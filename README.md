@@ -89,6 +89,6 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 [Website]: http://www.danielsaidi.com
 [Sponsors]: https://github.com/sponsors/danielsaidi
 
-[Documentation]: https://danielsaidi.github.io/RichTextKit/documentation/RichTextKit/
+[Documentation]: https://danielsaidi.github.io/RichTextKit/documentation/richtextkit/
 [GettingStarted]: https://github.com/danielsaidi/RichTextKit/blob/master/Readmes/Getting-Started.md
 [License]: https://github.com/danielsaidi/RichTextKit/blob/master/LICENSE
