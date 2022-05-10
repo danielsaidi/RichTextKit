@@ -16,9 +16,9 @@
 
 RichTextKit is a Swift-based library that lets you work with rich text in UIKit, AppKit and SwiftUI.
 
-RichTextKit is supported by [Oribi](https://oribi.se/en/) and used in [OribiWriter](https://oribi.se/en/apps/oribi-writer/), which is out on iOS and soon on macOS.
-
 RichTextKit is under development. Currently missing parts will be added over time.
+
+RichTextKit is supported by and released with permission from [Oribi](https://oribi.se/en/) and used in [OribiWriter](https://oribi.se/en/apps/oribi-writer/), which is out on iOS and soon on macOS.
 
 
 
