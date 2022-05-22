@@ -13,18 +13,18 @@ import SwiftUI
 struct ContentView: View {
 
     @State
-    private var text = NSAttributedString(string: "Test")
+    private var text = NSAttributedString(string: "test")
 
     var body: some View {
         VStack {
-            RichTextEditor(text: $text)
+            RichTextEditor(text: $text, context: RichTextContext())
                 .cornerRadius(5)
                 .frame(maxHeight: .infinity)
             Divider()
             Text(text.string)
             Divider()
             Button("Change text") {
-                text = NSAttributedString(string: "ABC123")
+                text = NSAttributedString(string: "\(Date())")
             }
         }
         .padding()

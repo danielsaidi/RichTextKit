@@ -26,14 +26,20 @@ public struct RichTextEditor: ViewRepresentable {
 
      - Parameters:
        - text: The rich text to edit.
+       - context: The rich text context to use.
      */
-    public init(text: Binding<NSAttributedString>) {
-        self._attributedString = text
+    public init(
+        text: Binding<NSAttributedString>,
+        context: RichTextContext) {
+        self.text = text
+        self._richTextContext = ObservedObject(wrappedValue: context)
     }
 
+    
+    private var text: Binding<NSAttributedString>
 
-    @Binding
-    public var attributedString: NSAttributedString
+    @ObservedObject
+    private var richTextContext: RichTextContext
 
 
     #if os(iOS) || os(tvOS)
@@ -49,10 +55,17 @@ public struct RichTextEditor: ViewRepresentable {
     #endif
 
 
+    public func makeCoordinator() -> RichTextCoordinator {
+        RichTextCoordinator(
+            text: text,
+            textView: textView,
+            context: richTextContext)
+    }
+
+
     #if os(iOS) || os(tvOS)
     public func makeUIView(context: Context) -> some UIView {
-        textView.attributedText = attributedString
-        return textView
+        textView
     }
 
     public func updateUIView(_ view: UIViewType, context: Context) {}
@@ -60,8 +73,7 @@ public struct RichTextEditor: ViewRepresentable {
 
     #if os(macOS)
     public func makeNSView(context: Context) -> some NSView {
-        textView.attributedText = attributedString
-        return scrollView
+        scrollView
     }
 
     public func updateNSView(_ view: NSViewType, context: Context) {}

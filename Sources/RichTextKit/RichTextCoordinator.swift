@@ -1,0 +1,122 @@
+//
+//  RichTextCoordinator.swift
+//  RichTextKit
+//
+//  Created by Daniel Saidi on 2022-05-22.
+//  Copyright © 2022 Daniel Saidi. All rights reserved.
+//
+
+#if os(iOS) || os(macOS) || os(tvOS)
+import SwiftUI
+
+/**
+ This coordinator is used to keep a ``RichTextView`` in sync
+ with an observable ``RichTextContext``.
+
+ The coordinator sets itself as the text view's delegate and
+ updates the context when things change in the text view. It
+ also subscribes to context observable changes and keeps the
+ text view in sync with these changes.
+ */
+open class RichTextCoordinator: NSObject {
+
+    // MARK: - Initialization
+
+    /**
+     Create a rich text coordinator.
+
+     - Parameters:
+       - text: The rich text to edit.
+       - textView: The rich text view used to edit the text.
+       - context: The rich text context to keep in sync.
+     */
+    public init(
+        text: Binding<NSAttributedString>,
+        textView: RichTextView,
+        context: RichTextContext) {
+        textView.attributedString = text.wrappedValue
+        self.text = text
+        self.textView = textView
+        self.context = context
+        super.init()
+        self.textView.delegate = self
+    }
+
+
+    // MARK: - Properties
+
+    /**
+     The rich text context for which the coordinator is used.
+     */
+    public var context: RichTextContext
+
+    /**
+     The rich text to edit.
+     */
+    public var text: Binding<NSAttributedString>
+
+    /**
+     The text view for which the coordinator is used.
+     */
+    public private(set) var textView: RichTextView
+
+
+    #if canImport(UIKit)
+
+    // MARK: - UITextViewDelegate
+
+    open func textViewDidChange(_ textView: UITextView) {
+        syncWithTextView()
+    }
+
+    open func textViewDidChangeSelection(_ textView: UITextView) {
+        syncWithTextView()
+    }
+    #endif
+
+
+    #if canImport(AppKit)
+
+    // MARK: - NSTextViewDelegate
+
+    open func textDidChange(_ notification: Notification) {
+        syncWithTextView()
+    }
+
+    open func textViewDidChangeSelection(_ notification: Notification) {
+        syncWithTextView()
+    }
+    #endif
+}
+
+
+#if os(iOS) || os(tvOS)
+import UIKit
+
+extension RichTextCoordinator: UITextViewDelegate {}
+
+#elseif os(macOS)
+import AppKit
+
+extension RichTextCoordinator: NSTextViewDelegate {}
+#endif
+
+
+private extension RichTextCoordinator {
+
+    /**
+     Sync state from the text view's current state.
+     */
+    func syncWithTextView() {
+        syncTextWithTextView()
+    }
+
+    /**
+     Sync the text binding with the text view's current text.
+     */
+    func syncTextWithTextView() {
+        if text.wrappedValue == textView.attributedString { return }
+        text.wrappedValue = textView.attributedString
+    }
+}
+#endif
