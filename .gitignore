@@ -16,3 +16,6 @@ Fastlane/Preview.html
 Fastlane/screenshots
 Fastlane/test_output
 Fastlane/README.md
+
+# Xcode
+**/xcuserdata/
