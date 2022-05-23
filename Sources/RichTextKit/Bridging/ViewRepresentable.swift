@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-#if canImport(UIKit)
+#if os(iOS) || os(tvOS)
 import UIKit
 
 /**
