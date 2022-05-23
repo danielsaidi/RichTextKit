@@ -17,7 +17,7 @@ public extension NSAttributedString {
      the case with `attributes(at:)`.
 
      - Parameters:
-       - key: The attribute key to get.
+       - key: The attribute to get.
        - range: The range to get the attribute from.
      */
     func textAttribute<Value>(_ key: Key, at range: NSRange) -> Value? {

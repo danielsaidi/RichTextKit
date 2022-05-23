@@ -11,16 +11,6 @@ import Foundation
 public extension NSAttributedString {
 
     /**
-     Get the font at a certain `range`.
-
-     - Parameters:
-       - range: The range to get the font from.
-     */
-    func font(at range: NSRange) -> FontRepresentable? {
-        textAttribute(.font, at: range)
-    }
-
-    /**
      Get the symbolic font traits at a certain `range`.
 
      - Parameters:
