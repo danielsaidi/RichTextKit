@@ -16,6 +16,11 @@ public extension NSMutableAttributedString {
      This function accounts for invalid ranges, which is not
      the case with `enumerateAttribute(...)` and other range
      based operations.
+
+     - Parameters:
+       - key: The attribute key to set.
+       - newValue: The new value to set the attribute to.
+       - range: The range for which to set the attribute.
      */
     func setTextAttribute(_ key: Key, to newValue: Any, for range: NSRange) {
         let range = safeRange(for: range)

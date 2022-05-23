@@ -15,9 +15,13 @@ public extension NSAttributedString {
 
      This function accounts for invalid ranges, which is not
      the case with `attributes(at:)`.
+
+     - Parameters:
+       - key: The attribute key to get.
+       - range: The range to get the attribute from.
      */
-    func textAttribute<Value>(_ key: Key, for range: NSRange) -> Value? {
-        textAttributes(for: range)[key] as? Value
+    func textAttribute<Value>(_ key: Key, at range: NSRange) -> Value? {
+        textAttributes(at: range)[key] as? Value
     }
 
     /**
@@ -25,8 +29,11 @@ public extension NSAttributedString {
 
      This function accounts for invalid ranges, which is not
      the case with `attributes(at:)`.
+
+     - Parameters:
+       - range: The range to get attributes from.
      */
-    func textAttributes(for range: NSRange) -> [Key: Any] {
+    func textAttributes(at range: NSRange) -> [Key: Any] {
         if length == 0 { return [:] }
         let range = safeRange(for: range)
         return attributes(at: range.location, effectiveRange: nil)

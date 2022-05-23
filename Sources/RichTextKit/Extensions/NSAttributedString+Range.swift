@@ -15,6 +15,9 @@ public extension NSAttributedString {
      
      Since this function accounts for invalid ranges, always
      use this function instead of `attributedSubstring`,
+
+     - Parameters:
+       - range: The range to get the rich text from.
      */
     func richText(at range: NSRange) -> NSAttributedString {
         let range = safeRange(for: range)
@@ -24,6 +27,9 @@ public extension NSAttributedString {
     /**
      Get a safe range for the provided range. This will help
      protecting if the range is outside the text bounds.
+
+     - Parameters:
+       - range: The range for which to get a safe range.
      */
     func safeRange(for range: NSRange) -> NSRange {
         NSRange(
