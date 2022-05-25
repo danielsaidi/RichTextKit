@@ -13,7 +13,7 @@ import SwiftUI
 struct ContentView: View {
 
     @State
-    private var text = NSAttributedString(string: "<u>test</u>")
+    private var text = NSAttributedString(string: "test")
 
     @StateObject
     private var context = RichTextContext()
@@ -22,17 +22,13 @@ struct ContentView: View {
         VStack {
             RichTextEditor(text: $text, context: context)
                 .cornerRadius(5)
-                .frame(maxHeight: .infinity)
-            Divider()
-            Text(text.string)
-            Divider()
-            Button("Change text") {
-                text = NSAttributedString(string: "\(Date())")
+                .frame(height: 100)
+            Button("B") {
+                context.isUnderlined.toggle()
             }
-            Divider()
-            Button("Change text") {
-                text = NSAttributedString(string: "\(Date())")
-            }
+            .foregroundColor(context.isUnderlined ? .accentColor : .primary)
+            .buttonStyle(.bordered)
+            Spacer()
         }
         .padding()
         .background(Color.gray.opacity(0.3))
