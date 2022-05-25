@@ -21,7 +21,13 @@ public protocol RichTextViewRepresentable {
     // MARK: Properties
 
     /**
-     The text view's attributed text.
+     The text view's attributed string.
      */
     var attributedString: NSAttributedString { get }
+
+
+    /**
+     The text view's mutable attributed string, if any.
+     */
+    var mutableAttributedString: NSMutableAttributedString? { get }
 }

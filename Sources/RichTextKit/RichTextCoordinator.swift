@@ -7,6 +7,7 @@
 //
 
 #if os(iOS) || os(macOS) || os(tvOS)
+import Combine
 import SwiftUI
 
 /**
@@ -40,6 +41,7 @@ open class RichTextCoordinator: NSObject {
         self.context = context
         super.init()
         self.textView.delegate = self
+        subscribeToContextChanges()
     }
 
 
@@ -59,6 +61,11 @@ open class RichTextCoordinator: NSObject {
      The text view for which the coordinator is used.
      */
     public private(set) var textView: RichTextView
+
+    /**
+     This set is used to store context observations.
+     */
+    var cancellables = Set<AnyCancellable>()
 
 
     #if canImport(UIKit)
@@ -108,11 +115,22 @@ private extension RichTextCoordinator {
      Sync state from the text view's current state.
      */
     func syncWithTextView() {
+        syncContextWithTextView()
         syncTextWithTextView()
     }
 
     /**
-     Sync the text binding with the text view's current text.
+     Sync the context with the text view.
+     */
+    func syncContextWithTextView() {
+        let string = textView.attributedString
+        let attributes = string.textAttributes(at: textView.selectedRange)
+        let isUnderlined = (attributes[.underlineStyle] as? Int) == 1
+        context.isUnderlined = isUnderlined
+    }
+
+    /**
+     Sync the text binding with the text view.
      */
     func syncTextWithTextView() {
         if text.wrappedValue == textView.attributedString { return }

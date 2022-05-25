@@ -13,15 +13,22 @@ import SwiftUI
 struct ContentView: View {
 
     @State
-    private var text = NSAttributedString(string: "test")
+    private var text = NSAttributedString(string: "<u>test</u>")
+
+    @StateObject
+    private var context = RichTextContext()
 
     var body: some View {
         VStack {
-            RichTextEditor(text: $text, context: RichTextContext())
+            RichTextEditor(text: $text, context: context)
                 .cornerRadius(5)
                 .frame(maxHeight: .infinity)
             Divider()
             Text(text.string)
+            Divider()
+            Button("Change text") {
+                text = NSAttributedString(string: "\(Date())")
+            }
             Divider()
             Button("Change text") {
                 text = NSAttributedString(string: "\(Date())")

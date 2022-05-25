@@ -19,4 +19,11 @@ import SwiftUI
 public class RichTextContext: ObservableObject {
 
     public init() {}
+
+
+    /**
+     Whether or not the current text is underlined.
+     */
+    @Published
+    public var isUnderlined = false
 }

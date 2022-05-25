@@ -22,7 +22,7 @@ public extension NSMutableAttributedString {
        - newValue: The new value to set the attribute to.
        - range: The range for which to set the attribute.
      */
-    func setTextAttribute(_ key: Key, to newValue: Any, for range: NSRange) {
+    func setTextAttribute(_ key: Key, to newValue: Any, at range: NSRange) {
         let range = safeRange(for: range)
         guard length > 0, range.location >= 0 else { return }
         beginEditing()

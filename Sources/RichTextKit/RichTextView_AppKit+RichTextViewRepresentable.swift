@@ -20,5 +20,12 @@ public extension RichTextView {
         get { attributedString() }
         set { textStorage?.setAttributedString(newValue) }
     }
+
+    /**
+     The text view's mutable attributed string, if any.
+     */
+    var mutableAttributedString: NSMutableAttributedString? {
+        textStorage
+    }
 }
 #endif
