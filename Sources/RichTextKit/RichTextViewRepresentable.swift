@@ -15,7 +15,7 @@ import Foundation
  By implementing and using this protocol in the library, the
  library doesn't have to do a bunch of `#if` checks.
  */
-public protocol RichTextViewRepresentable: RichTextProvider {
+public protocol RichTextViewRepresentable: RichTextReader {
 
     /**
      The text view's mutable attributed string, if any.

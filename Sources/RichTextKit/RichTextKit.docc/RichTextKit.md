@@ -65,7 +65,7 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 
 - ``RichTextContext``
 - ``RichTextCoordinator``
-- ``RichTextProvider``
+- ``RichTextReader``
 - ``RichTextTrait``
 - ``RichTextWriter``
 
