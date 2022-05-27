@@ -62,7 +62,7 @@ public extension RichTextAlignment {
     }
     
     /**
-     The icon to use for the text alignment.
+     The standard icon to use for the text alignment.
      */
     var icon: Image {
         switch self {

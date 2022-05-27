@@ -28,6 +28,20 @@ public enum RichTextTrait {
     case underlined
 }
 
+public extension RichTextTrait {
+
+    /**
+     The standard icon to use for the trait.
+     */
+    var icon: Image {
+        switch self {
+        case .bold: return .bold
+        case .italic: return .italic
+        case .underlined: return .underline
+        }
+    }
+}
+
 #if canImport(UIKit)
 public extension RichTextTrait {
 
