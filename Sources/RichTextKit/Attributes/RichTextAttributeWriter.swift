@@ -10,7 +10,7 @@ import Foundation
 
 /**
  This protocol can be implemented any types that can provide
- extended rich text attribute write functionality.
+ extended rich text attribute writing capabilities.
 
  This protocol is implemented by `NSMutableAttributedString`
  as well as other library types.
@@ -22,18 +22,22 @@ extension NSMutableAttributedString: RichTextAttributeWriter {}
 public extension RichTextAttributeWriter {
 
     /**
-     Set a certain text attribute value for a certain range.
+     Set a certain rich text attribute to a certain value at
+     a certain range.
 
-     This function accounts for invalid ranges, which is not
-     the case with `enumerateAttribute(...)` and other range
-     based operations.
+     The function uses `safeRange(for:)` to handle incorrect
+     ranges, which is not handled by the native functions.
 
      - Parameters:
        - key: The attribute key to set.
        - newValue: The new value to set the attribute to.
        - range: The range for which to set the attribute.
      */
-    func setTextAttribute(_ key: NSAttributedString.Key, to newValue: Any, at range: NSRange) {
+    func setRichTextAttribute(
+        _ key: NSAttributedString.Key,
+        to newValue: Any,
+        at range: NSRange
+    ) {
         let range = safeRange(for: range)
         guard let string = mutableAttributedString else { return }
         guard string.length > 0, range.location >= 0 else { return }
