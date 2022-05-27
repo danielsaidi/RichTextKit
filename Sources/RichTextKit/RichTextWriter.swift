@@ -15,7 +15,7 @@ import Foundation
  This protocol is implemented by `NSMutableAttributedString`
  as well as other library types.
  */
-public protocol RichTextWriter {
+public protocol RichTextWriter: RichTextReader {
 
     /**
      Get the writable attributed string provided by the type.

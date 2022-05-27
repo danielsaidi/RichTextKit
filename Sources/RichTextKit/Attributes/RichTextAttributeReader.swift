@@ -24,8 +24,8 @@ public extension RichTextAttributeReader {
     /**
      Get a rich text attribute for the provided range.
 
-     The function uses ``safeRange(for:)`` to handle invalid
-     ranges, which is not the case with the native functions.
+     The function uses `safeRange(for:)` to handle incorrect
+     ranges, which is not handled by the native functions.
 
      - Parameters:
        - key: The attribute to get.
@@ -38,8 +38,8 @@ public extension RichTextAttributeReader {
     /**
      Get all text attributes for the provided range.
 
-     The function uses ``safeRange(for:)`` to handle invalid
-     ranges, which is not the case with the native functions.
+     The function uses `safeRange(for:)` to handle incorrect
+     ranges, which is not handled by the native functions.
 
      - Parameters:
        - range: The range to get attributes from.
