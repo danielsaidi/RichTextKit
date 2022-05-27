@@ -13,13 +13,13 @@ import UIKit
  This view inhertits and extends `NSTextField` in AppKit and
  `UITextField` in UIKit.
  */
-public class RichTextView: UITextView {
+public class RichTextView: UITextView, RichTextProvider, RichTextWriter {
 }
 
 
 // MARK: - RichTextProvider
 
-extension RichTextView: RichTextProvider {
+extension RichTextView {
 
     /**
      Get the rich text that is managed by the text view.
@@ -27,6 +27,19 @@ extension RichTextView: RichTextProvider {
     public var attributedString: NSAttributedString {
         get { super.attributedText ?? NSAttributedString(string: "") }
         set { attributedText = newValue }
+    }
+}
+
+
+// MARK: - RichTextWriter
+
+public extension RichTextView {
+
+    /**
+     Get the mutable rich text that is managed by the view.
+     */
+    var mutableAttributedString: NSMutableAttributedString? {
+        textStorage
     }
 }
 #endif

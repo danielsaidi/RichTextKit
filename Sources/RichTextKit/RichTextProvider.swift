@@ -12,8 +12,8 @@ import Foundation
  This protocol can be implemented any types that can provide
  a rich text string.
 
- The protocol is used by types in the library, to extend all
- types that can provide a rich text.
+ The protocol is used to extend all types within the library
+ that can provide a rich text.
  */
 public protocol RichTextProvider {
 
@@ -25,9 +25,6 @@ public protocol RichTextProvider {
 
 extension NSAttributedString: RichTextProvider {
 
-    /**
-     Get the rich text that is defined within this string.
-     */
     public var attributedString: NSAttributedString {
         self
     }
