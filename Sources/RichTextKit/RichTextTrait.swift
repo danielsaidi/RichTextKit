@@ -18,13 +18,13 @@ import SwiftUI
  */
 public enum RichTextTrait {
 
-    /// Bold text
+    /// Bold text.
     case bold
 
-    /// Italic text
+    /// Italic text.
     case italic
 
-    /// Underlined text
+    /// Underlined text.
     case underlined
 }
 
