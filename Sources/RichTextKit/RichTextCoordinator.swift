@@ -127,7 +127,7 @@ private extension RichTextCoordinator {
      */
     func syncContextWithTextView() {
         let string = textView.attributedString
-        let attributes = string.textAttributes(at: textView.selectedRange)
+        let attributes = string.richTextAttributes(at: textView.selectedRange)
         let isUnderlined = (attributes[.underlineStyle] as? Int) == 1
         context.isUnderlined = isUnderlined
     }

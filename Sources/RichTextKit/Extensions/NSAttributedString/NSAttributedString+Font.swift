@@ -17,6 +17,6 @@ public extension NSAttributedString {
        - range: The range to get the font from.
      */
     func font(at range: NSRange) -> FontRepresentable? {
-        textAttribute(.font, at: range)
+        richTextAttribute(.font, at: range)
     }
 }

@@ -31,7 +31,7 @@ private extension RichTextCoordinator {
 
     func setIsUnderlined(to newValue: Bool) {
         let string = textView.attributedString
-        let attributes = string.textAttributes(at: textView.selectedRange)
+        let attributes = string.richTextAttributes(at: textView.selectedRange)
         let isUnderlined = (attributes[.underlineStyle] as? Int) == 1
         if newValue == isUnderlined { return }
         let value = NSNumber(value: newValue)

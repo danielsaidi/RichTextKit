@@ -8,10 +8,15 @@
 
 import Foundation
 
-public extension NSAttributedString {
+/**
+ This protocol is implemented by `NSAttributedString` to get
+ additional rich text functionality that show up in the DocC
+ generated documentation.
+ */
+public protocol NSAttributedStringAttributeExtension {
 
     /**
-     Get a certain text attribute for a certain range.
+     Get a certain rich text attribute for a certain range.
 
      This function accounts for invalid ranges, which is not
      the case with `attributes(at:)`.
@@ -20,9 +25,7 @@ public extension NSAttributedString {
        - key: The attribute to get.
        - range: The range to get the attribute from.
      */
-    func textAttribute<Value>(_ key: Key, at range: NSRange) -> Value? {
-        textAttributes(at: range)[key] as? Value
-    }
+    func richTextAttribute<Value>(_ key: NSAttributedString.Key, at range: NSRange) -> Value?
 
     /**
      Get all text attributes for a certain range.
@@ -33,7 +36,21 @@ public extension NSAttributedString {
      - Parameters:
        - range: The range to get attributes from.
      */
-    func textAttributes(at range: NSRange) -> [Key: Any] {
+    func richTextAttributes(at range: NSRange) -> [NSAttributedString.Key: Any]
+}
+
+
+// MARK: - Implementation
+
+extension NSAttributedString: NSAttributedStringAttributeExtension {}
+
+public extension NSAttributedString {
+
+    func richTextAttribute<Value>(_ key: Key, at range: NSRange) -> Value? {
+        richTextAttributes(at: range)[key] as? Value
+    }
+
+    func richTextAttributes(at range: NSRange) -> [Key: Any] {
         if length == 0 { return [:] }
         let range = safeRange(for: range)
         return attributes(at: range.location, effectiveRange: nil)
