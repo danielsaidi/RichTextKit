@@ -23,7 +23,7 @@ struct ContentView: View {
             RichTextEditor(text: $text, context: context)
                 .cornerRadius(5)
                 .frame(height: 100)
-            Button("B") {
+            Button("U") {
                 context.isUnderlined.toggle()
             }
             .foregroundColor(context.isUnderlined ? .accentColor : .primary)

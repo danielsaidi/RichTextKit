@@ -10,8 +10,8 @@
 import AppKit
 
 /**
- This view inhertits `UITextField` in UIKit and `NSTextField`
- in AppKit.
+ This view inhertits and extends `NSTextField` in AppKit and
+ `UITextField` in UIKit.
  */
 public class RichTextView: NSTextView {
 }

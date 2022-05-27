@@ -9,7 +9,12 @@
 import SwiftUI
 
 /**
- This enum represents various traits that rich text can have.
+ This enum represents various rich text traits, such as bold,
+ italic and underlined.
+
+ This enum aims to simplify working with traits, by creating
+ a single way to toggle certaint traits on and off, although
+ they can then be handled differently within the library.
  */
 public enum RichTextTrait {
 

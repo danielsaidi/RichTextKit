@@ -12,12 +12,15 @@ import SwiftUI
 
 /**
  This coordinator is used to keep a ``RichTextView`` in sync
- with an observable ``RichTextContext``.
+ with a ``RichTextContext``.
 
  The coordinator sets itself as the text view's delegate and
  updates the context when things change in the text view. It
  also subscribes to context observable changes and keeps the
  text view in sync with these changes.
+
+ You can inherit this class to customize the coordinator for
+ your own use cases.
  */
 open class RichTextCoordinator: NSObject {
 
@@ -50,12 +53,12 @@ open class RichTextCoordinator: NSObject {
     /**
      The rich text context for which the coordinator is used.
      */
-    public var context: RichTextContext
+    public let context: RichTextContext
 
     /**
      The rich text to edit.
      */
-    public var text: Binding<NSAttributedString>
+    public let text: Binding<NSAttributedString>
 
     /**
      The text view for which the coordinator is used.
@@ -65,7 +68,7 @@ open class RichTextCoordinator: NSObject {
     /**
      This set is used to store context observations.
      */
-    var cancellables = Set<AnyCancellable>()
+    internal var cancellables = Set<AnyCancellable>()
 
 
     #if canImport(UIKit)
