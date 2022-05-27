@@ -12,8 +12,8 @@ import SwiftUI
 import UIKit
 
 /**
- This typealias is used to bridge the platform-specific view
- representable protocols in AppKit and UIKit.
+ This typealias bridges platform-specific view representable
+ types to simplify multi-platform support.
  */
 typealias ViewRepresentable = UIViewRepresentable
 #endif
@@ -22,8 +22,8 @@ typealias ViewRepresentable = UIViewRepresentable
 import AppKit
 
 /**
- This typealias is used to bridge the platform-specific view
- representable protocols in AppKit and UIKit.
+ This typealias bridges platform-specific view representable
+ types to simplify multi-platform support.
  */
 typealias ViewRepresentable = NSViewRepresentable
 #endif
