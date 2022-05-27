@@ -13,13 +13,6 @@ extension RichTextView: RichTextViewRepresentable {}
 
 public extension RichTextView {
 
-    /**
-     The text view's attributed text.
-     */
-    var attributedString: NSAttributedString {
-        get { attributedString() }
-        set { textStorage?.setAttributedString(newValue) }
-    }
 
     /**
      The text view's mutable attributed string, if any.

@@ -15,4 +15,18 @@ import UIKit
  */
 public class RichTextView: UITextView {
 }
+
+
+// MARK: - RichTextProvider
+
+extension RichTextView: RichTextProvider {
+
+    /**
+     Get the rich text that is managed by the text view.
+     */
+    public var attributedString: NSAttributedString {
+        get { super.attributedText ?? NSAttributedString(string: "") }
+        set { attributedText = newValue }
+    }
+}
 #endif

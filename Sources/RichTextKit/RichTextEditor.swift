@@ -79,4 +79,19 @@ public struct RichTextEditor: ViewRepresentable {
     public func updateNSView(_ view: NSViewType, context: Context) {}
     #endif
 }
+
+
+// MARK: RichTextProvider
+
+extension RichTextEditor: RichTextProvider {}
+
+public extension RichTextEditor {
+
+    /**
+     Get the rich text that is managed by the editor.
+     */
+    var attributedString: NSAttributedString {
+        text.wrappedValue
+    }
+}
 #endif

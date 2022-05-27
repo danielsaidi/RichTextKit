@@ -15,16 +15,7 @@ import Foundation
  By implementing and using this protocol in the library, the
  library doesn't have to do a bunch of `#if` checks.
  */
-public protocol RichTextViewRepresentable {
-
-
-    // MARK: Properties
-
-    /**
-     The text view's attributed string.
-     */
-    var attributedString: NSAttributedString { get }
-
+public protocol RichTextViewRepresentable: RichTextProvider {
 
     /**
      The text view's mutable attributed string, if any.

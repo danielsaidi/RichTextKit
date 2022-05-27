@@ -14,14 +14,6 @@ extension RichTextView: RichTextViewRepresentable {}
 public extension RichTextView {
 
     /**
-     The text view's attributed string.
-     */
-    var attributedString: NSAttributedString {
-        get { super.attributedText ?? NSAttributedString(string: "") }
-        set { attributedText = newValue }
-    }
-
-    /**
      The text view's mutable attributed string, if any.
      */
     var mutableAttributedString: NSMutableAttributedString? {

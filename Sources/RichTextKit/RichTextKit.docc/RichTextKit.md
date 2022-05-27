@@ -53,8 +53,8 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 
 ### Rich Text Views
 
-- ``RichTextView``
 - ``RichTextEditor``
+- ``RichTextView``
 - ``RichTextViewRepresentable``
 
 ### Extensions
@@ -65,6 +65,7 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 
 - ``RichTextContext``
 - ``RichTextCoordinator``
+- ``RichTextProvider``
 - ``RichTextTrait``
 
 ### Fonts
