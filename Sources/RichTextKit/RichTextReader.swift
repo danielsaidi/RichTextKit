@@ -18,7 +18,7 @@ import Foundation
 public protocol RichTextReader {
 
     /**
-     Get the string provided by the implementing type.
+     Get the attributed string from the implementing type.
      */
     var attributedString: NSAttributedString { get }
 }

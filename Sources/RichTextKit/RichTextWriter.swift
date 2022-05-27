@@ -12,13 +12,13 @@ import Foundation
  This protocol can be implemented any types that can provide
  a writable rich text string.
 
- The protocol is implemented by `NSMutableAttributedString`,
+ This protocol is implemented by `NSMutableAttributedString`
  as well as other library types.
  */
 public protocol RichTextWriter {
 
     /**
-     Get the writable rich text provided by this type.
+     Get the writable attributed string provided by the type.
      */
     var mutableAttributedString: NSMutableAttributedString? { get }
 }
