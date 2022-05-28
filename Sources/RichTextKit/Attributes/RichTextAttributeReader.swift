@@ -44,6 +44,10 @@ public extension RichTextAttributeReader {
      The function uses `safeRange(for:)` to handle incorrect
      ranges, which is not handled by the native functions.
 
+     This function returns an empty attributes dictionary if
+     the rich text is empty, since this check will otherwise
+     cause the application to crash.
+
      - Parameters:
        - range: The range to get attributes from.
      */

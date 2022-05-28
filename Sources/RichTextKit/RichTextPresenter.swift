@@ -25,6 +25,22 @@ public protocol RichTextPresenter: RichTextReader {
 }
 
 public extension RichTextPresenter {
+
+    /**
+     Get whether or not the presenter has a selected range.
+     */
+    var hasSelectedRange: Bool {
+        selectedRange.length > 0
+    }
+
+    /**
+     Whether or not the rich text contains any trimmed text.
+     */
+    var hasTrimmedText: Bool {
+        let string = richText.string
+        let trimmed = string.trimmingCharacters(in: .whitespaces)
+        return !trimmed.isEmpty
+    }
     
     /**
      Get the range after the input cursor.

@@ -40,7 +40,6 @@ public extension RichTextAttributeWriter {
     ) {
         let range = safeRange(for: range)
         guard let string = mutableRichText else { return }
-        guard string.length > 0, range.location >= 0 else { return }
         string.beginEditing()
         string.enumerateAttribute(attribute, in: range, options: .init()) { value, range, _ in
             string.removeAttribute(attribute, range: range)

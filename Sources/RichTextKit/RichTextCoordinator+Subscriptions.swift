@@ -11,6 +11,9 @@ import SwiftUI
 
 extension RichTextCoordinator {
 
+    /**
+     Make the coordinator subscribe to context changes.
+     */
     func subscribeToContextChanges() {
         subscribeToIsBold()
         subscribeToIsItalic()
@@ -47,13 +50,8 @@ private extension RichTextCoordinator {
 
 private extension RichTextCoordinator {
 
-    // TODO: Add this to textView instead (or protocol)
     func setStyle(_ style: RichTextStyle, to newValue: Bool) {
-        let range = textView.selectedRange
-        let styles = textView.richTextStyles(at: range)
-        let isSet = styles.hasStyle(style)
-        if newValue == isSet { return }
-        textView.setRichTextStyle(style, to: newValue, at: range)
+        textView.setRichTextStyle(style, to: newValue)
     }
 }
 #endif
