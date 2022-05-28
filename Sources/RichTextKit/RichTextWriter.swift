@@ -45,4 +45,26 @@ public extension RichTextWriter {
     var mutableRichText: NSMutableAttributedString? {
         mutableAttributedString
     }
+
+    /**
+     Replace the text in a certain range with a new string.
+
+     - Parameters:
+       - range: The range to replace text in.
+       - string: The string to replace the current text with.
+     */
+    func replaceText(in range: NSRange, with string: String) {
+        mutableRichText?.replaceCharacters(in: range, with: string)
+    }
+
+    /**
+     Replace the text in a certain range with a new string.
+
+     - Parameters:
+       - range: The range to replace text in.
+       - string: The string to replace the current text with.
+     */
+    func replaceText(in range: NSRange, with string: NSAttributedString) {
+        mutableRichText?.replaceCharacters(in: range, with: string)
+    }
 }
