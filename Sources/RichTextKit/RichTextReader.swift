@@ -38,7 +38,8 @@ public extension RichTextReader {
     /**
      Get the rich text provided by the implementing type.
 
-     This is a convenience alias for ``attributedString``.
+     This is a convenience alias for ``attributedString`` to
+     get a property that uses the rich text naming.
      */
     var richText: NSAttributedString {
         attributedString

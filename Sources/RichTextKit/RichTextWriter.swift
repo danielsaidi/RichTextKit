@@ -25,7 +25,24 @@ public protocol RichTextWriter: RichTextReader {
 
 extension NSMutableAttributedString: RichTextWriter {
 
+    /**
+     This type returns itself as mutable attributed string.
+     */
     public var mutableAttributedString: NSMutableAttributedString? {
         self
+    }
+}
+
+public extension RichTextWriter {
+
+    /**
+     Get the writable rich text provided by the implementing
+     type.
+
+     This is an alias for ``mutableAttributedString`` and is
+     used to get a property that uses the rich text naming.
+     */
+    var mutableRichText: NSMutableAttributedString? {
+        mutableAttributedString
     }
 }

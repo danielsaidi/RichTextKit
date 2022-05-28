@@ -39,7 +39,7 @@ public extension RichTextAttributeWriter {
         at range: NSRange
     ) {
         let range = safeRange(for: range)
-        guard let string = mutableAttributedString else { return }
+        guard let string = mutableRichText else { return }
         guard string.length > 0, range.location >= 0 else { return }
         string.beginEditing()
         string.enumerateAttribute(key, in: range, options: .init()) { value, range, _ in
