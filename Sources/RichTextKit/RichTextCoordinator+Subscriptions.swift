@@ -16,6 +16,7 @@ extension RichTextCoordinator {
      */
     func subscribeToContextChanges() {
         subscribeToIsBold()
+        subscribeToIsEditingText()
         subscribeToIsItalic()
         subscribeToIsUnderlined()
     }
@@ -28,6 +29,14 @@ private extension RichTextCoordinator {
             .sink(
                 receiveCompletion: { _ in },
                 receiveValue: { [weak self] in self?.setStyle(.bold, to: $0) })
+            .store(in: &cancellables)
+    }
+
+    func subscribeToIsEditingText() {
+        context.$isEditingText
+            .sink(
+                receiveCompletion: { _ in },
+                receiveValue: { [weak self] in self?.setIsEditing(to: $0) })
             .store(in: &cancellables)
     }
 
@@ -49,6 +58,15 @@ private extension RichTextCoordinator {
 }
 
 private extension RichTextCoordinator {
+
+    func setIsEditing(to newValue: Bool) {
+        if newValue == textView.isFirstResponder { return }
+        if newValue {
+            textView.becomeFirstResponder()
+        } else {
+            textView.resignFirstResponder()
+        }
+    }
 
     func setStyle(_ style: RichTextStyle, to newValue: Bool) {
         textView.setRichTextStyle(style, to: newValue)

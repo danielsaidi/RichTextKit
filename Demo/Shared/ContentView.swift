@@ -19,16 +19,21 @@ struct ContentView: View {
     private var context = RichTextContext()
 
     var body: some View {
-        VStack {
-            RichTextEditor(text: $text, context: context)
-                .cornerRadius(5)
-                .frame(height: 100)
-            HStack {
-                button(for: .bold)
-                button(for: .italic)
-                button(for: .underlined)
+        NavigationView {
+            VStack {
+                RichTextEditor(text: $text, context: context)
+                    .cornerRadius(5)
+                    .frame(height: 100)
+                HStack {
+                    button(for: .bold)
+                    button(for: .italic)
+                    button(for: .underlined)
+                }
+                Button(action: context.toggleIsEditing) {
+                    Image.edit
+                }.highlighted(if: context.isEditingText)
+                Spacer()
             }
-            Spacer()
         }
         .padding()
         .background(Color.gray.opacity(0.3))
@@ -41,8 +46,15 @@ private extension ContentView {
         Button(action: { context.toggle(style) }) {
             style.icon
         }
-        .foregroundColor(context.hasStyle(style) ? .accentColor : .primary)
+        .highlighted(if: context.hasStyle(style))
         .buttonStyle(.bordered)
+    }
+}
+
+private extension Button {
+
+    func highlighted(if condition: Bool) -> some View {
+        foregroundColor(condition ? .accentColor : .primary)
     }
 }
 

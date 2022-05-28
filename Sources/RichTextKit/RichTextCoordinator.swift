@@ -75,12 +75,20 @@ open class RichTextCoordinator: NSObject {
 
     // MARK: - UITextViewDelegate
 
+    open func textViewDidBeginEditing(_ textView: UITextView) {
+        context.isEditingText = true
+    }
+
     open func textViewDidChange(_ textView: UITextView) {
         syncWithTextView()
     }
 
     open func textViewDidChangeSelection(_ textView: UITextView) {
         syncWithTextView()
+    }
+
+    open func textViewDidEndEditing(_ textView: UITextView) {
+        context.isEditingText = false
     }
     #endif
 
@@ -89,12 +97,20 @@ open class RichTextCoordinator: NSObject {
 
     // MARK: - NSTextViewDelegate
 
+    open func textDidBeginEditing(_ notification: Notification) {
+        context.isEditingText = true
+    }
+
     open func textDidChange(_ notification: Notification) {
         syncWithTextView()
     }
 
     open func textViewDidChangeSelection(_ notification: Notification) {
         syncWithTextView()
+    }
+
+    open func textDidEndEditing(_ notification: Notification) {
+        context.isEditingText = false
     }
     #endif
 }
@@ -126,6 +142,14 @@ private extension RichTextCoordinator {
      Sync the context with the text view.
      */
     func syncContextWithTextView() {
+        syncContextStylesWithTextView()
+        context.isEditingText = textView.isFirstResponder
+    }
+
+    /**
+     Sync the context styles with the text view.
+     */
+    func syncContextStylesWithTextView() {
         let styles = textView.richTextStyles(at: textView.selectedRange)
         context.isBold = styles.hasStyle(.bold)
         context.isItalic = styles.hasStyle(.italic)

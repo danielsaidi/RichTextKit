@@ -28,6 +28,12 @@ public class RichTextContext: ObservableObject {
     public var isBold = false
 
     /**
+     Whether or not the rich text is currently being edited.
+     */
+    @Published
+    public var isEditingText = false
+
+    /**
      Whether or not the current text is italic.
      */
     @Published
@@ -62,5 +68,12 @@ public extension RichTextContext {
         case .italic: isItalic.toggle()
         case .underlined: isUnderlined.toggle()
         }
+    }
+
+    /**
+     Toggle whether or not the text is being edited.
+     */
+    func toggleIsEditing() {
+        isEditingText.toggle()
     }
 }

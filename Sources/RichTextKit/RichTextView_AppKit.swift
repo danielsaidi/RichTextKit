@@ -28,6 +28,13 @@ public extension RichTextView {
         get { attributedString() }
         set { textStorage?.setAttributedString(newValue) }
     }
+
+    /**
+     Whether or not the text view is the first responder.
+     */
+    var isFirstResponder: Bool {
+        window?.firstResponder == self
+    }
 }
 
 

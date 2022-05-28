@@ -16,6 +16,8 @@ public extension Image {
     static let bold = symbol("bold")
     static let italic = symbol("italic")
     static let underline = symbol("underline")
+
+    static let edit = symbol("square.and.pencil")
     
     static let textAlignmentCenter = symbol("text.aligncenter")
     static let textAlignmentJustify = symbol("text.justify")
@@ -38,6 +40,9 @@ struct Image_RichText_Previews: PreviewProvider {
             Image.bold
             Image.italic
             Image.underline
+            Divider()
+            Image.edit
+            Divider()
             Image.textAlignmentCenter
             Image.textAlignmentJustify
             Image.textAlignmentLeft
