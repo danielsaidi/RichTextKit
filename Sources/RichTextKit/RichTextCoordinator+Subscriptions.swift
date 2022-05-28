@@ -12,29 +12,48 @@ import SwiftUI
 extension RichTextCoordinator {
 
     func subscribeToContextChanges() {
+        subscribeToIsBold()
+        subscribeToIsItalic()
         subscribeToIsUnderlined()
     }
 }
 
 private extension RichTextCoordinator {
 
+    func subscribeToIsBold() {
+        context.$isBold
+            .sink(
+                receiveCompletion: { _ in },
+                receiveValue: { [weak self] in self?.setStyle(.bold, to: $0) })
+            .store(in: &cancellables)
+    }
+
+    func subscribeToIsItalic() {
+        context.$isItalic
+            .sink(
+                receiveCompletion: { _ in },
+                receiveValue: { [weak self] in self?.setStyle(.italic, to: $0) })
+            .store(in: &cancellables)
+    }
+
     func subscribeToIsUnderlined() {
         context.$isUnderlined
             .sink(
                 receiveCompletion: { _ in },
-                receiveValue: { [weak self] in self?.setIsUnderlined(to: $0) })
+                receiveValue: { [weak self] in self?.setStyle(.underlined, to: $0) })
             .store(in: &cancellables)
     }
 }
 
 private extension RichTextCoordinator {
 
-    func setIsUnderlined(to newValue: Bool) {
+    // TODO: Add this to textView instead (or protocol)
+    func setStyle(_ style: RichTextStyle, to newValue: Bool) {
         let range = textView.selectedRange
         let styles = textView.richTextStyles(at: range)
-        let isUnderlined = styles.hasStyle(.underlined)
-        if newValue == isUnderlined { return }
-        textView.setRichTextStyle(.underlined, to: newValue, at: range)
+        let isSet = styles.hasStyle(style)
+        if newValue == isSet { return }
+        textView.setRichTextStyle(style, to: newValue, at: range)
     }
 }
 #endif

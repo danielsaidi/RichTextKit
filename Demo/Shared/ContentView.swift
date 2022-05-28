@@ -23,15 +23,26 @@ struct ContentView: View {
             RichTextEditor(text: $text, context: context)
                 .cornerRadius(5)
                 .frame(height: 100)
-            Button("U") {
-                context.isUnderlined.toggle()
+            HStack {
+                button(for: .bold)
+                button(for: .italic)
+                button(for: .underlined)
             }
-            .foregroundColor(context.isUnderlined ? .accentColor : .primary)
-            .buttonStyle(.bordered)
             Spacer()
         }
         .padding()
         .background(Color.gray.opacity(0.3))
+    }
+}
+
+private extension ContentView {
+
+    func button(for style: RichTextStyle) -> some View {
+        Button(action: { context.toggle(style) }) {
+            style.icon
+        }
+        .foregroundColor(context.hasStyle(style) ? .accentColor : .primary)
+        .buttonStyle(.bordered)
     }
 }
 

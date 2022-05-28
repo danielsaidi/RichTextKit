@@ -22,8 +22,45 @@ public class RichTextContext: ObservableObject {
 
 
     /**
+     Whether or not the current text is bold.
+     */
+    @Published
+    public var isBold = false
+
+    /**
+     Whether or not the current text is italic.
+     */
+    @Published
+    public var isItalic = false
+
+    /**
      Whether or not the current text is underlined.
      */
     @Published
     public var isUnderlined = false
+}
+
+public extension RichTextContext {
+
+    /**
+     Check whether or not a certain style is enabled.
+     */
+    func hasStyle(_ style: RichTextStyle) -> Bool {
+        switch style {
+        case .bold: return isBold
+        case .italic: return isItalic
+        case .underlined: return isUnderlined
+        }
+    }
+
+    /**
+     Toggle a certain rich text style.
+     */
+    func toggle(_ style: RichTextStyle) {
+        switch style {
+        case .bold: isBold.toggle()
+        case .italic: isItalic.toggle()
+        case .underlined: isUnderlined.toggle()
+        }
+    }
 }
