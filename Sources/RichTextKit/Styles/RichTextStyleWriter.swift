@@ -1,5 +1,5 @@
 //
-//  RichTextTraitWriter.swift
+//  RichTextStyleWriter.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-05-28.
@@ -10,16 +10,16 @@ import Foundation
 
 /**
  This protocol can be implemented any types that can provide
- extended rich text trait writing capabilities.
+ extended rich text style writing capabilities.
 
  This protocol is implemented by `NSMutableAttributedString`
  as well as other library types.
  */
-public protocol RichTextTraitWriter: RichTextFontWriter {}
+public protocol RichTextStyleWriter: RichTextFontWriter {}
 
-extension NSMutableAttributedString: RichTextTraitWriter {}
+extension NSMutableAttributedString: RichTextStyleWriter {}
 
-public extension RichTextTraitWriter {
+public extension RichTextStyleWriter {
 
 //    /**
 //     Set a certain rich text attribute to a certain value at

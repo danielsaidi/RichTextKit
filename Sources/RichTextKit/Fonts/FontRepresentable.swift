@@ -10,8 +10,8 @@
 import UIKit
 
 /**
- This typealias is used to bridge the platform-specific font
- types in AppKit and UIKit.
+ This typealias bridges platform-specific fonts, to simplify
+ multi-platform support.
  */
 public typealias FontRepresentable = UIFont
 #endif
@@ -20,8 +20,8 @@ public typealias FontRepresentable = UIFont
 import AppKit
 
 /**
- This typealias is used to bridge the platform-specific font
- types in AppKit and UIKit.
+ This typealias bridges platform-specific fonts, to simplify
+ multi-platform support. 
  */
 public typealias FontRepresentable = NSFont
 #endif

@@ -13,7 +13,7 @@ import UIKit
  This view inhertits and extends `NSTextField` in AppKit and
  `UITextField` in UIKit.
  */
-public class RichTextView: UITextView, RichTextReader, RichTextWriter {
+public class RichTextView: UITextView, RichTextViewRepresentable {
 }
 
 

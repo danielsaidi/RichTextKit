@@ -17,7 +17,7 @@ import Foundation
  */
 public protocol RichTextViewRepresentable:
     RichTextPresenter,
-    RichTextTraitReader, RichTextTraitWriter {
+    RichTextStyleReader, RichTextStyleWriter {
     
     /**
      The text view's mutable attributed string, if any.

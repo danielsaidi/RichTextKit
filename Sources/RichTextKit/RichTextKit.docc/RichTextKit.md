@@ -71,6 +71,7 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 
 ### Attributes
 
+- ``RichTextAttributes``
 - ``RichTextAttributeReader``
 - ``RichTextAttributeWriter``
 
@@ -80,8 +81,9 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 
 ### Fonts
 
-- ``FontDescriptor``
 - ``FontRepresentable``
+- ``FontDescriptorRepresentable``
+- ``FontTraitsRepresentable``
 - ``RichTextFontReader``
 - ``RichTextFontWriter``
 
@@ -89,8 +91,8 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 
 - ``ImageRepresentable``
 
-### Traits
+### Styles
 
-- ``RichTextTrait``
-- ``RichTextTraitReader``
-- ``RichTextTraitWriter``
+- ``RichTextStyle``
+- ``RichTextStyleReader``
+- ``RichTextStyleWriter``

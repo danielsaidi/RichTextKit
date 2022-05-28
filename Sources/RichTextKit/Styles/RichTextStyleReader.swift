@@ -1,5 +1,5 @@
 //
-//  RichTextTraitReader.swift
+//  RichTextStyleReader.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-05-28.
@@ -10,16 +10,16 @@ import Foundation
 
 /**
  This protocol can be implemented any types that can provide
- extended rich text trait capabilities.
+ extended rich text style capabilities.
 
  The protocol is implemented by `NSAttributedString` as well
  as other library types.
  */
-public protocol RichTextTraitReader: RichTextFontReader {}
+public protocol RichTextStyleReader: RichTextFontReader {}
 
-extension NSAttributedString: RichTextTraitReader {}
+extension NSAttributedString: RichTextStyleReader {}
 
-public extension RichTextTraitReader {
+public extension RichTextStyleReader {
 
 //    /**
 //     Get a rich text attribute at the provided range.
@@ -55,18 +55,18 @@ public extension RichTextTraitReader {
 //        return richText.attributes(at: range.location, effectiveRange: nil)
 //    }
 
-    
-    /**
-     Get the symbolic font traits at a certain range.
 
-     Note that this function returns the native traits for a
-     certain range. To get the corresponding ``RichTextTrait``
-     collection, use
+    /**
+     Get the rich text styles at a certain range.
 
      - Parameters:
        - range: The range to get the traits from.
      */
-    func symbolicTraits(at range: NSRange) -> FontDescriptor.SymbolicTraits? {
-        font(at: range)?.fontDescriptor.symbolicTraits
+    func richTextStyles(at range: NSRange) -> [RichTextStyle] {
+        let attributes = richTextAttributes(at: range)
+        let traits = font(at: range)?.fontDescriptor.symbolicTraits
+        var styles = traits?.enabledRichTextStyles ?? []
+        if attributes.isUnderlined { styles.append(.underlined) }
+        return styles
     }
 }
