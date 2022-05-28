@@ -29,12 +29,12 @@ public extension RichTextAttributeWriter {
      ranges, which is not handled by the native functions.
 
      - Parameters:
-       - key: The attribute key to set.
+       - key: The attribute to set.
        - newValue: The new value to set the attribute to.
        - range: The range for which to set the attribute.
      */
     func setRichTextAttribute(
-        _ key: NSAttributedString.Key,
+        _ attribute: RichTextAttribute,
         to newValue: Any,
         at range: NSRange
     ) {
@@ -42,9 +42,9 @@ public extension RichTextAttributeWriter {
         guard let string = mutableRichText else { return }
         guard string.length > 0, range.location >= 0 else { return }
         string.beginEditing()
-        string.enumerateAttribute(key, in: range, options: .init()) { value, range, _ in
-            string.removeAttribute(key, range: range)
-            string.addAttribute(key, value: newValue, range: range)
+        string.enumerateAttribute(attribute, in: range, options: .init()) { value, range, _ in
+            string.removeAttribute(attribute, range: range)
+            string.addAttribute(attribute, value: newValue, range: range)
             string.fixAttributes(in: range)
         }
         string.endEditing()

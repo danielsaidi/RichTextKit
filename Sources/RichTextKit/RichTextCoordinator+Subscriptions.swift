@@ -30,11 +30,11 @@ private extension RichTextCoordinator {
 private extension RichTextCoordinator {
 
     func setIsUnderlined(to newValue: Bool) {
-        let styles = textView.richTextStyles(at: textView.selectedRange)
+        let range = textView.selectedRange
+        let styles = textView.richTextStyles(at: range)
         let isUnderlined = styles.hasStyle(.underlined)
         if newValue == isUnderlined { return }
-        let value = NSNumber(value: newValue)
-        textView.mutableAttributedString?.setRichTextAttribute(.underlineStyle, to: value, at: textView.selectedRange)
+        textView.setRichTextStyle(.underlined, to: newValue, at: range)
     }
 }
 #endif

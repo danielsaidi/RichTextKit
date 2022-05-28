@@ -28,14 +28,14 @@ public extension RichTextAttributeReader {
      ranges, which is not handled by the native functions.
 
      - Parameters:
-       - key: The attribute to get.
+       - attribute: The attribute to get.
        - range: The range to get the attribute from.
      */
     func richTextAttribute<Value>(
-        _ key: NSAttributedString.Key,
+        _ attribute: RichTextAttribute,
         at range: NSRange
     ) -> Value? {
-        richTextAttributes(at: range)[key] as? Value
+        richTextAttributes(at: range)[attribute] as? Value
     }
 
     /**
@@ -49,7 +49,7 @@ public extension RichTextAttributeReader {
      */
     func richTextAttributes(
         at range: NSRange
-    ) -> [NSAttributedString.Key: Any] {
+    ) -> RichTextAttributes {
         if richText.length == 0 { return [:] }
         let range = safeRange(for: range)
         return richText.attributes(at: range.location, effectiveRange: nil)

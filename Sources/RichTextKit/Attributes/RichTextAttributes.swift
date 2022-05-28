@@ -15,7 +15,7 @@ import Foundation
  The typealias also defines additional functionality as type
  extensions for the platform-specific types.
  */
-public typealias RichTextAttributes = [NSAttributedString.Key: Any]
+public typealias RichTextAttributes = [RichTextAttribute: Any]
 
 public extension RichTextAttributes {
 

@@ -14,10 +14,15 @@ import Foundation
 
  By implementing and using this protocol in the library, the
  library doesn't have to do a bunch of `#if` checks.
+
+ This protocol aggregates many other protocols, although the
+ protocol conformances below seem basic. This means that the
+ protocol enabled a lot of additional functionality, such as
+ setting attributes, fonts, styles etc.
  */
 public protocol RichTextViewRepresentable:
     RichTextPresenter,
-    RichTextStyleReader, RichTextStyleWriter {
+    RichTextStyleWriter {
     
     /**
      The text view's mutable attributed string, if any.
