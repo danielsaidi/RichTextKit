@@ -69,7 +69,7 @@ private extension RichTextCoordinator {
     }
 
     func setStyle(_ style: RichTextStyle, to newValue: Bool) {
-        textView.setRichTextStyle(style, to: newValue)
+        textView.setCurrentRichTextStyle(style, to: newValue)
     }
 }
 #endif
