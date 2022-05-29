@@ -11,18 +11,40 @@ import Foundation
 public extension RichTextViewRepresentable {
 
     /**
+     Use the selected range (if any) or text position to get
+     the current rich text styles.
+     */
+    var currentRichTextStyles: [RichTextStyle] {
+        let attributes = currentRichTextAttributes
+        let traits = currentFont?.fontDescriptor.symbolicTraits
+        var styles = traits?.enabledRichTextStyles ?? []
+        if attributes.isUnderlined { styles.append(.underlined) }
+        return styles
+    }
+
+    /**
      Use the selected range (if any) or text position to set
      a certain rich text style.
+
+     `TODO` This function reuses a lot of functionality from
+     ``setRichTextStyle(_:to:at:)``. Try to reuse some.
 
      - Parameters:
        - style: The style to set.
        - newValue: The value to set.
      */
     func setCurrentRichTextStyle(_ style: RichTextStyle, to newValue: Bool) {
-        let range = selectedRange
-        let styles = richTextStyles(at: range)
-        let isSet = styles.hasStyle(style)
-        if newValue == isSet { return }
-        setRichTextStyle(style, to: newValue, at: range)
+        let attributeValue = newValue ? 1 : 0
+        if style == .underlined { return setCurrentRichTextAttribute(.underlineStyle, to: attributeValue) }
+        let styles = currentRichTextStyles
+        let shouldAdd = newValue && !styles.hasStyle(style)
+        let shouldRemove = !newValue && styles.hasStyle(style)
+        guard shouldAdd || shouldRemove else { return }
+        guard let font = currentFont else { return }
+        let newFont: FontRepresentable? = FontRepresentable(
+            descriptor: font.fontDescriptor.byTogglingStyle(style),
+            size: font.pointSize)
+        guard let newFontValue = newFont else { return }
+        setCurrentFont(newFontValue)
     }
 }

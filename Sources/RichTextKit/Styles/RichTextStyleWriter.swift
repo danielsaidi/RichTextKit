@@ -38,7 +38,7 @@ public extension RichTextStyleWriter {
         at range: NSRange
     ) {
         let range = safeRange(for: range)
-        let attributeValue =  newValue ? 1 : 0
+        let attributeValue = newValue ? 1 : 0
         if style == .underlined { return setRichTextAttribute(.underlineStyle, to: attributeValue, at: range) }
         guard let font = font(at: range) else { return }
         let styles = richTextStyles(at: range)
