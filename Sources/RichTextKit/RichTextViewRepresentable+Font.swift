@@ -30,7 +30,7 @@ public extension RichTextViewRepresentable {
      Use the selected range (if any) or text position to set
      the current font.
      */
-    func setCurrentFont(_ font: FontRepresentable) {
+    func setCurrentFont(to font: FontRepresentable) {
         setCurrentRichTextAttribute(.font, to: font)
     }
 

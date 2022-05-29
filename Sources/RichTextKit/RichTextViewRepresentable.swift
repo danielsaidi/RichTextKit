@@ -16,13 +16,19 @@ import Foundation
  library doesn't have to do a bunch of `#if` checks.
 
  This protocol aggregates many other protocols, although the
- protocol conformances below seem basic. This means that the
- protocol enabled a lot of additional functionality, such as
- setting attributes, fonts, styles etc.
+ protocols often implement eachother. To show every protocol,
+ some are commented out in the list below.
  */
 public protocol RichTextViewRepresentable:
     AnyObject,
     RichTextPresenter,
+    // RichTextAttributeReader,
+    // RichTextAttributeWriter,
+    RichTextAlignmentReader,
+    RichTextAlignmentWriter,
+    // RichTextFontReader,
+    // RichTextFontWriter,
+    // RichTextStyleReader,
     RichTextStyleWriter {
 
     /**

@@ -22,6 +22,18 @@ public class RichTextContext: ObservableObject {
 
 
     /**
+     The current text alignment, if any.
+     */
+    @Published
+    public var alignment: RichTextAlignment = .left
+
+    /**
+     The current font, if any.
+     */
+    @Published
+    public var font: FontRepresentable? = nil
+
+    /**
      Whether or not the current text is bold.
      */
     @Published

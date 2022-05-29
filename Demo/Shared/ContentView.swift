@@ -29,6 +29,12 @@ struct ContentView: View {
                     button(for: .italic)
                     button(for: .underlined)
                 }
+                HStack {
+                    button(for: .left)
+                    button(for: .center)
+                    button(for: .right)
+                    button(for: .justified)
+                }
                 Button(action: context.toggleIsEditing) {
                     Image.edit
                 }.highlighted(if: context.isEditingText)
@@ -47,6 +53,14 @@ private extension ContentView {
             style.icon
         }
         .highlighted(if: context.hasStyle(style))
+        .buttonStyle(.bordered)
+    }
+
+    func button(for alignment: RichTextAlignment) -> some View {
+        Button(action: { context.alignment = alignment }) {
+            alignment.icon
+        }
+        .highlighted(if: context.alignment == alignment)
         .buttonStyle(.bordered)
     }
 }

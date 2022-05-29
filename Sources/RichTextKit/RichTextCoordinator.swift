@@ -142,18 +142,13 @@ private extension RichTextCoordinator {
      Sync the context with the text view.
      */
     func syncContextWithTextView() {
-        syncContextStylesWithTextView()
-        context.isEditingText = textView.isFirstResponder
-    }
-
-    /**
-     Sync the context styles with the text view.
-     */
-    func syncContextStylesWithTextView() {
-        let styles = textView.richTextStyles(at: textView.selectedRange)
+        let styles = textView.currentRichTextStyles
+        context.alignment = textView.currentRichTextAlignment ?? .left
+        context.font = textView.currentFont
         context.isBold = styles.hasStyle(.bold)
         context.isItalic = styles.hasStyle(.italic)
         context.isUnderlined = styles.hasStyle(.underlined)
+        context.isEditingText = textView.isFirstResponder
     }
 
     /**

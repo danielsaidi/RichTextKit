@@ -24,9 +24,6 @@ public extension RichTextAttributeReader {
     /**
      Get a rich text attribute at the provided range.
 
-     The function uses `safeRange(for:)` to handle incorrect
-     ranges, which is not handled by the native functions.
-
      - Parameters:
        - attribute: The attribute to get.
        - range: The range to get the attribute from.

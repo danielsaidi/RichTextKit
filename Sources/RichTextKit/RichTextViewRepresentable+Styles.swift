@@ -24,7 +24,7 @@ public extension RichTextViewRepresentable {
 
     /**
      Use the selected range (if any) or text position to set
-     a certain rich text style.
+     the current value for a certain rich text style.
 
      `TODO` This function reuses a lot of functionality from
      ``setRichTextStyle(_:to:at:)``. Try to reuse some.
@@ -45,6 +45,6 @@ public extension RichTextViewRepresentable {
             descriptor: font.fontDescriptor.byTogglingStyle(style),
             size: font.pointSize)
         guard let newFontValue = newFont else { return }
-        setCurrentFont(newFontValue)
+        setCurrentFont(to: newFontValue)
     }
 }
