@@ -30,7 +30,7 @@ public extension RichTextViewRepresentable {
 
     /**
      Use the selected range (if any) or text position to set
-     a current rich text alignment.
+     the current rich text alignment.
 
      This function is highly a result of trial and error. It
      sets the text alignment in various ways, based on which

@@ -35,6 +35,10 @@ struct ContentView: View {
                     button(for: .right)
                     button(for: .justified)
                 }
+                HStack {
+                    ColorPicker("background", selection: context.backgroundColorBinding)
+                    ColorPicker("foreground", selection: context.foregroundColorBinding)
+                }
                 Button(action: context.toggleIsEditing) {
                     Image.edit
                 }.highlighted(if: context.isEditingText)

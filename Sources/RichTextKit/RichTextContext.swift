@@ -20,6 +20,23 @@ public class RichTextContext: ObservableObject {
 
     public init() {}
 
+    
+    /**
+     The current background color, if any.
+     */
+    @Published
+    public var backgroundColor: ColorRepresentable? = nil
+
+    /**
+     A custom binding that can be used to set the background
+     color with e.g. a SwitUI `ColorPicker`.
+     */
+    public var backgroundColorBinding: Binding<Color> {
+        Binding(
+            get: { Color(self.backgroundColor ?? .clear) },
+            set: { self.backgroundColor = ColorRepresentable($0)}
+        )
+    }
 
     /**
      The current text alignment, if any.
@@ -32,6 +49,23 @@ public class RichTextContext: ObservableObject {
      */
     @Published
     public var font: FontRepresentable? = nil
+
+    /**
+     The current foreground color, if any.
+     */
+    @Published
+    public var foregroundColor: ColorRepresentable? = nil
+
+    /**
+     A custom binding that can be used to set the foreground
+     color with e.g. a SwitUI `ColorPicker`.
+     */
+    public var foregroundColorBinding: Binding<Color> {
+        Binding(
+            get: { Color(self.foregroundColor ?? .clear) },
+            set: { self.foregroundColor = ColorRepresentable($0)}
+        )
+    }
 
     /**
      Whether or not the current text is bold.

@@ -16,7 +16,9 @@ extension RichTextCoordinator {
      */
     func subscribeToContextChanges() {
         subscribeToAlignment()
+        subscribeToBackgroundColor()
         subscribeToFont()
+        subscribeToForegroundColor()
         subscribeToIsBold()
         subscribeToIsEditingText()
         subscribeToIsItalic()
@@ -34,11 +36,27 @@ private extension RichTextCoordinator {
             .store(in: &cancellables)
     }
 
+    func subscribeToBackgroundColor() {
+        context.$backgroundColor
+            .sink(
+                receiveCompletion: { _ in },
+                receiveValue: { [weak self] in self?.setBackgroundColor(to: $0) })
+            .store(in: &cancellables)
+    }
+
     func subscribeToFont() {
         context.$font
             .sink(
                 receiveCompletion: { _ in },
                 receiveValue: { [weak self] in self?.setFont(to: $0) })
+            .store(in: &cancellables)
+    }
+
+    func subscribeToForegroundColor() {
+        context.$foregroundColor
+            .sink(
+                receiveCompletion: { _ in },
+                receiveValue: { [weak self] in self?.setForegroundColor(to: $0) })
             .store(in: &cancellables)
     }
 
@@ -82,10 +100,22 @@ private extension RichTextCoordinator {
         textView.setCurrentRichTextAlignment(to: newValue)
     }
 
+    func setBackgroundColor(to newValue: ColorRepresentable?) {
+        if textView.currentBackgroundColor == newValue { return }
+        guard let color = newValue else { return }
+        textView.setCurrentBackgroundColor(to: color)
+    }
+
     func setFont(to newValue: FontRepresentable?) {
         guard let value = newValue else { return }
         if textView.currentFont == newValue { return }
         textView.setCurrentFont(to: value)
+    }
+
+    func setForegroundColor(to newValue: ColorRepresentable?) {
+        if textView.currentForegroundColor == newValue { return }
+        guard let color = newValue else { return }
+        textView.setCurrentForegroundColor(to: color)
     }
 
     func setIsEditing(to newValue: Bool) {

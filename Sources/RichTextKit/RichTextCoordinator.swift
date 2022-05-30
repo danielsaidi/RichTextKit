@@ -144,7 +144,9 @@ private extension RichTextCoordinator {
     func syncContextWithTextView() {
         let styles = textView.currentRichTextStyles
         context.alignment = textView.currentRichTextAlignment ?? .left
+        context.backgroundColor = textView.currentBackgroundColor
         context.font = textView.currentFont
+        context.foregroundColor = textView.currentForegroundColor
         context.isBold = styles.hasStyle(.bold)
         context.isItalic = styles.hasStyle(.italic)
         context.isUnderlined = styles.hasStyle(.underlined)

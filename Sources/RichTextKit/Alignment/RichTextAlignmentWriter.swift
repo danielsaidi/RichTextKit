@@ -30,7 +30,7 @@ extension NSMutableAttributedString: RichTextAlignmentWriter {}
 public extension RichTextAlignmentWriter {
 
     /**
-     Get the rich text alignment at the provided range.
+     Set the rich text alignment at the provided range.
 
      - Parameters:
        - alignment: The alignment to set.
