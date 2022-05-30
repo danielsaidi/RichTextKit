@@ -29,12 +29,22 @@ public struct RichTextAlignmentPicker: View {
         alignments: [RichTextAlignment] = RichTextAlignment.allCases,
         selection: Binding<RichTextAlignment>) {
         self.title = title
+        self.alignments = alignments
         self._selection = selection
     }
-    
-    private let title: String
-    
-    @Binding private var selection: RichTextAlignment
+
+    /**
+     The optional picker title.
+     */
+    public let title: String
+
+    /**
+     The pickable alignments.
+     */
+    public let alignments: [RichTextAlignment]
+
+    @Binding
+    private var selection: RichTextAlignment
     
     public var body: some View {
         Picker(title, selection: $selection) {

@@ -20,7 +20,7 @@ public extension Image {
     static let edit = symbol("square.and.pencil")
     
     static let textAlignmentCenter = symbol("text.aligncenter")
-    static let textAlignmentJustify = symbol("text.justify")
+    static let textAlignmentJustified = symbol("text.justify")
     static let textAlignmentLeft = symbol("text.alignleft")
     static let textAlignmentRight = symbol("text.alignright")
 }
@@ -44,7 +44,7 @@ struct Image_RichText_Previews: PreviewProvider {
             Image.edit
             Divider()
             Image.textAlignmentCenter
-            Image.textAlignmentJustify
+            Image.textAlignmentJustified
             Image.textAlignmentLeft
             Image.textAlignmentRight
         }

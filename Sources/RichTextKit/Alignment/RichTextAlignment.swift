@@ -50,26 +50,26 @@ public extension RichTextAlignment {
     var id: String { rawValue }
     
     /**
-     The foundation alignment for a certain text alignment.
-     */
-    var foundationAlignment: NSTextAlignment {
-        switch self {
-        case .left: return .left
-        case .right: return .right
-        case .center: return .center
-        case .justified: return .justified
-        }
-    }
-    
-    /**
-     The standard icon to use for the text alignment.
+     The standard icon to use for the alignment.
      */
     var icon: Image {
         switch self {
         case .left: return .textAlignmentLeft
         case .right: return .textAlignmentRight
         case .center: return .textAlignmentCenter
-        case .justified: return .textAlignmentJustify
+        case .justified: return .textAlignmentJustified
+        }
+    }
+
+    /**
+     The native alignment of the alignment.
+     */
+    var nativeAlignment: NSTextAlignment {
+        switch self {
+        case .left: return .left
+        case .right: return .right
+        case .center: return .center
+        case .justified: return .justified
         }
     }
 }

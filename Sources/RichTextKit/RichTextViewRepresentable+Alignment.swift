@@ -129,7 +129,7 @@ private extension RichTextViewRepresentable {
         let range = NSRange(location: index, length: 1)
         var attributes = attributedString.attributes(at: index, effectiveRange: nil)
         let style = attributes[.paragraphStyle] as? NSMutableParagraphStyle ?? NSMutableParagraphStyle()
-        style.alignment = alignment.foundationAlignment
+        style.alignment = alignment.nativeAlignment
         attributes[.paragraphStyle] = style
         string.beginEditing()
         string.setAttributes(attributes, range: range)
@@ -149,7 +149,7 @@ private extension RichTextViewRepresentable {
      */
     func setTextAlignmentAtCurrentPosition(_ alignment: RichTextAlignment) {
         let style = NSMutableParagraphStyle()
-        style.alignment = alignment.foundationAlignment
+        style.alignment = alignment.nativeAlignment
         var attributes = currentRichTextAttributes
         attributes[.paragraphStyle] = style
         typingAttributes = attributes

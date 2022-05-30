@@ -42,7 +42,7 @@ public extension RichTextAlignmentWriter {
     ) {
         setRichTextAttribute(
             .paragraphStyle,
-            to: alignment.foundationAlignment,
+            to: alignment.nativeAlignment,
             at: range)
     }
 }
