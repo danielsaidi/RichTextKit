@@ -29,12 +29,9 @@ struct ContentView: View {
                     button(for: .italic)
                     button(for: .underlined)
                 }
-                HStack {
-                    button(for: .left)
-                    button(for: .center)
-                    button(for: .right)
-                    button(for: .justified)
-                }
+                RichTextAlignmentPicker(
+                    title: "Alignment",
+                    selection: $context.alignment).pickerStyle(.segmented)
                 HStack {
                     ColorPicker("background", selection: context.backgroundColorBinding)
                     ColorPicker("foreground", selection: context.foregroundColorBinding)
