@@ -8,14 +8,6 @@
 
 import Foundation
 
-#if canImport(UIKit)
-import UIKit
-#endif
-
-#if canImport(AppKit)
-import AppKit
-#endif
-
 /**
  This protocol can be implemented any types that can provide
  extended rich text color capabilities.
