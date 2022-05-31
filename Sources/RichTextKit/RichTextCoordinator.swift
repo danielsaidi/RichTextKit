@@ -128,7 +128,7 @@ extension RichTextCoordinator: NSTextViewDelegate {}
 #endif
 
 
-private extension RichTextCoordinator {
+extension RichTextCoordinator {
 
     /**
      Sync state from the text view's current state.

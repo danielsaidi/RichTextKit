@@ -120,7 +120,8 @@ private extension RichTextAlignmentWriter {
     ) {
         guard let text = mutableRichText else { return }
         let range = NSRange(location: index, length: 1)
-        var attributes = text.attributes(at: index, effectiveRange: nil)
+        let safeRange = safeRange(for: range)
+        var attributes = text.attributes(at: safeRange.location, effectiveRange: nil)
         let style = attributes[.paragraphStyle] as? NSMutableParagraphStyle ?? NSMutableParagraphStyle()
         style.alignment = alignment.nativeAlignment
         attributes[.paragraphStyle] = style

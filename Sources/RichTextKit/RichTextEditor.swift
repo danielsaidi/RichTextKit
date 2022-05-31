@@ -65,7 +65,8 @@ public struct RichTextEditor: ViewRepresentable, RichTextReader, RichTextAttribu
 
     #if os(iOS) || os(tvOS)
     public func makeUIView(context: Context) -> some UIView {
-        textView
+        textView.allowsUndo = true
+        return textView
     }
 
     public func updateUIView(_ view: UIViewType, context: Context) {}
@@ -73,7 +74,8 @@ public struct RichTextEditor: ViewRepresentable, RichTextReader, RichTextAttribu
 
     #if os(macOS)
     public func makeNSView(context: Context) -> some NSView {
-        scrollView
+        textView.allowsUndo = true
+        return scrollView
     }
 
     public func updateNSView(_ view: NSViewType, context: Context) {}

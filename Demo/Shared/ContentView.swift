@@ -20,6 +20,9 @@ struct ContentView: View {
 
     var body: some View {
         NavigationView {
+            #if os(macOS)
+            Text("MENU")
+            #endif
             VStack {
                 RichTextEditor(text: $text, context: context)
                     .cornerRadius(5)
@@ -36,6 +39,16 @@ struct ContentView: View {
                     ColorPicker("background", selection: context.backgroundColorBinding)
                     ColorPicker("foreground", selection: context.foregroundColorBinding)
                 }
+                HStack {
+                    Button(action: { context.undoLatestChange() }) {
+                        Image.undo
+                    }.buttonStyle(.bordered)
+
+                    Button(action: { context.redoLatestChange() }) {
+                        Image.redo
+                    }.buttonStyle(.bordered)
+                }
+
                 Button(action: context.toggleIsEditing) {
                     Image.edit
                 }.highlighted(if: context.isEditingText)

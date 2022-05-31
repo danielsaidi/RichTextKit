@@ -90,6 +90,18 @@ public class RichTextContext: ObservableObject {
      */
     @Published
     public var isUnderlined = false
+
+    /**
+     Whether or not to undo the latest change.
+     */
+    @Published
+    public var shouldUndoLatestChange = false
+
+    /**
+     Whether or not to redo the latest undone change.
+     */
+    @Published
+    public var shouldRedoLatestChange = false
 }
 
 public extension RichTextContext {
@@ -103,6 +115,13 @@ public extension RichTextContext {
         case .italic: return isItalic
         case .underlined: return isUnderlined
         }
+    }
+
+    /**
+     Redo the latest undone change.
+     */
+    func redoLatestChange() {
+        shouldRedoLatestChange = true
     }
 
     /**
@@ -121,5 +140,12 @@ public extension RichTextContext {
      */
     func toggleIsEditing() {
         isEditingText.toggle()
+    }
+
+    /**
+     Undo the latest change.
+     */
+    func undoLatestChange() {
+        shouldUndoLatestChange = true
     }
 }

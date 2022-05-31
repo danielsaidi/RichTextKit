@@ -54,10 +54,10 @@ public extension RichTextAlignment {
      */
     var icon: Image {
         switch self {
-        case .left: return .textAlignmentLeft
-        case .right: return .textAlignmentRight
-        case .center: return .textAlignmentCenter
-        case .justified: return .textAlignmentJustified
+        case .left: return .alignmentLeft
+        case .right: return .alignmentRight
+        case .center: return .alignmentCenter
+        case .justified: return .alignmentJustified
         }
     }
 

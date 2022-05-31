@@ -23,6 +23,8 @@ extension RichTextCoordinator {
         subscribeToIsEditingText()
         subscribeToIsItalic()
         subscribeToIsUnderlined()
+        subscribeToShouldRedoLatestChange()
+        subscribeToShouldUndoLatestChange()
     }
 }
 
@@ -91,9 +93,31 @@ private extension RichTextCoordinator {
                 receiveValue: { [weak self] in self?.setStyle(.underlined, to: $0) })
             .store(in: &cancellables)
     }
+
+    func subscribeToShouldRedoLatestChange() {
+        context.$shouldRedoLatestChange
+            .sink(
+                receiveCompletion: { _ in },
+                receiveValue: { [weak self] in self?.redoLastChange($0) })
+            .store(in: &cancellables)
+    }
+
+    func subscribeToShouldUndoLatestChange() {
+        context.$shouldUndoLatestChange
+            .sink(
+                receiveCompletion: { _ in },
+                receiveValue: { [weak self] in self?.undoLastChange($0) })
+            .store(in: &cancellables)
+    }
 }
 
 private extension RichTextCoordinator {
+
+    func redoLastChange(_ shouldRedo: Bool) {
+        guard shouldRedo else { return }
+        textView.undoManager?.redo()
+        syncContextWithTextView()
+    }
 
     func setAlignment(to newValue: RichTextAlignment) {
         if textView.currentRichTextAlignment == newValue { return }
@@ -131,6 +155,12 @@ private extension RichTextCoordinator {
         let hasStyle = textView.currentRichTextStyles.hasStyle(style)
         if newValue == hasStyle { return }
         textView.setCurrentRichTextStyle(style, to: newValue)
+    }
+
+    func undoLastChange(_ shouldUndo: Bool) {
+        guard shouldUndo else { return }
+        textView.undoManager?.undo()
+        syncContextWithTextView()
     }
 }
 #endif
