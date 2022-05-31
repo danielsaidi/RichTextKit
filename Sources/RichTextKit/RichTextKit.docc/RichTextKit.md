@@ -68,6 +68,7 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 ### Alignment
 
 - ``RichTextAlignment``
+- ``RichTextAlignmentPicker``
 - ``RichTextAlignmentReader``
 - ``RichTextAlignmentWriter``
 
