@@ -97,6 +97,10 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 
 - ``ImageRepresentable``
 
+### Pasteboard
+
+- ``PasteboardImageReader``
+
 ### Styles
 
 - ``RichTextStyle``

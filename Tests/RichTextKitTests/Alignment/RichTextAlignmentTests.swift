@@ -39,10 +39,10 @@ final class RichTextAlignmentTests: XCTestCase {
             RichTextAlignment(alignment).icon
         }
 
-        XCTAssertEqual(result(for: .left), .textAlignmentLeft)
-        XCTAssertEqual(result(for: .right), .textAlignmentRight)
-        XCTAssertEqual(result(for: .center), .textAlignmentCenter)
-        XCTAssertEqual(result(for: .justified), .textAlignmentJustified)
+        XCTAssertEqual(result(for: .left), .alignmentLeft)
+        XCTAssertEqual(result(for: .right), .alignmentRight)
+        XCTAssertEqual(result(for: .center), .alignmentCenter)
+        XCTAssertEqual(result(for: .justified), .alignmentJustified)
     }
 
     func testHasValidNativeAlignment() throws {

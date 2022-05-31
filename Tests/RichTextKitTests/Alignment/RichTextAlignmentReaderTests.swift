@@ -6,6 +6,7 @@
 //  Copyright © 2022 Daniel Saidi. All rights reserved.
 //
 
+#if os(iOS) || os(macOS) || os(tvOS)
 import RichTextKit
 import SwiftUI
 import XCTest
@@ -27,3 +28,4 @@ private class TestReader: RichTextAlignmentReader {
 
     var attributedString = NSAttributedString(string: "foo bar")
 }
+#endif
