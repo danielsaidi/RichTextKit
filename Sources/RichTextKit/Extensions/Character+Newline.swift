@@ -10,6 +10,9 @@ import Foundation
 
 extension Character {
 
+    /**
+     Get whether or not the character is a newline separator.
+     */
     var isNewLineSeparator: Bool {
         self == .newLine || self == .carriageReturn
     }
