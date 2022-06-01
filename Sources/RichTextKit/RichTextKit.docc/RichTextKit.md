@@ -89,6 +89,7 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 
 - ``FontRepresentable``
 - ``FontDescriptorRepresentable``
+- ``FontPickerFont``
 - ``FontTraitsRepresentable``
 - ``RichTextFontReader``
 - ``RichTextFontWriter``

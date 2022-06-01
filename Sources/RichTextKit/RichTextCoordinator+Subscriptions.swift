@@ -1,9 +1,9 @@
 //
 //  RichTextCoordinator+Subscriptions.swift
-//  OribiRichTextKit
+//  RichTextKit
 //
-//  Created by Daniel Saidi on 2021-12-06.
-//  Copyright © 2021 Oribi. All rights reserved.
+//  Created by Daniel Saidi on 2022-05-22.
+//  Copyright © 2022 Daniel Saidi. All rights reserved.
 //
 
 #if os(iOS) || os(macOS) || os(tvOS)
