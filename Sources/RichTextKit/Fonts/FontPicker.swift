@@ -1,6 +1,6 @@
 //
 //  FontPicker.swift
-//  SwiftUIKit
+//  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-06-01.
 //  Copyright © 2022 Daniel Saidi. All rights reserved.
@@ -9,8 +9,8 @@
 import SwiftUI
 
 /**
- This system font picker renders a plain `Picker` that lists
- a collection of fonts, of which one can be selected.
+ This font picker uses a plain `Picker` to list the provided
+ fonts, of which one can be selected.
  
  Note that some platforms don't render custom fonts for some
  picker styles. For these situations, you can use the custom
@@ -24,22 +24,19 @@ public struct FontPicker: View {
      
      - Parameters:
        - selection: The selected font name.
-       - fonts: The fonts to display in the list, by default `all` with the selected font topmost.
+       - fonts: The fonts to display in the list, by default `all`.
        - fontSize: The font size to use in the list items.
      */
     public init(
         selection: Binding<FontName>,
         fonts: [FontPickerFont] = .all,
         fontSize: CGFloat = 20) {
-        self._selectedFontName = selection
+        self._selection = selection
         self.fonts = fonts
         self.itemFontSize = fontSize
         self.selectedFont = fonts.last { $0.matches(selection.wrappedValue) }
     }
 
-    /**
-     This typealias aims at making the code more readable.
-     */
     public typealias FontName = String
     
     private let fonts: [FontPickerFont]
@@ -47,16 +44,16 @@ public struct FontPicker: View {
     private let selectedFont: FontPickerFont?
     
     @Binding
-    private var selectedFontName: FontName
+    private var selection: FontName
     
     public var body: some View {
-        Picker(selection: $selectedFontName) {
+        Picker(selection: $selection) {
             ForEach(fonts) { font in
                 FontPickerItem(
                     font: font,
                     fontSize: itemFontSize,
                     isSelected: false)
-                .tag(font.tag(for: selectedFont, selectedName: selectedFontName))
+                .tag(font.tag(for: selectedFont, selectedName: selection))
             }
         } label: {
             EmptyView()

@@ -37,6 +37,6 @@ struct FontPickerItem: View, ListPickerItem {
                 .font(.custom(font.fontName, size: fontSize))
             Spacer()
             checkmark
-        }
+        }.contentShape(Rectangle())
     }
 }
