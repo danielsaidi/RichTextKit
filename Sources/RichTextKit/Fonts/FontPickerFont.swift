@@ -2,7 +2,7 @@
 //  FontPickerFont.swift
 //  RichTextKit
 //
-//  Created by Daniel Saidi on 2022-05-22.
+//  Created by Daniel Saidi on 2022-06-01.
 //  Copyright © 2022 Daniel Saidi. All rights reserved.
 //
 
@@ -32,7 +32,7 @@ import UIKit
  property to another value. To identify the system font, set
  the ``FontPickerFont/systemFontNamePrefix``.
  */
-public struct FontPickerFont: Identifiable {
+public struct FontPickerFont: Identifiable, Equatable {
     
     public init(fontName: String) {
         let fontName = fontName.capitalized
