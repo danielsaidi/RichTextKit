@@ -128,6 +128,16 @@ public class RichTextContext: ObservableObject {
 public extension RichTextContext {
 
     /**
+     Decrement the current font size.
+
+     - Parameters:
+       - points: The number of points to decrement the font size, by default `1`.
+     */
+    func decrementFontSize(points: UInt = 1) {
+        stepFontSize(points: -Int(points))
+    }
+
+    /**
      Check whether or not a certain style is enabled.
      */
     func hasStyle(_ style: RichTextStyle) -> Bool {
@@ -139,10 +149,30 @@ public extension RichTextContext {
     }
 
     /**
+     Increment the current font size.
+
+     - Parameters:
+       - points: The number of points to increment the font size, by default `1`.
+     */
+    func incrementFontSize(points: UInt = 1) {
+        stepFontSize(points: Int(points))
+    }
+
+    /**
      Redo the latest undone change.
      */
     func redoLatestChange() {
         shouldRedoLatestChange = true
+    }
+
+    /**
+     Step the current font size a certain number of points.
+
+     - Parameters:
+       - points: The number of points to increase or decrease the font size.
+     */
+    func stepFontSize(points: Int) {
+        fontSize += CGFloat(points)
     }
 
     /**

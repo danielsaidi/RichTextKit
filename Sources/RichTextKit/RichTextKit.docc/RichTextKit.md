@@ -99,6 +99,7 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 - ``FontPickerFont``
 - ``FontForEachPicker``
 - ``FontListPicker``
+- ``FontSizePicker``
 
 ### Images
 

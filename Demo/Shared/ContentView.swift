@@ -20,22 +20,30 @@ struct ContentView: View {
 
     var body: some View {
         NavigationView {
-            #if os(macOS)
-            Text("MENU")
-            #endif
-            VStack {
-                RichTextEditor(text: $text, context: context)
-                    .cornerRadius(5)
-                Divider()
-                styleButtons
-                alignmentPicker
-                colorPickers
-                sizeTools
-                actionButtons
-            }.background(Color.gray.opacity(0.3))
+            content.navigationTitle("RichTextKit")
         }
         .padding()
         .background(Color.gray.opacity(0.3))
+    }
+}
+
+private extension ContentView {
+
+    @ViewBuilder
+    var content: some View {
+        #if os(macOS)
+        Text("MENU")
+        #endif
+        VStack {
+            RichTextEditor(text: $text, context: context)
+                .cornerRadius(5)
+            Divider()
+            styleButtons
+            alignmentPicker
+            colorPickers
+            sizeTools
+            actionButtons
+        }.background(Color.gray.opacity(0.3))
     }
 }
 
@@ -64,7 +72,15 @@ private extension ContentView {
     }
 
     var sizeTools: some View {
-        FontSizePicker(selection: $context.fontSize)
+        HStack {
+            button(icon: Image(systemName: "minus")) {
+                context.decrementFontSize()
+            }
+            FontSizePicker(selection: $context.fontSize)
+            button(icon: Image(systemName: "plus")) {
+                context.incrementFontSize()
+            }
+        }
     }
 
     var styleButtons: some View {

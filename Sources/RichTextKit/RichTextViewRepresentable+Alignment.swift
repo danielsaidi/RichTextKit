@@ -39,7 +39,7 @@ public extension RichTextViewRepresentable {
         to alignment: RichTextAlignment
     ) {
         if !hasTrimmedText {
-            return setTextAlignmentAtCurrentPosition(alignment)
+            return setTextAlignmentAtCurrentPosition(to: alignment)
         }
         setRichTextAlignment(to: alignment, at: selectedRange)
     }
@@ -51,7 +51,7 @@ private extension RichTextViewRepresentable {
      Set the text alignment at the current position.
      */
     func setTextAlignmentAtCurrentPosition(
-        _ alignment: RichTextAlignment
+        to alignment: RichTextAlignment
     ) {
         let style = NSMutableParagraphStyle()
         style.alignment = alignment.nativeAlignment

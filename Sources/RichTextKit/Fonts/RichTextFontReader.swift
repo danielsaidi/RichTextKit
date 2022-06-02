@@ -23,7 +23,7 @@ extension NSAttributedString: RichTextFontReader {}
 public extension RichTextFontReader {
 
     /**
-     Get the font at a certain `range`.
+     Get the font at a certain range.
 
      - Parameters:
        - range: The range to get the font from.
@@ -33,7 +33,7 @@ public extension RichTextFontReader {
     }
 
     /**
-     Get the font size at a certain `range`.
+     Get the font size at a certain range.
 
      - Parameters:
        - range: The range to get the font size from.

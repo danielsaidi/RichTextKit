@@ -38,6 +38,9 @@ public extension RichTextViewRepresentable {
     /**
      Use the selected range (if any) or text position to set
      the current font.
+
+     - Parameters:
+       - font: The font to set.
      */
     func setCurrentFont(to font: FontRepresentable) {
         setCurrentRichTextAttribute(.font, to: font)
@@ -46,30 +49,81 @@ public extension RichTextViewRepresentable {
     /**
      Use the selected range (if any) or text position to set
      the current font name.
+
+     - Parameters:
+       - name: The font name to set.
      */
-    func setCurrentFont(named name: String) {
+    func setCurrentFontName(to name: String) {
         if hasSelectedRange {
-            setFont(named: name, at: selectedRange)
+            setFontName(to: name, at: selectedRange)
         } else {
-            setFontAtCurrentPosition(named: name)
+            setFontNameAtCurrentPosition(to: name)
         }
     }
 
     /**
      Use the selected range (if any) or text position to set
      the current font size.
+
+     - Parameters:
+       - size: The font size to set.
      */
-    func setCurrentFontSize(_ size: CGFloat) {
+    func setCurrentFontSize(to size: CGFloat) {
         #if os(macOS)
-        setFontSize(size, at: selectedRange)
+        setFontSize(to: size, at: selectedRange)
         setFontSizeAtCurrentPosition(size)
         #else
         if hasSelectedRange {
-            setFontSize(size, at: selectedRange)
+            setFontSize(to: size, at: selectedRange)
         } else {
             setFontSizeAtCurrentPosition(size)
         }
         #endif
+    }
+
+    /**
+     Use the selected range (if any) or text position to set
+     the current font size by stepping the size up or down a
+     certain number of points.
+
+     - Parameters:
+       - points: The number of points to increase or decrease the font size.
+     */
+    func stepCurrentFontSize(points: Int) {
+        let currentSize = currentFontSize ?? .standardRichTextFontSize
+        let newSize = currentSize + CGFloat(points)
+        setCurrentFontSize(to: newSize)
+    }
+}
+
+public extension RichTextViewRepresentable {
+
+    /**
+     Decrement the current font size.
+
+     - Parameters:
+       - points: The number of points to decrement the font size, by default `1`.
+       - range: The range to get the font from.
+     */
+    func decrementFontSize(
+        points: UInt = 1,
+        at range: NSRange
+    ) {
+        stepCurrentFontSize(points: -Int(points))
+    }
+
+    /**
+     Increment the current font size.
+
+     - Parameters:
+       - points: The number of points to increment the font size, by default `1`.
+       - range: The range to get the font from.
+     */
+    func incrementFontSize(
+        points: UInt = 1,
+        at range: NSRange
+    ) {
+        stepCurrentFontSize(points: Int(points))
     }
 }
 
@@ -91,7 +145,7 @@ private extension RichTextViewRepresentable {
      just creates a new font, but be aware of this change if
      something turns out not to work as expected.
      */
-    func setFontAtCurrentPosition(named name: String) {
+    func setFontNameAtCurrentPosition(to name: String) {
         var attributes = typingAttributes
         let oldFont = attributes[.font] as? FontRepresentable ?? .standardRichTextFont
         let size = oldFont.pointSize

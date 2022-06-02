@@ -141,13 +141,13 @@ private extension RichTextCoordinator {
 
     func setFontName(to newValue: String) {
         if newValue == textView.currentFontName { return }
-        textView.setCurrentFont(named: newValue)
+        textView.setCurrentFontName(to: newValue)
     }
 
     func setFontSize(to size: CGFloat) {
         if isSteppingFontSize { return }
         if size == textView.currentFontSize { return }
-        textView.setCurrentFontSize(size)
+        textView.setCurrentFontSize(to: size)
     }
 
     func setForegroundColor(to newValue: ColorRepresentable?) {

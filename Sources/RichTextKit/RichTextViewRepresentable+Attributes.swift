@@ -47,7 +47,7 @@ public extension RichTextViewRepresentable {
      the implementation has different branches.
 
      - Parameters:
-       - key: The attribute to set.
+       - attribute: The attribute to set.
        - value: The value to set the attribute to.
      */
     func setCurrentRichTextAttribute(_ attribute: RichTextAttribute, to value: Any) {

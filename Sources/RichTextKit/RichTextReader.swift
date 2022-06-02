@@ -46,7 +46,7 @@ public extension RichTextReader {
     }
 
     /**
-     Get the rich text at a certain `range`.
+     Get the rich text at a certain range.
 
      Since this function accounts for invalid ranges, always
      use this function instead of `attributedSubstring`,

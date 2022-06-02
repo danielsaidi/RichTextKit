@@ -16,27 +16,27 @@ import Foundation
  This protocol is implemented by `NSMutableAttributedString`
  as well as other library types.
  */
-public protocol RichTextFontWriter: RichTextAttributeWriter {}
+public protocol RichTextFontWriter: RichTextAttributeReader, RichTextAttributeWriter {}
 
 extension NSMutableAttributedString: RichTextFontWriter {}
 
 public extension RichTextFontWriter {
 
     /**
-     Set the font at a certain `range`.
+     Set the font at a certain range.
 
      - Parameters:
        - range: The range to get the font from.
      */
     func setFont(
-        _ font: FontRepresentable,
+        to font: FontRepresentable,
         at range: NSRange
     ) {
         setRichTextAttribute(.font, to: font, at: range)
     }
 
     /**
-     Set the font at a certain `range`.
+     Set the font name at a certain range.
 
      This function may seem complicated, but so far it's the
      only way setting the font name seems to work correctly.
@@ -55,8 +55,8 @@ public extension RichTextFontWriter {
        - name: The name of the font to apply.
        - range: The range to get the font from.
      */
-    func setFont(
-        named name: String,
+    func setFontName(
+        to name: String,
         at range: NSRange
     ) {
         guard let text = mutableRichText else { return }
@@ -76,7 +76,7 @@ public extension RichTextFontWriter {
     }
 
     /**
-     Set the font size at a certain `range`.
+     Set the font size at a certain range.
 
      This function will iterate over a the range and replace
      the old font with a copy where the size has changed.
@@ -85,7 +85,10 @@ public extension RichTextFontWriter {
        - size: The font size to set.
        - range: The range to get the font from.
      */
-    func setFontSize(_ size: CGFloat, at range: NSRange) {
+    func setFontSize(
+        to size: CGFloat,
+        at range: NSRange
+    ) {
         guard let text = mutableRichText else { return }
         guard text.length > 0 else { return }
         text.beginEditing()
@@ -97,6 +100,55 @@ public extension RichTextFontWriter {
             text.fixAttributes(in: range)
         }
         text.endEditing()
+    }
+
+    /**
+     Increase or decrease the font size at a certain range.
+
+     - Parameters:
+       - points: The number of points to increase or decrease the font size.
+       - range: The range to get the font from.
+     */
+    func stepFontSize(
+        points: Int,
+        at range: NSRange
+    ) {
+        let attr: FontRepresentable? = richTextAttribute(.font, at: range)
+        guard let font = attr else { return }
+        let size = font.pointSize
+        let newSize = size + CGFloat(points)
+        setFontSize(to: newSize, at: range)
+    }
+}
+
+public extension RichTextFontWriter {
+
+    /**
+     Decrement the font size at a certain range.
+
+     - Parameters:
+       - points: The number of points to decrement the font size, by default `1`.
+       - range: The range to get the font from.
+     */
+    func decrementFontSize(
+        points: UInt = 1,
+        at range: NSRange
+    ) {
+        stepFontSize(points: -Int(points), at: range)
+    }
+
+    /**
+     Increment the font size at a certain range.
+
+     - Parameters:
+       - points: The number of points to increment the font size, by default `1`.
+       - range: The range to get the font from.
+     */
+    func incrementFontSize(
+        points: UInt = 1,
+        at range: NSRange
+    ) {
+        stepFontSize(points: Int(points), at: range)
     }
 }
 
