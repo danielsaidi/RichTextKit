@@ -19,24 +19,26 @@ public protocol RichTextExportService: AnyObject {
      content.
      
      - Parameters:
-       - withName: The name of the exported file.
+       - fileName: The preferred file name.
        - content: The rich text content to export.
        - format: The rich text format to use when exporting.
      */
     func generateExportFile(
         withName fileName: String,
         content: NSAttributedString,
-        format: RichTextFormat) throws -> URL
+        format: RichTextFormat
+    ) throws -> URL
     
     /**
      Generate a PDF export file with a certain name and rich
      text content.
      
      - Parameters:
-       - withName: The name of the exported file.
+       - fileName: The preferred file name.
        - content: The rich text content to export.
      */
     func generatePdfExportFile(
         withName fileName: String,
-        content: NSAttributedString) throws -> URL
+        content: NSAttributedString
+    ) throws -> URL
 }

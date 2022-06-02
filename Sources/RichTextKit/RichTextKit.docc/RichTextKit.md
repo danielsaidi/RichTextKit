@@ -87,7 +87,10 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 
 ### Export
 
+- ``ExportFileUrlError``
+- ``ExportFileUrlResolver``
 - ``RichTextExportService``
+- ``StandardExportFileUrlResolver``
 - ``StandardRichTextExportService``
 
 ### Fonts
@@ -97,6 +100,7 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 - ``FontTraitsRepresentable``
 - ``RichTextFontReader``
 - ``RichTextFontWriter``
+- ``StandardFontSizeProvider``
 
 ### Font Pickers
 

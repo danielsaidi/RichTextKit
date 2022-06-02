@@ -1,5 +1,5 @@
 //
-//  FileManager+Url.swift
+//  FileManager+ExportFileUrlResolver.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-06-02.
@@ -8,39 +8,47 @@
 
 import Foundation
 
+extension FileManager: ExportFileUrlResolver {}
+
 public extension FileManager {
-    
-    /**
-     This enum defines errors that can be thrown when a file
-     manager fails to perform export operations.
-     */
-    enum ExportError: Error {
-        case cantCreateFile(at: URL)
-        case cantGenerateFileUrl(in: FileManager.SearchPathDirectory)
-    }
-    
+
     /**
      Try to generate a file url in a certain directory.
+
+     - Parameters:
+       - fileName: The preferred file name.
+       - extensions: The file extension.
+       - directory: The directory in which to generate an url.
      */
     func fileUrl(
         withName fileName: String,
         extension: String,
-        in directory: FileManager.SearchPathDirectory = .documentDirectory) throws -> URL {
+        in directory: FileManager.SearchPathDirectory) throws -> URL {
         let url = self
             .urls(for: directory, in: .userDomainMask).first?
             .appendingPathComponent(fileName)
             .appendingPathExtension(`extension`)
-        guard let fileUrl = url else { throw ExportError.cantGenerateFileUrl(in: directory) }
+        guard let fileUrl = url else { throw ExportFileUrlError.cantCreateFileUrl(in: directory) }
         return fileUrl
     }
     
     /**
      Try to generate a unique file url in a certain directory.
+
+     If needed, the function appends a counter until the url
+     is unique. This means that the resulting url for a file
+     url that has the file name `myFile.txt` may result in a
+     url that has the file name `myFile-1.txt`.
+
+     - Parameters:
+       - fileName: The preferred file name.
+       - extensions: The file extension.
+       - directory: The directory in which to generate an url.
      */
     func uniqueFileUrl(
         withName fileName: String,
         extension: String,
-        in directory: FileManager.SearchPathDirectory = .documentDirectory) throws -> URL {
+        in directory: FileManager.SearchPathDirectory) throws -> URL {
         let url = try fileUrl(withName: fileName, extension: `extension`, in: directory)
         let uniqueUrl = uniqueUrl(for: url)
         return uniqueUrl
@@ -54,10 +62,11 @@ public extension FileManager {
      is unique. This means that the resulting url for a file
      url that has the file name `myFile.txt` may result in a
      url that has the file name `myFile-1.txt`.
+
+     - Parameters:
+       - url: The url to generate a unique url for.
      */
-    func uniqueUrl(
-        for url: URL,
-        separator: String = "-") -> URL {
+    func uniqueUrl(for url: URL) -> URL {
         if !fileExists(atPath: url.path) { return url }
         let fileExtension = url.pathExtension
         let noExtension = url.deletingPathExtension()
@@ -66,7 +75,7 @@ public extension FileManager {
         repeat {
             let newUrl = noExtension
                 .deletingLastPathComponent()
-                .appendingPathComponent(fileName.appending("\(separator)\(counter)"))
+                .appendingPathComponent(fileName.appending("-\(counter)"))
                 .appendingPathExtension(fileExtension)
             if !fileExists(atPath: newUrl.path) { return newUrl }
             counter += 1

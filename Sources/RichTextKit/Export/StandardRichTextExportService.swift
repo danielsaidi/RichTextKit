@@ -23,17 +23,17 @@ public class StandardRichTextExportService: RichTextExportService {
      Create a standard rich text export service.
      
      - Parameters:
-       - fileManager: The file manager to use to create files, by default `.default`.
+       - urlResolver: The type to use to resolve file urls, by default `FileManager.default`.
        - directory: The directory to save the file in, by default `.cachesDirectory`.
      */
     public init(
-        fileManager: FileManager = .default,
+        urlResolver: ExportFileUrlResolver = FileManager.default,
         directory: FileManager.SearchPathDirectory = .cachesDirectory) {
-        self.fileManager = fileManager
+        self.urlResolver = urlResolver
         self.directory = directory
     }
     
-    private let fileManager: FileManager
+    private let urlResolver: ExportFileUrlResolver
     private let directory: FileManager.SearchPathDirectory
     
     /**
@@ -45,15 +45,16 @@ public class StandardRichTextExportService: RichTextExportService {
      unique before it exports it.
      
      - Parameters:
-       - withName: The preferred name of the exported file.
+       - fileName: The preferred file name.
        - content: The rich text content to export.
        - format: The rich text format to use when exporting.
      */
     public func generateExportFile(
         withName fileName: String,
         content: NSAttributedString,
-        format: RichTextFormat) throws -> URL {
-        let fileUrl = try fileManager.uniqueFileUrl(
+        format: RichTextFormat
+    ) throws -> URL {
+        let fileUrl = try urlResolver.uniqueFileUrl(
             withName: fileName,
             extension: format.standardFileExtension,
             in: directory)
@@ -71,12 +72,14 @@ public class StandardRichTextExportService: RichTextExportService {
      unique before it exports it.
      
      - Parameters:
-       - withName: The preferred name of the exported file.
+       - fileName: The preferred file name.
        - content: The rich text content to export.
      */
     public func generatePdfExportFile(
-        withName fileName: String, content: NSAttributedString) throws -> URL {
-        let fileUrl = try fileManager.uniqueFileUrl(
+        withName fileName: String,
+        content: NSAttributedString
+    ) throws -> URL {
+        let fileUrl = try urlResolver.uniqueFileUrl(
             withName: fileName,
             extension: "pdf",
             in: directory)
