@@ -103,7 +103,10 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 
 ### Images
 
+- ``ImageAttachmentSize``
+- ``ImageInsertConfiguration``
 - ``ImageRepresentable``
+- ``RichTextImageConfiguration``
 
 ### Pasteboard
 
