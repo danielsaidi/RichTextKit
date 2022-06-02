@@ -70,6 +70,11 @@ open class RichTextCoordinator: NSObject {
      */
     internal var cancellables = Set<AnyCancellable>()
 
+    /**
+     This flag is used to handle font size stepping.
+     */
+    internal var isSteppingFontSize = false
+
 
     #if canImport(UIKit)
 
@@ -145,7 +150,8 @@ extension RichTextCoordinator {
         let styles = textView.currentRichTextStyles
         context.alignment = textView.currentRichTextAlignment ?? .left
         context.backgroundColor = textView.currentBackgroundColor
-        context.font = textView.currentFont
+        context.fontName = textView.currentFontName ?? ""
+        context.fontSize = textView.currentFontSize ?? .standardRichTextFontSize
         context.foregroundColor = textView.currentForegroundColor
         context.isBold = styles.hasStyle(.bold)
         context.isItalic = styles.hasStyle(.italic)

@@ -17,7 +17,8 @@ extension RichTextCoordinator {
     func subscribeToContextChanges() {
         subscribeToAlignment()
         subscribeToBackgroundColor()
-        subscribeToFont()
+        subscribeToFontName()
+        subscribeToFontSize()
         subscribeToForegroundColor()
         subscribeToIsBold()
         subscribeToIsEditingText()
@@ -46,11 +47,19 @@ private extension RichTextCoordinator {
             .store(in: &cancellables)
     }
 
-    func subscribeToFont() {
-        context.$font
+    func subscribeToFontName() {
+        context.$fontName
             .sink(
                 receiveCompletion: { _ in },
-                receiveValue: { [weak self] in self?.setFont(to: $0) })
+                receiveValue: { [weak self] in self?.setFontName(to: $0) })
+            .store(in: &cancellables)
+    }
+
+    func subscribeToFontSize() {
+        context.$fontSize
+            .sink(
+                receiveCompletion: { _ in },
+                receiveValue: { [weak self] in self?.setFontSize(to: $0) })
             .store(in: &cancellables)
     }
 
@@ -120,20 +129,25 @@ private extension RichTextCoordinator {
     }
 
     func setAlignment(to newValue: RichTextAlignment) {
-        if textView.currentRichTextAlignment == newValue { return }
+        if newValue == textView.currentRichTextAlignment { return }
         textView.setCurrentRichTextAlignment(to: newValue)
     }
 
     func setBackgroundColor(to newValue: ColorRepresentable?) {
-        if textView.currentBackgroundColor == newValue { return }
+        if newValue == textView.currentBackgroundColor { return }
         guard let color = newValue else { return }
         textView.setCurrentBackgroundColor(to: color)
     }
 
-    func setFont(to newValue: FontRepresentable?) {
-        guard let value = newValue else { return }
-        if textView.currentFont == newValue { return }
-        textView.setCurrentFont(to: value)
+    func setFontName(to newValue: String) {
+        if newValue == textView.currentFontName { return }
+        textView.setCurrentFont(named: newValue)
+    }
+
+    func setFontSize(to size: CGFloat) {
+        if isSteppingFontSize { return }
+        if size == textView.currentFontSize { return }
+        textView.setCurrentFontSize(size)
     }
 
     func setForegroundColor(to newValue: ColorRepresentable?) {

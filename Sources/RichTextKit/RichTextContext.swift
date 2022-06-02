@@ -18,14 +18,20 @@ import SwiftUI
  */
 public class RichTextContext: ObservableObject {
 
-    public init() {}
-
-    
     /**
-     The current background color, if any.
+     Create a new rich text context.
+
+     - Parameters:
+       - standardFontSize: The font size to use by default.
      */
-    @Published
-    public var backgroundColor: ColorRepresentable? = nil
+    public init(
+        standardFontSize: CGFloat = .standardRichTextFontSize
+    ) {
+        self.fontSize = standardFontSize
+    }
+
+
+    // MARK: - Bindings
 
     /**
      A custom binding that can be used to set the background
@@ -38,6 +44,9 @@ public class RichTextContext: ObservableObject {
         )
     }
 
+
+    // MARK: - Properties
+
     /**
      The current text alignment, if any.
      */
@@ -45,10 +54,22 @@ public class RichTextContext: ObservableObject {
     public var alignment: RichTextAlignment = .left
 
     /**
-     The current font, if any.
+     The current background color, if any.
      */
     @Published
-    public var font: FontRepresentable? = nil
+    public var backgroundColor: ColorRepresentable? = nil
+
+    /**
+     The current font name.
+     */
+    @Published
+    public var fontName = ""
+
+    /**
+     The current font size.
+     */
+    @Published
+    public var fontSize: CGFloat
 
     /**
      The current foreground color, if any.

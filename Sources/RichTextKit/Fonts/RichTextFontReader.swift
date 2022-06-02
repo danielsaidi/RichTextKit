@@ -6,6 +6,7 @@
 //  Copyright © 2022 Daniel Saidi. All rights reserved.
 //
 
+import CoreGraphics
 import Foundation
 
 /**
@@ -29,5 +30,15 @@ public extension RichTextFontReader {
      */
     func font(at range: NSRange) -> FontRepresentable? {
         richTextAttribute(.font, at: range)
+    }
+
+    /**
+     Get the font size at a certain `range`.
+
+     - Parameters:
+       - range: The range to get the font size from.
+     */
+    func fontSize(at range: NSRange) -> CGFloat? {
+        font(at: range)?.pointSize
     }
 }

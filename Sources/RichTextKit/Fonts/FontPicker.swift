@@ -11,6 +11,9 @@ import SwiftUI
 /**
  This font picker uses a plain `Picker` to list the provided
  fonts, of which one can be selected.
+
+ Since this view uses a plain `Picker`, you can apply any of
+ the native picker styles to this picker as well.
  
  Note that some platforms don't render custom fonts for some
  picker styles. For these situations, you can use the custom

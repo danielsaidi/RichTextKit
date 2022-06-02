@@ -34,13 +34,5 @@ public extension FontRepresentable {
      You can change this value to affect all types that make
      use of the value.
      */
-    static var standardRichTextFont = systemFont(ofSize: standardRichTextFontSize)
-
-    /**
-     The standard font size to use for rich text.
-
-     You can change this value to affect all types that make
-     use of the value.
-     */
-    static var standardRichTextFontSize: CGFloat = 16
+    static var standardRichTextFont = systemFont(ofSize: .standardRichTextFontSize)
 }

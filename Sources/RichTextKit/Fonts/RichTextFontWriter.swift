@@ -6,6 +6,7 @@
 //  Copyright © 2022 Daniel Saidi. All rights reserved.
 //
 
+import CoreGraphics
 import Foundation
 
 /**
@@ -69,6 +70,30 @@ public extension RichTextFontWriter {
             let newFont = FontRepresentable(name: fontName, size: size) ?? .standardRichTextFont
             text.removeAttribute(key, range: range)
             text.addAttribute(key, value: newFont, range: range)
+            text.fixAttributes(in: range)
+        }
+        text.endEditing()
+    }
+
+    /**
+     Set the font size at a certain `range`.
+
+     This function will iterate over a the range and replace
+     the old font with a copy where the size has changed.
+
+     - Parameters:
+       - size: The font size to set.
+       - range: The range to get the font from.
+     */
+    func setFontSize(_ size: CGFloat, at range: NSRange) {
+        guard let text = mutableRichText else { return }
+        guard text.length > 0 else { return }
+        text.beginEditing()
+        text.enumerateAttribute(.font, in: range, options: .init()) { value, range, _ in
+            let oldFont = value as? FontRepresentable ?? .standardRichTextFont
+            let newFont = oldFont.withSize(size)
+            text.removeAttribute(.font, range: range)
+            text.addAttribute(.font, value: newFont, range: range)
             text.fixAttributes(in: range)
         }
         text.endEditing()

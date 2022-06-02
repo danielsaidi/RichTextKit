@@ -26,34 +26,13 @@ struct ContentView: View {
             VStack {
                 RichTextEditor(text: $text, context: context)
                     .cornerRadius(5)
-                    .frame(height: 100)
-                HStack {
-                    button(for: .bold)
-                    button(for: .italic)
-                    button(for: .underlined)
-                }
-                RichTextAlignmentPicker(
-                    title: "Alignment",
-                    selection: $context.alignment).pickerStyle(.segmented)
-                HStack {
-                    ColorPicker("background", selection: context.backgroundColorBinding)
-                    ColorPicker("foreground", selection: context.foregroundColorBinding)
-                }
-                HStack {
-                    Button(action: { context.undoLatestChange() }) {
-                        Image.undo
-                    }.buttonStyle(.bordered)
-
-                    Button(action: { context.redoLatestChange() }) {
-                        Image.redo
-                    }.buttonStyle(.bordered)
-                }
-
-                Button(action: context.toggleIsEditing) {
-                    Image.edit
-                }.highlighted(if: context.isEditingText)
-                Spacer()
-            }
+                Divider()
+                styleButtons
+                alignmentPicker
+                colorPickers
+                sizeTools
+                actionButtons
+            }.background(Color.gray.opacity(0.3))
         }
         .padding()
         .background(Color.gray.opacity(0.3))
@@ -62,24 +41,63 @@ struct ContentView: View {
 
 private extension ContentView {
 
-    func button(for style: RichTextStyle) -> some View {
-        Button(action: { context.toggle(style) }) {
-            style.icon
+    var actionButtons: some View {
+        HStack {
+            button(icon: .undo, action: context.undoLatestChange)
+            button(icon: .redo, action: context.redoLatestChange)
+            button(icon: .edit, action: context.toggleIsEditing)
+                .highlighted(if: context.isEditingText)
         }
-        .highlighted(if: context.hasStyle(style))
-        .buttonStyle(.bordered)
     }
 
-    func button(for alignment: RichTextAlignment) -> some View {
-        Button(action: { context.alignment = alignment }) {
-            alignment.icon
+    var alignmentPicker: some View {
+        RichTextAlignmentPicker(
+            title: "Alignment",
+            selection: $context.alignment).pickerStyle(.segmented)
+    }
+
+    var colorPickers: some View {
+        HStack {
+            ColorPicker("background", selection: context.backgroundColorBinding)
+            ColorPicker("foreground", selection: context.foregroundColorBinding)
         }
-        .highlighted(if: context.alignment == alignment)
-        .buttonStyle(.bordered)
+    }
+
+    var sizeTools: some View {
+        FontSizePicker(selection: $context.fontSize)
+    }
+
+    var styleButtons: some View {
+        HStack {
+            button(for: .bold)
+            button(for: .italic)
+            button(for: .underlined)
+        }
     }
 }
 
-private extension Button {
+private extension ContentView {
+
+    func button(icon: Image, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            icon
+        }.buttonStyle(.bordered)
+    }
+
+    func button(for style: RichTextStyle) -> some View {
+        button(icon: style.icon) {
+            context.toggle(style)
+        }.highlighted(if: context.hasStyle(style))
+    }
+
+    func button(for alignment: RichTextAlignment) -> some View {
+        button(icon: alignment.icon) {
+            context.alignment = alignment
+        }.highlighted(if: context.alignment == alignment)
+    }
+}
+
+private extension View {
 
     func highlighted(if condition: Bool) -> some View {
         foregroundColor(condition ? .accentColor : .primary)
