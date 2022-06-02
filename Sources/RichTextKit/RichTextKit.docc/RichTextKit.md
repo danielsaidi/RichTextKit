@@ -85,6 +85,11 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 - ``RichTextColorReader``
 - ``RichTextColorWriter``
 
+### Export
+
+- ``RichTextExportService``
+- ``StandardRichTextExportService``
+
 ### Fonts
 
 - ``FontRepresentable``
@@ -101,6 +106,10 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 - ``FontListPicker``
 - ``FontSizePicker``
 
+### Formats
+
+- ``RichTextFormat``
+
 ### Images
 
 - ``ImageAttachmentSize``
@@ -111,6 +120,11 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 ### Pasteboard
 
 - ``PasteboardImageReader``
+
+### Pdf
+
+- ``PdfPageConfiguration``
+- ``PdfPageMargins``
 
 ### Styles
 
