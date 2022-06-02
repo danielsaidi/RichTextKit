@@ -52,7 +52,9 @@ private extension ContentView {
     var actionButtons: some View {
         HStack {
             button(icon: .undo, action: context.undoLatestChange)
+                .disabled(!context.canUndoLatestChange)
             button(icon: .redo, action: context.redoLatestChange)
+                .disabled(!context.canRedoLatestChange)
             button(icon: .edit, action: context.toggleIsEditing)
                 .highlighted(if: context.isEditingText)
         }

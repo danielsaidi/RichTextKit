@@ -60,6 +60,24 @@ public class RichTextContext: ObservableObject {
     public var backgroundColor: ColorRepresentable? = nil
 
     /**
+     Whether or not the current rich text can be copied.
+     */
+    @Published
+    public var canCopy = false
+
+    /**
+     Whether or not the latest undone change can be redone.
+     */
+    @Published
+    public var canRedoLatestChange = false
+
+    /**
+     Whether or not the latest change can be undone.
+     */
+    @Published
+    public var canUndoLatestChange = false
+
+    /**
      The current font name.
      */
     @Published
