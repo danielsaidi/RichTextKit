@@ -26,7 +26,7 @@ public protocol RichTextExportService: AnyObject {
     func generateExportFile(
         withName fileName: String,
         content: NSAttributedString,
-        format: RichTextFormat
+        format: RichTextDataFormat
     ) throws -> URL
     
     /**

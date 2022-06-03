@@ -1,5 +1,5 @@
 //
-//  NSAttributedString+Archive.swift
+//  RichTextDataError.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-06-04.
@@ -12,7 +12,7 @@ import Foundation
  This enum represents errors that can be thrown when getting
  rich text data for a certain format.
  */
-public enum RichTextFormatDataError: Error {
+public enum RichTextDataError: Error {
 
     case invalidArchivedData(in: Data)
     case invalidPlainTextData(in: Data)

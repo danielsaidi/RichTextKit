@@ -1,5 +1,5 @@
 //
-//  RichTextFormat.swift
+//  RichTextDataFormat.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-06-02.
@@ -30,7 +30,7 @@ import UniformTypeIdentifiers
  certain kind of rich text data, that can only be handled by
  these archiver classes. It's convenient, but more limited.
  */
-public enum RichTextFormat: String, CaseIterable, Equatable, Identifiable {
+public enum RichTextDataFormat: String, CaseIterable, Equatable, Identifiable {
     
     /// Archived data that's persisted with a keyed archiver.
     case archivedData
@@ -42,7 +42,7 @@ public enum RichTextFormat: String, CaseIterable, Equatable, Identifiable {
     case rtf
 }
 
-public extension RichTextFormat {
+public extension RichTextDataFormat {
     
     /**
      The format's unique identifier.
@@ -52,7 +52,7 @@ public extension RichTextFormat {
     /**
      The formats that a format can be converted to.
      */
-    var convertableFormats: [RichTextFormat] {
+    var convertableFormats: [RichTextDataFormat] {
         switch self {
         case .archivedData: return [.rtf, .plainText]
         case .plainText: return [.archivedData, .rtf]

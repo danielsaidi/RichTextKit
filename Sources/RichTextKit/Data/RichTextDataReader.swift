@@ -10,17 +10,21 @@ import Foundation
 
 /**
  This protocol can be implemented types that can generate an
- attributed string from ``RichTextFormat`` formatted data.
+ attributed string from ``RichTextDataFormat`` specific data.
 
- The protocol provides functionality that uses public string
- extensions to generate strings from data.
+ This protocol uses public `NSAttributedString` initializers
+ that are defined as extensions in this library. They can be
+ used directly, without using a data reader, but are for now
+ omitted by the documentation engine.
+
+ You find the extensions in the ``RichTextDataReader`` file.
  */
 public protocol RichTextDataReader {}
 
 public extension RichTextDataReader {
 
     /**
-     Get rich text from rich text data with a certain format.
+     Get rich text from ``RichTextDataFormat`` specific data.
 
      - Parameters:
        - data: The data to parse.
@@ -28,44 +32,35 @@ public extension RichTextDataReader {
      */
     func richText(
         from data: Data,
-        with format: RichTextFormat
+        format: RichTextDataFormat
     ) throws -> NSAttributedString {
         switch format {
-        case .archivedData: return try richText(fromArchivedData: data)
-        case .plainText: return try richText(fromPlainTextData: data)
-        case .rtf: return try richText(fromRtfData: data)
+        case .archivedData: return try NSAttributedString(archivedData: data)
+        case .plainText: return try NSAttributedString(plainTextData: data)
+        case .rtf: return try NSAttributedString(rtfData: data)
         }
-    }
-
-    /**
-     Get rich text from ``RichTextFormat/archivedData`` data.
-     */
-    func richText(
-        fromArchivedData data: Data
-    ) throws -> NSAttributedString {
-        try NSAttributedString(archivedData: data)
-    }
-
-    /**
-     Get rich text from ``RichTextFormat/plainText`` data.
-     */
-    func richText(
-        fromPlainTextData data: Data
-    ) throws -> NSAttributedString {
-        try NSAttributedString(plainTextData: data)
-    }
-
-    /**
-     Get rich text from ``RichTextFormat/rtf`` data.
-     */
-    func richText(
-        fromRtfData data: Data
-    ) throws -> NSAttributedString {
-        try NSAttributedString(rtfData: data)
     }
 }
 
 public extension NSAttributedString {
+
+    /**
+     Try to parse ``RichTextFormat`` data.
+
+     - Parameters:
+       - data: The data to initalize the string with.
+       - format: The data format to use.
+     */
+    convenience init(
+        data: Data,
+        format: RichTextDataFormat
+    ) throws {
+        switch format {
+        case .archivedData: try self.init(archivedData: data)
+        case .plainText: try self.init(plainTextData: data)
+        case .rtf: try self.init(rtfData: data)
+        }
+    }
 
     /**
      Try to parse ``RichTextFormat/archivedData`` data.
@@ -81,7 +76,7 @@ public extension NSAttributedString {
             ofClass: NSAttributedString.self,
             from: data)
         guard let string = unarchived else {
-            throw RichTextFormatDataError.invalidArchivedData(in: data)
+            throw RichTextDataError.invalidArchivedData(in: data)
         }
         self.init(attributedString: string)
     }
@@ -95,7 +90,7 @@ public extension NSAttributedString {
     convenience init(plainTextData data: Data) throws {
         let decoded = String(data: data, encoding: .utf8)
         guard let string = decoded else {
-            throw RichTextFormatDataError.invalidPlainTextData(in: data)
+            throw RichTextDataError.invalidPlainTextData(in: data)
         }
         let attributed = NSAttributedString(string: string)
         self.init(attributedString: attributed)

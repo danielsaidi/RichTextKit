@@ -52,7 +52,7 @@ public class StandardRichTextExportService: RichTextExportService {
     public func generateExportFile(
         withName fileName: String,
         content: NSAttributedString,
-        format: RichTextFormat
+        format: RichTextDataFormat
     ) throws -> URL {
         let fileUrl = try urlResolver.uniqueFileUrl(
             withName: fileName,
@@ -83,7 +83,7 @@ public class StandardRichTextExportService: RichTextExportService {
             withName: fileName,
             extension: "pdf",
             in: directory)
-        let data = try content.pdfData()
+        let data = try content.richTextPdfData()
         try data.write(to: fileUrl)
         return fileUrl
     }

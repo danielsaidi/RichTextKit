@@ -22,12 +22,12 @@ extension NSAttributedString: RichTextDataWriter {}
 public extension RichTextDataWriter {
 
     /**
-     Get rich text data for a certain format.
+     Generate rich text data from the current rich text.
 
      - Parameters:
        - format: The data format to use.
      */
-    func richTextData(with format: RichTextFormat) throws -> Data {
+    func richTextData(with format: RichTextDataFormat) throws -> Data {
         switch format {
         case .archivedData: return try richTextArchivedData()
         case .plainText: return try richTextPlainTextData()
@@ -50,7 +50,7 @@ public extension RichTextDataWriter {
     func richTextPlainTextData() throws -> Data {
         let string = richText.string
         guard let data = string.data(using: .utf8) else {
-            throw RichTextFormatDataError
+            throw RichTextDataError
                 .invalidData(in: string)
         }
         return data

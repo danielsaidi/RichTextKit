@@ -1,45 +1,40 @@
 //
-//  NSAttributedString+Pdf.swift
+//  PdfDataWriter.swift
 //  RichTextKit
 //
-//  Created by Daniel Saidi on 2022-06-02.
+//  Created by Daniel Saidi on 2022-06-03.
 //  Copyright © 2022 Daniel Saidi. All rights reserved.
 //
 
 import Foundation
-import CoreGraphics
 
 /**
- This error can be thrown when calling `pdfData()` on an
- `NSAttributedString`.
- */
-public enum NSAttributedStringPdfDataError: Error {
-    
-    /// The platform is not supported
-    case unsupportedPlatform
-}
+ This protocol can be implemented any types that can provide
+ PDF data for the current rich text.
 
-public extension NSAttributedString {
-    
+ The protocol is implemented by `NSAttributedString` as well
+ as other library types.
+ */
+public protocol PdfDataWriter: RichTextReader {}
+
+extension NSAttributedString: PdfDataWriter {}
+
+public extension PdfDataWriter {
+
     /**
-     This typealias is used within the type to make the code
-     more compact.
+     Generate PDF data from the current rich text.
+
+     This is currently only supported on iOS and macOS. When
+     calling this function on other platforms, it will throw
+     a ``PdfDataError/unsupportedPlatform`` error.
      */
-    typealias PdfDataError = NSAttributedStringPdfDataError
-    
-    /**
-     Try to generate PDF data for the attributed string.
-     
-     This function is currently only supported on iOS. Other
-     platforms will throw `PdfDataError.unsupportedPlatform`.
-     */
-    func pdfData(configuration: PdfPageConfiguration = .standard) throws -> Data {
+    func richTextPdfData(configuration: PdfPageConfiguration = .standard) throws -> Data {
         #if os(iOS)
-        try iosPdfData(for: configuration)
+        try richText.iosPdfData(for: configuration)
         #elseif os(macOS)
-        try macosPdfData(for: configuration)
+        try richText.macosPdfData(for: configuration)
         #else
-        throw NSAttributedStringPdfDataError.unsupportedPlatform
+        throw PdfDataError.unsupportedPlatform
         #endif
     }
 }
@@ -48,31 +43,31 @@ public extension NSAttributedString {
 import AppKit
 
 private extension NSAttributedString {
-    
+
     func macosPdfData(for configuration: PdfPageConfiguration) throws -> Data {
         do {
             let fileUrl = try macosPdfFileUrl()
             let printInfo = try macosPdfPrintInfo(
                 for: configuration,
                 fileUrl: fileUrl)
-            
+
             let scrollView = NSTextView.scrollableTextView()
             scrollView.frame = configuration.paperRect
             let textView = scrollView.documentView as? NSTextView ?? NSTextView()
             sleepToPrepareTextView()
             textView.textStorage?.setAttributedString(self)
-            
+
             let printOperation = NSPrintOperation(view: textView, printInfo: printInfo)
             printOperation.showsPrintPanel = false
             printOperation.showsProgressPanel = false
             printOperation.run()
-            
+
             return try Data(contentsOf: fileUrl)
         } catch {
             throw(error)
         }
     }
-    
+
     func macosPdfFileUrl() throws -> URL {
         let manager = FileManager.default
         let cacheUrl = try manager.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
@@ -80,7 +75,7 @@ private extension NSAttributedString {
             .appendingPathComponent(UUID().uuidString)
             .appendingPathExtension("pdf")
     }
-    
+
     func macosPdfPrintInfo(
         for configuration: PdfPageConfiguration,
         fileUrl: URL) throws -> NSPrintInfo {
@@ -98,7 +93,7 @@ private extension NSAttributedString {
         printInfo.isVerticallyCentered = false
         return printInfo
     }
-    
+
     func sleepToPrepareTextView() {
         Thread.sleep(forTimeInterval: 0.1)
     }
@@ -109,7 +104,7 @@ private extension NSAttributedString {
 import UIKit
 
 private extension NSAttributedString {
-    
+
     func iosPdfData(for configuration: PdfPageConfiguration) throws -> Data {
         let pageRenderer = iosPdfPageRenderer(for: configuration)
         let paperRect = configuration.paperRect
@@ -125,7 +120,7 @@ private extension NSAttributedString {
         UIGraphicsEndPDFContext()
         return pdfData as Data
     }
-    
+
     func iosPdfPageRenderer(for configuration: PdfPageConfiguration) -> UIPrintPageRenderer {
         let printFormatter = UISimpleTextPrintFormatter(attributedText: self)
         let paperRect = NSValue(cgRect: configuration.paperRect)
