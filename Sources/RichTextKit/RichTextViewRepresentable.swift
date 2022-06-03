@@ -26,6 +26,8 @@ public protocol RichTextViewRepresentable:
     // RichTextAttributeWriter,
     RichTextAlignmentReader,
     RichTextAlignmentWriter,
+    RichTextDataReader,
+    RichTextDataWriter,
     // RichTextFontReader,
     // RichTextFontWriter,
     // RichTextStyleReader,

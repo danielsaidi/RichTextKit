@@ -10,7 +10,7 @@ import Foundation
 
 /**
  This protocol can be implemented any types that can provide
- extended rich text style reading capabilities.
+ rich text style reading capabilities.
 
  The protocol is implemented by `NSAttributedString` as well
  as other library types.

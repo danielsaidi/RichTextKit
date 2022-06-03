@@ -85,6 +85,13 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 - ``RichTextColorReader``
 - ``RichTextColorWriter``
 
+### Data
+
+- ``RichTextDataReader``
+- ``RichTextDataWriter``
+- ``RichTextFormat``
+- ``RichTextFormatDataError``
+
 ### Export
 
 - ``ExportFileUrlError``
@@ -109,10 +116,6 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 - ``FontForEachPicker``
 - ``FontListPicker``
 - ``FontSizePicker``
-
-### Formats
-
-- ``RichTextFormat``
 
 ### Images
 

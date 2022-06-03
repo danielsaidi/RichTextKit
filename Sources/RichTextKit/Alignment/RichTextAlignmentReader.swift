@@ -18,7 +18,7 @@ import AppKit
 
 /**
  This protocol can be implemented any types that can provide
- extended rich text alignment reading capabilities.
+ rich text alignment reading capabilities.
 
  The protocol is implemented by `NSAttributedString` as well
  as other library types.

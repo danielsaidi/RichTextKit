@@ -10,7 +10,7 @@ import Foundation
 
 /**
  This protocol can be implemented any types that can provide
- extended rich text style writing capabilities.
+ rich text style writing capabilities.
 
  This protocol is implemented by `NSMutableAttributedString`
  as well as other library types.

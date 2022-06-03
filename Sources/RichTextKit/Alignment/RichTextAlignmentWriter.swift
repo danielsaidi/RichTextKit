@@ -18,7 +18,7 @@ import AppKit
 
 /**
  This protocol can be implemented any types that can provide
- extended rich text alignment writing capabilities.
+ rich text alignment writing capabilities.
 
  This protocol is implemented by `NSMutableAttributedString`
  as well as other library types.

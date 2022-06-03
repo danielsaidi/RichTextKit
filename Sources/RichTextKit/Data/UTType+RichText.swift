@@ -11,10 +11,10 @@ import UniformTypeIdentifiers
 public extension UTType {
     
     /**
-     The uniforum types an Oribi rich text document supports.
+     The uniform rich text types that RichTextKit supports.
      */
     static let richTextTypes: [UTType] = [
-        .richTextKit,
+        .archivedData,
         .rtf,
         .text,
         .plainText,
@@ -22,10 +22,10 @@ public extension UTType {
     ]
     
     /**
-     The uniform type that is used by OribiWriter.
+     The uniform type for ``RichTextFormat/archivedData``.
      */
-    static let richTextKit = UTType(
-        exportedAs: "com.richtextkit.format")
+    static let archivedData = UTType(
+        exportedAs: "com.richtextkit.archiveddata")
 }
 
 public extension Collection where Element == UTType {
@@ -33,5 +33,5 @@ public extension Collection where Element == UTType {
     /**
      The uniforum types an Oribi rich text document supports.
      */
-    static var oribiRichTextTypes: [UTType] { UTType.richTextTypes }
+    static var richTextTypes: [UTType] { UTType.richTextTypes }
 }
