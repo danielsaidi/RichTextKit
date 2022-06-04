@@ -1,5 +1,5 @@
 //
-//  ExportFileUrlResolver.swift
+//  RichTextExportUrlResolver.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-06-02.
@@ -10,13 +10,13 @@ import Foundation
 
 /**
  This protocol can be implemented by any types that could be
- used to resolve the url for export files.
+ used to resolve the url for when exporting rich text files.
 
  The protocol is implemented by `FileManager`, which will be
  used by default by the library. You could however implement
  it in any custom way you want.
  */
-public protocol ExportFileUrlResolver {
+public protocol RichTextExportUrlResolver {
 
     /**
      Try to generate a file url in a certain directory.

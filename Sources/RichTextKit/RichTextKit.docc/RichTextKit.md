@@ -100,11 +100,11 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 
 ### Export
 
-- ``ExportFileUrlError``
-- ``ExportFileUrlResolver``
+- ``RichTextExportError``
 - ``RichTextExportService``
-- ``StandardExportFileUrlResolver``
+- ``RichTextExportUrlResolver``
 - ``StandardRichTextExportService``
+- ``StandardRichTextExportUrlResolver``
 
 ### Fonts
 

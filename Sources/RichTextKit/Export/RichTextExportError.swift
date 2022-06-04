@@ -1,5 +1,5 @@
 //
-//  ExportFileUrlError.swift
+//  RichTextExportError.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-06-02.
@@ -12,7 +12,7 @@ import Foundation
  This enum defines errors that can be thrown when a file
  manager fails to perform export operations.
  */
-public enum ExportFileUrlError: Error {
+public enum RichTextExportError: Error {
 
     /// This error occurs when no file could be generated at a certain url.
     case cantCreateFile(at: URL)

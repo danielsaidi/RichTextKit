@@ -27,7 +27,8 @@ public extension RichTextViewRepresentable {
      the current value for a certain rich text style.
 
      `TODO` This function reuses a lot of functionality from
-     ``setRichTextStyle(_:to:at:)``. Try to reuse some.
+     `setRichTextStyle(_:to:at:)`. Try reuse some of it when
+     we have unit tests in place.
 
      - Parameters:
        - style: The style to set.

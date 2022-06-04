@@ -1,5 +1,5 @@
 //
-//  StandardExportFileUrlResolver.swift
+//  StandardRichTextExportUrlResolver.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-06-02.
@@ -9,14 +9,12 @@
 import Foundation
 
 /**
- This is a typealias for the `FileManager` class.
-
- The reason why this is a typealias and not a class, is that
- `FileManager` is the only resolver in the library.
+ This is a typealias for the `FileManager` class, since it's
+ the standard way to resolve export file urls.
  */
-public typealias StandardExportFileUrlResolver = FileManager
+public typealias StandardRichTextExportUrlResolver = FileManager
 
-extension FileManager: ExportFileUrlResolver {}
+extension FileManager: RichTextExportUrlResolver {}
 
 public extension FileManager {
 
@@ -36,7 +34,7 @@ public extension FileManager {
             .urls(for: directory, in: .userDomainMask).first?
             .appendingPathComponent(fileName)
             .appendingPathExtension(`extension`)
-        guard let fileUrl = url else { throw ExportFileUrlError.cantCreateFileUrl(in: directory) }
+        guard let fileUrl = url else { throw RichTextExportError.cantCreateFileUrl(in: directory) }
         return fileUrl
     }
 

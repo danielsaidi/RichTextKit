@@ -27,13 +27,13 @@ public class StandardRichTextExportService: RichTextExportService {
        - directory: The directory to save the file in, by default `.cachesDirectory`.
      */
     public init(
-        urlResolver: ExportFileUrlResolver = FileManager.default,
+        urlResolver: RichTextExportUrlResolver = FileManager.default,
         directory: FileManager.SearchPathDirectory = .cachesDirectory) {
         self.urlResolver = urlResolver
         self.directory = directory
     }
     
-    private let urlResolver: ExportFileUrlResolver
+    private let urlResolver: RichTextExportUrlResolver
     private let directory: FileManager.SearchPathDirectory
     
     /**
