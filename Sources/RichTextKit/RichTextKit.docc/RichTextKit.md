@@ -94,9 +94,9 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 ### Data
 
 - ``RichTextDataError``
+- ``RichTextDataFormat``
 - ``RichTextDataReader``
 - ``RichTextDataWriter``
-- ``RichTextFormat``
 
 ### Export
 
@@ -143,6 +143,8 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 
 ### Styles
 
+- ``RichTextHighlightingStyle``
 - ``RichTextStyle``
+- ``RichTextStyleButton``
 - ``RichTextStyleReader``
 - ``RichTextStyleWriter``

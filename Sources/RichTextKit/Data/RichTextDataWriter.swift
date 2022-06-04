@@ -9,8 +9,9 @@
 import Foundation
 
 /**
- This protocol can be implemented any types that can provide
- ``RichTextFormat`` formatted data for the current rich text.
+ This protocol can be implemented by ``RichTextReader``s, to
+ make them able to get ``RichTextDataFormat`` formatted data
+ for the current rich text.
 
  The protocol is implemented by `NSAttributedString` as well
  as other library types.
@@ -36,7 +37,7 @@ public extension RichTextDataWriter {
     }
 
     /**
-     Generate ``RichTextFormat/archivedData`` formatted data.
+     Generate ``RichTextDataFormat/archivedData`` formatted data.
      */
     func richTextArchivedData() throws -> Data {
         try NSKeyedArchiver.archivedData(
@@ -45,7 +46,7 @@ public extension RichTextDataWriter {
     }
 
     /**
-     Generate ``RichTextFormat/plainText`` formatted data.
+     Generate ``RichTextDataFormat/plainText`` formatted data.
      */
     func richTextPlainTextData() throws -> Data {
         let string = richText.string
@@ -57,7 +58,7 @@ public extension RichTextDataWriter {
     }
 
     /**
-     Generate ``RichTextFormat/rtf`` formatted data.
+     Generate ``RichTextDataFormat/rtf`` formatted data.
      */
     func richTextRtfData() throws -> Data {
         try richText.data(

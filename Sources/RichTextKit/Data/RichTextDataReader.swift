@@ -10,14 +10,12 @@ import Foundation
 
 /**
  This protocol can be implemented types that can generate an
- attributed string from ``RichTextDataFormat`` specific data.
+ attributed string from ``RichTextDataFormat``-specific data.
 
  This protocol uses public `NSAttributedString` initializers
  that are defined as extensions in this library. They can be
  used directly, without using a data reader, but are for now
  omitted by the documentation engine.
-
- You find the extensions in the ``RichTextDataReader`` file.
  */
 public protocol RichTextDataReader {}
 

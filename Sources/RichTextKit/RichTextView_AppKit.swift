@@ -54,4 +54,15 @@ public extension RichTextView {
         textStorage
     }
 }
+
+
+// MARK: - Private Extensions
+
+private extension RichTextView {
+
+    /**
+     The pasteboard to use when pasting into the text view.
+     */
+    private var pasteboard: NSPasteboard { .general }
+}
 #endif

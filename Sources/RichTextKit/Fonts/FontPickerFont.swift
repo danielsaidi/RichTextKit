@@ -27,10 +27,13 @@ import UIKit
  Some system fonts are special when it comes to being listed
  in a picker or displayed in other ways. One such example is
  `San Francisco`, which must have its name replaced in order
- to be properly presented. To change the display name of the
- system font, set the ``FontPickerFont/systemFontDisplayName``
- property to another value. To identify the system font, set
- the ``FontPickerFont/systemFontNamePrefix``.
+ to be properly presented.
+
+ To change the display name of the system font, just set the
+ ``FontPickerFont/standardSystemFontDisplayName`` to another
+ value. To customize how the system font for a platform will
+ be detected, just set ``FontPickerFont/systemFontNamePrefix``
+ to another value.
  */
 public struct FontPickerFont: Identifiable, Equatable {
     
