@@ -62,4 +62,20 @@ public extension RichTextViewRepresentable {
         }
         #endif
     }
+
+    /**
+     Use the selected range (if any) or text position to set
+     the current rich text attributes.
+
+     AppKit and UIKit handles this differently, which is why
+     the implementation has different branches.
+
+     - Parameters:
+       - attributes: The attributes to set.
+     */
+    func setCurrentRichTextAttributes(_ attributes: RichTextAttributes) {
+        attributes.forEach { attribute, value in
+            setCurrentRichTextAttribute(attribute, to: value)
+        }
+    }
 }

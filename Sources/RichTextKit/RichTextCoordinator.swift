@@ -176,6 +176,7 @@ extension RichTextCoordinator {
         context.isUnderlined = styles.hasStyle(.underlined)
         context.isEditingText = textView.isFirstResponder
         context.selectedRange = textView.selectedRange
+        updateTextViewAttributesIfNeeded()
     }
 
     /**
@@ -183,7 +184,31 @@ extension RichTextCoordinator {
      */
     func syncTextWithTextView() {
         if text.wrappedValue == textView.attributedString { return }
-        text.wrappedValue = textView.attributedString
+        DispatchQueue.main.async {
+            self.text.wrappedValue = self.textView.attributedString
+        }
+    }
+
+    /**
+     On macOS, we have to update the font and colors when we
+     move the text input cursor and there's no selected text.
+
+     The code looks very strange, but setting current values
+     to the current values will reset the text view in a way
+     that is otherwise not done correctly.
+
+     To try out the incorrect behavior, comment out the code
+     below, then change font size, colors etc. for a part of
+     the text then move the input cursor around. When you do,
+     the presented information will be correct, but when you
+     type, the last selected font, colors etc. will be used.
+     */
+    func updateTextViewAttributesIfNeeded() {
+        #if os(macOS)
+        if textView.hasSelectedRange { return }
+        let attributes = textView.currentRichTextAttributes
+        textView.setCurrentRichTextAttributes(attributes)
+        #endif
     }
 }
 #endif

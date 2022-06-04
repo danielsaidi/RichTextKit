@@ -29,7 +29,7 @@ public extension RichTextAttributeWriter {
      ranges, which is not handled by the native functions.
 
      - Parameters:
-       - key: The attribute to set.
+       - attribute: The attribute to set.
        - newValue: The new value to set the attribute to.
        - range: The range for which to set the attribute.
      */
@@ -38,13 +38,32 @@ public extension RichTextAttributeWriter {
         to newValue: Any,
         at range: NSRange
     ) {
+        setRichTextAttributes([attribute: newValue], at: range)
+    }
+
+    /**
+     Set a set of rich text attributes at a certain range.
+
+     The function uses `safeRange(for:)` to handle incorrect
+     ranges, which is not handled by the native functions.
+
+     - Parameters:
+       - attributes: The attributes to set.
+       - range: The range for which to set the attributes.
+     */
+    func setRichTextAttributes(
+        _ attributes: RichTextAttributes,
+        at range: NSRange
+    ) {
         let range = safeRange(for: range)
         guard let string = mutableRichText else { return }
         string.beginEditing()
-        string.enumerateAttribute(attribute, in: range, options: .init()) { value, range, _ in
-            string.removeAttribute(attribute, range: range)
-            string.addAttribute(attribute, value: newValue, range: range)
-            string.fixAttributes(in: range)
+        attributes.forEach { attribute, newValue in
+            string.enumerateAttribute(attribute, in: range, options: .init()) { value, range, _ in
+                string.removeAttribute(attribute, range: range)
+                string.addAttribute(attribute, value: newValue, range: range)
+                string.fixAttributes(in: range)
+            }
         }
         string.endEditing()
     }
