@@ -14,6 +14,11 @@ import UIKit
  `UITextField` in UIKit.
  */
 public class RichTextView: UITextView, RichTextViewRepresentable {
+
+    /**
+     The style to use when highlighting text in the view.
+     */
+    public var highlightingStyle: RichTextHighlightingStyle = .standard
 }
 
 

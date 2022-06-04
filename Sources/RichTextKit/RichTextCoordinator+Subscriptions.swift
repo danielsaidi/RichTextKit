@@ -20,10 +20,12 @@ extension RichTextCoordinator {
         subscribeToFontName()
         subscribeToFontSize()
         subscribeToForegroundColor()
+        subscribeToHighlightedRange()
         subscribeToIsBold()
         subscribeToIsEditingText()
         subscribeToIsItalic()
         subscribeToIsUnderlined()
+        subscribeToSelectedRange()
         subscribeToShouldRedoLatestChange()
         subscribeToShouldUndoLatestChange()
     }
@@ -71,6 +73,14 @@ private extension RichTextCoordinator {
             .store(in: &cancellables)
     }
 
+    func subscribeToHighlightedRange() {
+        context.$highlightedRange
+            .sink(
+                receiveCompletion: { _ in },
+                receiveValue: { [weak self] in self?.setHighlightedRange(to: $0) })
+            .store(in: &cancellables)
+    }
+
     func subscribeToIsBold() {
         context.$isBold
             .sink(
@@ -103,6 +113,14 @@ private extension RichTextCoordinator {
             .store(in: &cancellables)
     }
 
+    func subscribeToSelectedRange() {
+        context.$selectedRange
+            .sink(
+                receiveCompletion: { _ in },
+                receiveValue: { [weak self] in self?.setSelectedRange(to: $0) })
+            .store(in: &cancellables)
+    }
+
     func subscribeToShouldRedoLatestChange() {
         context.$shouldRedoLatestChange
             .sink(
@@ -120,12 +138,22 @@ private extension RichTextCoordinator {
     }
 }
 
-private extension RichTextCoordinator {
+internal extension RichTextCoordinator {
 
     func redoLastChange(_ shouldRedo: Bool) {
         guard shouldRedo else { return }
         textView.undoManager?.redo()
         syncContextWithTextView()
+    }
+
+    func resetHighlightedRangeAppearance() {
+        guard
+            let range = context.highlightedRange,
+            let background = highlightedRangeOriginalBackgroundColor,
+            let foreground = highlightedRangeOriginalForegroundColor
+        else { return }
+        textView.setBackgroundColor(to: background, at: range)
+        textView.setForegroundColor(to: foreground, at: range)
     }
 
     func setAlignment(to newValue: RichTextAlignment) {
@@ -156,6 +184,22 @@ private extension RichTextCoordinator {
         textView.setCurrentForegroundColor(to: color)
     }
 
+    func setHighlightedRange(to range: NSRange?) {
+        resetHighlightedRangeAppearance()
+        guard let range = range else { return }
+        setHighlightedRangeAppearance(for: range)
+    }
+
+    func setHighlightedRangeAppearance(for range: NSRange) {
+        highlightedRangeOriginalBackgroundColor = textView.backgroundColor(at: range) ?? .clear
+        highlightedRangeOriginalForegroundColor = textView.foregroundColor(at: range) ?? .textColor
+        let style = textView.highlightingStyle
+        let background = ColorRepresentable(style.backgroundColor)
+        let foreground = ColorRepresentable(style.foregroundColor)
+        textView.setBackgroundColor(to: background, at: range)
+        textView.setForegroundColor(to: foreground, at: range)
+    }
+
     func setIsEditing(to newValue: Bool) {
         if newValue == textView.isFirstResponder { return }
         if newValue {
@@ -163,6 +207,11 @@ private extension RichTextCoordinator {
         } else {
             textView.resignFirstResponder()
         }
+    }
+
+    func setSelectedRange(to range: NSRange) {
+        if range == textView.selectedRange { return }
+        textView.selectedRange = range
     }
 
     func setStyle(_ style: RichTextStyle, to newValue: Bool) {
@@ -176,5 +225,12 @@ private extension RichTextCoordinator {
         textView.undoManager?.undo()
         syncContextWithTextView()
     }
+}
+
+private extension ColorRepresentable {
+
+    #if os(iOS) || os(tvOS)
+    static var textColor: ColorRepresentable { .label }
+    #endif
 }
 #endif

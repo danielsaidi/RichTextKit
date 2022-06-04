@@ -26,12 +26,20 @@ public protocol RichTextViewRepresentable:
     // RichTextAttributeWriter,
     RichTextAlignmentReader,
     RichTextAlignmentWriter,
+    RichTextColorReader,
+    RichTextColorWriter,
     RichTextDataReader,
     RichTextDataWriter,
     // RichTextFontReader,
     // RichTextFontWriter,
     // RichTextStyleReader,
-    RichTextStyleWriter {
+    RichTextStyleWriter
+{
+
+    /**
+     The style to use when highlighting text in the view.
+     */
+    var highlightingStyle: RichTextHighlightingStyle { get set }
 
     /**
      Whether or not the text view is the first responder.

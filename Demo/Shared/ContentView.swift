@@ -90,6 +90,14 @@ private extension ContentView {
             button(for: .bold)
             button(for: .italic)
             button(for: .underlined)
+
+            Button("Toggle selection") {
+                if context.hasSelectedRange {
+                    context.resetSelectedRange()
+                } else {
+                    context.selectRange(NSRange(location: 1, length: 2))
+                }
+            }
         }
     }
 }

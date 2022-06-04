@@ -31,7 +31,7 @@ public class RichTextContext: ObservableObject {
     }
 
 
-    // MARK: - Bindings
+    // MARK: - Properties
 
     /**
      A custom binding that can be used to set the background
@@ -44,8 +44,14 @@ public class RichTextContext: ObservableObject {
         )
     }
 
+    /**
+     The standard highlighting style to apply when setting a
+     highlighted range.
+     */
+    public var standardHighlightingStyle = RichTextHighlightingStyle.standard
 
-    // MARK: - Properties
+
+    // MARK: - Published Properties
 
     /**
      The current text alignment, if any.
@@ -107,6 +113,12 @@ public class RichTextContext: ObservableObject {
     }
 
     /**
+     The currently highlighted range, if any.
+     */
+    @Published
+    public var highlightedRange: NSRange?
+
+    /**
      Whether or not the current text is bold.
      */
     @Published
@@ -131,6 +143,12 @@ public class RichTextContext: ObservableObject {
     public var isUnderlined = false
 
     /**
+     The currently selected range, if any.
+     */
+    @Published
+    public var selectedRange = NSRange()
+
+    /**
      Whether or not to undo the latest change.
      */
     @Published
@@ -146,6 +164,16 @@ public class RichTextContext: ObservableObject {
 public extension RichTextContext {
 
     /**
+     Whether or not the context has a selected range.
+     */
+    var hasSelectedRange: Bool {
+        selectedRange.length > 0
+    }
+}
+
+public extension RichTextContext {
+
+    /**
      Decrement the current font size.
 
      - Parameters:
@@ -156,7 +184,7 @@ public extension RichTextContext {
     }
 
     /**
-     Check whether or not a certain style is enabled.
+     Whether or not a certain style is enabled.
      */
     func hasStyle(_ style: RichTextStyle) -> Bool {
         switch style {
@@ -164,6 +192,13 @@ public extension RichTextContext {
         case .italic: return isItalic
         case .underlined: return isUnderlined
         }
+    }
+
+    /**
+     Set ``highlightedRange`` to a new, optional range.
+     */
+    func highlightRange(_ range: NSRange?) {
+        highlightedRange = range
     }
 
     /**
@@ -181,6 +216,28 @@ public extension RichTextContext {
      */
     func redoLatestChange() {
         shouldRedoLatestChange = true
+    }
+
+    /**
+     Reset the ``highlightedRange``.
+     */
+    func resetHighlightedRange() {
+        highlightedRange = nil
+    }
+
+    /**
+     Reset the ``selectedRange``.
+     */
+    func resetSelectedRange() {
+        selectedRange = NSRange(location: 0, length: 0)
+    }
+
+    /**
+     Set ``selectedRange`` to a new, optional range.
+     */
+    func selectRange(_ range: NSRange) {
+        isEditingText = true
+        selectedRange = range
     }
 
     /**

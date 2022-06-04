@@ -76,6 +76,21 @@ open class RichTextCoordinator: NSObject {
     internal var isSteppingFontSize = false
 
 
+    // MARK: - Internal Properties
+
+    /**
+     The background color that was used before the currently
+     highlighted range was set.
+     */
+    internal var highlightedRangeOriginalBackgroundColor: ColorRepresentable?
+
+    /**
+     The foreground color that was used before the currently
+     highlighted range was set.
+     */
+    internal var highlightedRangeOriginalForegroundColor: ColorRepresentable?
+
+
     #if canImport(UIKit)
 
     // MARK: - UITextViewDelegate
@@ -160,6 +175,7 @@ extension RichTextCoordinator {
         context.isItalic = styles.hasStyle(.italic)
         context.isUnderlined = styles.hasStyle(.underlined)
         context.isEditingText = textView.isFirstResponder
+        context.selectedRange = textView.selectedRange
     }
 
     /**
