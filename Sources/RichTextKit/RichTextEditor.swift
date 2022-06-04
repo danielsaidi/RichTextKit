@@ -19,7 +19,22 @@ import SwiftUI
  so that you only have to use the context to observe changes
  and trigger changes in the editor.
  */
-public struct RichTextEditor: ViewRepresentable, RichTextReader, RichTextAttributeReader {
+public struct RichTextEditor:
+    ViewRepresentable,
+    RichTextPresenter,
+    // RichTextAttributeReader,
+    // RichTextAttributeWriter,
+    RichTextAlignmentReader,
+    RichTextAlignmentWriter,
+    RichTextColorReader,
+    RichTextColorWriter,
+    RichTextDataReader,
+    RichTextDataWriter,
+    // RichTextFontReader,
+    // RichTextFontWriter,
+    // RichTextStyleReader,
+    RichTextStyleWriter
+{
 
     /**
      Create a rich text editor.
@@ -82,7 +97,20 @@ public struct RichTextEditor: ViewRepresentable, RichTextReader, RichTextAttribu
 }
 
 
-// MARK: RichTextProvider
+// MARK: RichTextPresenter
+
+public extension RichTextEditor {
+
+    /**
+     Get the currently selected range.
+     */
+    var selectedRange: NSRange {
+        textView.selectedRange
+    }
+}
+
+
+// MARK: RichTextReader
 
 public extension RichTextEditor {
 
@@ -93,4 +121,18 @@ public extension RichTextEditor {
         text.wrappedValue
     }
 }
+
+
+// MARK: RichTextWriter
+
+public extension RichTextEditor {
+
+    /**
+     Get the mutable rich text that is managed by the editor.
+     */
+    var mutableAttributedString: NSMutableAttributedString? {
+        textView.mutableAttributedString
+    }
+}
+
 #endif
