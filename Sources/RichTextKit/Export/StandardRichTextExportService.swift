@@ -13,9 +13,8 @@ import Foundation
  to a file with a certain format.
 
  Exported files are by default written to the app's document
- folder, to simplify converting between various file formats.
- If you mean to share, save or print the file, you can use a
- ``StandardRichTextShareService`` instead.
+ folder, since the intent should be to export rich text with
+ another data format.
  */
 public class StandardRichTextExportService: RichTextExportService {
     
@@ -24,11 +23,12 @@ public class StandardRichTextExportService: RichTextExportService {
      
      - Parameters:
        - urlResolver: The type to use to resolve file urls, by default `FileManager.default`.
-       - directory: The directory to save the file in, by default `.cachesDirectory`.
+       - directory: The directory to save the file in, by default `.documentDirectory`.
      */
     public init(
         urlResolver: RichTextExportUrlResolver = FileManager.default,
-        directory: FileManager.SearchPathDirectory = .cachesDirectory) {
+        directory: FileManager.SearchPathDirectory = .documentDirectory
+    ) {
         self.urlResolver = urlResolver
         self.directory = directory
     }
@@ -38,14 +38,17 @@ public class StandardRichTextExportService: RichTextExportService {
     
     /**
      Generate a file with a certain name, content and format.
-     
-     Unlike when sharing a file, exported file names must be
-     unique, to avoid overwriting other files. This function
-     will therefore make sure that the generated file url is
-     unique before it exports it.
+
+     Exported files will by default be exported to the app's
+     document folder, which means that we should give them a
+     unique name to avoid overwriting already existing files.
+
+     To achieve this, we'll use the `uniqueFileUrl` function
+     of the url resolver, which by default will add a suffix
+     until the file name no longer exists.
      
      - Parameters:
-       - fileName: The preferred file name.
+       - fileName: The preferred name of the exported name.
        - content: The rich text content to export.
        - format: The rich text format to use when exporting.
      */
@@ -66,10 +69,13 @@ public class StandardRichTextExportService: RichTextExportService {
     /**
      Generate a PDF file with a certain name and content.
 
-     Unlike when sharing a file, exported file names must be
-     unique, to avoid overwriting other files. This function
-     will therefore make sure that the generated file url is
-     unique before it exports it.
+     Exported files will by default be exported to the app's
+     document folder, which means that we should give them a
+     unique name to avoid overwriting already existing files.
+
+     To achieve this, we'll use the `uniqueFileUrl` function
+     of the url resolver, which by default will add a suffix
+     until the file name no longer exists.
      
      - Parameters:
        - fileName: The preferred file name.

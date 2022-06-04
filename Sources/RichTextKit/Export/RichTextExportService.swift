@@ -10,13 +10,17 @@ import Foundation
 
 /**
  This protocol can be implemented by any classes that can be
- used to export documents.
+ used to export rich text files.
+
+ Exporting should be used to convert between various formats.
+ If you want to share or print the text, using a share sheet,
+ you shoul use a ``RichTextShareService`` instead.
  */
 public protocol RichTextExportService: AnyObject {
     
     /**
-     Generate a export file with a custom name and rich text
-     content.
+     Generate an export file with a certain name and content,
+     that uses a certain rich text data format.
      
      - Parameters:
        - fileName: The preferred file name.
@@ -26,8 +30,7 @@ public protocol RichTextExportService: AnyObject {
     func generateExportFile(
         withName fileName: String,
         content: NSAttributedString,
-        format: RichTextDataFormat
-    ) throws -> URL
+        format: RichTextDataFormat) throws -> URL
     
     /**
      Generate a PDF export file with a certain name and rich
@@ -39,6 +42,5 @@ public protocol RichTextExportService: AnyObject {
      */
     func generatePdfExportFile(
         withName fileName: String,
-        content: NSAttributedString
-    ) throws -> URL
+        content: NSAttributedString) throws -> URL
 }

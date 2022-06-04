@@ -10,7 +10,7 @@ import SwiftUI
 
 /**
  This context can be used to observe state for any rich text
- editor, as well as other properties.
+ view, as well as other editor-specific properties.
 
  SwiftUI can observe the published properties to keep the UI
  of an app in sync, while a coordinator can subscribe to any
@@ -248,6 +248,13 @@ public extension RichTextContext {
      */
     func stepFontSize(points: Int) {
         fontSize += CGFloat(points)
+    }
+
+    /**
+     Set ``isEditingText`` to `false`.
+     */
+    func stopEditingText() {
+        isEditingText = false
     }
 
     /**
