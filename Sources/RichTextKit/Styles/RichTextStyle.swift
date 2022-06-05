@@ -35,9 +35,9 @@ public extension RichTextStyle {
      */
     var icon: Image {
         switch self {
-        case .bold: return .bold
-        case .italic: return .italic
-        case .underlined: return .underline
+        case .bold: return .richTextStyleBold
+        case .italic: return .richTextStyleItalic
+        case .underlined: return .richTextStyleUnderline
         }
     }
 

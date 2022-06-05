@@ -13,18 +13,19 @@ import SwiftUI
  */
 public extension Image {
 
-    static let alignmentCenter = symbol("text.aligncenter")
-    static let alignmentJustified = symbol("text.justify")
-    static let alignmentLeft = symbol("text.alignleft")
-    static let alignmentRight = symbol("text.alignright")
+    static let richTextAlignmentCenter = symbol("text.aligncenter")
+    static let richTextAlignmentJustified = symbol("text.justify")
+    static let richTextAlignmentLeft = symbol("text.alignleft")
+    static let richTextAlignmentRight = symbol("text.alignright")
 
-    static let bold = symbol("bold")
-    static let italic = symbol("italic")
-    static let underline = symbol("underline")
+    static let richTextStyleBold = symbol("bold")
+    static let richTextStyleItalic = symbol("italic")
+    static let richTextStyleUnderline = symbol("underline")
 
-    static let edit = symbol("square.and.pencil")
-    static let redo = symbol("arrow.uturn.forward")
-    static let undo = symbol("arrow.uturn.backward")
+    static let richTextActionCopy = symbol("doc.on.clipboard")
+    static let richTextActionEdit = symbol("square.and.pencil")
+    static let richTextActionRedo = symbol("arrow.uturn.forward")
+    static let richTextActionUndo = symbol("arrow.uturn.backward")
 }
 
 private extension Image {
@@ -39,16 +40,37 @@ struct Image_RichText_Previews: PreviewProvider {
 
     static var previews: some View {
         VStack(spacing: 20) {
-            Image.alignmentCenter
-            Image.alignmentJustified
-            Image.alignmentLeft
-            Image.alignmentRight
+            alignmentPreviews
             Divider()
-            Image.bold
-            Image.italic
-            Image.underline
+            stylePreviews
             Divider()
-            Image.edit
+            actionPreviews
+        }
+    }
+
+    static var alignmentPreviews: some View {
+        HStack {
+            Image.richTextAlignmentCenter
+            Image.richTextAlignmentJustified
+            Image.richTextAlignmentLeft
+            Image.richTextAlignmentRight
+        }
+    }
+
+    static var stylePreviews: some View {
+        HStack {
+            Image.richTextStyleBold
+            Image.richTextStyleItalic
+            Image.richTextStyleUnderline
+        }
+    }
+
+    static var actionPreviews: some View {
+        HStack {
+            Image.richTextActionCopy
+            Image.richTextActionEdit
+            Image.richTextActionRedo
+            Image.richTextActionUndo
         }
     }
 }
