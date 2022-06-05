@@ -77,6 +77,20 @@ public extension RichTextView {
 
 
     /**
+     Alert a certain title and message.
+
+     This view uses an `NSAlert` to alert messages.
+     */
+    func alert(_ title: String, message: String) {
+        let alert = NSAlert()
+        alert.messageText = title
+        alert.informativeText = message
+        alert.alertStyle = NSAlert.Style.warning
+        alert.addButton(withTitle: "OK")
+        alert.runModal()
+    }
+
+    /**
      Copy the current selection.
      */
     func copySelection() {

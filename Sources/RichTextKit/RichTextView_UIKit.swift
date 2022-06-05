@@ -87,6 +87,19 @@ public extension RichTextView {
         }
     }
 
+
+    /**
+     Alert a certain title and message.
+
+     This view uses a `UIAlertController` to alert messages.
+     */
+    func alert(_ title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(action)
+        let controller = window?.rootViewController?.presentedViewController
+        controller?.present(alert, animated: true, completion: nil)
+    }
     
     /**
      Copy the current selection.

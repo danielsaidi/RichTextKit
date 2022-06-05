@@ -79,6 +79,11 @@ public protocol RichTextViewRepresentable:
 
 
     /**
+     Alert a certain title and message.
+     */
+    func alert(_ title: String, message: String)
+    
+    /**
      Copy the current selection.
      */
     func copySelection()
