@@ -44,6 +44,9 @@ private extension ContentView {
             colorPickers
             sizeTools
             actionButtons
+            Button("Test") {
+                context.pasteText("foo bar", at: 2, moveCursorToPastedContent: true)
+            }
         }.background(Color.gray.opacity(0.3))
     }
 }

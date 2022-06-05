@@ -37,6 +37,10 @@ public protocol RichTextViewRepresentable:
     // RichTextStyleReader,
     RichTextStyleWriter
 {
+    /**
+     The text view's frame.
+     */
+    var frame: CGRect { get }
 
     /**
      The style to use when highlighting text in the view.

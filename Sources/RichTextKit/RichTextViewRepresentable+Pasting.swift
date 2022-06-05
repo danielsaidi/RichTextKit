@@ -21,6 +21,14 @@ public extension RichTextViewRepresentable {
     /**
      Paste an image into the text view, at a certain index.
 
+     For now, pasting will automatically insert the image as
+     a jpeg with a 0.7 compression quality. We should expand
+     this to allow us to define format, compression etc. but
+     for now this is hard coded and a future TODO.
+
+     Pasting images only works on iOS, tvOS and macOS. Other
+     platform will trigger an assertion failure.
+
      - Parameters:
        - image: The image to paste.
        - index: The index to paste at.
@@ -28,28 +36,20 @@ public extension RichTextViewRepresentable {
      */
     func pasteImage(
         _ image: ImageRepresentable,
-        at location: Int,
-        moveCursorToPastedContent: Bool = false) {
-//        guard validateImageInsert(with: imagePasteConfiguration) else { return }
-//        guard let data = image.richTextData else { return }
-//        let locationAfterPaste = location + 2   // Add the number of inserted "items"
-//        let font = currentFont ?? .standardRichTextFont
-//        guard let compressed = ImageRepresentable(data: data) else { return }
-//        let attachment = ImageAttachment(image: compressed)
-//        attachment.bounds = attachmentBounds(for: compressed)
-//        let attachmentString = NSAttributedString(attachment: attachment)
-//        let content = NSMutableAttributedString(attributedString: attributedString)
-//        content.insert(NSAttributedString(string: "\n"), at: location)
-//        content.insert(attachmentString, at: location)
-//        attributedString = content
-//        DispatchQueue.main.async {
-//            self.selectedRange = NSRange(location: locationAfterPaste, length: 0)
-//            self.setCurrentFont(font)
-//        }
+        at index: Int,
+        moveCursorToPastedContent: Bool = false
+    ) {
+        pasteImages(
+            [image],
+            at: index,
+            moveCursorToPastedContent: moveCursorToPastedContent)
     }
 
     /**
      Paste images into the text view, at a certain index.
+
+     Pasting images only works on iOS, tvOS and macOS. Other
+     platform will trigger an assertion failure.
 
      - Parameters:
        - images: The images to paste.
@@ -61,9 +61,26 @@ public extension RichTextViewRepresentable {
         at index: Int,
         moveCursorToPastedContent: Bool = false
     ) {
+        #if os(iOS) || os(tvOS) || os(macOS)
+        guard validateImageInsertion(for: imagePasteConfiguration) else { return }
+        let content = NSMutableAttributedString(attributedString: richText)
+        let insertRange = NSRange(location: index, length: 0)
+        let safeInsertRange = safeRange(for: insertRange)
+        let insertedItems = images.count * 2   // The number of inserted "items" is the images and a newline for each
+        let safeMoveIndex = safeInsertRange.location + insertedItems
+        let attributes = content.richTextAttributes(at: safeInsertRange)
+        let attributeRange = NSRange(location: index, length: insertedItems)
+        let safeAttributeRange = safeRange(for: attributeRange)
         images.reversed().forEach {
-            pasteImage($0, at: index, moveCursorToPastedContent: moveCursorToPastedContent)
+            performPasteImage($0, at: index)
         }
+        mutableRichText?.setRichTextAttributes(attributes, at: safeAttributeRange)
+        if moveCursorToPastedContent {
+            moveInputCursor(to: safeMoveIndex)
+        }
+        #else
+        assertionFailure("Image pasting is not supported on this platform")
+        #endif
     }
 
     /**
@@ -79,15 +96,45 @@ public extension RichTextViewRepresentable {
         at index: Int,
         moveCursorToPastedContent: Bool = false
     ) {
-        let text = NSMutableAttributedString(string: text)
-        let content = NSMutableAttributedString(attributedString: attributedString)
-        let font = content.font(at: selectedRange) ?? .standardRichTextFont
-        let fontRange = NSRange(location: 0, length: text.length)
-        text.setFont(to: font, at: fontRange)
-        content.insert(text, at: index)
+        let content = NSMutableAttributedString(attributedString: richText)
+        let insertString = NSMutableAttributedString(string: text)
+        let insertRange = NSRange(location: index, length: 0)
+        let safeInsertRange = safeRange(for: insertRange)
+        let safeMoveIndex = safeInsertRange.location + insertString.length
+        let attributes = content.richTextAttributes(at: safeInsertRange)
+        let attributeRange = NSRange(location: 0, length: insertString.length)
+        let safeAttributeRange = safeRange(for: attributeRange)
+        insertString.setRichTextAttributes(attributes, at: safeAttributeRange)
+        content.insert(insertString, at: index)
         setRichText(content)
         if moveCursorToPastedContent {
-            moveInputCursor(to: index + text.length)
+            moveInputCursor(to: safeMoveIndex)
         }
     }
 }
+
+#if os(iOS) || os(tvOS) || os(macOS)
+private extension RichTextViewRepresentable {
+
+    func getAttachmentString(
+        for image: ImageRepresentable
+    ) -> NSMutableAttributedString? {
+        guard let data = image.jpegData(compressionQuality: 0.7) else { return nil }
+        guard let compressed = ImageRepresentable(data: data) else { return nil }
+        let attachment = RichTextImageAttachment(jpegData: data)
+        attachment.bounds = attachmentBounds(for: compressed)
+        return NSMutableAttributedString(attachment: attachment)
+    }
+
+    func performPasteImage(
+        _ image: ImageRepresentable,
+        at index: Int
+    ) {
+        let content = NSMutableAttributedString(attributedString: richText)
+        guard let insertString = getAttachmentString(for: image) else { return }
+        content.insert(NSAttributedString(string: "\n"), at: index)
+        content.insert(insertString, at: index)
+        setRichText(content)
+    }
+}
+#endif
