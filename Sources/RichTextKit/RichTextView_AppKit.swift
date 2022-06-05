@@ -128,6 +128,7 @@ public extension RichTextView {
         let pasteboard = NSPasteboard.general
         let range = safeRange(for: selectedRange)
         let text = richText(at: range)
+        pasteboard.clearContents()
         pasteboard.setString(text.string, forType: .string)
     }
 
