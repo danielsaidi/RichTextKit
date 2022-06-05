@@ -78,7 +78,6 @@ public struct FontForEachPicker: View {
     }
 }
 
-#if os(iOS)
 struct FontForEachPicker_Previews: PreviewProvider {
     
     struct Preview: View {
@@ -99,4 +98,3 @@ struct FontForEachPicker_Previews: PreviewProvider {
         Preview()
     }
 }
-#endif

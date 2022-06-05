@@ -2,7 +2,7 @@
 //  RichTextImageAttachmentManager.swift
 //  RichTextKit
 //
-//  Created by Daniel Saidi on 2022-05-28.
+//  Created by Daniel Saidi on 2022-06-05.
 //  Copyright © 2022 Daniel Saidi. All rights reserved.
 //
 
@@ -16,6 +16,7 @@ import UIKit
 import AppKit
 #endif
 
+#if canImport(iOS) || os(macOS) || os(tvOS)
 /**
  This protocol can be implemented any types that can provide
  additional image attachment capabilities.
@@ -85,3 +86,4 @@ private extension NSTextAttachment {
         return ImageRepresentable(data: imageData)
     }
 }
+#endif

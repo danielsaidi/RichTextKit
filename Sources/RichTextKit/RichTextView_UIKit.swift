@@ -92,10 +92,14 @@ public extension RichTextView {
      Copy the current selection.
      */
     func copySelection() {
+        #if os(iOS)
         let pasteboard = UIPasteboard.general
         let range = safeRange(for: selectedRange)
         let text = richText(at: range)
         pasteboard.string = text.string
+        #else
+        print("Pasteboard is not available on this platform")
+        #endif
     }
 
     /**

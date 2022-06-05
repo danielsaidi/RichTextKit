@@ -9,6 +9,10 @@
 import CoreGraphics
 import Foundation
 
+#if canImport(iOS) || os(macOS) || os(tvOS)
+extension RichTextViewRepresentable: RichTextImageAttachmentManager {}
+#endif
+
 /**
  This protocol defines a platform-agnostic api that's shared
  by the UIKit and AppKit implementation of ``RichTextView``.
@@ -33,7 +37,6 @@ public protocol RichTextViewRepresentable:
     RichTextDataWriter,
     // RichTextFontReader,
     // RichTextFontWriter,
-    RichTextImageAttachmentManager,
     // RichTextStyleReader,
     RichTextStyleWriter
 {

@@ -99,9 +99,11 @@ struct FontPicker_Previews: PreviewProvider {
         @State private var selectedFontName = ""
         
         var body: some View {
-            FontPicker(selection: $selectedFontName)
-                .withStyle()
-                .padding(20)
+            NavigationView {
+                FontPicker(selection: $selectedFontName)
+                    .withStyle()
+                    .padding(20)
+            }
         }
     }
     
