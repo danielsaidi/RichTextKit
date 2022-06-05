@@ -55,4 +55,26 @@ public protocol RichTextViewRepresentable:
      The text view current typing attributes.
      */
     var typingAttributes: RichTextAttributes { get set }
+
+
+    /**
+     Setup the rich text view with a rich text and a certain
+     data format.
+     */
+    func setup(
+        with text: NSAttributedString,
+        format: RichTextDataFormat)
+}
+
+internal extension RichTextViewRepresentable {
+
+    /**
+     This setup function can be called by all implemetations,
+     to setup the initial font size for a text.
+     */
+    func setupInitialFontSize(for text: NSAttributedString) {
+        let fontSize = FontRepresentable.standardRichTextFont.pointSize
+        setFontSize(to: fontSize, at: NSRange(location: 0, length: text.length))
+        setCurrentFontSize(to: FontRepresentable.standardRichTextFont.pointSize)
+    }
 }

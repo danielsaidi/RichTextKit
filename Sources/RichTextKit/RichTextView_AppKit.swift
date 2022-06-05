@@ -22,6 +22,34 @@ public class RichTextView: NSTextView, RichTextViewRepresentable {
 }
 
 
+// MARK: - Public Functions
+
+public extension RichTextView {
+
+    /**
+     Setup the rich text view with a rich text and a certain
+     data format.
+
+     We should later make all these configurations easier to
+     customize.
+     */
+    func setup(
+        with text: NSAttributedString,
+        format: RichTextDataFormat
+    ) {
+        attributedString = text
+        allowsImageEditing = true
+        allowsUndo = true
+        backgroundColor = .clear
+        // TODO: imageConfiguration = imageConfig ?? imageConfiguration
+        // TODO: layoutManager?.defaultAttachmentScaling = NSImageScaling.scaleProportionallyDown
+        textColor = .textColor
+        setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        setupInitialFontSize(for: text)
+    }
+}
+
+
 // MARK: - RichTextProvider
 
 public extension RichTextView {
@@ -53,16 +81,5 @@ public extension RichTextView {
     var mutableAttributedString: NSMutableAttributedString? {
         textStorage
     }
-}
-
-
-// MARK: - Private Extensions
-
-private extension RichTextView {
-
-    /**
-     The pasteboard to use when pasting into the text view.
-     */
-    private var pasteboard: NSPasteboard { .general }
 }
 #endif

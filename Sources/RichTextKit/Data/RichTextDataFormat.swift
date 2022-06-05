@@ -73,6 +73,8 @@ public extension RichTextDataFormat {
     
     /**
      Whether or not the format supports images.
+
+     For now, 
      */
     var supportsImages: Bool {
         switch self {

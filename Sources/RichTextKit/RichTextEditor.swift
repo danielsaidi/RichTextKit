@@ -37,24 +37,37 @@ public struct RichTextEditor:
 {
 
     /**
-     Create a rich text editor.
+     Create a rich text editor with a certain text that uses
+     a certain rich text data format.
 
      - Parameters:
        - text: The rich text to edit.
        - context: The rich text context to use.
+       - format: The rich text data format, by default ``RichTextDataFormat/archivedData``.
      */
     public init(
         text: Binding<NSAttributedString>,
-        context: RichTextContext) {
+        context: RichTextContext,
+        format: RichTextDataFormat = .archivedData,
+        viewConfiguration: @escaping ViewConfiguration = { _ in }
+    ) {
         self.text = text
         self._richTextContext = ObservedObject(wrappedValue: context)
+        self.format = format
+        self.viewConfiguration = viewConfiguration
     }
 
+    public typealias ViewConfiguration = (RichTextViewRepresentable) -> ()
+
+
+    private var format: RichTextDataFormat
     
     private var text: Binding<NSAttributedString>
 
     @ObservedObject
     private var richTextContext: RichTextContext
+
+    private var viewConfiguration: ViewConfiguration
 
 
     #if os(iOS) || os(tvOS)
@@ -80,7 +93,9 @@ public struct RichTextEditor:
 
     #if os(iOS) || os(tvOS)
     public func makeUIView(context: Context) -> some UIView {
-        textView
+        textView.setup(with: text.wrappedValue, format: format)
+        viewConfiguration(textView)
+        return textView
     }
 
     public func updateUIView(_ view: UIViewType, context: Context) {}
@@ -88,7 +103,8 @@ public struct RichTextEditor:
 
     #if os(macOS)
     public func makeNSView(context: Context) -> some NSView {
-        textView.allowsUndo = true
+        textView.setup(with: text.wrappedValue, format: format)
+        viewConfiguration(textView)
         return scrollView
     }
 
