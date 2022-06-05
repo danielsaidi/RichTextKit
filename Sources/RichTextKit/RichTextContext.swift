@@ -149,16 +149,22 @@ public class RichTextContext: ObservableObject {
     public var selectedRange = NSRange()
 
     /**
-     Whether or not to undo the latest change.
+     Whether or not to copy the current text selection.
      */
     @Published
-    public var shouldUndoLatestChange = false
+    public var shouldCopySelection = false
 
     /**
      Whether or not to redo the latest undone change.
      */
     @Published
     public var shouldRedoLatestChange = false
+
+    /**
+     Whether or not to undo the latest change.
+     */
+    @Published
+    public var shouldUndoLatestChange = false
 }
 
 public extension RichTextContext {
@@ -172,6 +178,15 @@ public extension RichTextContext {
 }
 
 public extension RichTextContext {
+
+    /**
+     Copy the current selection to the pasteboard.
+
+     This is only usable on platforms that have a pasteboard.
+     */
+    func copyCurrentSelection() {
+        shouldCopySelection = true
+    }
 
     /**
      Decrement the current font size.

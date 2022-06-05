@@ -26,6 +26,7 @@ extension RichTextCoordinator {
         subscribeToIsItalic()
         subscribeToIsUnderlined()
         subscribeToSelectedRange()
+        subscribeToShouldCopySelection()
         subscribeToShouldRedoLatestChange()
         subscribeToShouldUndoLatestChange()
     }
@@ -121,11 +122,19 @@ private extension RichTextCoordinator {
             .store(in: &cancellables)
     }
 
+    func subscribeToShouldCopySelection() {
+        context.$shouldCopySelection
+            .sink(
+                receiveCompletion: { _ in },
+                receiveValue: { [weak self] in self?.copySelection($0) })
+            .store(in: &cancellables)
+    }
+
     func subscribeToShouldRedoLatestChange() {
         context.$shouldRedoLatestChange
             .sink(
                 receiveCompletion: { _ in },
-                receiveValue: { [weak self] in self?.redoLastChange($0) })
+                receiveValue: { [weak self] in self?.redoLatestChange($0) })
             .store(in: &cancellables)
     }
 
@@ -133,16 +142,21 @@ private extension RichTextCoordinator {
         context.$shouldUndoLatestChange
             .sink(
                 receiveCompletion: { _ in },
-                receiveValue: { [weak self] in self?.undoLastChange($0) })
+                receiveValue: { [weak self] in self?.undoLatestChange($0) })
             .store(in: &cancellables)
     }
 }
 
 internal extension RichTextCoordinator {
 
-    func redoLastChange(_ shouldRedo: Bool) {
+    func copySelection(_ shouldCopy: Bool) {
+        guard shouldCopy else { return }
+        textView.copySelection()
+    }
+
+    func redoLatestChange(_ shouldRedo: Bool) {
         guard shouldRedo else { return }
-        textView.undoManager?.redo()
+        textView.redoLatestChange()
         syncContextWithTextView()
     }
 
@@ -220,9 +234,9 @@ internal extension RichTextCoordinator {
         textView.setCurrentRichTextStyle(style, to: newValue)
     }
 
-    func undoLastChange(_ shouldUndo: Bool) {
+    func undoLatestChange(_ shouldUndo: Bool) {
         guard shouldUndo else { return }
-        textView.undoManager?.undo()
+        textView.undoLatestChange()
         syncContextWithTextView()
     }
 }

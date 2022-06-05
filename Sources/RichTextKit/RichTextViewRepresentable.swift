@@ -70,6 +70,22 @@ public protocol RichTextViewRepresentable:
     func setup(
         with text: NSAttributedString,
         format: RichTextDataFormat)
+
+
+    /**
+     Copy the current selection.
+     */
+    func copySelection()
+
+    /**
+     Redo the latest undone change.
+     */
+    func redoLatestChange()
+
+    /**
+     Undo the latest change.
+     */
+    func undoLatestChange()
 }
 
 internal extension RichTextViewRepresentable {

@@ -52,11 +52,13 @@ private extension ContentView {
 
     var actionButtons: some View {
         HStack {
-            button(icon: .undo, action: context.undoLatestChange)
+            button(icon: .richTextActionCopy, action: context.copyCurrentSelection)
+                .disabled(false)
+            button(icon: .richTextActionUndo, action: context.undoLatestChange)
                 .disabled(!context.canUndoLatestChange)
-            button(icon: .redo, action: context.redoLatestChange)
+            button(icon: .richTextActionRedo, action: context.redoLatestChange)
                 .disabled(!context.canRedoLatestChange)
-            button(icon: .edit, action: context.toggleIsEditing)
+            button(icon: .richTextActionEdit, action: context.toggleIsEditing)
                 .highlighted(if: context.isEditingText)
         }
     }

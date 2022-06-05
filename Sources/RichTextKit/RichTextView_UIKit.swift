@@ -51,7 +51,7 @@ public extension RichTextView {
 }
 
 
-// MARK: - Public Functions
+// MARK: - Public Functionality
 
 public extension RichTextView {
 
@@ -75,6 +75,31 @@ public extension RichTextView {
                 bottom: newValue.height,
                 right: newValue.width)
         }
+    }
+
+    
+    /**
+     Copy the current selection.
+     */
+    func copySelection() {
+        let pasteboard = UIPasteboard.general
+        let range = safeRange(for: selectedRange)
+        let text = richText(at: range)
+        pasteboard.string = text.string
+    }
+
+    /**
+     Try to redo the latest undone change.
+     */
+    func redoLatestChange() {
+        undoManager?.redo()
+    }
+
+    /**
+     Try to undo the latest change.
+     */
+    func undoLatestChange() {
+        undoManager?.undo()
     }
 }
 
