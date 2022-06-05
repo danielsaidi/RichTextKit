@@ -166,10 +166,22 @@ public class RichTextContext: ObservableObject {
     public var shouldRedoLatestChange = false
 
     /**
+     Set this property to trigger an image paste operation.
+     */
+    @Published
+    public var shouldPasteImage: (image: ImageRepresentable, atIndex: Int, moveCursor: Bool)?
+
+    /**
+     Set this property to trigger an image paste operation.
+     */
+    @Published
+    public var shouldPasteImages: (images: [ImageRepresentable], atIndex: Int, moveCursor: Bool)?
+
+    /**
      Set this property to trigger a text paste operation.
      */
     @Published
-    public var shouldPasteText: (text: String, index: Int, moveCursor: Bool)?
+    public var shouldPasteText: (text: String, atIndex: Int, moveCursor: Bool)?
 
     /**
      Whether or not to undo the latest change.
@@ -238,19 +250,51 @@ public extension RichTextContext {
     }
 
     /**
-     Paste a text into the text view, at a certain position.
+     Paste an image into the text view, at a certain index.
+
+     - Parameters:
+       - image: The image to paste.
+       - index: The index to paste at.
+       - moveCursorToPastedContent: Whether or not to move the cursor to the end of the pasted content, by default `false`.
+     */
+    func pasteImage(
+        _ image: ImageRepresentable,
+        at index: Int,
+        moveCursorToPastedContent: Bool = false
+    ) {
+        shouldPasteImage = (image, index, moveCursorToPastedContent)
+    }
+
+    /**
+     Paste images into the text view, at a certain index.
+
+     - Parameters:
+       - images: The images to paste.
+       - index: The index to paste at.
+       - moveCursorToPastedContent: Whether or not to move the cursor to the end of the pasted content, by default `false`.
+     */
+    func pasteImage(
+        _ images: [ImageRepresentable],
+        at index: Int,
+        moveCursorToPastedContent: Bool = false
+    ) {
+        shouldPasteImages = (images, index, moveCursorToPastedContent)
+    }
+
+    /**
+     Paste text into the text view, at a certain index.
 
      - Parameters:
        - text: The text to paste.
-       - index: The index to paste the text into.
-       - moveCursorToPastedText: Whether or not to move the cursor to the end of the pasted text, by default `false`.
+       - index: The index to paste at.
+       - moveCursorToPastedContent: Whether or not to move the cursor to the end of the pasted content, by default `false`.
      */
     func pasteText(
         _ text: String,
         at index: Int,
-        moveCursorToPastedText: Bool = false
+        moveCursorToPastedContent: Bool = false
     ) {
-        shouldPasteText = (text, index, moveCursorToPastedText)
+        shouldPasteText = (text, index, moveCursorToPastedContent)
     }
 
     /**

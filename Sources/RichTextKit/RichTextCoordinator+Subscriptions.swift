@@ -131,6 +131,22 @@ private extension RichTextCoordinator {
             .store(in: &cancellables)
     }
 
+    func subscribeToShouldPasteImage() {
+        context.$shouldPasteImage
+            .sink(
+                receiveCompletion: { _ in },
+                receiveValue: { [weak self] in self?.pasteImage($0) })
+            .store(in: &cancellables)
+    }
+
+    func subscribeToShouldPasteImages() {
+        context.$shouldPasteImages
+            .sink(
+                receiveCompletion: { _ in },
+                receiveValue: { [weak self] in self?.pasteImages($0) })
+            .store(in: &cancellables)
+    }
+
     func subscribeToShouldPasteText() {
         context.$shouldPasteText
             .sink(
@@ -163,12 +179,28 @@ internal extension RichTextCoordinator {
         textView.copySelection()
     }
 
-    func pasteText(_ data: (text: String, index: Int, moveCursor: Bool)?) {
+    func pasteImage(_ data: (image: ImageRepresentable, atIndex: Int, moveCursor: Bool)?) {
+        guard let data = data else { return }
+        textView.pasteImage(
+            data.image,
+            at: data.atIndex,
+            moveCursorToPastedContent: data.moveCursor)
+    }
+
+    func pasteImages(_ data: (images: [ImageRepresentable], atIndex: Int, moveCursor: Bool)?) {
+        guard let data = data else { return }
+        textView.pasteImages(
+            data.images,
+            at: data.atIndex,
+            moveCursorToPastedContent: data.moveCursor)
+    }
+
+    func pasteText(_ data: (text: String, atIndex: Int, moveCursor: Bool)?) {
         guard let data = data else { return }
         textView.pasteText(
             data.text,
-            at: data.index,
-            moveCursorToPastedText: data.moveCursor)
+            at: data.atIndex,
+            moveCursorToPastedContent: data.moveCursor)
     }
 
     func redoLatestChange(_ shouldRedo: Bool) {
