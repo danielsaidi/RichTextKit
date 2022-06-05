@@ -94,6 +94,13 @@ public extension RichTextView {
     }
 
     /**
+     Set the rich text in the text view.
+     */
+    func setRichText(_ text: NSAttributedString) {
+        attributedString = text
+    }
+
+    /**
      Try to undo the latest change.
      */
     func undoLatestChange() {

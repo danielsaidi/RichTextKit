@@ -166,6 +166,12 @@ public class RichTextContext: ObservableObject {
     public var shouldRedoLatestChange = false
 
     /**
+     Set this property to trigger a text paste operation.
+     */
+    @Published
+    public var shouldPasteText: (text: String, index: Int, moveCursor: Bool)?
+
+    /**
      Whether or not to undo the latest change.
      */
     @Published
@@ -229,6 +235,22 @@ public extension RichTextContext {
      */
     func incrementFontSize(points: UInt = 1) {
         stepFontSize(points: Int(points))
+    }
+
+    /**
+     Paste a text into the text view, at a certain position.
+
+     - Parameters:
+       - text: The text to paste.
+       - index: The index to paste the text into.
+       - moveCursorToPastedText: Whether or not to move the cursor to the end of the pasted text, by default `false`.
+     */
+    func pasteText(
+        _ text: String,
+        at index: Int,
+        moveCursorToPastedText: Bool = false
+    ) {
+        shouldPasteText = (text, index, moveCursorToPastedText)
     }
 
     /**

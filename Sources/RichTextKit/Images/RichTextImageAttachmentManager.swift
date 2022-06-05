@@ -6,6 +6,7 @@
 //  Copyright © 2022 Daniel Saidi. All rights reserved.
 //
 
+import CoreGraphics
 import Foundation
 
 #if os(iOS) || os(tvOS)
@@ -16,7 +17,6 @@ import UIKit
 import AppKit
 #endif
 
-#if canImport(iOS) || os(macOS) || os(tvOS)
 /**
  This protocol can be implemented any types that can provide
  additional image attachment capabilities.
@@ -59,6 +59,10 @@ public extension RichTextImageAttachmentManager {
             height: size.height * aspectRatio)
         return newSize
     }
+}
+
+#if os(iOS) || os(macOS) || os(tvOS)
+public extension RichTextImageAttachmentManager {
 
     /**
      Auto-size all images attachments within a rich text, by

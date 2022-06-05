@@ -27,6 +27,7 @@ extension RichTextCoordinator {
         subscribeToIsUnderlined()
         subscribeToSelectedRange()
         subscribeToShouldCopySelection()
+        subscribeToShouldPasteText()
         subscribeToShouldRedoLatestChange()
         subscribeToShouldUndoLatestChange()
     }
@@ -130,6 +131,14 @@ private extension RichTextCoordinator {
             .store(in: &cancellables)
     }
 
+    func subscribeToShouldPasteText() {
+        context.$shouldPasteText
+            .sink(
+                receiveCompletion: { _ in },
+                receiveValue: { [weak self] in self?.pasteText($0) })
+            .store(in: &cancellables)
+    }
+
     func subscribeToShouldRedoLatestChange() {
         context.$shouldRedoLatestChange
             .sink(
@@ -152,6 +161,14 @@ internal extension RichTextCoordinator {
     func copySelection(_ shouldCopy: Bool) {
         guard shouldCopy else { return }
         textView.copySelection()
+    }
+
+    func pasteText(_ data: (text: String, index: Int, moveCursor: Bool)?) {
+        guard let data = data else { return }
+        textView.pasteText(
+            data.text,
+            at: data.index,
+            moveCursorToPastedText: data.moveCursor)
     }
 
     func redoLatestChange(_ shouldRedo: Bool) {

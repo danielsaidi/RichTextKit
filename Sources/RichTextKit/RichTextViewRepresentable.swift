@@ -9,10 +9,6 @@
 import CoreGraphics
 import Foundation
 
-#if canImport(iOS) || os(macOS) || os(tvOS)
-extension RichTextViewRepresentable: RichTextImageAttachmentManager {}
-#endif
-
 /**
  This protocol defines a platform-agnostic api that's shared
  by the UIKit and AppKit implementation of ``RichTextView``.
@@ -37,6 +33,7 @@ public protocol RichTextViewRepresentable:
     RichTextDataWriter,
     // RichTextFontReader,
     // RichTextFontWriter,
+    RichTextImageAttachmentManager,
     // RichTextStyleReader,
     RichTextStyleWriter
 {
@@ -92,9 +89,34 @@ public protocol RichTextViewRepresentable:
     func redoLatestChange()
 
     /**
+     Set the rich text in the text view.
+     */
+    func setRichText(_ text: NSAttributedString)
+
+    /**
+     Set the selected range in the text view.
+     */
+    func setSelectedRange(_ range: NSRange)
+
+    /**
      Undo the latest change.
      */
     func undoLatestChange()
+}
+
+public extension RichTextViewRepresentable {
+
+    /**
+     Move the text cursor to a certain input index.
+
+     This will use `safeRange(for:)` to cap the index to the
+     available rich text range.
+     */
+    func moveInputCursor(to index: Int) {
+        let newRange = NSRange(location: index, length: 0)
+        let safeRange = safeRange(for: newRange)
+        setSelectedRange(safeRange)
+    }
 }
 
 internal extension RichTextViewRepresentable {
