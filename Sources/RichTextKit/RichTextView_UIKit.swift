@@ -78,6 +78,31 @@ public class RichTextView: UITextView, RichTextViewRepresentable {
         }
     }
 
+    /**
+     Check whether or not a certain action can be performed.
+     */
+    public override func canPerformAction(
+        _ action: Selector,
+        withSender sender: Any?
+    ) -> Bool {
+        let pasteboard = UIPasteboard.general
+        let hasImage = pasteboard.image != nil
+        let isPaste = action == #selector(paste(_:))
+        let canPerformImagePaste = imagePasteConfiguration != .disabled
+        if isPaste && hasImage && canPerformImagePaste { return true }
+        return super.canPerformAction(action, withSender: sender)
+    }
+
+    /**
+     Paste the current content of the general pasteboard.
+     */
+    public override func paste(_ sender: Any?) {
+        let pasteboard = UIPasteboard.general
+        if let image = pasteboard.image {
+            return pasteImage(image, at: selectedRange.location)
+        }
+        super.paste(sender)
+    }
 }
 
 
@@ -166,6 +191,23 @@ public extension RichTextView {
     }
 
     /**
+     Get the frame of a certain range.
+
+     - Parameters:
+       - range: The range to get the frame from.
+     */
+    func frame(of range: NSRange) -> CGRect {
+        let beginning = beginningOfDocument
+        guard
+            let start = position(from: beginning, offset: range.location),
+            let end = position(from: start, offset: range.length),
+            let textRange = textRange(from: start, to: end)
+        else { return .zero }
+        let rect = firstRect(for: textRange)
+        return convert(rect, from: textInputView)
+    }
+
+    /**
      Get the text range at a certain point.
 
      - Parameters:
@@ -183,6 +225,17 @@ public extension RichTextView {
      */
     func redoLatestChange() {
         undoManager?.redo()
+    }
+
+    /**
+     Scroll the text view to a certain range.
+
+     - Parameters:
+       - range: The range to scroll to.     
+     */
+    func scroll(to range: NSRange) {
+        let caret = frame(of: range)
+        scrollRectToVisible(caret, animated: true)
     }
 
     /**

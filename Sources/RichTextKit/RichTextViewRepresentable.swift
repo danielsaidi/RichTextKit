@@ -98,12 +98,26 @@ public protocol RichTextViewRepresentable:
     func redoLatestChange()
 
     /**
+     Scroll to a certain range.
+
+     - Parameters:
+       - range: The range to scroll to.
+     */
+    func scroll(to range: NSRange)
+
+    /**
      Set the rich text in the text view.
+
+     - Parameters:
+       - text: The rich text to set.
      */
     func setRichText(_ text: NSAttributedString)
 
     /**
      Set the selected range in the text view.
+
+     - Parameters:
+       - range: The range to set.     
      */
     func setSelectedRange(_ range: NSRange)
 

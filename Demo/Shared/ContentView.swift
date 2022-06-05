@@ -40,7 +40,7 @@ private extension ContentView {
             RichTextEditor(text: $text, context: context) {
                 $0.textContentInset = CGSize(width: 10, height: 20)
             }
-            .background(Color.white)
+            .background(Material.regular)
             .cornerRadius(5)
             Divider()
             styleButtons

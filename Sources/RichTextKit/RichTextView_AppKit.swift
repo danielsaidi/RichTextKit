@@ -34,6 +34,17 @@ public class RichTextView: NSTextView, RichTextViewRepresentable {
     // MARK: - Overrides
 
     /**
+     Paste the current pasteboard content into the text view.
+     */
+    public override func paste(_ sender: Any?) {
+        let pasteboard = NSPasteboard.general
+        if let image = pasteboard.image {
+            return pasteImage(image, at: selectedRange.location)
+        }
+        super.paste(sender)
+    }
+
+    /**
      Try to perform a certain drag operation, which will get
      and paste images from the drag info into the text.
      */
@@ -128,7 +139,20 @@ public extension RichTextView {
     }
 
     /**
+     Scroll to a certain range.
+
+     - Parameters:
+       - range: The range to scroll to.
+     */
+    func scroll(to range: NSRange) {
+        scrollRangeToVisible(range)
+    }
+
+    /**
      Set the rich text in the text view.
+
+     - Parameters:
+       - text: The rich text to set.
      */
     func setRichText(_ text: NSAttributedString) {
         attributedString = text
