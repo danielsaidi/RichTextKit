@@ -29,6 +29,22 @@ public class RichTextView: NSTextView, RichTextViewRepresentable {
      with a ``RichTextDataFormat`` that supports images.
      */
     public var imageConfiguration: RichTextImageConfiguration = .disabled
+
+
+    // MARK: - Overrides
+
+    /**
+     Try to perform a certain drag operation, which will get
+     and paste images from the drag info into the text.
+     */
+    public override func performDragOperation(_ draggingInfo: NSDraggingInfo) -> Bool {
+        let pasteboard = draggingInfo.draggingPasteboard
+        if let images = pasteboard.images, images.count > 0 {
+            pasteImages(images, at: selectedRange().location, moveCursorToPastedContent: true)
+            return true
+        }
+        return super.performDragOperation(draggingInfo)
+    }
 }
 
 
@@ -42,6 +58,10 @@ public extension RichTextView {
 
      We should later make all these configurations easier to
      customize.
+
+     - Parameters:
+       - text: The text to edit with the text view.
+       - format: The rich text format to edit.
      */
     func setup(
         with text: NSAttributedString,
@@ -51,8 +71,8 @@ public extension RichTextView {
         allowsImageEditing = true
         allowsUndo = true
         backgroundColor = .clear
-        // TODO: imageConfiguration = imageConfig ?? imageConfiguration
-        // TODO: layoutManager?.defaultAttachmentScaling = NSImageScaling.scaleProportionallyDown
+        imageConfiguration = standardImageConfiguration(for: format)
+        layoutManager?.defaultAttachmentScaling = NSImageScaling.scaleProportionallyDown
         textColor = .textColor
         setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         setupInitialFontSize(for: text)

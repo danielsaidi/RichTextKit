@@ -126,6 +126,34 @@ public extension RichTextViewRepresentable {
         let safeRange = safeRange(for: newRange)
         setSelectedRange(safeRange)
     }
+
+    /**
+     Get the image configuration to use for a certain format.
+
+     - Parameters:
+       - format: The format to get a configuration for.
+     */
+    func standardImageConfiguration(for format: RichTextDataFormat) -> RichTextImageConfiguration {
+        let insertConfig = standardImageInsertConfiguration(for: format)
+        return RichTextImageConfiguration(
+            pasteConfiguration: insertConfig,
+            dropConfiguration: insertConfig,
+            maxImageSize: (width: .frame, height: .frame))
+    }
+
+    /**
+     Get the image configuration to use for a certain format.
+
+     - Parameters:
+       - format: The format to get a configuration for.
+     */
+    func standardImageInsertConfiguration(for format: RichTextDataFormat) -> RichTextImageInsertConfiguration {
+        switch format {
+        case .archivedData: return .enabled
+        case .plainText: return .disabled
+        case .rtf: return .disabled
+        }
+    }
 }
 
 internal extension RichTextViewRepresentable {

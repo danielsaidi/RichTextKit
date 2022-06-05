@@ -20,9 +20,12 @@ struct ContentView: View {
 
     var body: some View {
         NavigationView {
-            content.navigationTitle("RichTextKit")
+            content
+                .navigationTitle("RichTextKit")
         }
-        .background(Color.gray.opacity(0.3))
+        #if os(iOS)
+        .navigationViewStyle(.stack)
+        #endif
     }
 }
 
@@ -37,6 +40,7 @@ private extension ContentView {
             RichTextEditor(text: $text, context: context) {
                 $0.textContentInset = CGSize(width: 10, height: 20)
             }
+            .background(Color.white)
             .cornerRadius(5)
             Divider()
             styleButtons
@@ -47,7 +51,9 @@ private extension ContentView {
             Button("Test") {
                 context.pasteText("foo bar", at: 2, moveCursorToPastedContent: true)
             }
-        }.background(Color.gray.opacity(0.3))
+        }
+        .padding()
+        .background(Color.gray.opacity(0.3))
     }
 }
 

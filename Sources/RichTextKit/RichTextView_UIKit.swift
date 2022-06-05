@@ -28,7 +28,56 @@ public class RichTextView: UITextView, RichTextViewRepresentable {
      setting the property manually or by setting up the view
      with a ``RichTextDataFormat`` that supports images.
      */
-    public var imageConfiguration: RichTextImageConfiguration = .disabled
+    public var imageConfiguration: RichTextImageConfiguration = .disabled {
+        didSet {
+            #if os(iOS)
+            refreshDropInteraction()
+            #endif
+        }
+    }
+
+    #if os(iOS)
+
+    /**
+     The image drop interaction to use when dropping images.
+     */
+    lazy var imageDropInteraction: UIDropInteraction = {
+        UIDropInteraction(delegate: self)
+    }()
+
+    #endif
+
+    /**
+     This keeps track of the first time a valid frame is set.
+     We should find another way to handle this.
+     */
+    private var isInitialFrameSetupNeeded = true
+
+    /**
+     This keeps track of the data format used by the view.
+     */
+    private var richTextDataFormat: RichTextDataFormat = .archivedData
+
+
+    // MARK: - Overrides
+
+    /**
+     Layout subviews and auto-resize images in the rich text.
+
+     I tried to only autosize image attachments here, but it
+     didn't work - they weren't resized. I then tried adding
+     font size adjustment, but that also didn't work. So now
+     we initialize this once, when the frame is first set.
+     */
+    public override var frame: CGRect {
+        didSet {
+            if frame.size == .zero { return }
+            if !isInitialFrameSetupNeeded { return }
+            isInitialFrameSetupNeeded = false
+            setup(with: attributedString, format: richTextDataFormat)
+        }
+    }
+
 }
 
 
@@ -51,8 +100,9 @@ public extension RichTextView {
         allowsEditingTextAttributes = false
         autocapitalizationType = .sentences
         backgroundColor = .clear
-        // TODO: imageConfiguration = imageConfig ?? imageConfiguration
-        // TODO: text.autosizeImageAttachments(maxSize: imageAttachmentMaxSize)
+        imageConfiguration = standardImageConfiguration(for: format)
+        text.autosizeImageAttachments(maxSize: imageAttachmentMaxSize)
+        richTextDataFormat = format
         spellCheckingType = .no
         textColor = .label
         setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
@@ -113,6 +163,19 @@ public extension RichTextView {
         #else
         print("Pasteboard is not available on this platform")
         #endif
+    }
+
+    /**
+     Get the text range at a certain point.
+
+     - Parameters:
+       - index: The text index to get the range from.
+     */
+    func range(at index: CGPoint) -> NSRange? {
+        guard let range = characterRange(at: index) else { return nil }
+        let location = offset(from: beginningOfDocument, to: range.start)
+        let length = offset(from: range.start, to: range.end)
+        return NSRange(location: location, length: length)
     }
 
     /**
