@@ -6,6 +6,7 @@
 //  Copyright © 2022 Daniel Saidi. All rights reserved.
 //
 
+import CoreGraphics
 import Foundation
 
 /**
@@ -50,6 +51,11 @@ public protocol RichTextViewRepresentable:
      The text view's mutable attributed string, if any.
      */
     var mutableAttributedString: NSMutableAttributedString? { get }
+
+    /**
+     The spacing between the text view's edge and its text.
+     */
+    var textContentInset: CGSize { get set }
 
     /**
      The text view current typing attributes.

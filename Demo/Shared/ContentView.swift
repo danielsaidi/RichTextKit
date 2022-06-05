@@ -22,7 +22,6 @@ struct ContentView: View {
         NavigationView {
             content.navigationTitle("RichTextKit")
         }
-        .padding()
         .background(Color.gray.opacity(0.3))
     }
 }
@@ -35,8 +34,10 @@ private extension ContentView {
         Text("MENU")
         #endif
         VStack {
-            RichTextEditor(text: $text, context: context)
-                .cornerRadius(5)
+            RichTextEditor(text: $text, context: context) {
+                $0.textContentInset = CGSize(width: 10, height: 20)
+            }
+            .cornerRadius(5)
             Divider()
             styleButtons
             alignmentPicker

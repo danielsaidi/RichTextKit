@@ -22,7 +22,7 @@ public class RichTextView: UITextView, RichTextViewRepresentable {
 }
 
 
-// MARK: - Public Functions
+// MARK: - Setup
 
 public extension RichTextView {
 
@@ -47,6 +47,34 @@ public extension RichTextView {
         textColor = .label
         setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         setupInitialFontSize(for: text)
+    }
+}
+
+
+// MARK: - Public Functions
+
+public extension RichTextView {
+
+    /**
+     The spacing between the text view's edge and its text.
+
+     The reason why this only supports setting a `CGSize` is
+     that AppKit only supports a `CGSize`. You can still use
+     the `textContainerInset` of the underlying `UITextView`
+     if you want more control.
+     */
+    var textContentInset: CGSize {
+        get {
+            CGSize(
+                width: textContainerInset.left,
+                height: textContainerInset.top)
+        } set {
+            textContainerInset = UIEdgeInsets(
+                top: newValue.height,
+                left: newValue.width,
+                bottom: newValue.height,
+                right: newValue.width)
+        }
     }
 }
 

@@ -22,7 +22,7 @@ public class RichTextView: NSTextView, RichTextViewRepresentable {
 }
 
 
-// MARK: - Public Functions
+// MARK: - Setup
 
 public extension RichTextView {
 
@@ -46,6 +46,23 @@ public extension RichTextView {
         textColor = .textColor
         setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         setupInitialFontSize(for: text)
+    }
+}
+
+
+// MARK: - Public Functions
+
+public extension RichTextView {
+
+    /**
+     The spacing between the text view's edge and its text.
+
+     This is an alias for `textContainerInset`, to make sure
+     that the text view has a platform-agnostic API.
+     */
+    var textContentInset: CGSize {
+        get { textContainerInset }
+        set { textContainerInset = newValue }
     }
 }
 

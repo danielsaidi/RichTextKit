@@ -19,21 +19,7 @@ import SwiftUI
  so that you only have to use the context to observe changes
  and trigger changes in the editor.
  */
-public struct RichTextEditor:
-    ViewRepresentable,
-    RichTextPresenter,
-    // RichTextAttributeReader,
-    // RichTextAttributeWriter,
-    RichTextAlignmentReader,
-    RichTextAlignmentWriter,
-    RichTextColorReader,
-    RichTextColorWriter,
-    RichTextDataReader,
-    RichTextDataWriter,
-    // RichTextFontReader,
-    // RichTextFontWriter,
-    // RichTextStyleReader,
-    RichTextStyleWriter
+public struct RichTextEditor: ViewRepresentable
 {
 
     /**
