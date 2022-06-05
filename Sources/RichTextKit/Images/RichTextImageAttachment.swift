@@ -66,9 +66,11 @@ public class RichTextImageAttachment: NSTextAttachment {
      no image compression.
 
      - Parameters:
-       - image: The image to use in the attachment.
+       - image: The image to add to the attachment.
      */
-    public convenience init(jpegImage image: ImageRepresentable) {
+    public convenience init(
+        jpegImage image: ImageRepresentable
+    ) {
         self.init(jpegImage: image, compressionQuality: 1.0)
     }
 
@@ -77,24 +79,72 @@ public class RichTextImageAttachment: NSTextAttachment {
      a custom compression rate.
 
      - Parameters:
-       - image: The image to use in the attachment.
+       - image: The image to add to the attachment.
        - compressionQuality: The percentage rate to apply, by default `0.7`.
      */
-    public init(
+    public convenience init(
         jpegImage image: ImageRepresentable,
         compressionQuality: CGFloat = 0.7
     ) {
-        let image = image.jpegData(compressionQuality: compressionQuality)
-        super.init(data: image, ofType: UTType.jpeg.identifier)
-        contents = image
+        let data = image.jpegData(compressionQuality: compressionQuality)
+        self.init(jpegData: data)
+        contents = data
+    }
+
+    /**
+     Create a custom image attachment with PNG data.
+
+     Note that using PNG data may result in large file sizes.
+     */
+    public convenience init(
+        jpegData data: Data?
+    ) {
+        self.init(data: data, ofType: UTType.jpeg.identifier)
+    }
+
+    /**
+     Create a custom image attachment with PNG data.
+
+     Note that using PNG data may result in large file sizes.
+     */
+    public convenience init(
+        pngData data: Data?
+    ) {
+        self.init(data: data, ofType: UTType.png.identifier)
+    }
+
+    /**
+     Create a custom image attachment using plain image data
+     and a custom uniform type.
+
+     - Parameters:
+       - data: The data to add to the attachment.
+       - type: The uniform type to use, e.g. `UTType.jpeg`.
+     */
+    public convenience init(
+        data contentData: Data?,
+        ofType type: UTType
+    ) {
+        self.init(data: contentData, ofType: type.identifier)
+    }
+
+    /**
+     Create a custom image attachment using plain image data
+     and a custom uniform type.
+
+     - Parameters:
+       - data: The data to add to the attachment.
+       - uti: The uniform type identifier, e.g. `UTType.jpeg.identifier`
+     */
+    public override init(
+        data contentData: Data?,
+        ofType uti: String?
+    ) {
+        super.init(data: contentData, ofType: uti)
     }
 
     public required init?(coder: NSCoder) {
         super.init(coder: coder)
-    }
-    
-    public override init(data contentData: Data?, ofType uti: String?) {
-        super.init(data: contentData, ofType: uti)
     }
 
 

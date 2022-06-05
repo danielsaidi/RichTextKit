@@ -19,6 +19,16 @@ public class RichTextView: NSTextView, RichTextViewRepresentable {
      The style to use when highlighting text in the view.
      */
     public var highlightingStyle: RichTextHighlightingStyle = .standard
+
+    /**
+     The image configuration to use by the rich text view.
+
+     The view uses the ``RichTextImageConfiguration/disabled``
+     configuration by default. You can change this by either
+     setting the property manually or by setting up the view
+     with a ``RichTextDataFormat`` that supports images.
+     */
+    public var imageConfiguration: RichTextImageConfiguration = .disabled
 }
 
 

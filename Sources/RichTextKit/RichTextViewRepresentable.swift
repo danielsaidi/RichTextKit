@@ -43,6 +43,11 @@ public protocol RichTextViewRepresentable:
     var highlightingStyle: RichTextHighlightingStyle { get set }
 
     /**
+     The image configuration used by the rich text view.
+     */
+    var imageConfiguration: RichTextImageConfiguration { get set }
+
+    /**
      Whether or not the text view is the first responder.
      */
     var isFirstResponder: Bool { get }
