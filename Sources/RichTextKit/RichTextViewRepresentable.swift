@@ -33,6 +33,7 @@ public protocol RichTextViewRepresentable:
     RichTextDataWriter,
     // RichTextFontReader,
     // RichTextFontWriter,
+    RichTextImageAttachmentManager,
     // RichTextStyleReader,
     RichTextStyleWriter
 {

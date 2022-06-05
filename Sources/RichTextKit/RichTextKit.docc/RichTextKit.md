@@ -127,6 +127,7 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 
 - ``ImageRepresentable``
 - ``RichTextImageAttachment``
+- ``RichTextImageAttachmentManager``
 - ``RichTextImageAttachmentSize``
 - ``RichTextImageConfiguration``
 - ``RichTextImageInsertConfiguration``

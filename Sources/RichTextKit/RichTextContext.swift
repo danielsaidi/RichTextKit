@@ -15,6 +15,11 @@ import SwiftUI
  SwiftUI can observe the published properties to keep the UI
  of an app in sync, while a coordinator can subscribe to any
  property to keep a wrapped text view in sync.
+
+ This context also defines some functions that just set some
+ context state, that should then be handled by a coordinator.
+ If you use the context without a coordinator, the functions
+ will not do anything unless you observe the state yourself.
  */
 public class RichTextContext: ObservableObject {
 
