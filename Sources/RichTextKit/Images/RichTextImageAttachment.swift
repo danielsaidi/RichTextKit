@@ -1,5 +1,5 @@
 //
-//  ImageAttachment.swift
+//  RichTextImageAttachment.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-06-05.
@@ -48,8 +48,8 @@ import UniformTypeIdentifiers
  into the archive data exist when the data is unarchived. If
  any type is missing, this unarchiving will fail. This means
  that if you later decide to use another library to handle a
- file that contains an ``ImageAttachment``, you must setup a
- custom class for the unarchiver, for instance:
+ file that contains an ``RichTextImageAttachment``, you must
+ setup a custom class in the unarchiver, for instance:
 
  ```
  let unarchiver = NSKeyedUnarchiver()
@@ -59,7 +59,7 @@ import UniformTypeIdentifiers
  You'll see the name of the missing class in the unarchiving
  error, so just pop that name in as the class name.
  */
-public class ImageAttachment: NSTextAttachment {
+public class RichTextImageAttachment: NSTextAttachment {
 
     /**
      Create a custom image attachment with an JPEG image and

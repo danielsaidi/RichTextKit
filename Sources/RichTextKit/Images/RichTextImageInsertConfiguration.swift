@@ -1,5 +1,5 @@
 //
-//  ImageInsertConfiguration.swift
+//  RichTextImageInsertConfiguration.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-06-02.
@@ -16,7 +16,7 @@ import Foundation
  don't support images, and a rich text view doesn't know the
  format of the string that it contains.
  */
-public enum ImageInsertConfiguration: Equatable {
+public enum RichTextImageInsertConfiguration: Equatable {
     
     /// Image inserting is disabled
     case disabled

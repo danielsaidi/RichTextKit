@@ -1,5 +1,5 @@
 //
-//  ImageAttachmentSize.swift
+//  RichTextImageAttachmentSize.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-06-02.
@@ -12,7 +12,7 @@ import CoreGraphics
  This enum defines various ways to size images when they are
  used in a rich text.
  */
-public enum ImageAttachmentSize {
+public enum RichTextImageAttachmentSize {
     
     /// This size aims to make image fit the frame.
     case frame
@@ -21,7 +21,7 @@ public enum ImageAttachmentSize {
     case points(CGFloat)
 }
 
-public extension ImageAttachmentSize {
+public extension RichTextImageAttachmentSize {
     
     /**
      The image's resulting height in a certain frame.

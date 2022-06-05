@@ -27,9 +27,9 @@ public struct RichTextImageConfiguration {
        - maxImageSize: The max size to limit images in the text view to.
      */
     public init(
-        pasteConfiguration: ImageInsertConfiguration,
-        dropConfiguration: ImageInsertConfiguration,
-        maxImageSize: (width: ImageAttachmentSize, height: ImageAttachmentSize)) {
+        pasteConfiguration: RichTextImageInsertConfiguration,
+        dropConfiguration: RichTextImageInsertConfiguration,
+        maxImageSize: (width: RichTextImageAttachmentSize, height: RichTextImageAttachmentSize)) {
         self.pasteConfiguration = pasteConfiguration
         self.dropConfiguration = dropConfiguration
         self.maxImageSize = maxImageSize
@@ -39,17 +39,17 @@ public struct RichTextImageConfiguration {
     /**
      The image configuration to use when dropping images.
      */
-    public var dropConfiguration: ImageInsertConfiguration
+    public var dropConfiguration: RichTextImageInsertConfiguration
     
     /**
      The max size to limit images in the text view to.
      */
-    public var maxImageSize: (width: ImageAttachmentSize, height: ImageAttachmentSize)
+    public var maxImageSize: (width: RichTextImageAttachmentSize, height: RichTextImageAttachmentSize)
     
     /**
      The image configuration to use when pasting images.
      */
-    public var pasteConfiguration: ImageInsertConfiguration
+    public var pasteConfiguration: RichTextImageInsertConfiguration
 }
 
 public extension RichTextImageConfiguration {

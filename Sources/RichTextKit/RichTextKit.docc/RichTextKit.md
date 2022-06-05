@@ -125,11 +125,11 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 
 ### Images
 
-- ``ImageAttachment``
-- ``ImageAttachmentSize``
-- ``ImageInsertConfiguration``
 - ``ImageRepresentable``
+- ``RichTextImageAttachment``
+- ``RichTextImageAttachmentSize``
 - ``RichTextImageConfiguration``
+- ``RichTextImageInsertConfiguration``
 
 ### Pasteboard
 
