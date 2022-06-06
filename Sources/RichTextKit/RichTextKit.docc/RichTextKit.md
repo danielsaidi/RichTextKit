@@ -7,13 +7,7 @@ RichTextKit is a Swift-based library that lets you work with rich text in UIKit,
 
 ![SwiftKit logo](Logo.png)
 
-RichTextKit is under active development. Currently missing parts will be added over the next couple of weeks, which included:
-
-* Image support
-* Pasting images
-* Dragging in images
-* Highlighting
-* Document-app support
+RIchTextKit supports changing styles (bold, italic, underline), font, font sizes, colors, alignment etc. You can also drag and copy in images if you use a data format that allows it. 
 
 RichTextKit is supported by and released with permission from [Oribi](https://oribi.se/en/) and used in [OribiWriter](https://oribi.se/en/apps/oribi-writer/), which is out on iOS and soon on macOS.
 
