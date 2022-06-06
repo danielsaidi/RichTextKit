@@ -78,6 +78,7 @@ public class RichTextView: UITextView, RichTextViewRepresentable {
         }
     }
 
+    #if os(iOS)
     /**
      Check whether or not a certain action can be performed.
      */
@@ -103,6 +104,7 @@ public class RichTextView: UITextView, RichTextViewRepresentable {
         }
         super.paste(sender)
     }
+    #endif
 }
 
 
