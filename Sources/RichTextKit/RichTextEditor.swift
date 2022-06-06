@@ -19,8 +19,7 @@ import SwiftUI
  so that you only have to use the context to observe changes
  and trigger changes in the editor.
  */
-public struct RichTextEditor: ViewRepresentable
-{
+public struct RichTextEditor: ViewRepresentable {
 
     /**
      Create a rich text editor with a certain text that uses
@@ -43,7 +42,7 @@ public struct RichTextEditor: ViewRepresentable
         self.viewConfiguration = viewConfiguration
     }
 
-    public typealias ViewConfiguration = (RichTextViewRepresentable) -> ()
+    public typealias ViewConfiguration = (RichTextViewRepresentable) -> Void
 
 
     private var format: RichTextDataFormat

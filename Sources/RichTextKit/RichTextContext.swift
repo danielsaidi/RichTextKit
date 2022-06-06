@@ -68,7 +68,7 @@ public class RichTextContext: ObservableObject {
      The current background color, if any.
      */
     @Published
-    public var backgroundColor: ColorRepresentable? = nil
+    public var backgroundColor: ColorRepresentable?
 
     /**
      Whether or not the current rich text can be copied.
@@ -104,7 +104,7 @@ public class RichTextContext: ObservableObject {
      The current foreground color, if any.
      */
     @Published
-    public var foregroundColor: ColorRepresentable? = nil
+    public var foregroundColor: ColorRepresentable?
 
     /**
      A custom binding that can be used to set the foreground

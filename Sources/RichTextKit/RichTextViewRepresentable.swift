@@ -20,8 +20,7 @@ import Foundation
  protocols often implement eachother. To show every protocol,
  some are commented out in the list below.
  */
-public protocol RichTextViewRepresentable:
-    AnyObject,
+public protocol RichTextViewRepresentable: AnyObject,
     RichTextPresenter,
     // RichTextAttributeReader,
     // RichTextAttributeWriter,
@@ -35,8 +34,8 @@ public protocol RichTextViewRepresentable:
     // RichTextFontWriter,
     RichTextImageAttachmentManager,
     // RichTextStyleReader,
-    RichTextStyleWriter
-{
+    RichTextStyleWriter {
+        
     /**
      The text view's frame.
      */
