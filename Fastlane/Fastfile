@@ -26,7 +26,7 @@ platform :ios do
   desc "Create a new version"
   lane :version do |options|
     ensure_git_status_clean
-    ensure_git_branch(branch: 'master')
+    ensure_git_branch(branch: 'main')
     
     lint
     test
