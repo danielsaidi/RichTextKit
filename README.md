@@ -46,7 +46,7 @@ pod RichTextKit
 
 ## Getting started
 
-To get started with RichTextKit, have a look at [this getting started guide][GettingStarted].
+The [online documentation][Documentation] has a guide to get started with RichTextKit.
 
 
 
@@ -90,5 +90,4 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 [Sponsors]: https://github.com/sponsors/danielsaidi
 
 [Documentation]: https://danielsaidi.github.io/RichTextKit/documentation/richtextkit/
-[GettingStarted]: https://github.com/danielsaidi/RichTextKit/blob/master/Readmes/Getting-Started.md
 [License]: https://github.com/danielsaidi/RichTextKit/blob/master/LICENSE
