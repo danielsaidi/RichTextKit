@@ -6,6 +6,15 @@ Until then, features may be deprecated in a minor version and removed in the nex
 
 
 
+## 0.1.1
+
+This is a small bugfix release.
+
+### 🐛 Bugs
+
+* `RichTextAlignmentWriter` now uses safe ranges to avoid occasional crashes.
+
+
 ## 0.1
 
 This is the first beta release of RichTextKit.
