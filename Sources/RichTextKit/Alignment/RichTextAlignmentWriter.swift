@@ -126,8 +126,8 @@ private extension RichTextAlignmentWriter {
         style.alignment = alignment.nativeAlignment
         attributes[.paragraphStyle] = style
         text.beginEditing()
-        text.setAttributes(attributes, range: range)
-        text.fixAttributes(in: range)
+        text.setAttributes(attributes, range: safeRange)
+        text.fixAttributes(in: safeRange)
         text.endEditing()
     }
 
