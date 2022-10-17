@@ -28,6 +28,8 @@ extension RichTextCoordinator {
         subscribeToSelectedRange()
         subscribeToShouldCopySelection()
         subscribeToShouldPasteText()
+        subscribeToShouldPasteImage()
+        subscribeToShouldPasteImages()
         subscribeToShouldRedoLatestChange()
         subscribeToShouldUndoLatestChange()
     }
