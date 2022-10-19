@@ -137,9 +137,10 @@ public extension RichTextView {
         
         let bar = UIToolbar()
         let done = UIBarButtonItem(systemItem: .done)
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         done.style = .done
         done.action = #selector(dismissKeyboard)
-        bar.items = [done]
+        bar.items = [flexibleSpace, done]
         bar.sizeToFit()
         self.inputAccessoryView = bar
     }
