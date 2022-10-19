@@ -134,7 +134,20 @@ public extension RichTextView {
         textColor = .label
         setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         setupInitialFontSize(for: text)
+        
+        let bar = UIToolbar()
+        let done = UIBarButtonItem(systemItem: .done)
+        done.style = .done
+        done.action = #selector(dismissKeyboard)
+        bar.items = [done]
+        bar.sizeToFit()
+        self.inputAccessoryView = bar
     }
+    
+    @objc func dismissKeyboard() {
+        self.endEditing(true)
+    }
+    
 }
 
 
