@@ -8,6 +8,10 @@
 
 import SwiftUI
 
+protocol RichTextContextDelegate: AnyObject {
+    func updateText()
+}
+
 /**
  This context can be used to observe state for any rich text
  view, as well as other editor-specific properties.
@@ -38,6 +42,8 @@ public class RichTextContext: ObservableObject {
 
     // MARK: - Properties
 
+    weak var delegate: RichTextContextDelegate?
+    
     /**
      A custom binding that can be used to set the background
      color with e.g. a SwitUI `ColorPicker`.
@@ -202,6 +208,10 @@ public extension RichTextContext {
 
 public extension RichTextContext {
 
+    func shouldUpdateTextField() {
+        delegate?.updateText()
+    }
+    
     /**
      Copy the current selection to the pasteboard.
 

@@ -45,6 +45,7 @@ open class RichTextCoordinator: NSObject {
         super.init()
         self.textView.delegate = self
         subscribeToContextChanges()
+        context.delegate = self
     }
 
 
@@ -212,3 +213,9 @@ extension RichTextCoordinator {
     }
 }
 #endif
+
+extension RichTextCoordinator: RichTextContextDelegate {
+    func updateText() {
+        textView.attributedString = text.wrappedValue
+    }
+}
