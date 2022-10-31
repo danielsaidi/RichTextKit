@@ -54,7 +54,6 @@ extension DemoToolbar {
                 context.decrementFontSize()
             }
             FontSizePicker(selection: size)
-                .frame(maxWidth: 50)
                 .labelsHidden()
             button(icon: .plus) {
                 context.incrementFontSize()

@@ -17,10 +17,8 @@ struct EditorTopToolbar: View, DemoToolbar {
     var body: some View {
         HStack {
             fontPicker(for: $context.fontName)
-            divider
+            Spacer()
             sizeTools(for: $context.fontSize)
-            divider
-            styleButtons
         }
     }
 }
