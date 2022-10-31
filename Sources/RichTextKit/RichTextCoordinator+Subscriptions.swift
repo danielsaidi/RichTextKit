@@ -27,6 +27,8 @@ extension RichTextCoordinator {
         subscribeToIsUnderlined()
         subscribeToSelectedRange()
         subscribeToShouldCopySelection()
+        subscribeToShouldPasteImage()
+        subscribeToShouldPasteImages()
         subscribeToShouldPasteText()
         subscribeToShouldRedoLatestChange()
         subscribeToShouldUndoLatestChange()
