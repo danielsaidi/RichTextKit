@@ -6,6 +6,16 @@ Until then, features may be deprecated in a minor version and removed in the nex
 
 
 
+## 0.1.2
+
+This is a small bugfix release.
+
+### 🐛 Bugs
+
+* `RichTextCoordinator` now subscribes to image pasting.
+
+
+
 ## 0.1.1
 
 This is a small bugfix release.
@@ -13,6 +23,7 @@ This is a small bugfix release.
 ### 🐛 Bugs
 
 * `RichTextAlignmentWriter` now uses safe ranges to avoid occasional crashes.
+
 
 
 ## 0.1
