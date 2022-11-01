@@ -163,19 +163,21 @@ extension RichTextCoordinator {
      */
     func syncContextWithTextView() {
         let styles = textView.currentRichTextStyles
-        context.alignment = textView.currentRichTextAlignment ?? .left
-        context.backgroundColor = textView.currentBackgroundColor
-        context.canCopy = textView.hasSelectedRange
-        context.canRedoLatestChange = textView.undoManager?.canRedo ?? false
-        context.canUndoLatestChange = textView.undoManager?.canUndo ?? false
-        context.fontName = textView.currentFontName ?? ""
-        context.fontSize = textView.currentFontSize ?? .standardRichTextFontSize
-        context.foregroundColor = textView.currentForegroundColor
-        context.isBold = styles.hasStyle(.bold)
-        context.isItalic = styles.hasStyle(.italic)
-        context.isUnderlined = styles.hasStyle(.underlined)
-        context.isEditingText = textView.isFirstResponder
-        context.selectedRange = textView.selectedRange
+        DispatchQueue.main.async {
+            context.alignment = textView.currentRichTextAlignment ?? .left
+            context.backgroundColor = textView.currentBackgroundColor
+            context.canCopy = textView.hasSelectedRange
+            context.canRedoLatestChange = textView.undoManager?.canRedo ?? false
+            context.canUndoLatestChange = textView.undoManager?.canUndo ?? false
+            context.fontName = textView.currentFontName ?? ""
+            context.fontSize = textView.currentFontSize ?? .standardRichTextFontSize
+            context.foregroundColor = textView.currentForegroundColor
+            context.isBold = styles.hasStyle(.bold)
+            context.isItalic = styles.hasStyle(.italic)
+            context.isUnderlined = styles.hasStyle(.underlined)
+            context.isEditingText = textView.isFirstResponder
+            context.selectedRange = textView.selectedRange
+        }
         updateTextViewAttributesIfNeeded()
     }
 
