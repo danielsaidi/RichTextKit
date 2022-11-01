@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'RichTextKit'
-  s.version          = '0.1.1'
+  s.version          = '0.1.2'
   s.swift_versions   = ['5.6']
   s.summary          = 'RichTextKit is a Swift-based library for working with rich text in UIKit, AppKit and SwiftUI.'
   s.description      = 'RichTextKit is a Swift-based library for working with rich text in UIKit, AppKit and SwiftUI. It adds extensions to native types, new views and a great SwiftUI integrations.'
