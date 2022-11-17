@@ -70,7 +70,7 @@
                 if frame.size == .zero { return }
                 if !isInitialFrameSetupNeeded { return }
                 isInitialFrameSetupNeeded = false
-                setup(with: attributedString, format: richTextDataFormat)
+                // setup(with: attributedString, format: richTextDataFormat)
             }
         }
 
