@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84C211F329269BBA00D322DF /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 84C211F229269BBA00D322DF /* SnapKit */; };
+		84C211F629269BE900D322DF /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 84C211F529269BE900D322DF /* SwiftUIX */; };
 		A978467F284D560B00DF0CEA /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A978467D284D560B00DF0CEA /* MainMenu.swift */; };
 		A9784682284D565E00DF0CEA /* Image+Demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9784681284D565E00DF0CEA /* Image+Demo.swift */; };
 		A9784683284D565E00DF0CEA /* Image+Demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9784681284D565E00DF0CEA /* Image+Demo.swift */; };
@@ -66,7 +68,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84C211F629269BE900D322DF /* SwiftUIX in Frameworks */,
 				A9E50323283A245D00BA5101 /* RichTextKit in Frameworks */,
+				84C211F329269BBA00D322DF /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -183,6 +187,8 @@
 			name = "Demo (iOS)";
 			packageProductDependencies = (
 				A9E50322283A245D00BA5101 /* RichTextKit */,
+				84C211F229269BBA00D322DF /* SnapKit */,
+				84C211F529269BE900D322DF /* SwiftUIX */,
 			);
 			productName = "Demo (iOS)";
 			productReference = A9E50308283A23EE00BA5101 /* Demo.app */;
@@ -236,6 +242,10 @@
 				Base,
 			);
 			mainGroup = A9E502FB283A23ED00BA5101;
+			packageReferences = (
+				84C211F129269BBA00D322DF /* XCRemoteSwiftPackageReference "SnapKit" */,
+				84C211F429269BE900D322DF /* XCRemoteSwiftPackageReference "SwiftUIX" */,
+			);
 			productRefGroup = A9E50309283A23EE00BA5101 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -564,7 +574,36 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		84C211F129269BBA00D322DF /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = exactVersion;
+				version = 5.6.0;
+			};
+		};
+		84C211F429269BE900D322DF /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftUIX/SwiftUIX";
+			requirement = {
+				kind = exactVersion;
+				version = 0.1.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
+		84C211F229269BBA00D322DF /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 84C211F129269BBA00D322DF /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		84C211F529269BE900D322DF /* SwiftUIX */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 84C211F429269BE900D322DF /* XCRemoteSwiftPackageReference "SwiftUIX" */;
+			productName = SwiftUIX;
+		};
 		A9E50322283A245D00BA5101 /* RichTextKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = RichTextKit;
