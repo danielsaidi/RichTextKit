@@ -22,7 +22,6 @@ import SwiftUI
  will not do anything unless you observe the state yourself.
  */
 public class RichTextContext: ObservableObject {
-
     /**
      Create a new rich text context.
 
@@ -32,9 +31,8 @@ public class RichTextContext: ObservableObject {
     public init(
         standardFontSize: CGFloat = .standardRichTextFontSize
     ) {
-        self.fontSize = standardFontSize
+        fontSize = standardFontSize
     }
-
 
     // MARK: - Properties
 
@@ -45,7 +43,7 @@ public class RichTextContext: ObservableObject {
     public var backgroundColorBinding: Binding<Color> {
         Binding(
             get: { Color(self.backgroundColor ?? .clear) },
-            set: { self.backgroundColor = ColorRepresentable($0)}
+            set: { self.backgroundColor = ColorRepresentable($0) }
         )
     }
 
@@ -55,8 +53,10 @@ public class RichTextContext: ObservableObject {
      */
     public var standardHighlightingStyle = RichTextHighlightingStyle.standard
 
-
     // MARK: - Published Properties
+
+    @Published public var inputAccessoryView: UIView?
+    @Published public var inputView: UIView?
 
     /**
      The current text alignment, if any.
@@ -113,7 +113,7 @@ public class RichTextContext: ObservableObject {
     public var foregroundColorBinding: Binding<Color> {
         Binding(
             get: { Color(self.foregroundColor ?? .clear) },
-            set: { self.foregroundColor = ColorRepresentable($0)}
+            set: { self.foregroundColor = ColorRepresentable($0) }
         )
     }
 
@@ -191,7 +191,6 @@ public class RichTextContext: ObservableObject {
 }
 
 public extension RichTextContext {
-
     /**
      Whether or not the context has a selected range.
      */
@@ -201,7 +200,6 @@ public extension RichTextContext {
 }
 
 public extension RichTextContext {
-
     /**
      Copy the current selection to the pasteboard.
 
