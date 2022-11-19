@@ -44,6 +44,7 @@
             self.context = context
             super.init()
             self.textView.delegate = self
+            textView.textStorage.delegate = self
             subscribeToContextChanges()
         }
 
@@ -111,6 +112,7 @@
                     self?.context.isEditingText = false
                 }
             }
+
         #endif
 
         #if canImport(AppKit)
@@ -139,6 +141,16 @@
         import UIKit
 
         extension RichTextCoordinator: UITextViewDelegate {}
+        extension RichTextCoordinator: NSTextStorageDelegate {
+            public func textStorage(
+                _: NSTextStorage,
+                didProcessEditing _: NSTextStorage.EditActions,
+                range _: NSRange,
+                changeInLength _: Int
+            ) {
+                syncWithTextView()
+            }
+        }
 
     #elseif os(macOS)
         import AppKit
