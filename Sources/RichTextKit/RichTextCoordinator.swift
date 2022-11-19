@@ -93,7 +93,9 @@
             // MARK: - UITextViewDelegate
 
             open func textViewDidBeginEditing(_: UITextView) {
-                context.isEditingText = true
+                DispatchQueue.main.async { [weak self] in
+                    self?.context.isEditingText = true
+                }
             }
 
             open func textViewDidChange(_: UITextView) {
@@ -105,7 +107,9 @@
             }
 
             open func textViewDidEndEditing(_: UITextView) {
-                context.isEditingText = false
+                DispatchQueue.main.async { [weak self] in
+                    self?.context.isEditingText = false
+                }
             }
         #endif
 
