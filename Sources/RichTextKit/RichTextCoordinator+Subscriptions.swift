@@ -60,7 +60,9 @@
         }
 
         func subscribeToAlignment() {
-            context.$alignment
+            context
+                .$alignment
+                .dropFirst()
                 .sink(
                     receiveCompletion: { _ in },
                     receiveValue: { [weak self] in self?.setAlignment(to: $0) }
