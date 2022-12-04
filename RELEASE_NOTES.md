@@ -6,6 +6,15 @@ Until then, features may be deprecated in a minor version and removed in the nex
 
 
 
+## 0.2
+
+### ✨ New Features
+
+* String extensions have been made public.
+* `RichTextDataFormat` has a new vendor-specific data format.
+
+
+
 ## 0.1.2
 
 This is a small bugfix release.

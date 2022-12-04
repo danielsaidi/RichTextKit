@@ -36,6 +36,7 @@ public extension RichTextDataReader {
         case .archivedData: return try NSAttributedString(archivedData: data)
         case .plainText: return try NSAttributedString(plainTextData: data)
         case .rtf: return try NSAttributedString(rtfData: data)
+        case .vendorArchivedData: return try NSAttributedString(archivedData: data)
         }
     }
 }
@@ -57,6 +58,7 @@ public extension NSAttributedString {
         case .archivedData: try self.init(archivedData: data)
         case .plainText: try self.init(plainTextData: data)
         case .rtf: try self.init(rtfData: data)
+        case .vendorArchivedData: try self.init(archivedData: data)
         }
     }
 

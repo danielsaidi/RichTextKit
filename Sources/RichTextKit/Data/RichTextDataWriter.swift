@@ -33,6 +33,7 @@ public extension RichTextDataWriter {
         case .archivedData: return try richTextArchivedData()
         case .plainText: return try richTextPlainTextData()
         case .rtf: return try richTextRtfData()
+        case .vendorArchivedData: return try richTextArchivedData()
         }
     }
 

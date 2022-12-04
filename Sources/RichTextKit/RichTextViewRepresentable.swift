@@ -165,6 +165,7 @@ public extension RichTextViewRepresentable {
         case .archivedData: return .enabled
         case .plainText: return .disabled
         case .rtf: return .disabled
+        case .vendorArchivedData: return .enabled
         }
     }
 }

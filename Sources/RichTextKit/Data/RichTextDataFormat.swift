@@ -30,7 +30,7 @@ import UniformTypeIdentifiers
  certain kind of rich text data, that can only be handled by
  these archiver classes. It's convenient, but more limited.
  */
-public enum RichTextDataFormat: String, CaseIterable, Equatable, Identifiable {
+public enum RichTextDataFormat: Equatable, Identifiable {
     
     /// Archived data that's persisted with a keyed archiver.
     case archivedData
@@ -40,6 +40,9 @@ public enum RichTextDataFormat: String, CaseIterable, Equatable, Identifiable {
     
     /// RTF data is persisted as formatted text.
     case rtf
+
+    /// A vendor-specific archived data format.
+    case vendorArchivedData(id: String, fileExtension: String, uniformType: UTType)
 }
 
 public extension RichTextDataFormat {
@@ -47,7 +50,14 @@ public extension RichTextDataFormat {
     /**
      The format's unique identifier.
      */
-    var id: String { rawValue }
+    var id: String {
+        switch self {
+        case .archivedData: return "archivedData"
+        case .plainText: return "plainText"
+        case .rtf: return "rtf"
+        case .vendorArchivedData(let id, _, _): return id
+        }
+    }
     
     /**
      The formats that a format can be converted to.
@@ -57,6 +67,7 @@ public extension RichTextDataFormat {
         case .archivedData: return [.rtf, .plainText]
         case .plainText: return [.archivedData, .rtf]
         case .rtf: return [.archivedData, .plainText]
+        case .vendorArchivedData: return [.rtf, .plainText]
         }
     }
     
@@ -68,6 +79,7 @@ public extension RichTextDataFormat {
         case .archivedData: return "rtk"
         case .plainText: return "txt"
         case .rtf: return "rtf"
+        case .vendorArchivedData(_, let fileExtension, _): return fileExtension
         }
     }
     
@@ -81,6 +93,7 @@ public extension RichTextDataFormat {
         case .archivedData: return true
         case .plainText: return false
         case .rtf: return false
+        case .vendorArchivedData: return true
         }
     }
     
@@ -92,6 +105,7 @@ public extension RichTextDataFormat {
         case .archivedData: return .archivedData
         case .plainText: return .plainText
         case .rtf: return .rtf
+        case .vendorArchivedData(_, _, let type): return type
         }
     }
 }
