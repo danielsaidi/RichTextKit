@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension NSAttributedString {
+public extension NSAttributedString {
  
     /**
      Create an empty attributed string.

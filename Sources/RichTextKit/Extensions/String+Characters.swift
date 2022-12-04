@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension String.Element {
+public extension String.Element {
 
     /**
      Get the string element for a `\r` carriage return.
@@ -26,7 +26,7 @@ extension String.Element {
     static var tab: String.Element { "\t" }
 }
 
-extension String {
+public extension String {
     
     /**
      Get the string for a `\r` carriage return.

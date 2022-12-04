@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension String {
+public extension String {
     
     /**
      Backs to find the index of the first new line paragraph

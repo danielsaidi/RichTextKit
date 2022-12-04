@@ -14,7 +14,7 @@ import Foundation
  
  https://stackoverflow.com/questions/24092884/get-nth-character-of-a-string-in-swift-programming-language
  */
-extension StringProtocol {
+public extension StringProtocol {
     
     func character(at index: Int) -> String.Element? {
         if index < 0 { return nil }
