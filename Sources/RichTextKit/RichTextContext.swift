@@ -64,6 +64,9 @@ public class RichTextContext: ObservableObject {
     @Published
     public var alignment: RichTextAlignment = .left
 
+    @Published
+    public var link: URL?
+
     /**
      The current background color, if any.
      */

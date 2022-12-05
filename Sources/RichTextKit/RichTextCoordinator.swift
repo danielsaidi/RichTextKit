@@ -176,6 +176,7 @@ extension RichTextCoordinator {
         context.isUnderlined = styles.hasStyle(.underlined)
         context.isEditingText = textView.isFirstResponder
         context.selectedRange = textView.selectedRange
+        context.link = textView.currentLink
         updateTextViewAttributesIfNeeded()
     }
 

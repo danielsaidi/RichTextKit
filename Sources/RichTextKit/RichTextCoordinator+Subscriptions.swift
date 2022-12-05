@@ -22,6 +22,7 @@ extension RichTextCoordinator {
         subscribeToForegroundColor()
         subscribeToHighlightedRange()
         subscribeToIsBold()
+        subscribeToLink()
         subscribeToIsEditingText()
         subscribeToIsItalic()
         subscribeToIsUnderlined()
@@ -90,6 +91,14 @@ private extension RichTextCoordinator {
             .sink(
                 receiveCompletion: { _ in },
                 receiveValue: { [weak self] in self?.setStyle(.bold, to: $0) })
+            .store(in: &cancellables)
+    }
+
+    func subscribeToLink() {
+        context.$link
+            .sink(
+                receiveCompletion: { _ in },
+                receiveValue: { [weak self] in self?.setLink(to: $0) })
             .store(in: &cancellables)
     }
 
@@ -277,6 +286,14 @@ internal extension RichTextCoordinator {
     func setSelectedRange(to range: NSRange) {
         if range == textView.selectedRange { return }
         textView.selectedRange = range
+    }
+
+    func setLink(to: URL?) {
+        // todo check?
+        if textView.currentLink == to {
+            return
+        }
+        textView.setCurrentLink(to: to)
     }
 
     func setStyle(_ style: RichTextStyle, to newValue: Bool) {
