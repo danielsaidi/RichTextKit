@@ -12,6 +12,7 @@ Until then, features may be deprecated in a minor version and removed in the nex
 
 * String extensions have been made public.
 * `RichTextDataFormat` has a new vendor-specific data format.
+* `RichTextImageAttachment` is now open for inheritance.
 
 ### 🗑️ Deprecated
 

@@ -59,7 +59,7 @@ import UniformTypeIdentifiers
  You'll see the name of the missing class in the unarchiving
  error, so just pop that name in as the class name.
  */
-public class RichTextImageAttachment: NSTextAttachment {
+open class RichTextImageAttachment: NSTextAttachment {
 
     /**
      Create a custom image attachment with an JPEG image and
