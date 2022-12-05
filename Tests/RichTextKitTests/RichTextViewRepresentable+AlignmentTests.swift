@@ -14,6 +14,7 @@ import UIKit
 import AppKit
 #endif
 
+#if os(iOS) || os(macOS) || os(tvOS)
 import RichTextKit
 import XCTest
 
@@ -86,3 +87,4 @@ class RichTextViewRepresentable_AlignmentTests: XCTestCase {
         #endif
     }
 }
+#endif

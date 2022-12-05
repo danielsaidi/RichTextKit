@@ -9,11 +9,7 @@
 #if canImport(AppKit)
 import AppKit
 
-extension NSImage {
-
-    var cgImage: CGImage? {
-        cgImage(forProposedRect: nil, context: nil, hints: nil)
-    }
+public extension NSImage {
 
     func jpegData(compressionQuality: CGFloat) -> Data? {
         guard let image = cgImage else { return nil }

@@ -11,6 +11,7 @@ Until then, features may be deprecated in a minor version and removed in the nex
 ### ✨ New Features
 
 * String extensions have been made public.
+* `NSImage` `cgImage` and `jpegData` are now public.
 * `RichTextDataFormat` has a new vendor-specific data format.
 * `RichTextImageAttachment` is now open for inheritance.
 

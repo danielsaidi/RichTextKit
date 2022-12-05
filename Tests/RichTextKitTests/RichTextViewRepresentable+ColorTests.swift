@@ -11,7 +11,7 @@ import XCTest
 
 class RichTextViewRepresentable_ColorAlignmentTests: XCTestCase {
 
-    let string = NSTextStorage(string: "foo bar baz")
+    let string = NSMutableAttributedString(string: "foo bar baz")
 
     func testSettingColorWithinRangeOnlySetsAttributeWithinTheProvidedRange() {
         let color = ColorRepresentable.yellow
