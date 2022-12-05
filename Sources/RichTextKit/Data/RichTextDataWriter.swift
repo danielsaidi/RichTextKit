@@ -28,7 +28,7 @@ public extension RichTextDataWriter {
      - Parameters:
        - format: The data format to use.
      */
-    func richTextData(with format: RichTextDataFormat) throws -> Data {
+    func richTextData(for format: RichTextDataFormat) throws -> Data {
         switch format {
         case .archivedData: return try richTextArchivedData()
         case .plainText: return try richTextPlainTextData()

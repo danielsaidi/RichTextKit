@@ -61,7 +61,7 @@ public class StandardRichTextExportService: RichTextExportService {
             withName: fileName,
             extension: format.standardFileExtension,
             in: directory)
-        let data = try content.richTextData(with: format)
+        let data = try content.richTextData(for: format)
         try data.write(to: fileUrl)
         return fileUrl
     }

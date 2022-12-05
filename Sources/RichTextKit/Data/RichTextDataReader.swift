@@ -32,12 +32,7 @@ public extension RichTextDataReader {
         from data: Data,
         format: RichTextDataFormat
     ) throws -> NSAttributedString {
-        switch format {
-        case .archivedData: return try NSAttributedString(archivedData: data)
-        case .plainText: return try NSAttributedString(plainTextData: data)
-        case .rtf: return try NSAttributedString(rtfData: data)
-        case .vendorArchivedData: return try NSAttributedString(archivedData: data)
-        }
+        try NSAttributedString(data: data, format: format)
     }
 }
 
