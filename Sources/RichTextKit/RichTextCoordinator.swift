@@ -68,7 +68,7 @@ open class RichTextCoordinator: NSObject {
     /**
      This set is used to store context observations.
      */
-    internal var cancellables = Set<AnyCancellable>()
+    public var cancellables = Set<AnyCancellable>()
 
     /**
      This flag is used to handle font size stepping.
