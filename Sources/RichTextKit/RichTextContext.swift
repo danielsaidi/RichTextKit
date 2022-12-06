@@ -212,12 +212,19 @@ public extension RichTextContext {
     }
 
     /**
+     Decrement the current font size 1 point.
+     */
+    func decrementFontSize() {
+        decrementFontSize(points: 1)
+    }
+
+    /**
      Decrement the current font size.
 
      - Parameters:
-       - points: The number of points to decrement the font size, by default `1`.
+       - points: The number of points to decrement the font size.
      */
-    func decrementFontSize(points: UInt = 1) {
+    func decrementFontSize(points: UInt) {
         stepFontSize(points: -Int(points))
     }
 
@@ -240,12 +247,19 @@ public extension RichTextContext {
     }
 
     /**
+     Increment the current font size 1 point.
+     */
+    func incrementFontSize() {
+        incrementFontSize(points: 1)
+    }
+
+    /**
      Increment the current font size.
 
      - Parameters:
-       - points: The number of points to increment the font size, by default `1`.
+       - points: The number of points to increment the font size.
      */
-    func incrementFontSize(points: UInt = 1) {
+    func incrementFontSize(points: UInt) {
         stepFontSize(points: Int(points))
     }
 

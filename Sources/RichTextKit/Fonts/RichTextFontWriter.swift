@@ -124,17 +124,37 @@ public extension RichTextFontWriter {
 public extension RichTextFontWriter {
 
     /**
+     Decrement the font size 1 point at a certain range.
+
+     - Parameters:
+       - range: The range to affect.
+     */
+    func decrementFontSize(at range: NSRange) {
+        decrementFontSize(points: 1, at: range)
+    }
+
+    /**
      Decrement the font size at a certain range.
 
      - Parameters:
        - points: The number of points to decrement the font size, by default `1`.
-       - range: The range to get the font from.
+       - range: The range to affect.
      */
     func decrementFontSize(
-        points: UInt = 1,
+        points: UInt,
         at range: NSRange
     ) {
         stepFontSize(points: -Int(points), at: range)
+    }
+
+    /**
+     Increment the font size 1 point at a certain range.
+
+     - Parameters:
+       - range: The range to affect.
+     */
+    func incrementFontSize(at range: NSRange) {
+        incrementFontSize(points: 1, at: range)
     }
 
     /**
@@ -142,10 +162,10 @@ public extension RichTextFontWriter {
 
      - Parameters:
        - points: The number of points to increment the font size, by default `1`.
-       - range: The range to get the font from.
+       - range: The range to affect.
      */
     func incrementFontSize(
-        points: UInt = 1,
+        points: UInt,
         at range: NSRange
     ) {
         stepFontSize(points: Int(points), at: range)
