@@ -148,6 +148,28 @@ extension RichTextCoordinator: NSTextViewDelegate {}
 #endif
 
 
+// MARK: - Public Extensions
+
+public extension RichTextCoordinator {
+
+    /**
+     Reset the apperance for the currently highlighted range,
+     if any.
+     */
+    func resetHighlightedRangeAppearance() {
+        guard
+            let range = richTextContext.highlightedRange,
+            let background = highlightedRangeOriginalBackgroundColor,
+            let foreground = highlightedRangeOriginalForegroundColor
+        else { return }
+        textView.setBackgroundColor(to: background, at: range)
+        textView.setForegroundColor(to: foreground, at: range)
+    }
+}
+
+
+// MARK: - Internal Extensions
+
 extension RichTextCoordinator {
 
     /**
