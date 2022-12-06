@@ -29,7 +29,8 @@ public struct RichTextImageConfiguration {
     public init(
         pasteConfiguration: RichTextImageInsertConfiguration,
         dropConfiguration: RichTextImageInsertConfiguration,
-        maxImageSize: (width: RichTextImageAttachmentSize, height: RichTextImageAttachmentSize)) {
+        maxImageSize: (width: RichTextImageAttachmentSize, height: RichTextImageAttachmentSize)
+    ) {
         self.pasteConfiguration = pasteConfiguration
         self.dropConfiguration = dropConfiguration
         self.maxImageSize = maxImageSize
