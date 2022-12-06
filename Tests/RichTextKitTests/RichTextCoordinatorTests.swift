@@ -28,7 +28,7 @@ class RichTextCoordinatorTests: XCTestCase {
         coordinator = RichTextCoordinator(
             text: textBinding,
             textView: textView,
-            context: textContext)
+            richTextContext: textContext)
         textView.selectedRange = NSRange(location: 0, length: 1)
         textView.setCurrentRichTextAlignment(to: .justified)
     }
@@ -47,7 +47,7 @@ class RichTextCoordinatorTests: XCTestCase {
         let range = NSRange(location: 4, length: 3)
         textView.selectedRange = range
         XCTAssertEqual(coordinator.text.wrappedValue.string, "foo bar baz")
-        XCTAssertEqual(coordinator.context.selectedRange, range)
+        XCTAssertEqual(coordinator.richTextContext.selectedRange, range)
     }
 
 
@@ -118,7 +118,7 @@ class RichTextCoordinatorTests: XCTestCase {
 
     func testResetingHighlightedRangeAppearanceResetsToInternalValues() {
         let range = NSRange(location: 4, length: 3)
-        coordinator.context.highlightedRange = range
+        coordinator.richTextContext.highlightedRange = range
         coordinator.highlightedRangeOriginalBackgroundColor = .blue
         coordinator.highlightedRangeOriginalForegroundColor = .yellow
         coordinator.resetHighlightedRangeAppearance()

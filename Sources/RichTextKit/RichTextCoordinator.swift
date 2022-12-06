@@ -37,11 +37,11 @@ open class RichTextCoordinator: NSObject {
     public init(
         text: Binding<NSAttributedString>,
         textView: RichTextView,
-        context: RichTextContext) {
+        richTextContext: RichTextContext) {
         textView.attributedString = text.wrappedValue
         self.text = text
         self.textView = textView
-        self.context = context
+        self.richTextContext = richTextContext
         super.init()
         self.textView.delegate = self
         subscribeToContextChanges()
@@ -53,7 +53,7 @@ open class RichTextCoordinator: NSObject {
     /**
      The rich text context for which the coordinator is used.
      */
-    public let context: RichTextContext
+    public let richTextContext: RichTextContext
 
     /**
      The rich text to edit.
@@ -96,7 +96,7 @@ open class RichTextCoordinator: NSObject {
     // MARK: - UITextViewDelegate
 
     open func textViewDidBeginEditing(_ textView: UITextView) {
-        context.isEditingText = true
+        richTextContext.isEditingText = true
     }
 
     open func textViewDidChange(_ textView: UITextView) {
@@ -108,7 +108,7 @@ open class RichTextCoordinator: NSObject {
     }
 
     open func textViewDidEndEditing(_ textView: UITextView) {
-        context.isEditingText = false
+        richTextContext.isEditingText = false
     }
     #endif
 
@@ -163,19 +163,19 @@ extension RichTextCoordinator {
      */
     func syncContextWithTextView() {
         let styles = textView.currentRichTextStyles
-        context.alignment = textView.currentRichTextAlignment ?? .left
-        context.backgroundColor = textView.currentBackgroundColor
-        context.canCopy = textView.hasSelectedRange
-        context.canRedoLatestChange = textView.undoManager?.canRedo ?? false
-        context.canUndoLatestChange = textView.undoManager?.canUndo ?? false
-        context.fontName = textView.currentFontName ?? ""
-        context.fontSize = textView.currentFontSize ?? .standardRichTextFontSize
-        context.foregroundColor = textView.currentForegroundColor
-        context.isBold = styles.hasStyle(.bold)
-        context.isItalic = styles.hasStyle(.italic)
-        context.isUnderlined = styles.hasStyle(.underlined)
-        context.isEditingText = textView.isFirstResponder
-        context.selectedRange = textView.selectedRange
+        richTextContext.alignment = textView.currentRichTextAlignment ?? .left
+        richTextContext.backgroundColor = textView.currentBackgroundColor
+        richTextContext.canCopy = textView.hasSelectedRange
+        richTextContext.canRedoLatestChange = textView.undoManager?.canRedo ?? false
+        richTextContext.canUndoLatestChange = textView.undoManager?.canUndo ?? false
+        richTextContext.fontName = textView.currentFontName ?? ""
+        richTextContext.fontSize = textView.currentFontSize ?? .standardRichTextFontSize
+        richTextContext.foregroundColor = textView.currentForegroundColor
+        richTextContext.isBold = styles.hasStyle(.bold)
+        richTextContext.isItalic = styles.hasStyle(.italic)
+        richTextContext.isUnderlined = styles.hasStyle(.underlined)
+        richTextContext.isEditingText = textView.isFirstResponder
+        richTextContext.selectedRange = textView.selectedRange
         updateTextViewAttributesIfNeeded()
     }
 

@@ -28,7 +28,7 @@ class RichTextCoordinator_SubscriptionsTests: XCTestCase {
         coordinator = RichTextCoordinator(
             text: textBinding,
             textView: textView,
-            context: textContext)
+            richTextContext: textContext)
         textView.selectedRange = NSRange(location: 0, length: 1)
         textView.setCurrentRichTextAlignment(to: .justified)
     }

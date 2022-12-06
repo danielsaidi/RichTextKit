@@ -39,7 +39,7 @@ class RichTextEditorTests: XCTestCase {
         let coordinator = editor.makeCoordinator()
         XCTAssertEqual(coordinator.text.wrappedValue.string, text.string)
         XCTAssertTrue(coordinator.textView === editor.textView)
-        XCTAssertTrue(coordinator.context === context)
+        XCTAssertTrue(coordinator.richTextContext === context)
     }
 }
 #endif
