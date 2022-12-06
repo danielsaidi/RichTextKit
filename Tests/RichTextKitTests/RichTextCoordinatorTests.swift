@@ -2,8 +2,8 @@
 //  RichTextCoordinatorTests.swift
 //  RichTextKitTests
 //
-//  Created by Daniel Saidi on 2021-12-30.
-//  Copyright © 2021 Daniel Saidi. All rights reserved.
+//  Created by Daniel Saidi on 2022-12-05.
+//  Copyright © 2022 Daniel Saidi. All rights reserved.
 //
 
 #if os(iOS) || os(macOS) || os(tvOS)

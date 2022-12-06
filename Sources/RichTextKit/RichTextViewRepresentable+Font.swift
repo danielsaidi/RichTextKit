@@ -103,12 +103,8 @@ public extension RichTextViewRepresentable {
 
      - Parameters:
        - points: The number of points to decrement the font size, by default `1`.
-       - range: The range to get the font from.
      */
-    func decrementFontSize(
-        points: UInt = 1,
-        at range: NSRange
-    ) {
+    func decrementCurrentFontSize(points: UInt = 1) {
         stepCurrentFontSize(points: -Int(points))
     }
 
@@ -117,12 +113,8 @@ public extension RichTextViewRepresentable {
 
      - Parameters:
        - points: The number of points to increment the font size, by default `1`.
-       - range: The range to get the font from.
      */
-    func incrementFontSize(
-        points: UInt = 1,
-        at range: NSRange
-    ) {
+    func incrementCurrentFontSize(points: UInt = 1) {
         stepCurrentFontSize(points: Int(points))
     }
 }

@@ -2,8 +2,8 @@
 //  RichTextCoordinator+SubscriptionsTests.swift
 //  OribiRichTextKitTests
 //
-//  Created by Daniel Saidi on 2021-12-30.
-//  Copyright © 2021 Daniel Saidi. All rights reserved.
+//  Created by Daniel Saidi on 2022-12-05.
+//  Copyright © 2022 Daniel Saidi. All rights reserved.
 //
 
 #if os(iOS) || os(macOS) || os(tvOS)
@@ -114,7 +114,7 @@ class RichTextCoordinator_SubscriptionsTests: XCTestCase {
     func testSelectedRangeUpdatesTextView() {
         let range = NSRange(location: 4, length: 3)
         textContext.selectedRange = range
-         XCTAssertEqual(textView.selectedRange, range)
+        XCTAssertEqual(textView.selectedRange, range)
     }
 
 

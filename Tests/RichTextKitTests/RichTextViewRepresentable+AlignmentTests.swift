@@ -2,8 +2,8 @@
 //  RichTextViewRepresentable+AlignmentTests.swift
 //  RichTextKitTests
 //
-//  Created by Daniel Saidi on 2021-12-30.
-//  Copyright © 2021 Daniel Saidi. All rights reserved.
+//  Created by Daniel Saidi on 2022-12-06.
+//  Copyright © 2022 Daniel Saidi. All rights reserved.
 //
 
 #if canImport(UIKit)
@@ -20,7 +20,7 @@ import XCTest
 
 class RichTextViewRepresentable_AlignmentTests: XCTestCase {
 
-    var textView: RichTextView!
+    var textView: RichTextViewRepresentable!
 
     let alignment = RichTextAlignment.right
     let startRange = NSRange(location: 0, length: 1)
@@ -35,13 +35,13 @@ class RichTextViewRepresentable_AlignmentTests: XCTestCase {
         )
     }
 
-    func validateEqualAlignment(_ attr: Any?) {
+    func assertEqualAlignment(_ attr: Any?) {
         let paragraphAlignment = (attr as? NSMutableParagraphStyle)?.alignment ?? .left
         let align = RichTextAlignment(paragraphAlignment)
         XCTAssertEqual(align, alignment)
     }
 
-    func validateNonEqualAlignment(_ attr: Any?) {
+    func assertNonEqualAlignment(_ attr: Any?) {
         let paragraphAlignment = (attr as? NSMutableParagraphStyle)?.alignment ?? .left
         let align = RichTextAlignment(paragraphAlignment)
         XCTAssertNotEqual(align, alignment)
@@ -49,41 +49,41 @@ class RichTextViewRepresentable_AlignmentTests: XCTestCase {
 
 
     func testCurrentRichTextAlignmentWorksForSelectedRange() {
-        textView.selectedRange = selectedRange
+        textView.setSelectedRange(selectedRange)
         textView.setCurrentRichTextAlignment(to: alignment)
         XCTAssertEqual(textView.currentRichTextAlignment, alignment)
-        validateEqualAlignment(textView.currentRichTextAttributes[.paragraphStyle])
-        validateEqualAlignment(textView.richTextAttributes(at: selectedRange)[.paragraphStyle])
+        assertEqualAlignment(textView.currentRichTextAttributes[.paragraphStyle])
+        assertEqualAlignment(textView.richTextAttributes(at: selectedRange)[.paragraphStyle])
         #if os(iOS) || os(tvOS)
-        validateEqualAlignment(textView.typingAttributes[.paragraphStyle])
+        assertEqualAlignment(textView.typingAttributes[.paragraphStyle])
         #elseif os(macOS)
-        validateNonEqualAlignment(textView.typingAttributes[.paragraphStyle])
+        assertNonEqualAlignment(textView.typingAttributes[.paragraphStyle])
         #endif
     }
 
     func testCurrentRichTextAlignmentSetsAlignmentForEntireParagraph() {
-        textView.selectedRange = startRange
+        textView.setSelectedRange(startRange)
         textView.setCurrentRichTextAlignment(to: alignment)
         XCTAssertEqual(textView.currentRichTextAlignment, alignment)
-        validateEqualAlignment(textView.currentRichTextAttributes[.paragraphStyle])
-        validateEqualAlignment(textView.richTextAttributes(at: selectedRange)[.paragraphStyle])
+        assertEqualAlignment(textView.currentRichTextAttributes[.paragraphStyle])
+        assertEqualAlignment(textView.richTextAttributes(at: selectedRange)[.paragraphStyle])
         #if os(iOS) || os(tvOS)
-        validateEqualAlignment(textView.typingAttributes[.paragraphStyle])
+        assertEqualAlignment(textView.typingAttributes[.paragraphStyle])
         #elseif os(macOS)
-        validateNonEqualAlignment(textView.typingAttributes[.paragraphStyle])
+        assertNonEqualAlignment(textView.typingAttributes[.paragraphStyle])
         #endif
     }
 
     func testCurrentRichTextAlignmentDoesNotSetAlignmentForParagraphsOutsideOfRange() {
-        textView.selectedRange = startRange
+        textView.setSelectedRange(startRange)
         textView.setCurrentRichTextAlignment(to: alignment)
         XCTAssertEqual(textView.currentRichTextAlignment, alignment)
-        validateEqualAlignment(textView.currentRichTextAttributes[.paragraphStyle])
-        validateNonEqualAlignment(textView.richTextAttributes(at: secondRowRange)[.paragraphStyle])
+        assertEqualAlignment(textView.currentRichTextAttributes[.paragraphStyle])
+        assertNonEqualAlignment(textView.richTextAttributes(at: secondRowRange)[.paragraphStyle])
         #if os(iOS) || os(tvOS)
-        validateEqualAlignment(textView.typingAttributes[.paragraphStyle])
+        assertEqualAlignment(textView.typingAttributes[.paragraphStyle])
         #elseif os(macOS)
-        validateNonEqualAlignment(textView.typingAttributes[.paragraphStyle])
+        assertNonEqualAlignment(textView.typingAttributes[.paragraphStyle])
         #endif
     }
 }

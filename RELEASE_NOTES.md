@@ -17,7 +17,12 @@ Until then, features may be deprecated in a minor version and removed in the nex
 
 ### 🗑️ Deprecated
 
-* `RichTextDataWriter` `richTextData(with:)` is renamed to `richTextData(for:)`.  
+* `RichTextDataWriter` `richTextData(with:)` is renamed to `richTextData(for:)`.
+
+### 💥 Breaking Changes
+
+* `RichTextViewRepresentable` `decrementFontSize` is renamed to `decrementCurrentFontSize` and has no range parameter.
+* `RichTextViewRepresentable` `incrementFontSize` is renamed to `incrementCurrentFontSize` and has no range parameter.  
 
 
 
