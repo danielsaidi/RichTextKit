@@ -14,6 +14,7 @@ Until then, features may be deprecated in a minor version and removed in the nex
 * `NSImage` `cgImage` and `jpegData` are now public.
 * `NSAttributedString` has a new `withBlackText()` extension.
 * `RichTextCoordinator` `cancellables` are now public.
+* `RichTextCoordinator` `text` is now mutable.
 * `RichTextDataFormat` has a new vendor-specific data format.
 * `RichTextImageAttachment` is now open for inheritance. 
 

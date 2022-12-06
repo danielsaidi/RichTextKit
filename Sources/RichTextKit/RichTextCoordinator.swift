@@ -58,7 +58,7 @@ open class RichTextCoordinator: NSObject {
     /**
      The rich text to edit.
      */
-    public let text: Binding<NSAttributedString>
+    public var text: Binding<NSAttributedString>
 
     /**
      The text view for which the coordinator is used.
