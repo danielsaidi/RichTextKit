@@ -13,6 +13,7 @@ Until then, features may be deprecated in a minor version and removed in the nex
 * `NSImage` `cgImage` and `jpegData` are now public.
 * `NSAttributedString` has a new `withBlackText()` extension.
 * `NSAttributedString` has a new init extension file.
+* `RichTextCoordinator` now subscribes to highlighting style changes.
 * `RichTextCoordinator` `cancellables` are now public.
 * `RichTextCoordinator` `resetHighlightedRangeAppearance()` is now public.
 * `RichTextCoordinator` `text` is now mutable.
@@ -25,6 +26,7 @@ Until then, features may be deprecated in a minor version and removed in the nex
 * `FontSizePicker` `sizes` has been renamed to `values`.
 * `PdfDataWriter` has been renamed to `PdfDataReader`.
 * `RichTextAlignmentPicker` `alignments` has been renamed to `values`.
+* `RichTextContext` `standardHighlightingStyle` has been renamed to `highlightingStyle`.
 * `RichTextCoordinator` `context` has been renamed to `richTextContext`.
 * `RichTextDataWriter` `richTextData(with:)` has been renamed to `richTextData(for:)`.
 

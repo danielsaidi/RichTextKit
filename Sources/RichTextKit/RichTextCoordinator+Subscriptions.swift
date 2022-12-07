@@ -21,6 +21,7 @@ extension RichTextCoordinator {
         subscribeToFontSize()
         subscribeToForegroundColor()
         subscribeToHighlightedRange()
+        subscribeToHighlightingStyle()
         subscribeToIsBold()
         subscribeToIsEditingText()
         subscribeToIsItalic()
@@ -82,6 +83,14 @@ private extension RichTextCoordinator {
             .sink(
                 receiveCompletion: { _ in },
                 receiveValue: { [weak self] in self?.setHighlightedRange(to: $0) })
+            .store(in: &cancellables)
+    }
+
+    func subscribeToHighlightingStyle() {
+        richTextContext.$highlightingStyle
+            .sink(
+                receiveCompletion: { _ in },
+                receiveValue: { [weak self] in self?.setHighlightingStyle(to: $0) })
             .store(in: &cancellables)
     }
 
@@ -253,6 +262,10 @@ internal extension RichTextCoordinator {
         let foreground = ColorRepresentable(style.foregroundColor)
         textView.setBackgroundColor(to: background, at: range)
         textView.setForegroundColor(to: foreground, at: range)
+    }
+
+    func setHighlightingStyle(to style: RichTextHighlightingStyle) {
+        textView.highlightingStyle = style
     }
 
     func setIsEditing(to newValue: Bool) {

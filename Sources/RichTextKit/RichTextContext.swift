@@ -49,12 +49,6 @@ public class RichTextContext: ObservableObject {
         )
     }
 
-    /**
-     The standard highlighting style to apply when setting a
-     highlighted range.
-     */
-    public var standardHighlightingStyle = RichTextHighlightingStyle.standard
-
 
     // MARK: - Published Properties
 
@@ -122,6 +116,12 @@ public class RichTextContext: ObservableObject {
      */
     @Published
     public var highlightedRange: NSRange?
+
+    /**
+     The style to apply when highlighting a range.
+     */
+    @Published
+    public var highlightingStyle = RichTextHighlightingStyle.standard
 
     /**
      Whether or not the current text is bold.
