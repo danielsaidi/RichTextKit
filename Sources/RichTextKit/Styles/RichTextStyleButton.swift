@@ -51,18 +51,6 @@ private extension RichTextStyleButton {
     }
 }
 
-private extension View {
-
-    @ViewBuilder
-    func withWidth(shareAvailableWidth: Bool) -> some View {
-        if shareAvailableWidth {
-            self.frame(maxWidth: .infinity)
-        } else {
-            self
-        }
-    }
-}
-
 struct RichTextStyleButton_Previews: PreviewProvider {
 
     struct Preview: View {

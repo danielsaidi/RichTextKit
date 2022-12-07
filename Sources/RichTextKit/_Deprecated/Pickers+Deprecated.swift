@@ -11,8 +11,24 @@ public extension RichTextAlignmentPicker {
         self.init(
             title: title,
             values: alignments,
-            selection: selection)
+            selection: selection
+        )
     }
 
     var alignments: [RichTextAlignment] { values }
+}
+
+
+public extension FontSizePicker {
+
+    @available(*, deprecated, message: "Use the values initializer instead.")
+    init(
+        selection: Binding<CGFloat>,
+        sizes: [CGFloat]
+    ) {
+        self.init(
+            selection: selection,
+            values: sizes
+        )
+    }
 }

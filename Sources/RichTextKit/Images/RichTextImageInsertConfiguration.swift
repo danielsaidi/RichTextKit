@@ -12,9 +12,10 @@ import Foundation
  This enum can be used to configure the image drop and paste
  behavior of a ``RichTextView``.
  
- This configuration is needed, since .txt and .rtf documents
- don't support images, and a rich text view doesn't know the
- format of the string that it contains.
+ The configuration is needed, since ``RichTextDataFormat/rtf``
+ and ``RichTextDataFormat/plainText`` doesn't support images
+ and a text view does not know the format of the string that
+ it contains.
  */
 public enum RichTextImageInsertConfiguration: Equatable {
     

@@ -9,8 +9,7 @@
 import SwiftUI
 
 /**
- This internal struct is used within the custom font pickers
- that can render fonts within the picker.
+ This internal struct is used within the custom font pickers.
  */
 struct FontPickerItem: View, ListPickerItem {
 

@@ -9,8 +9,8 @@
 import Foundation
 
 /**
- This protocol can be implemented any types that can provide
- images from the pasteboard.
+ This protocol can be implemented by types that can fetch an
+ image or multiple images from the pasteboard.
 
  The protocol is implemented by the UIKit `UIPasteboard`, as
  well as the AppKit `NSPasteboard`.

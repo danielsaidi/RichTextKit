@@ -27,26 +27,25 @@ public struct FontSizePicker: View {
      - Parameters:
        - selection: The selected font size.
        - sizes: The sizes to display in the list, by default ``FontSizePicker/standardFontSizes``.
-       - fontSize: The font size to use in the list items.
      */
     public init(
         selection: Binding<CGFloat>,
-        sizes: [CGFloat] = standardFontSizes
+        values: [CGFloat] = standardFontSizes
     ) {
         self._selection = selection
-        self.sizes = Self.fontSizePickerSizes(
-            for: sizes,
+        self.values = Self.fontSizePickerSizes(
+            for: values,
             selection: selection.wrappedValue)
     }
 
-    private let sizes: [CGFloat]
+    private let values: [CGFloat]
 
     @Binding
     private var selection: CGFloat
 
     public var body: some View {
         Picker(selection: $selection) {
-            ForEach(sizes, id: \.self) {
+            ForEach(values, id: \.self) {
                 text(for: $0)
                     .tag($0)
             }

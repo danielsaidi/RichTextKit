@@ -11,6 +11,9 @@ import AppKit
 
 public extension NSImage {
 
+    /**
+     Try to get a CoreGraphic image from the AppKit image.
+     */
     var cgImage: CGImage? {
         cgImage(forProposedRect: nil, context: nil, hints: nil)
     }

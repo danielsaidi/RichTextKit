@@ -49,7 +49,8 @@ public class StandardRichTextShareService: RichTextShareService {
     public func generateShareFile(
         withName fileName: String,
         content: NSAttributedString,
-        format: RichTextDataFormat) throws -> URL {
+        format: RichTextDataFormat
+    ) throws -> URL {
         let fileUrl = try urlResolver.fileUrl(
             withName: fileName,
             extension: format.standardFileExtension,
@@ -72,7 +73,8 @@ public class StandardRichTextShareService: RichTextShareService {
      */
     public func generatePdfShareFile(
         withName fileName: String,
-        content: NSAttributedString) throws -> URL {
+        content: NSAttributedString
+    ) throws -> URL {
         let fileUrl = try urlResolver.fileUrl(
             withName: fileName,
             extension: "pdf",

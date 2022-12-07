@@ -9,12 +9,11 @@
 import Foundation
 
 /**
- This protocol can be implemented by any types that could be
- used to resolve the url for when exporting rich text files.
+ This protocol can be implemented by types that can generate
+ file urls, for instance when exporting rich text files.
 
- The protocol is implemented by `FileManager`, which will be
- used by default by the library. You could however implement
- it in any custom way you want.
+ The protocol is implemented by `FileManager`, which is used
+ by default by the library.
  */
 public protocol RichTextExportUrlResolver {
 

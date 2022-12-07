@@ -10,7 +10,7 @@ import Foundation
 
 /**
  This export service can be used to export rich text content
- to a file with a certain format.
+ to files with a certain format.
 
  Exported files are by default written to the app's document
  folder, since the intent should be to export rich text with

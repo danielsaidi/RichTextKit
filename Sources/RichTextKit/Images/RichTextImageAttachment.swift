@@ -80,7 +80,7 @@ open class RichTextImageAttachment: NSTextAttachment {
 
      - Parameters:
        - image: The image to add to the attachment.
-       - compressionQuality: The percentage rate to apply, by default `0.7`.
+       - compressionQuality: The percentage rate to apply.
      */
     public convenience init(
         jpegImage image: ImageRepresentable,

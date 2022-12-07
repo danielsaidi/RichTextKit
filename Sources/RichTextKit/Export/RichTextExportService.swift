@@ -12,9 +12,9 @@ import Foundation
  This protocol can be implemented by any classes that can be
  used to export rich text files.
 
- Exporting should be used to convert between various formats.
- If you want to share or print the text, using a share sheet,
- you shoul use a ``RichTextShareService`` instead.
+ Exporting a file can be used to convert a rich text between
+ various formats. To share or print the text, consider using
+ a ``RichTextShareService`` instead.
  */
 public protocol RichTextExportService: AnyObject {
     

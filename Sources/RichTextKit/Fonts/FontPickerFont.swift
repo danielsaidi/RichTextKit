@@ -17,26 +17,25 @@ import UIKit
 #endif
 
 /**
- This font struct is used by the various font pickers.
+ This struct is used by the various font pickers.
 
- Instead of referring to certain fonts, the struct refers to
+ Instead of referring to actual fonts, this struct refers to
  fonts by name, to simplify view binding in e.g. the pickers.
  You can use `FontPickerFont.all` to get all fonts, then use
- collection extensions like `moveFirst(...)` to manage order.
+ collection extensions to rearrange the fonts if needed.
 
- Some system fonts are special when it comes to being listed
- in a picker or displayed in other ways. One such example is
- `San Francisco`, which must have its name replaced in order
- to be properly presented.
+ Some system fonts are special when being listed in a picker
+ or displayed elsewhere. One such example is `San Francisco`,
+ which must have its name adjusted in order to be presented.
 
- To change the display name of the system font, just set the
+ To change the display name of a system font, simply set the
  ``FontPickerFont/standardSystemFontDisplayName`` to another
  value. To customize how the system font for a platform will
- be detected, just set ``FontPickerFont/systemFontNamePrefix``
- to another value.
+ be detected, set ``FontPickerFont/systemFontNamePrefix`` to
+ another value.
  */
 public struct FontPickerFont: Identifiable, Equatable {
-    
+
     public init(fontName: String) {
         let fontName = fontName.capitalized
         self.fontName = fontName

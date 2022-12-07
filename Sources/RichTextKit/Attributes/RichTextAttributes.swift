@@ -9,8 +9,8 @@
 import Foundation
 
 /**
- This typealias represents a dictionary that with attributed
- string keys as keys and `Any` as value.
+ This typealias represents a ``RichTextAttribute`` keyed and
+ `Any` valued dictionary.
 
  The typealias also defines additional functionality as type
  extensions for the platform-specific types.

@@ -11,7 +11,7 @@ import Foundation
 extension Character {
 
     /**
-     Get whether or not the character is a newline separator.
+     Check if a character is a `newLine` or `carriageReturn`.
      */
     var isNewLineSeparator: Bool {
         self == .newLine || self == .carriageReturn

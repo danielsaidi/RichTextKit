@@ -31,7 +31,8 @@ public protocol RichTextShareService: AnyObject {
     func generateShareFile(
         withName fileName: String,
         content: NSAttributedString,
-        format: RichTextDataFormat) throws -> URL
+        format: RichTextDataFormat
+    ) throws -> URL
     
     /**
      Generate a PDF formatted share file with a certain name
@@ -43,5 +44,6 @@ public protocol RichTextShareService: AnyObject {
      */
     func generatePdfShareFile(
         withName fileName: String,
-        content: NSAttributedString) throws -> URL
+        content: NSAttributedString
+    ) throws -> URL
 }

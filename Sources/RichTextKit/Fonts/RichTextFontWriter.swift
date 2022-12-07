@@ -14,7 +14,8 @@ import Foundation
  rich text font writing capabilities.
 
  This protocol is implemented by `NSMutableAttributedString`
- as well as other library types.
+ as well as other types in the library. It provides any type
+ that implements it with convenient extensions.
  */
 public protocol RichTextFontWriter: RichTextAttributeReader, RichTextAttributeWriter {}
 

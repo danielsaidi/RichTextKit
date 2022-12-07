@@ -21,7 +21,8 @@ import AppKit
  rich text alignment reading capabilities.
 
  The protocol is implemented by `NSAttributedString` as well
- as other library types.
+ as other types in the library. It provides any implementing
+ types with convenient extensions.
  */
 public protocol RichTextAlignmentReader: RichTextAttributeReader {}
 

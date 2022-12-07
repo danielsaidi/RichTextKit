@@ -9,12 +9,12 @@
 import Foundation
 
 /**
- This protocol can be implemented by ``RichTextReader``s, to
- make them able to get ``RichTextDataFormat`` formatted data
- for the current rich text.
+ This protocol can be implemented any types that can provide
+ rich text data for its current attributed, rich text string.
 
  The protocol is implemented by `NSAttributedString` as well
- as other library types.
+ as other types in the library. It provides any implementing
+ types with convenient extensions.
  */
 public protocol RichTextDataWriter: RichTextReader {}
 

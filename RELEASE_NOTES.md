@@ -10,23 +10,26 @@ Until then, features may be deprecated in a minor version and removed in the nex
 
 ### ✨ New Features
 
-* String extensions have been made public.
 * `NSImage` `cgImage` and `jpegData` are now public.
 * `NSAttributedString` has a new `withBlackText()` extension.
+* `NSAttributedString` has a new init extension file.
 * `RichTextCoordinator` `cancellables` are now public.
 * `RichTextCoordinator` `resetHighlightedRangeAppearance()` is now public.
 * `RichTextCoordinator` `text` is now mutable.
 * `RichTextDataFormat` has a new vendor-specific data format.
 * `RichTextImageAttachment` is now open for inheritance. 
+* `String` extensions have been made public.
 
 ### 🗑️ Deprecated
 
+* `FontSizePicker` `sizes` has been renamed to `values`.
+* `PdfDataWriter` has been renamed to `PdfDataReader`.
 * `RichTextAlignmentPicker` `alignments` has been renamed to `values`.
 * `RichTextCoordinator` `context` has been renamed to `richTextContext`.
 * `RichTextDataWriter` `richTextData(with:)` has been renamed to `richTextData(for:)`.
 
 ### 💥 Breaking Changes
-
+  
 * `RichTextViewRepresentable` `decrementFontSize` has been renamed to `decrementCurrentFontSize` and has no range parameter.
 * `RichTextViewRepresentable` `incrementFontSize` has been renamed to `incrementCurrentFontSize` and has no range parameter.  
 

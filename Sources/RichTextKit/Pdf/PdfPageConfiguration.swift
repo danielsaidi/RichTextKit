@@ -9,7 +9,7 @@
 import CoreGraphics
 
 /**
- This struct defines page configurations for a PDF document.
+ This struct defines a page configuration for a PDF document.
  */
 public struct PdfPageConfiguration: Equatable {
 

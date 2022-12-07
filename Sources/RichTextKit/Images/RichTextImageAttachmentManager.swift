@@ -22,7 +22,8 @@ import AppKit
  additional image attachment capabilities.
 
  The protocol is implemented by `NSAttributedString` as well
- as other library types.
+ as other types in the library. It provides any implementing
+ types with convenient extensions.
  */
 public protocol RichTextImageAttachmentManager: RichTextReader {}
 

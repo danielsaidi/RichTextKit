@@ -12,8 +12,8 @@ extension NSAttributedString {
 
     /**
      Make all text in the attributed string black to account
-     for dark mode. This is internal, since we don't want to
-     have to do it this way.
+     for dark mode, otherwise this text will not be adaptive
+     when switching to dark mode.
      */
     func withBlackText() -> NSAttributedString {
         let mutable = NSMutableAttributedString(attributedString: self)

@@ -10,25 +10,29 @@ import Foundation
 import UniformTypeIdentifiers
 
 /**
- This enum specifies various rich text formats that are used
- in different ways by the library.
+ This enum specifies rich text formats that handle rich text
+ in different ways.
 
- This is a convenience type that's used by many of the types
- in the library. You are not forced to use it, but it can be
- useful when you want to save and files, generate share data
- etc. using the functionality that the library provides.
+ For instance, ``rtf`` supports rich text attributes, styles,
+ formatting etc. while ``plainText`` only handles plain text.
+ ``archivedData`` lets you archive text and attachments into
+ a binary archive, which is convenient if you stick to Apple
+ platforms, but restricts how the data can be used elsewhere.
 
- The reason for having the ``archivedData`` is to provide an
- additional way to handle images. .txt files doesn't support
- images at all and .rtf requires special handling, where the
- RTFD format handles file attachments like images by storing
- them in a sub folder, using a special format.
+ The reason for having ``archivedData`` is to let you handle
+ images in a more convenient way. Since ``plainText`` has no
+ image support and ``rtf`` requires additional handling (the
+ RTFD format handles attachments by storing them in a folder,
+ using a special format), ``archivedData`` store attachments
+ within the attributed string. The archiver however uses the
+ Apple `NSKeyedArchiver` and `NSKeyedUnarchiver` which means
+ that it's more limited when it comes to data portability.
 
- The ``archivedData`` format will instead keep the rich text
- attachments within the rich text and use the Apple specific
- `NSKeyedArchiver` and `NSKeyedUnarchiver` types to create a
- certain kind of rich text data, that can only be handled by
- these archiver classes. It's convenient, but more limited.
+ ``archivedData`` uses `rtk` as file extension, as well as a
+ custom `UTType.archivedData` uniform type. You can create a
+ ``vendorArchivedData(id:fileExtension:uniformType:)`` value
+ if you want to use custom file extensions and uniform types
+ in your app. Don't forget to configure your app accordingly.
  */
 public enum RichTextDataFormat: Equatable, Identifiable {
     
