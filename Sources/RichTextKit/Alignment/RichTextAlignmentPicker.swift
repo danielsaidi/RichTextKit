@@ -12,7 +12,7 @@ import SwiftUI
  This picker can be used to pick a rich text alignment.
 
  This view returns a plain SwiftUI `Picker` view that can be
- styled and adjusted in all ways supported by SwiftUI.
+ styled and configured in all ways supported by SwiftUI.
  */
 public struct RichTextAlignmentPicker: View {
 
@@ -20,16 +20,17 @@ public struct RichTextAlignmentPicker: View {
      Create a rich text alignment picker.
 
      - Parameters:
-       - title: The optional picker title.
-       - alignments: The pickable alignments.
-       - selection: The binding to update with the picker.
+     - title: The optional picker title.
+     - alignments: The pickable alignments.
+     - selection: The binding to update with the picker.
      */
     public init(
         title: String = "",
-        alignments: [RichTextAlignment] = RichTextAlignment.allCases,
-        selection: Binding<RichTextAlignment>) {
+        values: [RichTextAlignment] = RichTextAlignment.allCases,
+        selection: Binding<RichTextAlignment>
+    ) {
         self.title = title
-        self.alignments = alignments
+        self.values = values
         self._selection = selection
     }
 
@@ -41,7 +42,7 @@ public struct RichTextAlignmentPicker: View {
     /**
      The pickable alignments.
      */
-    public let alignments: [RichTextAlignment]
+    public let values: [RichTextAlignment]
 
     @Binding
     private var selection: RichTextAlignment

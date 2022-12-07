@@ -118,7 +118,7 @@ open class RichTextCoordinator: NSObject {
     // MARK: - NSTextViewDelegate
 
     open func textDidBeginEditing(_ notification: Notification) {
-        context.isEditingText = true
+        richTextContext.isEditingText = true
     }
 
     open func textDidChange(_ notification: Notification) {
@@ -130,7 +130,7 @@ open class RichTextCoordinator: NSObject {
     }
 
     open func textDidEndEditing(_ notification: Notification) {
-        context.isEditingText = false
+        richTextContext.isEditingText = false
     }
     #endif
 }

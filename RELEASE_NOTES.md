@@ -21,6 +21,7 @@ Until then, features may be deprecated in a minor version and removed in the nex
 
 ### 🗑️ Deprecated
 
+* `RichTextAlignmentPicker` `alignments` has been renamed to `values`.
 * `RichTextCoordinator` `context` has been renamed to `richTextContext`.
 * `RichTextDataWriter` `richTextData(with:)` has been renamed to `richTextData(for:)`.
 
