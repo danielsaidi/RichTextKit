@@ -1,5 +1,5 @@
 //
-//  RichTextViewRepresentable+AlignmentTests.swift
+//  RichTextViewComponent+AlignmentTests.swift
 //  RichTextKitTests
 //
 //  Created by Daniel Saidi on 2022-12-06.
@@ -18,9 +18,9 @@ import AppKit
 import RichTextKit
 import XCTest
 
-class RichTextViewRepresentable_AlignmentTests: XCTestCase {
+class RichTextViewComponent_AlignmentTests: XCTestCase {
 
-    var textView: RichTextViewRepresentable!
+    var textView: RichTextViewComponent!
 
     let alignment = RichTextAlignment.right
     let startRange = NSRange(location: 0, length: 1)

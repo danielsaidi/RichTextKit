@@ -1,5 +1,5 @@
 //
-//  RichTextViewRepresentable+ColorTests.swift
+//  RichTextViewComponent+ColorTests.swift
 //  RichTextKitTests
 //
 //  Created by Daniel Saidi on 2022-12-06.
@@ -18,9 +18,9 @@ import AppKit
 import RichTextKit
 import XCTest
 
-class RichTextViewRepresentable_ColorTests: XCTestCase {
+class RichTextViewComponent_ColorTests: XCTestCase {
 
-    var textView: RichTextViewRepresentable!
+    var textView: RichTextViewComponent!
 
     let color = ColorRepresentable.red
     let noRange = NSRange(location: 0, length: 0)

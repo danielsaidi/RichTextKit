@@ -1,5 +1,5 @@
 //
-//  RichTextViewRepresentable+Pasting.swift
+//  RichTextViewComponent+Pasting.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-06-05.
@@ -16,7 +16,7 @@ import UIKit
 import AppKit
 #endif
 
-public extension RichTextViewRepresentable {
+public extension RichTextViewComponent {
 
     /**
      Paste an image into the text view, at a certain index.
@@ -114,7 +114,7 @@ public extension RichTextViewRepresentable {
 }
 
 #if os(iOS) || os(tvOS) || os(macOS)
-private extension RichTextViewRepresentable {
+private extension RichTextViewComponent {
 
     func getAttachmentString(
         for image: ImageRepresentable

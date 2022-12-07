@@ -1,5 +1,5 @@
 //
-//  RichTextViewRepresentable+Images.swift
+//  RichTextViewComponent+Images.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-06-05.
@@ -16,7 +16,7 @@ import UIKit
 import AppKit
 #endif
 
-public extension RichTextViewRepresentable {
+public extension RichTextViewComponent {
 
     /**
      Get the attachment max size for a certain image.

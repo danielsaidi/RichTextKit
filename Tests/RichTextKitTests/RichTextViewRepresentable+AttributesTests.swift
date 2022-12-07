@@ -1,5 +1,5 @@
 //
-//  RichTextViewRepresentable+AttributesTests.swift
+//  RichTextViewComponent+AttributesTests.swift
 //  RichTextKitTests
 //
 //  Created by Daniel Saidi on 2022-12-06.
@@ -18,9 +18,9 @@ import AppKit
 import RichTextKit
 import XCTest
 
-class RichTextViewRepresentable_AttributesTests: XCTestCase {
+class RichTextViewComponent_AttributesTests: XCTestCase {
 
-    var textView: RichTextViewRepresentable!
+    var textView: RichTextViewComponent!
 
     let font = FontRepresentable.systemFont(ofSize: 666)
     let noRange = NSRange(location: 0, length: 0)

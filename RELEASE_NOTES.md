@@ -31,6 +31,7 @@ Until then, features may be deprecated in a minor version and removed in the nex
 * `RichTextContext` `standardHighlightingStyle` has been renamed to `highlightingStyle`.
 * `RichTextCoordinator` `context` has been renamed to `richTextContext`.
 * `RichTextDataWriter` `richTextData(with:)` has been renamed to `richTextData(for:)`.
+* `RichTextViewRepresentable` has been renamed to `RichTextViewComponent`.
 
 ### 💥 Breaking Changes
   

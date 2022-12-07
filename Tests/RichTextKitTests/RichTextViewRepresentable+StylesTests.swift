@@ -1,5 +1,5 @@
 //
-//  RichTextViewRepresentable+StylesTest.swift
+//  RichTextViewComponent+StylesTest.swift
 //  RichTextKitTests
 //
 //  Created by Daniel Saidi on 2022-12-06.
@@ -18,9 +18,9 @@ import AppKit
 import RichTextKit
 import XCTest
 
-class RichTextViewRepresentable_StylesTests: XCTestCase {
+class RichTextViewComponent_StylesTests: XCTestCase {
 
-    var textView: RichTextViewRepresentable!
+    var textView: RichTextViewComponent!
 
     let noRange = NSRange(location: 0, length: 0)
     let selectedRange = NSRange(location: 4, length: 3)

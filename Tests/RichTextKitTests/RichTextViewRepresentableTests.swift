@@ -1,5 +1,5 @@
 //
-//  RichTextViewRepresentableTests.swift
+//  RichTextViewComponentTests.swift
 //  RichTextKitTests
 //
 //  Created by Daniel Saidi on 2022-12-06.
@@ -10,7 +10,7 @@
 import RichTextKit
 import XCTest
 
-class RichTextViewRepresentableTests: XCTestCase {
+class RichTextViewComponentTests: XCTestCase {
 
     var view: RichTextView!
 

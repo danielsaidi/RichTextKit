@@ -1,5 +1,5 @@
 //
-//  RichTextViewRepresentable+Font.swift
+//  RichTextViewComponent+Font.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-05-29.
@@ -9,7 +9,7 @@
 import CoreGraphics
 import Foundation
 
-public extension RichTextViewRepresentable {
+public extension RichTextViewComponent {
 
     /**
      Use the selected range (if any) or text position to get
@@ -96,7 +96,7 @@ public extension RichTextViewRepresentable {
     }
 }
 
-public extension RichTextViewRepresentable {
+public extension RichTextViewComponent {
 
     /**
      Decrement the current font size.
@@ -119,7 +119,7 @@ public extension RichTextViewRepresentable {
     }
 }
 
-private extension RichTextViewRepresentable {
+private extension RichTextViewComponent {
 
     /**
      Set the font at the current position.

@@ -42,7 +42,7 @@ public struct RichTextEditor: ViewRepresentable {
         self.viewConfiguration = viewConfiguration
     }
 
-    public typealias ViewConfiguration = (RichTextViewRepresentable) -> Void
+    public typealias ViewConfiguration = (RichTextViewComponent) -> Void
 
 
     private var format: RichTextDataFormat

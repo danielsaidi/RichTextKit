@@ -1,5 +1,5 @@
 //
-//  RichTextViewRepresentable+Color.swift
+//  RichTextViewComponent+Color.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-05-30.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public extension RichTextViewRepresentable {
+public extension RichTextViewComponent {
 
     /**
      Use the selected range (if any) or text position to get

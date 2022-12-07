@@ -1,5 +1,5 @@
 //
-//  RichTextViewRepresentable.swift
+//  RichTextViewComponent.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-05-22.
@@ -11,16 +11,16 @@ import Foundation
 
 /**
  This protocol defines a platform-agnostic api that's shared
- by the UIKit and AppKit implementation of ``RichTextView``.
+ by the UIKit and AppKit ``RichTextView`` components.
 
  By implementing and using this protocol in the library, the
  library doesn't have to do a bunch of `#if` checks.
 
  This protocol aggregates many other protocols, although the
- protocols often implement eachother. To show every protocol,
+ protocols often implement each other. To show all protocols,
  some are commented out in the list below.
  */
-public protocol RichTextViewRepresentable: AnyObject,
+public protocol RichTextViewComponent: AnyObject,
     RichTextPresenter,
     // RichTextAttributeReader,
     // RichTextAttributeWriter,
@@ -144,7 +144,7 @@ public protocol RichTextViewRepresentable: AnyObject,
 
 // MARK: - Public Extension
 
-public extension RichTextViewRepresentable {
+public extension RichTextViewComponent {
 
     /**
      Alert a title and message, using "OK" as button text.
@@ -199,7 +199,7 @@ public extension RichTextViewRepresentable {
     }
 }
 
-internal extension RichTextViewRepresentable {
+internal extension RichTextViewComponent {
 
     /**
      This setup function can be called by all implemetations,

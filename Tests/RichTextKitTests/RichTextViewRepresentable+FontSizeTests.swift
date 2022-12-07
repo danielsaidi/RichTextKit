@@ -1,5 +1,5 @@
 //
-//  RichTextViewRepresentable+FontSizeTests.swift
+//  RichTextViewComponent+FontSizeTests.swift
 //  RichTextKitTests
 //
 //  Created by Daniel Saidi on 2022-12-06.
@@ -18,9 +18,9 @@ import AppKit
 import RichTextKit
 import XCTest
 
-class RichTextViewRepresentable_FontSizeTests: XCTestCase {
+class RichTextViewComponent_FontSizeTests: XCTestCase {
 
-    var textView: RichTextViewRepresentable!
+    var textView: RichTextViewComponent!
 
     let size: CGFloat = 666
     let font = FontRepresentable.systemFont(ofSize: 666)
@@ -51,8 +51,6 @@ class RichTextViewRepresentable_FontSizeTests: XCTestCase {
     func assertNonEqualFontSize(_ attr: Any?) {
         XCTAssertNotEqual((attr as? FontRepresentable)?.pointSize, size)
     }
-
-
 
 
     func testCurrentFontWorksForSelectedRange() {

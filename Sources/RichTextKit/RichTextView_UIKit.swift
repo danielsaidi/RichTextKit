@@ -21,10 +21,10 @@ extension RichTextView: UIDropInteractionDelegate {}
 
  The view inhertits `NSTextField` in AppKit and `UITextField`
  in UIKit. It aims to make these views behave more alike and
- make them implement ``RichTextViewRepresentable``, which is
- the protocol that is used within this library.
+ make them implement ``RichTextViewComponent``, which is the
+ protocol that is used within this library.
  */
-open class RichTextView: UITextView, RichTextViewRepresentable {
+open class RichTextView: UITextView, RichTextViewComponent {
 
     // MARK: - Properties
 
@@ -167,9 +167,9 @@ open class RichTextView: UITextView, RichTextViewRepresentable {
        - message: The alert message.
        - buttonTitle: The alert button title.
      */
-    open func alert(_ title: String, message: String) {
+    open func alert(title: String, message: String, buttonTitle: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        let action = UIAlertAction(title: buttonTitle, style: .default, handler: nil)
         alert.addAction(action)
         let controller = window?.rootViewController?.presentedViewController
         controller?.present(alert, animated: true, completion: nil)

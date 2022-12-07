@@ -15,10 +15,10 @@ import AppKit
 
  The view inhertits `NSTextField` in AppKit and `UITextField`
  in UIKit. It aims to make these views behave more alike and
- make them implement ``RichTextViewRepresentable``, which is
- the protocol that is used within this library.
+ make them implement ``RichTextViewComponent``, which is the
+ protocol that is used within this library.
  */
-open class RichTextView: NSTextView, RichTextViewRepresentable {
+open class RichTextView: NSTextView, RichTextViewComponent {
 
     // MARK: - Properties
     
