@@ -18,7 +18,9 @@ Until then, features may be deprecated in a minor version and removed in the nex
 * `RichTextCoordinator` `resetHighlightedRangeAppearance()` is now public.
 * `RichTextCoordinator` `text` is now mutable.
 * `RichTextDataFormat` has a new vendor-specific data format.
-* `RichTextImageAttachment` is now open for inheritance. 
+* `RichTextImageAttachment` is now open for inheritance.
+* `RichTextView` is now open for inheritance.
+* `RichTextView` drop interaction functionality is now open. 
 * `String` extensions have been made public.
 
 ### 🗑️ Deprecated
@@ -32,6 +34,7 @@ Until then, features may be deprecated in a minor version and removed in the nex
 
 ### 💥 Breaking Changes
   
+* `RichTextView` alert function `title` parameter is no longer implicit.
 * `RichTextViewRepresentable` `decrementFontSize` has been renamed to `decrementCurrentFontSize` and has no range parameter.
 * `RichTextViewRepresentable` `incrementFontSize` has been renamed to `incrementCurrentFontSize` and has no range parameter.  
 

@@ -19,7 +19,7 @@ import Foundation
 public protocol RichTextReader {
 
     /**
-     Get the attributed string from the implementing type.
+     The attributed string to use as rich text.
      */
     var attributedString: NSAttributedString { get }
 }
@@ -27,20 +27,19 @@ public protocol RichTextReader {
 extension NSAttributedString: RichTextReader {
 
     /**
-     This type returns itself as attributed string.
+     This type returns itself as the attributed string.
      */
-    public var attributedString: NSAttributedString {
-        self
-    }
+    public var attributedString: NSAttributedString { self }
 }
 
 public extension RichTextReader {
 
     /**
-     Get the rich text provided by the implementing type.
+     The rich text to use.
 
-     This is a convenience alias for ``attributedString`` to
-     get a property that uses the rich text naming.
+     This is a convenience name alias for ``attributedString``
+     to provide this type with a property that uses the rich
+     text naming convention.
      */
     var richText: NSAttributedString {
         attributedString
@@ -49,7 +48,8 @@ public extension RichTextReader {
     /**
      Get the range of the entire ``richText``.
 
-     This uses ``safeRange(for:)`` to return a safe range.
+     This uses ``safeRange(for:)`` to return a range that is
+     always valid for the current rich text.
      */
     var richTextRange: NSRange {
         let range = NSRange(location: 0, length: richText.length)
@@ -60,8 +60,9 @@ public extension RichTextReader {
     /**
      Get the rich text at a certain range.
 
-     Since this function accounts for invalid ranges, always
-     use this function instead of `attributedSubstring`,
+     Since this function uses ``safeRange(for:)`` to account
+     for invalid ranges, always use this function instead of
+     the unsafe `attributedSubstring` rich text function.
 
      - Parameters:
        - range: The range for which to get the rich text.

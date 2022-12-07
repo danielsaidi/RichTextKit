@@ -11,8 +11,8 @@ import SwiftUI
 
 /**
  This SwiftUI text editor can be used to edit rich text with
- an embedded ``RichTextView`` view, a ``RichTextContext`` as
- well as a ``RichTextCoordinator``.
+ an embedded ``RichTextView``, a ``RichTextContext`` as well
+ as a ``RichTextCoordinator``.
 
  When you create an editor, you just have to provide it with
  a rich text context. The editor will then set up everything

@@ -10,11 +10,18 @@
 import AppKit
 
 /**
- This view inhertits and extends `NSTextField` in AppKit and
- `UITextField` in UIKit.
- */
-public class RichTextView: NSTextView, RichTextViewRepresentable {
+ This is a platform-agnostic rich text view that can be used
+ in both UIKit and AppKit.
 
+ The view inhertits `NSTextField` in AppKit and `UITextField`
+ in UIKit. It aims to make these views behave more alike and
+ make them implement ``RichTextViewRepresentable``, which is
+ the protocol that is used within this library.
+ */
+open class RichTextView: NSTextView, RichTextViewRepresentable {
+
+    // MARK: - Properties
+    
     /**
      The style to use when highlighting text in the view.
      */
@@ -36,7 +43,7 @@ public class RichTextView: NSTextView, RichTextViewRepresentable {
     /**
      Paste the current pasteboard content into the text view.
      */
-    public override func paste(_ sender: Any?) {
+    open override func paste(_ sender: Any?) {
         let pasteboard = NSPasteboard.general
         if let image = pasteboard.image {
             return pasteImage(image, at: selectedRange.location)
@@ -48,7 +55,7 @@ public class RichTextView: NSTextView, RichTextViewRepresentable {
      Try to perform a certain drag operation, which will get
      and paste images from the drag info into the text.
      */
-    public override func performDragOperation(_ draggingInfo: NSDraggingInfo) -> Bool {
+    open override func performDragOperation(_ draggingInfo: NSDraggingInfo) -> Bool {
         let pasteboard = draggingInfo.draggingPasteboard
         if let images = pasteboard.images, images.count > 0 {
             pasteImages(images, at: selectedRange().location, moveCursorToPastedContent: true)
@@ -56,25 +63,19 @@ public class RichTextView: NSTextView, RichTextViewRepresentable {
         }
         return super.performDragOperation(draggingInfo)
     }
-}
 
 
-// MARK: - Setup
-
-public extension RichTextView {
+    // MARK: - Setup
 
     /**
      Setup the rich text view with a rich text and a certain
-     data format.
-
-     We should later make all these configurations easier to
-     customize.
+     ``RichTextDataFormat``.
 
      - Parameters:
        - text: The text to edit with the text view.
        - format: The rich text format to edit.
      */
-    func setup(
+    open func setup(
         with text: NSAttributedString,
         format: RichTextDataFormat
     ) {
@@ -88,10 +89,75 @@ public extension RichTextView {
         setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         setupInitialFontSize(for: text)
     }
+
+
+    // MARK: - Open Functionality
+
+    /**
+     Alert a certain title and message.
+
+     - Parameters:
+       - title: The alert title.
+       - message: The alert message.
+       - buttonTitle: The alert button title.
+     */
+    open func alert(title: String, message: String, buttonTitle: String) {
+        let alert = NSAlert()
+        alert.messageText = title
+        alert.informativeText = message
+        alert.alertStyle = NSAlert.Style.warning
+        alert.addButton(withTitle: buttonTitle)
+        alert.runModal()
+    }
+
+    /**
+     Copy the current selection.
+     */
+    open func copySelection() {
+        let pasteboard = NSPasteboard.general
+        let range = safeRange(for: selectedRange)
+        let text = richText(at: range)
+        pasteboard.clearContents()
+        pasteboard.setString(text.string, forType: .string)
+    }
+
+    /**
+     Try to redo the latest undone change.
+     */
+    open func redoLatestChange() {
+        undoManager?.redo()
+    }
+
+    /**
+     Scroll to a certain range.
+
+     - Parameters:
+       - range: The range to scroll to.
+     */
+    open func scroll(to range: NSRange) {
+        scrollRangeToVisible(range)
+    }
+
+    /**
+     Set the rich text in the text view.
+
+     - Parameters:
+       - text: The rich text to set.
+     */
+    open func setRichText(_ text: NSAttributedString) {
+        attributedString = text
+    }
+
+    /**
+     Undo the latest change.
+     */
+    open func undoLatestChange() {
+        undoManager?.undo()
+    }
 }
 
 
-// MARK: - Public Functionality
+// MARK: - Public Extensions
 
 public extension RichTextView {
 
@@ -104,66 +170,6 @@ public extension RichTextView {
     var textContentInset: CGSize {
         get { textContainerInset }
         set { textContainerInset = newValue }
-    }
-
-
-    /**
-     Alert a certain title and message.
-
-     This view uses an `NSAlert` to alert messages.
-     */
-    func alert(_ title: String, message: String) {
-        let alert = NSAlert()
-        alert.messageText = title
-        alert.informativeText = message
-        alert.alertStyle = NSAlert.Style.warning
-        alert.addButton(withTitle: "OK")
-        alert.runModal()
-    }
-
-    /**
-     Copy the current selection.
-     */
-    func copySelection() {
-        let pasteboard = NSPasteboard.general
-        let range = safeRange(for: selectedRange)
-        let text = richText(at: range)
-        pasteboard.clearContents()
-        pasteboard.setString(text.string, forType: .string)
-    }
-
-    /**
-     Try to redo the latest undone change.
-     */
-    func redoLatestChange() {
-        undoManager?.redo()
-    }
-
-    /**
-     Scroll to a certain range.
-
-     - Parameters:
-       - range: The range to scroll to.
-     */
-    func scroll(to range: NSRange) {
-        scrollRangeToVisible(range)
-    }
-
-    /**
-     Set the rich text in the text view.
-
-     - Parameters:
-       - text: The rich text to set.
-     */
-    func setRichText(_ text: NSAttributedString) {
-        attributedString = text
-    }
-
-    /**
-     Try to undo the latest change.
-     */
-    func undoLatestChange() {
-        undoManager?.undo()
     }
 }
 

@@ -36,7 +36,7 @@ public class RichTextContext: ObservableObject {
     }
 
 
-    // MARK: - Properties
+    // MARK: - Bindings
 
     /**
      A custom binding that can be used to set the background
@@ -46,6 +46,17 @@ public class RichTextContext: ObservableObject {
         Binding(
             get: { Color(self.backgroundColor ?? .clear) },
             set: { self.backgroundColor = ColorRepresentable($0)}
+        )
+    }
+
+    /**
+     A custom binding that can be used to set the foreground
+     color with e.g. a SwitUI `ColorPicker`.
+     */
+    public var foregroundColorBinding: Binding<Color> {
+        Binding(
+            get: { Color(self.foregroundColor ?? .clear) },
+            set: { self.foregroundColor = ColorRepresentable($0)}
         )
     }
 
@@ -99,17 +110,6 @@ public class RichTextContext: ObservableObject {
      */
     @Published
     public var foregroundColor: ColorRepresentable?
-
-    /**
-     A custom binding that can be used to set the foreground
-     color with e.g. a SwitUI `ColorPicker`.
-     */
-    public var foregroundColorBinding: Binding<Color> {
-        Binding(
-            get: { Color(self.foregroundColor ?? .clear) },
-            set: { self.foregroundColor = ColorRepresentable($0)}
-        )
-    }
 
     /**
      The currently highlighted range, if any.
@@ -333,7 +333,10 @@ public extension RichTextContext {
     }
 
     /**
-     Set ``selectedRange`` to a new, optional range.
+     Set ``selectedRange`` to a new range and start editing.
+
+     - Parameters:
+       - range: The range to select.
      */
     func selectRange(_ range: NSRange) {
         isEditingText = true

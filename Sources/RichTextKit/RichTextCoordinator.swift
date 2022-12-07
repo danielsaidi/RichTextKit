@@ -31,8 +31,8 @@ open class RichTextCoordinator: NSObject {
 
      - Parameters:
        - text: The rich text to edit.
-       - textView: The rich text view used to edit the text.
-       - context: The rich text context to keep in sync.
+       - textView: The rich text view to keep in sync.
+       - richTextContext: The context to keep in sync.
      */
     public init(
         text: Binding<NSAttributedString>,

@@ -34,7 +34,8 @@ public protocol RichTextViewRepresentable: AnyObject,
     // RichTextFontWriter,
     RichTextImageAttachmentManager,
     // RichTextStyleReader,
-    RichTextStyleWriter {
+    RichTextStyleWriter
+{
         
     /**
      The text view's frame.
@@ -72,27 +73,41 @@ public protocol RichTextViewRepresentable: AnyObject,
     var typingAttributes: RichTextAttributes { get set }
 
 
+    // MARK: - Setup
+
     /**
      Setup the rich text view with a rich text and a certain
-     data format.
+     ``RichTextDataFormat``.
+
+     - Parameters:
+       - text: The text to edit with the text view.
+       - format: The rich text format to edit.
      */
     func setup(
         with text: NSAttributedString,
-        format: RichTextDataFormat)
+        format: RichTextDataFormat
+    )
 
+
+    // MARK: - Functions
 
     /**
      Alert a certain title and message.
+
+     - Parameters:
+       - title: The alert title.
+       - message: The alert message.
+       - buttonTitle: The alert button title.
      */
-    func alert(_ title: String, message: String)
-    
+    func alert(title: String, message: String, buttonTitle: String)
+
     /**
      Copy the current selection.
      */
     func copySelection()
 
     /**
-     Redo the latest undone change.
+     Try to redo the latest undone change.
      */
     func redoLatestChange()
 
@@ -126,7 +141,21 @@ public protocol RichTextViewRepresentable: AnyObject,
     func undoLatestChange()
 }
 
+
+// MARK: - Public Extension
+
 public extension RichTextViewRepresentable {
+
+    /**
+     Alert a title and message, using "OK" as button text.
+
+     - Parameters:
+       - title: The alert title.
+       - message: The alert message.
+     */
+    func alert(title: String, message: String) {
+        alert(title: title, message: message, buttonTitle: "OK")
+    }
 
     /**
      Move the text cursor to a certain input index.

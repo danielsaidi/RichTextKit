@@ -10,11 +10,11 @@ import Foundation
 
 /**
  This protocol can be implemented any types that can present
- a rich text and provide a selected range.
+ a rich text and provide a ``selectedRange``.
 
- The protocol extends the ``RichTextReader`` protocol with a
- selected range. This makes it possible to provide even more
- properties and features.
+ This protocol is implemented by ``RichTextEditor`` since it
+ can both present and select text. It is also implemented by
+ the platform-specific ``RichTextView`` components.
  */
 public protocol RichTextPresenter: RichTextReader {
     

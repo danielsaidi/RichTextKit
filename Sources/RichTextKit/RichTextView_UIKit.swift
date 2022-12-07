@@ -9,11 +9,24 @@
 #if os(iOS) || os(tvOS)
 import UIKit
 
+#if os(iOS)
+import UniformTypeIdentifiers
+
+extension RichTextView: UIDropInteractionDelegate {}
+#endif
+
 /**
- This view inhertits and extends `NSTextField` in AppKit and
- `UITextField` in UIKit.
+ This is a platform-agnostic rich text view that can be used
+ in both UIKit and AppKit.
+
+ The view inhertits `NSTextField` in AppKit and `UITextField`
+ in UIKit. It aims to make these views behave more alike and
+ make them implement ``RichTextViewRepresentable``, which is
+ the protocol that is used within this library.
  */
-public class RichTextView: UITextView, RichTextViewRepresentable {
+open class RichTextView: UITextView, RichTextViewRepresentable {
+
+    // MARK: - Properties
 
     /**
      The style to use when highlighting text in the view.
@@ -36,6 +49,7 @@ public class RichTextView: UITextView, RichTextViewRepresentable {
         }
     }
 
+
     #if os(iOS)
 
     /**
@@ -45,7 +59,15 @@ public class RichTextView: UITextView, RichTextViewRepresentable {
         UIDropInteraction(delegate: self)
     }()
 
+    /**
+     The interaction types that are supported by drag & drop.
+     */
+    var supportedDropInteractionTypes: [UTType] {
+        [.image, .text, .plainText, .utf8PlainText, .utf16PlainText]
+    }
+
     #endif
+
 
     /**
      This keeps track of the first time a valid frame is set.
@@ -69,7 +91,7 @@ public class RichTextView: UITextView, RichTextViewRepresentable {
      font size adjustment, but that also didn't work. So now
      we initialize this once, when the frame is first set.
      */
-    public override var frame: CGRect {
+    open override var frame: CGRect {
         didSet {
             if frame.size == .zero { return }
             if !isInitialFrameSetupNeeded { return }
@@ -82,7 +104,7 @@ public class RichTextView: UITextView, RichTextViewRepresentable {
     /**
      Check whether or not a certain action can be performed.
      */
-    public override func canPerformAction(
+    open override func canPerformAction(
         _ action: Selector,
         withSender sender: Any?
     ) -> Bool {
@@ -97,7 +119,7 @@ public class RichTextView: UITextView, RichTextViewRepresentable {
     /**
      Paste the current content of the general pasteboard.
      */
-    public override func paste(_ sender: Any?) {
+    open override func paste(_ sender: Any?) {
         let pasteboard = UIPasteboard.general
         if let image = pasteboard.image {
             return pasteImage(image, at: selectedRange.location)
@@ -105,21 +127,19 @@ public class RichTextView: UITextView, RichTextViewRepresentable {
         super.paste(sender)
     }
     #endif
-}
 
 
-// MARK: - Setup
-
-public extension RichTextView {
+    // MARK: - Setup
 
     /**
      Setup the rich text view with a rich text and a certain
-     data format.
+     ``RichTextDataFormat``.
 
-     We should later make all these configurations easier to
-     customize.
+     - Parameters:
+       - text: The text to edit with the text view.
+       - format: The rich text format to edit.
      */
-    func setup(
+    open func setup(
         with text: NSAttributedString,
         format: RichTextDataFormat
     ) {
@@ -135,10 +155,244 @@ public extension RichTextView {
         setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         setupInitialFontSize(for: text)
     }
+
+
+    // MARK: - Open Functionality
+
+    /**
+     Alert a certain title and message.
+
+     - Parameters:
+       - title: The alert title.
+       - message: The alert message.
+       - buttonTitle: The alert button title.
+     */
+    open func alert(_ title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(action)
+        let controller = window?.rootViewController?.presentedViewController
+        controller?.present(alert, animated: true, completion: nil)
+    }
+
+    /**
+     Copy the current selection.
+     */
+    open func copySelection() {
+        #if os(iOS)
+        let pasteboard = UIPasteboard.general
+        let range = safeRange(for: selectedRange)
+        let text = richText(at: range)
+        pasteboard.string = text.string
+        #else
+        print("Pasteboard is not available on this platform")
+        #endif
+    }
+
+    /**
+     Get the frame of a certain range.
+
+     - Parameters:
+       - range: The range to get the frame from.
+     */
+    open func frame(of range: NSRange) -> CGRect {
+        let beginning = beginningOfDocument
+        guard
+            let start = position(from: beginning, offset: range.location),
+            let end = position(from: start, offset: range.length),
+            let textRange = textRange(from: start, to: end)
+        else { return .zero }
+        let rect = firstRect(for: textRange)
+        return convert(rect, from: textInputView)
+    }
+
+    /**
+     Get the text range at a certain point.
+
+     - Parameters:
+       - index: The text index to get the range from.
+     */
+    open func range(at index: CGPoint) -> NSRange? {
+        guard let range = characterRange(at: index) else { return nil }
+        let location = offset(from: beginningOfDocument, to: range.start)
+        let length = offset(from: range.start, to: range.end)
+        return NSRange(location: location, length: length)
+    }
+
+    /**
+     Try to redo the latest undone change.
+     */
+    open func redoLatestChange() {
+        undoManager?.redo()
+    }
+
+    /**
+     Scroll to a certain range.
+
+     - Parameters:
+       - range: The range to scroll to.
+     */
+    open func scroll(to range: NSRange) {
+        let caret = frame(of: range)
+        scrollRectToVisible(caret, animated: true)
+    }
+
+    /**
+     Set the rich text in the text view.
+
+     - Parameters:
+       - text: The rich text to set.
+     */
+    open func setRichText(_ text: NSAttributedString) {
+        attributedString = text
+    }
+
+    /**
+     Set the selected range in the text view.
+
+     - Parameters:
+       - range: The range to set.
+     */
+    open func setSelectedRange(_ range: NSRange) {
+        selectedRange = range
+    }
+
+    /**
+     Undo the latest change.
+     */
+    open func undoLatestChange() {
+        undoManager?.undo()
+    }
+
+
+    #if os(iOS)
+
+    // MARK: - UIDropInteractionDelegate
+
+    /**
+     Whether or not the view can handle a drop session.
+     */
+    open func dropInteraction(
+        _ interaction: UIDropInteraction,
+        canHandle session: UIDropSession
+    ) -> Bool {
+        if session.hasImage && imageDropConfiguration == .disabled { return false }
+        let identifiers = supportedDropInteractionTypes.map { $0.identifier }
+        return session.hasItemsConforming(toTypeIdentifiers: identifiers)
+    }
+
+    /**
+     Handle an updated drop session.
+
+     - Parameters:
+       - interaction: The drop interaction to handle.
+       - sessionDidUpdate: The drop session to handle.
+     */
+    open func dropInteraction(
+        _ interaction: UIDropInteraction,
+        sessionDidUpdate session: UIDropSession
+    ) -> UIDropProposal {
+        let operation = dropInteractionOperation(for: session)
+        return UIDropProposal(operation: operation)
+    }
+
+    /**
+     The drop interaction operation for the provided session.
+
+     - Parameters:
+       - session: The drop session to handle.
+     */
+    open func dropInteractionOperation(
+        for session: UIDropSession
+    ) -> UIDropOperation {
+        guard session.hasDroppableContent else { return .forbidden }
+        let location = session.location(in: self)
+        return frame.contains(location) ? .copy : .cancel
+    }
+
+    /**
+     Handle a performed drop session.
+
+     In this function, we reverse the item collection, since
+     each item will be pasted at the drop point, which would
+     result in a revese result.
+     */
+    open func dropInteraction(
+        _ interaction: UIDropInteraction,
+        performDrop session: UIDropSession
+    ) {
+        guard session.hasDroppableContent else { return }
+        let location = session.location(in: self)
+        guard let range = self.range(at: location) else { return }
+        performImageDrop(with: session, at: range)
+        performTextDrop(with: session, at: range)
+    }
+
+
+    // MARK: - Drop Interaction Support
+
+    /**
+     Performe an image drop session.
+
+     We reverse the item collection, since each item will be
+     pasted at the original drop point.
+     */
+    open func performImageDrop(with session: UIDropSession, at range: NSRange) {
+        guard validateImageInsertion(for: imageDropConfiguration) else { return }
+        session.loadObjects(ofClass: UIImage.self) { items in
+            let images = items.compactMap { $0 as? UIImage }.reversed()
+            images.forEach { self.pasteImage($0, at: range.location) }
+        }
+    }
+
+    /**
+     Perform a text drop session.
+
+     We reverse the item collection, since each item will be
+     pasted at the original drop point.
+     */
+    open func performTextDrop(with session: UIDropSession, at range: NSRange) {
+        if session.hasImage { return }
+        _ = session.loadObjects(ofClass: String.self) { items in
+            let strings = items.reversed()
+            strings.forEach { self.pasteText($0, at: range.location) }
+        }
+    }
+    
+    /**
+     Refresh the drop interaction based on the drop config.
+     */
+    open func refreshDropInteraction() {
+        switch imageDropConfiguration {
+        case .disabled:
+            removeInteraction(imageDropInteraction)
+        case .disabledWithWarning, .enabled:
+            addInteraction(imageDropInteraction)
+        }
+    }
+
+    #endif
 }
 
+#if os(iOS)
+private extension UIDropSession {
 
-// MARK: - Public Functionality
+    var hasDroppableContent: Bool {
+        hasImage || hasText
+    }
+
+    var hasImage: Bool {
+        canLoadObjects(ofClass: UIImage.self)
+    }
+
+    var hasText: Bool {
+        canLoadObjects(ofClass: String.self)
+    }
+}
+#endif
+
+
+// MARK: - Public Extensions
 
 public extension RichTextView {
 
@@ -163,114 +417,17 @@ public extension RichTextView {
                 right: newValue.width)
         }
     }
-
-
-    /**
-     Alert a certain title and message.
-
-     This view uses a `UIAlertController` to alert messages.
-     */
-    func alert(_ title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alert.addAction(action)
-        let controller = window?.rootViewController?.presentedViewController
-        controller?.present(alert, animated: true, completion: nil)
-    }
-    
-    /**
-     Copy the current selection.
-     */
-    func copySelection() {
-        #if os(iOS)
-        let pasteboard = UIPasteboard.general
-        let range = safeRange(for: selectedRange)
-        let text = richText(at: range)
-        pasteboard.string = text.string
-        #else
-        print("Pasteboard is not available on this platform")
-        #endif
-    }
-
-    /**
-     Get the frame of a certain range.
-
-     - Parameters:
-       - range: The range to get the frame from.
-     */
-    func frame(of range: NSRange) -> CGRect {
-        let beginning = beginningOfDocument
-        guard
-            let start = position(from: beginning, offset: range.location),
-            let end = position(from: start, offset: range.length),
-            let textRange = textRange(from: start, to: end)
-        else { return .zero }
-        let rect = firstRect(for: textRange)
-        return convert(rect, from: textInputView)
-    }
-
-    /**
-     Get the text range at a certain point.
-
-     - Parameters:
-       - index: The text index to get the range from.
-     */
-    func range(at index: CGPoint) -> NSRange? {
-        guard let range = characterRange(at: index) else { return nil }
-        let location = offset(from: beginningOfDocument, to: range.start)
-        let length = offset(from: range.start, to: range.end)
-        return NSRange(location: location, length: length)
-    }
-
-    /**
-     Try to redo the latest undone change.
-     */
-    func redoLatestChange() {
-        undoManager?.redo()
-    }
-
-    /**
-     Scroll the text view to a certain range.
-
-     - Parameters:
-       - range: The range to scroll to.     
-     */
-    func scroll(to range: NSRange) {
-        let caret = frame(of: range)
-        scrollRectToVisible(caret, animated: true)
-    }
-
-    /**
-     Set the rich text in the text view.
-     */
-    func setRichText(_ text: NSAttributedString) {
-        attributedString = text
-    }
-
-    /**
-     Set the selected range in the text view.
-     */
-    func setSelectedRange(_ range: NSRange) {
-        selectedRange = range
-    }
-
-    /**
-     Try to undo the latest change.
-     */
-    func undoLatestChange() {
-        undoManager?.undo()
-    }
 }
 
 
 // MARK: - RichTextProvider
 
-extension RichTextView {
+public extension RichTextView {
 
     /**
      Get the rich text that is managed by the text view.
      */
-    public var attributedString: NSAttributedString {
+    var attributedString: NSAttributedString {
         get { super.attributedText ?? NSAttributedString(string: "") }
         set { attributedText = newValue }
     }

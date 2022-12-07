@@ -87,7 +87,7 @@ public extension RichTextViewRepresentable {
         case .disabled:
             return false
         case .disabledWithWarning(let title, let message):
-            alert(title, message: message)
+            alert(title: title, message: message)
             return false
         case .enabled:
             return true
