@@ -27,7 +27,7 @@ class RichTextContextTests: XCTestCase {
         XCTAssertNil(context.highlightedRange)
         XCTAssertEqual(context.selectedRange.location, 0)
         XCTAssertEqual(context.selectedRange.length, 0)
-        XCTAssertEqual(context.alignment, .left)
+        XCTAssertEqual(context.textAlignment, .left)
     }
 
     func testHighlightingRangeSetsHighlightedRange() {

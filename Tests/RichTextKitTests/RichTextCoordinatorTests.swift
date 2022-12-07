@@ -60,9 +60,9 @@ class RichTextCoordinatorTests: XCTestCase {
         XCTAssertEqual(textContext.isUnderlined, textView.currentRichTextStyles.hasStyle(.underlined))
         XCTAssertEqual(textContext.selectedRange, textView.selectedRange)
         #if os(iOS) || os(tvOS)
-        XCTAssertEqual(textContext.alignment, textView.currentRichTextAlignment)
+        XCTAssertEqual(textContext.textAlignment, textView.currentRichTextAlignment)
         #elseif os(macOS)
-        XCTAssertEqual(textContext.alignment, macOSAlignment)
+        XCTAssertEqual(textContext.textAlignment, macOSAlignment)
         #endif
     }
 

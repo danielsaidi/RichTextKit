@@ -185,7 +185,6 @@ extension RichTextCoordinator {
      */
     func syncContextWithTextView() {
         let styles = textView.currentRichTextStyles
-        richTextContext.alignment = textView.currentRichTextAlignment ?? .left
         richTextContext.backgroundColor = textView.currentBackgroundColor
         richTextContext.canCopy = textView.hasSelectedRange
         richTextContext.canRedoLatestChange = textView.undoManager?.canRedo ?? false
@@ -198,6 +197,7 @@ extension RichTextCoordinator {
         richTextContext.isUnderlined = styles.hasStyle(.underlined)
         richTextContext.isEditingText = textView.isFirstResponder
         richTextContext.selectedRange = textView.selectedRange
+        richTextContext.textAlignment = textView.currentRichTextAlignment ?? .left
         updateTextViewAttributesIfNeeded()
     }
 

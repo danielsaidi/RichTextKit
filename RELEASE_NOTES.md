@@ -28,6 +28,7 @@ Until then, features may be deprecated in a minor version and removed in the nex
 * `FontSizePicker` `sizes` has been renamed to `values`.
 * `PdfDataWriter` has been renamed to `PdfDataReader`.
 * `RichTextAlignmentPicker` `alignments` has been renamed to `values`.
+* `RichTextContext` `alignment` has been renamed to `textAlignment`.
 * `RichTextContext` `standardHighlightingStyle` has been renamed to `highlightingStyle`.
 * `RichTextCoordinator` `context` has been renamed to `richTextContext`.
 * `RichTextDataWriter` `richTextData(with:)` has been renamed to `richTextData(for:)`.

@@ -39,7 +39,7 @@ extension RichTextCoordinator {
 private extension RichTextCoordinator {
 
     func subscribeToAlignment() {
-        richTextContext.$alignment
+        richTextContext.$textAlignment
             .sink(
                 receiveCompletion: { _ in },
                 receiveValue: { [weak self] in self?.setAlignment(to: $0) })

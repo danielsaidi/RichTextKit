@@ -64,12 +64,6 @@ public class RichTextContext: ObservableObject {
     // MARK: - Published Properties
 
     /**
-     The current text alignment, if any.
-     */
-    @Published
-    public var alignment: RichTextAlignment = .left
-
-    /**
      The current background color, if any.
      */
     @Published
@@ -188,6 +182,12 @@ public class RichTextContext: ObservableObject {
      */
     @Published
     public var shouldUndoLatestChange = false
+
+    /**
+     The current text alignment, if any.
+     */
+    @Published
+    public var textAlignment: RichTextAlignment = .left
 }
 
 public extension RichTextContext {

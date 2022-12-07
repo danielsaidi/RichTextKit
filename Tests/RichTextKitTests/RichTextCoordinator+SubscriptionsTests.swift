@@ -121,7 +121,7 @@ class RichTextCoordinator_SubscriptionsTests: XCTestCase {
     func testTextAlignmentUpdatesTextView() {
         textView.setCurrentRichTextAlignment(to: .left)
         XCTAssertEqual(textView.currentRichTextAlignment, .left)
-        textContext.alignment = .right
+        textContext.textAlignment = .right
         XCTAssertEqual(textView.currentRichTextAlignment, .right)
     }
 }
