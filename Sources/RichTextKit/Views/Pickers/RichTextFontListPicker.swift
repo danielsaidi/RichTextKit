@@ -1,5 +1,5 @@
 //
-//  FontListPicker.swift
+//  RichTextFontListPicker.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-06-01.
@@ -12,18 +12,18 @@ import SwiftUI
  This font picker uses a plain `List` to list provided fonts,
  of which one can be selected.
 
- Unlike the ``FontPicker`` this picker will render the fonts
+ Unlike the ``RichTextFontPicker`` this picker renders fonts
  correctly on all platforms. However, unlike regular SwiftUI
  `Picker` views, it must be presented manually, for instance
- with a sheet or a full screen cover.
+ in a sheet or a full screen cover.
 
- This picker also provides you with native list behavior for
- all platforms, which however may also limit you if you want
- more control over how font items are listed. Consider using
- a ``FontPicker`` for a native picker, or a ``FontListPicker``
- if you want more control over hot items are listed.
+ This picker also uses native list behavior on all platforms,
+ which may limit you if you want more control over how fonts
+ are listed. You can use ``RichTextFontPicker`` for a native
+ picker, or a ``RichTextFontForEachPicker`` if you want more
+ control over hot items are listed.
  */
-public struct FontListPicker: View {
+public struct RichTextFontListPicker: View {
     
     /**
      Create a font picker.
@@ -38,7 +38,7 @@ public struct FontListPicker: View {
     public init(
         selection: Binding<FontName>,
         selectionTopmost: Bool = false,
-        fonts: [FontPickerFont]? = nil,
+        fonts: [RichTextFontPickerFont]? = nil,
         fontSize: CGFloat = 20,
         dismissAfterPick: Bool = true
     ) {
@@ -53,7 +53,7 @@ public struct FontListPicker: View {
 
     public typealias FontName = String
 
-    private var fonts: [FontPickerFont]
+    private var fonts: [RichTextFontPickerFont]
     private let fontSize: CGFloat
     private let dismissAfterPick: Bool
     
@@ -62,35 +62,25 @@ public struct FontListPicker: View {
     
     public var body: some View {
         let font = Binding(
-            get: { FontPickerFont(fontName: selection) },
+            get: { RichTextFontPickerFont(fontName: selection) },
             set: { selection = $0.fontName }
         )
         
         ListPicker(
             items: fonts,
             selection: font,
-            dismissAfterPick: dismissAfterPick) { font, isSelected in
-                FontPickerItem(
-                    font: font,
-                    fontSize: fontSize,
-                    isSelected: isSelected)
-            }
+            dismissAfterPick: dismissAfterPick
+        ) { font, isSelected in
+            RichTextFontPickerItem(
+                font: font,
+                fontSize: fontSize,
+                isSelected: isSelected
+            )
+        }
     }
 }
 
-private extension View {
-    
-    @ViewBuilder
-    func withTitle(_ title: String) -> some View {
-        #if os(iOS) || os(tvOS) || os(watchOS)
-        self.navigationBarTitle(title)
-        #else
-        self
-        #endif
-    }
-}
-
-struct FontListPicker_Previews: PreviewProvider {
+struct RichTextFontListPicker_Previews: PreviewProvider {
     
     struct Preview: View {
         
@@ -98,7 +88,7 @@ struct FontListPicker_Previews: PreviewProvider {
         
         var body: some View {
             NavigationView {
-                FontListPicker(
+                RichTextFontListPicker(
                     selection: $font)
                 .withTitle("Pick a font")
             }
@@ -107,5 +97,17 @@ struct FontListPicker_Previews: PreviewProvider {
     
     static var previews: some View {
         Preview()
+    }
+}
+
+private extension View {
+
+    @ViewBuilder
+    func withTitle(_ title: String) -> some View {
+        #if os(iOS) || os(tvOS) || os(watchOS)
+        self.navigationBarTitle(title)
+        #else
+        self
+        #endif
     }
 }

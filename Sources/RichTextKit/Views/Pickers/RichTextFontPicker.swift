@@ -1,5 +1,5 @@
 //
-//  FontPicker.swift
+//  RichTextFontPicker.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-06-01.
@@ -9,18 +9,19 @@
 import SwiftUI
 
 /**
- This font picker uses a plain `Picker` to list the provided
- fonts, of which one can be selected.
+ This font picker can be used to pick a font from a list. It
+ will by default use ``RichTextFontPickerFont/all`` fonts.
 
- This view returns a plain SwiftUI `Picker` view that can be
- styled and configured in all ways supported by SwiftUI.
- 
- Note that some platforms don't render custom fonts for some
- picker styles. For these situations, you can use the custom
- ``FontListPicker`` and ``FontForEachPicker`` pickers, which
- give you more control over how fonts are rendered.
+ This view renders a plain `Picker`, which means you can use
+ and configure it in all ways supported by SwiftUI.
+
+ Note that only macOS will render the fonts correctly, while
+ iOS will not render the fonts and tvOS will just list every
+ font in a horizontal list. On these platforms, consider the
+ ``RichTextFontListPicker`` or ``RichTextFontForEachPicker``
+ instead, which can be more customized.
  */
-public struct FontPicker: View {
+public struct RichTextFontPicker: View {
     
     /**
      Create a font picker.
@@ -32,8 +33,9 @@ public struct FontPicker: View {
      */
     public init(
         selection: Binding<FontName>,
-        fonts: [FontPickerFont] = .all,
-        fontSize: CGFloat = 20) {
+        fonts: [RichTextFontPickerFont] = .all,
+        fontSize: CGFloat = 20
+    ) {
         self._selection = selection
         self.fonts = fonts
         self.itemFontSize = fontSize
@@ -42,9 +44,9 @@ public struct FontPicker: View {
 
     public typealias FontName = String
     
-    private let fonts: [FontPickerFont]
+    private let fonts: [RichTextFontPickerFont]
     private let itemFontSize: CGFloat
-    private let selectedFont: FontPickerFont?
+    private let selectedFont: RichTextFontPickerFont?
     
     @Binding
     private var selection: FontName
@@ -52,11 +54,11 @@ public struct FontPicker: View {
     public var body: some View {
         Picker(selection: $selection) {
             ForEach(fonts) { font in
-                FontPickerItem(
+                RichTextFontPickerItem(
                     font: font,
                     fontSize: itemFontSize,
-                    isSelected: false)
-                .tag(font.tag(for: selectedFont, selectedName: selection))
+                    isSelected: false
+                ).tag(font.tag(for: selectedFont, selectedName: selection))
             }
         } label: {
             EmptyView()
@@ -64,7 +66,7 @@ public struct FontPicker: View {
     }
 }
 
-private extension FontPickerFont {
+private extension RichTextFontPickerFont {
     
     /**
      A system font has a font name that may be resolved to a
@@ -73,7 +75,7 @@ private extension FontPickerFont {
      currently selected font name.
      */
     func matches(_ selectedFontName: String) -> Bool {
-        let system = FontPickerFont.systemFontNamePrefix.lowercased()
+        let system = RichTextFontPickerFont.systemFontNamePrefix.lowercased()
         let selected = selectedFontName.lowercased()
         let fontName = self.fontName.lowercased()
         if fontName.isEmpty { return system == selected }
@@ -86,7 +88,7 @@ private extension FontPickerFont {
     /**
      Use the selected font name as tag for the selected font.
      */
-    func tag(for selectedFont: FontPickerFont?, selectedName: String) -> String {
+    func tag(for selectedFont: RichTextFontPickerFont?, selectedName: String) -> String {
         let isSelected = fontName == selectedFont?.fontName
         return isSelected ? selectedName : fontName
     }
@@ -96,11 +98,12 @@ struct FontPicker_Previews: PreviewProvider {
     
     struct Preview: View {
         
-        @State private var selectedFontName = ""
+        @State
+        private var selection = ""
         
         var body: some View {
             NavigationView {
-                FontPicker(selection: $selectedFontName)
+                RichTextFontPicker(selection: $selection)
                     .withStyle()
                     .padding(20)
             }

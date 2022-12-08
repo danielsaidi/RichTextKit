@@ -1,5 +1,5 @@
 //
-//  FontPickerItem.swift
+//  RichTextFontPickerItem.swift
 //  SwiftUIKit
 //
 //  Created by Daniel Saidi on 2022-06-01.
@@ -11,24 +11,25 @@ import SwiftUI
 /**
  This internal struct is used within the custom font pickers.
  */
-struct FontPickerItem: View, ListPickerItem {
+struct RichTextFontPickerItem: View, ListPickerItem {
 
     init(
-        font: FontPickerFont,
+        font: RichTextFontPickerFont,
         fontSize: CGFloat = 20,
-        isSelected: Bool) {
+        isSelected: Bool
+    ) {
         self.font = font
         self.fontSize = fontSize
         self.isSelected = isSelected
     }
 
-    typealias Item = FontPickerFont
+    typealias Item = RichTextFontPickerFont
     
-    let font: FontPickerFont
+    let font: RichTextFontPickerFont
     let fontSize: CGFloat
     let isSelected: Bool
 
-    var item: FontPickerFont { font }
+    var item: RichTextFontPickerFont { font }
     
     var body: some View {
         HStack {

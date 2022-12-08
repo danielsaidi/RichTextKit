@@ -1,5 +1,5 @@
 //
-//  FontSizePicker.swift
+//  RichTextFontSizePicker.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-06-02.
@@ -19,14 +19,14 @@ import SwiftUI
  in the list, since a text can have sizes that aren't in the
  available option set.
  */
-public struct FontSizePicker: View {
+public struct RichTextFontSizePicker: View {
 
     /**
      Create a font picker.
 
      - Parameters:
        - selection: The selected font size.
-       - sizes: The sizes to display in the list, by default ``FontSizePicker/standardFontSizes``.
+       - sizes: The sizes to display in the list, by default ``RichTextFontSizePicker/standardFontSizes``.
      */
     public init(
         selection: Binding<CGFloat>,
@@ -55,7 +55,7 @@ public struct FontSizePicker: View {
     }
 }
 
-public extension FontSizePicker {
+public extension RichTextFontSizePicker {
 
     /**
      The default font sizes to list in a font size picker.
@@ -75,7 +75,7 @@ public extension FontSizePicker {
     }
 }
 
-private extension FontSizePicker {
+private extension RichTextFontSizePicker {
 
     /**
      Get the text to display for a certain font size.
@@ -83,5 +83,22 @@ private extension FontSizePicker {
     func text(for fontSize: CGFloat) -> some View {
         Text("\(Int(fontSize))")
             .fixedSize(horizontal: true, vertical: false)
+    }
+}
+
+struct RichTextFontSizePicker_Previews: PreviewProvider {
+
+    struct Preview: View {
+
+        @State
+        private var selection: CGFloat = 36.0
+
+        var body: some View {
+            RichTextFontSizePicker(selection: $selection)
+        }
+    }
+
+    static var previews: some View {
+        Preview()
     }
 }

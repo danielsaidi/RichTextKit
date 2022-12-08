@@ -18,8 +18,7 @@ public extension RichTextAlignmentPicker {
     var alignments: [RichTextAlignment] { values }
 }
 
-
-public extension FontSizePicker {
+public extension RichTextFontSizePicker {
 
     @available(*, deprecated, message: "Use the values initializer instead.")
     init(
@@ -32,3 +31,18 @@ public extension FontSizePicker {
         )
     }
 }
+
+@available(*, deprecated, renamed: "RichTextFontPicker")
+public typealias FontPicker = RichTextFontPicker
+
+@available(*, deprecated, renamed: "RichTextFontForEachPicker")
+public typealias FontForEachPicker = RichTextFontForEachPicker
+
+@available(*, deprecated, renamed: "RichTextFontListPicker")
+public typealias FontListPicker = RichTextFontListPicker
+
+@available(*, deprecated, renamed: "RichTextFontPickerFont")
+public typealias FontPickerFont = RichTextFontPickerFont
+
+@available(*, deprecated, renamed: "RichTextFontSizePicker")
+public typealias FontSizePicker = RichTextFontSizePicker

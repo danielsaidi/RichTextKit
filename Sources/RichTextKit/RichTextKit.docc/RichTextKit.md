@@ -107,14 +107,6 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 - ``RichTextFontWriter``
 - ``StandardFontSizeProvider``
 
-### Font Pickers
-
-- ``FontPicker``
-- ``FontPickerFont``
-- ``FontForEachPicker``
-- ``FontListPicker``
-- ``FontSizePicker``
-
 ### Images
 
 - ``ImageRepresentable``
@@ -131,7 +123,7 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 ### Pdf
 
 - ``PdfDataError``
-- ``PdfDataWriter``
+- ``PdfDataReader``
 - ``PdfPageConfiguration``
 - ``PdfPageMargins``
 
@@ -144,20 +136,28 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 
 - ``RichTextHighlightingStyle``
 - ``RichTextStyle``
-- ``RichTextStyleButton``
 - ``RichTextStyleReader``
 - ``RichTextStyleWriter``
 
 ### Text Alignment
 
 - ``RichTextAlignment``
-- ``RichTextAlignmentPicker``
 - ``RichTextAlignmentReader``
 - ``RichTextAlignmentWriter``
 
 ### Views - Buttons
 
+- ``RichTextStyleButton``
 
 ### Views - Pickers
 
+- ``RichTextAlignmentPicker``
+- ``RichTextFontPicker``
+- ``RichTextFontPickerFont``
+- ``RichTextFontForEachPicker``
+- ``RichTextFontListPicker``
+- ``RichTextFontSizePicker``
 
+### Views - Toggles
+
+- ``RichTextStyleToggle``

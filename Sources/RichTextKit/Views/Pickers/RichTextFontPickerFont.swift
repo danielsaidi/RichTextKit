@@ -1,5 +1,5 @@
 //
-//  FontPickerFont.swift
+//  RichTextFontPickerFont.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-06-01.
@@ -21,20 +21,23 @@ import UIKit
 
  Instead of referring to actual fonts, this struct refers to
  fonts by name, to simplify view binding in e.g. the pickers.
- You can use `FontPickerFont.all` to get all fonts, then use
- collection extensions to rearrange the fonts if needed.
+
+ You can use ``RichTextFontPickerFont/all`` to get all fonts,
+ then rearrange the fonts if needed.
 
  Some system fonts are special when being listed in a picker
  or displayed elsewhere. One such example is `San Francisco`,
  which must have its name adjusted in order to be presented.
 
  To change the display name of a system font, simply set the
- ``FontPickerFont/standardSystemFontDisplayName`` to another
- value. To customize how the system font for a platform will
- be detected, set ``FontPickerFont/systemFontNamePrefix`` to
+ ``RichTextFontPickerFont/standardSystemFontDisplayName`` to
  another value.
+
+ To change how a font is detected by the system, just change
+ ``RichTextFontPickerFont/systemFontNamePrefix`` to a custom
+ value, which will differ for each platform.
  */
-public struct FontPickerFont: Identifiable, Equatable {
+public struct RichTextFontPickerFont: Identifiable, Equatable {
 
     public init(fontName: String) {
         let fontName = fontName.capitalized
@@ -57,14 +60,14 @@ public struct FontPickerFont: Identifiable, Equatable {
 
 // MARK: - Static Properties
 
-public extension FontPickerFont {
+public extension RichTextFontPickerFont {
 
     /**
      Get all available system fonts.
      */
-    static var all: [FontPickerFont] {
-        let all = FontPickerFont.systemFonts
-        let systemFont = FontPickerFont(fontName: "")
+    static var all: [RichTextFontPickerFont] {
+        let all = RichTextFontPickerFont.systemFonts
+        let systemFont = RichTextFontPickerFont(fontName: "")
         var sorted = all.sorted { $0.fontDisplayName < $1.fontDisplayName }
         sorted.insert(systemFont, at: 0)
         return sorted
@@ -98,7 +101,7 @@ public extension FontPickerFont {
 
 // MARK: - Public Properties
 
-public extension FontPickerFont {
+public extension RichTextFontPickerFont {
     
     /**
      Get the display name for the font.
@@ -127,13 +130,13 @@ public extension FontPickerFont {
 
 // MARK: - Collection Extensions
 
-public extension Collection where Element == FontPickerFont {
+public extension Collection where Element == RichTextFontPickerFont {
 
     /**
      Get all available system fonts.
      */
-    static var all: [FontPickerFont] {
-        FontPickerFont.all
+    static var all: [RichTextFontPickerFont] {
+        RichTextFontPickerFont.all
     }
 
     /**
@@ -142,12 +145,12 @@ public extension Collection where Element == FontPickerFont {
      This function can be used to highlight the current font
      in a picker, by moving it first.
      */
-    func moveTopmost(_ topmost: String) -> [FontPickerFont] {
+    func moveTopmost(_ topmost: String) -> [RichTextFontPickerFont] {
         let topmost = topmost.trimmingCharacters(in: .whitespaces)
         let exists = contains { $0.fontName.lowercased() == topmost.lowercased() }
         guard exists else { return Array(self) }
         var filtered = filter { $0.fontName.lowercased() != topmost.lowercased() }
-        let new = FontPickerFont(fontName: topmost)
+        let new = RichTextFontPickerFont(fontName: topmost)
         filtered.insert(new, at: 0)
         return filtered
     }
@@ -156,24 +159,24 @@ public extension Collection where Element == FontPickerFont {
 
 // MARK: - System Fonts
 
-private extension FontPickerFont {
+private extension RichTextFontPickerFont {
     
     /**
      Get all available font picker fonts.
      */
-    static var systemFonts: [FontPickerFont] {
+    static var systemFonts: [RichTextFontPickerFont] {
         #if canImport(AppKit)
         return NSFontManager.shared
             .availableFontFamilies
             .map {
-                FontPickerFont(fontName: $0)
+                RichTextFontPickerFont(fontName: $0)
             }
         #endif
 
         #if canImport(UIKit)
         return UIFont.familyNames
             .map {
-                FontPickerFont(fontName: $0)
+                RichTextFontPickerFont(fontName: $0)
             }
         #endif
     }

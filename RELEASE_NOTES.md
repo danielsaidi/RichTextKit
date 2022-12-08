@@ -20,12 +20,14 @@ Until then, deprecated features may be removed in the next minor version.
 * `RichTextDataFormat` has a new vendor-specific data format.
 * `RichTextImageAttachment` is now open for inheritance.
 * `RichTextStyleButton` has a new button style.
+* `RichTextStyleToggle` is a new, prominent style button.
 * `RichTextView` is now open for inheritance.
 * `RichTextView` drop interaction functionality is now open. 
 * `String` extensions have been made public.
 
 ### 🗑️ Deprecated
 
+* `Font` picker components have been renamed with a `RichText` prefix.
 * `FontSizePicker` `sizes` has been renamed to `values`.
 * `PdfDataWriter` has been renamed to `PdfDataReader`.
 * `RichTextAlignmentPicker` `alignments` has been renamed to `values`.
