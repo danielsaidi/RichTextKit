@@ -181,10 +181,22 @@ extension RichTextCoordinator {
     }
 
     /**
-     Sync the context with the text view.
+     Sync the rich text context with the text view.
      */
     func syncContextWithTextView() {
+        DispatchQueue.main.async {
+            self.syncContextWithTextViewAfterDelay()
+        }
+    }
+
+    /**
+     Sync the rich text context with the text view after the
+     dispatch queue delay above. The delay will silence some
+     purple alert warnings about how state is updated.
+     */
+    func syncContextWithTextViewAfterDelay() {
         let styles = textView.currentRichTextStyles
+        richTextContext.selectedRange = textView.selectedRange
         richTextContext.backgroundColor = textView.currentBackgroundColor
         richTextContext.canCopy = textView.hasSelectedRange
         richTextContext.canRedoLatestChange = textView.undoManager?.canRedo ?? false
@@ -196,7 +208,6 @@ extension RichTextCoordinator {
         richTextContext.isItalic = styles.hasStyle(.italic)
         richTextContext.isUnderlined = styles.hasStyle(.underlined)
         richTextContext.isEditingText = textView.isFirstResponder
-        richTextContext.selectedRange = textView.selectedRange
         richTextContext.textAlignment = textView.currentRichTextAlignment ?? .left
         updateTextViewAttributesIfNeeded()
     }
