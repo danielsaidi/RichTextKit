@@ -1,0 +1,141 @@
+//
+//  RichTextStyleButton.swift
+//  RichTextKit
+//
+//  Created by Daniel Saidi on 2022-06-04.
+//  Copyright © 2022 Daniel Saidi. All rights reserved.
+//
+
+import SwiftUI
+
+/**
+ This button can be used to toggle ``RichTextStyle``s on and
+ off and will use the .accent color when the style is active.
+
+ This renders a plain `Button`, which means that you can use
+ it in any regular way. The only exception is that the color
+ of the button content is determined by the button style you
+ can provide in the initializer.
+
+ You can apply any button styles to this button. However, if
+ it isn't prominent enough, consider using a `Toggle` with a
+ button style instead.
+ */
+public struct RichTextStyleButton: View {
+
+    /**
+     Create a rich text style button.
+
+     - Parameters:
+       - style: The style to toggle.
+       - buttonStyle: The button style to use, by default ``RichTextStyleButton/Style/standard``.
+       - value: The value to bind to.
+     */
+    public init(
+        style: RichTextStyle,
+        buttonStyle: Style = .standard,
+        value: Binding<Bool>
+    ) {
+        self.style = style
+        self.buttonStyle = buttonStyle
+        self.value = value
+    }
+
+    private let style: RichTextStyle
+    private let buttonStyle: Style
+    private let value: Binding<Bool>
+
+    public var body: some View {
+        Button(action: toggle) {
+            style.icon
+                .foregroundColor(tintColor)
+                .contentShape(Rectangle())
+        }
+    }
+}
+
+public extension RichTextStyleButton {
+
+    /**
+     This style can be used to style a ``RichTextStyleButton``.
+     */
+    struct Style {
+
+        /**
+         Create a rich text style button style.
+
+         - Parameters:
+           - inactiveColor: The color to apply when the button is inactive, by default `.primary`.
+           - activeColor: The color to apply when the button is active, by default `.blue`.
+         */
+        public init(
+            inactiveColor: Color = .primary,
+            activeColor: Color = .blue
+        ) {
+            self.inactiveColor = inactiveColor
+            self.activeColor = activeColor
+        }
+
+        /// The color to apply when the button is inactive.
+        public var inactiveColor: Color
+
+        /// The color to apply when the button is active.
+        public var activeColor: Color
+    }
+}
+
+public extension RichTextStyleButton.Style {
+
+    /**
+     The standard ``RichTextStyleButton`` style.
+     */
+    static var standard = RichTextStyleButton.Style()
+}
+
+private extension RichTextStyleButton {
+
+    var isOn: Bool {
+        value.wrappedValue
+    }
+
+    var tintColor: Color {
+        isOn ? buttonStyle.activeColor : buttonStyle.inactiveColor
+    }
+
+    func toggle() {
+        value.wrappedValue.toggle()
+    }
+}
+
+struct RichTextStyleButton_Previews: PreviewProvider {
+
+    struct Preview: View {
+
+        @State
+        private var isBoldOn = false
+
+        @State
+        private var isItalicOn = true
+
+        @State
+        private var isUnderlinedOn = false
+
+        var body: some View {
+            HStack {
+                RichTextStyleButton(
+                    style: .bold,
+                    value: $isBoldOn)
+                RichTextStyleButton(
+                    style: .italic,
+                    value: $isItalicOn)
+                RichTextStyleButton(
+                    style: .underlined,
+                    value: $isUnderlinedOn)
+            }.padding()
+        }
+    }
+
+    static var previews: some View {
+        Preview()
+    }
+}

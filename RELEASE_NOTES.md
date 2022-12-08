@@ -2,7 +2,7 @@
 
 RichTextKit will use semver after 1.0. 
 
-Until then, features may be deprecated in a minor version and removed in the next minor version.
+Until then, deprecated features may be removed in the next minor version.
 
 
 
@@ -19,6 +19,7 @@ Until then, features may be deprecated in a minor version and removed in the nex
 * `RichTextCoordinator` `text` is now mutable.
 * `RichTextDataFormat` has a new vendor-specific data format.
 * `RichTextImageAttachment` is now open for inheritance.
+* `RichTextStyleButton` has a new button style.
 * `RichTextView` is now open for inheritance.
 * `RichTextView` drop interaction functionality is now open. 
 * `String` extensions have been made public.

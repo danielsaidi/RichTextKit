@@ -70,13 +70,6 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 - ``RichTextReader``
 - ``RichTextWriter``
 
-### Alignment
-
-- ``RichTextAlignment``
-- ``RichTextAlignmentPicker``
-- ``RichTextAlignmentReader``
-- ``RichTextAlignmentWriter``
-
 ### Attributes
 
 - ``RichTextAttribute``
@@ -154,3 +147,17 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 - ``RichTextStyleButton``
 - ``RichTextStyleReader``
 - ``RichTextStyleWriter``
+
+### Text Alignment
+
+- ``RichTextAlignment``
+- ``RichTextAlignmentPicker``
+- ``RichTextAlignmentReader``
+- ``RichTextAlignmentWriter``
+
+### Views - Buttons
+
+
+### Views - Pickers
+
+
