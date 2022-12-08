@@ -20,7 +20,7 @@ struct EditorMidToolbar: View, DemoToolbar {
             Spacer()
             RichTextAlignmentPicker(selection: $context.textAlignment)
             Spacer()
-            colorPickers
+            RichTextColorPickerGroup(context: context)
         }
     }
 }

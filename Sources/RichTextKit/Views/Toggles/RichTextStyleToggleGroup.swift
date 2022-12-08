@@ -10,27 +10,30 @@ import SwiftUI
 
 /**
  This view can be used to list ``RichTextStyleToggle`` views
- for all available styles.
+ for a ``RichTextStyle`` collection.
+
+ Since this view controls multiple values, it binds directly
+ to a ``RichTextContext`` instead of individual values.
  */
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 9.0, *)
 public struct RichTextStyleToggleGroup: View {
 
     /**
-     Create a rich text style button.
+     Create a rich text style toggle button group.
 
      - Parameters:
-     - styles: The styles to list, by default all.
-     - buttonStyle: The button style to use, by default ``RichTextStyleToggle/Style/standard``.
-     - context: The context to affect.
+       - context: The context to affect.
+       - styles: The styles to list, by default ``RichTextStyle/all``.
+       - buttonStyle: The button style to use, by default ``RichTextStyleToggle/Style/standard``.
      */
     public init(
-        styles: [RichTextStyle] = RichTextStyle.allCases,
-        buttonStyle: RichTextStyleToggle.Style = .standard,
-        context: RichTextContext
+        context: RichTextContext,
+        styles: [RichTextStyle] = .all,
+        buttonStyle: RichTextStyleToggle.Style = .standard
     ) {
+        self._context = ObservedObject(wrappedValue: context)
         self.styles = styles
         self.buttonStyle = buttonStyle
-        self._context = ObservedObject(wrappedValue: context)
     }
 
     private let styles: [RichTextStyle]

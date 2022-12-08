@@ -157,6 +157,7 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 - ``RichTextFontForEachPicker``
 - ``RichTextFontListPicker``
 - ``RichTextFontSizePicker``
+- ``RichTextFontSizePickerGroup``
 
 ### Views - Toggles
 

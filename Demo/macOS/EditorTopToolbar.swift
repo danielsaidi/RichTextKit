@@ -22,7 +22,7 @@ struct EditorTopToolbar: View, DemoToolbar {
             divider
             RichTextAlignmentPicker(selection: $context.textAlignment)
             divider
-            colorPickers
+            RichTextColorPickerGroup(context: context)
         }
         .padding(.horizontal, 10)
         .padding(.vertical, 7)
@@ -34,9 +34,9 @@ private extension EditorTopToolbar {
 
     @ViewBuilder
     var fontItems: some View {
-        fontPicker(for: $context.fontName)
+        RichTextFontPicker(selection: $context.fontName, fontSize: 12)
         divider
-        sizeTools(for: $context.fontSize)
+        RichTextFontSizePickerGroup(selection: $context.fontSize)
     }
 }
 

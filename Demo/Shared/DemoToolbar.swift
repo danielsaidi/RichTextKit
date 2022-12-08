@@ -27,40 +27,8 @@ extension DemoToolbar {
         }
     }
 
-    var colorPickers: some View {
-        HStack {
-            ColorPicker("", selection: context.backgroundColorBinding)
-            ColorPicker("", selection: context.foregroundColorBinding)
-        }.labelsHidden()
-    }
-
     var divider: some View {
         Divider().frame(height: 10)
-    }
-
-    func fontPicker(for font: Binding<String>) -> some View {
-        RichTextFontPicker(selection: font, fontSize: 12)
-    }
-
-    func sizeTools(for size: Binding<CGFloat>) -> some View {
-        HStack(spacing: sizeToolSpacing) {
-            button(icon: .minus) {
-                context.decrementFontSize()
-            }
-            RichTextFontSizePicker(selection: size)
-                .labelsHidden()
-            button(icon: .plus) {
-                context.incrementFontSize()
-            }
-        }
-    }
-
-    var sizeToolSpacing: CGFloat {
-        #if os(macOS)
-        return 5
-        #else
-        return 0
-        #endif
     }
 }
 
@@ -73,23 +41,5 @@ private extension DemoToolbar {
         Button(action: action) {
             icon.frame(height: 17)
         }
-        #if os(macOS)
-        .buttonStyle(.borderedProminent)
-        #else
-        .buttonStyle(.bordered)
-        #endif
-    }
-
-    func button(forStyle style: RichTextStyle) -> some View {
-        button(icon: style.icon) {
-            context.toggle(style)
-        }.highlighted(if: context.hasStyle(style))
-    }
-}
-
-private extension View {
-
-    func highlighted(if condition: Bool) -> some View {
-        self.tint(condition ? .blue : .primary)
     }
 }

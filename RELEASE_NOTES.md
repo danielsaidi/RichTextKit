@@ -10,6 +10,7 @@ Until then, deprecated features may be removed in the next minor version.
 
 ### ✨ New Features
 
+* `Image` has new rich text-specific images.
 * `NSImage` `cgImage` and `jpegData` are now public.
 * `NSAttributedString` has a new `withBlackText()` extension.
 * `NSAttributedString` has a new init extension file.
@@ -18,6 +19,8 @@ Until then, deprecated features may be removed in the next minor version.
 * `RichTextCoordinator` `cancellables` are now public.
 * `RichTextCoordinator` `resetHighlightedRangeAppearance()` is now public.
 * `RichTextCoordinator` `text` is now mutable.
+* `RichTextColorPicker` is a new color picker.
+* `RichTextColorPickerGroup` is a new color picker group.
 * `RichTextDataFormat` has a new vendor-specific data format.
 * `RichTextImageAttachment` is now open for inheritance.
 * `RichTextStyleButton` has a new button style.

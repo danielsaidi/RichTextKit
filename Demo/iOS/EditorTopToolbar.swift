@@ -16,9 +16,9 @@ struct EditorTopToolbar: View, DemoToolbar {
 
     var body: some View {
         HStack {
-            fontPicker(for: $context.fontName)
+            RichTextFontPicker(selection: $context.fontName, fontSize: 12)
             Spacer()
-            sizeTools(for: $context.fontSize)
+            RichTextFontSizePickerGroup(selection: $context.fontSize)
         }
     }
 }

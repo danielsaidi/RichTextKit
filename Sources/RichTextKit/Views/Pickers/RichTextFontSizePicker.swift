@@ -22,7 +22,7 @@ import SwiftUI
 public struct RichTextFontSizePicker: View {
 
     /**
-     Create a font picker.
+     Create a font size picker.
 
      - Parameters:
        - selection: The selected font size.
@@ -46,8 +46,7 @@ public struct RichTextFontSizePicker: View {
     public var body: some View {
         Picker(selection: $selection) {
             ForEach(values, id: \.self) {
-                text(for: $0)
-                    .tag($0)
+                text(for: $0).tag($0)
             }
         } label: {
             EmptyView()

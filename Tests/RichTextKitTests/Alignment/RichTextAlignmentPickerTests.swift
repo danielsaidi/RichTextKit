@@ -6,17 +6,19 @@
 //  Copyright © 2022 Daniel Saidi. All rights reserved.
 //
 
-import RichTextKit
 import SwiftUI
 import XCTest
+
+@testable import RichTextKit
 
 final class RichTextAlignmentPickerTests: XCTestCase {
 
     func testCanBeCreatedWithAllParameters() throws {
         let picker = RichTextAlignmentPicker(
             title: "Test",
-            values: [.left],
-            selection: .constant(.left))
+            selection: .constant(.left),
+            values: [.left]
+        )
 
         XCTAssertEqual(picker.title, "Test")
         XCTAssertEqual(picker.alignments, [.left])

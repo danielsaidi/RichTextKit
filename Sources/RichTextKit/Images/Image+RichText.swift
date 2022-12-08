@@ -18,6 +18,12 @@ public extension Image {
     static let richTextAlignmentLeft = symbol("text.alignleft")
     static let richTextAlignmentRight = symbol("text.alignright")
 
+    static let richTextFontSizeDecrement = symbol("minus")
+    static let richTextFontSizeIncrement = symbol("plus")
+
+    static let richTextForegroundColor = symbol("character")
+    static let richTextBackgroundColor = symbol("highlighter")
+
     static let richTextStyleBold = symbol("bold")
     static let richTextStyleItalic = symbol("italic")
     static let richTextStyleUnderline = symbol("underline")
