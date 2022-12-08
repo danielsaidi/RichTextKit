@@ -1,8 +1,8 @@
 //
-//  RichTextStyleButton.swift
+//  RichTextStyleToggle.swift
 //  RichTextKit
 //
-//  Created by Daniel Saidi on 2022-06-04.
+//  Created by Daniel Saidi on 2022-12-08.
 //  Copyright © 2022 Daniel Saidi. All rights reserved.
 //
 
@@ -11,23 +11,23 @@ import SwiftUI
 /**
  This button can be used to toggle a ``RichTextStyle`` value.
 
- This view renders a plain `Button`, which means you can use
- and configure it in all ways supported by SwiftUI. The only
- exception is the content color, which is set by a style you
+ This renders a plain `Button`, which means that you can use
+ and configure it as normal. The only exception is the color
+ of the content, which is determined by the button style you
  can provide in the initializer.
 
  If you want a more prominent button, you may consider using
- a ``RichTextStyleToggle`` instead, but it requires a higher
- deployment target.
+ the ``RichTextStyleToggle`` instead.
  */
-public struct RichTextStyleButton: View {
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 9.0, *)
+public struct RichTextStyleToggle: View {
 
     /**
      Create a rich text style button.
 
      - Parameters:
        - style: The style to toggle.
-       - buttonStyle: The button style to use, by default ``RichTextStyleButton/Style/standard``.
+       - buttonStyle: The button style to use, by default ``RichTextStyleToggle/Style/standard``.
        - value: The value to bind to.
      */
     public init(
@@ -40,23 +40,52 @@ public struct RichTextStyleButton: View {
         self.value = value
     }
 
+    /**
+     Create a rich text style button.
+
+     - Parameters:
+       - style: The style to toggle.
+       - buttonStyle: The button style to use, by default ``RichTextStyleToggle/Style/standard``.
+       - context: The context to affect.
+     */
+    public init(
+        style: RichTextStyle,
+        buttonStyle: Style = .standard,
+        context: RichTextContext
+    ) {
+        self.style = style
+        self.buttonStyle = buttonStyle
+        switch style {
+        case .bold: self.value = context.isBoldBinding
+        case .italic: self.value = context.isItalicBinding
+        case .underlined: self.value = context.isUnderlinedBinding
+        }
+    }
+
     private let style: RichTextStyle
     private let buttonStyle: Style
     private let value: Binding<Bool>
 
     public var body: some View {
-        Button(action: toggle) {
+        #if os(tvOS)
+        toggle
+        #else
+        toggle.toggleStyle(.button)
+        #endif
+    }
+
+    private var toggle: some View {
+        Toggle(isOn: value) {
             style.icon
-                .foregroundColor(tintColor)
-                .contentShape(Rectangle())
-        }
+        }.tint(tintColor)
     }
 }
 
-public extension RichTextStyleButton {
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 9.0, *)
+public extension RichTextStyleToggle {
 
     /**
-     This style can be used to style a ``RichTextStyleButton``.
+     This style can be used to style a ``RichTextStyleToggle``.
      */
     struct Style {
 
@@ -83,15 +112,17 @@ public extension RichTextStyleButton {
     }
 }
 
-public extension RichTextStyleButton.Style {
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 9.0, *)
+public extension RichTextStyleToggle.Style {
 
     /**
-     The standard ``RichTextStyleButton`` style.
+     The standard ``RichTextStyleToggle`` style.
      */
-    static var standard = RichTextStyleButton.Style()
+    static var standard = RichTextStyleToggle.Style()
 }
 
-private extension RichTextStyleButton {
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 9.0, *)
+private extension RichTextStyleToggle {
 
     var isOn: Bool {
         value.wrappedValue
@@ -100,13 +131,10 @@ private extension RichTextStyleButton {
     var tintColor: Color {
         isOn ? buttonStyle.activeColor : buttonStyle.inactiveColor
     }
-
-    func toggle() {
-        value.wrappedValue.toggle()
-    }
 }
 
-struct RichTextStyleButton_Previews: PreviewProvider {
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 9.0, *)
+struct RichTextStyleToggle_Previews: PreviewProvider {
 
     struct Preview: View {
 
@@ -121,13 +149,13 @@ struct RichTextStyleButton_Previews: PreviewProvider {
 
         var body: some View {
             HStack {
-                RichTextStyleButton(
+                RichTextStyleToggle(
                     style: .bold,
                     value: $isBoldOn)
-                RichTextStyleButton(
+                RichTextStyleToggle(
                     style: .italic,
                     value: $isItalicOn)
-                RichTextStyleButton(
+                RichTextStyleToggle(
                     style: .underlined,
                     value: $isUnderlinedOn)
             }.padding()
