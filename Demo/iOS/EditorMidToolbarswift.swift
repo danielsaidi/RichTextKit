@@ -18,7 +18,7 @@ struct EditorMidToolbar: View, DemoToolbar {
         HStack {
             styleButtons
             Spacer()
-            alignmentPicker(for: $context.alignment)
+            alignmentPicker(for: $context.textAlignment)
             Spacer()
             colorPickers
         }

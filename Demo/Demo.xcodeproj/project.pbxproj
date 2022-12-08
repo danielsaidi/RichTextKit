@@ -122,8 +122,8 @@
 				A978469B284D6AFB00DF0CEA /* AboutScreen.swift */,
 				A9E50301283A23ED00BA5101 /* DemoApp.swift */,
 				A9784684284D5C5500DF0CEA /* DemoSection.swift */,
-				A9784687284D5CB600DF0CEA /* DemoUrl.swift */,
 				A9784689284D67F200DF0CEA /* DemoToolbar.swift */,
+				A9784687284D5CB600DF0CEA /* DemoUrl.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";

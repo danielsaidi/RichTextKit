@@ -20,7 +20,7 @@ struct EditorTopToolbar: View, DemoToolbar {
             divider
             styleButtons
             divider
-            alignmentPicker(for: $context.alignment)
+            alignmentPicker(for: $context.textAlignment)
             divider
             colorPickers
         }

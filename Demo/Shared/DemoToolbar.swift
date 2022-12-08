@@ -71,37 +71,39 @@ extension DemoToolbar {
 
     var styleButtons: some View {
         HStack(spacing: 5) {
-            button(for: .bold)
-            button(for: .italic)
-            button(for: .underlined)
+            button(forStyle: .bold)
+            button(forStyle: .italic)
+            button(forStyle: .underlined)
         }
     }
 }
 
 private extension DemoToolbar {
 
-    func button(icon: Image, action: @escaping () -> Void) -> some View {
+    func button(
+        icon: Image,
+        action: @escaping () -> Void
+    ) -> some View {
         Button(action: action) {
             icon.frame(height: 17)
-        }.buttonStyle(.bordered)
+        }
+        #if os(macOS)
+        .buttonStyle(.borderedProminent)
+        #else
+        .buttonStyle(.bordered)
+        #endif
     }
 
-    func button(for style: RichTextStyle) -> some View {
+    func button(forStyle style: RichTextStyle) -> some View {
         button(icon: style.icon) {
             context.toggle(style)
         }.highlighted(if: context.hasStyle(style))
-    }
-
-    func button(for alignment: RichTextAlignment) -> some View {
-        button(icon: alignment.icon) {
-            context.alignment = alignment
-        }.highlighted(if: context.alignment == alignment)
     }
 }
 
 private extension View {
 
     func highlighted(if condition: Bool) -> some View {
-        foregroundColor(condition ? .accentColor : .primary)
+        self.tint(condition ? .blue : .primary)
     }
 }
