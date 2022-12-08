@@ -13,6 +13,7 @@ Until then, deprecated features may be removed in the next minor version.
 * `NSImage` `cgImage` and `jpegData` are now public.
 * `NSAttributedString` has a new `withBlackText()` extension.
 * `NSAttributedString` has a new init extension file.
+* `RichTextContext` has new bindings.
 * `RichTextCoordinator` now subscribes to highlighting style changes.
 * `RichTextCoordinator` `cancellables` are now public.
 * `RichTextCoordinator` `resetHighlightedRangeAppearance()` is now public.

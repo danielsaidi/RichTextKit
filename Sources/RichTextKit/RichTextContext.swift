@@ -36,33 +36,6 @@ public class RichTextContext: ObservableObject {
     }
 
 
-    // MARK: - Bindings
-
-    /**
-     A custom binding that can be used to set the background
-     color with e.g. a SwitUI `ColorPicker`.
-     */
-    public var backgroundColorBinding: Binding<Color> {
-        Binding(
-            get: { Color(self.backgroundColor ?? .clear) },
-            set: { self.backgroundColor = ColorRepresentable($0)}
-        )
-    }
-
-    /**
-     A custom binding that can be used to set the foreground
-     color with e.g. a SwitUI `ColorPicker`.
-     */
-    public var foregroundColorBinding: Binding<Color> {
-        Binding(
-            get: { Color(self.foregroundColor ?? .clear) },
-            set: { self.foregroundColor = ColorRepresentable($0)}
-        )
-    }
-
-
-    // MARK: - Published Properties
-
     /**
      The current background color, if any.
      */
