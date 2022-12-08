@@ -18,9 +18,10 @@ struct EditorTopToolbar: View, DemoToolbar {
         HStack {
             fontItems
             divider
-            styleButtons
+            RichTextStyleToggleGroup(context: context)
             divider
-            alignmentPicker(for: $context.textAlignment)
+            RichTextAlignmentPicker(selection: $context.textAlignment)
+                .pickerStyle(.segmented)
             divider
             colorPickers
         }

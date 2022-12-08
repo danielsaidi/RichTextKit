@@ -20,9 +20,9 @@ public struct RichTextAlignmentPicker: View {
      Create a rich text alignment picker.
 
      - Parameters:
-     - title: The optional picker title.
-     - alignments: The pickable alignments.
-     - selection: The binding to update with the picker.
+       - title: The optional picker title.
+       - values: The pickable alignments, by default all available alignments.
+       - selection: The binding to update with the picker.
      */
     public init(
         title: String = "",

@@ -27,12 +27,6 @@ extension DemoToolbar {
         }
     }
 
-    func alignmentPicker(for alignment: Binding<RichTextAlignment>) -> some View {
-        RichTextAlignmentPicker(selection: alignment)
-            .pickerStyle(.segmented)
-            .labelsHidden()
-    }
-
     var colorPickers: some View {
         HStack {
             ColorPicker("", selection: context.backgroundColorBinding)
@@ -45,7 +39,7 @@ extension DemoToolbar {
     }
 
     func fontPicker(for font: Binding<String>) -> some View {
-        FontPicker(selection: font, fontSize: 12)
+        RichTextFontPicker(selection: font, fontSize: 12)
     }
 
     func sizeTools(for size: Binding<CGFloat>) -> some View {
@@ -53,7 +47,7 @@ extension DemoToolbar {
             button(icon: .minus) {
                 context.decrementFontSize()
             }
-            FontSizePicker(selection: size)
+            RichTextFontSizePicker(selection: size)
                 .labelsHidden()
             button(icon: .plus) {
                 context.incrementFontSize()
@@ -67,14 +61,6 @@ extension DemoToolbar {
         #else
         return 0
         #endif
-    }
-
-    var styleButtons: some View {
-        HStack(spacing: 5) {
-            button(forStyle: .bold)
-            button(forStyle: .italic)
-            button(forStyle: .underlined)
-        }
     }
 }
 

@@ -21,7 +21,8 @@ Until then, deprecated features may be removed in the next minor version.
 * `RichTextDataFormat` has a new vendor-specific data format.
 * `RichTextImageAttachment` is now open for inheritance.
 * `RichTextStyleButton` has a new button style.
-* `RichTextStyleToggle` is a new, prominent style button.
+* `RichTextStyleToggle` is a new style toggle button.
+* `RichTextStyleToggleGroup` is a new style toggle button group.
 * `RichTextView` is now open for inheritance.
 * `RichTextView` drop interaction functionality is now open. 
 * `String` extensions have been made public.

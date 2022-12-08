@@ -16,7 +16,7 @@ import SwiftUI
  a single way to toggle certain traits and attributes on and
  off, although they may be handled differently by the system.
  */
-public enum RichTextStyle: CaseIterable {
+public enum RichTextStyle: String, CaseIterable, Identifiable {
 
     /// Bold text.
     case bold
@@ -29,6 +29,8 @@ public enum RichTextStyle: CaseIterable {
 }
 
 public extension RichTextStyle {
+
+    var id: String { rawValue }
 
     /**
      The standard icon to use for the trait.

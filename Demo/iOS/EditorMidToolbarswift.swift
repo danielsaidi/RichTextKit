@@ -16,9 +16,10 @@ struct EditorMidToolbar: View, DemoToolbar {
 
     var body: some View {
         HStack {
-            styleButtons
+            RichTextStyleToggleGroup(context: context)
             Spacer()
-            alignmentPicker(for: $context.textAlignment)
+            RichTextAlignmentPicker(selection: $context.textAlignment)
+                .pickerStyle(.segmented)
             Spacer()
             colorPickers
         }
