@@ -30,13 +30,13 @@ public enum RichTextStyle: String, CaseIterable, Identifiable {
 
 public extension RichTextStyle {
 
-    /// All available styles.
-    static var all: [RichTextStyle] { RichTextStyle.allCases }
+    /// All available rich text styles.
+    static var all: [Self] { allCases }
 }
 
 public extension Collection where Element == RichTextStyle {
 
-    /// All available styles.
+    /// All available rich text styles.
     static var all: [RichTextStyle] { RichTextStyle.allCases }
 }
 

@@ -15,9 +15,6 @@ import SwiftUI
  and configure it as normal. The only exception is the color
  of the content, which is determined by the button style you
  can provide in the initializer.
-
- If you want a more prominent button, you may consider using
- the ``RichTextStyleToggle`` instead.
  */
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 9.0, *)
 public struct RichTextStyleToggle: View {

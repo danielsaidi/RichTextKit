@@ -26,7 +26,7 @@ public struct RichTextFontSizePickerGroup: View {
      - Parameters:
        - selection: The selected font size.
        - bordered: Whether or not the buttons are bordered, by default `true`.
-       - values: The sizes to display in the list, by default ``RichTextFontSizePickerGroup/standardFontSizes``.
+       - values: The sizes to display in the list, by default ``RichTextFontSizePicker/standardFontSizes``.
      */
     public init(
         selection: Binding<CGFloat>,

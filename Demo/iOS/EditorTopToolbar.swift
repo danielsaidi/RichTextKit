@@ -9,7 +9,7 @@
 import RichTextKit
 import SwiftUI
 
-struct EditorTopToolbar: View, DemoToolbar {
+struct EditorTopToolbar: View {
 
     @EnvironmentObject
     var context: RichTextContext

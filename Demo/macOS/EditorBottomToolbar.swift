@@ -9,14 +9,14 @@
 import RichTextKit
 import SwiftUI
 
-struct EditorBottomToolbar: View, DemoToolbar {
+struct EditorBottomToolbar: View {
 
     @EnvironmentObject
     var context: RichTextContext
 
     var body: some View {
         HStack {
-            actionButtons
+            RichTextActionButtonGroup(context: context)
             Spacer()
         }
         .padding(.horizontal, 10)

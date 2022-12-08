@@ -9,7 +9,7 @@
 import RichTextKit
 import SwiftUI
 
-struct EditorTopToolbar: View, DemoToolbar {
+struct EditorTopToolbar: View {
 
     @EnvironmentObject
     var context: RichTextContext
@@ -31,6 +31,10 @@ struct EditorTopToolbar: View, DemoToolbar {
 }
 
 private extension EditorTopToolbar {
+
+    var divider: some View {
+        Divider().frame(height: 15)
+    }
 
     @ViewBuilder
     var fontItems: some View {

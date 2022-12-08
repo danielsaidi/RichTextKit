@@ -9,7 +9,7 @@
 import RichTextKit
 import SwiftUI
 
-struct EditorScreen: View, DemoToolbar {
+struct EditorScreen: View {
 
     @State
     private var text = NSAttributedString(string: "Type here...")

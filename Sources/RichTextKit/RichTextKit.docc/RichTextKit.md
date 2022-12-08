@@ -51,12 +51,11 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 
 ## Topics
 
-
 ### Articles
 
 - <doc:Getting-Started>
 
-### Rich Text Views
+### Editors
 
 - ``RichTextEditor``
 - ``RichTextView``
@@ -69,6 +68,10 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 - ``RichTextPresenter``
 - ``RichTextReader``
 - ``RichTextWriter``
+
+### Actions
+
+- ``RichTextAction``
 
 ### Attributes
 
@@ -147,11 +150,15 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 
 ### Views - Buttons
 
+- ``RichTextActionButton``
+- ``RichTextActionButtonGroup``
 - ``RichTextStyleButton``
 
 ### Views - Pickers
 
 - ``RichTextAlignmentPicker``
+- ``RichTextColorPicker``
+- ``RichTextColorPickerGroup``
 - ``RichTextFontPicker``
 - ``RichTextFontPickerFont``
 - ``RichTextFontForEachPicker``
@@ -162,3 +169,4 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 ### Views - Toggles
 
 - ``RichTextStyleToggle``
+- ``RichTextStyleToggleGroup``

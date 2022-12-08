@@ -81,13 +81,13 @@ public extension RichTextColorPicker {
 
 public extension RichTextColorPicker.PickerColor {
 
-    /// All available colors.
-    static var all: [Self] { Self.allCases }
+    /// All available picker colors.
+    static var all: [Self] { allCases }
 }
 
 public extension Collection where Element == RichTextColorPicker.PickerColor {
 
-    /// All available colors.
+    /// All available picker colors.
     static var all: [RichTextColorPicker.PickerColor] { RichTextColorPicker.PickerColor.allCases }
 }
 
