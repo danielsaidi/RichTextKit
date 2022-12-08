@@ -12,7 +12,7 @@ import SwiftUI
 struct ContentView: View {
 
     @State
-    private var section = DemoSection.textEditor
+    private var screen = DemoScreen.editor
 
     @State
     private var text = NSAttributedString(string: "test")
@@ -22,8 +22,8 @@ struct ContentView: View {
 
     var body: some View {
         NavigationView {
-            MainMenu(section: $section)
-            sectionView
+            MainMenu(selection: $screen)
+            screenView
                 .navigationTitle("RichTextKit")
         }
     }
@@ -32,12 +32,10 @@ struct ContentView: View {
 extension ContentView {
 
     @ViewBuilder
-    var sectionView: some View {
-        switch section {
-        case .aboutApp:
-            AboutScreen()
-        case .textEditor:
-            EditorScreen()
+    var screenView: some View {
+        switch screen {
+        case .about: AboutScreen()
+        case .editor: EditorScreen()
         }
     }
 }

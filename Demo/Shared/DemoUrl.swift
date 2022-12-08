@@ -6,7 +6,6 @@
 //  Copyright © 2022 Daniel Saidi. All rights reserved.
 //
 
-import Foundation
 import SwiftUI
 
 enum DemoUrl: String, Equatable, Identifiable {
@@ -23,6 +22,14 @@ extension DemoUrl {
         switch self {
         case .github: return .safari
         case .documentation: return .documentation
+        }
+    }
+
+    var label: some View {
+        Label {
+            Text(title)
+        } icon: {
+            icon
         }
     }
 

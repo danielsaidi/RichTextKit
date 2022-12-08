@@ -14,9 +14,6 @@ struct EditorScreen: View, DemoToolbar {
     @State
     private var text = NSAttributedString(string: "Type here...")
 
-    @State
-    private var section = DemoSection.textEditor
-
     @StateObject
     var context = RichTextContext()
 

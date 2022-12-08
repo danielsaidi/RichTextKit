@@ -15,7 +15,7 @@ struct MainMenu: View {
 
     var body: some View {
         Menu {
-            sectionLink(to: .aboutApp)
+            link(to: .about)
             webLink(to: .github)
             webLink(to: .documentation)
         } label: {
@@ -30,26 +30,15 @@ struct MainMenu: View {
 
 extension MainMenu {
 
-    func buttonBody(title: String, icon: Image) -> some View {
-        HStack {
-            Label {
-                Text(title)
-            } icon: {
-                icon
-            }
-        }
-    }
-
-    func sectionLink(to section: DemoSection) -> some View {
+    func link(to screen: DemoScreen) -> some View {
         Button(action: { isSheetPresented = true }) {
-            buttonBody(title: section.title, icon: section.icon)
+            screen.label
         }
-
     }
 
     func webLink(to url: DemoUrl) -> some View {
         Link(destination: url.url) {
-            buttonBody(title: url.title, icon: url.icon)
+            url.label
         }
     }
 }

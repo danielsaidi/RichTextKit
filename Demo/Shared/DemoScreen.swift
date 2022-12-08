@@ -1,35 +1,42 @@
 //
-//  DemoSection.swift
+//  DemoScreen.swift
 //  Demo
 //
 //  Created by Daniel Saidi on 2022-06-05.
 //  Copyright © 2022 Daniel Saidi. All rights reserved.
 //
 
-import Foundation
 import SwiftUI
 
-enum DemoSection: String, Equatable, Identifiable {
+enum DemoScreen: String, Equatable, Identifiable {
 
-    case aboutApp
-    case textEditor
+    case about
+    case editor
 }
 
-extension DemoSection {
+extension DemoScreen {
 
     var id: String { rawValue }
 
     var icon: Image {
         switch self {
-        case .aboutApp: return .about
-        case .textEditor: return .textEditor
+        case .about: return .about
+        case .editor: return .textEditor
+        }
+    }
+
+    var label: some View {
+        Label {
+            Text(title)
+        } icon: {
+            icon
         }
     }
 
     var title: String {
         switch self {
-        case .aboutApp: return "About app"
-        case .textEditor: return "Editor"
+        case .about: return "About"
+        case .editor: return "Editor"
         }
     }
 
