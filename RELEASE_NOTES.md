@@ -27,6 +27,10 @@ Until then, deprecated features may be removed in the next minor version.
 * `RichTextView` drop interaction functionality is now open. 
 * `String` extensions have been made public.
 
+### 💡 Behavior changes
+
+* `RichTextAlignmentPicker` is now segmented by default.
+
 ### 🗑️ Deprecated
 
 * `Font` picker components have been renamed with a `RichText` prefix.

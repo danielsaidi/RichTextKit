@@ -19,7 +19,6 @@ struct EditorMidToolbar: View, DemoToolbar {
             RichTextStyleToggleGroup(context: context)
             Spacer()
             RichTextAlignmentPicker(selection: $context.textAlignment)
-                .pickerStyle(.segmented)
             Spacer()
             colorPickers
         }

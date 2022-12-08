@@ -10,8 +10,8 @@ public extension RichTextAlignmentPicker {
     ) {
         self.init(
             title: title,
-            values: alignments,
-            selection: selection
+            selection: selection,
+            values: alignments
         )
     }
 

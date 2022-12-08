@@ -21,7 +21,6 @@ struct EditorTopToolbar: View, DemoToolbar {
             RichTextStyleToggleGroup(context: context)
             divider
             RichTextAlignmentPicker(selection: $context.textAlignment)
-                .pickerStyle(.segmented)
             divider
             colorPickers
         }
