@@ -75,6 +75,11 @@ open class RichTextCoordinator: NSObject {
      */
     internal var isSteppingFontSize = false
 
+    /**
+     This test flag is used to avoid delaying context sync.
+     */
+    internal var shouldDelaySyncContextWithTextView = true
+
 
     // MARK: - Internal Properties
 
@@ -184,8 +189,12 @@ extension RichTextCoordinator {
      Sync the rich text context with the text view.
      */
     func syncContextWithTextView() {
-        DispatchQueue.main.async {
-            self.syncContextWithTextViewAfterDelay()
+        if shouldDelaySyncContextWithTextView {
+            DispatchQueue.main.async {
+                self.syncContextWithTextViewAfterDelay()
+            }
+        } else {
+            syncContextWithTextViewAfterDelay()
         }
     }
 

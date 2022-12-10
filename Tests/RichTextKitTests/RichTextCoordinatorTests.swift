@@ -16,36 +16,37 @@ class RichTextCoordinatorTests: XCTestCase {
     
     var text: NSAttributedString!
     var textBinding: Binding<NSAttributedString>!
-    var textView: RichTextView!
-    var textContext: RichTextContext!
+    var view: RichTextView!
+    var context: RichTextContext!
     var coordinator: RichTextCoordinator!
 
     override func setUp() {
         text = NSAttributedString(string: "foo bar baz")
         textBinding = Binding(get: { self.text }, set: { self.text = $0 })
-        textView = RichTextView()
-        textContext = RichTextContext()
+        view = RichTextView()
+        context = RichTextContext()
         coordinator = RichTextCoordinator(
             text: textBinding,
-            textView: textView,
-            richTextContext: textContext)
-        textView.selectedRange = NSRange(location: 0, length: 1)
-        textView.setCurrentRichTextAlignment(to: .justified)
+            textView: view,
+            richTextContext: context)
+        coordinator.shouldDelaySyncContextWithTextView = false
+        view.selectedRange = NSRange(location: 0, length: 1)
+        view.setCurrentRichTextAlignment(to: .justified)
     }
 
 
     func testInitializerSetsUpTextViewText() {
-        XCTAssertEqual(textView.richText.string, "foo bar baz")
+        XCTAssertEqual(view.richText.string, "foo bar baz")
     }
 
     func testInitializerSetsUpTextViewDelegate() {
-        XCTAssertTrue(textView.delegate === coordinator)
+        XCTAssertTrue(view.delegate === coordinator)
     }
 
 
     func testRichTextPresenterUsesNestedTextView() {
         let range = NSRange(location: 4, length: 3)
-        textView.selectedRange = range
+        view.selectedRange = range
         XCTAssertEqual(coordinator.text.wrappedValue.string, "foo bar baz")
         XCTAssertEqual(coordinator.richTextContext.selectedRange, range)
     }
@@ -53,16 +54,16 @@ class RichTextCoordinatorTests: XCTestCase {
 
 
     func assertIsSyncedWithContext(macOSAlignment: RichTextAlignment = .left) {
-        XCTAssertEqual(textContext.fontName, textView.currentFontName)
-        XCTAssertEqual(textContext.fontSize, textView.currentFontSize)
-        XCTAssertEqual(textContext.isBold, textView.currentRichTextStyles.hasStyle(.bold))
-        XCTAssertEqual(textContext.isItalic, textView.currentRichTextStyles.hasStyle(.italic))
-        XCTAssertEqual(textContext.isUnderlined, textView.currentRichTextStyles.hasStyle(.underlined))
-        XCTAssertEqual(textContext.selectedRange, textView.selectedRange)
+        XCTAssertEqual(context.fontName, view.currentFontName)
+        XCTAssertEqual(context.fontSize, view.currentFontSize)
+        XCTAssertEqual(context.isBold, view.currentRichTextStyles.hasStyle(.bold))
+        XCTAssertEqual(context.isItalic, view.currentRichTextStyles.hasStyle(.italic))
+        XCTAssertEqual(context.isUnderlined, view.currentRichTextStyles.hasStyle(.underlined))
+        XCTAssertEqual(context.selectedRange, view.selectedRange)
         #if os(iOS) || os(tvOS)
-        XCTAssertEqual(textContext.textAlignment, textView.currentRichTextAlignment)
+        XCTAssertEqual(context.textAlignment, view.currentRichTextAlignment)
         #elseif os(macOS)
-        XCTAssertEqual(textContext.textAlignment, macOSAlignment)
+        XCTAssertEqual(context.textAlignment, macOSAlignment)
         #endif
     }
 
@@ -70,25 +71,25 @@ class RichTextCoordinatorTests: XCTestCase {
     #if os(iOS) || os(tvOS)
 
     func testTextViewDelegateHandlesTextViewDidBeginEditing() {
-        coordinator.textViewDidBeginEditing(textView)
-        XCTAssertTrue(textContext.isEditingText)
+        coordinator.textViewDidBeginEditing(view)
+        XCTAssertTrue(context.isEditingText)
     }
 
     func testTextViewDelegateHandlesTextViewDidChange() {
-        textView.text = "abc 123"
-        coordinator.textViewDidChange(textView)
+        view.text = "abc 123"
+        coordinator.textViewDidChange(view)
         assertIsSyncedWithContext()
     }
 
     func testTextViewDelegateHandlesTextViewDidChangeSelection() {
-        coordinator.textViewDidChangeSelection(textView)
+        coordinator.textViewDidChangeSelection(view)
         assertIsSyncedWithContext()
     }
 
     func testTextViewDelegateHandlesTextViewDidEndEditing() {
-        textContext.isEditingText = true
-        coordinator.textViewDidEndEditing(textView)
-        XCTAssertFalse(textContext.isEditingText)
+        context.isEditingText = true
+        coordinator.textViewDidEndEditing(view)
+        XCTAssertFalse(context.isEditingText)
     }
 
     #elseif os(macOS)
@@ -100,7 +101,7 @@ class RichTextCoordinatorTests: XCTestCase {
 
     func testTextViewDelegateHandlesTextDidBeginEditing() {
         coordinator.textDidBeginEditing(notification)
-        XCTAssertTrue(textContext.isEditingText)
+        XCTAssertTrue(context.isEditingText)
     }
 
     func testTextViewDelegateHandlesTextViewDidChangeSelection() {
@@ -109,9 +110,9 @@ class RichTextCoordinatorTests: XCTestCase {
     }
 
     func testTextViewDelegateHandlesTextDidEndEditing() {
-        textContext.isEditingText = true
+        context.isEditingText = true
         coordinator.textDidEndEditing(notification)
-        XCTAssertFalse(textContext.isEditingText)
+        XCTAssertFalse(context.isEditingText)
     }
 
     #endif
@@ -122,9 +123,9 @@ class RichTextCoordinatorTests: XCTestCase {
         coordinator.highlightedRangeOriginalBackgroundColor = .blue
         coordinator.highlightedRangeOriginalForegroundColor = .yellow
         coordinator.resetHighlightedRangeAppearance()
-        textView.selectedRange = range
-        XCTAssertEqual(textView.currentBackgroundColor, .blue)
-        XCTAssertEqual(textView.currentForegroundColor, .yellow)
+        view.selectedRange = range
+        XCTAssertEqual(view.currentBackgroundColor, .blue)
+        XCTAssertEqual(view.currentForegroundColor, .yellow)
     }
 }
 #endif
