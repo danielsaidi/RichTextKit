@@ -62,6 +62,7 @@ private extension View {
     func segmented(if condition: Bool) -> some View {
         if condition {
             self.pickerStyle(.segmented)
+                .labelsHidden()
         } else {
             self
         }

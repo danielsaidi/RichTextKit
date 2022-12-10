@@ -54,9 +54,10 @@ public struct RichTextColorPicker: View {
     private let value: Binding<Color>
 
     public var body: some View {
-        ColorPicker(selection: value) {
+        HStack {
             color.icon
-        }
+            ColorPicker("", selection: value)
+        }.labelsHidden()
     }
 }
 

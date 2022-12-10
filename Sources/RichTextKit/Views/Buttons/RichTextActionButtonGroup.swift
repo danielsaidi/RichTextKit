@@ -19,17 +19,22 @@ public struct RichTextActionButtonGroup: View {
 
      - Parameters:
        - context: The context to affect.
+       - bordered: Whether or not the buttons are bordered, by default `true`.
        - actions: The actions to list, by default ``RichTextAction/all``.
      */
     public init(
         context: RichTextContext,
+        bordered: Bool = true,
         actions: [RichTextAction] = .all
     ) {
         self._context = ObservedObject(wrappedValue: context)
+        self.bordered = bordered
         self.actions = actions
     }
 
     private let actions: [RichTextAction]
+
+    private let bordered: Bool
 
     @ObservedObject
     private var context: RichTextContext
@@ -40,8 +45,22 @@ public struct RichTextActionButtonGroup: View {
                 RichTextActionButton(
                     action: $0,
                     context: context
-                )
+                ).frame(maxHeight: .infinity)
             }
+        }
+        .bordered(if: bordered)
+        .fixedSize(horizontal: false, vertical: true)
+    }
+}
+
+private extension View {
+
+    @ViewBuilder
+    func bordered(if condition: Bool) -> some View {
+        if condition, #available(iOS 15.0, macOS 12.0, *) {
+            self.buttonStyle(.bordered)
+        } else {
+            self
         }
     }
 }
