@@ -23,19 +23,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             MainMenu(selection: $screen)
-            screenView
-                .navigationTitle("RichTextKit")
-        }
-    }
-}
-
-extension ContentView {
-
-    @ViewBuilder
-    var screenView: some View {
-        switch screen {
-        case .about: AboutScreen()
-        case .editor: EditorScreen()
+            screen.view
         }
     }
 }

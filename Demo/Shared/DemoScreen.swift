@@ -46,4 +46,16 @@ extension DemoScreen {
         }
         return url
     }
+
+    @ViewBuilder
+    var view: some View {
+        switch self {
+        case .editor:
+            EditorScreen()
+                .navigationTitle("RichTextKit")
+        case .about:
+            AboutScreen()
+                .navigationTitle("About")
+        }
+    }
 }

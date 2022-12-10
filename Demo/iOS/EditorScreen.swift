@@ -18,17 +18,22 @@ struct EditorScreen: View {
     var context = RichTextContext()
 
     var body: some View {
-        VStack {
+        VStack(spacing: 10) {
             editor
-            EditorTopToolbar()
+            topToolbar
             Divider()
-            EditorMidToolbar()
+            midToolbar
             Divider()
-            EditorBottomToolbar()
+            bottomToolbar
         }
         .padding()
         .background(Color.gray.opacity(0.3))
-        .environmentObject(context)
+        .navigationTitle("RichTextKit")
+        .toolbar {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                MainMenu()
+            }
+        }
     }
 }
 
@@ -41,9 +46,35 @@ private extension EditorScreen {
         .background(Material.regular)
         .cornerRadius(5)
     }
+
+    var topToolbar: some View {
+        HStack {
+            RichTextFontPicker(selection: $context.fontName, fontSize: 12)
+            Spacer()
+            RichTextFontSizePickerGroup(selection: $context.fontSize)
+        }
+    }
+
+    var midToolbar: some View {
+        HStack {
+            RichTextStyleToggleGroup(context: context)
+            Spacer()
+            RichTextAlignmentPicker(selection: $context.textAlignment)
+        }
+    }
+
+    var bottomToolbar: some View {
+        HStack {
+            RichTextActionButtonGroup(context: context)
+                .buttonStyle(.bordered)
+            Spacer()
+            RichTextColorPickerGroup(context: context)
+        }
+    }
 }
 
 struct EditorScreen_Previews: PreviewProvider {
+    
     static var previews: some View {
         EditorScreen()
     }

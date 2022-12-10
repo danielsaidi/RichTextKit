@@ -19,11 +19,28 @@ struct EditorScreen: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            EditorTopToolbar()
             Divider()
-            editor
-            EditorBottomToolbar()
-        }.environmentObject(context)
+            HStack(spacing: 0) {
+                editor
+                Divider()
+                toolbar
+            }
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigation) {
+                sidebarToggle
+            }
+            ToolbarItem(placement: .automatic) {
+                RichTextActionButtonGroup(context: context)
+            }
+        }
+    }
+}
+
+private extension EditorScreen {
+
+    func toggleSidebar() {
+        NSApp.keyWindow?.firstResponder?.tryToPerform(#selector(NSSplitViewController.toggleSidebar(_:)), with: nil)
     }
 }
 
@@ -32,11 +49,77 @@ private extension EditorScreen {
     var editor: some View {
         RichTextEditor(text: $text, context: context) {
             $0.textContentInset = CGSize(width: 10, height: 20)
+        }.frame(minWidth: 400)
+    }
+
+    var sidebarToggle: some View {
+        Button(action: toggleSidebar) {
+            Image.sidebar
+        }
+    }
+
+    var toolbar: some View {
+        Toolbar {
+            SidebarSection(title: "Font") {
+                RichTextFontPicker(selection: $context.fontName, fontSize: 12)
+                HStack {
+                    RichTextStyleToggleGroup(context: context)
+                    RichTextFontSizePickerGroup(selection: $context.fontSize)
+                }
+            }
+            SidebarSection(title: "Color") {
+                HStack {
+                    Text("Text color")
+                    Spacer()
+                    RichTextColorPicker(color: .foreground, context: context)
+                }
+                HStack {
+                    Text("Background color")
+                    Spacer()
+                    RichTextColorPicker(color: .background, context: context)
+                }
+            }
+            SidebarSection(title: "Alignment") {
+                RichTextAlignmentPicker(selection: $context.textAlignment)
+            }
+            Spacer()
+        }.frame(width: 250)
+    }
+}
+
+private struct Toolbar<Content: View>: View {
+
+    @ViewBuilder
+    let content: () -> Content
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            content()
+        }
+        .padding(8)
+        .background(Color.white.opacity(0.05))
+    }
+}
+
+private struct SidebarSection<Content: View>: View {
+
+    let title: String
+
+    @ViewBuilder
+    let content: () -> Content
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text(title)
+                .font(.headline)
+            content()
+            Divider()
         }
     }
 }
 
 struct EditorScreen_Previews: PreviewProvider {
+    
     static var previews: some View {
         EditorScreen()
     }

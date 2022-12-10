@@ -12,11 +12,9 @@ extension Image {
 
     static let about = symbol("lightbulb")
     static let documentation = symbol("doc.text")
-    static let highlighter = symbol("highlighter")
-    static let menu = symbol("line.3.horizontal")
-    static let minus = symbol("minus")
-    static let plus = symbol("plus")
+    static let menu = symbol("ellipsis.circle")
     static let safari = symbol("safari")
+    static let sidebar = symbol("sidebar.leading")
     static let textEditor = symbol("doc.richtext")
 
     static func symbol(_ named: String) -> Image {

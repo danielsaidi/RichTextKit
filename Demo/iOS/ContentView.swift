@@ -11,14 +11,8 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         NavigationView {
-            EditorScreen()
-                .navigationTitle("RichTextKit")
+            DemoScreen.editor.view
                 .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItemGroup(placement: .navigationBarTrailing) {
-                        MainMenu()
-                    }
-                }
         }
     }
 }
