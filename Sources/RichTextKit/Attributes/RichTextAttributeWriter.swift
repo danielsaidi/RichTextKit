@@ -60,7 +60,7 @@ public extension RichTextAttributeWriter {
         guard let string = mutableRichText else { return }
         string.beginEditing()
         attributes.forEach { attribute, newValue in
-            string.enumerateAttribute(attribute, in: range, options: .init()) { value, range, _ in
+            string.enumerateAttribute(attribute, in: range, options: .init()) { _, range, _ in
                 string.removeAttribute(attribute, range: range)
                 string.addAttribute(attribute, value: newValue, range: range)
                 string.fixAttributes(in: range)

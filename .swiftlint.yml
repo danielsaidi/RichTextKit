@@ -1,9 +1,9 @@
 disabled_rules:
-  - function_body_length
-  - function_parameter_count
+  - file_length
   - identifier_name
   - large_tuple
   - line_length
+  - opening_brace
   - todo
   - trailing_whitespace
   - type_name
