@@ -6,6 +6,7 @@
 //  Copyright © 2022 Daniel Saidi. All rights reserved.
 //
 
+#if os(iOS) || os(macOS)
 import SwiftUI
 
 /**
@@ -92,7 +93,6 @@ public extension Collection where Element == RichTextColorPicker.PickerColor {
     static var all: [RichTextColorPicker.PickerColor] { RichTextColorPicker.PickerColor.allCases }
 }
 
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 9.0, *)
 struct RichTextColorPicker_Previews: PreviewProvider {
 
     struct Preview: View {
@@ -115,3 +115,4 @@ struct RichTextColorPicker_Previews: PreviewProvider {
         Preview()
     }
 }
+#endif

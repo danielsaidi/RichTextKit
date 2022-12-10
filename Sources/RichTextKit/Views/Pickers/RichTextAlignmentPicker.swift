@@ -60,11 +60,15 @@ private extension View {
 
     @ViewBuilder
     func segmented(if condition: Bool) -> some View {
+        #if os(watchOS)
+        self
+        #else
         if condition {
             self.pickerStyle(.segmented)
                 .labelsHidden()
         } else {
             self
         }
+        #endif
     }
 }
