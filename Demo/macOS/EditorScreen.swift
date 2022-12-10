@@ -27,20 +27,10 @@ struct EditorScreen: View {
             }
         }
         .toolbar {
-            ToolbarItem(placement: .navigation) {
-                sidebarToggle
-            }
             ToolbarItem(placement: .automatic) {
-                RichTextActionButtonGroup(context: context)
+                RichTextActionButtonStack(context: context)
             }
         }
-    }
-}
-
-private extension EditorScreen {
-
-    func toggleSidebar() {
-        NSApp.keyWindow?.firstResponder?.tryToPerform(#selector(NSSplitViewController.toggleSidebar(_:)), with: nil)
     }
 }
 
@@ -52,19 +42,13 @@ private extension EditorScreen {
         }.frame(minWidth: 400)
     }
 
-    var sidebarToggle: some View {
-        Button(action: toggleSidebar) {
-            Image.sidebar
-        }
-    }
-
     var toolbar: some View {
         Toolbar {
             SidebarSection(title: "Font") {
                 RichTextFontPicker(selection: $context.fontName, fontSize: 12)
                 HStack {
-                    RichTextStyleToggleGroup(context: context)
-                    RichTextFontSizePickerGroup(selection: $context.fontSize)
+                    RichTextStyleToggleStack(context: context)
+                    RichTextFontSizePicker(selection: $context.fontSize)
                 }
             }
             SidebarSection(title: "Color") {

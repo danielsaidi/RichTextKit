@@ -51,13 +51,13 @@ private extension EditorScreen {
         HStack {
             RichTextFontPicker(selection: $context.fontName, fontSize: 12)
             Spacer()
-            RichTextFontSizePickerGroup(selection: $context.fontSize)
+            RichTextFontSizePicker(selection: $context.fontSize)
         }
     }
 
     var midToolbar: some View {
         HStack {
-            RichTextStyleToggleGroup(context: context)
+            RichTextStyleToggleStack(context: context)
             Spacer()
             RichTextAlignmentPicker(selection: $context.textAlignment)
         }
@@ -65,10 +65,10 @@ private extension EditorScreen {
 
     var bottomToolbar: some View {
         HStack {
-            RichTextActionButtonGroup(context: context)
+            RichTextActionButtonStack(context: context)
                 .buttonStyle(.bordered)
             Spacer()
-            RichTextColorPickerGroup(context: context)
+            RichTextColorPickerStack(context: context)
         }
     }
 }

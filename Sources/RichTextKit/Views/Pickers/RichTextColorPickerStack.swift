@@ -1,5 +1,5 @@
 //
-//  RichTextColorPickerGroup.swift
+//  RichTextColorPickerStack.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-12-08.
@@ -9,16 +9,16 @@
 import SwiftUI
 
 /**
- This view can be used to list ``RichTextColorPicker`` views
- for a ``RichTextColorPicker/PickerColor`` collection.
+ This view can be used to list a collection of pickers for a
+ set of ``RichTextAction`` values in a horizontal line.
 
  Since this view controls multiple values, it binds directly
  to a ``RichTextContext`` instead of individual values.
  */
-public struct RichTextColorPickerGroup: View {
+public struct RichTextColorPickerStack: View {
 
     /**
-     Create a rich text color picker.
+     Create a rich text color picker stack.
 
      - Parameters:
        - context: The context to affect.
@@ -47,7 +47,7 @@ public struct RichTextColorPickerGroup: View {
 }
 
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 9.0, *)
-struct RichTextColorPickerGroup_Previews: PreviewProvider {
+struct RichTextColorPickerStack_Previews: PreviewProvider {
 
     struct Preview: View {
 
@@ -55,7 +55,7 @@ struct RichTextColorPickerGroup_Previews: PreviewProvider {
         private var context = RichTextContext()
 
         var body: some View {
-            RichTextColorPickerGroup(context: context)
+            RichTextColorPickerStack(context: context)
                 .padding()
         }
     }

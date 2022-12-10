@@ -1,5 +1,5 @@
 //
-//  RichTextActionButtonGroup.swift
+//  RichTextActionButtonStack.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-12-08.
@@ -9,13 +9,16 @@
 import SwiftUI
 
 /**
- This view can be used to list ``RichTextActionButton``s for
- a ``RichTextAction`` collection.
+ This view can be used to list a collection of buttons for a
+ set of ``RichTextAction`` values in a horizontal line.
+
+ Since this view controls multiple values, it binds directly
+ to a ``RichTextContext`` instead of individual values.
  */
-public struct RichTextActionButtonGroup: View {
+public struct RichTextActionButtonStack: View {
 
     /**
-     Create a rich text style toggle button group.
+     Create a rich text action button stack.
 
      - Parameters:
        - context: The context to affect.
@@ -65,7 +68,7 @@ private extension View {
     }
 }
 
-struct RichTextActionButtonGroup_Previews: PreviewProvider {
+struct RichTextActionButtonStack_Previews: PreviewProvider {
 
     struct Preview: View {
 
@@ -73,7 +76,7 @@ struct RichTextActionButtonGroup_Previews: PreviewProvider {
         private var context = RichTextContext()
 
         var body: some View {
-            RichTextActionButtonGroup(context: context)
+            RichTextActionButtonStack(context: context)
                 .padding()
         }
     }

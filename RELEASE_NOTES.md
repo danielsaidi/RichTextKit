@@ -14,18 +14,22 @@ Until then, deprecated features may be removed in the next minor version.
 * `NSImage` `cgImage` and `jpegData` are now public.
 * `NSAttributedString` has a new `withBlackText()` extension.
 * `NSAttributedString` has a new init extension file.
+* `RichTextAction` is a new enum that defines rich text actions.
+* `RichTextActionButton` is a new view that can trigger a RichTextAction.
+* `RichTextActionButtonStack` is a new view that can list multiple RichTextActionButton views.
 * `RichTextContext` has new bindings.
 * `RichTextCoordinator` now subscribes to highlighting style changes.
 * `RichTextCoordinator` `cancellables` are now public.
 * `RichTextCoordinator` `resetHighlightedRangeAppearance()` is now public.
 * `RichTextCoordinator` `text` is now mutable.
 * `RichTextColorPicker` is a new color picker.
-* `RichTextColorPickerGroup` is a new color picker group.
+* `RichTextColorPickerStack` is a new view that can list multiple RichTextColorPicker views.
 * `RichTextDataFormat` has a new vendor-specific data format.
+* `RichTextFontSizePickerStack` is a new view that can list multiple RichTextFontSizePicker views.
 * `RichTextImageAttachment` is now open for inheritance.
 * `RichTextStyleButton` has a new button style.
 * `RichTextStyleToggle` is a new style toggle button.
-* `RichTextStyleToggleGroup` is a new style toggle button group.
+* `RichTextStyleToggleStack` is a new view that can list multiple RichTextStyleToggle views.
 * `RichTextView` is now open for inheritance.
 * `RichTextView` drop interaction functionality is now open. 
 * `String` extensions have been made public.

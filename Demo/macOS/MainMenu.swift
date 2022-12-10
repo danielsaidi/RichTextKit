@@ -14,21 +14,15 @@ struct MainMenu: View {
     var selection: DemoScreen
 
     var body: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 20) {
-                Text("RichTextKit")
-                    .font(.largeTitle)
-                VStack(alignment: .leading, spacing: 5) {
-                    links
-                }
-                Spacer()
-            }
-            Spacer()
+        HStack(alignment: .top) {
+            VStack(alignment: .leading, spacing: 5) {
+                links
+            }.frame(maxHeight: .infinity, alignment: .top)
         }
+        .frame(minWidth: 200, maxWidth: .infinity, alignment: .leading)
         .font(.title2)
         .foregroundColor(.primary)
-        .frame(minWidth: 200, alignment: .leading)
-        .padding()
+        .padding(10)
     }
 }
 

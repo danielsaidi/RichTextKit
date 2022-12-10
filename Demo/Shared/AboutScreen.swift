@@ -28,7 +28,8 @@ struct AboutScreen: View {
                 }.padding()
             }
             Spacer()
-        }.navigationTitle(titleText)
+        }
+        .navigationTitle(titleText)
     }
 }
 

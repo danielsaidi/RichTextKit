@@ -23,7 +23,18 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             MainMenu(selection: $screen)
-            screen.view
+            screen.view.withSidebarToggle()
+        }
+    }
+}
+
+private extension View {
+
+    func withSidebarToggle() -> some View {
+        self.toolbar {
+            ToolbarItem(placement: .navigation) {
+                SidebarToggleButton()
+            }
         }
     }
 }

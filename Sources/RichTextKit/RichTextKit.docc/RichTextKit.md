@@ -151,22 +151,22 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 ### Views - Buttons
 
 - ``RichTextActionButton``
-- ``RichTextActionButtonGroup``
+- ``RichTextActionButtonStack``
 - ``RichTextStyleButton``
 
 ### Views - Pickers
 
 - ``RichTextAlignmentPicker``
 - ``RichTextColorPicker``
-- ``RichTextColorPickerGroup``
+- ``RichTextColorPickerStack``
 - ``RichTextFontPicker``
 - ``RichTextFontPickerFont``
 - ``RichTextFontForEachPicker``
 - ``RichTextFontListPicker``
 - ``RichTextFontSizePicker``
-- ``RichTextFontSizePickerGroup``
+- ``RichTextFontSizePickerStack``
 
 ### Views - Toggles
 
 - ``RichTextStyleToggle``
-- ``RichTextStyleToggleGroup``
+- ``RichTextStyleToggleStack``

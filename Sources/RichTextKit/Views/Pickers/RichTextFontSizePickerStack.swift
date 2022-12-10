@@ -1,5 +1,5 @@
 //
-//  RichTextFontSizePickerGroup.swift
+//  RichTextFontSizePickerStack.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-06-02.
@@ -10,18 +10,19 @@
 import SwiftUI
 
 /**
- This component uses a ``RichTextFontSizePicker`` and adds a
- increment and a decrement button to it.
+ This view lists a ``RichTextFontSizePicker`` and buttons to
+ increment and a decrement the font size.
 
- The stepper buttons will be plain `Button` views on iOS and
- a `Stepper` on macOS. iOS will by default apply a border to
- all buttons, but you can disable this with `bordered: false`
- in the initializer.
+ iOS adds plain `Button` steppers to each side of the picker
+ while macOS adds a native `Stepper` after the picker.
+
+ iOS will by default apply a border to the steppers. You can
+ disable this by adding `bordered: false` to the initializer.
  */
-public struct RichTextFontSizePickerGroup: View {
+public struct RichTextFontSizePickerStack: View {
 
     /**
-     Create a font size picker group.
+     Create a rich text font size picker stack.
 
      - Parameters:
        - selection: The selected font size.
@@ -63,7 +64,7 @@ public struct RichTextFontSizePickerGroup: View {
     }
 }
 
-private extension RichTextFontSizePickerGroup {
+private extension RichTextFontSizePickerStack {
 
     var decrementButton: some View {
         Button(action: decrement) {
@@ -107,7 +108,7 @@ private extension View {
     }
 }
 
-struct RichTextFontSizePickerGroup_Previews: PreviewProvider {
+struct RichTextFontSizePickerStack_Previews: PreviewProvider {
 
     struct Preview: View {
 
@@ -116,9 +117,9 @@ struct RichTextFontSizePickerGroup_Previews: PreviewProvider {
 
         var body: some View {
             if #available(iOS 15.0, *) {
-                RichTextFontSizePickerGroup(selection: $selection)
+                RichTextFontSizePickerStack(selection: $selection)
             } else {
-                RichTextFontSizePickerGroup(selection: $selection)
+                RichTextFontSizePickerStack(selection: $selection)
             }
         }
     }

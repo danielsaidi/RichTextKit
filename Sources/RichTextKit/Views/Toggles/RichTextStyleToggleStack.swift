@@ -1,5 +1,5 @@
 //
-//  RichTextStyleToggleGroup.swift
+//  RichTextStyleToggleStack.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-12-08.
@@ -9,14 +9,14 @@
 import SwiftUI
 
 /**
- This view can be used to list ``RichTextStyleToggle`` views
- for a ``RichTextStyle`` collection.
+ This view can be used to list a collection of toggles for a
+ set of ``RichTextStyle`` values in a horizontal line.
 
  Since this view controls multiple values, it binds directly
  to a ``RichTextContext`` instead of individual values.
  */
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 9.0, *)
-public struct RichTextStyleToggleGroup: View {
+public struct RichTextStyleToggleStack: View {
 
     /**
      Create a rich text style toggle button group.
@@ -56,7 +56,7 @@ public struct RichTextStyleToggleGroup: View {
 }
 
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 9.0, *)
-struct RichTextStyleToggleGroup_Previews: PreviewProvider {
+struct RichTextStyleToggleStack_Previews: PreviewProvider {
 
     struct Preview: View {
 
@@ -64,7 +64,7 @@ struct RichTextStyleToggleGroup_Previews: PreviewProvider {
         private var context = RichTextContext()
 
         var body: some View {
-            RichTextStyleToggleGroup(context: context)
+            RichTextStyleToggleStack(context: context)
                 .padding()
         }
     }
