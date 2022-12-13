@@ -71,21 +71,47 @@ struct RichTextActionButton_Previews: PreviewProvider {
         private var context = RichTextContext()
 
         var body: some View {
-            HStack {
-                RichTextActionButton(
-                    action: .copy,
-                    context: context)
-                RichTextActionButton(
-                    action: .redoLatestChange,
-                    context: context)
-                RichTextActionButton(
-                    action: .undoLatestChange,
-                    context: context)
-            }.padding()
+            if #available(iOS 15.0, *) {
+                HStack {
+                    RichTextActionButton(
+                        action: .copy,
+                        context: context)
+                    Divider()
+                    RichTextActionButton(
+                        action: .redoLatestChange,
+                        context: context)
+                    RichTextActionButton(
+                        action: .undoLatestChange,
+                        context: context)
+                    Divider()
+                    RichTextActionButton(
+                        action: .incrementFontSize,
+                        context: context)
+                    RichTextActionButton(
+                        action: .decrementFontSize,
+                        context: context)
+                }
+                .padding()
+                .bordered()
+            } else {
+                // Fallback on earlier versions
+            }
         }
     }
 
     static var previews: some View {
         Preview()
+    }
+}
+
+private extension View {
+
+    @ViewBuilder
+    func bordered() -> some View {
+        if #available(iOS 15.0, *) {
+            self.buttonStyle(.bordered)
+        } else {
+            self
+        }
     }
 }

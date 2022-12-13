@@ -25,6 +25,7 @@ extension RichTextCoordinator {
         subscribeToIsBold()
         subscribeToIsEditingText()
         subscribeToIsItalic()
+        subscribeToIsStrikethrough()
         subscribeToIsUnderlined()
         subscribeToSelectedRange()
         subscribeToShouldCopySelection()
@@ -115,6 +116,14 @@ private extension RichTextCoordinator {
             .sink(
                 receiveCompletion: { _ in },
                 receiveValue: { [weak self] in self?.setStyle(.italic, to: $0) })
+            .store(in: &cancellables)
+    }
+
+    func subscribeToIsStrikethrough() {
+        richTextContext.$isStrikethrough
+            .sink(
+                receiveCompletion: { _ in },
+                receiveValue: { [weak self] in self?.setStyle(.strikethrough, to: $0) })
             .store(in: &cancellables)
     }
 

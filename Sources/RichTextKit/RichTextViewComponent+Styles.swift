@@ -18,6 +18,7 @@ public extension RichTextViewComponent {
         let attributes = currentRichTextAttributes
         let traits = currentFont?.fontDescriptor.symbolicTraits
         var styles = traits?.enabledRichTextStyles ?? []
+        if attributes.isStrikethrough { styles.append(.strikethrough) }
         if attributes.isUnderlined { styles.append(.underlined) }
         return styles
     }
@@ -36,6 +37,7 @@ public extension RichTextViewComponent {
      */
     func setCurrentRichTextStyle(_ style: RichTextStyle, to newValue: Bool) {
         let attributeValue = newValue ? 1 : 0
+        if style == .strikethrough { return setCurrentRichTextAttribute(.strikethroughStyle, to: attributeValue) }
         if style == .underlined { return setCurrentRichTextAttribute(.underlineStyle, to: attributeValue) }
         let styles = currentRichTextStyles
         let shouldAdd = newValue && !styles.hasStyle(style)

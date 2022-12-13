@@ -20,8 +20,19 @@ public typealias RichTextAttributes = [RichTextAttribute: Any]
 public extension RichTextAttributes {
 
     /**
-     Get or set whether or not the attributes contains a
-     value that indicates that underline is active.
+     Whether or not the attributes has a strikethrough style.
+     */
+    var isStrikethrough: Bool {
+        get {
+            self[.strikethroughStyle] as? Int == 1
+        }
+        set {
+            self[.strikethroughStyle] = newValue ? 1 : 0
+        }
+    }
+
+    /**
+     Whether or not the attributes has an underline style.
      */
     var isUnderlined: Bool {
         get {

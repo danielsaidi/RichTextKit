@@ -215,6 +215,7 @@ extension RichTextCoordinator {
         richTextContext.foregroundColor = textView.currentForegroundColor
         richTextContext.isBold = styles.hasStyle(.bold)
         richTextContext.isItalic = styles.hasStyle(.italic)
+        richTextContext.isStrikethrough = styles.hasStyle(.strikethrough)
         richTextContext.isUnderlined = styles.hasStyle(.underlined)
         richTextContext.isEditingText = textView.isFirstResponder
         richTextContext.textAlignment = textView.currentRichTextAlignment ?? .left

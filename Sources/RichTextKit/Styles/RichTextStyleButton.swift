@@ -117,6 +117,9 @@ struct RichTextStyleButton_Previews: PreviewProvider {
         private var isItalicOn = true
 
         @State
+        private var isStrikethroughOn = false
+
+        @State
         private var isUnderlinedOn = false
 
         var body: some View {
@@ -127,6 +130,9 @@ struct RichTextStyleButton_Previews: PreviewProvider {
                 RichTextStyleButton(
                     style: .italic,
                     value: $isItalicOn)
+                RichTextStyleButton(
+                    style: .strikethrough,
+                    value: $isStrikethroughOn)
                 RichTextStyleButton(
                     style: .underlined,
                     value: $isUnderlinedOn)

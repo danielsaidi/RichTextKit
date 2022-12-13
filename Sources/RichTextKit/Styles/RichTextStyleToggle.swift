@@ -26,15 +26,18 @@ public struct RichTextStyleToggle: View {
        - style: The style to toggle.
        - buttonStyle: The button style to use, by default ``RichTextStyleToggle/Style/standard``.
        - value: The value to bind to.
+       - fillVertically: Whether or not fill up vertical space in a non-greedy way, by default `false`.
      */
     public init(
         style: RichTextStyle,
         buttonStyle: Style = .standard,
-        value: Binding<Bool>
+        value: Binding<Bool>,
+        fillVertically: Bool = false
     ) {
         self.style = style
         self.buttonStyle = buttonStyle
         self.value = value
+        self.fillVertically = fillVertically
     }
 
     /**
@@ -44,24 +47,29 @@ public struct RichTextStyleToggle: View {
        - style: The style to toggle.
        - buttonStyle: The button style to use, by default ``RichTextStyleToggle/Style/standard``.
        - context: The context to affect.
+       - fillVertically: Whether or not fill up vertical space in a non-greedy way, by default `false`.
      */
     public init(
         style: RichTextStyle,
         buttonStyle: Style = .standard,
-        context: RichTextContext
+        context: RichTextContext,
+        fillVertically: Bool = false
     ) {
         self.style = style
         self.buttonStyle = buttonStyle
         switch style {
         case .bold: self.value = context.isBoldBinding
         case .italic: self.value = context.isItalicBinding
+        case .strikethrough: self.value = context.isStrikethroughBinding
         case .underlined: self.value = context.isUnderlinedBinding
         }
+        self.fillVertically = fillVertically
     }
 
     private let style: RichTextStyle
     private let buttonStyle: Style
     private let value: Binding<Bool>
+    private let fillVertically: Bool
 
     public var body: some View {
         #if os(tvOS)
@@ -74,6 +82,7 @@ public struct RichTextStyleToggle: View {
     private var toggle: some View {
         Toggle(isOn: value) {
             style.icon
+                .frame(maxHeight: fillVertically ? .infinity : nil)
         }
         .tint(tintColor)
         .keyboardShortcut(for: style)
@@ -144,6 +153,9 @@ struct RichTextStyleToggle_Previews: PreviewProvider {
         private var isItalicOn = true
 
         @State
+        private var isStrikethroughOn = false
+
+        @State
         private var isUnderlinedOn = false
 
         var body: some View {
@@ -154,6 +166,9 @@ struct RichTextStyleToggle_Previews: PreviewProvider {
                 RichTextStyleToggle(
                     style: .italic,
                     value: $isItalicOn)
+                RichTextStyleToggle(
+                    style: .strikethrough,
+                    value: $isStrikethroughOn)
                 RichTextStyleToggle(
                     style: .underlined,
                     value: $isUnderlinedOn)

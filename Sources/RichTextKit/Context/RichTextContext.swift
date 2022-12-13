@@ -109,6 +109,12 @@ public class RichTextContext: ObservableObject {
     public var isItalic = false
 
     /**
+     Whether or not the current text is striked through.
+     */
+    @Published
+    public var isStrikethrough = false
+
+    /**
      Whether or not the current text is underlined.
      */
     @Published
@@ -208,6 +214,7 @@ public extension RichTextContext {
         switch style {
         case .bold: return isBold
         case .italic: return isItalic
+        case .strikethrough: return isStrikethrough
         case .underlined: return isUnderlined
         }
     }
@@ -340,6 +347,7 @@ public extension RichTextContext {
         switch style {
         case .bold: isBold.toggle()
         case .italic: isItalic.toggle()
+        case .strikethrough: isStrikethrough.toggle()
         case .underlined: isUnderlined.toggle()
         }
     }

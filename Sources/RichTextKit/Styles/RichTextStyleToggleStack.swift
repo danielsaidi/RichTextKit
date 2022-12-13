@@ -48,10 +48,11 @@ public struct RichTextStyleToggleStack: View {
                 RichTextStyleToggle(
                     style: $0,
                     buttonStyle: buttonStyle,
-                    context: context
+                    context: context,
+                    fillVertically: true
                 )
             }
-        }
+        }.fixedSize(horizontal: false, vertical: true)
     }
 }
 

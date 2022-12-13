@@ -43,6 +43,7 @@ public extension View {
         switch style {
         case .bold: keyboardShortcut("b", modifiers: .command)
         case .italic: keyboardShortcut("i", modifiers: .command)
+        case .strikethrough: self
         case .underlined: keyboardShortcut("u", modifiers: .command)
         }
         #else

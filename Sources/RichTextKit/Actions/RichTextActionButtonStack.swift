@@ -23,12 +23,12 @@ public struct RichTextActionButtonStack: View {
      - Parameters:
        - context: The context to affect.
        - bordered: Whether or not the buttons are bordered, by default `true`.
-       - actions: The actions to list, by default ``RichTextAction/all``.
+       - actions: The actions to list, by default all non-size actions.
      */
     public init(
         context: RichTextContext,
         bordered: Bool = true,
-        actions: [RichTextAction] = .all
+        actions: [RichTextAction] = [.copy, .redoLatestChange, .undoLatestChange]
     ) {
         self._context = ObservedObject(wrappedValue: context)
         self.bordered = bordered
@@ -47,7 +47,8 @@ public struct RichTextActionButtonStack: View {
             ForEach(actions) {
                 RichTextActionButton(
                     action: $0,
-                    context: context
+                    context: context,
+                    fillVertically: true
                 ).frame(maxHeight: .infinity)
             }
         }

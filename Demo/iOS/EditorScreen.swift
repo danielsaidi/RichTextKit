@@ -51,7 +51,7 @@ private extension EditorScreen {
         HStack {
             RichTextFontPicker(selection: $context.fontName, fontSize: 12)
             Spacer()
-            RichTextFontSizePicker(selection: $context.fontSize)
+            RichTextFontSizePickerStack(context: context)
         }
     }
 

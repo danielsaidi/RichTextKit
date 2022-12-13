@@ -26,6 +26,7 @@ public extension Image {
 
     static let richTextStyleBold = symbol("bold")
     static let richTextStyleItalic = symbol("italic")
+    static let richTextStyleStrikethrough = symbol("strikethrough")
     static let richTextStyleUnderline = symbol("underline")
 
     static let richTextActionCopy = symbol("doc.on.clipboard")

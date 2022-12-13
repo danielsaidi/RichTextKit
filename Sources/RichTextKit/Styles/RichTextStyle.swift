@@ -18,14 +18,10 @@ import SwiftUI
  */
 public enum RichTextStyle: String, CaseIterable, Identifiable {
 
-    /// Bold text.
     case bold
-
-    /// Italic text.
     case italic
-
-    /// Underlined text.
     case underlined
+    case strikethrough
 }
 
 public extension RichTextStyle {
@@ -51,6 +47,7 @@ public extension RichTextStyle {
         switch self {
         case .bold: return .richTextStyleBold
         case .italic: return .richTextStyleItalic
+        case .strikethrough: return .richTextStyleStrikethrough
         case .underlined: return .richTextStyleUnderline
         }
     }
@@ -68,6 +65,7 @@ public extension RichTextStyle {
         attributes: RichTextAttributes?
     ) -> [RichTextStyle] {
         var styles = traits?.enabledRichTextStyles ?? []
+        if attributes?.isStrikethrough == true { styles.append(.strikethrough) }
         if attributes?.isUnderlined == true { styles.append(.underlined) }
         return styles
     }
@@ -96,6 +94,7 @@ public extension RichTextStyle {
         switch self {
         case .bold: return .traitBold
         case .italic: return .traitItalic
+        case .strikethrough: return nil
         case .underlined: return nil
         }
     }
@@ -112,6 +111,7 @@ public extension RichTextStyle {
         switch self {
         case .bold: return .bold
         case .italic: return .italic
+        case .strikethrough: return nil
         case .underlined: return nil
         }
     }

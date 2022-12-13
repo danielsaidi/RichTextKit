@@ -49,6 +49,14 @@ public extension RichTextContext {
         )
     }
 
+    /// A ``RichTextContext/isStrikethrough`` binding.
+    var isStrikethroughBinding: Binding<Bool> {
+        Binding(
+            get: { self.isStrikethrough },
+            set: { self.isStrikethrough = $0 }
+        )
+    }
+
     /// A ``RichTextContext/isUnderlined`` binding.
     var isUnderlinedBinding: Binding<Bool> {
         Binding(

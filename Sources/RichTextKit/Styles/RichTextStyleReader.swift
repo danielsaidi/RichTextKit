@@ -32,6 +32,7 @@ public extension RichTextStyleReader {
         let attributes = richTextAttributes(at: range)
         let traits = font(at: range)?.fontDescriptor.symbolicTraits
         var styles = traits?.enabledRichTextStyles ?? []
+        if attributes.isStrikethrough { styles.append(.strikethrough) }
         if attributes.isUnderlined { styles.append(.underlined) }
         return styles
     }
