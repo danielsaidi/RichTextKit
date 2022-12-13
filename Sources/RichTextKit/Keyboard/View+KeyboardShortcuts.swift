@@ -21,6 +21,8 @@ public extension View {
         #if os(iOS) || os(macOS)
         switch action {
         case .copy: keyboardShortcut("c", modifiers: .command)
+        case .incrementFontSize: keyboardShortcut("+", modifiers: .command)
+        case .decrementFontSize: keyboardShortcut("-", modifiers: .command)
         case .redoLatestChange: keyboardShortcut("z", modifiers: [.command, .shift])
         case .undoLatestChange: keyboardShortcut("z", modifiers: .command)
         }

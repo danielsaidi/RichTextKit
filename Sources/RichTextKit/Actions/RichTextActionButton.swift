@@ -22,16 +22,20 @@ public struct RichTextActionButton: View {
      - Parameters:
        - action: The action to trigger.
        - context: The context to affect.
+       - fillVertically: Whether or not fill up vertical space in a non-greedy way, by default `false`.
      */
     public init(
         action: RichTextAction,
-        context: RichTextContext
+        context: RichTextContext,
+        fillVertically: Bool = false
     ) {
         self.action = action
         self._context = ObservedObject(wrappedValue: context)
+        self.fillVertically = fillVertically
     }
 
     private let action: RichTextAction
+    private let fillVertically: Bool
 
     @ObservedObject
     private var context: RichTextContext
@@ -39,6 +43,7 @@ public struct RichTextActionButton: View {
     public var body: some View {
         Button(action: triggerAction) {
             action.icon
+                .frame(maxHeight: fillVertically ? .infinity : nil)
                 .contentShape(Rectangle())
         }
         .disabled(!canTriggerAction)

@@ -25,26 +25,25 @@ public struct RichTextFontSizePickerStack: View {
      Create a rich text font size picker stack.
 
      - Parameters:
-       - selection: The selected font size.
+       - context: The context to affect.
        - bordered: Whether or not the buttons are bordered, by default `true`.
        - values: The sizes to display in the list, by default ``RichTextFontSizePicker/standardFontSizes``.
      */
     public init(
-        selection: Binding<CGFloat>,
+        context: RichTextContext,
         bordered: Bool = true,
         values: [CGFloat] = RichTextFontSizePicker.standardFontSizes
     ) {
-        self._selection = selection
+        self._context = ObservedObject(wrappedValue: context)
         self.bordered = bordered
         self.values = values
     }
 
+    private let bordered: Bool
     private let values: [CGFloat]
 
-    private let bordered: Bool
-
-    @Binding
-    private var selection: CGFloat
+    @ObservedObject
+    private var context: RichTextContext
 
     public var body: some View {
         #if os(iOS)
@@ -67,23 +66,23 @@ public struct RichTextFontSizePickerStack: View {
 private extension RichTextFontSizePickerStack {
 
     var decrementButton: some View {
-        Button(action: decrement) {
-            Image.richTextFontSizeDecrement
-                .frame(maxHeight: .infinity)
-                .contentShape(Rectangle())
-        }
+        RichTextActionButton(
+            action: .decrementFontSize,
+            context: context,
+            fillVertically: true
+        )
     }
 
     var incrementButton: some View {
-        Button(action: increment) {
-            Image.richTextFontSizeIncrement
-                .frame(maxHeight: .infinity)
-                .contentShape(Rectangle())
-        }
+        RichTextActionButton(
+            action: .incrementFontSize,
+            context: context,
+            fillVertically: true
+        )
     }
 
     var picker: some View {
-        RichTextFontSizePicker(selection: $selection, values: values)
+        RichTextFontSizePicker(selection: $context.fontSize, values: values)
     }
 
     var stepper: some View {
@@ -92,11 +91,11 @@ private extension RichTextFontSizePickerStack {
     }
 
     func decrement() {
-        selection -= 1
+        context.fontSize -= 1
     }
 
     func increment() {
-        selection += 1
+        context.fontSize += 1
     }
 }
 
@@ -116,15 +115,19 @@ struct RichTextFontSizePickerStack_Previews: PreviewProvider {
 
     struct Preview: View {
 
-        @State
-        private var selection: CGFloat = 36.0
+        @StateObject
+        private var context = RichTextContext()
 
         var body: some View {
-            if #available(iOS 15.0, *) {
-                RichTextFontSizePickerStack(selection: $selection)
-            } else {
-                RichTextFontSizePickerStack(selection: $selection)
-            }
+            VStack {
+                Text("Size: \(context.fontSize)")
+
+                if #available(iOS 15.0, *) {
+                    RichTextFontSizePickerStack(context: context)
+                } else {
+                    RichTextFontSizePickerStack(context: context)
+                }
+            }.padding()
         }
     }
 

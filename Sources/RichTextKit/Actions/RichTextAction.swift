@@ -17,6 +17,12 @@ public enum RichTextAction: String, CaseIterable, Identifiable {
     /// Copy the currently selected text, if any.
     case copy
 
+    /// Increment the current font size.
+    case incrementFontSize
+
+    /// Decrement the current font size.
+    case decrementFontSize
+
     /// Redo the latest undone change.
     case redoLatestChange
 
@@ -44,9 +50,11 @@ public extension RichTextAction {
     /// The standard icon to use for the action.
     var icon: Image {
         switch self {
-        case .copy: return Image.richTextActionCopy
-        case .redoLatestChange: return Image.richTextActionRedo
-        case .undoLatestChange: return Image.richTextActionUndo
+        case .copy: return .richTextActionCopy
+        case .incrementFontSize: return .richTextFontSizeIncrement
+        case .decrementFontSize: return .richTextFontSizeDecrement
+        case .redoLatestChange: return .richTextActionRedo
+        case .undoLatestChange: return .richTextActionUndo
         }
     }
 }

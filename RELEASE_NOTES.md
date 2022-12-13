@@ -10,6 +10,7 @@ Until then, deprecated features may be removed in the next minor version.
 
 ### ✨ New Features
 
+* `RichTextAction` has new `incrementFontSize` and `decrementFontSize` actions.
 * `RichTextStyle` has a new `keyboardShortcutKey` property.
 * `View+KeyboardShortcuts` is a new view extension to simplify binding keyboard shortcuts to views.
 
@@ -17,6 +18,10 @@ Until then, deprecated features may be removed in the next minor version.
 
 * `RichTextStyleButton` and `RichTextStyleToggle` now applies keyboard shortcuts.
 * More buttons apply a rectangular content shape.
+
+### 💥 Breaking Changes
+  
+* `RichTextFontSizePickerStack` now requires a `RichTextContext` instea dof a binding.
 
 
 ## 0.2

@@ -117,6 +117,12 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 - ``RichTextFontReader``
 - ``RichTextFontWriter``
 - ``StandardFontSizeProvider``
+- ``RichTextFontPicker``
+- ``RichTextFontPickerFont``
+- ``RichTextFontForEachPicker``
+- ``RichTextFontListPicker``
+- ``RichTextFontSizePicker``
+- ``RichTextFontSizePickerStack``
 
 ### Images
 
@@ -157,10 +163,4 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 
 - ``RichTextAlignmentPicker``
 - ``RichTextColorPicker``
-- ``RichTextColorPickerStack``
-- ``RichTextFontPicker``
-- ``RichTextFontPickerFont``
-- ``RichTextFontForEachPicker``
-- ``RichTextFontListPicker``
-- ``RichTextFontSizePicker``
-- ``RichTextFontSizePickerStack``
+- ``RichTextColorPickerStack`

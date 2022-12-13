@@ -48,7 +48,7 @@ private extension EditorScreen {
                 RichTextFontPicker(selection: $context.fontName, fontSize: 12)
                 HStack {
                     RichTextStyleToggleStack(context: context)
-                    RichTextFontSizePicker(selection: $context.fontSize)
+                    RichTextFontSizePickerStack(context: context)
                 }
             }
             SidebarSection(title: "Color") {

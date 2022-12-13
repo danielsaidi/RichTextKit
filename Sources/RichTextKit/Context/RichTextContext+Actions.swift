@@ -19,6 +19,8 @@ public extension RichTextContext {
     func canTriggerRichTextAction(_ action: RichTextAction) -> Bool {
         switch action {
         case .copy: return canCopy
+        case .incrementFontSize: return true
+        case .decrementFontSize: return true
         case .redoLatestChange: return canRedoLatestChange
         case .undoLatestChange: return canUndoLatestChange
         }
@@ -33,6 +35,8 @@ public extension RichTextContext {
     func triggerRichTextAction(_ action: RichTextAction) {
         switch action {
         case .copy: copyCurrentSelection()
+        case .incrementFontSize: incrementFontSize()
+        case .decrementFontSize: decrementFontSize()
         case .redoLatestChange: redoLatestChange()
         case .undoLatestChange: undoLatestChange()
         }
