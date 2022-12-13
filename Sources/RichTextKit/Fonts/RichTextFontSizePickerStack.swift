@@ -26,20 +26,16 @@ public struct RichTextFontSizePickerStack: View {
 
      - Parameters:
        - context: The context to affect.
-       - bordered: Whether or not the buttons are bordered, by default `true`.
        - values: The sizes to display in the list, by default ``RichTextFontSizePicker/standardFontSizes``.
      */
     public init(
         context: RichTextContext,
-        bordered: Bool = true,
         values: [CGFloat] = RichTextFontSizePicker.standardFontSizes
     ) {
         self._context = ObservedObject(wrappedValue: context)
-        self.bordered = bordered
         self.values = values
     }
 
-    private let bordered: Bool
     private let values: [CGFloat]
 
     @ObservedObject
@@ -52,7 +48,6 @@ public struct RichTextFontSizePickerStack: View {
             picker
             incrementButton
         }
-        .bordered(if: bordered)
         .fixedSize(horizontal: false, vertical: true)
         #else
         HStack(spacing: 3) {
@@ -99,18 +94,6 @@ private extension RichTextFontSizePickerStack {
     }
 }
 
-private extension View {
-
-    @ViewBuilder
-    func bordered(if condition: Bool) -> some View {
-        if condition, #available(iOS 15.0, macOS 12.0, *) {
-            self.buttonStyle(.bordered)
-        } else {
-            self
-        }
-    }
-}
-
 struct RichTextFontSizePickerStack_Previews: PreviewProvider {
 
     struct Preview: View {
@@ -121,18 +104,31 @@ struct RichTextFontSizePickerStack_Previews: PreviewProvider {
         var body: some View {
             VStack {
                 Text("Size: \(context.fontSize)")
-
                 if #available(iOS 15.0, *) {
                     RichTextFontSizePickerStack(context: context)
                 } else {
                     RichTextFontSizePickerStack(context: context)
                 }
-            }.padding()
+            }
+            .bordered()
+            .padding()
         }
     }
 
     static var previews: some View {
         Preview()
+    }
+}
+
+private extension View {
+
+    @ViewBuilder
+    func bordered() -> some View {
+        if #available(iOS 15.0, *) {
+            self.buttonStyle(.bordered)
+        } else {
+            self
+        }
     }
 }
 #endif

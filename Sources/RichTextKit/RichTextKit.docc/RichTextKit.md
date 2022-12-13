@@ -80,6 +80,7 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 - ``RichTextAlignment``
 - ``RichTextAlignmentReader``
 - ``RichTextAlignmentWriter``
+- ``RichTextAlignmentPicker``
 
 ### Attributes
 
@@ -93,6 +94,8 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 - ``ColorRepresentable``
 - ``RichTextColorReader``
 - ``RichTextColorWriter``
+- ``RichTextColorPicker``
+- ``RichTextColorPickerStack`
 
 ### Data
 
@@ -158,9 +161,3 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 - ``RichTextStyleButton``
 - ``RichTextStyleToggle``
 - ``RichTextStyleToggleStack``
-
-### Views - Pickers
-
-- ``RichTextAlignmentPicker``
-- ``RichTextColorPicker``
-- ``RichTextColorPickerStack`

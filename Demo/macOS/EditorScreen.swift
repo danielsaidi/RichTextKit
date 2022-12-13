@@ -28,7 +28,10 @@ struct EditorScreen: View {
         }
         .toolbar {
             ToolbarItem(placement: .automatic) {
-                RichTextActionButtonStack(context: context)
+                RichTextActionButtonStack(
+                    context: context,
+                    actions: [.undo, .redo, .copy]
+                )
             }
         }
     }
@@ -65,6 +68,7 @@ private extension EditorScreen {
             }
             SidebarSection(title: "Alignment") {
                 RichTextAlignmentPicker(selection: $context.textAlignment)
+                    .pickerStyle(.segmented)
             }
             Spacer()
         }.frame(width: 250)

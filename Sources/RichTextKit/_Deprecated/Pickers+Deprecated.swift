@@ -9,7 +9,6 @@ public extension RichTextAlignmentPicker {
         selection: Binding<RichTextAlignment>
     ) {
         self.init(
-            title: title,
             selection: selection,
             values: alignments
         )

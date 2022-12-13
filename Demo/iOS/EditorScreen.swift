@@ -52,6 +52,7 @@ private extension EditorScreen {
             RichTextFontPicker(selection: $context.fontName, fontSize: 12)
             Spacer()
             RichTextFontSizePickerStack(context: context)
+                .buttonStyle(.bordered)
         }
     }
 
@@ -60,13 +61,16 @@ private extension EditorScreen {
             RichTextStyleToggleStack(context: context)
             Spacer()
             RichTextAlignmentPicker(selection: $context.textAlignment)
+                .pickerStyle(.segmented)
         }
     }
 
     var bottomToolbar: some View {
         HStack {
-            RichTextActionButtonStack(context: context)
-                .buttonStyle(.bordered)
+            RichTextActionButtonStack(
+                context: context,
+                actions: [.undo, .redo, .copy]
+            ).buttonStyle(.bordered)
             Spacer()
             RichTextColorPickerStack(context: context)
         }

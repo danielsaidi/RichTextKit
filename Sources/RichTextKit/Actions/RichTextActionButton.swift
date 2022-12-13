@@ -75,22 +75,26 @@ struct RichTextActionButton_Previews: PreviewProvider {
                 HStack {
                     RichTextActionButton(
                         action: .copy,
-                        context: context)
-                    Divider()
+                        context: context,
+                        fillVertically: true)
                     RichTextActionButton(
                         action: .redoLatestChange,
-                        context: context)
+                        context: context,
+                        fillVertically: true)
                     RichTextActionButton(
                         action: .undoLatestChange,
-                        context: context)
-                    Divider()
+                        context: context,
+                        fillVertically: true)
                     RichTextActionButton(
                         action: .incrementFontSize,
-                        context: context)
+                        context: context,
+                        fillVertically: true)
                     RichTextActionButton(
                         action: .decrementFontSize,
-                        context: context)
+                        context: context,
+                        fillVertically: true)
                 }
+                .fixedSize(horizontal: false, vertical: true)
                 .padding()
                 .bordered()
             } else {

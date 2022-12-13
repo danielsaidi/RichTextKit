@@ -34,6 +34,12 @@ public extension RichTextAction {
 
     /// All available rich text actions.
     static var all: [Self] { allCases }
+
+    /// A name alias for `.redoLatestChange`.
+    static var redo: RichTextAction { .redoLatestChange }
+
+    /// A name alias for `.undoLatestChange`.
+    static var undo: RichTextAction { .undoLatestChange }
 }
 
 public extension Collection where Element == RichTextAction {

@@ -50,7 +50,7 @@ public struct RichTextFontSizePicker: View {
             }
         } label: {
             EmptyView()
-        }
+        }.labelsHidden()
     }
 }
 

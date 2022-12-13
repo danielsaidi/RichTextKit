@@ -22,22 +22,17 @@ public struct RichTextActionButtonStack: View {
 
      - Parameters:
        - context: The context to affect.
-       - bordered: Whether or not the buttons are bordered, by default `true`.
        - actions: The actions to list, by default all non-size actions.
      */
     public init(
         context: RichTextContext,
-        bordered: Bool = true,
-        actions: [RichTextAction] = [.copy, .redoLatestChange, .undoLatestChange]
+        actions: [RichTextAction]
     ) {
         self._context = ObservedObject(wrappedValue: context)
-        self.bordered = bordered
         self.actions = actions
     }
 
     private let actions: [RichTextAction]
-
-    private let bordered: Bool
 
     @ObservedObject
     private var context: RichTextContext
@@ -52,20 +47,7 @@ public struct RichTextActionButtonStack: View {
                 ).frame(maxHeight: .infinity)
             }
         }
-        .bordered(if: bordered)
         .fixedSize(horizontal: false, vertical: true)
-    }
-}
-
-private extension View {
-
-    @ViewBuilder
-    func bordered(if condition: Bool) -> some View {
-        if condition, #available(iOS 15.0, macOS 12.0, *) {
-            self.buttonStyle(.bordered)
-        } else {
-            self
-        }
     }
 }
 
@@ -77,12 +59,28 @@ struct RichTextActionButtonStack_Previews: PreviewProvider {
         private var context = RichTextContext()
 
         var body: some View {
-            RichTextActionButtonStack(context: context)
-                .padding()
+            RichTextActionButtonStack(
+                context: context,
+                actions: [.undoLatestChange, .redoLatestChange, .copy]
+            )
+            .bordered()
+            .padding()
         }
     }
 
     static var previews: some View {
         Preview()
+    }
+}
+
+private extension View {
+
+    @ViewBuilder
+    func bordered() -> some View {
+        if #available(iOS 15.0, *) {
+            self.buttonStyle(.bordered)
+        } else {
+            self
+        }
     }
 }

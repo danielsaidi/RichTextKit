@@ -8,9 +8,12 @@ Until then, deprecated features may be removed in the next minor version.
 
 ## 0.3
 
+This release adds support for strikethrough and cleans up the 0.2 api a little.
+
 ### ✨ New Features
 
 * `RichTextAction` has new `incrementFontSize` and `decrementFontSize` actions.
+* `RichTextAction` has new `undo` and `redo` name aliases.
 * `RichTextActionButton` has a new `fillVertically` parameter.
 * `RichTextStyle` has a new `strikethrough` style.
 * `RichTextStyleToggle` has a new `fillVertically` parameter.
@@ -23,7 +26,11 @@ Until then, deprecated features may be removed in the next minor version.
 * More buttons apply a rectangular content shape.
 
 ### 💥 Breaking Changes
-  
+    
+* `RichTextActionButtonStack` no longer has default actions.
+* `RichTextActionButtonStack` no longer has a bordered init parameter.
+* `RichTextAlignmentPicker` no longer has title and segmented parameters.
+* `RichTextFontSizePickerStack` no longer has a bordered init parameter.
 * `RichTextFontSizePickerStack` now requires a `RichTextContext` instea dof a binding.
 
 
