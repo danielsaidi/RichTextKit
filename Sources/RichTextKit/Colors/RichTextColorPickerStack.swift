@@ -39,7 +39,7 @@ public struct RichTextColorPickerStack: View {
     private var context: RichTextContext
 
     public var body: some View {
-        HStack(spacing: 5) {
+        HStack(spacing: 20) {
             ForEach(colors) {
                 RichTextColorPicker(color: $0, context: context)
             }

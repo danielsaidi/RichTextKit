@@ -127,6 +127,11 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 - ``RichTextFontSizePicker``
 - ``RichTextFontSizePickerStack``
 
+### Format
+
+- ``RichTextFormatSheet``
+- ``RichTextFormatSidebar``
+
 ### Images
 
 - ``ImageRepresentable``

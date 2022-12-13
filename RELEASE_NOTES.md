@@ -15,6 +15,8 @@ This release adds support for strikethrough and cleans up the 0.2 api a little.
 * `RichTextAction` has new `incrementFontSize` and `decrementFontSize` actions.
 * `RichTextAction` has new `undo` and `redo` name aliases.
 * `RichTextActionButton` has a new `fillVertically` parameter.
+* `RichTextFormatSheet` is a new view that collects a bunch of text formatting controls.
+* `RichTextFormatSidebar` is a new view that collects a bunch of text formatting controls.
 * `RichTextStyle` has a new `strikethrough` style.
 * `RichTextStyleToggle` has a new `fillVertically` parameter.
 * `View+KeyboardShortcuts` is a new view extension to simplify binding keyboard shortcuts to views.
