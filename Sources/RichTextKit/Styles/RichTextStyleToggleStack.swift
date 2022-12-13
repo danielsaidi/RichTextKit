@@ -12,10 +12,11 @@ import SwiftUI
  This view can be used to list a collection of toggles for a
  set of ``RichTextStyle`` values in a horizontal line.
 
- Since this view controls multiple values, it binds directly
- to a ``RichTextContext`` instead of individual values.
+ See the ``RichTextStyleToggle`` for more information on the
+ toggle views that are rendered by this view. Since the view
+ controls multiple values, it uses a ``RichTextContext`` and
+ not individual values.
  */
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 9.0, *)
 public struct RichTextStyleToggleStack: View {
 
     /**
@@ -56,7 +57,6 @@ public struct RichTextStyleToggleStack: View {
     }
 }
 
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 9.0, *)
 struct RichTextStyleToggleStack_Previews: PreviewProvider {
 
     struct Preview: View {

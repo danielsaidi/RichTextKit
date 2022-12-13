@@ -11,12 +11,14 @@ import SwiftUI
 /**
  This button can be used to toggle a ``RichTextStyle`` value.
 
- This renders a plain `Button`, which means that you can use
- and configure it as normal. The only exception is the color
- of the content, which is determined by the button style you
- can provide in the initializer.
+ This view renders a plain `Toggle` that uses a button style.
+ This means that you can use and configure it as normal. The
+ only exception is the tint, which is specified by the style
+ that you can inject.
+
+ Note that the view will use a ``RichTextStyleButton`` if it
+ is used on iOS 14, macOS 11, tvOS 14 and watchOS 8.
  */
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 9.0, *)
 public struct RichTextStyleToggle: View {
 
     /**
@@ -75,7 +77,17 @@ public struct RichTextStyleToggle: View {
         #if os(tvOS)
         toggle
         #else
-        toggle.toggleStyle(.button)
+        if #available(iOS 15.0, macOS 12.0, watchOS 9.0, *) {
+            toggle.toggleStyle(.button)
+        } else {
+            RichTextStyleButton(
+                style: style,
+                buttonStyle: .init(
+                    inactiveColor: buttonStyle.inactiveColor,
+                    activeColor: buttonStyle.activeColor),
+                value: value
+            )
+        }
         #endif
     }
 
@@ -84,12 +96,24 @@ public struct RichTextStyleToggle: View {
             style.icon
                 .frame(maxHeight: fillVertically ? .infinity : nil)
         }
-        .tint(tintColor)
+        .tintColor(tintColor)
         .keyboardShortcut(for: style)
     }
 }
 
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 9.0, *)
+private extension View {
+
+    @ViewBuilder
+    func tintColor(_ color: Color) -> some View {
+        if #available(iOS 15.0, macOS 12.0, watchOS 9.0, *) {
+            self.tint(color)
+        } else {
+            self.accentColor(color)
+        }
+    }
+
+}
+
 public extension RichTextStyleToggle {
 
     /**
@@ -120,7 +144,6 @@ public extension RichTextStyleToggle {
     }
 }
 
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 9.0, *)
 public extension RichTextStyleToggle.Style {
 
     /**
@@ -129,7 +152,6 @@ public extension RichTextStyleToggle.Style {
     static var standard = RichTextStyleToggle.Style()
 }
 
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 9.0, *)
 private extension RichTextStyleToggle {
 
     var isOn: Bool {
@@ -141,7 +163,6 @@ private extension RichTextStyleToggle {
     }
 }
 
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 9.0, *)
 struct RichTextStyleToggle_Previews: PreviewProvider {
 
     struct Preview: View {
