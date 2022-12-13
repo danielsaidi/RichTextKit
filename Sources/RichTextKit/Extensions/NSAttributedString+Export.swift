@@ -1,9 +1,9 @@
 //
 //  NSAttributedString+Export.swift
-//  OribiRichTextKit
+//  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-04-05.
-//  Copyright © 2022 Oribi. All rights reserved.
+//  Copyright © 2022 Daniel Saidi. All rights reserved.
 //
 
 import Foundation

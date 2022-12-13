@@ -55,6 +55,19 @@ public extension RichTextStyle {
         }
     }
 
+    #if os(iOS) || os(macOS)
+    /**
+     The standard keyboard shortcut key to use with command.
+     */
+    var keyboardShortcutKey: KeyEquivalent {
+        switch self {
+        case .bold: return "b"
+        case .italic: return "i"
+        case .underlined: return "u"
+        }
+    }
+    #endif
+
     /**
      Get the rich text styles that are enabled in a provided
      set of traits and attributes.

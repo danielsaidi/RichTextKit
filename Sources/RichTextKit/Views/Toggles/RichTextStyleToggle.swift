@@ -74,7 +74,9 @@ public struct RichTextStyleToggle: View {
     private var toggle: some View {
         Toggle(isOn: value) {
             style.icon
-        }.tint(tintColor)
+        }
+        .tint(tintColor)
+        .keyboardShortcut(for: style)
     }
 }
 

@@ -6,6 +6,18 @@ Until then, deprecated features may be removed in the next minor version.
 
 
 
+## 0.3
+
+### ✨ New Features
+
+* `RichTextStyle` has a new `keyboardShortcutKey` property.
+* `View+KeyboardShortcuts` is a new view extension to simplify binding keyboard shortcuts to views.
+
+### 💡 Behavior changes
+
+* `RichTextStyleButton` and `RichTextStyleToggle` now applies keyboard shortcuts.
+
+
 ## 0.2
 
 ### ✨ New Features

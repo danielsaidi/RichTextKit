@@ -11,7 +11,7 @@ import SwiftUI
 import XCTest
 
 class RichTextStyleTests: XCTestCase {
-    
+
     func icon(for style: RichTextStyle) -> Image {
         style.icon
     }
@@ -21,6 +21,7 @@ class RichTextStyleTests: XCTestCase {
         XCTAssertEqual(icon(for: .italic), .richTextStyleItalic)
         XCTAssertEqual(icon(for: .underlined), .richTextStyleUnderline)
     }
+
 
     #if canImport(UIKit)
     func traits(for style: RichTextStyle) -> UIFontDescriptor.SymbolicTraits? {

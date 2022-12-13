@@ -31,7 +31,7 @@ public extension UTType {
 public extension Collection where Element == UTType {
     
     /**
-     The uniforum types an Oribi rich text document supports.
+     The uniforum types that rich text documents support.
      */
     static var richTextTypes: [UTType] { UTType.richTextTypes }
 }
