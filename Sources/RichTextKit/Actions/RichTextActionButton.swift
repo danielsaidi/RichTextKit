@@ -39,7 +39,10 @@ public struct RichTextActionButton: View {
     public var body: some View {
         Button(action: triggerAction) {
             action.icon
-        }.disabled(!canTriggerAction)
+                .contentShape(Rectangle())
+        }
+        .disabled(!canTriggerAction)
+        .keyboardShortcut(for: action)
     }
 }
 

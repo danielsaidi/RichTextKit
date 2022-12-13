@@ -16,6 +16,7 @@ Until then, deprecated features may be removed in the next minor version.
 ### 💡 Behavior changes
 
 * `RichTextStyleButton` and `RichTextStyleToggle` now applies keyboard shortcuts.
+* More buttons apply a rectangular content shape.
 
 
 ## 0.2

@@ -68,13 +68,17 @@ private extension RichTextFontSizePickerStack {
 
     var decrementButton: some View {
         Button(action: decrement) {
-            Image.richTextFontSizeDecrement.frame(maxHeight: .infinity)
+            Image.richTextFontSizeDecrement
+                .frame(maxHeight: .infinity)
+                .contentShape(Rectangle())
         }
     }
 
     var incrementButton: some View {
         Button(action: increment) {
-            Image.richTextFontSizeIncrement.frame(maxHeight: .infinity)
+            Image.richTextFontSizeIncrement
+                .frame(maxHeight: .infinity)
+                .contentShape(Rectangle())
         }
     }
 

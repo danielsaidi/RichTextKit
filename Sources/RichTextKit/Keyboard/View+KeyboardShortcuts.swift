@@ -11,6 +11,25 @@ import SwiftUI
 public extension View {
 
     /**
+     Add a keyboard shortcut that triggers a certain action.
+
+     This modifier only has effect on platforms that support
+     keyboard shortcuts.
+     */
+    @ViewBuilder
+    func keyboardShortcut(for action: RichTextAction) -> some View {
+        #if os(iOS) || os(macOS)
+        switch action {
+        case .copy: keyboardShortcut("c", modifiers: .command)
+        case .redoLatestChange: keyboardShortcut("z", modifiers: [.command, .shift])
+        case .undoLatestChange: keyboardShortcut("z", modifiers: .command)
+        }
+        #else
+        self
+        #endif
+    }
+
+    /**
      Add a keyboard shortcut that toggles a certain style.
 
      This modifier only has effect on platforms that support
@@ -19,8 +38,11 @@ public extension View {
     @ViewBuilder
     func keyboardShortcut(for style: RichTextStyle) -> some View {
         #if os(iOS) || os(macOS)
-        let key = style.keyboardShortcutKey
-        self.keyboardShortcut(key, modifiers: .command)
+        switch style {
+        case .bold: keyboardShortcut("b", modifiers: .command)
+        case .italic: keyboardShortcut("i", modifiers: .command)
+        case .underlined: keyboardShortcut("u", modifiers: .command)
+        }
         #else
         self
         #endif

@@ -72,6 +72,14 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 ### Actions
 
 - ``RichTextAction``
+- ``RichTextActionButton``
+- ``RichTextActionButtonStack``
+
+### Alignment
+
+- ``RichTextAlignment``
+- ``RichTextAlignmentReader``
+- ``RichTextAlignmentWriter``
 
 ### Attributes
 
@@ -141,18 +149,9 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 - ``RichTextStyle``
 - ``RichTextStyleReader``
 - ``RichTextStyleWriter``
-
-### Text Alignment
-
-- ``RichTextAlignment``
-- ``RichTextAlignmentReader``
-- ``RichTextAlignmentWriter``
-
-### Views - Buttons
-
-- ``RichTextActionButton``
-- ``RichTextActionButtonStack``
 - ``RichTextStyleButton``
+- ``RichTextStyleToggle``
+- ``RichTextStyleToggleStack``
 
 ### Views - Pickers
 
@@ -165,8 +164,3 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 - ``RichTextFontListPicker``
 - ``RichTextFontSizePicker``
 - ``RichTextFontSizePickerStack``
-
-### Views - Toggles
-
-- ``RichTextStyleToggle``
-- ``RichTextStyleToggleStack``
