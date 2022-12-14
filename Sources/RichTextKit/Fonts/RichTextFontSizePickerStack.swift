@@ -53,12 +53,21 @@ public struct RichTextFontSizePickerStack: View {
         HStack(spacing: 3) {
             picker
             stepper
-        }
+        }.overlay(macShortcutOverlay)
         #endif
     }
 }
 
 private extension RichTextFontSizePickerStack {
+
+    var macShortcutOverlay: some View {
+        HStack {
+            decrementButton
+            incrementButton
+        }
+        .opacity(0)
+        .allowsHitTesting(false)
+    }
 
     var decrementButton: some View {
         RichTextActionButton(
