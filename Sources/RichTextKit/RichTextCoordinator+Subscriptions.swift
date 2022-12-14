@@ -282,7 +282,11 @@ internal extension RichTextCoordinator {
         if newValue {
             textView.becomeFirstResponder()
         } else {
+            #if os(iOS)
             textView.resignFirstResponder()
+            #else
+            print("macOS currently doesn't resign first responder.")
+            #endif
         }
     }
 
