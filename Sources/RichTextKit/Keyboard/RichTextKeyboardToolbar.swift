@@ -27,7 +27,7 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
        - leadingActions: The leading actions, by default `.undo`, `.redo` and `.copy`.
        - trailingActions: The trailing actions, by default `.dismissKeyboard`.
        - spacing: The stack item spacing, by default `15`.
-       - minHeight: The toolbar minimum height, by default `50`.
+       - height: The toolbar height, by default `50`.
        - style: The toolbar style to apply, by default ``RichTextKeyboardToolbar/Style/standard``.
        - leadingButtons: The leading buttons to place after the leading actions.
        - trailingButtons: The trailing buttons to place after the trailing actions.
@@ -37,7 +37,7 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
         leadingActions: [RichTextAction] = [.undo, .redo, .copy],
         trailingActions: [RichTextAction] = [.dismissKeyboard],
         spacing: Double = 15,
-        minHeight: Double = 50,
+        height: Double = 50,
         style: RichTextKeyboardToolbarStyle = .standard,
         @ViewBuilder leadingButtons: @escaping () -> LeadingButtons,
         @ViewBuilder trailingButtons: @escaping () -> TrailingButtons
@@ -46,7 +46,7 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
         self.leadingActions = leadingActions
         self.trailingActions = trailingActions
         self.spacing = spacing
-        self.minHeight = minHeight
+        self.height = height
         self.style = style
         self.leadingButtons = leadingButtons
         self.trailingButtons = trailingButtons
@@ -55,7 +55,7 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
     private let leadingActions: [RichTextAction]
     private let trailingActions: [RichTextAction]
     private let spacing: Double
-    private let minHeight: Double
+    private let height: Double
     private let style: RichTextKeyboardToolbarStyle
 
     private let leadingButtons: () -> LeadingButtons
@@ -79,7 +79,7 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
             }
             .padding(10)
         }
-        .frame(minHeight: minHeight)
+        .frame(height: height)
         .overlay(Divider(), alignment: .bottom)
         .accentColor(.primary)
         .background(
@@ -87,7 +87,8 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
                 .overlay(Color.white.opacity(0.2))
                 .shadow(color: style.shadowColor, radius: style.shadowRadius, x: 0, y: 0)
         )
-        .offset(y: context.isEditingText ? 0 : minHeight)
+        .opacity(context.isEditingText ? 1 : 0)
+        .offset(y: context.isEditingText ? 0 : height)
         .frame(height: context.isEditingText ? nil : 0)
         .sheet(isPresented: $isSheetPresented) {
             RichTextFormatSheet(context: context)

@@ -22,6 +22,7 @@ This release also adds localization and accessibility to the various views.
 * `RichTextFormatSheet` is a new view that collects a bunch of text formatting controls.
 * `RichTextFormatSidebar` is a new view that collects a bunch of text formatting controls.
 * `RichTextKeyboardToolbar` is a new toolbar that can be used on iOS.
+* `RichTextKeyboardToolbarMenu` is a new toolbar menu.
 * `RichTextStyle` has a new `strikethrough` style.
 * `RichTextStyleToggle` has a new `fillVertically` parameter.
 * `RTKL10n` is a new enum with localized strings, which is used to localize multiple types.
