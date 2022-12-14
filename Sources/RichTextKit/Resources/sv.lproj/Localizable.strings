@@ -14,7 +14,7 @@
 "fontSize" = "Teckenstorlek";
 
 "color" = "Färg";
-"textColor" = "Text";
+"foregroundColor" = "Text";
 "backgroundColor" = "Bakgrund";
 
 "actionCopy" = "Kopiera";

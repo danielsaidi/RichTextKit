@@ -27,7 +27,7 @@ public extension Image {
     static let richTextAlignmentRight = symbol("text.alignright")
 
     static let richTextColorBackground = symbol("highlighter")
-    static let richTextColorText = symbol("character")
+    static let richTextColorForeground = symbol("character")
 
     static let richTextFontSizeDecrement = symbol("minus")
     static let richTextFontSizeIncrement = symbol("plus")

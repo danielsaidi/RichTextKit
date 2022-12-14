@@ -14,7 +14,7 @@
 "fontSize" = "Font Size";
 
 "color" = "Color";
-"textColor" = "Text";
+"foregroundColor" = "Text";
 "backgroundColor" = "Background";
 
 "actionCopy" = "Copy";

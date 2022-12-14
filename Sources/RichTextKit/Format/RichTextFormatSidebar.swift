@@ -45,9 +45,9 @@ public struct RichTextFormatSidebar: View {
             }
             SidebarSection(title: RTKL10n.color.text) {
                 HStack {
-                    Text(RTKL10n.textColor.text)
+                    Text(RTKL10n.foregroundColor.text)
                     Spacer()
-                    RichTextColorPicker(color: .text, context: context)
+                    RichTextColorPicker(color: .foreground, context: context)
                 }
                 HStack {
                     Text(RTKL10n.backgroundColor.text)

@@ -20,7 +20,7 @@ public enum RTKL10n: String, CaseIterable, Identifiable {
     fontSize,
 
     color,
-    textColor,
+    foregroundColor,
     backgroundColor,
 
     actionCopy,

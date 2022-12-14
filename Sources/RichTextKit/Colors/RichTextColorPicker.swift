@@ -46,7 +46,7 @@ public struct RichTextColorPicker: View {
     ) {
         self.color = color
         switch color {
-        case .text: self.value = context.foregroundColorBinding
+        case .foreground: self.value = context.foregroundColorBinding
         case .background: self.value = context.backgroundColorBinding
         }
     }
@@ -70,12 +70,12 @@ public extension RichTextColorPicker {
      This enum specifies which colors this picker can pick.
      */
     enum PickerColor: String, CaseIterable, Identifiable {
-        case text, background
+        case foreground, background
 
         var icon: Image {
             switch self {
+            case .foreground: return Image.richTextColorForeground
             case .background: return Image.richTextColorBackground
-            case .text: return Image.richTextColorText
             }
         }
     }
@@ -92,7 +92,7 @@ public extension RichTextColorPicker.PickerColor {
     /// The color's localized name.
     var localizedName: String {
         switch self {
-        case .text: return RTKL10n.textColor.text
+        case .foreground: return RTKL10n.foregroundColor.text
         case .background: return RTKL10n.backgroundColor.text
         }
     }
@@ -116,7 +116,7 @@ struct RichTextColorPicker_Previews: PreviewProvider {
 
         var body: some View {
             HStack {
-                RichTextColorPicker(color: .text, value: $text)
+                RichTextColorPicker(color: .foreground, value: $text)
                 RichTextColorPicker(color: .background, value: $background)
             }.padding()
         }
