@@ -17,6 +17,9 @@ public enum RichTextAction: String, CaseIterable, Identifiable {
     /// Copy the currently selected text, if any.
     case copy
 
+    /// Dismiss any presented software keyboard.
+    case dismissKeyboard
+
     /// Increment the current font size.
     case incrementFontSize
 
@@ -45,6 +48,7 @@ public extension RichTextAction {
     var localizedName: String {
         switch self {
         case .copy: return RTKL10n.actionCopy.text
+        case .dismissKeyboard: return RTKL10n.actionDismissKeyboard.text
         case .incrementFontSize: return RTKL10n.actionIncrementFontSize.text
         case .decrementFontSize: return RTKL10n.actionDecrementFontSize.text
         case .redoLatestChange: return RTKL10n.actionRedoLatestChange.text
@@ -68,6 +72,7 @@ public extension RichTextAction {
     var icon: Image {
         switch self {
         case .copy: return .richTextActionCopy
+        case .dismissKeyboard: return .richTextActionDismissKeyboard
         case .incrementFontSize: return .richTextFontSizeIncrement
         case .decrementFontSize: return .richTextFontSizeDecrement
         case .redoLatestChange: return .richTextActionRedo
