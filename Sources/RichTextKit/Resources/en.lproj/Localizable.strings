@@ -8,6 +8,8 @@
 
 "locale" = "en";
 
+"done" = "Done";
+
 "font" = "Font";
 "fontSize" = "Font Size";
 
@@ -16,8 +18,9 @@
 "backgroundColor" = "Background";
 
 "actionCopy" = "Copy";
-"actionIncrementFontSize" = "Increment font size";
-"actionDecrementFontSize" = "Decrement font size";
+"actionDismissKeyboard" = "Dismiss Keyboard";
+"actionIncrementFontSize" = "Increment Font Size";
+"actionDecrementFontSize" = "Decrement Font Size";
 "actionRedoLatestChange" = "Redo";
 "actionUndoLatestChange" = "Undo";
 

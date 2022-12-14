@@ -8,6 +8,8 @@
 
 "locale" = "sv";
 
+"done" = "Klar";
+
 "font" = "Typsnitt";
 "fontSize" = "Teckenstorlek";
 
@@ -16,6 +18,7 @@
 "backgroundColor" = "Bakgrund";
 
 "actionCopy" = "Kopiera";
+"actionDismissKeyboard" = "Stäng tangentbordet";
 "actionIncrementFontSize" = "Öka teckenstorlek";
 "actionDecrementFontSize" = "Minska teckenstorlek";
 "actionRedoLatestChange" = "Gör om";

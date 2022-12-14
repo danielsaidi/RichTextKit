@@ -14,6 +14,8 @@ import SwiftUI
 public enum RTKL10n: String, CaseIterable, Identifiable {
 
     case
+    done,
+
     font,
     fontSize,
 
@@ -22,6 +24,7 @@ public enum RTKL10n: String, CaseIterable, Identifiable {
     backgroundColor,
 
     actionCopy,
+    actionDismissKeyboard,
     actionIncrementFontSize,
     actionDecrementFontSize,
     actionRedoLatestChange,
@@ -101,7 +104,7 @@ struct RTKL10n_Previews: PreviewProvider {
                     }.padding(.vertical, 4)
                 }
             }.navigationBarTitle("Translations")
-        }
+        }.navigationViewStyle(.stack)
     }
 }
 #endif
