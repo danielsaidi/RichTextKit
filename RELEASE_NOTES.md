@@ -33,6 +33,7 @@ This release also adds localization and accessibility to the various views.
 
 * `RichTextActionButtonStack` and `RichTextStyleToggleStack` now fills vertically.
 * `RichTextStyleButton` and `RichTextStyleToggle` now applies keyboard shortcuts.
+* `RichTextStyleToggle` applies a toggle-like style to fallbacks on older OS versions.
 * Many pickers, buttons and toggles apply a localized accessibility label.
 * More buttons apply a rectangular content shape.
 

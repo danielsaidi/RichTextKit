@@ -29,24 +29,29 @@ public struct RichTextStyleButton: View {
        - style: The style to toggle.
        - buttonStyle: The button style to use, by default ``RichTextStyleButton/Style/standard``.
        - value: The value to bind to.
+       - fillVertically: Whether or not fill up vertical space in a non-greedy way, by default `false`.
      */
     public init(
         style: RichTextStyle,
         buttonStyle: Style = .standard,
-        value: Binding<Bool>
+        value: Binding<Bool>,
+        fillVertically: Bool = false
     ) {
         self.style = style
         self.buttonStyle = buttonStyle
         self.value = value
+        self.fillVertically = fillVertically
     }
 
     private let style: RichTextStyle
     private let buttonStyle: Style
     private let value: Binding<Bool>
+    private let fillVertically: Bool
 
     public var body: some View {
         Button(action: toggle) {
             style.icon
+                .frame(maxHeight: fillVertically ? .infinity : nil)
                 .foregroundColor(tintColor)
                 .contentShape(Rectangle())
         }

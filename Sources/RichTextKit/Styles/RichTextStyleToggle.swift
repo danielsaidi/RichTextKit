@@ -85,8 +85,13 @@ public struct RichTextStyleToggle: View {
                 buttonStyle: .init(
                     inactiveColor: buttonStyle.inactiveColor,
                     activeColor: buttonStyle.activeColor),
-                value: value
+                value: value,
+                fillVertically: fillVertically
             )
+            .padding(7)
+            .frame(minWidth: 35)
+            .background(backgroundColor)
+            .cornerRadius(5)
         }
         #endif
     }
@@ -102,6 +107,13 @@ public struct RichTextStyleToggle: View {
     }
 }
 
+private extension RichTextStyleToggle {
+
+    var backgroundColor: Color {
+        value.wrappedValue ? buttonStyle.activeColor.opacity(0.2) : .clear
+    }
+}
+
 private extension View {
 
     @ViewBuilder
@@ -112,7 +124,6 @@ private extension View {
             self.accentColor(color)
         }
     }
-
 }
 
 public extension RichTextStyleToggle {
@@ -175,10 +186,10 @@ struct RichTextStyleToggle_Previews: PreviewProvider {
         private var isItalicOn = true
 
         @State
-        private var isStrikethroughOn = false
+        private var isStrikethroughOn = true
 
         @State
-        private var isUnderlinedOn = false
+        private var isUnderlinedOn = true
 
         var body: some View {
             HStack {
