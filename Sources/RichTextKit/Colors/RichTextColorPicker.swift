@@ -74,8 +74,8 @@ public extension RichTextColorPicker {
 
         var icon: Image {
             switch self {
-            case .background: return Image.richTextBackgroundColor
-            case .text: return Image.richTextForegroundColor
+            case .background: return Image.richTextColorBackground
+            case .text: return Image.richTextColorText
             }
         }
     }

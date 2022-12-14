@@ -13,26 +13,29 @@ import SwiftUI
  */
 public extension Image {
 
+    static let richTextFormat = symbol("textformat")
+
+    static let richTextActionCopy = symbol("doc.on.clipboard")
+    static let richTextActionDismissKeyboard = symbol("keyboard.chevron.compact.down")
+    static let richTextActionEdit = symbol("square.and.pencil")
+    static let richTextActionRedo = symbol("arrow.uturn.forward")
+    static let richTextActionUndo = symbol("arrow.uturn.backward")
+
     static let richTextAlignmentCenter = symbol("text.aligncenter")
     static let richTextAlignmentJustified = symbol("text.justify")
     static let richTextAlignmentLeft = symbol("text.alignleft")
     static let richTextAlignmentRight = symbol("text.alignright")
 
+    static let richTextColorBackground = symbol("highlighter")
+    static let richTextColorText = symbol("character")
+
     static let richTextFontSizeDecrement = symbol("minus")
     static let richTextFontSizeIncrement = symbol("plus")
-
-    static let richTextForegroundColor = symbol("character")
-    static let richTextBackgroundColor = symbol("highlighter")
 
     static let richTextStyleBold = symbol("bold")
     static let richTextStyleItalic = symbol("italic")
     static let richTextStyleStrikethrough = symbol("strikethrough")
     static let richTextStyleUnderline = symbol("underline")
-
-    static let richTextActionCopy = symbol("doc.on.clipboard")
-    static let richTextActionEdit = symbol("square.and.pencil")
-    static let richTextActionRedo = symbol("arrow.uturn.forward")
-    static let richTextActionUndo = symbol("arrow.uturn.backward")
 }
 
 private extension Image {
