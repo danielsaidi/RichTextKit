@@ -268,9 +268,9 @@ internal extension RichTextCoordinator {
         highlightedRangeOriginalForegroundColor = textView.foregroundColor(at: range) ?? .textColor
         let style = textView.highlightingStyle
         let background = ColorRepresentable(style.backgroundColor)
-        let foreground = ColorRepresentable(style.foregroundColor)
+        let text = ColorRepresentable(style.foregroundColor)
         textView.setBackgroundColor(to: background, at: range)
-        textView.setForegroundColor(to: foreground, at: range)
+        textView.setForegroundColor(to: text, at: range)
     }
 
     func setHighlightingStyle(to style: RichTextHighlightingStyle) {

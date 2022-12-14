@@ -1,0 +1,33 @@
+/*
+ Localizable.strings
+ RichTextKit
+
+ Created by Daniel Saidi on 2022-12-14.
+ Copyright © 2022 Daniel Saidi. All rights reserved.
+ */
+
+"locale" = "en";
+
+"font" = "Font";
+"fontSize" = "Font Size";
+
+"color" = "Color";
+"textColor" = "Text";
+"backgroundColor" = "Background";
+
+"actionCopy" = "Copy";
+"actionIncrementFontSize" = "Increment font size";
+"actionDecrementFontSize" = "Decrement font size";
+"actionRedoLatestChange" = "Redo";
+"actionUndoLatestChange" = "Undo";
+
+"styleBold" = "Bold";
+"styleItalic" = "Italic";
+"styleStrikethrough" = "Strikethrough";
+"styleUnderlined" = "Underlined";
+
+"textAlignment" = "Text Alignment";
+"textAlignmentLeft" = "Left";
+"textAlignmentRight" = "Right";
+"textAlignmentCenter" = "Center";
+"textAlignmentJustified" = "Justified";

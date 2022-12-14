@@ -165,10 +165,10 @@ public extension RichTextCoordinator {
         guard
             let range = richTextContext.highlightedRange,
             let background = highlightedRangeOriginalBackgroundColor,
-            let foreground = highlightedRangeOriginalForegroundColor
+            let text = highlightedRangeOriginalForegroundColor
         else { return }
         textView.setBackgroundColor(to: background, at: range)
-        textView.setForegroundColor(to: foreground, at: range)
+        textView.setForegroundColor(to: text, at: range)
     }
 }
 

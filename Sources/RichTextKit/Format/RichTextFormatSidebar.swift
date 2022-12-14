@@ -42,19 +42,19 @@ public struct RichTextFormatSidebar: View {
                     RichTextFontSizePickerStack(context: context)
                 }
             }
-            SidebarSection(title: "Color") {
+            SidebarSection(title: RTKL10n.color.text) {
                 HStack {
-                    Text("Text color")
+                    Text(RTKL10n.textColor.text)
                     Spacer()
-                    RichTextColorPicker(color: .foreground, context: context)
+                    RichTextColorPicker(color: .text, context: context)
                 }
                 HStack {
-                    Text("Background color")
+                    Text(RTKL10n.backgroundColor.text)
                     Spacer()
                     RichTextColorPicker(color: .background, context: context)
                 }
             }
-            SidebarSection(title: "Alignment") {
+            SidebarSection(title: RTKL10n.textAlignment.text) {
                 RichTextAlignmentPicker(selection: $context.textAlignment)
                     .pickerStyle(.segmented)
             }

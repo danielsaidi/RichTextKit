@@ -52,6 +52,16 @@ public extension RichTextStyle {
         }
     }
 
+    /// The styles's localized name.
+    var localizedName: String {
+        switch self {
+        case .bold: return RTKL10n.styleBold.text
+        case .italic: return RTKL10n.styleItalic.text
+        case .underlined: return RTKL10n.styleUnderlined.text
+        case .strikethrough: return RTKL10n.styleStrikethrough.text
+        }
+    }
+
     /**
      Get the rich text styles that are enabled in a provided
      set of traits and attributes.

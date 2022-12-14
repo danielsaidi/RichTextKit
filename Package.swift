@@ -5,6 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "RichTextKit",
+    defaultLocalization: "en",
     platforms: [
         .iOS(.v14),
         .macOS(.v11),
@@ -22,7 +23,8 @@ let package = Package(
     targets: [
         .target(
             name: "RichTextKit",
-            dependencies: []),
+            dependencies: [],
+            resources: [.process("Resources")]),
         .testTarget(
             name: "RichTextKitTests",
             dependencies: ["RichTextKit", "MockingKit"]),

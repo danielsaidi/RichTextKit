@@ -40,6 +40,17 @@ public extension RichTextAction {
 
     /// A name alias for `.undoLatestChange`.
     static var undo: RichTextAction { .undoLatestChange }
+
+    /// The actions's localized name.
+    var localizedName: String {
+        switch self {
+        case .copy: return RTKL10n.actionCopy.text
+        case .incrementFontSize: return RTKL10n.actionIncrementFontSize.text
+        case .decrementFontSize: return RTKL10n.actionDecrementFontSize.text
+        case .redoLatestChange: return RTKL10n.actionRedoLatestChange.text
+        case .undoLatestChange: return RTKL10n.actionUndoLatestChange.text
+        }
+    }
 }
 
 public extension Collection where Element == RichTextAction {

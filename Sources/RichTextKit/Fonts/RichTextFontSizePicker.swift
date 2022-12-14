@@ -50,7 +50,9 @@ public struct RichTextFontSizePicker: View {
             }
         } label: {
             EmptyView()
-        }.labelsHidden()
+        }
+        .labelsHidden()
+        .accessibilityLabel(RTKL10n.fontSize.text)
     }
 }
 

@@ -49,7 +49,9 @@ public struct RichTextStyleButton: View {
             style.icon
                 .foregroundColor(tintColor)
                 .contentShape(Rectangle())
-        }.keyboardShortcut(for: style)
+        }
+        .keyboardShortcut(for: style)
+        .accessibilityLabel(style.localizedName)
     }
 }
 

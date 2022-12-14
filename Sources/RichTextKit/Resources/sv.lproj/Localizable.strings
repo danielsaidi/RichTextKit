@@ -1,0 +1,33 @@
+/*
+ Localizable.strings
+ RichTextKit
+ 
+ Created by Daniel Saidi on 2022-12-14.
+ Copyright © 2022 Daniel Saidi. All rights reserved.
+ */
+
+"locale" = "sv";
+
+"font" = "Typsnitt";
+"fontSize" = "Teckenstorlek";
+
+"color" = "Färg";
+"textColor" = "Text";
+"backgroundColor" = "Bakgrund";
+
+"actionCopy" = "Kopiera";
+"actionIncrementFontSize" = "Öka teckenstorlek";
+"actionDecrementFontSize" = "Minska teckenstorlek";
+"actionRedoLatestChange" = "Gör om";
+"actionUndoLatestChange" = "Ångra";
+
+"styleBold" = "Fet";
+"styleItalic" = "Kursiv";
+"styleStrikethrough" = "Genomstrykning";
+"styleUnderlined" = "Understrykning";
+
+"textAlignment" = "Textjustering";
+"textAlignmentLeft" = "Vänsterjustera";
+"textAlignmentRight" = "Högerjustera";
+"textAlignmentCenter" = "Centrera";
+"textAlignmentJustified" = "Marginaljustera";

@@ -46,7 +46,7 @@ public struct RichTextColorPicker: View {
     ) {
         self.color = color
         switch color {
-        case .foreground: self.value = context.foregroundColorBinding
+        case .text: self.value = context.foregroundColorBinding
         case .background: self.value = context.backgroundColorBinding
         }
     }
@@ -58,7 +58,9 @@ public struct RichTextColorPicker: View {
         HStack {
             color.icon
             ColorPicker("", selection: value)
-        }.labelsHidden()
+                .accessibilityLabel(color.localizedName)
+        }
+        .labelsHidden()
     }
 }
 
@@ -68,16 +70,14 @@ public extension RichTextColorPicker {
      This enum specifies which colors this picker can pick.
      */
     enum PickerColor: String, CaseIterable, Identifiable {
-        case foreground, background
+        case text, background
 
         var icon: Image {
             switch self {
             case .background: return Image.richTextBackgroundColor
-            case .foreground: return Image.richTextForegroundColor
+            case .text: return Image.richTextForegroundColor
             }
         }
-
-        public var id: String { rawValue }
     }
 }
 
@@ -85,6 +85,17 @@ public extension RichTextColorPicker.PickerColor {
 
     /// All available picker colors.
     static var all: [Self] { allCases }
+
+    /// The color's unique identifier.
+    var id: String { rawValue }
+
+    /// The color's localized name.
+    var localizedName: String {
+        switch self {
+        case .text: return RTKL10n.textColor.text
+        case .background: return RTKL10n.backgroundColor.text
+        }
+    }
 }
 
 public extension Collection where Element == RichTextColorPicker.PickerColor {
@@ -98,14 +109,14 @@ struct RichTextColorPicker_Previews: PreviewProvider {
     struct Preview: View {
 
         @State
-        private var foreground = Color.black
+        private var text = Color.black
 
         @State
         private var background = Color.white
 
         var body: some View {
             HStack {
-                RichTextColorPicker(color: .foreground, value: $foreground)
+                RichTextColorPicker(color: .text, value: $text)
                 RichTextColorPicker(color: .background, value: $background)
             }.padding()
         }

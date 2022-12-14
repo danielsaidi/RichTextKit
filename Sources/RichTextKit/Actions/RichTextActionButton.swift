@@ -48,6 +48,7 @@ public struct RichTextActionButton: View {
         }
         .disabled(!canTriggerAction)
         .keyboardShortcut(for: action)
+        .accessibilityLabel(action.localizedName)
     }
 }
 
