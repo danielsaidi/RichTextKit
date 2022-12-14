@@ -71,11 +71,6 @@ open class RichTextCoordinator: NSObject {
     public var cancellables = Set<AnyCancellable>()
 
     /**
-     This flag is used to handle font size stepping.
-     */
-    internal var isSteppingFontSize = false
-
-    /**
      This test flag is used to avoid delaying context sync.
      */
     internal var shouldDelaySyncContextWithTextView = true
@@ -105,12 +100,11 @@ open class RichTextCoordinator: NSObject {
     }
 
     open func textViewDidChange(_ textView: UITextView) {
-        syncContextWithTextView()
-        syncTextWithTextView()
+        syncWithTextView()
     }
 
     open func textViewDidChangeSelection(_ textView: UITextView) {
-        syncContextWithTextView()
+        syncWithTextView()
     }
 
     open func textViewDidEndEditing(_ textView: UITextView) {
@@ -128,12 +122,11 @@ open class RichTextCoordinator: NSObject {
     }
 
     open func textDidChange(_ notification: Notification) {
-        syncContextWithTextView()
-        syncTextWithTextView()
+        syncWithTextView()
     }
 
     open func textViewDidChangeSelection(_ notification: Notification) {
-        syncContextWithTextView()
+        syncWithTextView()
     }
 
     open func textDidEndEditing(_ notification: Notification) {
@@ -180,6 +173,14 @@ public extension RichTextCoordinator {
 extension RichTextCoordinator {
 
     /**
+     Sync state from the text view's current state.
+     */
+    func syncWithTextView() {
+        syncContextWithTextView()
+        syncTextWithTextView()
+    }
+
+    /**
      Sync the rich text context with the text view.
      */
     func syncContextWithTextView() {
@@ -220,7 +221,7 @@ extension RichTextCoordinator {
      Sync the text binding with the text view.
      */
     func syncTextWithTextView() {
-        // if text.wrappedValue == textView.attributedString { return }
+        if text.wrappedValue == textView.attributedString { return }
         DispatchQueue.main.async {
             self.text.wrappedValue = self.textView.attributedString
         }

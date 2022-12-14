@@ -50,6 +50,5 @@ public extension RichTextViewComponent {
         to color: ColorRepresentable
     ) {
         setCurrentRichTextAttribute(.foregroundColor, to: color)
-        setCurrentRichTextAttribute(.strokeWidth, to: -5)
     }
 }

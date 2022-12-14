@@ -246,7 +246,6 @@ internal extension RichTextCoordinator {
     }
 
     func setFontSize(to size: CGFloat) {
-        if isSteppingFontSize { return }
         if size == textView.currentFontSize { return }
         textView.setCurrentFontSize(to: size)
     }
