@@ -8,20 +8,25 @@ Until then, deprecated features may be removed in the next minor version.
 
 ## 0.3
 
-This release adds support for strikethrough and cleans up the 0.2 api a little.
+This release adds support for strikethrough and cleans up some 0.2 code.
+
+This release also adds localization and accessibility to the various views.
 
 ### ✨ New Features
 
 * `Bundle.richTextKit` is a new bundle extension that works in external previews.
+* `RichTextAction` has a new `dismissKeyboard` action.
 * `RichTextAction` has new `incrementFontSize` and `decrementFontSize` actions.
 * `RichTextAction` has new `undo` and `redo` name aliases.
 * `RichTextActionButton` has a new `fillVertically` parameter.
 * `RichTextFormatSheet` is a new view that collects a bunch of text formatting controls.
 * `RichTextFormatSidebar` is a new view that collects a bunch of text formatting controls.
+* `RichTextKeyboardToolbar` is a new toolbar that can be used on iOS.
 * `RichTextStyle` has a new `strikethrough` style.
 * `RichTextStyleToggle` has a new `fillVertically` parameter.
 * `RTKL10n` is a new enum with localized strings, which is used to localize multiple types.
 * `View+KeyboardShortcuts` is a new view extension to simplify binding keyboard shortcuts to views.
+* The various stack views now support 
 
 ### 💡 Behavior changes
 

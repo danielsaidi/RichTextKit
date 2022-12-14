@@ -39,25 +39,32 @@ extension MainMenu {
 
     func link(to screen: DemoScreen) -> some View {
         Button(action: { self.selection = screen }) {
-            screen.label
+            screen.label.linkContent()
         }.linkStyle(isSelected: isSelected(screen))
     }
 
     func webLink(to url: DemoUrl) -> some View {
         Link(destination: url.url) {
-            url.label
+            url.label.linkContent()
         }.linkStyle()
     }
 }
 
 private extension View {
 
+    func linkContent() -> some View {
+        self.frame(maxWidth: .infinity, minHeight: 30, alignment: .leading)
+    }
+
+    func linkColor(isSelected: Bool = false) -> Color {
+        isSelected ? .white.opacity(0.1) : .clear
+    }
+
     func linkStyle(isSelected: Bool = false) -> some View {
-        let color: Color = isSelected ? .white.opacity(0.1) : .clear
-        return self
-            .padding(5)
+        self.padding(.horizontal, 5)
             .buttonStyle(.borderless)
-            .background(color.cornerRadius(5))
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(linkColor(isSelected: isSelected).cornerRadius(5))
     }
 }
 
