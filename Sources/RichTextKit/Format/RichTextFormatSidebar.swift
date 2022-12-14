@@ -6,6 +6,7 @@
 //  Copyright © 2022 Daniel Saidi. All rights reserved.
 //
 
+#if os(iOS) || os(macOS)
 import SwiftUI
 
 /**
@@ -13,8 +14,8 @@ import SwiftUI
  is meant to be used on macOS, in a trailing sidebar.
 
  Although the view is designed to be used on macOS, it's not
- excluded for the other platforms, although it will probably
- feel off on them.
+ excluded for iOS, although it will probably feel off to use
+ it on an iPhone or iPad.
  */
 public struct RichTextFormatSidebar: View {
 
@@ -99,3 +100,4 @@ struct RichTextFormatSidebar_Previews: PreviewProvider {
             .frame(width: 250)
     }
 }
+#endif
