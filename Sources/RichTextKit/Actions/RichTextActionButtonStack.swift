@@ -23,22 +23,26 @@ public struct RichTextActionButtonStack: View {
      - Parameters:
        - context: The context to affect.
        - actions: The actions to list, by default all non-size actions.
+       - spacing: The spacing to apply to stack items, by default `5`.
      */
     public init(
         context: RichTextContext,
-        actions: [RichTextAction]
+        actions: [RichTextAction],
+        spacing: Double = 5
     ) {
         self._context = ObservedObject(wrappedValue: context)
         self.actions = actions
+        self.spacing = spacing
     }
 
     private let actions: [RichTextAction]
+    private let spacing: Double
 
     @ObservedObject
     private var context: RichTextContext
 
     public var body: some View {
-        HStack(spacing: 5) {
+        HStack(spacing: spacing) {
             ForEach(actions) {
                 RichTextActionButton(
                     action: $0,

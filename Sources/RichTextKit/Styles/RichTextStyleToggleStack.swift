@@ -26,25 +26,29 @@ public struct RichTextStyleToggleStack: View {
        - context: The context to affect.
        - styles: The styles to list, by default ``RichTextStyle/all``.
        - buttonStyle: The button style to use, by default ``RichTextStyleToggle/Style/standard``.
+       - spacing: The spacing to apply to stack items, by default `5`.
      */
     public init(
         context: RichTextContext,
         styles: [RichTextStyle] = .all,
-        buttonStyle: RichTextStyleToggle.Style = .standard
+        buttonStyle: RichTextStyleToggle.Style = .standard,
+        spacing: Double = 5
     ) {
         self._context = ObservedObject(wrappedValue: context)
         self.styles = styles
         self.buttonStyle = buttonStyle
+        self.spacing = spacing
     }
 
     private let styles: [RichTextStyle]
     private let buttonStyle: RichTextStyleToggle.Style
+    private let spacing: Double
 
     @ObservedObject
     private var context: RichTextContext
 
     public var body: some View {
-        HStack(spacing: 5) {
+        HStack(spacing: spacing) {
             ForEach(styles) {
                 RichTextStyleToggle(
                     style: $0,
