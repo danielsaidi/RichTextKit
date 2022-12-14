@@ -6,16 +6,13 @@
 //  Copyright © 2022 Daniel Saidi. All rights reserved.
 //
 
+#if os(iOS)
 import SwiftUI
 
 /**
  This sheet view provides different text format options, and
  is meant to be used on iOS, where rich texts editor may not
  have enough space to present all formatting.
-
- Although the view is designed to be used on an iPhone, it's
- not excluded for the other platforms, although it will most
- probably feel off on them.
 
  Note that the topmost font list picker will take up as much
  height as it can, after the other rows have allocated their
@@ -39,28 +36,41 @@ public struct RichTextFormatSheet: View {
     @ObservedObject
     private var context: RichTextContext
 
+    @Environment(\.presentationMode)
+    private var presentationMode
+
     public var body: some View {
-        VStack(spacing: 0) {
-            RichTextFontListPicker(selection: $context.fontName)
-            Divider()
-            VStack(spacing: 20) {
-                HStack {
-                    RichTextColorPickerStack(context: context)
-                    Spacer()
-                    RichTextFontSizePickerStack(context: context)
+        NavigationView {
+            VStack(spacing: 0) {
+                RichTextFontListPicker(selection: $context.fontName)
+                Divider()
+                VStack(spacing: 20) {
+                    HStack {
+                        RichTextColorPickerStack(context: context)
+                        Spacer()
+                        RichTextFontSizePickerStack(context: context)
+                    }
+                    .prefersBordered()
+
+                    HStack {
+                        RichTextStyleToggleStack(context: context)
+                        RichTextAlignmentPicker(selection: $context.textAlignment)
+                            .pickerStyle(.segmented)
+                    }
                 }
-                .prefersBordered()
-                
-                HStack {
-                    RichTextStyleToggleStack(context: context)
-                    RichTextAlignmentPicker(selection: $context.textAlignment)
-                        .pickerStyle(.segmented)
+                .padding()
+                .accentColor(.primary)
+                .background(background)
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(RTKL10n.done.text) {
+                        presentationMode.wrappedValue.dismiss()
+                    }
                 }
             }
-            .padding()
-            .accentColor(.primary)
-            .background(background)
-        }
+            .navigationBarTitleDisplayMode(.inline)
+        }.navigationViewStyle(.stack)
     }
 }
 
@@ -102,3 +112,4 @@ struct RichTextFormatSheet_Previews: PreviewProvider {
         Preview()
     }
 }
+#endif
