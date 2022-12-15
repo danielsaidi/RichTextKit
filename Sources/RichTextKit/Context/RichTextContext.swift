@@ -37,6 +37,26 @@ public class RichTextContext: ObservableObject {
 
 
     /**
+     The currently selected range, if any.
+
+     Note that this property is currently not @Published, in
+     order to avoid redrawing the entire app. We should find
+     a way to make it published once more without it causing
+     the entire app to redraw every time the cursor is moved.
+     Until then, the property has been made read-only, while
+     a hopefully temporary `selectedRangeChange` property is
+     now used by ``selectRange(_:)``.
+     */
+    public internal(set) var selectedRange = NSRange()
+
+    /**
+     The selected range to change to.
+     */
+    @Published
+    var selectedRangeChange = NSRange()
+
+
+    /**
      The current background color, if any.
      */
     @Published
@@ -119,12 +139,6 @@ public class RichTextContext: ObservableObject {
      */
     @Published
     public var isUnderlined = false
-
-    /**
-     The currently selected range, if any.
-     */
-    @Published
-    public var selectedRange = NSRange()
 
     /**
      Whether or not to copy the current text selection.
@@ -320,7 +334,7 @@ public extension RichTextContext {
      */
     func selectRange(_ range: NSRange) {
         isEditingText = true
-        selectedRange = range
+        selectedRangeChange = range
     }
 
     /**

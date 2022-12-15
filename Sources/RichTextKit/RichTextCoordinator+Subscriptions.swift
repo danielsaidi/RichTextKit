@@ -136,7 +136,7 @@ private extension RichTextCoordinator {
     }
 
     func subscribeToSelectedRange() {
-        richTextContext.$selectedRange
+        richTextContext.$selectedRangeChange
             .sink(
                 receiveCompletion: { _ in },
                 receiveValue: { [weak self] in self?.setSelectedRange(to: $0) })

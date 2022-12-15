@@ -8,6 +8,12 @@ Until then, deprecated features may be removed in the next minor version.
 
 ## 0.4
 
+This release addresses some performance changes, by trying to minimize the number of redraws.
+
+As a result, the `RichTextContext`'s `selectedRange` is no longer observable, since that caused every input or text position change to redraw the entire app.
+
+The library and demo app still updates way to often, and updates too much. For instance, switching between having a selected range and not should only redraw the copy button, but now updates the entire screen. If you know how to minimize this, please reach out. 
+
 ### 💡 Behavior changes
 
 * `RichTextCoordinator` now checks if properties have changed before it syncs.
@@ -18,7 +24,8 @@ Until then, deprecated features may be removed in the next minor version.
 * `RichTextStyleToggle` is no longer tinted by default when inactive.
 
 ### 💥 Breaking Changes
-    
+        
+* `RichTextContext` `selectedRange` is no longer observable.
 * `RichTextStyleToggle.Style` `inactiveColor` is now optional.
 
 
