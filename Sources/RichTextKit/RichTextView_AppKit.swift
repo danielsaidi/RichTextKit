@@ -79,6 +79,7 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         with text: NSAttributedString,
         format: RichTextDataFormat
     ) {
+        attributedString = .empty
         setupInitialFontSize()
         attributedString = text
         allowsImageEditing = true

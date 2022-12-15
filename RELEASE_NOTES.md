@@ -14,6 +14,10 @@ As a result, the `RichTextContext`'s `selectedRange` is no longer observable, si
 
 The library and demo app still updates way to often, and updates too much. For instance, switching between having a selected range and not should only redraw the copy button, but now updates the entire screen. If you know how to minimize this, please reach out. 
 
+### ✨ New Features
+
+* `ViewDebug` is a new demo app class that is used for view debugging capabilities.
+
 ### 💡 Behavior changes
 
 * `RichTextCoordinator` now checks if properties have changed before it syncs.

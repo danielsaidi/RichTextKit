@@ -29,6 +29,7 @@ struct EditorScreen: View {
                 MainMenu()
             }
         }
+        .viewDebug()
     }
 }
 

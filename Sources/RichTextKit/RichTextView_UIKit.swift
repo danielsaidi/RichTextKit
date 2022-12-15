@@ -143,6 +143,7 @@ open class RichTextView: UITextView, RichTextViewComponent {
         with text: NSAttributedString,
         format: RichTextDataFormat
     ) {
+        attributedString = .empty
         setupInitialFontSize()
         attributedString = text
         allowsEditingTextAttributes = false
