@@ -221,7 +221,6 @@ extension RichTextCoordinator {
      Sync the text binding with the text view.
      */
     func syncTextWithTextView() {
-        if text.wrappedValue == textView.attributedString { return }
         DispatchQueue.main.async {
             self.text.wrappedValue = self.textView.attributedString
         }
