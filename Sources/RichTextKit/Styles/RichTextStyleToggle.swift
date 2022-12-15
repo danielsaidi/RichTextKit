@@ -118,7 +118,7 @@ private extension View {
 
     @ViewBuilder
     func tintColor(_ color: Color) -> some View {
-        if #available(iOS 15.0, macOS 12.0, watchOS 9.0, *) {
+        if #available(iOS 15.0, macOS 12.0, tvOS 16.0, watchOS 9.0, *) {
             self.tint(color)
         } else {
             self.accentColor(color)
