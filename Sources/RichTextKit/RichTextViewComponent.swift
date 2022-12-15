@@ -205,9 +205,8 @@ internal extension RichTextViewComponent {
      This setup function can be called by all implemetations,
      to setup the initial font size for a text.
      */
-    func setupInitialFontSize(for text: NSAttributedString) {
-        let fontSize = FontRepresentable.standardRichTextFont.pointSize
-        setFontSize(to: fontSize, at: NSRange(location: 0, length: text.length))
-        setCurrentFontSize(to: FontRepresentable.standardRichTextFont.pointSize)
+    func setupInitialFontSize() {
+        let standardSize = FontRepresentable.standardRichTextFont.pointSize
+        setCurrentFontSize(to: standardSize)
     }
 }

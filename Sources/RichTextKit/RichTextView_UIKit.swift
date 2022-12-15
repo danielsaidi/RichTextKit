@@ -143,6 +143,7 @@ open class RichTextView: UITextView, RichTextViewComponent {
         with text: NSAttributedString,
         format: RichTextDataFormat
     ) {
+        setupInitialFontSize()
         attributedString = text
         allowsEditingTextAttributes = false
         autocapitalizationType = .sentences
@@ -153,7 +154,6 @@ open class RichTextView: UITextView, RichTextViewComponent {
         spellCheckingType = .no
         textColor = .label
         setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        setupInitialFontSize(for: text)
     }
 
 

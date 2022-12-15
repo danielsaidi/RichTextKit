@@ -79,6 +79,7 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         with text: NSAttributedString,
         format: RichTextDataFormat
     ) {
+        setupInitialFontSize()
         attributedString = text
         allowsImageEditing = true
         allowsUndo = true
@@ -87,7 +88,6 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         layoutManager?.defaultAttachmentScaling = NSImageScaling.scaleProportionallyDown
         textColor = .textColor
         setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        setupInitialFontSize(for: text)
     }
 
 
