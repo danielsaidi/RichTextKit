@@ -14,9 +14,6 @@ struct ContentView: View {
     @State
     private var screen = DemoScreen.editor
 
-    @StateObject
-    var context = RichTextContext()
-
     var body: some View {
         NavigationView {
             MainMenu(selection: $screen)

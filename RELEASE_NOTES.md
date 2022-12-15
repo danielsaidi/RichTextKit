@@ -8,13 +8,14 @@ Until then, deprecated features may be removed in the next minor version.
 
 ## 0.4
 
-### 🐛 Bug Fixes
-
-* `RichTextStyleToggle` is no longer tinted by default when inactive.
-
 ### 💡 Behavior changes
 
 * `RichTextCoordinator` now checks if properties have changed before it syncs.
+
+### 🐛 Bug Fixes
+
+* `RichTextKeyboardToolbar` no longer allocates width for hidden items.
+* `RichTextStyleToggle` is no longer tinted by default when inactive.
 
 ### 💥 Breaking Changes
     

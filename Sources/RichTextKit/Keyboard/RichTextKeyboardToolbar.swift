@@ -125,9 +125,10 @@ private extension RichTextKeyboardToolbar {
         }
 
         RichTextStyleToggleStack(context: context)
-            .hidden(if: isCompact)
+            .keyboardShortcutsOnly(if: isCompact)
+
         RichTextFontSizePickerStack(context: context)
-            .hidden(if: isCompact)
+            .keyboardShortcutsOnly(if: true)
     }
 
     @ViewBuilder
@@ -135,7 +136,7 @@ private extension RichTextKeyboardToolbar {
         RichTextAlignmentPicker(selection: $context.textAlignment)
             .pickerStyle(.segmented)
             .frame(maxWidth: 200)
-            .hidden(if: isCompact)
+            .keyboardShortcutsOnly(if: isCompact)
 
         trailingButtons()
 
@@ -150,9 +151,10 @@ private extension RichTextKeyboardToolbar {
 private extension View {
 
     @ViewBuilder
-    func hidden(if condition: Bool) -> some View {
+    func keyboardShortcutsOnly(if condition: Bool) -> some View {
         if condition {
             self.hidden()
+                .frame(width: 0)
         } else {
             self
         }
