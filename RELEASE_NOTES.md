@@ -8,9 +8,7 @@ Until then, deprecated features may be removed in the next minor version.
 
 ## 0.3
 
-This release adds support for strikethrough and cleans up some 0.2 code.
-
-This release also adds localization and accessibility to the various views.
+This release adds support for strikethrough and cleans up some 0.2 code. It also adds a bunch of new views, such as toolbars, sidebars, sheets etc., as well as support for keyboard shortcuts, localization and accessibility.
 
 ### ✨ New Features
 
@@ -44,6 +42,7 @@ This release also adds localization and accessibility to the various views.
 * `RichTextAlignmentPicker` no longer has title and segmented parameters.
 * `RichTextFontSizePickerStack` no longer has a bordered init parameter.
 * `RichTextFontSizePickerStack` now requires a `RichTextContext` instea dof a binding.
+
 
 
 ## 0.2
