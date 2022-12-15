@@ -14,6 +14,7 @@ import SwiftUI
 public extension Image {
 
     static let richTextFormat = symbol("textformat")
+    static let richTextFormatBrush = symbol("paintbrush")
 
     static let richTextActionCopy = symbol("doc.on.clipboard")
     static let richTextActionDismissKeyboard = symbol("keyboard.chevron.compact.down")
