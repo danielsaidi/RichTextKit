@@ -200,20 +200,77 @@ extension RichTextCoordinator {
      */
     func syncContextWithTextViewAfterDelay() {
         let styles = textView.currentRichTextStyles
-        richTextContext.selectedRange = textView.selectedRange
-        richTextContext.backgroundColor = textView.currentBackgroundColor
-        richTextContext.canCopy = textView.hasSelectedRange
-        richTextContext.canRedoLatestChange = textView.undoManager?.canRedo ?? false
-        richTextContext.canUndoLatestChange = textView.undoManager?.canUndo ?? false
-        richTextContext.fontName = textView.currentFontName ?? ""
-        richTextContext.fontSize = textView.currentFontSize ?? .standardRichTextFontSize
-        richTextContext.foregroundColor = textView.currentForegroundColor
-        richTextContext.isBold = styles.hasStyle(.bold)
-        richTextContext.isItalic = styles.hasStyle(.italic)
-        richTextContext.isStrikethrough = styles.hasStyle(.strikethrough)
-        richTextContext.isUnderlined = styles.hasStyle(.underlined)
-        richTextContext.isEditingText = textView.isFirstResponder
-        richTextContext.textAlignment = textView.currentRichTextAlignment ?? .left
+
+        let range = textView.selectedRange
+        if (richTextContext.selectedRange != range) {
+            richTextContext.selectedRange = range
+        }
+
+        let background = textView.currentBackgroundColor
+        if (richTextContext.backgroundColor != background) {
+            richTextContext.backgroundColor = background
+        }
+
+        let hasRange = textView.hasSelectedRange
+        if (richTextContext.canCopy != hasRange) {
+            richTextContext.canCopy = hasRange
+        }
+
+        let canRedo = textView.undoManager?.canRedo ?? false
+        if (richTextContext.canRedoLatestChange != canRedo) {
+            richTextContext.canRedoLatestChange = canRedo
+        }
+
+        let canUndo = textView.undoManager?.canUndo ?? false
+        if (richTextContext.canUndoLatestChange != canUndo) {
+            richTextContext.canUndoLatestChange = canUndo
+        }
+
+        let fontName = textView.currentFontName ?? ""
+        if (richTextContext.fontName != fontName) {
+            richTextContext.fontName = fontName
+        }
+
+        let fontSize = textView.currentFontSize ?? .standardRichTextFontSize
+        if (richTextContext.fontSize != fontSize) {
+            richTextContext.fontSize = fontSize
+        }
+
+        let foreground = textView.currentForegroundColor
+        if (richTextContext.foregroundColor != foreground) {
+            richTextContext.foregroundColor = foreground
+        }
+
+        let isBold = styles.hasStyle(.bold)
+        if (richTextContext.isBold != isBold) {
+            richTextContext.isBold = isBold
+        }
+
+        let isItalic = styles.hasStyle(.italic)
+        if (richTextContext.isItalic != isItalic) {
+            richTextContext.isItalic = isItalic
+        }
+
+        let isStrikethrough = styles.hasStyle(.strikethrough)
+        if (richTextContext.isStrikethrough != isStrikethrough) {
+            richTextContext.isStrikethrough = isStrikethrough
+        }
+
+        let isUnderlined = styles.hasStyle(.underlined)
+        if (richTextContext.isUnderlined != isUnderlined) {
+            richTextContext.isUnderlined = isUnderlined
+        }
+
+        let isEditingText = textView.isFirstResponder
+        if (richTextContext.isEditingText != isEditingText) {
+            richTextContext.isEditingText = isEditingText
+        }
+
+        let textAlignment = textView.currentRichTextAlignment ?? .left
+        if (richTextContext.textAlignment != textAlignment) {
+            richTextContext.textAlignment = textAlignment
+        }
+
         updateTextViewAttributesIfNeeded()
     }
 

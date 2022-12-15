@@ -12,10 +12,13 @@ Until then, deprecated features may be removed in the next minor version.
 
 * `RichTextStyleToggle` is no longer tinted by default when inactive.
 
+### 💡 Behavior changes
+
+* `RichTextCoordinator` now checks if properties have changed before it syncs.
+
 ### 💥 Breaking Changes
     
 * `RichTextStyleToggle.Style` `inactiveColor` is now optional.
-
 
 
 
