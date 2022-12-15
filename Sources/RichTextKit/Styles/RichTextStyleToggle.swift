@@ -57,15 +57,19 @@ public struct RichTextStyleToggle: View {
         context: RichTextContext,
         fillVertically: Bool = false
     ) {
-        self.style = style
-        self.buttonStyle = buttonStyle
-        switch style {
-        case .bold: self.value = context.isBoldBinding
-        case .italic: self.value = context.isItalicBinding
-        case .strikethrough: self.value = context.isStrikethroughBinding
-        case .underlined: self.value = context.isUnderlinedBinding
-        }
-        self.fillVertically = fillVertically
+        self.init(
+            style: style,
+            buttonStyle: buttonStyle,
+            value: {
+                switch style {
+                case .bold: return context.isBoldBinding
+                case .italic: return context.isItalicBinding
+                case .strikethrough: return context.isStrikethroughBinding
+                case .underlined: return context.isUnderlinedBinding
+                }
+            }(),
+            fillVertically: fillVertically
+        )
     }
 
     private let style: RichTextStyle
@@ -83,7 +87,7 @@ public struct RichTextStyleToggle: View {
             RichTextStyleButton(
                 style: style,
                 buttonStyle: .init(
-                    inactiveColor: buttonStyle.inactiveColor,
+                    inactiveColor: buttonStyle.inactiveColor ?? .primary,
                     activeColor: buttonStyle.activeColor),
                 value: value,
                 fillVertically: fillVertically
@@ -117,7 +121,7 @@ private extension RichTextStyleToggle {
 private extension View {
 
     @ViewBuilder
-    func tintColor(_ color: Color) -> some View {
+    func tintColor(_ color: Color?) -> some View {
         if #available(iOS 15.0, macOS 12.0, tvOS 16.0, watchOS 9.0, *) {
             self.tint(color)
         } else {
@@ -137,11 +141,11 @@ public extension RichTextStyleToggle {
          Create a rich text style button style.
 
          - Parameters:
-           - inactiveColor: The color to apply when the button is inactive, by default `.primary`.
+           - inactiveColor: The color to apply when the button is inactive, by default `nil`.
            - activeColor: The color to apply when the button is active, by default `.blue`.
          */
         public init(
-            inactiveColor: Color = .primary,
+            inactiveColor: Color? = nil,
             activeColor: Color = .blue
         ) {
             self.inactiveColor = inactiveColor
@@ -149,7 +153,7 @@ public extension RichTextStyleToggle {
         }
 
         /// The color to apply when the button is inactive.
-        public var inactiveColor: Color
+        public var inactiveColor: Color?
 
         /// The color to apply when the button is active.
         public var activeColor: Color
@@ -170,7 +174,7 @@ private extension RichTextStyleToggle {
         value.wrappedValue
     }
 
-    var tintColor: Color {
+    var tintColor: Color? {
         isOn ? buttonStyle.activeColor : buttonStyle.inactiveColor
     }
 }

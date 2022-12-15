@@ -14,9 +14,6 @@ struct ContentView: View {
     @State
     private var screen = DemoScreen.editor
 
-    @State
-    private var text = NSAttributedString(string: "test")
-
     @StateObject
     var context = RichTextContext()
 

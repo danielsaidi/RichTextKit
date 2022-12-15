@@ -6,6 +6,19 @@ Until then, deprecated features may be removed in the next minor version.
 
 
 
+## 0.4
+
+### 🐛 Bug Fixes
+
+* `RichTextStyleToggle` is no longer tinted by default when inactive.
+
+### 💥 Breaking Changes
+    
+* `RichTextStyleToggle.Style` `inactiveColor` is now optional.
+
+
+
+
 ## 0.3
 
 This release adds support for strikethrough and cleans up some 0.2 code. It also adds a bunch of new views, such as toolbars, sidebars, sheets etc., as well as support for keyboard shortcuts, localization and accessibility.
