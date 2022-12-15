@@ -98,6 +98,11 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
 
 private extension RichTextKeyboardToolbar {
 
+    var isCompact: Bool { horizontalSizeClass == .compact }
+}
+
+private extension RichTextKeyboardToolbar {
+
     var divider: some View {
         Divider().frame(height: 25)
     }
@@ -109,6 +114,7 @@ private extension RichTextKeyboardToolbar {
             actions: leadingActions,
             spacing: spacing
         )
+
         leadingButtons()
 
         divider
@@ -117,19 +123,19 @@ private extension RichTextKeyboardToolbar {
             Image.richTextFormat
                 .contentShape(Rectangle())
         }
-        if horizontalSizeClass == .regular {
-            RichTextStyleToggleStack(context: context)
-        }
+
+        RichTextStyleToggleStack(context: context)
+            .hidden(if: isCompact)
+        RichTextFontSizePickerStack(context: context)
+            .hidden(if: isCompact)
     }
 
     @ViewBuilder
     var trailingViews: some View {
-        if horizontalSizeClass == .regular {
-            RichTextAlignmentPicker(selection: $context.textAlignment)
-                .pickerStyle(.segmented)
-                .frame(maxWidth: 200)
-        }
-
+        RichTextAlignmentPicker(selection: $context.textAlignment)
+            .pickerStyle(.segmented)
+            .frame(maxWidth: 200)
+            .hidden(if: isCompact)
 
         trailingButtons()
 
@@ -138,6 +144,18 @@ private extension RichTextKeyboardToolbar {
             actions: trailingActions,
             spacing: spacing
         )
+    }
+}
+
+private extension View {
+
+    @ViewBuilder
+    func hidden(if condition: Bool) -> some View {
+        if condition {
+            self.hidden()
+        } else {
+            self
+        }
     }
 }
 
