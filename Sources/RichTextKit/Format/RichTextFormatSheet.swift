@@ -63,6 +63,7 @@ public struct RichTextFormatSheet: View {
                 .accentColor(.primary)
                 .background(background)
             }
+            .withAutomaticToolbarRole()
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     EmptyView()
@@ -94,6 +95,15 @@ private extension View {
     func prefersBordered() -> some View {
         if #available(iOS 15.0, *) {
             self.buttonStyle(.bordered)
+        } else {
+            self
+        }
+    }
+
+    @ViewBuilder
+    func withAutomaticToolbarRole() -> some View {
+        if #available(iOS 16.0, *) {
+            self.toolbarRole(.automatic)
         } else {
             self
         }
