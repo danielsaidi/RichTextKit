@@ -79,6 +79,7 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
             }
             .padding(10)
         }
+        .environment(\.sizeCategory, .medium)
         .frame(height: height)
         .overlay(Divider(), alignment: .bottom)
         .accentColor(.primary)

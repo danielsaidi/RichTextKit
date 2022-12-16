@@ -58,11 +58,15 @@ public struct RichTextFormatSheet: View {
                             .pickerStyle(.segmented)
                     }
                 }
+                .environment(\.sizeCategory, .medium)
                 .padding()
                 .accentColor(.primary)
                 .background(background)
             }
             .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    EmptyView()
+                }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(RTKL10n.done.text) {
                         presentationMode.wrappedValue.dismiss()
