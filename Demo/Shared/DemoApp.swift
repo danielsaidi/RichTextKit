@@ -15,9 +15,10 @@ struct DemoApp: App {
             ContentView()
         }.commands {
             #if os(macOS)
+            AboutCommand()
             RichTextFormatCommands()
-            #endif
             SidebarCommands()
+            #endif
         }
     }
 }
