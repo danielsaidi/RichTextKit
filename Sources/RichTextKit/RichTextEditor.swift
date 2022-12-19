@@ -72,7 +72,8 @@ public struct RichTextEditor: ViewRepresentable {
         RichTextCoordinator(
             text: text,
             textView: textView,
-            richTextContext: richTextContext)
+            richTextContext: richTextContext
+        )
     }
 
 

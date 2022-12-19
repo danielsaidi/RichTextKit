@@ -114,6 +114,10 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 - ``StandardRichTextExportService``
 - ``StandardRichTextExportUrlResolver``
 
+### Focus
+
+- ``RichTextContextFocusedValueKey``
+
 ### Fonts
 
 - ``FontRepresentable``
