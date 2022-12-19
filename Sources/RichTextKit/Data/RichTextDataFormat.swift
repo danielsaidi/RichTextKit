@@ -90,6 +90,18 @@ public extension RichTextDataFormat {
         case .vendorArchivedData(_, _, let text, _): return text
         }
     }
+
+    /**
+     Whether or not the data format is an archived data type.
+     */
+    var isArchivedDataFormat: Bool {
+        switch self {
+        case .archivedData: return true
+        case .plainText: return false
+        case .rtf: return false
+        case .vendorArchivedData: return true
+        }
+    }
     
     /**
      The format's standard file extension.

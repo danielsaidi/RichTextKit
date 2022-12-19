@@ -25,6 +25,10 @@ class RichTextDataFormatTests: XCTestCase {
         format.id
     }
 
+    func isArchivedDataResult(for format: RichTextDataFormat) -> Bool {
+        format.isArchivedDataFormat
+    }
+
     func formatResult(for format: RichTextDataFormat) -> [RichTextDataFormat] {
         format.convertibleFormats
     }
@@ -47,11 +51,18 @@ class RichTextDataFormatTests: XCTestCase {
     }
 
 
-    func testConvertableIdIsValidForAllFormats() {
+    func testIdIsValidForAllFormats() {
         XCTAssertEqual(idResult(for: .archivedData), "archivedData")
         XCTAssertEqual(idResult(for: .plainText), "plainText")
         XCTAssertEqual(idResult(for: .rtf), "rtf")
         XCTAssertEqual(idResult(for: vendorFormat), "foo")
+    }
+
+    func testArchivedFormatsCanBeDetected() {
+        XCTAssertEqual(isArchivedDataResult(for: .archivedData), true)
+        XCTAssertEqual(isArchivedDataResult(for: .plainText), false)
+        XCTAssertEqual(isArchivedDataResult(for: .rtf), false)
+        XCTAssertEqual(isArchivedDataResult(for: vendorFormat), true)
     }
 
     func testConvertableFormatsAreValidForAllFormats() {

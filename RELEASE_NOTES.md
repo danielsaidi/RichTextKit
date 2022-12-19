@@ -17,6 +17,7 @@ The library and demo app still updates way to often, and updates too much. For i
 ### ✨ New Features
 
 * `RichTextDataFormat` has a new `fileFormatText` property.
+* `RichTextDataFormat` has a new `isArchivedDataFormat` property.
 * `RichTextDataFormat` has a new `libraryFormats` property that returns all formats except the `vendorArchivedData` format.
 * `RichTextDataFormatMenu` is a new menu that triggers an action for various formats.
 * `RichTextDataReader` now has ways to get data for the current rich text.
