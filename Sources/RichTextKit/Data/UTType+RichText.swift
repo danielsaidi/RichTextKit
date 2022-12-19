@@ -29,7 +29,7 @@ public extension UTType {
 }
 
 public extension Collection where Element == UTType {
-    
+
     /**
      The uniforum types that rich text documents support.
      */

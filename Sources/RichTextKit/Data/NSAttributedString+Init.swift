@@ -11,11 +11,11 @@ import Foundation
 public extension NSAttributedString {
 
     /**
-     Try to parse ``RichTextFormat`` data.
+     Try to parse ``RichTextFormat`` formatted data.
 
      - Parameters:
-       - data: The data to initalize the string with.
-       - format: The data format to use.
+     - data: The data to initalize the string with.
+     - format: The data format to use.
      */
     convenience init(
         data: Data,
@@ -28,9 +28,12 @@ public extension NSAttributedString {
         case .vendorArchivedData: try self.init(archivedData: data)
         }
     }
+}
+
+private extension NSAttributedString {
 
     /**
-     Try to parse ``RichTextFormat/archivedData`` data.
+     Try to parse ``RichTextDataFormat/archivedData`` data.
 
      The data must have been generated with `NSKeyedArchiver`
      and will be unarchived with a `NSKeyedUnarchiver`.
@@ -49,7 +52,7 @@ public extension NSAttributedString {
     }
 
     /**
-     Try to parse ``RichTextFormat/plainText`` data.
+     Try to parse ``RichTextDataFormat/plainText`` data.
 
      - Parameters:
        - data: The data to initalize the string with.
@@ -64,20 +67,58 @@ public extension NSAttributedString {
     }
 
     /**
-     Try to parse ``RichTextFormat/rtf`` data.
+     Try to parse ``RichTextDataFormat/rtf`` data.
      */
     convenience init(rtfData data: Data) throws {
         var attributes = Self.rtfDataAttributes as NSDictionary?
         try self.init(
             data: data,
-            options: [.characterEncoding: String.Encoding.utf8.rawValue],
+            options: [.characterEncoding: Self.utf8],
             documentAttributes: &attributes)
     }
+
+    /**
+     Try to parse ``RichTextDataFormat/rtfd`` data.
+     */
+    convenience init(rtfdData data: Data) throws {
+        var attributes = Self.rtfdDataAttributes as NSDictionary?
+        try self.init(
+            data: data,
+            options: [.characterEncoding: Self.utf8],
+            documentAttributes: &attributes)
+    }
+
+    #if os(macOS)
+    /**
+     Try to parse ``RichTextDataFormat/word`` data.
+     */
+    convenience init(wordData data: Data) throws {
+        var attributes = Self.wordDataAttributes as NSDictionary?
+        try self.init(
+            data: data,
+            options: [.characterEncoding: Self.utf8],
+            documentAttributes: &attributes)
+    }
+    #endif
 }
 
 private extension NSAttributedString {
 
+    static var utf8: UInt {
+        String.Encoding.utf8.rawValue
+    }
+
     static var rtfDataAttributes: [DocumentAttributeKey: Any] {
         [.documentType: NSAttributedString.DocumentType.rtf]
     }
+
+    static var rtfdDataAttributes: [DocumentAttributeKey: Any] {
+        [.documentType: NSAttributedString.DocumentType.rtfd]
+    }
+
+    #if os(macOS)
+    static var wordDataAttributes: [DocumentAttributeKey: Any] {
+        [.documentType: NSAttributedString.DocumentType.docFormat]
+    }
+    #endif
 }

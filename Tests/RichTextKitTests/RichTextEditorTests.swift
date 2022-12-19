@@ -7,10 +7,9 @@
 //
 
 #if os(iOS) || os(macOS) || os(tvOS)
+import RichTextKit
 import SwiftUI
 import XCTest
-
-@testable import RichTextKit
 
 class RichTextEditorTests: XCTestCase {
 
@@ -32,7 +31,7 @@ class RichTextEditorTests: XCTestCase {
 
     func testRichTextPresenterUsesContextSelectedRange() {
         let range = NSRange(location: 4, length: 3)
-        context.selectedRange = range
+        context.selectRange(range)
         XCTAssertEqual(editor.selectedRange, range)
     }
 

@@ -16,6 +16,7 @@ The library and demo app still updates way to often, and updates too much. For i
 
 ### ✨ New Features
 
+* `RichTextDataFormat` has a new `libraryFormats` property that returns all formats except the `vendorArchivedData` format.
 * `RichTextDataReader` now has ways to get data for the current rich text.
 * `ViewDebug` is a new demo app class that is used for view debugging capabilities.
 
@@ -39,7 +40,9 @@ The library and demo app still updates way to often, and updates too much. For i
         
 * `RichTextContext` `selectedRange` is no longer published.
 * `RichTextDataReader` now implements `RichTextReader`.
+* `RichTextDataReader` format-specific data functions have been made private.
 * `RichTextStyleToggle.Style` `inactiveColor` is now optional.
+* `NSMutableString` format-specific initializers have been made private.
 
 
 

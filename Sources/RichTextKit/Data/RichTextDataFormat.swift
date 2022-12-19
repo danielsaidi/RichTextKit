@@ -19,20 +19,14 @@ import UniformTypeIdentifiers
  a binary archive, which is convenient if you stick to Apple
  platforms, but restricts how the data can be used elsewhere.
 
- The reason for having ``archivedData`` is to let you handle
- images in a more convenient way. Since ``plainText`` has no
- image support and ``rtf`` requires additional handling (the
- RTFD format handles attachments by storing them in a folder,
- using a special format), ``archivedData`` store attachments
- within the attributed string. The archiver however uses the
- Apple `NSKeyedArchiver` and `NSKeyedUnarchiver` which means
- that it's more limited when it comes to data portability.
-
- ``archivedData`` uses `rtk` as file extension, as well as a
- custom `UTType.archivedData` uniform type. You can create a
+ The ``archivedData`` format uses `rtk` a file extension, as
+ well as a `UTType.archivedData` uniform type. You can use a
  ``vendorArchivedData(id:fileExtension:uniformType:)`` value
- if you want to use custom file extensions and uniform types
- in your app. Don't forget to configure your app accordingly.
+ if you want to use custom file extensions and uniform types.
+
+ Remember to configure your app for handling the UTTypes you
+ want to support, as well as the file extensions you want to
+ open with the app. Have a look at the demo app for examples.
  */
 public enum RichTextDataFormat: Equatable, Identifiable {
     
@@ -41,7 +35,7 @@ public enum RichTextDataFormat: Equatable, Identifiable {
     
     /// Plain data is persisted as plain text.
     case plainText
-    
+
     /// RTF data is persisted as formatted text.
     case rtf
 
@@ -50,6 +44,13 @@ public enum RichTextDataFormat: Equatable, Identifiable {
 }
 
 public extension RichTextDataFormat {
+
+    /**
+     Get all library supported data formats.
+     */
+    static var libraryFormats: [RichTextDataFormat] {
+        [.archivedData, .plainText, .rtf]
+    }
     
     /**
      The format's unique identifier.
@@ -68,10 +69,8 @@ public extension RichTextDataFormat {
      */
     var convertableFormats: [RichTextDataFormat] {
         switch self {
-        case .archivedData: return [.rtf, .plainText]
-        case .plainText: return [.archivedData, .rtf]
-        case .rtf: return [.archivedData, .plainText]
-        case .vendorArchivedData: return [.rtf, .plainText]
+        case .vendorArchivedData: return Self.libraryFormats.removing(.archivedData)
+        default: return Self.libraryFormats.removing(self)
         }
     }
     
@@ -111,5 +110,12 @@ public extension RichTextDataFormat {
         case .rtf: return .rtf
         case .vendorArchivedData(_, _, let type): return type
         }
+    }
+}
+
+private extension Collection where Element == RichTextDataFormat {
+
+    func removing(_ format: RichTextDataFormat) -> [RichTextDataFormat] {
+        filter { $0 != format }
     }
 }

@@ -35,6 +35,23 @@ public extension RichTextDataReader {
         case .vendorArchivedData: return try richTextArchivedData()
         }
     }
+}
+
+private extension RichTextDataReader {
+
+    /**
+     The full text range.
+     */
+    var textRange: NSRange {
+        NSRange(location: 0, length: richText.length)
+    }
+
+    /**
+     The full text range.
+     */
+    func documentAttributes(for documentType: NSAttributedString.DocumentType) -> [NSAttributedString.DocumentAttributeKey: Any] {
+        [.documentType: documentType]
+    }
 
     /**
      Generate ``RichTextDataFormat/archivedData`` formatted data.
@@ -62,10 +79,30 @@ public extension RichTextDataReader {
      */
     func richTextRtfData() throws -> Data {
         try richText.data(
-            from: NSRange(location: 0, length: richText.length),
-            documentAttributes: [
-                .documentType: NSAttributedString.DocumentType.rtf
-            ]
+            from: textRange,
+            documentAttributes: documentAttributes(for: .rtf)
         )
     }
+
+    /**
+     Generate ``RichTextDataFormat/rtfd`` formatted data.
+     */
+    func richTextRtfdData() throws -> Data {
+        try richText.data(
+            from: textRange,
+            documentAttributes:  documentAttributes(for: .rtfd)
+        )
+    }
+
+    #if os(macOS)
+    /**
+     Generate ``RichTextDataFormat/word`` formatted data.
+     */
+    func richTextWordData() throws -> Data {
+        try richText.data(
+            from: textRange,
+            documentAttributes: documentAttributes(for: .docFormat)
+        )
+    }
+    #endif
 }

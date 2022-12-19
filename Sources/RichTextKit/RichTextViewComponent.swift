@@ -204,12 +204,7 @@ public extension RichTextViewComponent {
        - format: The format to get a configuration for.
      */
     func standardImageInsertConfiguration(for format: RichTextDataFormat) -> RichTextImageInsertConfiguration {
-        switch format {
-        case .archivedData: return .enabled
-        case .plainText: return .disabled
-        case .rtf: return .disabled
-        case .vendorArchivedData: return .enabled
-        }
+        format.supportsImages ? .enabled : .disabled
     }
 }
 

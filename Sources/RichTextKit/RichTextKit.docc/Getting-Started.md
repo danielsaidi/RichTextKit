@@ -78,18 +78,21 @@ In RichTextKit, the ``RichTextDataFormat`` determines how the rich text content 
 
 Archived data is very capable, but is not as portable as the other formats. For instance, it may be hard to use on other platforms.
 
-RichTextKit has undocumented `NSAttributedString` initializers for initializing a rich text with data, for instance:
+RichTextKit adds an `NSAttributedString` initializer for initializing a rich text with data, for instance:
 
 ```
-NSAttributedString(data:format:)
-NSAttributedString(archivedData:)
-NSAttributedString(plainTextData:)
-NSAttributedString(rtfData:)
+NSAttributedString(data: myData, format: .archivedData)
 ```
 
-These initializers are used by the views below, but you can use them as is if you want to.
+You can use the ``RichTextDataReader`` protocol (which is implemented by `NSAttributedString` and other types in the library) to get data for various formats:
 
-You can use the ``RichTextDataReader`` protocol (which is implemented by `NSAttributedString` and other types in the library) to get data for various formats. 
+```
+let data = richText.data(for: .archivedData)
+```
+
+The various views in the library uses this initializer and data function, but you can use them as is as well.
+
+
 
 
 
