@@ -16,6 +16,7 @@ The library and demo app still updates way to often, and updates too much. For i
 
 ### ✨ New Features
 
+* `RichTextDataReader` now has ways to get data for the current rich text.
 * `ViewDebug` is a new demo app class that is used for view debugging capabilities.
 
 ### 💡 Behavior changes
@@ -27,9 +28,17 @@ The library and demo app still updates way to often, and updates too much. For i
 * `RichTextKeyboardToolbar` no longer allocates width for hidden items.
 * `RichTextStyleToggle` is no longer tinted by default when inactive.
 
+### 🗑️ Deprecated
+
+* `PdfDataReader` has been renamed to `RichTextPdfDataReader`.
+* `RichTextDataWriter` is deprecated.
+* `RichTextDataWriter` functionality has been moved to `RichTextDataReader`.
+
+
 ### 💥 Breaking Changes
         
-* `RichTextContext` `selectedRange` is no longer observable.
+* `RichTextContext` `selectedRange` is no longer published.
+* `RichTextDataReader` now implements `RichTextReader`.
 * `RichTextStyleToggle.Style` `inactiveColor` is now optional.
 
 

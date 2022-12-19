@@ -12,34 +12,61 @@ import Foundation
  This protocol can be implemented any types that can provide
  attributed string parsing of rich text-based data.
 
- This protocol uses public `NSAttributedString` initializers
- that are defined as extensions in the library, for instance:
-
- ```
- NSAttributedString(data: data, format: .rtf)
- NSAttributedString(archivedData: data)
- NSAttributedString(plainTextData: data)
- NSAttributedString(rtfData: data)
- ```
-
- These initializers are however omitted by the documentation
- for now.
+ The protocol is implemented by `NSAttributedString` as well
+ as other types in the library. It provides any implementing
+ types with convenient extensions. 
  */
-public protocol RichTextDataReader {}
+public protocol RichTextDataReader: RichTextReader {}
+
+extension NSAttributedString: RichTextDataReader {}
 
 public extension RichTextDataReader {
 
     /**
-     Get rich text from ``RichTextDataFormat`` specific data.
+     Generate rich text data from the current rich text.
 
      - Parameters:
-       - data: The data to parse.
        - format: The data format to use.
      */
-    func richText(
-        from data: Data,
-        format: RichTextDataFormat
-    ) throws -> NSAttributedString {
-        try NSAttributedString(data: data, format: format)
+    func richTextData(for format: RichTextDataFormat) throws -> Data {
+        switch format {
+        case .archivedData: return try richTextArchivedData()
+        case .plainText: return try richTextPlainTextData()
+        case .rtf: return try richTextRtfData()
+        case .vendorArchivedData: return try richTextArchivedData()
+        }
+    }
+
+    /**
+     Generate ``RichTextDataFormat/archivedData`` formatted data.
+     */
+    func richTextArchivedData() throws -> Data {
+        try NSKeyedArchiver.archivedData(
+            withRootObject: richText,
+            requiringSecureCoding: false)
+    }
+
+    /**
+     Generate ``RichTextDataFormat/plainText`` formatted data.
+     */
+    func richTextPlainTextData() throws -> Data {
+        let string = richText.string
+        guard let data = string.data(using: .utf8) else {
+            throw RichTextDataError
+                .invalidData(in: string)
+        }
+        return data
+    }
+
+    /**
+     Generate ``RichTextDataFormat/rtf`` formatted data.
+     */
+    func richTextRtfData() throws -> Data {
+        try richText.data(
+            from: NSRange(location: 0, length: richText.length),
+            documentAttributes: [
+                .documentType: NSAttributedString.DocumentType.rtf
+            ]
+        )
     }
 }

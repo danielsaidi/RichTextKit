@@ -1,5 +1,5 @@
 //
-//  RichTextDataReaderWriterTests.swift
+//  RichTextDataReaderTests.swift
 //  RichTextKitTests
 //
 //  Created by Daniel Saidi on 2022-01-25.

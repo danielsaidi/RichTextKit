@@ -7,9 +7,10 @@
 //
 
 #if os(iOS) || os(macOS) || os(tvOS)
-import RichTextKit
 import SwiftUI
 import XCTest
+
+@testable import RichTextKit
 
 class RichTextEditorTests: XCTestCase {
 

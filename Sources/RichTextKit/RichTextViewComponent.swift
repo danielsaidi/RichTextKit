@@ -29,10 +29,10 @@ public protocol RichTextViewComponent: AnyObject,
     RichTextColorReader,
     RichTextColorWriter,
     RichTextDataReader,
-    RichTextDataWriter,
     // RichTextFontReader,
     // RichTextFontWriter,
     RichTextImageAttachmentManager,
+    PdfDataReader,
     // RichTextStyleReader,
     RichTextStyleWriter
 {

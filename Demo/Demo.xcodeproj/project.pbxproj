@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		A909DC27294B4B2C00A2CA3C /* Color+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = A909DC26294B4B2C00A2CA3C /* Color+Random.swift */; };
 		A909DC2B294B4B5200A2CA3C /* Color+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = A909DC26294B4B2C00A2CA3C /* Color+Random.swift */; };
-		A909DC4D294B8C2F00A2CA3C /* View+ViewDebug.swift in Sources */ = {isa = PBXBuildFile; fileRef = A909DC4C294B8C2F00A2CA3C /* View+ViewDebug.swift */; };
-		A909DC4E294B8C3400A2CA3C /* View+ViewDebug.swift in Sources */ = {isa = PBXBuildFile; fileRef = A909DC4C294B8C2F00A2CA3C /* View+ViewDebug.swift */; };
 		A909DC50294B8C7B00A2CA3C /* ViewDebug.swift in Sources */ = {isa = PBXBuildFile; fileRef = A909DC4F294B8C7B00A2CA3C /* ViewDebug.swift */; };
 		A909DC51294B8C8000A2CA3C /* ViewDebug.swift in Sources */ = {isa = PBXBuildFile; fileRef = A909DC4F294B8C7B00A2CA3C /* ViewDebug.swift */; };
 		A978467F284D560B00DF0CEA /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A978467D284D560B00DF0CEA /* MainMenu.swift */; };
@@ -38,7 +36,6 @@
 
 /* Begin PBXFileReference section */
 		A909DC26294B4B2C00A2CA3C /* Color+Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Random.swift"; sourceTree = "<group>"; };
-		A909DC4C294B8C2F00A2CA3C /* View+ViewDebug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+ViewDebug.swift"; sourceTree = "<group>"; };
 		A909DC4F294B8C7B00A2CA3C /* ViewDebug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDebug.swift; sourceTree = "<group>"; };
 		A978467D284D560B00DF0CEA /* MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
 		A9784681284D565E00DF0CEA /* Image+Demo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Demo.swift"; sourceTree = "<group>"; };
@@ -90,7 +87,6 @@
 		A909DC4B294B8C2700A2CA3C /* Debug */ = {
 			isa = PBXGroup;
 			children = (
-				A909DC4C294B8C2F00A2CA3C /* View+ViewDebug.swift */,
 				A909DC4F294B8C7B00A2CA3C /* ViewDebug.swift */,
 			);
 			path = Debug;
@@ -290,7 +286,6 @@
 				A97846A2284D733200DF0CEA /* DemoUrl.swift in Sources */,
 				A9784686284D5C5700DF0CEA /* DemoScreen.swift in Sources */,
 				A9784698284D6A5800DF0CEA /* ContentView.swift in Sources */,
-				A909DC4D294B8C2F00A2CA3C /* View+ViewDebug.swift in Sources */,
 				A97846A3284D736C00DF0CEA /* AboutScreen.swift in Sources */,
 				A9E50311283A23EE00BA5101 /* DemoApp.swift in Sources */,
 			);
@@ -302,7 +297,6 @@
 			files = (
 				A909DC51294B8C8000A2CA3C /* ViewDebug.swift in Sources */,
 				A978468D284D691900DF0CEA /* EditorScreen.swift in Sources */,
-				A909DC4E294B8C3400A2CA3C /* View+ViewDebug.swift in Sources */,
 				A978467F284D560B00DF0CEA /* MainMenu.swift in Sources */,
 				A9D8E4832944878000B42858 /* SidebarToggleButton.swift in Sources */,
 				A9784685284D5C5500DF0CEA /* DemoScreen.swift in Sources */,
