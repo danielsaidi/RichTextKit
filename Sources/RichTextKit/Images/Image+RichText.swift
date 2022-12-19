@@ -16,9 +16,7 @@ public extension Image {
     static let richTextActionCopy = symbol("doc.on.clipboard")
     static let richTextActionDismissKeyboard = symbol("keyboard.chevron.compact.down")
     static let richTextActionEdit = symbol("square.and.pencil")
-    static let richTextActionExport = symbol("square.and.arrow.up.on.square")
     static let richTextActionRedo = symbol("arrow.uturn.forward")
-    static let richTextActionShare = symbol("square.and.arrow.up")
     static let richTextActionUndo = symbol("arrow.uturn.backward")
 
     static let richTextAlignmentCenter = symbol("text.aligncenter")
@@ -39,6 +37,9 @@ public extension Image {
     static let richTextFormat = symbol("textformat")
     static let richTextFormatBrush = symbol("paintbrush")
 
+    static let richTextMenuExport = symbol("square.and.arrow.up.on.square")
+    static let richTextMenuShare = symbol("square.and.arrow.up")
+
     static let richTextStyleBold = symbol("bold")
     static let richTextStyleItalic = symbol("italic")
     static let richTextStyleStrikethrough = symbol("strikethrough")
@@ -56,15 +57,21 @@ struct Image_RichText_Previews: PreviewProvider {
 
     static var previews: some View {
         VStack(spacing: 20) {
-            alignmentPreviews
-            Divider()
             actionPreviews
-            Divider()
+            alignmentPreviews
             fontPreviews
-            Divider()
             formatPreviews
-            Divider()
+            menuPreviews
             stylePreviews
+        }
+    }
+
+    static var actionPreviews: some View {
+        HStack {
+            Image.richTextActionCopy
+            Image.richTextActionEdit
+            Image.richTextActionRedo
+            Image.richTextActionUndo
         }
     }
 
@@ -92,23 +99,19 @@ struct Image_RichText_Previews: PreviewProvider {
         }
     }
 
+    static var menuPreviews: some View {
+        HStack {
+            Image.richTextMenuExport
+            Image.richTextMenuShare
+        }
+    }
+
     static var stylePreviews: some View {
         HStack {
             Image.richTextStyleBold
             Image.richTextStyleItalic
             Image.richTextStyleStrikethrough
             Image.richTextStyleUnderline
-        }
-    }
-
-    static var actionPreviews: some View {
-        HStack {
-            Image.richTextActionCopy
-            Image.richTextActionEdit
-            Image.richTextActionExport
-            Image.richTextActionRedo
-            Image.richTextActionShare
-            Image.richTextActionUndo
         }
     }
 }

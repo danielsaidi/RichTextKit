@@ -71,7 +71,7 @@ public extension RichTextDataFormat {
     /**
      The formats that a format can be converted to.
      */
-    var convertableFormats: [RichTextDataFormat] {
+    var convertibleFormats: [RichTextDataFormat] {
         switch self {
         case .vendorArchivedData: return Self.libraryFormats.removing(.archivedData)
         default: return Self.libraryFormats.removing(self)

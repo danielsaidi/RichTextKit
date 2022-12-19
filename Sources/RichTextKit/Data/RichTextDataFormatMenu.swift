@@ -9,13 +9,13 @@
 import SwiftUI
 
 /**
- This menu can be used to exporting and share rich text with
- various ``RichTextDataFormat`` options.
+ This menu can be used to trigger various actions for a list
+ of ``RichTextDataFormat`` values.
 
  The menu uses customizable actions, which means that it can
- be used in toolbars, macOS commands etc. It has an optional,
- action for PDF, which isn't a rich text format, but is used
- when e.g. exporting or sharing.
+ be used in toolbars, macOS commands etc. It has an optional
+ `pdf` action, which for instance can be used when exporting
+ or sharing rich text.
  */
 public struct RichTextDataFormatMenu: View {
 
@@ -75,7 +75,7 @@ struct RichTextDataFormatMenu_Previews: PreviewProvider {
         VStack {
             RichTextDataFormatMenu(
                 title: "Export...",
-                icon: .richTextActionExport,
+                icon: .richTextMenuExport,
                 formatAction: { _ in },
                 pdfAction: {}
             )

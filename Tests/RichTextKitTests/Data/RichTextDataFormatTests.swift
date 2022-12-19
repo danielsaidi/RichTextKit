@@ -26,7 +26,7 @@ class RichTextDataFormatTests: XCTestCase {
     }
 
     func formatResult(for format: RichTextDataFormat) -> [RichTextDataFormat] {
-        format.convertableFormats
+        format.convertibleFormats
     }
 
     func extensionResult(for format: RichTextDataFormat) -> String {

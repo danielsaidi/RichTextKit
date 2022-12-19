@@ -101,12 +101,14 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 
 - ``RichTextDataError``
 - ``RichTextDataFormat``
+- ``RichTextDataFormatMenu``
 - ``RichTextDataReader``
 - ``RichTextDataWriter``
 
 ### Export
 
 - ``RichTextExportError``
+- ``RichTextExportMenu``
 - ``RichTextExportService``
 - ``RichTextExportUrlResolver``
 - ``StandardRichTextExportService``
@@ -154,6 +156,7 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 
 ### Sharing
 
+- ``RichTextShareMenu``
 - ``RichTextShareService``
 - ``StandardRichTextShareService``
 
