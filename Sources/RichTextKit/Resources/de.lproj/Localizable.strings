@@ -29,6 +29,18 @@
 "fileFormatRtf" = "Formatierter Text (.rtf)";
 "fileFormatTxt" = "Klartext (.txt)";
 
+"menuExport" = "Exportieren";
+"menuExportAs" = "Exportieren als...";
+"menuFont" = "Schriftart";
+"menuFontLarger" = "Größer";
+"menuFontSmaller" = "Kleiner";
+"menuFormat" = "Format";
+"menuSave" = "Speichern";
+"menuSaveAs" = "Speichern als...";
+"menuShare" = "Teilen";
+"menuShareAs" = "Teilen als...";
+"menuText" = "Text";
+
 "styleBold" = "Fetter";
 "styleItalic" = "Kursiv";
 "styleStrikethrough" = "Durchgestrichen";

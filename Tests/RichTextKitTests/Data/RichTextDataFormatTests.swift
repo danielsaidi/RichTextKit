@@ -17,6 +17,7 @@ class RichTextDataFormatTests: XCTestCase {
     lazy var vendorFormat = RichTextDataFormat.vendorArchivedData(
         id: "foo",
         fileExtension: "fooFile",
+        fileFormatText: "Foo File (*.foo)",
         uniformType: vendorType
     )
 

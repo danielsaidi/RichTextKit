@@ -29,6 +29,18 @@
 "fileFormatRtf" = "Formateret tekst (.rtf)";
 "fileFormatTxt" = "Ren tekst (.txt)";
 
+"menuExport" = "Eksportere";
+"menuExportAs" = "Eksportere som...";
+"menuFont" = "Skrifttype";
+"menuFontLarger" = "Større";
+"menuFontSmaller" = "Mindre";
+"menuFormat" = "Format";
+"menuSave" = "Spare";
+"menuSaveAs" = "Spare som...";
+"menuShare" = "Del";
+"menuShareAs" = "Del som...";
+"menuText" = "Tekst";
+
 "styleBold" = "Fremhævet";
 "styleItalic" = "Kursiv";
 "styleStrikethrough" = "Gennemstreget";

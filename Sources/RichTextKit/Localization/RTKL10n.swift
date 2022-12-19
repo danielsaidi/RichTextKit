@@ -35,6 +35,14 @@ public enum RTKL10n: String, CaseIterable, Identifiable {
     fileFormatRtf,
     fileFormatTxt,
 
+    menuExport,
+    menuExportAs,
+    menuFormat,
+    menuSave,
+    menuSaveAs,
+    menuShare,
+    menuShareAs,
+
     styleBold,
     styleItalic,
     styleStrikethrough,

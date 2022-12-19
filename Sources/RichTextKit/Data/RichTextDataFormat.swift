@@ -40,7 +40,11 @@ public enum RichTextDataFormat: Equatable, Identifiable {
     case rtf
 
     /// A vendor-specific archived data format.
-    case vendorArchivedData(id: String, fileExtension: String, uniformType: UTType)
+    case vendorArchivedData(
+        id: String,
+        fileExtension: String,
+        fileFormatText: String,
+        uniformType: UTType)
 }
 
 public extension RichTextDataFormat {
@@ -60,7 +64,7 @@ public extension RichTextDataFormat {
         case .archivedData: return "archivedData"
         case .plainText: return "plainText"
         case .rtf: return "rtf"
-        case .vendorArchivedData(let id, _, _): return id
+        case .vendorArchivedData(let id, _, _, _): return id
         }
     }
     
@@ -73,6 +77,19 @@ public extension RichTextDataFormat {
         default: return Self.libraryFormats.removing(self)
         }
     }
+
+    /**
+     The format's file format text, which can be used in for
+     example menus and pickers.
+     */
+    var fileFormatText: String {
+        switch self {
+        case .archivedData: return RTKL10n.fileFormatRtk.text
+        case .plainText: return RTKL10n.fileFormatTxt.text
+        case .rtf: return RTKL10n.fileFormatRtf.text
+        case .vendorArchivedData(_, _, let text, _): return text
+        }
+    }
     
     /**
      The format's standard file extension.
@@ -82,7 +99,7 @@ public extension RichTextDataFormat {
         case .archivedData: return "rtk"
         case .plainText: return "txt"
         case .rtf: return "rtf"
-        case .vendorArchivedData(_, let fileExtension, _): return fileExtension
+        case .vendorArchivedData(_, let ext, _, _): return ext
         }
     }
     
@@ -108,7 +125,7 @@ public extension RichTextDataFormat {
         case .archivedData: return .archivedData
         case .plainText: return .plainText
         case .rtf: return .rtf
-        case .vendorArchivedData(_, _, let type): return type
+        case .vendorArchivedData(_, _, _, let type): return type
         }
     }
 }

@@ -29,10 +29,22 @@
 "fileFormatRtf" = "Rich Text (.rtf)";
 "fileFormatTxt" = "Plain Text (.txt)";
 
+"menuExport" = "Export";
+"menuExportAs" = "Export as...";
+"menuFont" = "Font";
+"menuFontLarger" = "Larger";
+"menuFontSmaller" = "Smaller";
+"menuFormat" = "Format";
+"menuSave" = "Save";
+"menuSaveAs" = "Save as...";
+"menuShare" = "Share";
+"menuShareAs" = "Share as...";
+"menuText" = "Text";
+
 "styleBold" = "Bold";
 "styleItalic" = "Italic";
 "styleStrikethrough" = "Strikethrough";
-"styleUnderlined" = "Underlined";
+"styleUnderlined" = "Underline";
 
 "textAlignment" = "Text Alignment";
 "textAlignmentLeft" = "Left";
