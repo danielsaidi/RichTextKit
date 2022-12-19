@@ -10,12 +10,11 @@ import CoreGraphics
 import Foundation
 
 /**
- This protocol can be implemented any types that can provide
- rich text font reading capabilities.
+ This protocol extends ``RichTextAttributeReader`` with rich
+ text font-specific functionality.
 
  The protocol is implemented by `NSAttributedString` as well
- as other types in the library. It provides any implementing
- types with convenient extensions.
+ as other types in the library.
  */
 public protocol RichTextFontReader: RichTextAttributeReader {}
 

@@ -32,7 +32,7 @@ public protocol RichTextViewComponent: AnyObject,
     // RichTextFontReader,
     // RichTextFontWriter,
     RichTextImageAttachmentManager,
-    PdfDataReader,
+    RichTextPdfDataReader,
     // RichTextStyleReader,
     RichTextStyleWriter
 {
@@ -76,12 +76,11 @@ public protocol RichTextViewComponent: AnyObject,
     // MARK: - Setup
 
     /**
-     Setup the rich text view with a rich text and a certain
-     ``RichTextDataFormat``.
+     Setup the view with text and a ``RichTextDataFormat``.
 
      - Parameters:
        - text: The text to edit with the text view.
-       - format: The rich text format to edit.
+       - format: The rich text format to use.
      */
     func setup(
         with text: NSAttributedString,
@@ -167,6 +166,21 @@ public extension RichTextViewComponent {
         let newRange = NSRange(location: index, length: 0)
         let safeRange = safeRange(for: newRange)
         setSelectedRange(safeRange)
+    }
+
+    /**
+     Setup the view with data and a ``RichTextDataFormat``.
+
+     - Parameters:
+       - data: The rich text data to edit with the text view.
+       - format: The rich text format to use.
+     */
+    func setup(
+        with data: Data,
+        format: RichTextDataFormat
+    ) throws {
+        let string = try NSAttributedString(data: data, format: format)
+        setup(with: string, format: format)
     }
 
     /**

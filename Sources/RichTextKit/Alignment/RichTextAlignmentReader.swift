@@ -17,12 +17,11 @@ import AppKit
 #endif
 
 /**
- This protocol can be implemented any types that can provide
- rich text alignment reading capabilities.
+ This protocol extends ``RichTextAttributeReader`` with rich
+ text alignment-specific functionality.
 
  The protocol is implemented by `NSAttributedString` as well
- as other types in the library. It provides any implementing
- types with convenient extensions.
+ as other types in the library.
  */
 public protocol RichTextAlignmentReader: RichTextAttributeReader {}
 

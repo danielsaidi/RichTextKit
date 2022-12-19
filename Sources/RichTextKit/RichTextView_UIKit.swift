@@ -26,6 +26,27 @@ extension RichTextView: UIDropInteractionDelegate {}
  */
 open class RichTextView: UITextView, RichTextViewComponent {
 
+
+    // MARK: - Initializers
+
+    public convenience init(
+        data: Data,
+        format: RichTextDataFormat = .archivedData
+    ) throws {
+        self.init()
+        try self.setup(with: data, format: format)
+    }
+
+    public convenience init(
+        string: NSAttributedString,
+        format: RichTextDataFormat = .archivedData
+    ) {
+        self.init()
+        self.setup(with: string, format: format)
+    }
+
+
+
     // MARK: - Properties
 
     /**

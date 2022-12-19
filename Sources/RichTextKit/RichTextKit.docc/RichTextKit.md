@@ -148,9 +148,9 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 ### Pdf
 
 - ``PdfDataError``
-- ``PdfDataReader``
 - ``PdfPageConfiguration``
 - ``PdfPageMargins``
+- ``RichTextPdfDataReader``
 
 ### Sharing
 

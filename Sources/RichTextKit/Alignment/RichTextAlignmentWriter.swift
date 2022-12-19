@@ -17,12 +17,11 @@ import AppKit
 #endif
 
 /**
- This protocol can be implemented any types that can provide
- rich text alignment writing capabilities.
+ This protocol extends ``RichTextAttributeWriter`` with rich
+ text alignment writing functionality.
 
  This protocol is implemented by `NSMutableAttributedString`
- as well as other types in the library. It provides any type
- that implements it with convenient extensions.
+ as well as other types in the library.
  */
 public protocol RichTextAlignmentWriter: RichTextAttributeWriter {}
 

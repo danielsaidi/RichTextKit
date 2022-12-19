@@ -9,12 +9,11 @@
 import Foundation
 
 /**
- This protocol can be implemented any types that can provide
- attributed string parsing of rich text-based data.
+ This protocol extends ``RichTextReader`` with functionality
+ for reading rich text data for the current rich text.
 
  The protocol is implemented by `NSAttributedString` as well
- as other types in the library. It provides any implementing
- types with convenient extensions. 
+ as other types in the library.
  */
 public protocol RichTextDataReader: RichTextReader {}
 

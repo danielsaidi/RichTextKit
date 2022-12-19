@@ -9,12 +9,11 @@
 import Foundation
 
 /**
- This protocol can be implemented any types that can provide
- rich text attribute writing capabilities.
+ This protocol extends ``RichTextWriter`` with functionality
+ for writing rich text attributes to the current rich text.
 
  This protocol is implemented by `NSMutableAttributedString`
- as well as other types in the library. It provides any type
- that implements it with convenient extensions.
+ as well as other types in the library.
  */
 public protocol RichTextAttributeWriter: RichTextWriter {}
 

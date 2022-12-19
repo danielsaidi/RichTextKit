@@ -9,12 +9,11 @@
 import Foundation
 
 /**
- This protocol can be implemented any types that can provide
- rich text color reading capabilities.
+ This protocol extends ``RichTextAttributeReader`` with rich
+ text color-specific functionality.
 
  The protocol is implemented by `NSAttributedString` as well
- as other types in the library. It provides any implementing
- types with convenient extensions.
+ as other types in the library.
  */
 public protocol RichTextColorReader: RichTextAttributeReader {}
 

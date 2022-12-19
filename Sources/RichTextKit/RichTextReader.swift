@@ -13,8 +13,7 @@ import Foundation
  a rich text string.
 
  The protocol is implemented by `NSAttributedString` as well
- as other types in the library. It provides any implementing
- types with convenient extensions.
+ as other types in the library.
  */
 public protocol RichTextReader {
 

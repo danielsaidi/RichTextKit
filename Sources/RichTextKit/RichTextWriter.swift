@@ -9,12 +9,11 @@
 import Foundation
 
 /**
- This protocol can be implemented any types that can provide
- a writable rich text string.
+ This protocol extends ``RichTextReader`` and is implemented
+ by types that can provide a writable rich text string.
 
  This protocol is implemented by `NSMutableAttributedString`
- as well as other types in the library. It provides any type
- that implements it with convenient extensions.
+ as well as other types in the library.
  */
 public protocol RichTextWriter: RichTextReader {
 

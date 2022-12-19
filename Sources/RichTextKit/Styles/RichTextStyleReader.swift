@@ -9,12 +9,11 @@
 import Foundation
 
 /**
- This protocol can be implemented any types that can provide
- rich text style for the current rich text font.
+ This protocol extends ``RichTextFontReader`` with rich text
+ style-specific functionality.
 
  The protocol is implemented by `NSAttributedString` as well
- as other types in the library. It provides any implementing
- types with convenient extensions.
+ as other types in the library.
  */
 public protocol RichTextStyleReader: RichTextFontReader {}
 

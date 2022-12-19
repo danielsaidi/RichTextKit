@@ -9,14 +9,13 @@
 import Foundation
 
 /**
- This protocol can be implemented any types that can provide
- rich text style writing capabilities.
+ This protocol extends ``RichTextFontWriter`` with rich text
+ font writing functionality.
 
  This protocol is implemented by `NSMutableAttributedString`
- as well as other types in the library. It provides any type
- that implements it with convenient extensions.
+ as well as other types in the library.
  */
-public protocol RichTextStyleWriter: RichTextStyleReader, RichTextFontWriter {}
+public protocol RichTextStyleWriter: RichTextFontWriter, RichTextStyleReader {}
 
 extension NSMutableAttributedString: RichTextStyleWriter {}
 

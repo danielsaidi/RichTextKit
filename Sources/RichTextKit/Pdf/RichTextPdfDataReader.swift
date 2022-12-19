@@ -1,5 +1,5 @@
 //
-//  PdfDataReader.swift
+//  RichTextPdfDataReader.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-06-03.
@@ -9,18 +9,17 @@
 import Foundation
 
 /**
- This protocol can be implemented any types that can provide
- or generate PDF data for the current rich text.
+ This protocol extends ``RichTextReader`` with functionality
+ for generating PDF data for the current rich text.
 
  The protocol is implemented by `NSAttributedString` as well
- as other types in the library. It provides any implementing
- types with convenient extensions.
+ as other types in the library.
  */
-public protocol PdfDataReader: RichTextReader {}
+public protocol RichTextPdfDataReader: RichTextReader {}
 
-extension NSAttributedString: PdfDataReader {}
+extension NSAttributedString: RichTextPdfDataReader {}
 
-public extension PdfDataReader {
+public extension RichTextPdfDataReader {
 
     /**
      Generate PDF data from the current rich text.
