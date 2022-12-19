@@ -24,6 +24,11 @@
 "actionRedoLatestChange" = "Gör om";
 "actionUndoLatestChange" = "Ångra";
 
+"fileFormatRtk" = "Rich Text Kit (.rtk)";
+"fileFormatPdf" = "PDF (.pdf)";
+"fileFormatRtf" = "Formaterad Text (.rtf)";
+"fileFormatTxt" = "Ren Text (.txt)";
+
 "styleBold" = "Fet";
 "styleItalic" = "Kursiv";
 "styleStrikethrough" = "Genomstrykning";

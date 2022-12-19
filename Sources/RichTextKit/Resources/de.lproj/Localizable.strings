@@ -1,0 +1,41 @@
+/*
+ Localizable.strings
+ RichTextKit
+ 
+ Created by Daniel Saidi on 2022-12-14.
+ Copyright © 2022 Daniel Saidi. All rights reserved.
+ */
+
+"locale" = "de";
+
+"done" = "Fertig";
+
+"font" = "Schriftart";
+"fontSize" = "Schriftgröße";
+
+"color" = "Farbe";
+"foregroundColor" = "Text";
+"backgroundColor" = "Hintergrund";
+
+"actionCopy" = "Kopieren";
+"actionDismissKeyboard" = "Tastatur schließen";
+"actionIncrementFontSize" = "Schriftgröße vergrößern";
+"actionDecrementFontSize" = "Schriftgröße verkleinern";
+"actionRedoLatestChange" = "Rückgängig";
+"actionUndoLatestChange" = "Wiederholen";
+
+"fileFormatRtk" = "Rich Text Kit (.rtk)";
+"fileFormatPdf" = "PDF (.pdf)";
+"fileFormatRtf" = "Formatierter Text (.rtf)";
+"fileFormatTxt" = "Klartext (.txt)";
+
+"styleBold" = "Fetter";
+"styleItalic" = "Kursiv";
+"styleStrikethrough" = "Durchgestrichen";
+"styleUnderlined" = "Unterstrichen";
+
+"textAlignment" = "Tekstjustering";
+"textAlignmentLeft" = "Linke Textausrichtung";
+"textAlignmentRight" = "Rechte Textausrichtung";
+"textAlignmentCenter" = "Textausrichtung zentrieren";
+"textAlignmentJustified" = "Blocksatz-Textausrichtung";

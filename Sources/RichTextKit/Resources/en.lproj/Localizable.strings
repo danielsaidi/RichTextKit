@@ -24,6 +24,11 @@
 "actionRedoLatestChange" = "Redo";
 "actionUndoLatestChange" = "Undo";
 
+"fileFormatRtk" = "Rich Text Kit (.rtk)";
+"fileFormatPdf" = "PDF (.pdf)";
+"fileFormatRtf" = "Rich Text (.rtf)";
+"fileFormatTxt" = "Plain Text (.txt)";
+
 "styleBold" = "Bold";
 "styleItalic" = "Italic";
 "styleStrikethrough" = "Strikethrough";

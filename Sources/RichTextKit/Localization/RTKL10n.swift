@@ -30,6 +30,11 @@ public enum RTKL10n: String, CaseIterable, Identifiable {
     actionRedoLatestChange,
     actionUndoLatestChange,
 
+    fileFormatRtk,
+    fileFormatPdf,
+    fileFormatRtf,
+    fileFormatTxt,
+
     styleBold,
     styleItalic,
     styleStrikethrough,
@@ -86,6 +91,9 @@ struct RTKL10n_Previews: PreviewProvider {
 
     static var locales: [Locale] = [
         .init(identifier: "en"),
+        .init(identifier: "da"),
+        .init(identifier: "de"),
+        .init(identifier: "nb"),
         .init(identifier: "sv")
     ]
     

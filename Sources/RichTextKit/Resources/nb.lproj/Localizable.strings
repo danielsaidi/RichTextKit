@@ -1,0 +1,41 @@
+/*
+ Localizable.strings
+ RichTextKit
+ 
+ Created by Daniel Saidi on 2022-12-14.
+ Copyright © 2022 Daniel Saidi. All rights reserved.
+ */
+
+"locale" = "nb";
+
+"done" = "Færdig";
+
+"font" = "Skrifttype";
+"fontSize" = "Skriftstørrelse";
+
+"color" = "Farge";
+"foregroundColor" = "Tekst";
+"backgroundColor" = "Bakgrunn";
+
+"actionCopy" = "Kopiere";
+"actionDismissKeyboard" = "Lukk tastaturet";
+"actionIncrementFontSize" = "Øk skriftstørrelsen";
+"actionDecrementFontSize" = "Reduser skriftstørrelsen";
+"actionRedoLatestChange" = "Angre";
+"actionUndoLatestChange" = "Gjøre om";
+
+"fileFormatRtk" = "Rich Text Kit (.rtk)";
+"fileFormatPdf" = "PDF (.pdf)";
+"fileFormatRtf" = "Formatert tekst (.rtf)";
+"fileFormatTxt" = "Ren tekst (.txt)";
+
+"styleBold" = "Fet";
+"styleItalic" = "Kursiv";
+"styleStrikethrough" = "Gjennomstreking";
+"styleUnderlined" = "Understreket";
+
+"textAlignment" = "Tekstjustering";
+"textAlignmentLeft" = "Venstrejustert";
+"textAlignmentRight" = "Høyrejustert";
+"textAlignmentCenter" = "Sentrert";
+"textAlignmentJustified" = "Margin justert";
