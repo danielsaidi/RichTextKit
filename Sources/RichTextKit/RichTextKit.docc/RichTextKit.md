@@ -97,6 +97,13 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 - ``RichTextColorPicker``
 - ``RichTextColorPickerStack``
 
+### Commands
+
+- ``RichTextCommandsAlignmentOptionsGroup``
+- ``RichTextCommandsFontSizeOptionsGroup``
+- ``RichTextCommandsStyleOptionsGroup``
+- ``RichTextFormatCommands``
+
 ### Data
 
 - ``RichTextDataError``

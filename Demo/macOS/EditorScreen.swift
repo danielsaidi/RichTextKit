@@ -12,7 +12,7 @@ import SwiftUI
 struct EditorScreen: View {
 
     @State
-    private var text = NSAttributedString(string: "Type here...")
+    private var text = NSAttributedString.empty
 
     @StateObject
     var context = RichTextContext()
@@ -43,7 +43,9 @@ private extension EditorScreen {
     var editor: some View {
         RichTextEditor(text: $text, context: context) {
             $0.textContentInset = CGSize(width: 10, height: 20)
-        }.frame(minWidth: 400)
+        }
+        .frame(minWidth: 400)
+        .focusedValue(\.richTextContext, context)
     }
 
     var toolbar: some View {

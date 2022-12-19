@@ -49,5 +49,5 @@
 "textAlignment" = "Tekstjustering";
 "textAlignmentLeft" = "Linke Textausrichtung";
 "textAlignmentRight" = "Rechte Textausrichtung";
-"textAlignmentCenter" = "Textausrichtung zentrieren";
+"textAlignmentCentered" = "Textausrichtung zentrieren";
 "textAlignmentJustified" = "Blocksatz-Textausrichtung";

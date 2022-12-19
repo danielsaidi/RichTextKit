@@ -49,5 +49,5 @@
 "textAlignment" = "Textjustering";
 "textAlignmentLeft" = "Vänsterjustera";
 "textAlignmentRight" = "Högerjustera";
-"textAlignmentCenter" = "Centrera";
+"textAlignmentCentered" = "Centrera";
 "textAlignmentJustified" = "Marginaljustera";

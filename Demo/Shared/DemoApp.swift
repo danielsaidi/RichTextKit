@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import RichTextKit
 
 @main
 struct DemoApp: App {
@@ -13,6 +14,9 @@ struct DemoApp: App {
         WindowGroup {
             ContentView()
         }.commands {
+            #if os(macOS)
+            RichTextFormatCommands()
+            #endif
             SidebarCommands()
         }
     }

@@ -49,5 +49,5 @@
 "textAlignment" = "Text Alignment";
 "textAlignmentLeft" = "Left";
 "textAlignmentRight" = "Right";
-"textAlignmentCenter" = "Center";
+"textAlignmentCentered" = "Centered";
 "textAlignmentJustified" = "Justified";

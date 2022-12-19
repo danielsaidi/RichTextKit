@@ -37,11 +37,15 @@ public enum RTKL10n: String, CaseIterable, Identifiable {
 
     menuExport,
     menuExportAs,
+    menuFont,
+    menuFontLarger,
+    menuFontSmaller,
     menuFormat,
     menuSave,
     menuSaveAs,
     menuShare,
     menuShareAs,
+    menuText,
 
     styleBold,
     styleItalic,

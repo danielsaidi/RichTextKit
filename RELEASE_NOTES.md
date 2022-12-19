@@ -10,12 +10,14 @@ Until then, deprecated features may be removed in the next minor version.
 
 This release addresses some performance changes, by trying to minimize the number of redraws.
 
-As a result, the `RichTextContext`'s `selectedRange` is no longer observable, since that caused every input or text position change to redraw the entire app.
+As a result, the `RichTextContext`'s `selectedRange` is no longer observable, since that caused every input or text position change to redraw the entire app. The library and demo app however still updates way to often, and too much. For instance, switching between having a selected range and not should only redraw the copy button, but now updates the entire screen. If you know how to minimize this, please reach out.
 
-The library and demo app still updates way to often, and updates too much. For instance, switching between having a selected range and not should only redraw the copy button, but now updates the entire screen. If you know how to minimize this, please reach out. 
+Furthermore, this release adds support for focus values and menu commands. You can see them in action in the demo app.  
 
 ### ✨ New Features
 
+* `Commands` is a new namespace for app commands.
+* `Focus` is a new namespace for focus values.
 * `RichTextDataFormat` has a new `fileFormatText` property.
 * `RichTextDataFormat` has a new `isArchivedDataFormat` property.
 * `RichTextDataFormat` has a new `libraryFormats` property that returns all formats except the `vendorArchivedData` format.
