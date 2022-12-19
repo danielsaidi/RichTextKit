@@ -3,6 +3,7 @@
 RichTextKit is a Swift-based library that lets you work with rich text in UIKit, AppKit and SwiftUI.
 
 
+
 ## UIKit and AppKit
 
 In UIKit and AppKit, you can start with creating ``RichTextView`` view instead of a `UITextView` or `NSTextView`, for instance:
@@ -21,6 +22,7 @@ view.setup(with: "A rich text", format: .archivedData)
 `RichTextView` has more functionality than `UITextView` or `NSTextView` to simplify working with rich text in similar way on all platforms. 
 
 RichTextKit also adds a bunch of additional functionality to native types, to simplify working with rich text attrbutes, styles, fonts, text alignments, image attachments etc.  
+
 
 
 ## SwiftUI
@@ -65,6 +67,32 @@ This means that in SwiftUI, you only have to use a ``RichTextEditor`` and a ``Ri
 
 
 
+## Rich Text Format
+
+In RichTextKit, the ``RichTextDataFormat`` determines how the rich text content is handled:
+
+* `.archivedData` uses an `NSKeyedArchiver` to persist rich text and image attachments into the text itself, and an `NSKeyedUnarchiver` to parse any archived strings.
+* `.rtf` supports rich content but requires additional handling of images.
+* `.plainText` only supports plain text without formatting.
+* `.vendorArchivedData` extends `.archivedData` with vendor-specific information, which you can use if you need to use your own uniform types.
+
+Archived data is very capable, but is not as portable as the other formats. For instance, it may be hard to use on other platforms.
+
+RichTextKit has undocumented `NSAttributedString` initializers for initializing a rich text with data, for instance:
+
+```
+NSAttributedString(data:format:)
+NSAttributedString(archivedData:)
+NSAttributedString(plainTextData:)
+NSAttributedString(rtfData:)
+```
+
+These initializers are used by the views below, but you can use them as is if you want to.
+
+You can use the ``RichTextDataReader`` protocol (which is implemented by `NSAttributedString` and other types in the library) to get data for various formats. 
+
+
+
 ## SwiftUI views
 
 This will eventually be a separate article, but until then let's take a quick look at some of the views that are available in RichTextKit.
@@ -99,19 +127,6 @@ This will eventually be a separate article, but until then let's take a quick lo
 * ``RichTextFontSizePickerStack``
 
 Have a look at the demo apps for some ways that you can use these views.  
-
-
-
-## Rich Text Format
-
-In RichTextKit, the ``RichTextDataFormat`` determines how the rich text content is handled:
-
-* `.archivedData` uses an `NSKeyedArchiver` to persist rich text and image attachments into the text itself, and an `NSKeyedUnarchiver` to parse any archived strings.
-* `.rtf` supports rich content but requires additional handling of images.
-* `.plainText` only supports plain text without formatting.
-* `.vendorArchivedData` extends `.archivedData` with vendor-specific information, which you can use if you need to use your own uniform types.
-
-Archived data is very capable, but is not as portable as the other formats. For instance, it may be hard to use on other platforms.
 
 
 
