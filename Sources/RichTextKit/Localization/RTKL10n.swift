@@ -9,7 +9,7 @@
 import SwiftUI
 
 /**
- This enum defines keyboard-specific, localized texts.
+ This enum defines RichTextKit-specific, localized texts.
  */
 public enum RTKL10n: String, CaseIterable, Identifiable {
 

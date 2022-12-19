@@ -21,6 +21,7 @@ The library and demo app still updates way to often, and updates too much. For i
 * `RichTextDataFormatMenu` is a new menu that triggers an action for various formats.
 * `RichTextDataReader` now has ways to get data for the current rich text.
 * `RichTextExportFormatMenu` is a new menu for exporting rich text.
+* `RichTextNSSharingMenu` is a new macOS-specific menu that lets you share rich text using NSSharingServices. 
 * `RichTextShareFormatMenu` is a new menu for exporting rich text.
 * `ViewDebug` is a new demo app class that is used for view debugging capabilities.
 * The library is now localized in Danish, German and Norwegian, although some translations probably need adjusting. 

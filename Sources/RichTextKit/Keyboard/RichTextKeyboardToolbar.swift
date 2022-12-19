@@ -28,7 +28,7 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
        - trailingActions: The trailing actions, by default `.dismissKeyboard`.
        - spacing: The stack item spacing, by default `15`.
        - height: The toolbar height, by default `50`.
-       - style: The toolbar style to apply, by default ``RichTextKeyboardToolbar/Style/standard``.
+       - style: The toolbar style to apply, by default ``RichTextKeyboardToolbarStyle/standard``.
        - leadingButtons: The leading buttons to place after the leading actions.
        - trailingButtons: The trailing buttons to place after the trailing actions.
      */

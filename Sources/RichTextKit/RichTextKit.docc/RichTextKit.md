@@ -95,7 +95,7 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 - ``RichTextColorReader``
 - ``RichTextColorWriter``
 - ``RichTextColorPicker``
-- ``RichTextColorPickerStack`
+- ``RichTextColorPickerStack``
 
 ### Data
 
@@ -143,6 +143,16 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 - ``RichTextImageConfiguration``
 - ``RichTextImageInsertConfiguration``
 
+### Images
+
+- ``RichTextKeyboardToolbar``
+- ``RichTextKeyboardToolbarMenu``
+- ``RichTextKeyboardToolbarStyle``
+
+### Localization
+
+- ``RTKL10n``
+
 ### Pasteboard
 
 - ``PasteboardImageReader``
@@ -156,6 +166,7 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 
 ### Sharing
 
+- ``RichTextNSSharingMenu``
 - ``RichTextShareMenu``
 - ``RichTextShareService``
 - ``StandardRichTextShareService``

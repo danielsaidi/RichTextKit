@@ -9,8 +9,8 @@
 import SwiftUI
 
 /**
- This menu can be used to trigger various export actions for
- a list of ``RichTextDataFormat`` values.
+ This menu can be used to trigger custom share actions for a
+ list of ``RichTextDataFormat`` values.
 
  This menu uses a ``RichTextDataFormatMenu`` that by default
  is configured for exporting. It has customizable actions to

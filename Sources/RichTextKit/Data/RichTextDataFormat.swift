@@ -21,8 +21,8 @@ import UniformTypeIdentifiers
 
  The ``archivedData`` format uses `rtk` a file extension, as
  well as a `UTType.archivedData` uniform type. You can use a
- ``vendorArchivedData(id:fileExtension:uniformType:)`` value
- if you want to use custom file extensions and uniform types.
+ ``RichTextDataFormat/vendorArchivedData(id:fileExtension:fileFormatText:uniformType:)``
+ value to specify custom formats.
 
  Remember to configure your app for handling the UTTypes you
  want to support, as well as the file extensions you want to
