@@ -13,13 +13,12 @@ import SwiftUI
  */
 public extension Image {
 
-    static let richTextFormat = symbol("textformat")
-    static let richTextFormatBrush = symbol("paintbrush")
-
     static let richTextActionCopy = symbol("doc.on.clipboard")
     static let richTextActionDismissKeyboard = symbol("keyboard.chevron.compact.down")
     static let richTextActionEdit = symbol("square.and.pencil")
+    static let richTextActionExport = symbol("square.and.arrow.up.on.square")
     static let richTextActionRedo = symbol("arrow.uturn.forward")
+    static let richTextActionShare = symbol("square.and.arrow.up")
     static let richTextActionUndo = symbol("arrow.uturn.backward")
 
     static let richTextAlignmentCenter = symbol("text.aligncenter")
@@ -30,8 +29,15 @@ public extension Image {
     static let richTextColorBackground = symbol("highlighter")
     static let richTextColorForeground = symbol("character")
 
+    static let richTextDocument = symbol("doc.text")
+    static let richTextDocuments = symbol("doc.on.doc")
+
+    static let richTextFont = symbol("textformat")
     static let richTextFontSizeDecrement = symbol("minus")
     static let richTextFontSizeIncrement = symbol("plus")
+
+    static let richTextFormat = symbol("textformat")
+    static let richTextFormatBrush = symbol("paintbrush")
 
     static let richTextStyleBold = symbol("bold")
     static let richTextStyleItalic = symbol("italic")
@@ -46,16 +52,19 @@ private extension Image {
     }
 }
 
-
 struct Image_RichText_Previews: PreviewProvider {
 
     static var previews: some View {
         VStack(spacing: 20) {
             alignmentPreviews
             Divider()
-            stylePreviews
-            Divider()
             actionPreviews
+            Divider()
+            fontPreviews
+            Divider()
+            formatPreviews
+            Divider()
+            stylePreviews
         }
     }
 
@@ -68,10 +77,26 @@ struct Image_RichText_Previews: PreviewProvider {
         }
     }
 
+    static var fontPreviews: some View {
+        HStack {
+            Image.richTextFont
+            Image.richTextFontSizeDecrement
+            Image.richTextFontSizeIncrement
+        }
+    }
+
+    static var formatPreviews: some View {
+        HStack {
+            Image.richTextFormat
+            Image.richTextFormatBrush
+        }
+    }
+
     static var stylePreviews: some View {
         HStack {
             Image.richTextStyleBold
             Image.richTextStyleItalic
+            Image.richTextStyleStrikethrough
             Image.richTextStyleUnderline
         }
     }
@@ -80,7 +105,9 @@ struct Image_RichText_Previews: PreviewProvider {
         HStack {
             Image.richTextActionCopy
             Image.richTextActionEdit
+            Image.richTextActionExport
             Image.richTextActionRedo
+            Image.richTextActionShare
             Image.richTextActionUndo
         }
     }
