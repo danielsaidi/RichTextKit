@@ -25,15 +25,8 @@ public class RichTextContext: ObservableObject {
 
     /**
      Create a new rich text context.
-
-     - Parameters:
-       - standardFontSize: The font size to use by default.
      */
-    public init(
-        standardFontSize: CGFloat = .standardRichTextFontSize
-    ) {
-        self.fontSize = standardFontSize
-    }
+    public init() {}
 
 
     /**
@@ -90,7 +83,7 @@ public class RichTextContext: ObservableObject {
      The current font size.
      */
     @Published
-    public var fontSize: CGFloat
+    public var fontSize = CGFloat.standardRichTextFontSize
 
     /**
      The current foreground color, if any.

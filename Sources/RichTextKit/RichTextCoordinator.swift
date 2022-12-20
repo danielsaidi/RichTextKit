@@ -37,7 +37,8 @@ open class RichTextCoordinator: NSObject {
     public init(
         text: Binding<NSAttributedString>,
         textView: RichTextView,
-        richTextContext: RichTextContext) {
+        richTextContext: RichTextContext
+    ) {
         textView.attributedString = text.wrappedValue
         self.text = text
         self.textView = textView

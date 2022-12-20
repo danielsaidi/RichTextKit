@@ -12,12 +12,23 @@ import CoreGraphics
  This protocol can be implemented by any type that should be
  able to provide the standard rich text font size.
 
- The protocol is implemented by `CGFloat` and can be used by
- any custom types that need to be get and set this font size.
+ This protocol is implemented by native types like `CGFloat`,
+ `Double`, as well as library types like ``RichTextContext``,
+ ``RichTextEditor`` and ``RichTextView``. All tese types can
+ use the ``StandardFontSizeProvider/standardRichTextFontSize``
+ property to set the standard rich text font size.
  */
 public protocol StandardFontSizeProvider {}
 
 extension CGFloat: StandardFontSizeProvider {}
+
+extension Double: StandardFontSizeProvider {}
+
+extension RichTextContext: StandardFontSizeProvider {}
+
+extension RichTextEditor: StandardFontSizeProvider {}
+
+extension RichTextView: StandardFontSizeProvider {}
 
 public extension StandardFontSizeProvider {
 

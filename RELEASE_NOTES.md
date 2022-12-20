@@ -46,6 +46,7 @@ Furthermore, this release adds support for focus values and menu commands. You c
 
 ### 💥 Breaking Changes
         
+* `RichTextContext` no longer has a font size in the initializer, use `StandardFontSizeProvider` (CGFloat, TextEditor etc.) instead.
 * `RichTextContext` `selectedRange` is no longer published.
 * `RichTextDataReader` now implements `RichTextReader`.
 * `RichTextDataReader` format-specific data functions have been made private.

@@ -32,3 +32,25 @@ public extension View {
         }
     }
 }
+
+private extension Color {
+
+    /**
+     Generate a random color.
+
+     - Parameters:
+       - range: The random color range, by default `0...1`.
+       - randomOpacity: Whether or not to randomize opacity as well, by default `false`.
+     */
+    static func random(
+        in range: ClosedRange<Double> = 0...1,
+        randomOpacity: Bool = false
+    ) -> Color {
+        Color(
+            red: .random(in: range),
+            green: .random(in: range),
+            blue: .random(in: range),
+            opacity: randomOpacity ? .random(in: 0...1) : 1
+        )
+    }
+}

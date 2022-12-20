@@ -11,6 +11,10 @@ import SwiftUI
 
 struct EditorScreen: View {
 
+    init() {
+        // RichTextEditor.standardRichTextFontSize = 100
+    }
+
     @State
     private var text = NSAttributedString.empty
 
