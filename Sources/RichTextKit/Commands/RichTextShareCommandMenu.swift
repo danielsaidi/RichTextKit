@@ -117,11 +117,7 @@ private extension RichTextShareCommandMenu {
     var printButton: some View {
         if let action = printAction {
             Button(action: action) {
-                Label {
-                    Text(RTKL10n.menuPrint.text)
-                } icon: {
-                    Image.richTextMenuPrint
-                }
+                Label(RTKL10n.menuPrint.text, .richTextMenuPrint)
             }
             .keyboardShortcut("p", modifiers: .command)
         }

@@ -42,29 +42,19 @@ public struct RichTextDataFormatMenu: View {
     public var body: some View {
         Menu {
             ForEach(formats) { format in
-                Button(action: { formatAction(format) }) {
-                    Label {
-                        Text(format.fileFormatText)
-                    } icon: {
-                        icon
-                    }
+                Button {
+                    formatAction(format)
+                } label: {
+                    Label(format.fileFormatText, icon)
                 }
             }
             if let action = pdfAction {
                 Button(action: action) {
-                    Label {
-                        Text(RTKL10n.fileFormatPdf.text)
-                    } icon: {
-                        icon
-                    }
+                    Label(RTKL10n.fileFormatPdf.text, icon)
                 }
             }
         } label: {
-            Label {
-                Text(title)
-            } icon: {
-                icon
-            }
+            Label(title, icon)
         }
     }
 }

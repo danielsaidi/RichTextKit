@@ -61,11 +61,7 @@ public struct RichTextNSSharingMenu: View {
                 )
             }
         } label: {
-            Label {
-                Text(title)
-            } icon: {
-                icon
-            }
+            Label(title, icon)
         }
     }
     #else
@@ -85,21 +81,19 @@ private extension RichTextNSSharingMenu {
     func serviceMenu(
         title: String,
         icon: Image,
-        serviceAction: @escaping (NSSharingService) -> ()
+        serviceAction: @escaping (NSSharingService) -> Void
     ) -> some View {
         Menu {
             ForEach(services, id: \.title) { service in
-                Button(action: { serviceAction(service) }) {
+                Button {
+                    serviceAction(service)
+                } label: {
                     Image(nsImage: service.image)
                     Text(service.title)
                 }
             }
         } label: {
-            Label {
-                Text(title)
-            } icon: {
-                icon
-            }
+            Label(title, icon)
         }
     }
 

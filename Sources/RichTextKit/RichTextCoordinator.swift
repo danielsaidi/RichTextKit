@@ -203,72 +203,72 @@ extension RichTextCoordinator {
         let styles = textView.currentRichTextStyles
 
         let range = textView.selectedRange
-        if (richTextContext.selectedRange != range) {
+        if richTextContext.selectedRange != range {
             richTextContext.selectedRange = range
         }
 
         let background = textView.currentBackgroundColor
-        if (richTextContext.backgroundColor != background) {
+        if richTextContext.backgroundColor != background {
             richTextContext.backgroundColor = background
         }
 
         let hasRange = textView.hasSelectedRange
-        if (richTextContext.canCopy != hasRange) {
+        if richTextContext.canCopy != hasRange {
             richTextContext.canCopy = hasRange
         }
 
         let canRedo = textView.undoManager?.canRedo ?? false
-        if (richTextContext.canRedoLatestChange != canRedo) {
+        if richTextContext.canRedoLatestChange != canRedo {
             richTextContext.canRedoLatestChange = canRedo
         }
 
         let canUndo = textView.undoManager?.canUndo ?? false
-        if (richTextContext.canUndoLatestChange != canUndo) {
+        if richTextContext.canUndoLatestChange != canUndo {
             richTextContext.canUndoLatestChange = canUndo
         }
 
         let fontName = textView.currentFontName ?? ""
-        if (richTextContext.fontName != fontName) {
+        if richTextContext.fontName != fontName {
             richTextContext.fontName = fontName
         }
 
         let fontSize = textView.currentFontSize ?? .standardRichTextFontSize
-        if (richTextContext.fontSize != fontSize) {
+        if richTextContext.fontSize != fontSize {
             richTextContext.fontSize = fontSize
         }
 
         let foreground = textView.currentForegroundColor
-        if (richTextContext.foregroundColor != foreground) {
+        if richTextContext.foregroundColor != foreground {
             richTextContext.foregroundColor = foreground
         }
 
         let isBold = styles.hasStyle(.bold)
-        if (richTextContext.isBold != isBold) {
+        if richTextContext.isBold != isBold {
             richTextContext.isBold = isBold
         }
 
         let isItalic = styles.hasStyle(.italic)
-        if (richTextContext.isItalic != isItalic) {
+        if richTextContext.isItalic != isItalic {
             richTextContext.isItalic = isItalic
         }
 
         let isStrikethrough = styles.hasStyle(.strikethrough)
-        if (richTextContext.isStrikethrough != isStrikethrough) {
+        if richTextContext.isStrikethrough != isStrikethrough {
             richTextContext.isStrikethrough = isStrikethrough
         }
 
         let isUnderlined = styles.hasStyle(.underlined)
-        if (richTextContext.isUnderlined != isUnderlined) {
+        if richTextContext.isUnderlined != isUnderlined {
             richTextContext.isUnderlined = isUnderlined
         }
 
         let isEditingText = textView.isFirstResponder
-        if (richTextContext.isEditingText != isEditingText) {
+        if richTextContext.isEditingText != isEditingText {
             richTextContext.isEditingText = isEditingText
         }
 
         let textAlignment = textView.currentRichTextAlignment ?? .left
-        if (richTextContext.textAlignment != textAlignment) {
+        if richTextContext.textAlignment != textAlignment {
             richTextContext.textAlignment = textAlignment
         }
 

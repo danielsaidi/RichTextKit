@@ -90,7 +90,7 @@ private extension RichTextDataReader {
     func richTextRtfdData() throws -> Data {
         try richText.data(
             from: textRange,
-            documentAttributes:  documentAttributes(for: .rtfd)
+            documentAttributes: documentAttributes(for: .rtfd)
         )
     }
 

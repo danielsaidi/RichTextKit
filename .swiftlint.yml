@@ -1,5 +1,7 @@
 disabled_rules:
+  - cyclomatic_complexity
   - file_length
+  - function_body_length
   - identifier_name
   - large_tuple
   - line_length
