@@ -23,9 +23,12 @@ Furthermore, this release adds support for focus values and menu commands. You c
 * `RichTextDataFormat` has a new `libraryFormats` property that returns all formats except the `vendorArchivedData` format.
 * `RichTextDataFormatMenu` is a new menu that triggers an action for various formats.
 * `RichTextDataReader` now has ways to get data for the current rich text.
-* `RichTextExportFormatMenu` is a new menu for exporting rich text.
-* `RichTextNSSharingMenu` is a new macOS-specific menu that lets you share rich text using NSSharingServices. 
-* `RichTextShareFormatMenu` is a new menu for exporting rich text.
+* `RichTextExportMenu` is a new menu for exporting rich text.
+* `RichTextContextFocusedValueKey` is a new rich text context focus key.
+* `RichTextFormatCommandMenu` is a new command menu for adding rich text formatting to the system menu. 
+* `RichTextNSSharingMenu` is a new macOS-specific menu for sharing rich text with `NSSharingServices`.
+* `RichTextShareCommandMenu` is a new command menu for adding rich text sharing and exporting to the system menu.
+* `RichTextShareMenu` is a new menu for sharing rich text.
 * `ViewDebug` is a new demo app class that is used for view debugging capabilities.
 * The library is now localized in Danish, German and Norwegian, although some translations probably need adjusting. 
 

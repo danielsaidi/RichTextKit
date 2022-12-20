@@ -35,6 +35,7 @@
 "menuFontLarger" = "Større";
 "menuFontSmaller" = "Mindre";
 "menuFormat" = "Format";
+"menuPrint" = "Skrive ut...";
 "menuSave" = "Lagre";
 "menuSaveAs" = "Lagre som...";
 "menuShare" = "Del";

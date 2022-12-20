@@ -38,6 +38,7 @@ public extension Image {
     static let richTextFormatBrush = symbol("paintbrush")
 
     static let richTextMenuExport = symbol("square.and.arrow.up.on.square")
+    static let richTextMenuPrint = symbol("printer")
     static let richTextMenuShare = symbol("square.and.arrow.up")
 
     static let richTextStyleBold = symbol("bold")

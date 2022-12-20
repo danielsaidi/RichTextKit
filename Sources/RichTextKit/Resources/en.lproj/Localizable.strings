@@ -35,6 +35,7 @@
 "menuFontLarger" = "Larger";
 "menuFontSmaller" = "Smaller";
 "menuFormat" = "Format";
+"menuPrint" = "Print...";
 "menuSave" = "Save";
 "menuSaveAs" = "Save as...";
 "menuShare" = "Share";

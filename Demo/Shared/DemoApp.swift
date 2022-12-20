@@ -17,7 +17,7 @@ struct DemoApp: App {
         }.commands {
             #if os(macOS)
             AboutCommand()
-            RichTextFormatCommands()
+            RichTextFormatCommandMenu()
             SidebarCommands()
             #endif
         }
