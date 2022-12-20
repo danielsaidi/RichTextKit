@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import RichTextKit
 
 struct MainMenu: View {
 
@@ -15,6 +16,15 @@ struct MainMenu: View {
 
     var body: some View {
         Menu {
+            RichTextShareMenu(
+                formats: .libraryFormats,
+                formatAction:  { print("TODO: Share file for \($0.id)") },
+                pdfAction: { print("TODO: Share PDF file") })
+            RichTextExportMenu(
+                formats: .libraryFormats,
+                formatAction:  { print("TODO: Export file for \($0.id)") },
+                pdfAction: { print("TODO: Export PDF file") })
+            Divider()
             link(to: .about)
             webLink(to: .github)
             webLink(to: .documentation)

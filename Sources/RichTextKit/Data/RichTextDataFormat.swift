@@ -47,6 +47,16 @@ public enum RichTextDataFormat: Equatable, Identifiable {
         uniformType: UTType)
 }
 
+public extension Collection where Element == RichTextDataFormat {
+
+    /**
+     Get all library supported data formats.
+     */
+    static var libraryFormats: [RichTextDataFormat] {
+        RichTextDataFormat.libraryFormats
+    }
+}
+
 public extension RichTextDataFormat {
 
     /**
