@@ -6,6 +6,7 @@
 //  Copyright © 2022 Daniel Saidi. All rights reserved.
 //
 
+#if os(iOS) || os(macOS)
 import SwiftUI
 
 /**
@@ -56,3 +57,4 @@ struct RichTextExportMenu_Previews: PreviewProvider {
         }
     }
 }
+#endif

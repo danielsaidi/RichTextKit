@@ -11,11 +11,6 @@ import XCTest
 
 class RichTextContextTests: XCTestCase {
     
-    func testInitializerSetsFontSize() {
-        let context = RichTextContext(standardFontSize: 10)
-        XCTAssertEqual(context.fontSize, 10)
-    }
-
     func testInitializerSetsDefaultValues() {
         let context = RichTextContext()
         XCTAssertEqual(context.fontName, "")
