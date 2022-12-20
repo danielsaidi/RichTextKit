@@ -13,12 +13,6 @@ RichTextKit is supported by and released with permission from [Oribi](https://or
 
 
 
-## Supported Platforms
-
-RichTextKit supports `iOS 14`, `macOS 11`, `tvOS 14` and `watchOS 7`.
-
-
-
 ## Installation
 
 RichTextKit can be installed with the Swift Package Manager:
@@ -32,6 +26,12 @@ or with CocoaPods:
 ```
 pod RichTextKit
 ```
+
+
+
+## Supported Platforms
+
+RichTextKit supports `iOS 14`, `macOS 11`, `tvOS 14` and `watchOS 7`.
 
 
 

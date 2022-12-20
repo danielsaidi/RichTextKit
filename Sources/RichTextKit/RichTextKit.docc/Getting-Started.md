@@ -6,7 +6,7 @@ RichTextKit is a Swift-based library that lets you work with rich text in UIKit,
 
 ## UIKit and AppKit
 
-In UIKit and AppKit, you can start with creating ``RichTextView`` view instead of a `UITextView` or `NSTextView`, for instance:
+In UIKit and AppKit, you can start with creating ``RichTextView`` view instead of a `UITextView` or `NSTextView`:
 
 ```swift
 RichTextView(data: myData, format: .archivedData)  // Using data
@@ -19,15 +19,13 @@ You can also initialize the text view without specifying a string or data, then 
 view.setup(with: "A rich text", format: .archivedData)
 ```
 
-`RichTextView` has more functionality than `UITextView` or `NSTextView` to simplify working with rich text in similar way on all platforms. 
-
-RichTextKit also adds a bunch of additional functionality to native types, to simplify working with rich text attrbutes, styles, fonts, text alignments, image attachments etc.  
+`RichTextView` has a lot more functionality than the native views and bridges the platform-specific api:s so that the views behave more alike. You can use this text view like a regular view to view or edit rich text.
 
 
 
 ## SwiftUI
 
-In SwiftUI, you can use a ``RichTextEditor`` to view and edit rich text, for instance:
+In SwiftUI, you can use a ``RichTextEditor``, which connects a wrapped ``RichTextView`` with a ``RichTextContext``:
 
 ```swift
 struct MyView: View {
@@ -41,15 +39,14 @@ struct MyView: View {
     var body: some View {
         RichTextEditor(text: $text, context: context) {
             // You can customize the native text view here
-            $0.textContentInset = CGSize(width: 10, height: 20)
         }
     }
 }
 ```
 
-The ``RichTextEditor`` connects the ``RichTextContext`` with an internal ``RichTextCoordinator``, which coordinates changes in both the context and the text view. 
+The ``RichTextEditor`` uses an internal ``RichTextCoordinator`` that coordinates changes between the context and the editor. You can now use the context to change font, font size, colors, alignment etc. and observe how these properties change when you move the cursor around the text view. 
 
-You can now use the context to change font, font size, colors, alignment etc. and also observe how these properties change when you move the cursor around the text view.
+You can now use the context to change font, font size, colors, alignment etc. and observe how these properties change when you move the cursor around the text view.
 
 For instance, to display and change the current font size, you can use the context's ``RichTextContext/fontSize``:
 
@@ -64,6 +61,12 @@ Button("Set font size") {
 ```
 
 This means that in SwiftUI, you only have to use a ``RichTextEditor`` and a ``RichTextContext``, although all the functionality that is used is also available to you if you want to dig deeper.
+
+
+
+## Additional functionality
+
+Other than these views, RichTextKit has a bunch of additional functionality to native types, to simplify working with rich text attrbutes, styles, fonts, text alignments, image attachments etc. It uses extensions and protocols to unify native and library types and has pickers, menus, toolbars etc. to help you build a great rich text editor. 
 
 
 

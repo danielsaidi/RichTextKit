@@ -14,19 +14,9 @@
 
 ## About RichTextKit
 
-RichTextKit is a Swift-based library that lets you work with rich text in UIKit, AppKit, and SwiftUI.
+RichTextKit lets you edit rich text in UIKit, AppKit, and SwiftUI. It has a multi-platform `RichTextView` and a SwiftUI `RichTextEditor` and supports changing style (bold, italic, underline etc.), font, font sizes, colors, text alignment, etc. You can even drag in and paste images if you use a data format that allows it. 
 
-RichTextKit provides multi-platform `RichTextView` and `RichTextEditor` components that let you view and edit rich text.
-
-RIchTextKit supports changing styles (bold, italic, underline), font, font sizes, colors, alignment, etc. You can also drag and copy in images if you use a data format that allows it. 
-
-RichTextKit is supported by and released with permission from [Oribi](https://oribi.se/en/) and used in [OribiWriter](https://oribi.se/en/apps/oribi-writer/), which is out on iOS and soon on macOS.
-
-
-
-## Supported Platforms
-
-RichTextKit supports `iOS 14`, `macOS 11`, `tvOS 14` and `watchOS 7`.
+RichTextKit is supported by and released with permission from [Oribi](https://oribi.se/en/) and used in [OribiWriter](https://oribi.se/en/apps/oribi-writer/), which is out on iOS and soon on macOS. Have a look at that app or the demo app in this repo if you want to see RichTextKit in action.
 
 
 
@@ -46,9 +36,47 @@ pod RichTextKit
 
 
 
+## Supported Platforms
+
+RichTextKit supports `iOS 14`, `macOS 11`, `tvOS 14` and `watchOS 7`.
+
+
+
 ## Getting started
 
-The [online documentation][Documentation] has a [getting started][GettingStarted] guide to help you get started with RichTextKit.
+In UIKit and AppKit, you can start with creating ``RichTextView`` view instead of a `UITextView` or `NSTextView`:
+
+```swift
+RichTextView(data: myData, format: .archivedData)  // Using data
+RichTextView(string: myString, format: .plainText) // Using a string
+```
+
+`RichTextView` has a lot more functionality than the native views and bridges the platform-specific api:s so that the views behave more alike. You can use this text view like a regular view to view or edit rich text.
+
+In SwiftUI, you can use a ``RichTextEditor``, which connects a wrapped ``RichTextView`` with a ``RichTextContext``:
+
+```swift
+struct MyView: View {
+
+    @State
+    private var text = NSAttributedString(string: "Type here...")
+    
+    @StateObject
+    var context = RichTextContext()
+
+    var body: some View {
+        RichTextEditor(text: $text, context: context) {
+            // You can customize the native text view here
+        }
+    }
+}
+```
+
+The ``RichTextEditor`` uses an internal coordinator that coordinates changes between the context and the editor. You can now use the context to change font, font size, colors, alignment etc. and observe how these properties change when you move the cursor around the text view.
+
+Other than these views, RichTextKit has a bunch of additional functionality to native types, to simplify working with rich text attrbutes, styles, fonts, text alignments, image attachments etc. It uses extensions and protocols to unify native and library types and has pickers, menus, toolbars etc. to help you build a great rich text editor. 
+
+For more information and examples, the [online documentation][Documentation] has a [getting started][GettingStarted] guide to help you get started with RichTextKit.
 
 
 
