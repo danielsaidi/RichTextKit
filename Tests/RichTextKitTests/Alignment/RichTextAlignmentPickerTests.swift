@@ -19,13 +19,13 @@ final class RichTextAlignmentPickerTests: XCTestCase {
             values: [.left]
         )
 
-        XCTAssertEqual(picker.alignments, [.left])
+        XCTAssertEqual(picker.values, [.left])
     }
 
     func testCanBeCreatedWithDefaultParameters() throws {
         let picker = RichTextAlignmentPicker(
             selection: .constant(.left))
 
-        XCTAssertEqual(picker.alignments, RichTextAlignment.allCases)
+        XCTAssertEqual(picker.values, RichTextAlignment.allCases)
     }
 }
