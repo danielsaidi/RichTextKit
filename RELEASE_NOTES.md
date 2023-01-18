@@ -6,6 +6,14 @@ Until then, deprecated features may be removed in the next minor version.
 
 
 
+## 0.5
+
+### 💥 Breaking Changes
+        
+* All deprecated types have been removed.
+
+
+
 ## 0.4
 
 This release addresses some performance changes, by trying to minimize the number of redraws.
