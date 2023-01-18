@@ -161,7 +161,7 @@ RichTextKit tries to use native terminology as much as possible, but has a coupl
 
 In RichTextKit, a `reader` is anything that can access (or read) certain information, while a `writer` is anything that can modify certain information.
 
-For instance, the ``RichTextReader`` lets you access the current ``RichTextReader/attributedString`` (or its alias ``RichTextReader/richText``) while the ``RichTextWriter`` lets you access a mutable ``RichTextWriter/mutableAttributedString`` (or its alias ``RichTextReader/mutableRichText``).
+For instance, the ``RichTextReader`` lets you access the current ``RichTextReader/attributedString`` (or its alias ``RichTextReader/richText``) while the ``RichTextWriter`` lets you access a mutable ``RichTextWriter/mutableAttributedString`` (or its alias ``RichTextWriter/mutableRichText``).
 
 These base protocols are then specialized by more specific protocols, like the ``RichTextAttributeReader`` and ``RichTextAttributeWriter`` protocols which let you read and write attributes from and to the current rich text.
 

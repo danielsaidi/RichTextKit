@@ -191,3 +191,7 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 - ``RichTextStyleButton``
 - ``RichTextStyleToggle``
 - ``RichTextStyleToggleStack``
+
+
+
+[License]: https://github.com/danielsaidi/RichTextKit/blob/master/LICENSE
