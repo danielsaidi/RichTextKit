@@ -27,6 +27,8 @@ or with CocoaPods:
 pod RichTextKit
 ```
 
+If you prefer to not have external dependencies, you can also just copy the source code into your app.
+
 
 
 ## Supported Platforms
