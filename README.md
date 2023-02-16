@@ -47,7 +47,7 @@ RichTextKit supports `iOS 14`, `macOS 11`, `tvOS 14` and `watchOS 7`.
 
 ## Getting started
 
-The [online documentation][Documentation] has a [getting started][GettingStarted] guide to help you get started with RichTextKit.
+The [online documentation][Documentation] has a [getting started][Getting-Started] guide to help you get started with RichTextKit.
 
 In UIKit and AppKit, you can start with creating ``RichTextView`` view instead of a `UITextView` or `NSTextView`:
 
