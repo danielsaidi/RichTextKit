@@ -30,3 +30,4 @@ let package = Package(
             dependencies: ["RichTextKit", "MockingKit"]),
     ]
 )
+
