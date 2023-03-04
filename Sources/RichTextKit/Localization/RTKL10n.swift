@@ -57,7 +57,9 @@ public enum RTKL10n: String, CaseIterable, Identifiable {
     textAlignmentLeft,
     textAlignmentRight,
     textAlignmentCentered,
-    textAlignmentJustified
+    textAlignmentJustified,
+    
+    tab
 }
 
 public extension RTKL10n {

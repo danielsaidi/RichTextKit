@@ -174,6 +174,12 @@ public class RichTextContext: ObservableObject {
      */
     @Published
     public var textAlignment: RichTextAlignment = .left
+    
+    /**
+     The current text tab, if any.
+     */
+    @Published
+    public var textTab: RichTextTab = .single
 }
 
 public extension RichTextContext {

@@ -266,7 +266,12 @@ extension RichTextCoordinator {
         if richTextContext.isEditingText != isEditingText {
             richTextContext.isEditingText = isEditingText
         }
-
+        
+        let textTab = textView.currentRichTextTab ?? .zero
+        if richTextContext.textTab != textTab {
+            richTextContext.textTab = textTab
+        }
+        
         let textAlignment = textView.currentRichTextAlignment ?? .left
         if richTextContext.textAlignment != textAlignment {
             richTextContext.textAlignment = textAlignment
