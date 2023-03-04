@@ -41,6 +41,9 @@ public struct RichTextFormatCommandMenu: Commands {
                     RichTextCommandsFontSizeOptionsGroup()
                 }
                 Menu(RTKL10n.menuText.text) {
+                    RichTextCommandsTabOptionsGroup()
+                }
+                Menu(RTKL10n.menuText.text) {
                     RichTextCommandsAlignmentOptionsGroup()
                 }
             }.disabled(context == nil)
