@@ -134,6 +134,12 @@ private extension RichTextKeyboardToolbar {
 
     @ViewBuilder
     var trailingViews: some View {
+        
+        RichTextTabPicker(selection: $context.textTab)
+            .pickerStyle(.segmented)
+            .frame(maxWidth: 200)
+            .keyboardShortcutsOnly(if: isCompact)
+        
         RichTextAlignmentPicker(selection: $context.textAlignment)
             .pickerStyle(.segmented)
             .frame(maxWidth: 200)

@@ -10,7 +10,7 @@ import SwiftUI
 
 /**
  This view can be added to a `Commands`, to expose rich text
- alignment menu options to an app main menu or key commands.
+ tab menu options to an app main menu or key commands.
  */
 public struct RichTextCommandsTabOptionsGroup: View {
 
