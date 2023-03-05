@@ -102,6 +102,7 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 ### Commands
 
 - ``RichTextCommandsAlignmentOptionsGroup``
+- ``RichTextCommandsTabOptionsGroup``
 - ``RichTextCommandsFontSizeOptionsGroup``
 - ``RichTextCommandsStyleOptionsGroup``
 - ``RichTextFormatCommandMenu``
@@ -162,6 +163,13 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 - ``RichTextKeyboardToolbarMenu``
 - ``RichTextKeyboardToolbarStyle``
 
+### Indent
+
+- ``RichTextIndent``
+- ``RichTextIndentReader``
+- ``RichTextIndentWriter``
+- ``RichTextIndentPicker``
+
 ### Localization
 
 - ``RTKL10n``
@@ -193,7 +201,6 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 - ``RichTextStyleButton``
 - ``RichTextStyleToggle``
 - ``RichTextStyleToggleStack``
-
 
 
 [License]: https://github.com/danielsaidi/RichTextKit/blob/master/LICENSE

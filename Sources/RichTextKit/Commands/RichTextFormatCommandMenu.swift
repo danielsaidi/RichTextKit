@@ -40,9 +40,7 @@ public struct RichTextFormatCommandMenu: Commands {
                     Divider()
                     RichTextCommandsFontSizeOptionsGroup()
                 }
-                Menu(RTKL10n.menuText.text) {
-                    RichTextCommandsTabOptionsGroup()
-                }
+                
                 Menu(RTKL10n.menuText.text) {
                     RichTextCommandsAlignmentOptionsGroup()
                 }

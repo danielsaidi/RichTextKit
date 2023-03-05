@@ -24,6 +24,8 @@ public extension RichTextContext {
         case .decrementFontSize: return true
         case .redoLatestChange: return canRedoLatestChange
         case .undoLatestChange: return canUndoLatestChange
+        case .increaseIndent: return canIncreaseIndent
+        case .decreaseIndent: return canDecreaseIndent
         }
     }
 
@@ -41,6 +43,8 @@ public extension RichTextContext {
         case .decrementFontSize: decrementFontSize()
         case .redoLatestChange: redoLatestChange()
         case .undoLatestChange: undoLatestChange()
+        case .decreaseIndent: decreaseIndent()
+        case .increaseIndent: increaseIndent()
         }
     }
 }

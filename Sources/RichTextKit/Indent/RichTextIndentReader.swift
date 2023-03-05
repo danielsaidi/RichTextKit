@@ -1,5 +1,5 @@
 //
-//  RichTextTabReader.swift
+//  RichTextIndentReader.swift
 //  RichTextKit
 //
 //  Created by James Bradley on 2022-03-04.
@@ -18,28 +18,28 @@ import AppKit
 
 /**
  This protocol extends ``RichTextAttributeReader`` with rich
- text tab-specific functionality.
+ text indent-specific functionality.
 
  The protocol is implemented by `NSAttributedString` as well
  as other types in the library.
  */
-public protocol RichTextTabReader: RichTextAttributeReader {}
+public protocol RichTextIndentReader: RichTextAttributeReader {}
 
-extension NSAttributedString: RichTextTabReader {}
+extension NSAttributedString: RichTextIndentReader {}
 
-public extension RichTextTabReader {
+public extension RichTextIndentReader {
 
     /**
-     Get the rich text tab at the provided range.
+     Get the rich text indent at the provided range.
 
      - Parameters:
-       - range: The range to get the tab from.
+       - range: The range to get the indent from.
      */
-    func richTextTab(
+    func richTextIndent(
         at range: NSRange
-    ) -> RichTextTab? {
+    ) -> RichTextIndent? {
         let attribute: NSMutableParagraphStyle? = richTextAttribute(.paragraphStyle, at: range)
         guard let style = attribute else { return nil }
-        return RichTextTab(1)
+        return RichTextIndent(rawValue: style.headIndent)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  RichTextViewComponent+Tab.swift
+//  RichTextViewComponent+Indent.swift
 //  RichTextKit
 //
 //  Created by James Bradley on 2023-03-04.
@@ -22,10 +22,10 @@ public extension RichTextViewComponent {
      Use the selected range (if any) or text position to get
      the current rich text alignment.
      */
-    var currentRichTextTab: RichTextTab? {
+    var currentRichTextIndent: RichTextIndent? {
         let attribute: NSMutableParagraphStyle? = currentRichTextAttribute(.paragraphStyle)
         guard let style = attribute else { return nil }
-        return RichTextTab(style.tabStops.count)
+        return RichTextIndent(rawValue: style.headIndent)
     }
 
     /**
@@ -35,26 +35,30 @@ public extension RichTextViewComponent {
      - Parameters:
        - alignment: The alignment to set.
      */
-    func setCurrentRichTextTab(
-        to tab: RichTextTab
+    func setCurrentRichTextIndent(
+        to indent: RichTextIndent
     ) {
         if !hasTrimmedText {
-            return setTextTabAtCurrentPosition(to: tab)
+            return setTextIndentAtCurrentPosition(to: indent)
         }
-//        setRichTextTab(to: tab, at: selectedRange)
+        setRichTextIndent(to: indent, at: selectedRange)
     }
 }
 
 private extension RichTextViewComponent {
 
     /**
-     Set the text alignment at the current position.
+     Set the text indent at the current position.
      */
-    func setTextTabAtCurrentPosition(
-        to tab: RichTextTab
+    func setTextIndentAtCurrentPosition(
+        to indent: RichTextIndent
     ) {
         let style = NSMutableParagraphStyle()
-        style.tabStops = tab.nativeTab
+        
+        let indentation = max(indent == .decrease ? style.headIndent - 30.0 : style.headIndent + 30.0, 0)
+        style.firstLineHeadIndent = indentation
+        style.headIndent = indentation
+        
         var attributes = currentRichTextAttributes
         attributes[.paragraphStyle] = style
         typingAttributes = attributes

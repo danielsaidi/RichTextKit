@@ -25,7 +25,7 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
      - Parameters:
        - context: The context to affect.
        - leadingActions: The leading actions, by default `.undo`, `.redo` and `.copy`.
-       - trailingActions: The trailing actions, by default `.dismissKeyboard`.
+       - trailingActions: The trailing actions, by default `.decreaseTab, .increaseTab, .dismissKeyboard`.
        - spacing: The stack item spacing, by default `15`.
        - height: The toolbar height, by default `50`.
        - style: The toolbar style to apply, by default ``RichTextKeyboardToolbarStyle/standard``.
@@ -35,7 +35,7 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
     public init(
         context: RichTextContext,
         leadingActions: [RichTextAction] = [.undo, .redo, .copy],
-        trailingActions: [RichTextAction] = [.dismissKeyboard],
+        trailingActions: [RichTextAction] = [.decreaseIndent, .increaseIndent, .dismissKeyboard],
         spacing: Double = 15,
         height: Double = 50,
         style: RichTextKeyboardToolbarStyle = .standard,
@@ -134,11 +134,6 @@ private extension RichTextKeyboardToolbar {
 
     @ViewBuilder
     var trailingViews: some View {
-        
-        RichTextTabPicker(selection: $context.textTab)
-            .pickerStyle(.segmented)
-            .frame(maxWidth: 200)
-            .keyboardShortcutsOnly(if: isCompact)
         
         RichTextAlignmentPicker(selection: $context.textAlignment)
             .pickerStyle(.segmented)
