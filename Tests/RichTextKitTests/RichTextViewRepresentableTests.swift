@@ -38,10 +38,10 @@ class RichTextViewComponentTests: XCTestCase {
     }
 
 
-    func testSettingUpWithAttributedTextWorks() {
-        let string = NSAttributedString(string: "foo bar baz")
+    func testSettingUpWithEmptyTextWorks() {
+        let string = NSAttributedString(string: "")
         view.setup(with: string, format: .rtf)
-        XCTAssertEqual(view.richText.string, "foo bar baz")
+        XCTAssertEqual(view.richText.string, "")
         #if os(iOS) || os(tvOS)
         XCTAssertFalse(view.allowsEditingTextAttributes)
         XCTAssertEqual(view.autocapitalizationType, .sentences)
@@ -53,6 +53,24 @@ class RichTextViewComponentTests: XCTestCase {
         XCTAssertEqual(view.textColor, .label)
         #elseif os(macOS)
         XCTAssertEqual(view.textColor, .textColor)
+        #endif
+    }
+
+    func testSettingUpWithNonEmptyTextWorks() {
+        let string = NSAttributedString(string: "foo bar baz")
+        view.setup(with: string, format: .rtf)
+        XCTAssertEqual(view.richText.string, "foo bar baz")
+        #if os(iOS) || os(tvOS)
+        XCTAssertFalse(view.allowsEditingTextAttributes)
+        XCTAssertEqual(view.autocapitalizationType, .sentences)
+        #endif
+        XCTAssertEqual(view.backgroundColor, .clear)
+        XCTAssertEqual(view.contentCompressionResistancePriority(for: .horizontal), .defaultLow)
+        #if os(iOS) || os(tvOS)
+        XCTAssertEqual(view.spellCheckingType, .no)
+        XCTAssertEqual(view.textColor, nil)
+        #elseif os(macOS)
+        XCTAssertEqual(view.textColor, nil)
         #endif
     }
 }
