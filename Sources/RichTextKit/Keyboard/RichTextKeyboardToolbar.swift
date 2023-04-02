@@ -16,6 +16,24 @@ import SwiftUI
  This view has customizable actions and also supports adding
  custom leading and trailing buttons. It shows more views if
  the horizontal size class is regular.
+
+ This custom toolbar is needed since ``RichTextEditor`` will
+ wrap a native `UIKit` text view, which means that using the
+ `toolbar` modifier with a `keyboard` placement doesn't work:
+
+ ```swift
+ RichTextEditor(text: $text, context: context)
+     .toolbar {
+         ToolbarItemGroup(placement: .keyboard) {
+             ....
+         }
+     }
+ ```
+
+ The above code will simply not show anything when you start
+ to edit text. To work around this limitation, you can use a
+ this custom toolbar instead, which by default will show and
+ hide itself as you begin and end editing the text.
  */
 public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: View>: View {
 

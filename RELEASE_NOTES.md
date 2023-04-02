@@ -6,7 +6,7 @@ Until then, deprecated features may be removed in the next minor version.
 
 
 
-## 0.5.1
+## 0.5.2
 
 ### 🐛 Bug Fixes
         
