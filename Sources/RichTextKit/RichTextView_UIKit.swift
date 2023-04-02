@@ -174,7 +174,9 @@ open class RichTextView: UITextView, RichTextViewComponent {
         text.autosizeImageAttachments(maxSize: imageAttachmentMaxSize)
         richTextDataFormat = format
         spellCheckingType = .no
-        //textColor = .label
+        if text.string.isEmpty {
+            textColor = .label
+        }
         setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
     }
 

@@ -85,6 +85,9 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         allowsImageEditing = true
         allowsUndo = true
         backgroundColor = .clear
+        if text.string.isEmpty {
+            textColor = .textColor
+        }
         imageConfiguration = standardImageConfiguration(for: format)
         layoutManager?.defaultAttachmentScaling = NSImageScaling.scaleProportionallyDown
         setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
