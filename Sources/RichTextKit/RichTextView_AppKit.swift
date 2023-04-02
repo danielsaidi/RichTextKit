@@ -87,7 +87,6 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         backgroundColor = .clear
         imageConfiguration = standardImageConfiguration(for: format)
         layoutManager?.defaultAttachmentScaling = NSImageScaling.scaleProportionallyDown
-        textColor = .textColor
         setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
     }
 
