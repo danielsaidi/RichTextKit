@@ -84,7 +84,9 @@ public struct RichTextEditor: ViewRepresentable {
         return textView
     }
 
-    public func updateUIView(_ view: UIViewType, context: Context) {}
+    public func updateUIView(_ view: UIViewType, context: Context) {
+        textView.attributedString = text.wrappedValue
+    }
     #endif
 
     #if os(macOS)
