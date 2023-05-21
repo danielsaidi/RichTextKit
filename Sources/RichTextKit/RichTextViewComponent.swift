@@ -86,7 +86,8 @@ public protocol RichTextViewComponent: AnyObject,
      */
     func setup(
         with text: NSAttributedString,
-        format: RichTextDataFormat
+        format: RichTextDataFormat,
+        placeholder: String
     )
 
 
@@ -179,10 +180,11 @@ public extension RichTextViewComponent {
      */
     func setup(
         with data: Data,
-        format: RichTextDataFormat
+        format: RichTextDataFormat,
+        placeholder: String
     ) throws {
         let string = try NSAttributedString(data: data, format: format)
-        setup(with: string, format: format)
+        setup(with: string, format: format, placeholder: placeholder)
     }
 
     /**

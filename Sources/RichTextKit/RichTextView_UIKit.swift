@@ -31,18 +31,20 @@ open class RichTextView: UITextView, RichTextViewComponent {
 
     public convenience init(
         data: Data,
-        format: RichTextDataFormat = .archivedData
+        format: RichTextDataFormat = .archivedData,
+        placeholder: String
     ) throws {
         self.init()
-        try self.setup(with: data, format: format)
+        try self.setup(with: data, format: format, placeholder: placeholder)
     }
 
     public convenience init(
         string: NSAttributedString,
-        format: RichTextDataFormat = .archivedData
+        format: RichTextDataFormat = .archivedData,
+        placeholder: String
     ) {
         self.init()
-        self.setup(with: string, format: format)
+        self.setup(with: string, format: format, placeholder: placeholder)
     }
 
 
@@ -69,6 +71,8 @@ open class RichTextView: UITextView, RichTextViewComponent {
             #endif
         }
     }
+    
+    var richTextLayoutManager:RichTextLayoutManager = RichTextLayoutManager()
 
 
     #if os(iOS)
@@ -100,6 +104,11 @@ open class RichTextView: UITextView, RichTextViewComponent {
      This keeps track of the data format used by the view.
      */
     private var richTextDataFormat: RichTextDataFormat = .archivedData
+    
+    /**
+     Placeholder text for the view if no text is currently in the RichTextView.
+     */
+    private var placeholder: String = ""
 
 
     // MARK: - Overrides
@@ -117,8 +126,12 @@ open class RichTextView: UITextView, RichTextViewComponent {
             if frame.size == .zero { return }
             if !isInitialFrameSetupNeeded { return }
             isInitialFrameSetupNeeded = false
-            setup(with: attributedString, format: richTextDataFormat)
+            setup(with: attributedString, format: richTextDataFormat, placeholder: placeholder)
         }
+    }
+    
+    open override var layoutManager: NSLayoutManager {
+        return richTextLayoutManager
     }
 
     #if os(iOS)
@@ -162,11 +175,11 @@ open class RichTextView: UITextView, RichTextViewComponent {
      */
     open func setup(
         with text: NSAttributedString,
-        format: RichTextDataFormat
+        format: RichTextDataFormat,
+        placeholder: String
     ) {
-        attributedString = .empty
+//        attributedString = .empty
         setupInitialFontSize()
-        attributedString = text
         allowsEditingTextAttributes = false
         autocapitalizationType = .sentences
         backgroundColor = .clear
@@ -174,8 +187,18 @@ open class RichTextView: UITextView, RichTextViewComponent {
         text.autosizeImageAttachments(maxSize: imageAttachmentMaxSize)
         richTextDataFormat = format
         spellCheckingType = .no
-        textColor = .label
+//        textColor = .label
         setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        
+        if !placeholder.isEmpty && text.richTextRange.length == 0 {
+            attributedString = placeholder.isEmpty ? .empty : NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16.0), NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        }
+        /// Add layout manager to manage custom underline styling
+        /// Includes tag background capsule style
+        richTextLayoutManager.textStorage = self.textStorage
+        richTextLayoutManager.addTextContainer(self.textContainer)
+        
+        self.textContainer.replaceLayoutManager(richTextLayoutManager)
     }
 
 
@@ -392,7 +415,7 @@ open class RichTextView: UITextView, RichTextViewComponent {
             addInteraction(imageDropInteraction)
         }
     }
-
+    
     #endif
 }
 

@@ -198,7 +198,18 @@ public class RichTextContext: ObservableObject {
      */
     @Published
     public var textAlignment: RichTextAlignment = .left
-
+    
+    /**
+     The current text indent, if any.
+     */
+    @Published
+    public var textIndent: RichTextIndent = .decrease
+    
+    /**
+     The last typed character, if any.
+     */
+    @Published
+    public var lastTypedCharacter: Character? = nil
 }
 
 public extension RichTextContext {

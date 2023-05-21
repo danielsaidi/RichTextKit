@@ -77,7 +77,8 @@ open class RichTextView: NSTextView, RichTextViewComponent {
      */
     open func setup(
         with text: NSAttributedString,
-        format: RichTextDataFormat
+        format: RichTextDataFormat,
+        placeholder: String
     ) {
         attributedString = .empty
         setupInitialFontSize()
@@ -89,6 +90,10 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         layoutManager?.defaultAttachmentScaling = NSImageScaling.scaleProportionallyDown
         textColor = .textColor
         setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        
+        if !placeholder.isEmpty && text.richTextRange.length == 0 {
+            attributedString = placeholder.isEmpty ? .empty : NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16.0), NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        }
     }
 
 
