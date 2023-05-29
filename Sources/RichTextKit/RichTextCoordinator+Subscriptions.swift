@@ -325,7 +325,9 @@ internal extension RichTextCoordinator {
     }
     
     func setIndent(_ indent: RichTextIndent, to newValue: Bool) {
-        if indent == textView.currentRichTextIndent { return }
+        print("indent: \(indent),  current: \(String(describing: textView.currentRichTextIndent))")
+//        if indent == textView.currentRichTextIndent ?? 0.0 { return }
+        print("Indenting")
         textView.setCurrentRichTextIndent(to: indent)
     }
 }

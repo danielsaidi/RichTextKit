@@ -23,17 +23,23 @@ import AppKit
  The protocol is implemented by `NSAttributedString` as well
  as other types in the library.
  */
-public protocol RichTextIndentReader: RichTextAttributeReader {
-    func richTextIndent(at index: Int) -> CGFloat
-}
+public protocol RichTextIndentReader: RichTextAttributeReader {}
 
 extension NSAttributedString: RichTextIndentReader {}
 
 public extension RichTextIndentReader {
 
-    func richTextIndent(at index: Int) -> CGFloat {
-        let range = NSRange(location: index, length: 0)
+    /**
+     Get the rich text indent at the provided range.
+
+     - Parameters:
+       - range: The range to get the indent from.
+     */
+    func richTextIndent(
+        at range: NSRange
+    ) -> CGFloat? {
         let attribute: NSMutableParagraphStyle? = richTextAttribute(.paragraphStyle, at: range)
-        return attribute?.headIndent ?? 0
+        guard let style = attribute else { return nil }
+        return style.headIndent
     }
 }

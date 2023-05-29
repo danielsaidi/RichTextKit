@@ -16,4 +16,8 @@ extension Character {
     var isNewLineSeparator: Bool {
         self == .newLine || self == .carriageReturn
     }
+    
+    var isNonBreakingSpace: Bool {
+        self == .nonBreakingSpace
+    }
 }

@@ -11,33 +11,31 @@ import SwiftUI
 /**
  This enum simplifies working with different text indents.
  */
-public enum RichTextIndent: CGFloat, CaseIterable, Codable, Equatable, Identifiable {
-    
+public enum RichTextIndent: CaseIterable, Codable, Equatable, Identifiable {
+
     /**
      Initialize a rich text indent with a native indent.
-     
+
      - Parameters:
-     - indent: The native indent to use.
+       - indent: The native indent to use.
      */
-    init(_ indent: CGFloat) {
-        self = indent >= 0 ? .increase : .decrease
-    }
+//    public init(_ indent: CGFloat) {
+//
+//    }
     
     /// Reduce indent space.
-    case decrease = -30.0
+    case decrease
     
     /// Increase indent space.
-    case increase = 30.0
+    case increase
 }
 
 public extension RichTextIndent {
-    
+
     /**
      The unique ID of the indent.
      */
-    var id: CGFloat { rawValue }
-    
-    
+    var id: UUID { UUID() }
     
     /**
      The standard icon to use for the indent.

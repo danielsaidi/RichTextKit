@@ -23,95 +23,170 @@ import AppKit
  This protocol is implemented by `NSMutableAttributedString`
  as well as other types in the library.
  */
-public protocol RichTextIndentWriter: RichTextAttributeWriter {
-    func setRichTextIndent(to indent: RichTextIndent, at range: NSRange)
-}
+public protocol RichTextIndentWriter: RichTextAttributeWriter {}
 
 extension NSMutableAttributedString: RichTextIndentWriter {}
 
 public extension RichTextIndentWriter {
 
+    /**
+     Set the rich text indent at the provided range.
+
+     Unlike some other attributes, the indent is not only
+     used by the provided range, but the entire paragraph. A
+     change must therefore be applied to an entire paragraph,
+     which makes the code a bit more complicated. The result
+     is highly a result of trial and error.
+
+     - Parameters:
+       - indent: The indent to set.
+       - range: The range for which to set the indent.
+     */
     func setRichTextIndent(
         to indent: RichTextIndent,
         at range: NSRange
-    ) {
-        let text = mutableRichText?.string ?? ""
+    ) -> RichTextAttributes? {
+        print("setRichTextIndent called: \(indent)")
+        let text = richText.string
 
         // Text view has selected text
         if range.length > 0 {
-            setRichTextIndent(indent, at: range)
+            return setRichTextIndent(indent, at: range)
         }
 
         // The cursor is at the beginning of the text
         if range.location == 0 {
-            let length = text.findLengthOfCurrentParagraph(from: UInt(range.location))
-            setRichTextIndent(indent, atIndex: 0, styleLength: length)
+            return setRichTextIndent(indent, atIndex: 0)
         }
 
         // The cursor is immediately after a newline
         if let char = text.character(at: range.location - 1), char.isNewLineSeparator {
-            setRichTextIndent(indent, atIndex: range.location, styleLength: 1)
+            return setRichTextIndentNL(indent, atIndex: range.location)
         }
 
         // The cursor is immediately before a newline
         if let char = text.character(at: range.location), char.isNewLineSeparator {
             let location = UInt(range.location)
-            let index = Int(text.findIndexOfCurrentParagraph(from: location))
-            let length = text.findLengthOfCurrentParagraph(from: location)
-            setRichTextIndent(indent, atIndex: index, styleLength: length)
+            let index = text.findIndexOfCurrentParagraph(from: location)
+            return setRichTextIndent(indent, atIndex: index)
         }
 
         // The cursor is somewhere within a paragraph
         let location = UInt(range.location)
-        let index = Int(text.findIndexOfCurrentParagraph(from: location))
-        let length = text.findLengthOfCurrentParagraph(from: location)
-        setRichTextIndent(indent, atIndex: index, styleLength: length)
+        let index = text.findIndexOfCurrentParagraph(from: location)
+        return setRichTextIndent(indent, atIndex: index)
     }
 }
 
 private extension RichTextIndentWriter {
 
+    /**
+     Set the rich text indent at the provided range.
+
+     - Parameters:
+       - indent: The indent to set.
+       - range: The range for which to set the indent.
+     */
     func setRichTextIndent(
         _ indent: RichTextIndent,
         at range: NSRange
-    ) {
-        let text = mutableRichText?.string ?? ""
+    ) -> RichTextAttributes? {
+        let text = richText.string
+        let length = range.length
         let location = range.location
         let ulocation = UInt(location)
-        let index = Int(text.findIndexOfCurrentParagraph(from: ulocation))
-        let length = text.findLengthOfCurrentParagraph(from: ulocation)
-        setRichTextIndent(indent, atIndex: index, styleLength: length)
+        var index = text.findIndexOfCurrentParagraph(from: ulocation)
+        return setRichTextIndent(indent, atIndex: index)
+//        repeat {
+//            let newIndex = text.findIndexOfNextParagraph(from: index)
+//            if newIndex > index && newIndex < (location + length) {
+//                setRichTextIndent(indent, atIndex: newIndex)
+//            } else {
+//                break
+//            }
+//            index = newIndex
+//        } while true
     }
 
+    /**
+     Set the rich text indent at the provided index.
+
+     - Parameters:
+       - indent: The indent to set.
+       - index: The text index for which to set the indent.
+     */
     func setRichTextIndent(
         _ indent: RichTextIndent,
-        atIndex index: Int,
-        styleLength length: Int
-    ) {
-        guard let text = mutableRichText else { return }
-        let range = NSRange(location: index, length: length)
+        atIndex index: Int
+    ) -> RichTextAttributes? {
+        guard let text = mutableRichText else { return nil }
+        let range = NSRange(location: index, length: 1)
         let safeRange = safeRange(for: range)
         var attributes = text.attributes(at: safeRange.location, effectiveRange: nil)
         let style = attributes[.paragraphStyle] as? NSMutableParagraphStyle ?? NSMutableParagraphStyle()
-
-        let indentAmount: CGFloat = 30.0
-        let maxIndent: CGFloat = 300.0
-
-        let currentIndent = style.headIndent
-        var newIndent: CGFloat
-        if indent == .decrease {
-            newIndent = max(currentIndent - indentAmount, 0)
-        } else {
-            newIndent = min(currentIndent + indentAmount, maxIndent)
-        }
-
-        style.firstLineHeadIndent = newIndent
-        style.headIndent = newIndent
-
+        
+        let indentation = max(indent == .decrease ? style.headIndent - 30.0 : style.headIndent + 30.0, 0)
+        style.firstLineHeadIndent = indentation
+        style.headIndent = indentation
+        
         attributes[.paragraphStyle] = style
         text.beginEditing()
         text.setAttributes(attributes, range: safeRange)
         text.fixAttributes(in: safeRange)
         text.endEditing()
+        
+        return attributes
+    }
+    
+    func setRichTextIndentNL(
+        _ indent: RichTextIndent,
+        atIndex index: Int
+    ) -> RichTextAttributes? {
+        guard let text = mutableRichText else { return nil }
+        let range = NSRange(location: index, length: 1)
+        var safeRange = safeRange(for: range)
+        let attributes = text.attributes(at: safeRange.location, effectiveRange: nil)
+        
+        // Create newAttributes as a copy of attributes
+        var newAttributes = attributes
+        // Merge attributes into newAttributes
+        newAttributes.merge(attributes) { (_, new) in new }
+        
+        if let style = attributes[.paragraphStyle] as? NSParagraphStyle {
+            let mutableStyle = style.mutableCopy() as! NSMutableParagraphStyle
+            let indentation = max(indent == .decrease ? mutableStyle.headIndent - 30.0 : mutableStyle.headIndent + 30.0, 0)
+            mutableStyle.firstLineHeadIndent = indentation
+            mutableStyle.headIndent = indentation
+            newAttributes[.paragraphStyle] = mutableStyle
+            
+            text.beginEditing()
+            if text.attributedSubstring(from: safeRange).length == 0 {
+                let nonBreakingSpace = NSAttributedString(string: "\u{00A0}", attributes: newAttributes)
+                let sRange = NSRange(location: index, length: 0)
+                text.replaceCharacters(in: sRange, with: nonBreakingSpace)
+            }
+            text.setAttributes(newAttributes, range: safeRange)
+            text.fixAttributes(in: safeRange)
+
+            text.endEditing()
+            
+            return newAttributes
+        }
+        return newAttributes
+    }
+
+    /**
+     Set the text indent at the provided `index`.
+
+     - Parameters:
+       - indent: The indent to set.
+       - index: The text index for which to set the indent.
+     */
+    func setRichTextIndent(
+        _ indent: RichTextIndent,
+        atIndex index: UInt
+    ) -> RichTextAttributes? {
+        let index = Int(index)
+        return setRichTextIndent(indent, atIndex: index)
     }
 }
