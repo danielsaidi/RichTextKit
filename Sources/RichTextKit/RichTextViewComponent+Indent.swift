@@ -40,7 +40,10 @@ public extension RichTextViewComponent {
     ) {
         if !hasTrimmedText {
             return setTextIndentAtCurrentPosition(to: indent)
+        } else if (richText.string.character(at: selectedRange.location - 1)!.isNewLineSeparator) {
+            return setTextIndentAtCurrentPosition(to: indent)
         }
+            
         typingAttributes = setRichTextIndent(to: indent, at: selectedRange) ?? typingAttributes
     }
 }
@@ -53,14 +56,16 @@ private extension RichTextViewComponent {
     func setTextIndentAtCurrentPosition(
         to indent: RichTextIndent
     ) {
-        let style = NSMutableParagraphStyle()
-        
-        let indentation = max(indent == .decrease ? style.headIndent - 30.0 : style.headIndent + 30.0, 0)
-        style.firstLineHeadIndent = indentation
-        style.headIndent = indentation
-        
-        var attributes = currentRichTextAttributes
-        attributes[.paragraphStyle] = style
-        typingAttributes = attributes
+        if let style = typingAttributes[.paragraphStyle] as? NSParagraphStyle {
+            let mutableStyle = style.mutableCopy() as! NSMutableParagraphStyle
+            
+            let indentation = max(indent == .decrease ? style.headIndent - 30.0 : style.headIndent + 30.0, 0)
+            mutableStyle.firstLineHeadIndent = indentation
+            mutableStyle.headIndent = indentation
+            
+            var attributes = currentRichTextAttributes
+            attributes[.paragraphStyle] = mutableStyle
+            typingAttributes = attributes
+        }
     }
 }
