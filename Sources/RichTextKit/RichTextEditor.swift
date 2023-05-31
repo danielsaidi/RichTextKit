@@ -34,7 +34,6 @@ public struct RichTextEditor: ViewRepresentable {
         text: Binding<NSAttributedString>,
         context: RichTextContext,
         format: RichTextDataFormat = .archivedData,
-        formatters: [RichTextFormatter] = [],
         viewConfiguration: @escaping ViewConfiguration = { _ in },
         resize: Bool = false,
         calculatedHeight: Binding<CGFloat> = .constant(0.0),
@@ -43,7 +42,6 @@ public struct RichTextEditor: ViewRepresentable {
         self.text = text
         self._richTextContext = ObservedObject(wrappedValue: context)
         self.format = format
-        self.formatters = formatters
         self.viewConfiguration = viewConfiguration
         self.resize = resize
         self._calculatedHeight = calculatedHeight
@@ -54,8 +52,6 @@ public struct RichTextEditor: ViewRepresentable {
 
 
     private var format: RichTextDataFormat
-    
-    private var formatters: [RichTextFormatter]
     
     private var text: Binding<NSAttributedString>
 
@@ -89,7 +85,6 @@ public struct RichTextEditor: ViewRepresentable {
             text: text,
             textView: textView,
             richTextContext: richTextContext,
-            formatters: formatters,
             resize: resize,
             calculatedHeight: $calculatedHeight,
             placeholder: placeholder
