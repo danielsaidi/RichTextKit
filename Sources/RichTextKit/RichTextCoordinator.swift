@@ -260,76 +260,6 @@ open class RichTextCoordinator: NSObject {
         }
     }
     
-    open func tagCheck(textView: UITextView, range: NSRange, char: Character, replacement: String) {
-        if (formatters.map { $0.trigger }.contains(char))  {
-            isTagging = true
-            guard let trigger = formatters.first(where: { $0.trigger == char }) else { return }
-            tagRange.location = range.location
-            tagRange.length = 1
-            let mText = NSMutableAttributedString(attributedString: text.wrappedValue)
-            mText.setAttributes([NSAttributedString.Key.kern: richTextContext.fontSize/3], range: mText.safeRange(for: NSRange(location: text.wrappedValue.length - 1, length: 1)))
-            textView.attributedText = mText
-            
-            tempContext = copyContext(from: richTextContext)
-            kerning = textView.typingAttributes[.kern] as? Double ?? 10.0
-            setTagStyle(trigger: trigger)
-            //            textView.typingAttributes[.underlineStyle] = NSUnderlineStyle.tagBasic.rawValue
-            //            textView.typingAttributes[.backgroundColor] = trigger.format.backgroundColor
-            //            textView.typingAttributes[.foregroundColor] = trigger.format.foregroundColor
-            //            richTextContext.backgroundColor = trigger.format.backgroundColor
-            //            richTextContext.foregroundColor = trigger.format.foregroundColor
-            //            richTextContext.isBold = trigger.format.isBold
-            //            richTextContext.isUnderlined = trigger.format.isUnderlined
-            //            richTextContext.isItalic = trigger.format.isItalic
-        } else if ((char.isNewLineSeparator || char.isWhitespace) && isTagging) {
-            //            let mText = NSMutableAttributedString(attributedString: text.wrappedValue)
-            //            mText.setAttributes([NSAttributedString.Key.link: "mention:\(mText.richText(at: linkRange))"], range: mText.safeRange(for: linkRange))
-            //            mText.setAttributes([NSAttributedString.Key.link: "mention:\(mText.richText(at: tagRange))"], range: tagRange)
-            //            mText.setAttributes([NSAttributedString.Key.kern: richTextContext.fontSize], range: mText.safeRange(for: NSRange(location: text.wrappedValue.length, length: 1)))
-            //            textView.attributedText = mText
-            
-            revertStyle()
-        } else if (isTagging) {
-            tagRange.length += 1
-        } else if (formatters.map { $0.trigger }.contains(replacement.first)) {
-            revertStyle()
-        } else if (textView.typingAttributes[.underlineStyle] as? Int == NSUnderlineStyle.tagBasic.rawValue) {
-            let wordIndex = textView.text.findIndexOfCurrentWord(from: UInt(range.location))
-            let word = textView.attributedText.string[Int(wordIndex)..<range.location]
-            
-            guard let trigger = formatters.first(where: { $0.trigger == word.first }) else { return }
-            isTagging = true
-            setTagStyle(trigger: trigger)
-        } else {
-            textView.typingAttributes[.kern] = kerning
-        }
-    }
-    
-    open func setTagStyle(trigger: RichTextFormatter) {
-        textView.typingAttributes[.underlineStyle] = NSUnderlineStyle.tagBasic.rawValue
-        textView.typingAttributes[.backgroundColor] = trigger.format.backgroundColor
-        textView.typingAttributes[.foregroundColor] = trigger.format.foregroundColor
-        richTextContext.backgroundColor = trigger.format.backgroundColor
-        richTextContext.foregroundColor = trigger.format.foregroundColor
-        richTextContext.isBold = trigger.format.isBold
-        richTextContext.isUnderlined = trigger.format.isUnderlined
-        richTextContext.isItalic = trigger.format.isItalic
-    }
-    
-    open func revertStyle() {
-        textView.typingAttributes[.underlineStyle] = 0x00
-        textView.typingAttributes[.backgroundColor] = tempContext.backgroundColor
-        textView.typingAttributes[.foregroundColor] = tempContext.foregroundColor
-        textView.typingAttributes[.kern] = richTextContext.fontSize/3
-        richTextContext.backgroundColor = tempContext.backgroundColor
-        richTextContext.foregroundColor = tempContext.foregroundColor
-        richTextContext.isBold = tempContext.isBold
-        richTextContext.isUnderlined = tempContext.isUnderlined
-        richTextContext.isItalic = tempContext.isItalic
-        
-        isTagging = false
-    }
-    
     open func copyContext(from context: RichTextContext) -> RichTextContext {
         let newContext = RichTextContext()
         
@@ -341,43 +271,6 @@ open class RichTextCoordinator: NSObject {
         
         return newContext
     }
-    
-    //    open func resolveTags(textView: UITextView) -> NSMutableAttributedString {
-    //
-    //        var offset = 0
-    //        let nsText = NSString(string: textView.text)
-    //
-    //        let words = nsText.components(separatedBy: CharacterSet(charactersIn: "#@ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_").inverted)
-    //
-    //        let attrString = NSMutableAttributedString()
-    //        attrString.setAttributedString(textView.attributedText)
-    //
-    //        for word in words {
-    //            if word.hasPrefix("#") {
-    //                let matchRange:NSRange = nsText.range(of: word, range: NSRange(location: offset, length: attrString.safeRange(for: attrString.richTextRange).length - offset))
-    //
-    //                let stringifiedWord = word.dropFirst()
-    //                if let firstChar = stringifiedWord.unicodeScalars.first, NSCharacterSet.decimalDigits.contains(firstChar) {
-    //
-    //                } else {
-    //                    attrString.addAttribute(NSAttributedString.Key.link, value: "hash:\(stringifiedWord)", range: matchRange)
-    //                }
-    //            }
-    //            if word.hasPrefix("@") {
-    //                let matchRange:NSRange = nsText.range(of: word, range: NSRange(location: offset, length: attrString.safeRange(for: attrString.richTextRange).length - offset))
-    //
-    //                let stringifiedWord = word.dropFirst()
-    //                if let firstChar = stringifiedWord.unicodeScalars.first, NSCharacterSet.decimalDigits.contains(firstChar) {
-    //                } else {
-    //                    attrString.addAttribute(NSAttributedString.Key.link, value: "mention:\(stringifiedWord)", range: matchRange)
-    //                }
-    //            }
-    //
-    //            offset += word.count + 1
-    //        }
-    //
-    //        return attrString
-    //    }
 }
 
 
