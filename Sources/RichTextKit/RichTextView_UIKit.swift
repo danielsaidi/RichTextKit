@@ -195,10 +195,6 @@ open class RichTextView: UITextView, RichTextViewComponent {
         if !placeholder.isEmpty && text.richTextRange.length == 0 {
             attributedString = placeholder.isEmpty ? .empty : NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16.0), NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         }
-        /// Add layout manager to manage custom underline styling
-        /// Includes tag background capsule style
-        richTextLayoutManager.textStorage = self.textStorage
-        richTextLayoutManager.addTextContainer(self.textContainer)
         
         self.textContainer.replaceLayoutManager(richTextLayoutManager)
     }
