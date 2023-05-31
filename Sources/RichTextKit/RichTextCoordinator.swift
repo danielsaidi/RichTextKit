@@ -38,7 +38,6 @@ open class RichTextCoordinator: NSObject {
         text: Binding<NSAttributedString>,
         textView: RichTextView,
         richTextContext: RichTextContext,
-        formatters: [RichTextFormatter],
         resize: Bool,
         calculatedHeight: Binding<CGFloat>,
         placeholder: String
@@ -47,7 +46,6 @@ open class RichTextCoordinator: NSObject {
         self.text = text
         self.textView = textView
         self.richTextContext = richTextContext
-        self.formatters = formatters
         self.resize = resize
         self.calculatedHeight = calculatedHeight
         self.placeholder = placeholder
@@ -73,11 +71,6 @@ open class RichTextCoordinator: NSObject {
      The text view for which the coordinator is used.
      */
     public private(set) var textView: RichTextView
-    
-    /**
-     .
-     */
-    public var formatters: [RichTextFormatter]
     
     /**
      
