@@ -30,14 +30,15 @@ public extension RichTextStyleWriter {
      - Parameters:
        - style: The style to set.
        - newValue: The new value to set the attribute to.
-       - range: The range for which to set the attribute.
+       - range: The range to affect, by default the entire text.
      */
     func setRichTextStyle(
         _ style: RichTextStyle,
         to newValue: Bool,
-        at range: NSRange
+        at range: NSRange? = nil
     ) {
-        let range = safeRange(for: range)
+        let rangeValue = range ?? richTextRange
+        let range = safeRange(for: rangeValue)
         let attributeValue = newValue ? 1 : 0
         if style == .underlined { return setRichTextAttribute(.underlineStyle, to: attributeValue, at: range) }
         guard let font = font(at: range) else { return }
