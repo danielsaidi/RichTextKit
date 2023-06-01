@@ -11,6 +11,7 @@ Until then, deprecated features may be removed in the next minor version.
 ### ✨ Features
 
 * `NSTextAttachment` has a new `attachedImage` property.
+* `RichTextKeyboardToolbar` now supports modofying the format sheet before presenting it.
 * `RichTextAttributeWriter` now supports affecting the entire text by default.
 * `RichTextColorWriter` now supports affecting the entire text by default.
 * `RichTextContext` has new `resetAttributedString()` and `setAttributedString()` functions.

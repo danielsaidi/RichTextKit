@@ -35,7 +35,7 @@ import SwiftUI
  this custom toolbar instead, which by default will show and
  hide itself as you begin and end editing the text.
  */
-public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: View>: View {
+public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: View, FormatSheet: View>: View {
 
     /**
      Create a rich text keyboard toolbar.
@@ -47,14 +47,16 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
        - trailingActions: The trailing actions, by default `.dismissKeyboard`.
        - leadingButtons: The leading buttons to place after the leading actions.
        - trailingButtons: The trailing buttons to place after the trailing actions.
+       - richTextFormatSheet: The rich text format sheet to use, given the default ``RichTextFormatSheet``.
      */
     public init(
         context: RichTextContext,
+        style: RichTextKeyboardToolbarStyle = .standard,
         leadingActions: [RichTextAction] = [.undo, .redo, .copy],
         trailingActions: [RichTextAction] = [.dismissKeyboard],
-        style: RichTextKeyboardToolbarStyle = .standard,
         @ViewBuilder leadingButtons: @escaping () -> LeadingButtons,
-        @ViewBuilder trailingButtons: @escaping () -> TrailingButtons
+        @ViewBuilder trailingButtons: @escaping () -> TrailingButtons,
+        @ViewBuilder richTextFormatSheet: @escaping (RichTextFormatSheet) -> FormatSheet
     ) {
         self._context = ObservedObject(wrappedValue: context)
         self.leadingActions = leadingActions
@@ -62,6 +64,38 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
         self.style = style
         self.leadingButtons = leadingButtons
         self.trailingButtons = trailingButtons
+        self.richTextFormatSheet = richTextFormatSheet
+    }
+
+    /**
+     Create a rich text keyboard toolbar.
+
+     - Parameters:
+       - context: The context to affect.
+       - style: The toolbar style to apply, by default ``RichTextKeyboardToolbarStyle/standard``.
+       - leadingActions: The leading actions, by default `.undo`, `.redo` and `.copy`.
+       - trailingActions: The trailing actions, by default `.dismissKeyboard`.
+       - leadingButtons: The leading buttons to place after the leading actions.
+       - trailingButtons: The trailing buttons to place after the trailing actions.
+       - richTextFormatSheet: The rich text format sheet to use, given the default ``RichTextFormatSheet``.
+     */
+    public init(
+        context: RichTextContext,
+        style: RichTextKeyboardToolbarStyle = .standard,
+        leadingActions: [RichTextAction] = [.undo, .redo, .copy],
+        trailingActions: [RichTextAction] = [.dismissKeyboard],
+        @ViewBuilder leadingButtons: @escaping () -> LeadingButtons,
+        @ViewBuilder trailingButtons: @escaping () -> TrailingButtons
+    ) where FormatSheet == RichTextFormatSheet {
+        self.init(
+            context: context,
+            style: style,
+            leadingActions: leadingActions,
+            trailingActions: trailingActions,
+            leadingButtons: leadingButtons,
+            trailingButtons: trailingButtons,
+            richTextFormatSheet: { $0 }
+        )
     }
 
     private let leadingActions: [RichTextAction]
@@ -70,12 +104,13 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
 
     private let leadingButtons: () -> LeadingButtons
     private let trailingButtons: () -> TrailingButtons
+    private let richTextFormatSheet: (RichTextFormatSheet) -> FormatSheet
 
     @ObservedObject
     private var context: RichTextContext
 
     @State
-    private var isSheetPresented = false
+    private var isFormatSheetPresented = false
 
     @Environment(\.horizontalSizeClass)
     private var horizontalSizeClass
@@ -101,8 +136,8 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
         .opacity(context.isEditingText ? 1 : 0)
         .offset(y: context.isEditingText ? 0 : style.toolbarHeight)
         .frame(height: context.isEditingText ? nil : 0)
-        .sheet(isPresented: $isSheetPresented) {
-            RichTextFormatSheet(context: context)
+        .sheet(isPresented: $isFormatSheetPresented) {
+            richTextFormatSheet(RichTextFormatSheet(context: context))
         }
     }
 }
@@ -220,7 +255,7 @@ public extension RichTextKeyboardToolbarStyle {
 private extension RichTextKeyboardToolbar {
 
     func presentFormatSheet() {
-        isSheetPresented = true
+        isFormatSheetPresented = true
     }
 }
 
