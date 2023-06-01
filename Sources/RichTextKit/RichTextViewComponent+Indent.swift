@@ -38,13 +38,11 @@ public extension RichTextViewComponent {
     func setCurrentRichTextIndent(
         to indent: RichTextIndent
     ) {
-        if !hasTrimmedText {
-            return setTextIndentAtCurrentPosition(to: indent)
-        } else if (richText.string.character(at: selectedRange.location - 1)!.isNewLineSeparator) {
-            return setTextIndentAtCurrentPosition(to: indent)
-        }
-            
-        typingAttributes = setRichTextIndent(to: indent, at: selectedRange) ?? typingAttributes
+         if !hasTrimmedText { return setTextIndentAtCurrentPosition(to: indent) }
+         let previousCharacter = richText.string.character(at: selectedRange.location - 1)
+         let isNewLine = previousCharacter?.isNewLineSeparator ?? false
+         if isNewLine { return setTextIndentAtCurrentPosition(to: indent) }
+         typingAttributes = setRichTextIndent(to: indent, at: selectedRange) ?? typingAttributes
     }
 }
 

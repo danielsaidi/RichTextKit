@@ -46,7 +46,6 @@ public extension RichTextIndentWriter {
         to indent: RichTextIndent,
         at range: NSRange
     ) -> RichTextAttributes? {
-        print("setRichTextIndent called: \(indent)")
         let text = richText.string
 
         // Text view has selected text
@@ -87,10 +86,10 @@ private extension RichTextIndentWriter {
         at range: NSRange
     ) -> RichTextAttributes? {
         let text = richText.string
-        let length = range.length
+        _ = range.length
         let location = range.location
         let ulocation = UInt(location)
-        var index = text.findIndexOfCurrentParagraph(from: ulocation)
+        let index = text.findIndexOfCurrentParagraph(from: ulocation)
         return setRichTextIndent(indent, atIndex: index)
     }
 

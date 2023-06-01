@@ -206,7 +206,7 @@ private extension RichTextCoordinator {
         richTextContext.$shouldDecreaseIndent
             .sink(
                 receiveCompletion: { _ in },
-                receiveValue: { [weak self] in self?.setIndent(.decrease, to: $0)})
+                receiveValue: { [weak self] in self?.setIndent(.decrease, if: $0)})
             .store(in: &cancellables)
     }
     
@@ -214,7 +214,7 @@ private extension RichTextCoordinator {
         richTextContext.$shouldIncreaseIndent
             .sink(
                 receiveCompletion: { _ in },
-                receiveValue: { [weak self] in self?.setIndent(.increase, to: $0)})
+                receiveValue: { [weak self] in self?.setIndent(.increase, if: $0)})
             .store(in: &cancellables)
     }
 }
@@ -269,7 +269,6 @@ internal extension RichTextCoordinator {
         textView.setRichText(newValue)
     }
 
-
     func setBackgroundColor(to newValue: ColorRepresentable?) {
         if newValue == textView.currentBackgroundColor { return }
         guard let color = newValue else { return }
@@ -312,6 +311,11 @@ internal extension RichTextCoordinator {
         textView.highlightingStyle = style
     }
 
+    func setIndent(_ indent: RichTextIndent, if shouldSet: Bool) {
+        guard shouldSet else { return }
+        textView.setCurrentRichTextIndent(to: indent)
+    }
+
     func setIsEditing(to newValue: Bool) {
         if newValue == textView.isFirstResponder { return }
         if newValue {
@@ -340,10 +344,6 @@ internal extension RichTextCoordinator {
         guard shouldUndo else { return }
         textView.undoLatestChange()
         syncContextWithTextView()
-    }
-    
-    func setIndent(_ indent: RichTextIndent, to newValue: Bool) {
-        textView.setCurrentRichTextIndent(to: indent)
     }
 }
 
