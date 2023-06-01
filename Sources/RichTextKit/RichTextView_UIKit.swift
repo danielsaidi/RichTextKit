@@ -392,7 +392,7 @@ open class RichTextView: UITextView, RichTextViewComponent {
             addInteraction(imageDropInteraction)
         }
     }
-    
+
     #endif
 }
 

@@ -13,26 +13,26 @@ import SwiftUI
 /**
  This coordinator is used to keep a ``RichTextView`` in sync
  with a ``RichTextContext``.
- 
+
  The coordinator sets itself as the text view's delegate and
  updates the context when things change in the text view. It
  also subscribes to context observable changes and keeps the
  text view in sync with these changes.
- 
+
  You can inherit this class to customize the coordinator for
  your own use cases.
  */
 open class RichTextCoordinator: NSObject {
-    
+
     // MARK: - Initialization
-    
+
     /**
      Create a rich text coordinator.
-     
+
      - Parameters:
-     - text: The rich text to edit.
-     - textView: The rich text view to keep in sync.
-     - richTextContext: The context to keep in sync.
+      - text: The rich text to edit.
+      - textView: The rich text view to keep in sync.
+      - richTextContext: The context to keep in sync.
      */
     public init(
         text: Binding<NSAttributedString>,
@@ -47,95 +47,93 @@ open class RichTextCoordinator: NSObject {
         self.textView.delegate = self
         subscribeToContextChanges()
     }
-    
-    
+
+
     // MARK: - Properties
-    
+
     /**
      The rich text context for which the coordinator is used.
      */
     public let richTextContext: RichTextContext
-    
+
     /**
      The rich text to edit.
      */
     public var text: Binding<NSAttributedString>
-    
+
     /**
      The text view for which the coordinator is used.
      */
     public private(set) var textView: RichTextView
 
-    
     /**
      This set is used to store context observations.
      */
     public var cancellables = Set<AnyCancellable>()
-    
+
     /**
      This test flag is used to avoid delaying context sync.
      */
     internal var shouldDelaySyncContextWithTextView = true
-    
-    
+
+
     // MARK: - Internal Properties
-    
+
     /**
      The background color that was used before the currently
      highlighted range was set.
      */
     internal var highlightedRangeOriginalBackgroundColor: ColorRepresentable?
-    
+
     /**
      The foreground color that was used before the currently
      highlighted range was set.
      */
     internal var highlightedRangeOriginalForegroundColor: ColorRepresentable?
-    
-    
-#if canImport(UIKit)
-    
+
+
+    #if canImport(UIKit)
+
     // MARK: - UITextViewDelegate
-    
+
     open func textViewDidBeginEditing(_ textView: UITextView) {
         richTextContext.isEditingText = true
     }
-    
+
     open func textViewDidChange(_ textView: UITextView) {
         syncWithTextView()
     }
-    
+
     open func textViewDidChangeSelection(_ textView: UITextView) {
         syncWithTextView()
     }
-    
+
     open func textViewDidEndEditing(_ textView: UITextView) {
         richTextContext.isEditingText = false
     }
+    #endif
     
-#endif
     
-    
-#if canImport(AppKit)
+    #if canImport(AppKit)
     
     // MARK: - NSTextViewDelegate
-    
+
     open func textDidBeginEditing(_ notification: Notification) {
         richTextContext.isEditingText = true
     }
-    
+
     open func textDidChange(_ notification: Notification) {
         syncWithTextView()
     }
-    
+
     open func textViewDidChangeSelection(_ notification: Notification) {
         syncWithTextView()
     }
-    
+
     open func textDidEndEditing(_ notification: Notification) {
         richTextContext.isEditingText = false
     }
-#endif
+    #endif
 }
 
 
@@ -174,7 +172,7 @@ public extension RichTextCoordinator {
 // MARK: - Internal Extensions
 
 extension RichTextCoordinator {
-    
+
     /**
      Sync state from the text view's current state.
      */
@@ -182,7 +180,7 @@ extension RichTextCoordinator {
         syncContextWithTextView()
         syncTextWithTextView()
     }
-    
+
     /**
      Sync the rich text context with the text view.
      */
@@ -195,7 +193,7 @@ extension RichTextCoordinator {
             syncContextWithTextViewAfterDelay()
         }
     }
-    
+
     /**
      Sync the rich text context with the text view after the
      dispatch queue delay above. The delay will silence some
@@ -203,77 +201,77 @@ extension RichTextCoordinator {
      */
     func syncContextWithTextViewAfterDelay() {
         let styles = textView.currentRichTextStyles
-        
+
         let range = textView.selectedRange
         if richTextContext.selectedRange != range {
             richTextContext.selectedRange = range
         }
-        
+
         let background = textView.currentBackgroundColor
         if richTextContext.backgroundColor != background {
             richTextContext.backgroundColor = background
         }
-        
+
         let hasRange = textView.hasSelectedRange
         if richTextContext.canCopy != hasRange {
             richTextContext.canCopy = hasRange
         }
-        
+
         let canRedo = textView.undoManager?.canRedo ?? false
         if richTextContext.canRedoLatestChange != canRedo {
             richTextContext.canRedoLatestChange = canRedo
         }
-        
+
         let canUndo = textView.undoManager?.canUndo ?? false
         if richTextContext.canUndoLatestChange != canUndo {
             richTextContext.canUndoLatestChange = canUndo
         }
-        
+
         let fontName = textView.currentFontName ?? ""
         if richTextContext.fontName != fontName {
             richTextContext.fontName = fontName
         }
-        
+
         let fontSize = textView.currentFontSize ?? .standardRichTextFontSize
         if richTextContext.fontSize != fontSize {
             richTextContext.fontSize = fontSize
         }
-        
+
         let foreground = textView.currentForegroundColor
         if richTextContext.foregroundColor != foreground {
             richTextContext.foregroundColor = foreground
         }
-        
+
         let isBold = styles.hasStyle(.bold)
         if richTextContext.isBold != isBold {
             richTextContext.isBold = isBold
         }
-        
+
         let isItalic = styles.hasStyle(.italic)
         if richTextContext.isItalic != isItalic {
             richTextContext.isItalic = isItalic
         }
-        
+
         let isStrikethrough = styles.hasStyle(.strikethrough)
         if richTextContext.isStrikethrough != isStrikethrough {
             richTextContext.isStrikethrough = isStrikethrough
         }
-        
+
         let isUnderlined = styles.hasStyle(.underlined)
         if richTextContext.isUnderlined != isUnderlined {
             richTextContext.isUnderlined = isUnderlined
         }
-        
+
         let isEditingText = textView.isFirstResponder
         if richTextContext.isEditingText != isEditingText {
             richTextContext.isEditingText = isEditingText
         }
-        
+
         let textAlignment = textView.currentRichTextAlignment ?? .left
         if richTextContext.textAlignment != textAlignment {
             richTextContext.textAlignment = textAlignment
         }
-        
+
         let textIndent = RichTextIndent.increase
         if richTextContext.textIndent != textIndent {
             richTextContext.textIndent = textIndent
@@ -281,7 +279,7 @@ extension RichTextCoordinator {
         
         updateTextViewAttributesIfNeeded()
     }
-    
+
     /**
      Sync the text binding with the text view.
      */
@@ -290,15 +288,15 @@ extension RichTextCoordinator {
             self.text.wrappedValue = self.textView.attributedString
         }
     }
-    
+
     /**
      On macOS, we have to update the font and colors when we
      move the text input cursor and there's no selected text.
-     
+
      The code looks very strange, but setting current values
      to the current values will reset the text view in a way
      that is otherwise not done correctly.
-     
+
      To try out the incorrect behavior, comment out the code
      below, then change font size, colors etc. for a part of
      the text then move the input cursor around. When you do,
@@ -306,11 +304,11 @@ extension RichTextCoordinator {
      type, the last selected font, colors etc. will be used.
      */
     func updateTextViewAttributesIfNeeded() {
-#if os(macOS)
+        #if os(macOS)
         if textView.hasSelectedRange { return }
         let attributes = textView.currentRichTextAttributes
         textView.setCurrentRichTextAttributes(attributes)
-#endif
+        #endif
     }
 }
 #endif

@@ -179,8 +179,7 @@ public extension RichTextViewComponent {
      */
     func setup(
         with data: Data,
-        format: RichTextDataFormat,
-        placeholder: String
+        format: RichTextDataFormat
     ) throws {
         let string = try NSAttributedString(data: data, format: format)
         setup(with: string, format: format)

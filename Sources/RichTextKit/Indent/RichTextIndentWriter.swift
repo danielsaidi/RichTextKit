@@ -59,12 +59,6 @@ public extension RichTextIndentWriter {
             return setRichTextIndent(indent, atIndex: 0)
         }
 
-        // This case should be caught before entering this func now
-        // The cursor is immediately after a newline
-//        if let char = text.character(at: range.location - 1), char.isNewLineSeparator {
-//            return setRichTextIndentNL(indent, atIndex: range.location)
-//        }
-
         // The cursor is immediately before a newline
         if let char = text.character(at: range.location), char.isNewLineSeparator {
             let location = UInt(range.location)
