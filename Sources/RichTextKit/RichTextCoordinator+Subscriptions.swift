@@ -33,6 +33,7 @@ extension RichTextCoordinator {
         subscribeToShouldPasteImages()
         subscribeToShouldPasteText()
         subscribeToShouldRedoLatestChange()
+        subscribeToShouldSetAttributedString()
         subscribeToShouldUndoLatestChange()
     }
 }
@@ -183,6 +184,14 @@ private extension RichTextCoordinator {
             .store(in: &cancellables)
     }
 
+    func subscribeToShouldSetAttributedString() {
+        richTextContext.$shouldSetAttributedString
+            .sink(
+                receiveCompletion: { _ in },
+                receiveValue: { [weak self] in self?.setAttributedString(to: $0) })
+            .store(in: &cancellables)
+    }
+
     func subscribeToShouldUndoLatestChange() {
         richTextContext.$shouldUndoLatestChange
             .sink(
@@ -236,6 +245,12 @@ internal extension RichTextCoordinator {
         if newValue == textView.currentRichTextAlignment { return }
         textView.setCurrentRichTextAlignment(to: newValue)
     }
+
+    func setAttributedString(to newValue: NSAttributedString?) {
+        guard let newValue else { return }
+        textView.setRichText(newValue)
+    }
+
 
     func setBackgroundColor(to newValue: ColorRepresentable?) {
         if newValue == textView.currentBackgroundColor { return }

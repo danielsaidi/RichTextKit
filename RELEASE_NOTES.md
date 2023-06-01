@@ -13,6 +13,7 @@ Until then, deprecated features may be removed in the next minor version.
 * `NSTextAttachment` has a new `attachedImage` property.
 * `RichTextAttributeWriter` now supports affecting the entire text by default.
 * `RichTextColorWriter` now supports affecting the entire text by default.
+* `RichTextContext` has new `resetAttributedString()` and `setAttributedString()` functions.
 * `RichTextFontWriter` now supports affecting the entire text by default.
 * `RichTextStyleWriter` now supports affecting the entire text by default.
 
