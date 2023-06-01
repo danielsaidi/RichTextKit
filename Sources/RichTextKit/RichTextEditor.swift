@@ -34,18 +34,12 @@ public struct RichTextEditor: ViewRepresentable {
         text: Binding<NSAttributedString>,
         context: RichTextContext,
         format: RichTextDataFormat = .archivedData,
-        viewConfiguration: @escaping ViewConfiguration = { _ in },
-        resize: Bool = false,
-        calculatedHeight: Binding<CGFloat> = .constant(0.0),
-        placeholder: String = ""
+        viewConfiguration: @escaping ViewConfiguration = { _ in }
     ) {
         self.text = text
         self._richTextContext = ObservedObject(wrappedValue: context)
         self.format = format
         self.viewConfiguration = viewConfiguration
-        self.resize = resize
-        self._calculatedHeight = calculatedHeight
-        self.placeholder = placeholder
     }
 
     public typealias ViewConfiguration = (RichTextViewComponent) -> Void
@@ -59,12 +53,6 @@ public struct RichTextEditor: ViewRepresentable {
     private var richTextContext: RichTextContext
 
     private var viewConfiguration: ViewConfiguration
-    
-    private var resize: Bool
-    
-    @Binding private var calculatedHeight: CGFloat
-    
-    private var placeholder: String
 
 
     #if os(iOS) || os(tvOS)
@@ -84,36 +72,20 @@ public struct RichTextEditor: ViewRepresentable {
         RichTextCoordinator(
             text: text,
             textView: textView,
-            richTextContext: richTextContext,
-            resize: resize,
-            calculatedHeight: $calculatedHeight,
-            placeholder: placeholder
+            richTextContext: richTextContext
         )
     }
 
 
     #if os(iOS) || os(tvOS)
     public func makeUIView(context: Context) -> some UIView {
-        textView.setup(with: text.wrappedValue, format: format, placeholder: placeholder)
+        textView.setup(with: text.wrappedValue, format: format)
         viewConfiguration(textView)
         return textView
     }
 
-    public func updateUIView(_ view: UIViewType, context: Context) {
-        if resize {
-            recalculateHeight(view: view, result: $calculatedHeight)
-        }
-    }
+    public func updateUIView(_ view: UIViewType, context: Context) {}
     #endif
-    
-    public func recalculateHeight(view: UIView, result: Binding<CGFloat>) {
-        let newSize = view.sizeThatFits(CGSize(width: view.frame.size.width, height: CGFloat.greatestFiniteMagnitude))
-        if result.wrappedValue != newSize.height {
-            DispatchQueue.main.async {
-                result.wrappedValue = newSize.height // !! must be called asynchronously
-            }
-        }
-    }
 
     #if os(macOS)
     public func makeNSView(context: Context) -> some NSView {

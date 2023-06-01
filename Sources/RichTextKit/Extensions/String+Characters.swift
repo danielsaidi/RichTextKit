@@ -19,11 +19,6 @@ public extension String.Element {
      Get the string element for a `\n` newline.
      */
     static var newLine: String.Element { "\n" }
-    
-    /**
-     Get the string element for a `\u{00A0}` non-breaking space.
-     */
-    static var nonBreakingSpace: String.Element { "\u{00A0}" }
 
     /**
      Get the string element for a `\t` tab.

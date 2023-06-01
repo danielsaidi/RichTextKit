@@ -204,12 +204,6 @@ public class RichTextContext: ObservableObject {
      */
     @Published
     public var textIndent: RichTextIndent = .decrease
-    
-    /**
-     The last typed character, if any.
-     */
-    @Published
-    public var lastTypedCharacter: Character? = nil
 }
 
 public extension RichTextContext {

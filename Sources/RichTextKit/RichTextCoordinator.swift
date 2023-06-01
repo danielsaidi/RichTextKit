@@ -38,17 +38,11 @@ open class RichTextCoordinator: NSObject {
         text: Binding<NSAttributedString>,
         textView: RichTextView,
         richTextContext: RichTextContext,
-        resize: Bool,
-        calculatedHeight: Binding<CGFloat>,
-        placeholder: String
     ) {
         textView.attributedString = text.wrappedValue
         self.text = text
         self.textView = textView
         self.richTextContext = richTextContext
-        self.resize = resize
-        self.calculatedHeight = calculatedHeight
-        self.placeholder = placeholder
         super.init()
         self.textView.delegate = self
         subscribeToContextChanges()
@@ -71,21 +65,7 @@ open class RichTextCoordinator: NSObject {
      The text view for which the coordinator is used.
      */
     public private(set) var textView: RichTextView
-    
-    /**
-     
-     */
-    public var resize: Bool
-    
-    /**
-     
-     */
-    public var calculatedHeight: Binding<CGFloat>
-    
-    /**
-     
-     */
-    public var placeholder: String
+
     
     /**
      This set is used to store context observations.
@@ -96,12 +76,6 @@ open class RichTextCoordinator: NSObject {
      This test flag is used to avoid delaying context sync.
      */
     internal var shouldDelaySyncContextWithTextView = true
-    
-    internal var isTagging = false
-    
-    internal var tempContext = RichTextContext()
-    internal var tagRange = NSRange()
-    internal var kerning = 0.0
     
     
     // MARK: - Internal Properties
@@ -125,18 +99,9 @@ open class RichTextCoordinator: NSObject {
     
     open func textViewDidBeginEditing(_ textView: UITextView) {
         richTextContext.isEditingText = true
-        
-        if textView.text == placeholder {
-            textView.text = nil
-            textView.textColor = UIColor.black
-        }
     }
     
     open func textViewDidChange(_ textView: UITextView) {
-        //        textView.attributedText = self.resolveTags(textView: textView)
-        if resize {
-            recalculateHeight(view: textView, result: calculatedHeight)
-        }
         syncWithTextView()
     }
     
@@ -146,68 +111,6 @@ open class RichTextCoordinator: NSObject {
     
     open func textViewDidEndEditing(_ textView: UITextView) {
         richTextContext.isEditingText = false
-        
-        if textView.text.isEmpty {
-            textView.text = placeholder
-            textView.textColor = UIColor.lightGray
-        }
-    }
-    
-    ///
-    ///
-    
-    open func textView(
-        _ textView: UITextView,
-        shouldChangeTextIn range: NSRange,
-        replacementText text: String
-    ) -> Bool {
-        guard let char = text.character(at: 0) else { return true }
-        richTextContext.lastTypedCharacter = char
-        //        tagCheck(textView: textView, range: range, char: char, replacement: text)
-        if char.isNewLineSeparator {
-            // Get the current attributes of the previous character.
-            var attributes: [NSAttributedString.Key: Any]
-            if textView.text.isEmpty || range.location == 0 {
-                attributes = textView.typingAttributes
-            } else {
-                let previousCharacterRange = NSRange(location: range.location - 1, length: 1)
-                attributes = textView.textStorage.attributes(at: previousCharacterRange.location, effectiveRange: nil)
-            }
-            
-            // Copy the current paragraph style and create a new one with the same properties.
-            if let currentParagraphStyle = attributes[.paragraphStyle] as? NSParagraphStyle {
-                let newParagraphStyle = NSMutableParagraphStyle()
-                newParagraphStyle.setParagraphStyle(currentParagraphStyle)
-                attributes[.paragraphStyle] = newParagraphStyle
-            }
-            
-            // Manually insert newline character and set the new paragraph's attributes.
-            let original = NSMutableAttributedString(attributedString: textView.attributedText)
-            let line = NSMutableAttributedString(string: String(char))
-            
-            line.addAttributes(attributes, range: NSMakeRange(0, line.string.count))
-            original.append(line)
-            textView.attributedText = original
-            
-            // Update the cursor's position.
-            let newPosition = textView.position(from: textView.beginningOfDocument, offset: range.location + 1)!
-            textView.selectedTextRange = textView.textRange(from: newPosition, to: newPosition)
-            
-            return false  // We've manually inserted the newline character and set its attributes, so we return false to prevent the text view from doing it again.
-        }
-        if char.isNonBreakingSpace {
-            print("Non-Breaking")
-            return false
-        }
-        return true
-    }
-    
-    func textView(
-        _ textView: UITextView,
-        shouldInteractWithURL URL: NSURL,
-        inRange characterRange: NSRange
-    ) -> Bool {
-        return true
     }
     
 #endif
@@ -219,11 +122,6 @@ open class RichTextCoordinator: NSObject {
     
     open func textDidBeginEditing(_ notification: Notification) {
         richTextContext.isEditingText = true
-        
-        if textView.text == placeholder {
-            textView.text = nil
-            textView.textColor = UIColor.black
-        }
     }
     
     open func textDidChange(_ notification: Notification) {
@@ -236,34 +134,8 @@ open class RichTextCoordinator: NSObject {
     
     open func textDidEndEditing(_ notification: Notification) {
         richTextContext.isEditingText = false
-        
-        if textView.text.isEmpty {
-            textView.text = placeholder
-            textView.textColor = UIColor.lightGray
-        }
     }
 #endif
-    
-    public func recalculateHeight(view: UIView, result: Binding<CGFloat>) {
-        let newSize = view.sizeThatFits(CGSize(width: view.frame.size.width, height: CGFloat.greatestFiniteMagnitude))
-        if result.wrappedValue != newSize.height {
-            DispatchQueue.main.async {
-                result.wrappedValue = newSize.height // !! must be called asynchronously
-            }
-        }
-    }
-    
-    open func copyContext(from context: RichTextContext) -> RichTextContext {
-        let newContext = RichTextContext()
-        
-        newContext.foregroundColor = context.foregroundColor
-        newContext.backgroundColor = context.backgroundColor
-        newContext.isBold = context.isBold
-        newContext.isItalic = context.isItalic
-        newContext.isUnderlined = context.isUnderlined
-        
-        return newContext
-    }
 }
 
 

@@ -26,8 +26,6 @@ public extension View {
         case .decrementFontSize: keyboardShortcut("-", modifiers: .command)
         case .redoLatestChange: keyboardShortcut("z", modifiers: [.command, .shift])
         case .undoLatestChange: keyboardShortcut("z", modifiers: .command)
-        case .decreaseIndent: keyboardShortcut(.tab, modifiers: [.command, .shift])
-        case .increaseIndent: keyboardShortcut(.tab, modifiers: .command)
         }
         #else
         self

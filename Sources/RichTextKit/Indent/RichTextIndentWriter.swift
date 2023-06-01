@@ -98,15 +98,6 @@ private extension RichTextIndentWriter {
         let ulocation = UInt(location)
         var index = text.findIndexOfCurrentParagraph(from: ulocation)
         return setRichTextIndent(indent, atIndex: index)
-//        repeat {
-//            let newIndex = text.findIndexOfNextParagraph(from: index)
-//            if newIndex > index && newIndex < (location + length) {
-//                setRichTextIndent(indent, atIndex: newIndex)
-//            } else {
-//                break
-//            }
-//            index = newIndex
-//        } while true
     }
 
     /**
@@ -138,43 +129,6 @@ private extension RichTextIndentWriter {
         
         return attributes
     }
-//
-//    func setRichTextIndentNL(
-//        _ indent: RichTextIndent,
-//        atIndex index: Int
-//    ) -> RichTextAttributes? {
-//        guard let text = mutableRichText else { return nil }
-//        let range = NSRange(location: index, length: 1)
-//        var safeRange = safeRange(for: range)
-//        let attributes = text.attributes(at: safeRange.location, effectiveRange: nil)
-//
-//        // Create newAttributes as a copy of attributes
-//        var newAttributes = attributes
-//        // Merge attributes into newAttributes
-//        newAttributes.merge(attributes) { (_, new) in new }
-//
-//        if let style = attributes[.paragraphStyle] as? NSParagraphStyle {
-//            let mutableStyle = style.mutableCopy() as! NSMutableParagraphStyle
-//            let indentation = max(indent == .decrease ? mutableStyle.headIndent - 30.0 : mutableStyle.headIndent + 30.0, 0)
-//            mutableStyle.firstLineHeadIndent = indentation
-//            mutableStyle.headIndent = indentation
-//            newAttributes[.paragraphStyle] = mutableStyle
-//
-//            text.beginEditing()
-//            if text.attributedSubstring(from: safeRange).length == 0 {
-//                let nonBreakingSpace = NSAttributedString(string: "\u{00A0}", attributes: newAttributes)
-//                let sRange = NSRange(location: index, length: 0)
-//                text.replaceCharacters(in: sRange, with: nonBreakingSpace)
-//            }
-//            text.setAttributes(newAttributes, range: safeRange)
-//            text.fixAttributes(in: safeRange)
-//
-//            text.endEditing()
-//
-//            return newAttributes
-//        }
-//        return newAttributes
-//    }
 
     /**
      Set the text indent at the provided `index`.

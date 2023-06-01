@@ -85,10 +85,10 @@ public extension String {
     }
     
     /**
-     Returns the length of the paragraph found at the location provided..
+     Returns the index of the word at the location provided..
      
-     A new paragraph is considered to start at the character
-     after the newline char, not the newline itself.
+     A word is considered to be a length of text between two
+     breaking characters or space characters.
      */
     func findIndexOfCurrentWord(from location: UInt) -> UInt {
         if isEmpty { return 0 }

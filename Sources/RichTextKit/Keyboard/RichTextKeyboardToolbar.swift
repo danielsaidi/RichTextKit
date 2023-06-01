@@ -25,7 +25,7 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
      - Parameters:
        - context: The context to affect.
        - leadingActions: The leading actions, by default `.undo`, `.redo` and `.copy`.
-       - trailingActions: The trailing actions, by default `.decreaseTab, .increaseTab, .dismissKeyboard`.
+       - trailingActions: The trailing actions, by default `.decreaseIndent, .increaseIndent, .dismissKeyboard`.
        - spacing: The stack item spacing, by default `15`.
        - height: The toolbar height, by default `50`.
        - style: The toolbar style to apply, by default ``RichTextKeyboardToolbarStyle/standard``.

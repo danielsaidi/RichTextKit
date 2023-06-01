@@ -31,20 +31,18 @@ open class RichTextView: UITextView, RichTextViewComponent {
 
     public convenience init(
         data: Data,
-        format: RichTextDataFormat = .archivedData,
-        placeholder: String
+        format: RichTextDataFormat = .archivedData
     ) throws {
         self.init()
-        try self.setup(with: data, format: format, placeholder: placeholder)
+        try self.setup(with: data, format: format)
     }
 
     public convenience init(
         string: NSAttributedString,
-        format: RichTextDataFormat = .archivedData,
-        placeholder: String
+        format: RichTextDataFormat = .archivedData
     ) {
         self.init()
-        self.setup(with: string, format: format, placeholder: placeholder)
+        self.setup(with: string, format: format)
     }
 
 
@@ -71,8 +69,6 @@ open class RichTextView: UITextView, RichTextViewComponent {
             #endif
         }
     }
-    
-    var richTextLayoutManager:RichTextLayoutManager = RichTextLayoutManager()
 
 
     #if os(iOS)
@@ -104,11 +100,6 @@ open class RichTextView: UITextView, RichTextViewComponent {
      This keeps track of the data format used by the view.
      */
     private var richTextDataFormat: RichTextDataFormat = .archivedData
-    
-    /**
-     Placeholder text for the view if no text is currently in the RichTextView.
-     */
-    private var placeholder: String = ""
 
 
     // MARK: - Overrides
@@ -126,12 +117,8 @@ open class RichTextView: UITextView, RichTextViewComponent {
             if frame.size == .zero { return }
             if !isInitialFrameSetupNeeded { return }
             isInitialFrameSetupNeeded = false
-            setup(with: attributedString, format: richTextDataFormat, placeholder: placeholder)
+            setup(with: attributedString, format: richTextDataFormat)
         }
-    }
-    
-    open override var layoutManager: NSLayoutManager {
-        return richTextLayoutManager
     }
 
     #if os(iOS)
@@ -175,11 +162,11 @@ open class RichTextView: UITextView, RichTextViewComponent {
      */
     open func setup(
         with text: NSAttributedString,
-        format: RichTextDataFormat,
-        placeholder: String
+        format: RichTextDataFormat
     ) {
-//        attributedString = .empty
+        attributedString = .empty
         setupInitialFontSize()
+        attributedString = text
         allowsEditingTextAttributes = false
         autocapitalizationType = .sentences
         backgroundColor = .clear
@@ -187,16 +174,8 @@ open class RichTextView: UITextView, RichTextViewComponent {
         text.autosizeImageAttachments(maxSize: imageAttachmentMaxSize)
         richTextDataFormat = format
         spellCheckingType = .no
-        if text.string.isEmpty {
-            textColor = .label
-        }
+        textColor = .label
         setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        
-        if !placeholder.isEmpty && text.richTextRange.length == 0 {
-            attributedString = placeholder.isEmpty ? .empty : NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16.0), NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-        }
-        
-        self.textContainer.replaceLayoutManager(richTextLayoutManager)
     }
 
 
