@@ -25,6 +25,10 @@ Until then, deprecated features may be removed in the next minor version.
         
 * This version fixes a bug where setting up an editor with a text that had image attachments, didn't resize the images until the user typed in the text editor.  
 
+### 💥 Breaking Changes
+                
+* `RichTextKeyboardToolbar` `height` and `spacing` has been moved to `RichTextKeyboardToolbarStyle`.
+
 
 
 ## 0.5.2
