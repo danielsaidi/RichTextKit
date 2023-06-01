@@ -15,9 +15,28 @@ import SwiftUI
  as a ``RichTextCoordinator``.
 
  When you create an editor, you just have to provide it with
- a rich text context. The editor will then set up everything
- so that you only have to use the context to observe changes
- and trigger changes in the editor.
+ a `text` binding, a rich text `context` and a data `format`.
+ The editor will then setup everything so that you only have
+ to use the `context` to observe changes and trigger changes
+ within the editor.
+
+ Note that since the view wraps a native `UIKit` or `AppKit`
+ text view, you can not provide it with toolbar actions like
+ you would with any other pure SwiftUI view. This means that
+ this doesn't work:
+
+ ```swift
+ RichTextEditor(text: $text, context: context)
+     .toolbar {
+         ToolbarItemGroup(placement: .keyboard) {
+             ....
+         }
+     }
+ ```
+
+ The above code will simply not show anything when you start
+ to edit text. To work around this limitation, you can use a
+ ``RichTextKeyboardToolbar`` instead.
  */
 public struct RichTextEditor: ViewRepresentable {
 

@@ -6,6 +6,14 @@ Until then, deprecated features may be removed in the next minor version.
 
 
 
+## 0.5.2
+
+### 🐛 Bug Fixes
+        
+* Initial text color is only applied when setting up rich text with an empty string.  
+
+
+
 ## 0.5
 
 ### 💥 Breaking Changes
