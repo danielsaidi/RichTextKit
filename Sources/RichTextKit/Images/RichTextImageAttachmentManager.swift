@@ -35,7 +35,8 @@ public extension RichTextImageAttachmentManager {
      */
     func attachmentBounds(
         for image: ImageRepresentable,
-        maxSize: CGSize) -> CGRect {
+        maxSize: CGSize
+    ) -> CGRect {
         let size = attachmentSize(for: image, maxSize: maxSize)
         return CGRect(origin: .zero, size: size)
     }
@@ -45,7 +46,8 @@ public extension RichTextImageAttachmentManager {
      */
     func attachmentSize(
         for image: ImageRepresentable,
-        maxSize: CGSize) -> CGSize {
+        maxSize: CGSize
+    ) -> CGSize {
         let size = image.size
         let validWidth = size.width < maxSize.width
         let validHeight = size.height < maxSize.height

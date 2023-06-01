@@ -211,11 +211,28 @@ public extension RichTextViewComponent {
 internal extension RichTextViewComponent {
 
     /**
-     This setup function can be called by all implemetations,
-     to setup the initial font size for a text.
+     This can be called to setup the initial font size for a
+     text view component.
      */
     func setupInitialFontSize() {
-        let standardSize = FontRepresentable.standardRichTextFont.pointSize
-        setCurrentFontSize(to: standardSize)
+        let font = FontRepresentable.standardRichTextFont
+        let size = font.pointSize
+        setCurrentFontSize(to: size)
+    }
+
+    /**
+     This can be called to setup an initial text color for a
+     text view component.
+
+     To avoid incorrectly coloring an already formatted text,
+     the action is only called if the provided text is empty.
+     */
+    func trySetupInitialTextColor(
+        for text: NSAttributedString,
+        _ action: () -> Void
+    ) {
+        if text.string.isEmpty {
+            action()
+        }
     }
 }
