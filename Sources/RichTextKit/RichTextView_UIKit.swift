@@ -166,12 +166,12 @@ open class RichTextView: UITextView, RichTextViewComponent {
     ) {
         attributedString = .empty
         setupInitialFontSize()
+        imageConfiguration = standardImageConfiguration(for: format)
+        text.autosizeImageAttachments(maxSize: imageAttachmentMaxSize)
         attributedString = text
         allowsEditingTextAttributes = false
         autocapitalizationType = .sentences
         backgroundColor = .clear
-        imageConfiguration = standardImageConfiguration(for: format)
-        text.autosizeImageAttachments(maxSize: imageAttachmentMaxSize)
         richTextDataFormat = format
         spellCheckingType = .no
         trySetupInitialTextColor(for: text) {

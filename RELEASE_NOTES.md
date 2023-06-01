@@ -12,6 +12,10 @@ Until then, deprecated features may be removed in the next minor version.
         
 * Thanks to [willmorris44](https://github.com/willmorris44) and [diniska](https://github.com/diniska), the UIKit and AppKit `RichTextView`s now update whenever the text changes.
 
+### 🐛 Bug Fixes
+        
+* This version fixes a bug where setting up an editor with a text that had image attachments, didn't resize the images until the user typed in the text editor.  
+
 
 
 ## 0.5.2

@@ -204,7 +204,8 @@ internal extension RichTextCoordinator {
         textView.pasteImage(
             data.image,
             at: data.atIndex,
-            moveCursorToPastedContent: data.moveCursor)
+            moveCursorToPastedContent: data.moveCursor
+        )
     }
 
     func pasteImages(_ data: (images: [ImageRepresentable], atIndex: Int, moveCursor: Bool)?) {
@@ -212,7 +213,8 @@ internal extension RichTextCoordinator {
         textView.pasteImages(
             data.images,
             at: data.atIndex,
-            moveCursorToPastedContent: data.moveCursor)
+            moveCursorToPastedContent: data.moveCursor
+        )
     }
 
     func pasteText(_ data: (text: String, atIndex: Int, moveCursor: Bool)?) {
@@ -220,7 +222,8 @@ internal extension RichTextCoordinator {
         textView.pasteText(
             data.text,
             at: data.atIndex,
-            moveCursorToPastedContent: data.moveCursor)
+            moveCursorToPastedContent: data.moveCursor
+        )
     }
 
     func redoLatestChange(_ shouldRedo: Bool) {
