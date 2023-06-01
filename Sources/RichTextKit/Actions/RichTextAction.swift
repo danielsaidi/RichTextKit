@@ -53,6 +53,8 @@ public extension RichTextAction {
         case .decrementFontSize: return RTKL10n.actionDecrementFontSize.text
         case .redoLatestChange: return RTKL10n.actionRedoLatestChange.text
         case .undoLatestChange: return RTKL10n.actionUndoLatestChange.text
+        case .increaseIndent: return RTKL10n.actionIncreaseIndent.text
+        case .decreaseIndent: return RTKL10n.actionDecreaseIndent.text
         }
     }
 }
@@ -77,6 +79,8 @@ public extension RichTextAction {
         case .decrementFontSize: return .richTextFontSizeDecrement
         case .redoLatestChange: return .richTextActionRedo
         case .undoLatestChange: return .richTextActionUndo
+        case .increaseIndent: return .richTextIndentIncrease
+        case .decreaseIndent: return .richTextIndentDecrease
         }
     }
 }
