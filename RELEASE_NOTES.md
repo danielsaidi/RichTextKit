@@ -8,6 +8,10 @@ Until then, deprecated features may be removed in the next minor version.
 
 ## 0.6
 
+### ✨ Features
+
+* `NSTextAttachment` has a new `attachedImage` property.
+
 ### 💡 Adjustments
         
 * Thanks to [willmorris44](https://github.com/willmorris44) and [diniska](https://github.com/diniska), the UIKit and AppKit `RichTextView`s now update whenever the text changes.

@@ -21,8 +21,8 @@ import AppKit
  This protocol extends ``RichTextReader`` with functionality
  for handling image attachments.
 
- The protocol is implemented by `NSAttributedString` as well
- as other types in the library.
+ The protocol is implemented by `NSAttributedString` but can
+ be oimplemented by any `RichTextReader`.
  */
 public protocol RichTextImageAttachmentManager: RichTextReader {}
 
@@ -81,15 +81,6 @@ public extension RichTextImageAttachmentManager {
             if oldBounds == newBounds { return }
             attachment.bounds = newBounds
         }
-    }
-}
-
-private extension NSTextAttachment {
-
-    var attachedImage: ImageRepresentable? {
-        if let image = self.image { return image }
-        guard let imageData = self.contents else { return nil }
-        return ImageRepresentable(data: imageData)
     }
 }
 #endif
