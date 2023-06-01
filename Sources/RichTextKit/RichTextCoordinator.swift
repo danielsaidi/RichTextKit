@@ -30,9 +30,9 @@ open class RichTextCoordinator: NSObject {
      Create a rich text coordinator.
 
      - Parameters:
-      - text: The rich text to edit.
-      - textView: The rich text view to keep in sync.
-      - richTextContext: The context to keep in sync.
+       - text: The rich text to edit.
+       - textView: The rich text view to keep in sync.
+       - richTextContext: The context to keep in sync.
      */
     public init(
         text: Binding<NSAttributedString>,
@@ -112,10 +112,10 @@ open class RichTextCoordinator: NSObject {
         richTextContext.isEditingText = false
     }
     #endif
-    
-    
+
+
     #if canImport(AppKit)
-    
+
     // MARK: - NSTextViewDelegate
 
     open func textDidBeginEditing(_ notification: Notification) {
@@ -152,7 +152,7 @@ extension RichTextCoordinator: NSTextViewDelegate {}
 // MARK: - Public Extensions
 
 public extension RichTextCoordinator {
-    
+
     /**
      Reset the apperance for the currently highlighted range,
      if any.
