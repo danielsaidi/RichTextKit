@@ -22,7 +22,7 @@ import SwiftUI
 public struct RichTextStyleToggle: View {
 
     /**
-     Create a rich text style toggle button.
+     Create a rich text style toggle toggle.
 
      - Parameters:
        - style: The style to toggle.
@@ -43,7 +43,7 @@ public struct RichTextStyleToggle: View {
     }
 
     /**
-     Create a rich text style button.
+     Create a rich text style toggle.
 
      - Parameters:
        - style: The style to toggle.

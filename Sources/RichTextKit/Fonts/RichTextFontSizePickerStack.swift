@@ -86,7 +86,10 @@ private extension RichTextFontSizePickerStack {
     }
 
     var picker: some View {
-        RichTextFontSizePicker(selection: $context.fontSize, values: values)
+        RichTextFontSizePicker(
+            selection: $context.fontSize,
+            values: values
+        )
     }
 
     var stepper: some View {

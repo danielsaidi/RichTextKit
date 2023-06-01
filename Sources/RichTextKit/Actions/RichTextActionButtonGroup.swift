@@ -1,21 +1,22 @@
 //
-//  RichTextActionButtonStack.swift
+//  RichTextActionButtonGroup.swift
 //  RichTextKit
 //
-//  Created by Daniel Saidi on 2023-06-01.
-//  Copyright © 2023 Daniel Saidi. All rights reserved.
+//  Created by Daniel Saidi on 2022-12-08.
+//  Copyright © 2022 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
 
 /**
  This view can be used to list a collection of buttons for a
- set of ``RichTextAction`` values in a horizontal stack.
+ set of ``RichTextAction`` values in a bordered button group.
 
  Since this view controls multiple values, it binds directly
  to a ``RichTextContext`` instead of individual values.
  */
-public struct RichTextActionButtonStack: View {
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+public struct RichTextActionButtonGroup: View {
 
     /**
      Create a rich text action button stack.
@@ -23,39 +24,39 @@ public struct RichTextActionButtonStack: View {
      - Parameters:
        - context: The context to affect.
        - actions: The actions to list, by default all non-size actions.
-       - spacing: The spacing to apply to stack items, by default `5`.
+       - greedy: Whether or not the group is horizontally greedy, by default `false`.
      */
     public init(
         context: RichTextContext,
         actions: [RichTextAction],
-        spacing: Double = 5
+        greedy: Bool = false
     ) {
         self._context = ObservedObject(wrappedValue: context)
         self.actions = actions
-        self.spacing = spacing
+        self.isGreedy = greedy
     }
 
     private let actions: [RichTextAction]
-    private let spacing: Double
+    private let isGreedy: Bool
 
     @ObservedObject
     private var context: RichTextContext
 
     public var body: some View {
-        HStack(spacing: spacing) {
+        ControlGroup {
             ForEach(actions) {
                 RichTextActionButton(
                     action: $0,
                     context: context,
                     fillVertically: true
-                ).frame(maxHeight: .infinity)
+                )
             }
         }
-        .fixedSize(horizontal: false, vertical: true)
     }
 }
 
-struct RichTextActionButtonStack_Previews: PreviewProvider {
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+struct RichTextActionButtonGroup_Previews: PreviewProvider {
 
     struct Preview: View {
 
@@ -63,7 +64,7 @@ struct RichTextActionButtonStack_Previews: PreviewProvider {
         private var context = RichTextContext()
 
         var body: some View {
-            RichTextActionButtonStack(
+            RichTextActionButtonGroup(
                 context: context,
                 actions: [.undoLatestChange, .redoLatestChange, .copy]
             )

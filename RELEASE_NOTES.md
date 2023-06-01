@@ -11,11 +11,14 @@ Until then, deprecated features may be removed in the next minor version.
 ### ✨ Features
 
 * `NSTextAttachment` has a new `attachedImage` property.
-* `RichTextKeyboardToolbar` now supports modofying the format sheet before presenting it.
+* `RichTextActionButtonGroup` is a new view that groups multiple action buttons together.
 * `RichTextAttributeWriter` now supports affecting the entire text by default.
+* `RichTextButtonGroup` is a new view that groups multiple buttons together.
 * `RichTextColorWriter` now supports affecting the entire text by default.
 * `RichTextContext` has new `resetAttributedString()` and `setAttributedString()` functions.
 * `RichTextFontWriter` now supports affecting the entire text by default.
+* `RichTextKeyboardToolbar` now supports modofying the format sheet before presenting it.
+* `RichTextStyleToggleGroup` is a new view that groups multiple toggles together.
 * `RichTextStyleWriter` now supports affecting the entire text by default.
 
 ### 💡 Adjustments

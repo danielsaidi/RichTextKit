@@ -43,6 +43,36 @@ public struct RichTextStyleButton: View {
         self.fillVertically = fillVertically
     }
 
+    /**
+     Create a rich text style button.
+
+     - Parameters:
+       - style: The style to toggle.
+       - buttonStyle: The button style to use, by default ``RichTextStyleButton/Style/standard``.
+       - context: The context to affect.
+       - fillVertically: Whether or not fill up vertical space in a non-greedy way, by default `false`.
+     */
+    public init(
+        style: RichTextStyle,
+        buttonStyle: Style = .standard,
+        context: RichTextContext,
+        fillVertically: Bool = false
+    ) {
+        self.init(
+            style: style,
+            buttonStyle: buttonStyle,
+            value: {
+                switch style {
+                case .bold: return context.isBoldBinding
+                case .italic: return context.isItalicBinding
+                case .strikethrough: return context.isStrikethroughBinding
+                case .underlined: return context.isUnderlinedBinding
+                }
+            }(),
+            fillVertically: fillVertically
+        )
+    }
+
     private let style: RichTextStyle
     private let buttonStyle: Style
     private let value: Binding<Bool>

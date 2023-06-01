@@ -77,31 +77,38 @@ struct RichTextActionButton_Previews: PreviewProvider {
                     RichTextActionButton(
                         action: .copy,
                         context: context,
-                        fillVertically: true)
+                        fillVertically: true
+                    )
                     RichTextActionButton(
                         action: .redoLatestChange,
                         context: context,
-                        fillVertically: true)
+                        fillVertically: true
+                    )
                     RichTextActionButton(
                         action: .undoLatestChange,
                         context: context,
-                        fillVertically: true)
+                        fillVertically: true
+                    )
                     RichTextActionButton(
                         action: .incrementFontSize,
                         context: context,
-                        fillVertically: true)
+                        fillVertically: true
+                    )
                     RichTextActionButton(
                         action: .decrementFontSize,
                         context: context,
-                        fillVertically: true)
+                        fillVertically: true
+                    )
                     RichTextActionButton(
                         action: .decreaseIndent,
                         context: context,
-                        fillVertically: true)
+                        fillVertically: true
+                    )
                     RichTextActionButton(
                         action: .increaseIndent,
                         context: context,
-                        fillVertically: true)
+                        fillVertically: true
+                    )
                 }
                 .fixedSize(horizontal: false, vertical: true)
                 .padding()

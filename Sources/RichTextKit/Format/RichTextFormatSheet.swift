@@ -45,18 +45,9 @@ public struct RichTextFormatSheet: View {
                 RichTextFontListPicker(selection: $context.fontName)
                 Divider()
                 VStack(spacing: 20) {
-                    HStack {
-                        RichTextColorPickerStack(context: context)
-                        Spacer()
-                        RichTextFontSizePickerStack(context: context)
-                    }
-                    .prefersBordered()
-
-                    HStack {
-                        RichTextStyleToggleStack(context: context)
-                        RichTextAlignmentPicker(selection: $context.textAlignment)
-                            .pickerStyle(.segmented)
-                    }
+                    colorRow
+                    fontRow
+                    paragraphRow
                 }
                 .environment(\.sizeCategory, .medium)
                 .padding()
@@ -76,6 +67,41 @@ public struct RichTextFormatSheet: View {
             }
             .navigationBarTitleDisplayMode(.inline)
         }.navigationViewStyle(.stack)
+    }
+}
+
+private extension RichTextFormatSheet {
+
+    var colorRow: some View {
+        HStack {
+            Spacer()
+            RichTextColorPickerStack(context: context)
+        }
+    }
+
+    var fontRow: some View {
+        HStack {
+            RichTextStyleToggleGroup(
+                context: context,
+                segmented: true
+            )
+            Spacer()
+            RichTextFontSizePickerStack(context: context)
+                .prefersBordered()
+        }
+    }
+
+    var paragraphRow: some View {
+        HStack {
+            RichTextActionButtonGroup(
+                context: context,
+                actions: [.decreaseIndent, .increaseIndent],
+                segmented: true
+            )
+            Spacer()
+            RichTextAlignmentPicker(selection: $context.textAlignment)
+                .pickerStyle(.segmented)
+        }
     }
 }
 
