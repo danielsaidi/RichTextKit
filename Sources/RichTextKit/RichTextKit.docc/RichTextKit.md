@@ -102,7 +102,7 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 ### Commands
 
 - ``RichTextCommandsAlignmentOptionsGroup``
-- ``RichTextCommandsTabOptionsGroup``
+- ``RichTextCommandsIndentOptionsGroup``
 - ``RichTextCommandsFontSizeOptionsGroup``
 - ``RichTextCommandsStyleOptionsGroup``
 - ``RichTextFormatCommandMenu``
