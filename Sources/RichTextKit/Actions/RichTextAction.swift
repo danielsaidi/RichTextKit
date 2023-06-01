@@ -31,6 +31,12 @@ public enum RichTextAction: String, CaseIterable, Identifiable {
 
     /// Undo the latest change.
     case undoLatestChange
+    
+    /// Increase the current indent
+    case increaseIndent
+
+    /// Decrease the current indent
+    case decreaseIndent
 }
 
 public extension RichTextAction {
