@@ -105,6 +105,7 @@ public struct RichTextEditor: ViewRepresentable {
 
     public func updateUIView(_ view: UIViewType, context: Context) {
         textView.attributedString = text.wrappedValue
+        richTextContext.highlightedRange = nil
     }
     #endif
 
@@ -115,7 +116,10 @@ public struct RichTextEditor: ViewRepresentable {
         return scrollView
     }
 
-    public func updateNSView(_ view: NSViewType, context: Context) {}
+    public func updateNSView(_ view: NSViewType, context: Context) {
+        textView.attributedString = text.wrappedValue
+        richTextContext.highlightedRange = nil
+    }
     #endif
 }
 

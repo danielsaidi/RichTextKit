@@ -6,6 +6,14 @@ Until then, deprecated features may be removed in the next minor version.
 
 
 
+## 0.6
+
+### 💡 Adjustments
+        
+* Thanks to [willmorris44](https://github.com/willmorris44) and [diniska](https://github.com/diniska), the UIKit and AppKit `RichTextView`s now update whenever the text changes.
+
+
+
 ## 0.5.2
 
 ### 🐛 Bug Fixes
