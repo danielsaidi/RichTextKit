@@ -23,6 +23,9 @@ public extension Image {
     static let richTextAlignmentJustified = symbol("text.justify")
     static let richTextAlignmentLeft = symbol("text.alignleft")
     static let richTextAlignmentRight = symbol("text.alignright")
+    
+    static let richTextIndentDecrease = symbol("decrease.indent")
+    static let richTextIndentIncrease = symbol("increase.indent")
 
     static let richTextColorBackground = symbol("highlighter")
     static let richTextColorForeground = symbol("character")

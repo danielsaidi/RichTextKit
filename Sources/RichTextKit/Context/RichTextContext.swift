@@ -72,6 +72,18 @@ public class RichTextContext: ObservableObject {
      */
     @Published
     public var canUndoLatestChange = false
+    
+    /**
+     Whether or not the indent level can be decreased.
+     */
+    @Published
+    public var canDecreaseIndent = true
+    
+    /**
+     Whether or not the indent level can be increased.
+     */
+    @Published
+    public var canIncreaseIndent = true
 
     /**
      The current font name.
@@ -176,10 +188,28 @@ public class RichTextContext: ObservableObject {
     public var shouldUndoLatestChange = false
 
     /**
+     Whether or not to decrease the current indent.
+     */
+    @Published
+    public var shouldDecreaseIndent = false
+    
+    /**
+     Whether or not to increase the current indent.
+     */
+    @Published
+    public var shouldIncreaseIndent = false
+    
+    /**
      The current text alignment, if any.
      */
     @Published
     public var textAlignment: RichTextAlignment = .left
+    
+    /**
+     The current text indent, if any.
+     */
+    @Published
+    public var textIndent: RichTextIndent = .decrease
 }
 
 public extension RichTextContext {
@@ -406,5 +436,19 @@ public extension RichTextContext {
      */
     func undoLatestChange() {
         shouldUndoLatestChange = true
+    }
+    
+    /**
+     Decrease current indent.
+     */
+    func decreaseIndent() {
+        shouldDecreaseIndent = true
+    }
+    
+    /**
+     Increase current indent.
+     */
+    func increaseIndent() {
+        shouldIncreaseIndent = true
     }
 }

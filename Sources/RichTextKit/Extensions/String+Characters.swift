@@ -24,6 +24,11 @@ public extension String.Element {
      Get the string element for a `\t` tab.
      */
     static var tab: String.Element { "\t" }
+    
+    /**
+     Get the string element for a ` ` space.
+     */
+    static var space: String.Element { " " }
 }
 
 public extension String {
@@ -42,4 +47,9 @@ public extension String {
      Get the string for a `\t` tab.
      */
     static let tab = String(.tab)
+    
+    /**
+     Get the string for a ` ` space.
+     */
+    static let space = String(.space)
 }
