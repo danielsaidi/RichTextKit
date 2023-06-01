@@ -176,6 +176,12 @@ public class RichTextContext: ObservableObject {
     public var shouldPasteText: (text: String, atIndex: Int, moveCursor: Bool)?
 
     /**
+     Set this property to trigger an attributed string update.
+     */
+    @Published
+    public var shouldSetAttributedString: NSAttributedString?
+
+    /**
      Whether or not to undo the latest change.
      */
     @Published
@@ -336,6 +342,13 @@ public extension RichTextContext {
     }
 
     /**
+     Reset the attributed string.
+     */
+    func resetAttributedString() {
+        setAttributedString(to: "")
+    }
+
+    /**
      Reset the ``highlightedRange``.
      */
     func resetHighlightedRange() {
@@ -358,6 +371,28 @@ public extension RichTextContext {
     func selectRange(_ range: NSRange) {
         isEditingText = true
         selectedRangeChange = range
+    }
+
+    /**
+     Set the attributed string to a new plain text.
+
+     - Parameters:
+       - text: The plain text string to set.
+     */
+    func setAttributedString(to text: String) {
+        setAttributedString(to: NSAttributedString(string: text))
+    }
+
+    /**
+     Set the attributed string to a new rich text.
+
+     - Parameters:
+       - string: The rich text string to set.
+     */
+    func setAttributedString(to string: NSAttributedString) {
+        let mutable = NSMutableAttributedString(attributedString: string)
+        mutable.setFontSize(to: fontSize)
+        shouldSetAttributedString = mutable
     }
 
     /**

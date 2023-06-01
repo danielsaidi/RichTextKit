@@ -6,6 +6,32 @@ Until then, deprecated features may be removed in the next minor version.
 
 
 
+## 0.6
+
+### ✨ Features
+
+* `NSTextAttachment` has a new `attachedImage` property.
+* `RichTextKeyboardToolbar` now supports modofying the format sheet before presenting it.
+* `RichTextAttributeWriter` now supports affecting the entire text by default.
+* `RichTextColorWriter` now supports affecting the entire text by default.
+* `RichTextContext` has new `resetAttributedString()` and `setAttributedString()` functions.
+* `RichTextFontWriter` now supports affecting the entire text by default.
+* `RichTextStyleWriter` now supports affecting the entire text by default.
+
+### 💡 Adjustments
+        
+* Thanks to [willmorris44](https://github.com/willmorris44) and [diniska](https://github.com/diniska), the UIKit and AppKit `RichTextView`s now update whenever the text changes.
+
+### 🐛 Bug Fixes
+        
+* This version fixes a bug where setting up an editor with a text that had image attachments, didn't resize the images until the user typed in the text editor.  
+
+### 💥 Breaking Changes
+                
+* `RichTextKeyboardToolbar` `height` and `spacing` has been moved to `RichTextKeyboardToolbarStyle`.
+
+
+
 ## 0.5.2
 
 ### 🐛 Bug Fixes

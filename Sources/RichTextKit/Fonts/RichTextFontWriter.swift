@@ -26,11 +26,11 @@ public extension RichTextFontWriter {
      Set the font at a certain range.
 
      - Parameters:
-       - range: The range to get the font from.
+       - range: The range to affect, by default the entire text.
      */
     func setFont(
         to font: FontRepresentable,
-        at range: NSRange
+        at range: NSRange? = nil
     ) {
         setRichTextAttribute(.font, to: font, at: range)
     }
@@ -53,14 +53,15 @@ public extension RichTextFontWriter {
 
      - Parameters:
        - name: The name of the font to apply.
-       - range: The range to get the font from.
+       - range: The range to affect, by default the entire text.
      */
     func setFontName(
         to name: String,
-        at range: NSRange
+        at range: NSRange? = nil
     ) {
         guard let text = mutableRichText else { return }
         guard text.length > 0 else { return }
+        let range = range ?? richTextRange
         let key = NSAttributedString.Key.font
         let fontName = settableFontName(for: name)
         text.beginEditing()
@@ -83,14 +84,15 @@ public extension RichTextFontWriter {
 
      - Parameters:
        - size: The font size to set.
-       - range: The range to get the font from.
+       - range: The range to affect, by default the entire text.
      */
     func setFontSize(
         to size: CGFloat,
-        at range: NSRange
+        at range: NSRange? = nil
     ) {
         guard let text = mutableRichText else { return }
         guard text.length > 0 else { return }
+        let range = range ?? richTextRange
         text.beginEditing()
         text.enumerateAttribute(.font, in: range, options: .init()) { value, range, _ in
             let oldFont = value as? FontRepresentable ?? .standardRichTextFont
@@ -107,7 +109,7 @@ public extension RichTextFontWriter {
 
      - Parameters:
        - points: The number of points to increase or decrease the font size.
-       - range: The range to get the font from.
+       - range: The range affect.
      */
     func stepFontSize(
         points: Int,

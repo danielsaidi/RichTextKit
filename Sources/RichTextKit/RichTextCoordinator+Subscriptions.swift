@@ -33,6 +33,7 @@ extension RichTextCoordinator {
         subscribeToShouldPasteImages()
         subscribeToShouldPasteText()
         subscribeToShouldRedoLatestChange()
+        subscribeToShouldSetAttributedString()
         subscribeToShouldUndoLatestChange()
         subscribeToShouldDecreaseIndent()
         subscribeToShouldIncreaseIndent()
@@ -185,6 +186,14 @@ private extension RichTextCoordinator {
             .store(in: &cancellables)
     }
 
+    func subscribeToShouldSetAttributedString() {
+        richTextContext.$shouldSetAttributedString
+            .sink(
+                receiveCompletion: { _ in },
+                receiveValue: { [weak self] in self?.setAttributedString(to: $0) })
+            .store(in: &cancellables)
+    }
+
     func subscribeToShouldUndoLatestChange() {
         richTextContext.$shouldUndoLatestChange
             .sink(
@@ -222,7 +231,8 @@ internal extension RichTextCoordinator {
         textView.pasteImage(
             data.image,
             at: data.atIndex,
-            moveCursorToPastedContent: data.moveCursor)
+            moveCursorToPastedContent: data.moveCursor
+        )
     }
 
     func pasteImages(_ data: (images: [ImageRepresentable], atIndex: Int, moveCursor: Bool)?) {
@@ -230,7 +240,8 @@ internal extension RichTextCoordinator {
         textView.pasteImages(
             data.images,
             at: data.atIndex,
-            moveCursorToPastedContent: data.moveCursor)
+            moveCursorToPastedContent: data.moveCursor
+        )
     }
 
     func pasteText(_ data: (text: String, atIndex: Int, moveCursor: Bool)?) {
@@ -238,7 +249,8 @@ internal extension RichTextCoordinator {
         textView.pasteText(
             data.text,
             at: data.atIndex,
-            moveCursorToPastedContent: data.moveCursor)
+            moveCursorToPastedContent: data.moveCursor
+        )
     }
 
     func redoLatestChange(_ shouldRedo: Bool) {
@@ -251,6 +263,12 @@ internal extension RichTextCoordinator {
         if newValue == textView.currentRichTextAlignment { return }
         textView.setCurrentRichTextAlignment(to: newValue)
     }
+
+    func setAttributedString(to newValue: NSAttributedString?) {
+        guard let newValue else { return }
+        textView.setRichText(newValue)
+    }
+
 
     func setBackgroundColor(to newValue: ColorRepresentable?) {
         if newValue == textView.currentBackgroundColor { return }

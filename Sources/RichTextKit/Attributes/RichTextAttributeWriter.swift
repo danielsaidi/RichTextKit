@@ -31,12 +31,12 @@ public extension RichTextAttributeWriter {
      - Parameters:
        - attribute: The attribute to set.
        - newValue: The new value to set the attribute to.
-       - range: The range for which to set the attribute.
+       - range: The range to affect, by default the entire text.
      */
     func setRichTextAttribute(
         _ attribute: RichTextAttribute,
         to newValue: Any,
-        at range: NSRange
+        at range: NSRange? = nil
     ) {
         setRichTextAttributes([attribute: newValue], at: range)
     }
@@ -49,13 +49,14 @@ public extension RichTextAttributeWriter {
 
      - Parameters:
        - attributes: The attributes to set.
-       - range: The range for which to set the attributes.
+       - range: The range to affect, by default the entire text.
      */
     func setRichTextAttributes(
         _ attributes: RichTextAttributes,
-        at range: NSRange
+        at range: NSRange? = nil
     ) {
-        let range = safeRange(for: range)
+        let rangeValue = range ?? richTextRange
+        let range = safeRange(for: rangeValue)
         guard let string = mutableRichText else { return }
         string.beginEditing()
         attributes.forEach { attribute, newValue in

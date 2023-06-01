@@ -85,7 +85,7 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         allowsImageEditing = true
         allowsUndo = true
         backgroundColor = .clear
-        if text.string.isEmpty {
+        trySetupInitialTextColor(for: text) {
             textColor = .textColor
         }
         imageConfiguration = standardImageConfiguration(for: format)
