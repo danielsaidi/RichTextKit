@@ -75,6 +75,7 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 
 - ``RichTextAction``
 - ``RichTextActionButton``
+- ``RichTextActionButtonGroup``
 - ``RichTextActionButtonStack``
 
 ### Alignment
@@ -102,10 +103,10 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 ### Commands
 
 - ``RichTextCommandsAlignmentOptionsGroup``
-- ``RichTextCommandsIndentOptionsGroup``
 - ``RichTextCommandsFontSizeOptionsGroup``
 - ``RichTextCommandsStyleOptionsGroup``
 - ``RichTextFormatCommandMenu``
+- ``RichTextShareCommandMenu``
 
 ### Data
 
@@ -113,7 +114,6 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 - ``RichTextDataFormat``
 - ``RichTextDataFormatMenu``
 - ``RichTextDataReader``
-- ``RichTextDataWriter``
 
 ### Export
 
@@ -200,6 +200,7 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 - ``RichTextStyleWriter``
 - ``RichTextStyleButton``
 - ``RichTextStyleToggle``
+- ``RichTextStyleToggleGroup``
 - ``RichTextStyleToggleStack``
 
 

@@ -104,6 +104,7 @@ This will eventually be a separate article, but until then let's take a quick lo
 ### Actions
 
 * ``RichTextActionButton``
+* ``RichTextActionButtonGroup``
 * ``RichTextActionButtonStack``
 
 ### Alignment
@@ -149,6 +150,7 @@ This will eventually be a separate article, but until then let's take a quick lo
 
 * ``RichTextStyleButton``
 * ``RichTextStyleToggle``
+* ``RichTextStyleToggleGroup``
 * ``RichTextStyleToggleStack``
 
 Have a look at the demo apps for some ways that you can use these views.  
