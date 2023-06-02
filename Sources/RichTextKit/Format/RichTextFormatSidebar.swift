@@ -13,9 +13,11 @@ import SwiftUI
  This sidebar view provides various text format options, and
  is meant to be used on macOS, in a trailing sidebar.
 
- Although the view is designed to be used on macOS, it's not
- excluded for iOS, although it will probably feel off to use
- it on an iPhone or iPad.
+ > Important: Although this view is designed for macOS, it's
+ not excluded for iOS, since it should be to the docs. If we
+ find a way to combine all platform docs, we can exclude the
+ view for iOS as well. Until then, don't use it on iOS since
+ it will look off.
  */
 public struct RichTextFormatSidebar: View {
 
@@ -36,14 +38,14 @@ public struct RichTextFormatSidebar: View {
 
     public var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            SidebarSection(title: "Font") {
+            SidebarSection(title: RTKL10n.font.text) {
                 RichTextFontPicker(selection: $context.fontName, fontSize: 12)
                 HStack {
-                    RichTextStyleToggleStack(context: context)
+                    styleToggles
                     RichTextFontSizePickerStack(context: context)
                 }
             }
-            SidebarSection(title: RTKL10n.color.text) {
+            SidebarSection(title: nil) {
                 HStack {
                     Text(RTKL10n.foregroundColor.text)
                     Spacer()
@@ -54,10 +56,11 @@ public struct RichTextFormatSidebar: View {
                     Spacer()
                     RichTextColorPicker(color: .background, context: context)
                 }
-            }
-            SidebarSection(title: RTKL10n.textAlignment.text) {
+            }.font(.callout)
+            SidebarSection(title: nil) {
                 RichTextAlignmentPicker(selection: $context.textAlignment)
                     .pickerStyle(.segmented)
+                indentButtons
             }
             Spacer()
         }
@@ -66,17 +69,40 @@ public struct RichTextFormatSidebar: View {
     }
 }
 
+private extension RichTextFormatSidebar {
+
+    @ViewBuilder
+    var styleToggles: some View {
+        if #available(iOS 15.0, macOS 12.0, *) {
+            RichTextStyleToggleGroup(context: context)
+        } else {
+            RichTextStyleToggleStack(context: context)
+        }
+    }
+
+    @ViewBuilder
+    var indentButtons: some View {
+        if #available(iOS 15.0, macOS 12.0, *) {
+            RichTextActionButtonGroup(
+                context: context,
+                actions: [.decreaseIndent, .increaseIndent]
+            )
+        }
+    }
+}
+
 private struct SidebarSection<Content: View>: View {
 
-    let title: String
+    let title: String?
 
     @ViewBuilder
     let content: () -> Content
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text(title)
-                .font(.headline)
+            if let title {
+                Text(title).font(.headline)
+            }
             content()
             Divider()
         }
