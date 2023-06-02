@@ -19,7 +19,7 @@ extension RichTextView: UIDropInteractionDelegate {}
  This is a platform-agnostic rich text view that can be used
  in both UIKit and AppKit.
 
- The view inhertits `NSTextField` in AppKit and `UITextField`
+ The view inherits `NSTextField` in AppKit and `UITextField`
  in UIKit. It aims to make these views behave more alike and
  make them implement ``RichTextViewComponent``, which is the
  protocol that is used within this library.
