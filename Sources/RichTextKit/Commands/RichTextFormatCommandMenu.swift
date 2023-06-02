@@ -42,6 +42,8 @@ public struct RichTextFormatCommandMenu: Commands {
                 }
                 Menu(RTKL10n.menuText.text) {
                     RichTextCommandsAlignmentOptionsGroup()
+                    Divider()
+                    RichTextCommandsIndentOptionsGroup()
                 }
             }.disabled(context == nil)
         }
