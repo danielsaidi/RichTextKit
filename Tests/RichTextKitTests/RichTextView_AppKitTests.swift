@@ -12,7 +12,7 @@ import XCTest
 
 final class TempTests: XCTestCase {
     
-    func testViewIsAccessible() throws {
+    func testViewIsAccessible() {
         let view = RichTextView()
         XCTAssertNotNil(view)
     }

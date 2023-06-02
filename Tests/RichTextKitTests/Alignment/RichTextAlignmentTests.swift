@@ -12,7 +12,7 @@ import XCTest
 
 final class RichTextAlignmentTests: XCTestCase {
 
-    func testCanBeCreatedWithNativeAlignment() throws {
+    func testCanBeCreatedWithNativeAlignment() {
         func result(for alignment: NSTextAlignment) -> RichTextAlignment {
             RichTextAlignment(alignment)
         }
@@ -23,7 +23,7 @@ final class RichTextAlignmentTests: XCTestCase {
         XCTAssertEqual(result(for: .justified), .justified)
     }
 
-    func testHasValidIdentifier() throws {
+    func testHasValidIdentifier() {
         func result(for alignment: NSTextAlignment) -> String {
             RichTextAlignment(alignment).id
         }
@@ -34,7 +34,7 @@ final class RichTextAlignmentTests: XCTestCase {
         XCTAssertEqual(result(for: .justified), "justified")
     }
 
-    func testHasValidIcon() throws {
+    func testHasValidIcon() {
         func result(for alignment: NSTextAlignment) -> Image {
             RichTextAlignment(alignment).icon
         }
@@ -45,7 +45,7 @@ final class RichTextAlignmentTests: XCTestCase {
         XCTAssertEqual(result(for: .justified), .richTextAlignmentJustified)
     }
 
-    func testHasValidNativeAlignment() throws {
+    func testHasValidNativeAlignment() {
         func result(for alignment: NSTextAlignment) -> NSTextAlignment {
             RichTextAlignment(alignment).nativeAlignment
         }

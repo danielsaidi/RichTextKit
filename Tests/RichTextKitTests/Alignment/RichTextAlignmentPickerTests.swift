@@ -13,7 +13,7 @@ import XCTest
 
 final class RichTextAlignmentPickerTests: XCTestCase {
 
-    func testCanBeCreatedWithAllParameters() throws {
+    func testCanBeCreatedWithAllParameters() {
         let picker = RichTextAlignmentPicker(
             selection: .constant(.left),
             values: [.left]
@@ -22,7 +22,7 @@ final class RichTextAlignmentPickerTests: XCTestCase {
         XCTAssertEqual(picker.values, [.left])
     }
 
-    func testCanBeCreatedWithDefaultParameters() throws {
+    func testCanBeCreatedWithDefaultParameters() {
         let picker = RichTextAlignmentPicker(
             selection: .constant(.left))
 
