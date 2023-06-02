@@ -45,9 +45,9 @@ public struct RichTextFormatSheet: View {
                 RichTextFontListPicker(selection: $context.fontName)
                 Divider()
                 VStack(spacing: 20) {
-                    colorRow
                     fontRow
                     paragraphRow
+                    colorRow
                 }
                 .environment(\.sizeCategory, .medium)
                 .padding()
@@ -90,10 +90,10 @@ private extension RichTextFormatSheet {
 
     var paragraphRow: some View {
         HStack {
-            indentButtons
-            Spacer()
             RichTextAlignmentPicker(selection: $context.textAlignment)
                 .pickerStyle(.segmented)
+            Spacer()
+            indentButtons
         }
     }
 }
@@ -112,7 +112,8 @@ private extension RichTextFormatSheet {
         if #available(iOS 15.0, *) {
             RichTextActionButtonGroup(
                 context: context,
-                actions: [.decreaseIndent, .increaseIndent]
+                actions: [.decreaseIndent, .increaseIndent],
+                greedy: false
             )
         } else {
             RichTextActionButtonStack(
