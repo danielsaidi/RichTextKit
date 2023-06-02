@@ -32,7 +32,8 @@ Until then, deprecated features may be removed in the next minor version.
 
 ### 💡 Adjustments
         
-* Thanks to [willmorris44](https://github.com/willmorris44) and [diniska](https://github.com/diniska), the UIKit and AppKit `RichTextView`s now update whenever the text changes.
+* Thanks to [@willmorris44](https://github.com/willmorris44) and [@diniska](https://github.com/diniska), the UIKit and AppKit `RichTextView`s now update whenever the text changes.
+* Thanks to [@msrutek-paylocity](https://github.com/msrutek-paylocity), some typos are fixed and some tests cleaned up. 
 
 ### 🐛 Bug Fixes
         
