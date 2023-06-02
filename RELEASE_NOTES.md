@@ -10,6 +10,8 @@ Until then, deprecated features may be removed in the next minor version.
 
 ### ✨ Features
 
+* Thanks to [@jamesbradleym](https://github.com/jamesbradleym), RichTextKit now supports text indentation.
+
 * `Image` has new `richTextIndentDecrease` and `richTextIndentIncrease` actions.
 * `NSTextAttachment` has a new `attachedImage` property.
 * `RichTextAction` has new `increaseIndent` and `decreaseIndent` actions.
@@ -31,7 +33,7 @@ Until then, deprecated features may be removed in the next minor version.
 * `RichTextStyleWriter` now supports affecting the entire text by default.
 
 ### 💡 Adjustments
-        
+
 * Thanks to [@willmorris44](https://github.com/willmorris44) and [@diniska](https://github.com/diniska), the UIKit and AppKit `RichTextView`s now update whenever the text changes.
 * Thanks to [@msrutek-paylocity](https://github.com/msrutek-paylocity), some typos are fixed and some tests cleaned up. 
 
