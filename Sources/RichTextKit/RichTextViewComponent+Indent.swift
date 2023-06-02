@@ -54,16 +54,15 @@ private extension RichTextViewComponent {
     func setTextIndentAtCurrentPosition(
         to indent: RichTextIndent
     ) {
-        if let style = typingAttributes[.paragraphStyle] as? NSParagraphStyle {
-            let mutableStyle = style.mutableCopy() as! NSMutableParagraphStyle
-            
-            let indentation = max(indent == .decrease ? style.headIndent - 30.0 : style.headIndent + 30.0, 0)
-            mutableStyle.firstLineHeadIndent = indentation
-            mutableStyle.headIndent = indentation
-            
-            var attributes = currentRichTextAttributes
-            attributes[.paragraphStyle] = mutableStyle
-            typingAttributes = attributes
-        }
+        guard let style = typingAttributes[.paragraphStyle] as? NSParagraphStyle else { return }
+        guard let mutableStyle = style.mutableCopy() as? NSMutableParagraphStyle else { return }
+
+        let indentation = max(indent == .decrease ? style.headIndent - 30.0 : style.headIndent + 30.0, 0)
+        mutableStyle.firstLineHeadIndent = indentation
+        mutableStyle.headIndent = indentation
+
+        var attributes = currentRichTextAttributes
+        attributes[.paragraphStyle] = mutableStyle
+        typingAttributes = attributes
     }
 }
