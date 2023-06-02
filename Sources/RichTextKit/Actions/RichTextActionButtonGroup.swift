@@ -25,12 +25,12 @@ public struct RichTextActionButtonGroup: View {
      - Parameters:
        - context: The context to affect.
        - actions: The actions to list, by default all non-size actions.
-       - greedy: Whether or not the group is horizontally greedy, by default `false`.
+       - greedy: Whether or not the group is horizontally greedy, by default `true`.
      */
     public init(
         context: RichTextContext,
         actions: [RichTextAction],
-        greedy: Bool = false
+        greedy: Bool = true
     ) {
         self._context = ObservedObject(wrappedValue: context)
         self.actions = actions
@@ -52,11 +52,25 @@ public struct RichTextActionButtonGroup: View {
                     fillVertically: true
                 )
             }
-        }
+        }.frame(width: groupWidth)
     }
 }
 
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, *)
+private extension RichTextActionButtonGroup {
+
+    var groupWidth: CGFloat? {
+        if isGreedy { return nil }
+        let count = Double(actions.count)
+        #if os(macOS)
+        return 30 * count
+        #else
+        return 50 * count
+        #endif
+    }
+}
+
+@available(iOS 15.0, macOS 12.0, *)
 struct RichTextActionButtonGroup_Previews: PreviewProvider {
 
     struct Preview: View {
@@ -64,12 +78,19 @@ struct RichTextActionButtonGroup_Previews: PreviewProvider {
         @StateObject
         private var context = RichTextContext()
 
-        var body: some View {
+        func group(greedy: Bool) -> some View {
             RichTextActionButtonGroup(
                 context: context,
-                actions: [.undoLatestChange, .redoLatestChange, .copy]
+                actions: [.undoLatestChange, .redoLatestChange, .copy],
+                greedy: greedy
             )
-            .bordered()
+        }
+
+        var body: some View {
+            VStack {
+                group(greedy: true)
+                group(greedy: false)
+            }
             .padding()
         }
     }

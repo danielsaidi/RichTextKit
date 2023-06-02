@@ -28,24 +28,34 @@ public struct RichTextStyleToggleGroup: View {
      - Parameters:
        - context: The context to affect.
        - styles: The styles to list, by default ``RichTextStyle/all``.
+       - greedy: Whether or not the group is horizontally greedy, by default `true`.
        - buttonStyle: The button style to use, by default ``RichTextStyleToggle/Style/standardNonProminent``.
-       - greedy: Whether or not the group is horizontally greedy, by default `false`.
      */
     public init(
         context: RichTextContext,
         styles: [RichTextStyle] = .all,
-        buttonStyle: RichTextStyleButton.Style = .standard,
-        greedy: Bool = false
+        greedy: Bool = true,
+        buttonStyle: RichTextStyleButton.Style = .standard
     ) {
         self._context = ObservedObject(wrappedValue: context)
+        self.isGreedy = greedy
         self.styles = styles
         self.buttonStyle = buttonStyle
-        self.isGreedy = greedy
     }
 
     private let styles: [RichTextStyle]
-    private let buttonStyle: RichTextStyleButton.Style
     private let isGreedy: Bool
+    private let buttonStyle: RichTextStyleButton.Style
+
+    private var groupWidth: CGFloat? {
+        if isGreedy { return nil }
+        let count = Double(styles.count)
+        #if os(macOS)
+        return 30 * count
+        #else
+        return 50 * count
+        #endif
+    }
 
     @ObservedObject
     private var context: RichTextContext
@@ -60,7 +70,7 @@ public struct RichTextStyleToggleGroup: View {
                     fillVertically: true
                 )
             }
-        }.frame(width: isGreedy ? nil : (50.0 * Double(styles.count)))
+        }.frame(width: groupWidth)
     }
 }
 
@@ -72,9 +82,19 @@ struct RichTextStyleToggleGroup_Previews: PreviewProvider {
         @StateObject
         private var context = RichTextContext()
 
+        func group(greedy: Bool) -> some View {
+            RichTextStyleToggleGroup(
+                context: context,
+                greedy: greedy
+            )
+        }
+
         var body: some View {
-            RichTextStyleToggleGroup(context: context)
-                .padding()
+            VStack {
+                group(greedy: true)
+                group(greedy: false)
+            }.padding()
+
         }
     }
 
