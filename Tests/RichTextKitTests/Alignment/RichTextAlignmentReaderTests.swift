@@ -13,7 +13,7 @@ import XCTest
 
 final class RichTextAlignmentReaderTests: XCTestCase {
 
-    func testCanReadTextAlignment() throws {
+    func testCanReadTextAlignment() {
         let textView = RichTextView()
         textView.attributedString = NSAttributedString(string: "foo bar")
         let range = NSRange(location: 2, length: 3)
