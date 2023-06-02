@@ -6,6 +6,12 @@ Until then, deprecated features may be removed in the next minor version.
 
 
 
+## 0.6.1
+
+This update reverts a `RichTextEditor` view update that made the editor less performant. 
+
+
+
 ## 0.6
 
 ### ✨ Features

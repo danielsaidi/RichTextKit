@@ -37,6 +37,11 @@ import SwiftUI
  The above code will simply not show anything when you start
  to edit text. To work around this limitation, you can use a
  ``RichTextKeyboardToolbar`` instead.
+
+ You may have noticed that `updateUIView/updateNSView` don't
+ contain any code. This is because having updates there will
+ update this view, which in turn makes typing very slow. Use
+ the rich text context to modify the text instead.
  */
 public struct RichTextEditor: ViewRepresentable {
 
@@ -103,10 +108,7 @@ public struct RichTextEditor: ViewRepresentable {
         return textView
     }
 
-    public func updateUIView(_ view: UIViewType, context: Context) {
-        textView.attributedString = text.wrappedValue
-        resetHighlightedRange()
-    }
+    public func updateUIView(_ view: UIViewType, context: Context) {}
     #endif
 
     #if os(macOS)
@@ -116,21 +118,8 @@ public struct RichTextEditor: ViewRepresentable {
         return scrollView
     }
 
-    public func updateNSView(_ view: NSViewType, context: Context) {
-        // textView.attributedString = text.wrappedValue
-        // resetHighlightedRange()
-    }
+    public func updateNSView(_ view: NSViewType, context: Context) {}
     #endif
-}
-
-@MainActor
-private extension RichTextEditor {
-
-    func resetHighlightedRange() {
-        DispatchQueue.main.async {
-            richTextContext.highlightedRange = nil
-        }
-    }
 }
 
 

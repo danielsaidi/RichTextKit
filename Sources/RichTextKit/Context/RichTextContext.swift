@@ -211,6 +211,13 @@ public extension RichTextContext {
     /**
      Whether or not the context has a selected range.
      */
+    var hasHighlightedRange: Bool {
+        highlightedRange != nil
+    }
+
+    /**
+     Whether or not the context has a selected range.
+     */
     var hasSelectedRange: Bool {
         selectedRange.length > 0
     }
@@ -346,6 +353,7 @@ public extension RichTextContext {
      Reset the ``highlightedRange``.
      */
     func resetHighlightedRange() {
+        guard hasHighlightedRange else { return }
         highlightedRange = nil
     }
 
