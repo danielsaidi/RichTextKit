@@ -105,7 +105,7 @@ public struct RichTextEditor: ViewRepresentable {
 
     public func updateUIView(_ view: UIViewType, context: Context) {
         textView.attributedString = text.wrappedValue
-        richTextContext.highlightedRange = nil
+        resetHighlightedRange()
     }
     #endif
 
@@ -117,10 +117,20 @@ public struct RichTextEditor: ViewRepresentable {
     }
 
     public func updateNSView(_ view: NSViewType, context: Context) {
-        textView.attributedString = text.wrappedValue
-        richTextContext.highlightedRange = nil
+        // textView.attributedString = text.wrappedValue
+        // resetHighlightedRange()
     }
     #endif
+}
+
+@MainActor
+private extension RichTextEditor {
+
+    func resetHighlightedRange() {
+        DispatchQueue.main.async {
+            richTextContext.highlightedRange = nil
+        }
+    }
 }
 
 
