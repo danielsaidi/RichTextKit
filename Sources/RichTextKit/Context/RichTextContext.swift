@@ -204,12 +204,6 @@ public class RichTextContext: ObservableObject {
      */
     @Published
     public var textAlignment: RichTextAlignment = .left
-    
-    /**
-     The current text indent, if any.
-     */
-    @Published
-    public var textIndent: RichTextIndent = .decrease
 }
 
 public extension RichTextContext {

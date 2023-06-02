@@ -24,9 +24,6 @@ public extension Image {
     static let richTextAlignmentLeft = symbol("text.alignleft")
     static let richTextAlignmentRight = symbol("text.alignright")
     
-    static let richTextIndentDecrease = symbol("decrease.indent")
-    static let richTextIndentIncrease = symbol("increase.indent")
-
     static let richTextColorBackground = symbol("highlighter")
     static let richTextColorForeground = symbol("character")
 
@@ -39,6 +36,9 @@ public extension Image {
 
     static let richTextFormat = symbol("textformat")
     static let richTextFormatBrush = symbol("paintbrush")
+
+    static let richTextIndentDecrease = symbol("decrease.indent")
+    static let richTextIndentIncrease = symbol("increase.indent")
 
     static let richTextMenuExport = symbol("square.and.arrow.up.on.square")
     static let richTextMenuPrint = symbol("printer")

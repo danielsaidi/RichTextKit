@@ -29,14 +29,14 @@ extension RichTextCoordinator {
         subscribeToIsUnderlined()
         subscribeToSelectedRange()
         subscribeToShouldCopySelection()
+        subscribeToShouldIncreaseIndent()
+        subscribeToShouldDecreaseIndent()
         subscribeToShouldPasteImage()
         subscribeToShouldPasteImages()
         subscribeToShouldPasteText()
         subscribeToShouldRedoLatestChange()
         subscribeToShouldSetAttributedString()
         subscribeToShouldUndoLatestChange()
-        subscribeToShouldDecreaseIndent()
-        subscribeToShouldIncreaseIndent()
     }
 }
 

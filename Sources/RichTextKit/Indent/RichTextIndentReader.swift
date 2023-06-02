@@ -30,7 +30,7 @@ extension NSAttributedString: RichTextIndentReader {}
 public extension RichTextIndentReader {
 
     /**
-     Get the rich text indent at the provided range.
+     Get the rich text indent level at the provided range.
 
      - Parameters:
        - range: The range to get the indent from.

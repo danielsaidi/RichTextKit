@@ -24,10 +24,10 @@ public extension View {
         case .dismissKeyboard: self
         case .incrementFontSize: keyboardShortcut("+", modifiers: .command)
         case .decrementFontSize: keyboardShortcut("-", modifiers: .command)
-        case .redoLatestChange: keyboardShortcut("z", modifiers: [.command, .shift])
-        case .undoLatestChange: keyboardShortcut("z", modifiers: .command)
         case .increaseIndent: self
         case .decreaseIndent: self
+        case .redoLatestChange: keyboardShortcut("z", modifiers: [.command, .shift])
+        case .undoLatestChange: keyboardShortcut("z", modifiers: .command)
         }
         #else
         self

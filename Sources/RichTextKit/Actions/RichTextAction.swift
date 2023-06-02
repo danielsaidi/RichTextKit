@@ -26,17 +26,17 @@ public enum RichTextAction: String, CaseIterable, Identifiable {
     /// Decrement the current font size.
     case decrementFontSize
 
+    /// Increase the current indent level.
+    case increaseIndent
+
+    /// Decrease the current indent level.
+    case decreaseIndent
+
     /// Redo the latest undone change.
     case redoLatestChange
 
     /// Undo the latest change.
     case undoLatestChange
-    
-    /// Increase the current indent
-    case increaseIndent
-
-    /// Decrease the current indent
-    case decreaseIndent
 }
 
 public extension RichTextAction {
@@ -57,10 +57,10 @@ public extension RichTextAction {
         case .dismissKeyboard: return RTKL10n.actionDismissKeyboard.text
         case .incrementFontSize: return RTKL10n.actionIncrementFontSize.text
         case .decrementFontSize: return RTKL10n.actionDecrementFontSize.text
-        case .redoLatestChange: return RTKL10n.actionRedoLatestChange.text
-        case .undoLatestChange: return RTKL10n.actionUndoLatestChange.text
         case .increaseIndent: return RTKL10n.actionIncreaseIndent.text
         case .decreaseIndent: return RTKL10n.actionDecreaseIndent.text
+        case .redoLatestChange: return RTKL10n.actionRedoLatestChange.text
+        case .undoLatestChange: return RTKL10n.actionUndoLatestChange.text
         }
     }
 }
@@ -83,10 +83,10 @@ public extension RichTextAction {
         case .dismissKeyboard: return .richTextActionDismissKeyboard
         case .incrementFontSize: return .richTextFontSizeIncrement
         case .decrementFontSize: return .richTextFontSizeDecrement
-        case .redoLatestChange: return .richTextActionRedo
-        case .undoLatestChange: return .richTextActionUndo
         case .increaseIndent: return .richTextIndentIncrease
         case .decreaseIndent: return .richTextIndentDecrease
+        case .redoLatestChange: return .richTextActionRedo
+        case .undoLatestChange: return .richTextActionUndo
         }
     }
 }

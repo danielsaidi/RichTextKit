@@ -81,10 +81,7 @@ private extension RichTextFormatSheet {
 
     var fontRow: some View {
         HStack {
-            RichTextStyleToggleGroup(
-                context: context,
-                segmented: true
-            )
+            styleButtons
             Spacer()
             RichTextFontSizePickerStack(context: context)
                 .prefersBordered()
@@ -93,11 +90,7 @@ private extension RichTextFormatSheet {
 
     var paragraphRow: some View {
         HStack {
-            RichTextActionButtonGroup(
-                context: context,
-                actions: [.decreaseIndent, .increaseIndent],
-                segmented: true
-            )
+            indentButtons
             Spacer()
             RichTextAlignmentPicker(selection: $context.textAlignment)
                 .pickerStyle(.segmented)
@@ -112,6 +105,34 @@ private extension RichTextFormatSheet {
             .overlay(Color.primary.opacity(0.1))
             .shadow(color: .black.opacity(0.1), radius: 5)
             .edgesIgnoringSafeArea(.all)
+    }
+
+    @ViewBuilder
+    var indentButtons: some View {
+        if #available(iOS 15.0, *) {
+            RichTextActionButtonGroup(
+                context: context,
+                actions: [.decreaseIndent, .increaseIndent]
+            )
+        } else {
+            RichTextActionButtonStack(
+                context: context,
+                actions: [.decreaseIndent, .increaseIndent]
+            ).prefersBordered()
+        }
+    }
+
+    @ViewBuilder
+    var styleButtons: some View {
+        if #available(iOS 15.0, *) {
+            RichTextStyleToggleGroup(
+                context: context
+            )
+        } else {
+            RichTextStyleToggleStack(
+                context: context
+            ).prefersBordered()
+        }
     }
 }
 

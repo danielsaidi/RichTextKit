@@ -22,10 +22,10 @@ public extension RichTextContext {
         case .dismissKeyboard: return true
         case .incrementFontSize: return true
         case .decrementFontSize: return true
-        case .redoLatestChange: return canRedoLatestChange
-        case .undoLatestChange: return canUndoLatestChange
         case .increaseIndent: return canIncreaseIndent
         case .decreaseIndent: return canDecreaseIndent
+        case .redoLatestChange: return canRedoLatestChange
+        case .undoLatestChange: return canUndoLatestChange
         }
     }
 
@@ -41,10 +41,10 @@ public extension RichTextContext {
         case .dismissKeyboard: stopEditingText()
         case .incrementFontSize: incrementFontSize()
         case .decrementFontSize: decrementFontSize()
+        case .increaseIndent: increaseIndent()
+        case .decreaseIndent: decreaseIndent()
         case .redoLatestChange: redoLatestChange()
         case .undoLatestChange: undoLatestChange()
-        case .decreaseIndent: decreaseIndent()
-        case .increaseIndent: increaseIndent()
         }
     }
 }

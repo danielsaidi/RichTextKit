@@ -27,10 +27,10 @@ public enum RTKL10n: String, CaseIterable, Identifiable {
     actionDismissKeyboard,
     actionIncrementFontSize,
     actionDecrementFontSize,
-    actionRedoLatestChange,
-    actionUndoLatestChange,
     actionIncreaseIndent,
     actionDecreaseIndent,
+    actionRedoLatestChange,
+    actionUndoLatestChange,
 
     fileFormatRtk,
     fileFormatPdf,

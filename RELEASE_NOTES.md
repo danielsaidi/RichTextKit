@@ -10,13 +10,22 @@ Until then, deprecated features may be removed in the next minor version.
 
 ### ✨ Features
 
+* `Image` has new `richTextIndentDecrease` and `richTextIndentIncrease` actions.
 * `NSTextAttachment` has a new `attachedImage` property.
+* `RichTextAction` has new `increaseIndent` and `decreaseIndent` actions.
 * `RichTextActionButtonGroup` is a new view that groups multiple action buttons together.
 * `RichTextAttributeWriter` now supports affecting the entire text by default.
 * `RichTextButtonGroup` is a new view that groups multiple buttons together.
 * `RichTextColorWriter` now supports affecting the entire text by default.
+* `RichTextContext` has new `canDecreaseIndent` and `canIncreaseIndent` properties.
+* `RichTextContext` has new `decreaseIndent()` and `increaseIndent()` functions.
 * `RichTextContext` has new `resetAttributedString()` and `setAttributedString()` functions.
 * `RichTextFontWriter` now supports affecting the entire text by default.
+* `RichTextFormatSheet` now groups related buttons and also adds indent buttons.
+* `RichTextIndent` is a new enum for handling text indent changes.
+* `RichTextIndentPicker` is a new enum for picking a text indent.
+* `RichTextIndentReader` is a new type for managing text indents.
+* `RichTextIndentWriter` is a new type for managing text indents.
 * `RichTextKeyboardToolbar` now supports modofying the format sheet before presenting it.
 * `RichTextStyleToggleGroup` is a new view that groups multiple toggles together.
 * `RichTextStyleWriter` now supports affecting the entire text by default.

@@ -12,16 +12,6 @@ import SwiftUI
  This enum simplifies working with different text indents.
  */
 public enum RichTextIndent: CaseIterable, Codable, Equatable, Identifiable {
-
-    /**
-     Initialize a rich text indent with a native indent.
-
-     - Parameters:
-       - indent: The native indent to use.
-     */
-//    public init(_ indent: CGFloat) {
-//
-//    }
     
     /// Reduce indent space.
     case decrease
