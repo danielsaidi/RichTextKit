@@ -6,14 +6,15 @@
 //  Copyright © 2023 Daniel Saidi. All rights reserved.
 //
 
-#if os(iOS) || os(tvOS)
+#if canImport(UIKit)
 import UIKit
 #endif
 
-#if os(macOS)
+#if canImport(AppKit)
 import AppKit
 #endif
 
+#if os(iOS) || os(macOS) || os(tvOS)
 public extension NSTextAttachment {
 
     /**
@@ -30,3 +31,4 @@ public extension NSTextAttachment {
         return ImageRepresentable(data: contents)
     }
 }
+#endif

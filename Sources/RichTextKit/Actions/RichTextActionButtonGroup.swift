@@ -6,6 +6,7 @@
 //  Copyright © 2022 Daniel Saidi. All rights reserved.
 //
 
+#if os(iOS) || os(macOS)
 import SwiftUI
 
 /**
@@ -15,7 +16,7 @@ import SwiftUI
  Since this view controls multiple values, it binds directly
  to a ``RichTextContext`` instead of individual values.
  */
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, *)
 public struct RichTextActionButtonGroup: View {
 
     /**
@@ -89,3 +90,4 @@ private extension View {
         }
     }
 }
+#endif
