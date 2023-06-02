@@ -35,6 +35,8 @@
 "menuFontLarger" = "Større";
 "menuFontSmaller" = "Mindre";
 "menuFormat" = "Format";
+"menuIndentIncrease" = "Øge indrykning";
+"menuIndentDecrease" = "Mindske indrykning";
 "menuPrint" = "Udskriv...";
 "menuSave" = "Spare";
 "menuSaveAs" = "Spare som...";

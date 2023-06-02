@@ -43,6 +43,8 @@ public enum RTKL10n: String, CaseIterable, Identifiable {
     menuFontLarger,
     menuFontSmaller,
     menuFormat,
+    menuIndentIncrease,
+    menuIndentDecrease,
     menuPrint,
     menuSave,
     menuSaveAs,

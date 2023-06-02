@@ -35,6 +35,8 @@
 "menuFontLarger" = "Größer";
 "menuFontSmaller" = "Kleiner";
 "menuFormat" = "Format";
+"menuIndentIncrease" = "Einrückungsebene Erhöhen";
+"menuIndentDecrease" = "Einrückungsebene Verringern";
 "menuPrint" = "Drucken...";
 "menuSave" = "Speichern";
 "menuSaveAs" = "Speichern als...";

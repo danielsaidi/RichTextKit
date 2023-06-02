@@ -33,8 +33,10 @@
 "menuExportAs" = "Exportera som...";
 "menuFont" = "Typsnitt";
 "menuFontLarger" = "Större";
-"menuFontSmaller" = "Mingre";
+"menuFontSmaller" = "Mindre";
 "menuFormat" = "Format";
+"menuIndentIncrease" = "Öka indragsnivå";
+"menuIndentDecrease" = "Minska indragsnivå";
 "menuPrint" = "Skriv ut...";
 "menuSave" = "Spara";
 "menuSaveAs" = "Spara som...";

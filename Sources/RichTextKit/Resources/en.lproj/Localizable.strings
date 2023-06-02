@@ -14,7 +14,7 @@
 "fontSize" = "Font Size";
 
 "color" = "Color";
-"foregroundColor" = "Text";
+"foregroundColor" = "Text Color";
 "backgroundColor" = "Background";
 
 "actionCopy" = "Copy";
@@ -35,6 +35,8 @@
 "menuFontLarger" = "Larger";
 "menuFontSmaller" = "Smaller";
 "menuFormat" = "Format";
+"menuIndentIncrease" = "Increase indentation level";
+"menuIndentDecrease" = "Reduce indentation level";
 "menuPrint" = "Print...";
 "menuSave" = "Save";
 "menuSaveAs" = "Save as...";
