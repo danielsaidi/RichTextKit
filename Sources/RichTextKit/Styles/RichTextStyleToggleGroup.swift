@@ -29,7 +29,7 @@ public struct RichTextStyleToggleGroup: View {
        - context: The context to affect.
        - styles: The styles to list, by default ``RichTextStyle/all``.
        - greedy: Whether or not the group is horizontally greedy, by default `true`.
-       - buttonStyle: The button style to use, by default ``RichTextStyleToggle/Style/standardNonProminent``.
+       - buttonStyle: The button style to use, by default ``RichTextStyleToggle/Style/standard``.
      */
     public init(
         context: RichTextContext,

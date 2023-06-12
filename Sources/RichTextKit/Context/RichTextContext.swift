@@ -9,17 +9,13 @@
 import SwiftUI
 
 /**
- This context can be used to observe state for any rich text
- view, as well as other editor-specific properties.
+ This observable context can be used to affect and observe a
+ ``RichTextEditor`` and its content.
 
- SwiftUI can observe the published properties to keep the UI
- of an app in sync, while a coordinator can subscribe to any
- property to keep a wrapped text view in sync.
-
- This context also defines some functions that just set some
- context state, that should then be handled by a coordinator.
- If you use the context without a coordinator, the functions
- will not do anything unless you observe the state yourself.
+ The SwiftUI ``RichTextEditor`` uses this context as well as
+ a ``RichTextCoordinator`` to keep itself updated when state
+ changes. The context also has properties and functions that
+ are used to set context state via the coordinator.
  */
 public class RichTextContext: ObservableObject {
 

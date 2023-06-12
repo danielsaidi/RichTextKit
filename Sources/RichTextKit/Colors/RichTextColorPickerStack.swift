@@ -11,7 +11,7 @@ import SwiftUI
 
 /**
  This view can be used to list a collection of pickers for a
- set of ``RichTextColor`` values in a horizontal line.
+ set of colors in a horizontal line.
 
  Since this view controls multiple values, it binds directly
  to a ``RichTextContext`` instead of individual values.

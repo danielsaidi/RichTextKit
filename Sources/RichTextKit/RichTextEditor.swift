@@ -10,20 +10,22 @@
 import SwiftUI
 
 /**
- This SwiftUI text editor can be used to edit rich text with
- an embedded ``RichTextView``, a ``RichTextContext`` as well
- as a ``RichTextCoordinator``.
+ This SwiftUI editor can be used to view and edit rich text.
 
- When you create an editor, you just have to provide it with
- a `text` binding, a rich text `context` and a data `format`.
- The editor will then setup everything so that you only have
- to use the `context` to observe changes and trigger changes
- within the editor.
+ The view uses a platform-specific ``RichTextView`` together
+ with a ``RichTextContext`` and a ``RichTextCoordinator`` to
+ make any changes to the rich text context display correctly
+ everywhere.
+
+ The rich text editor must be provided with a `text` binding,
+ a rich text `context` and a data `format`. It will then set
+ up the platform-specific view with the provided context and
+ coordinator, after which you can use the context to trigger
+ changes and observe any changes.
 
  Note that since the view wraps a native `UIKit` or `AppKit`
- text view, you can not provide it with toolbar actions like
- you would with any other pure SwiftUI view. This means that
- this doesn't work:
+ view, you can not provide it with any toolbar actions. This
+ means that this code doesn't work:
 
  ```swift
  RichTextEditor(text: $text, context: context)
@@ -35,8 +37,8 @@ import SwiftUI
  ```
 
  The above code will simply not show anything when you start
- to edit text. To work around this limitation, you can use a
- ``RichTextKeyboardToolbar`` instead.
+ to edit text. To work around the limitation on iOS, you can
+ use a ``RichTextKeyboardToolbar`` instead.
 
  You may have noticed that `updateUIView/updateNSView` don't
  contain any code. This is because having updates there will
