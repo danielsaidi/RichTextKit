@@ -106,8 +106,7 @@ private extension View {
     @ViewBuilder
     func withTitle(_ title: String) -> some View {
         #if os(iOS) || os(tvOS) || os(watchOS)
-        self.navigationBarTitleDisplayMode(.inline)
-            .navigationBarTitle(title)
+        self.navigationBarTitle(title)
         #else
         self
         #endif
