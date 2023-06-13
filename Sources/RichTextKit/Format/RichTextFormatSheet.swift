@@ -39,10 +39,14 @@ public struct RichTextFormatSheet: View {
     @Environment(\.presentationMode)
     private var presentationMode
 
+    private let topOffset = -35.0
+
     public var body: some View {
         NavigationView {
             VStack(spacing: 0) {
                 RichTextFontListPicker(selection: $context.fontName)
+                    .offset(y: topOffset)
+                    .padding(.bottom, topOffset)
                 Divider()
                 VStack(spacing: 10) {
                     VStack {
@@ -69,6 +73,7 @@ public struct RichTextFormatSheet: View {
                     }
                 }
             }
+            .navigationTitle("")
             .navigationBarTitleDisplayMode(.inline)
         }.navigationViewStyle(.stack)
     }

@@ -163,7 +163,7 @@ private extension RichTextColorPicker {
                     quickPickerButton(for: $0.element)
                 }
             }
-            .padding(.leading, spacing)
+            .padding(.horizontal, spacing)
         }.frame(maxWidth: .infinity)
     }
 
