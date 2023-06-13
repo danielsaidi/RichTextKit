@@ -93,6 +93,7 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 - ``RichTextColorReader``
 - ``RichTextColorWriter``
 - ``RichTextColorPicker``
+- ``RichTextColorPickerColor``
 - ``RichTextColorPickerStack``
 
 ### Commands
@@ -153,18 +154,18 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 - ``RichTextImageConfiguration``
 - ``RichTextImageInsertConfiguration``
 
-### Images
-
-- ``RichTextKeyboardToolbar``
-- ``RichTextKeyboardToolbarMenu``
-- ``RichTextKeyboardToolbarStyle``
-
 ### Indent
 
 - ``RichTextIndent``
 - ``RichTextIndentReader``
 - ``RichTextIndentWriter``
 - ``RichTextIndentPicker``
+
+### Keyboard
+
+- ``RichTextKeyboardToolbar``
+- ``RichTextKeyboardToolbarMenu``
+- ``RichTextKeyboardToolbarStyle``
 
 ### Localization
 
