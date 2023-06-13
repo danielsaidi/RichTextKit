@@ -47,17 +47,18 @@ public struct RichTextFormatSidebar: View {
             }
 
             SidebarSection(title: nil) {
+                RichTextAlignmentPicker(selection: $context.textAlignment)
+                    .pickerStyle(.segmented)
+                indentButtons
+            }
+
+            SidebarSection(title: nil) {
                 RichTextColorPicker(color: .foreground, context: context, quickPickerColors: .curated)
                 RichTextColorPicker(color: .background, context: context, quickPickerColors: .curated)
             }
             .font(.callout)
             .padding(.trailing, -8)
 
-            SidebarSection(title: nil) {
-                RichTextAlignmentPicker(selection: $context.textAlignment)
-                    .pickerStyle(.segmented)
-                indentButtons
-            }
             Spacer()
         }
         .padding(8)
