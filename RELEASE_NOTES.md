@@ -12,7 +12,11 @@ Until then, deprecated features may be removed in the next minor version.
 
 * `RichTextColorPicker` now supports hiding the icon.
 * `RichTextColorPicker` now supports specifying quick colors.
-* `RichTextColorPickerColor` is a new enum with curated colors. 
+* `RichTextColorPickerColor` is a new enum with curated colors.
+
+### 🗑️ Deprecations 
+
+* `RichTextColorPickerStack` has been deprecated. 
 
 
 
@@ -114,7 +118,7 @@ Furthermore, this release adds support for focus values and menu commands. You c
 * `RichTextKeyboardToolbar` no longer allocates width for hidden items.
 * `RichTextStyleToggle` is no longer tinted by default when inactive.
 
-### 🗑️ Deprecated
+### 🗑️ Deprecations
 
 * `PdfDataReader` has been renamed to `RichTextPdfDataReader`.
 * `RichTextDataWriter` is deprecated.
