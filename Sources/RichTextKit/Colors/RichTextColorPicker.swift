@@ -10,7 +10,7 @@
 import SwiftUI
 
 /**
- This button can be used to select a certain color value. It
+ This picker can be used to select a certain color value. It
  renders an appropriate icon next to the color picker and an
  optional list of horizontally scrolling quick colors.
 
@@ -164,6 +164,7 @@ private extension RichTextColorPicker {
                 }
             }
             .padding(.horizontal, spacing)
+            .padding(.vertical, 2)
         }.frame(maxWidth: .infinity)
     }
 
@@ -264,7 +265,7 @@ struct RichTextColorPicker_Previews: PreviewProvider {
                     color: .background,
                     value: $background,
                     quickPickerColors: .curated
-                ).background(Color.red)
+                )
             }.padding(.leading)
         }
     }
