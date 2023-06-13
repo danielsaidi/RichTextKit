@@ -36,8 +36,10 @@ public struct RichTextFormatSidebar: View {
     @ObservedObject
     private var context: RichTextContext
 
+    private let spacing = 10.0
+
     public var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: spacing) {
             SidebarSection(title: RTKL10n.font.text) {
                 RichTextFontPicker(selection: $context.fontName, fontSize: 12)
                 HStack {
@@ -53,8 +55,10 @@ public struct RichTextFormatSidebar: View {
             }
 
             SidebarSection(title: nil) {
-                RichTextColorPicker(color: .foreground, context: context, quickPickerColors: .curated)
-                RichTextColorPicker(color: .background, context: context, quickPickerColors: .curated)
+                VStack(spacing: 4) {
+                    RichTextColorPicker(color: .foreground, context: context, quickPickerColors: .curated)
+                    RichTextColorPicker(color: .background, context: context, quickPickerColors: .curated)
+                }
             }
             .font(.callout)
             .padding(.trailing, -8)

@@ -6,6 +6,12 @@ Until then, deprecated features may be removed in the next minor version.
 
 
 
+## 0.7.1
+
+This version tweaks the new color picker component a little.
+ 
+
+
 ## 0.7
 
 ### ✨ Features

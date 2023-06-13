@@ -157,7 +157,7 @@ private extension RichTextColorPicker {
     }
 
     var quickPicker: some View {
-        ScrollView(.horizontal) {
+        ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: spacing) {
                 ForEach(Array(quickColors.enumerated()), id: \.offset) {
                     quickPickerButton(for: $0.element)
@@ -176,7 +176,7 @@ private extension RichTextColorPicker {
                 .fill(color)
                 .shadow(radius: 1, x: 0, y: 1)
                 .frame(width: size, height: size)
-                .padding(.vertical, isSelected(color) ? 0 : 10)
+                .padding(.vertical, isSelected(color) ? 0 : 5)
                 .animation(.default, value: value.wrappedValue)
         }.buttonStyle(.plain)
     }

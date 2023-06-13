@@ -39,6 +39,7 @@ public struct RichTextFormatSheet: View {
     @Environment(\.presentationMode)
     private var presentationMode
 
+    private let padding = 10.0
     private let topOffset = -35.0
 
     public var body: some View {
@@ -48,16 +49,17 @@ public struct RichTextFormatSheet: View {
                     .offset(y: topOffset)
                     .padding(.bottom, topOffset)
                 Divider()
-                VStack(spacing: 10) {
+                VStack(spacing: padding) {
                     VStack {
                         fontRow
                         paragraphRow
-                    }.padding(.horizontal)
-                    VStack {
+                        Divider()
+                    }.padding(.horizontal, padding)
+                    VStack(spacing: padding) {
                         RichTextColorPicker(color: .foreground, context: context, quickPickerColors: .curated)
                         RichTextColorPicker(color: .background, context: context, quickPickerColors: .curated)
-                    }.padding(.leading)
-                }.padding(.vertical)
+                    }.padding(.leading, padding)
+                }.padding(.vertical, padding)
                 .environment(\.sizeCategory, .medium)
                 .accentColor(.primary)
                 .background(background)
