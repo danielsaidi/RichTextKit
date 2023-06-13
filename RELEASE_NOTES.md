@@ -14,6 +14,11 @@ Until then, deprecated features may be removed in the next minor version.
 * `RichTextColorPicker` now supports specifying quick colors.
 * `RichTextColorPickerColor` is a new enum with curated colors.
 
+### 💡 Adjustments
+
+* `RichTextFormatSheet` adds curated colors to its color pickers.
+* `RichTextFormatSidebar` adds curated colors to its color pickers. 
+
 ### 🗑️ Deprecations 
 
 * `RichTextColorPickerStack` has been deprecated. 

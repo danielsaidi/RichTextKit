@@ -44,13 +44,17 @@ public struct RichTextFormatSheet: View {
             VStack(spacing: 0) {
                 RichTextFontListPicker(selection: $context.fontName)
                 Divider()
-                VStack(spacing: 20) {
-                    fontRow
-                    paragraphRow
-                    colorRow
-                }
+                VStack(spacing: 10) {
+                    VStack {
+                        fontRow
+                        paragraphRow
+                    }.padding(.horizontal)
+                    VStack {
+                        RichTextColorPicker(color: .foreground, context: context, quickPickerColors: .curated)
+                        RichTextColorPicker(color: .background, context: context, quickPickerColors: .curated)
+                    }.padding(.leading)
+                }.padding(.vertical)
                 .environment(\.sizeCategory, .medium)
-                .padding()
                 .accentColor(.primary)
                 .background(background)
             }
@@ -71,13 +75,6 @@ public struct RichTextFormatSheet: View {
 }
 
 private extension RichTextFormatSheet {
-
-    var colorRow: some View {
-        HStack {
-            Spacer()
-            RichTextColorPickerStack(context: context)
-        }
-    }
 
     var fontRow: some View {
         HStack {

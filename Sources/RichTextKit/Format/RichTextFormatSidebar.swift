@@ -45,18 +45,14 @@ public struct RichTextFormatSidebar: View {
                     RichTextFontSizePickerStack(context: context)
                 }
             }
+
             SidebarSection(title: nil) {
-                HStack {
-                    Text(RTKL10n.foregroundColor.text)
-                    Spacer()
-                    RichTextColorPicker(color: .foreground, context: context)
-                }
-                HStack {
-                    Text(RTKL10n.backgroundColor.text)
-                    Spacer()
-                    RichTextColorPicker(color: .background, context: context)
-                }
-            }.font(.callout)
+                RichTextColorPicker(color: .foreground, context: context, quickPickerColors: .curated)
+                RichTextColorPicker(color: .background, context: context, quickPickerColors: .curated)
+            }
+            .font(.callout)
+            .padding(.trailing, -8)
+
             SidebarSection(title: nil) {
                 RichTextAlignmentPicker(selection: $context.textAlignment)
                     .pickerStyle(.segmented)

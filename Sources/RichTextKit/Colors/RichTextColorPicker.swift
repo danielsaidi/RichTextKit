@@ -153,7 +153,7 @@ private extension RichTextColorPicker {
     var picker: some View {
         ColorPicker("", selection: value)
             .fixedSize()
-            .padding(spacing)
+            .padding(.horizontal, spacing)
     }
 
     var quickPicker: some View {
@@ -163,7 +163,7 @@ private extension RichTextColorPicker {
                     quickPickerButton(for: $0.element)
                 }
             }
-            .padding([.vertical, .leading], spacing)
+            .padding(.leading, spacing)
         }.frame(maxWidth: .infinity)
     }
 
@@ -250,7 +250,7 @@ struct RichTextColorPicker_Previews: PreviewProvider {
         private var background = Color.white
 
         var body: some View {
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 0) {
                 RichTextColorPicker(
                     color: .foreground,
                     value: $text
@@ -264,7 +264,7 @@ struct RichTextColorPicker_Previews: PreviewProvider {
                     color: .background,
                     value: $background,
                     quickPickerColors: .curated
-                )
+                ).background(Color.red)
             }.padding(.leading)
         }
     }
