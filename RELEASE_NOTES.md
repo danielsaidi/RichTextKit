@@ -6,6 +6,16 @@ Until then, deprecated features may be removed in the next minor version.
 
 
 
+## 0.7
+
+### ✨ Features
+
+* `RichTextColorPicker` now supports hiding the icon.
+* `RichTextColorPicker` now supports specifying quick colors.
+* `RichTextColorPickerColor` is a new enum with curated colors. 
+
+
+
 ## 0.6.1
 
 This update reverts a `RichTextEditor` view update that made the editor less performant. 
