@@ -6,15 +6,9 @@ Until then, deprecated features may be removed in the next minor version.
 
 
 
-## 0.7.3
-
-This version makes keyboard toolbar menu prefer fixed menu order.
- 
-
-
 ## 0.7.2
 
-This version adjusts the  tweaks the new color picker component a little.
+This version makes the keyboard toolbar menu prefer fixed menu order.
  
 
 
