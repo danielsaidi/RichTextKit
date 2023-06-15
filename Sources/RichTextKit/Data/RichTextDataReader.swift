@@ -59,7 +59,8 @@ private extension RichTextDataReader {
     func richTextArchivedData() throws -> Data {
         try NSKeyedArchiver.archivedData(
             withRootObject: richText,
-            requiringSecureCoding: false)
+            requiringSecureCoding: false
+        )
     }
 
     /**

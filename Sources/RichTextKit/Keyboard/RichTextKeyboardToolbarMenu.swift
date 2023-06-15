@@ -15,8 +15,7 @@ import SwiftUI
 
  The glitch is that the menu label can be incorrectly offset
  vertically, beyound the bounds of the menu. If that happens,
- use this view instead to ensure that the label is correctly
- positioned.
+ use this view to ensure that it's correctly positioned.
  */
 public struct RichTextKeyboardToolbarMenu<Label: View, Content: View>: View {
 
@@ -40,7 +39,50 @@ public struct RichTextKeyboardToolbarMenu<Label: View, Content: View>: View {
         } label: {
             label().opacity(0)
         }
+        .preferesMenuOrderFixed()
         .background(label())
+    }
+}
+
+private extension Menu {
+
+    @ViewBuilder
+    func preferesMenuOrderFixed() -> some View {
+        if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
+            self.menuOrder(.fixed)
+        } else {
+            self
+        }
+    }
+}
+
+struct RichTextKeyboardToolbarMenu_Previews: PreviewProvider {
+
+    @ViewBuilder
+    static var buttons: some View {
+        Button("1") {}
+        Button("2") {}
+        Button("3") {}
+    }
+
+    static var previews: some View {
+        RichTextKeyboardToolbarMenu {
+            if #available(iOS 15.0, *) {
+                Section("Title") {
+                    buttons
+                }
+                Section {
+                    ControlGroup {
+                        buttons
+                    }
+                }
+            } else {
+                buttons
+            }
+        } label: {
+            Label("Menu", systemImage: "ellipsis.circle")
+        }
+
     }
 }
 #endif
