@@ -226,4 +226,15 @@ public extension RichTextView {
         textStorage
     }
 }
+
+// MARK: - Additional Pasteboard Types
+
+public extension RichTextView {
+    override var readablePasteboardTypes: [NSPasteboard.PasteboardType] {
+        var pasteboardTypes = super.readablePasteboardTypes
+        pasteboardTypes.append(.png)
+        return pasteboardTypes
+    }
+}
+
 #endif
