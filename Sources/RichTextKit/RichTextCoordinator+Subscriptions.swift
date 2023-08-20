@@ -319,13 +319,17 @@ internal extension RichTextCoordinator {
     func setIsEditing(to newValue: Bool) {
         if newValue == textView.isFirstResponder { return }
         if newValue {
+#if os(iOS)
             textView.becomeFirstResponder()
-        } else {
-            #if os(iOS)
-            textView.resignFirstResponder()
-            #else
+#else
             print("macOS currently doesn't resign first responder.")
-            #endif
+#endif
+        } else {
+#if os(iOS)
+            textView.resignFirstResponder()
+#else
+            print("macOS currently doesn't resign first responder.")
+#endif
         }
     }
 
