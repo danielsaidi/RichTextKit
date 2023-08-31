@@ -229,14 +229,15 @@ public extension RichTextContext {
 
      - Parameters:
        - image: The image to paste.
-       - index: The index to paste at.
+       - index: The index to paste at, by default the `selectedRange` location.
        - moveCursorToPastedContent: Whether or not to move the cursor to the end of the pasted content, by default `false`.
      */
     func pasteImage(
         _ image: ImageRepresentable,
-        at index: Int,
+        at index: Int? = nil,
         moveCursorToPastedContent: Bool = false
     ) {
+        let index = index ?? selectedRange.location
         shouldPasteImage = (image, index, moveCursorToPastedContent)
     }
 
@@ -245,14 +246,15 @@ public extension RichTextContext {
 
      - Parameters:
        - images: The images to paste.
-       - index: The index to paste at.
+       - index: The index to paste at, by default the `selectedRange` location.
        - moveCursorToPastedContent: Whether or not to move the cursor to the end of the pasted content, by default `false`.
      */
     func pasteImage(
         _ images: [ImageRepresentable],
-        at index: Int,
+        at index: Int? = nil,
         moveCursorToPastedContent: Bool = false
     ) {
+        let index = index ?? selectedRange.location
         shouldPasteImages = (images, index, moveCursorToPastedContent)
     }
 
@@ -261,14 +263,15 @@ public extension RichTextContext {
 
      - Parameters:
        - text: The text to paste.
-       - index: The index to paste at.
+       - index: The index to paste at, by default the `selectedRange` location.
        - moveCursorToPastedContent: Whether or not to move the cursor to the end of the pasted content, by default `false`.
      */
     func pasteText(
         _ text: String,
-        at index: Int,
+        at index: Int? = nil,
         moveCursorToPastedContent: Bool = false
     ) {
+        let index = index ?? selectedRange.location
         shouldPasteText = (text, index, moveCursorToPastedContent)
     }
 

@@ -15,6 +15,7 @@ These properties were never made to be used from the outside. Instead, use the f
 ### ✨ Features
 
 * `RichTextContext` has a new `attributedString` property.
+* `RichTextContext`'s paste functions now use the selected range index as default index.
 
 ### 💡 Adjustments
 
