@@ -16,6 +16,15 @@ These properties were never made to be used from the outside. Instead, use the f
 
 * `RichTextContext` has a new `attributedString` property.
 
+### 💡 Adjustments
+
+* `RichTextViewComponent` image pasting has been rewritten.
+* `RichTextViewComponent` will now clear the selected range when pasting in images using that range.
+
+### 🐛 Bug Fixes
+        
+* `RichTextViewComponent` now properly restores the font size after pasting an image.  
+
 ### 🗑️ Deprecations 
 
 * `RichTextContext` trigger properties have been made internal. 

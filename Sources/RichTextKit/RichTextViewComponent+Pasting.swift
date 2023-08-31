@@ -42,7 +42,8 @@ public extension RichTextViewComponent {
         pasteImages(
             [image],
             at: index,
-            moveCursorToPastedContent: moveCursorToPastedContent)
+            moveCursorToPastedContent: moveCursorToPastedContent
+        )
     }
 
     /**
@@ -59,24 +60,24 @@ public extension RichTextViewComponent {
     func pasteImages(
         _ images: [ImageRepresentable],
         at index: Int,
-        moveCursorToPastedContent: Bool = false
+        moveCursorToPastedContent move: Bool = false
     ) {
         #if os(iOS) || os(tvOS) || os(macOS)
         guard validateImageInsertion(for: imagePasteConfiguration) else { return }
-        let content = NSMutableAttributedString(attributedString: richText)
+        let items = images.count * 2   // The number of inserted "items" is the images and a newline for each
         let insertRange = NSRange(location: index, length: 0)
         let safeInsertRange = safeRange(for: insertRange)
-        let insertedItems = images.count * 2   // The number of inserted "items" is the images and a newline for each
-        let safeMoveIndex = safeInsertRange.location + insertedItems
-        let attributes = content.richTextAttributes(at: safeInsertRange)
-        let attributeRange = NSRange(location: index, length: insertedItems)
-        let safeAttributeRange = safeRange(for: attributeRange)
-        images.reversed().forEach {
-            performPasteImage($0, at: index)
-        }
-        mutableRichText?.setRichTextAttributes(attributes, at: safeAttributeRange)
-        if moveCursorToPastedContent {
-            moveInputCursor(to: safeMoveIndex)
+        let isSelectedRange = (index == selectedRange.location)
+        if isSelectedRange { deleteCharacters(in: selectedRange) }
+        if move { moveInputCursor(to: index) }
+        let fontSize = currentFontSize
+        images.reversed().forEach { performPasteImage($0, at: index) }
+        if move { moveInputCursor(to: safeInsertRange.location + items) }
+        if move || isSelectedRange, let fontSize {
+            DispatchQueue.main.async {
+                self.setFontSize(to: fontSize)
+                self.moveInputCursor(to: self.selectedRange.location)
+            }
         }
         #else
         assertionFailure("Image pasting is not supported on this platform")

@@ -130,27 +130,27 @@ public class RichTextContext: ObservableObject {
     
     /// Whether or not to copy the current text selection.
     @Published
-    public var shouldCopySelection = false
+    var shouldCopySelection = false
 
     /// Whether or not to redo the latest undone change.
     @Published
-    public var shouldRedoLatestChange = false
+    var shouldRedoLatestChange = false
 
     /// Set this property to trigger a paste operation.
     @Published
-    public var shouldPasteImage: (image: ImageRepresentable, atIndex: Int, moveCursor: Bool)?
+    var shouldPasteImage: (image: ImageRepresentable, atIndex: Int, moveCursor: Bool)?
 
     /// Set this property to trigger an image paste operation.
     @Published
-    public var shouldPasteImages: (images: [ImageRepresentable], atIndex: Int, moveCursor: Bool)?
+    var shouldPasteImages: (images: [ImageRepresentable], atIndex: Int, moveCursor: Bool)?
 
     /// Set this property to trigger a text paste operation.
     @Published
-    public var shouldPasteText: (text: String, atIndex: Int, moveCursor: Bool)?
+    var shouldPasteText: (text: String, atIndex: Int, moveCursor: Bool)?
 
     /// Set this property to trigger a string update.
     @Published
-    public var shouldSetAttributedString: NSAttributedString?
+    var shouldSetAttributedString: NSAttributedString?
     
     /// Set this property to trigger a range change.
     @Published
@@ -158,15 +158,15 @@ public class RichTextContext: ObservableObject {
 
     /// Whether or not to undo the latest change.
     @Published
-    public var shouldUndoLatestChange = false
+    var shouldUndoLatestChange = false
 
     /// Whether or not to decrease the current indent.
     @Published
-    public var shouldDecreaseIndent = false
+    var shouldDecreaseIndent = false
     
     /// Whether or not to increase the current indent.
     @Published
-    public var shouldIncreaseIndent = false
+    var shouldIncreaseIndent = false
 }
 
 public extension RichTextContext {
