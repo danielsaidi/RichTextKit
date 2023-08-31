@@ -13,7 +13,8 @@ struct ContentView: View {
         NavigationView {
             DemoScreen.editor.view
                 .navigationBarTitleDisplayMode(.inline)
-        }.navigationViewStyle(.stack)
+        }
+        .navigationViewStyle(.stack)
     }
 }
 

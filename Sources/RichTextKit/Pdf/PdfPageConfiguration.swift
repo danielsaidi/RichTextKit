@@ -27,14 +27,10 @@ public struct PdfPageConfiguration: Equatable {
         self.pageMargins = pageMargins
     }
     
-    /**
-     The page size in points.
-     */
+    /// The page size in points.
     public var pageSize: CGSize
 
-    /**
-     The page margins, by default `72`.
-     */
+    /// The page margins.
     public var pageMargins: PdfPageMargins
 }
 
@@ -50,16 +46,12 @@ public extension PdfPageConfiguration {
 
 public extension PdfPageConfiguration {
 
-    /**
-     Get the paper rectangle.
-     */
+    /// Get the paper rectangle.
     var paperRect: CGRect {
         CGRect(x: 0, y: 0, width: pageSize.width, height: pageSize.height)
     }
 
-    /**
-     Get the printable rectangle.
-     */
+    /// Get the printable rectangle.
     var printableRect: CGRect {
         CGRect(
             x: pageMargins.left,

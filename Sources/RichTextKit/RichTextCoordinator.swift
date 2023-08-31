@@ -202,6 +202,11 @@ extension RichTextCoordinator {
     func syncContextWithTextViewAfterDelay() {
         let styles = textView.currentRichTextStyles
 
+        let string = textView.attributedString
+        if richTextContext.attributedString != string {
+            richTextContext.attributedString = string
+        }
+        
         let range = textView.selectedRange
         if richTextContext.selectedRange != range {
             richTextContext.selectedRange = range

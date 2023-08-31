@@ -28,7 +28,8 @@ public protocol RichTextExportUrlResolver {
     func fileUrl(
         withName fileName: String,
         extension: String,
-        in directory: FileManager.SearchPathDirectory) throws -> URL
+        in directory: FileManager.SearchPathDirectory
+    ) throws -> URL
 
     /**
      Try to generate a unique file url in a certain directory.
@@ -41,7 +42,8 @@ public protocol RichTextExportUrlResolver {
     func uniqueFileUrl(
         withName fileName: String,
         extension: String,
-        in directory: FileManager.SearchPathDirectory) throws -> URL
+        in directory: FileManager.SearchPathDirectory
+    ) throws -> URL
 
     /**
      Get a unique url for the provided url, to ensure that a

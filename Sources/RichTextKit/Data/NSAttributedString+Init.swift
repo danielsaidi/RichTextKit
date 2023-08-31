@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  NSAttributedString+Init.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-06-03.

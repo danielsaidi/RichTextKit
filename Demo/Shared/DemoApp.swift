@@ -28,7 +28,7 @@ struct DemoApp: App {
                     print("TODO: Share file for \($0.id)")
                     return nil
                 },
-                pdfNSSharingAction:  {
+                pdfNSSharingAction: {
                     print("TODO: Share PDF file")
                     return nil
                 },

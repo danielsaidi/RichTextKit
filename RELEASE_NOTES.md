@@ -6,6 +6,22 @@ Until then, deprecated features may be removed in the next minor version.
 
 
 
+## 0.8
+
+This version makes the observable trigger properties internal.
+
+These properties were never made to be used from the outside. Instead, use the functions that trigger them.
+
+### ✨ Features
+
+* `RichTextContext` has a new `attributedString` property.
+
+### 🗑️ Deprecations 
+
+* `RichTextContext` trigger properties have been made internal. 
+
+
+
 ## 0.7.2
 
 This version makes the keyboard toolbar menu prefer fixed menu order.

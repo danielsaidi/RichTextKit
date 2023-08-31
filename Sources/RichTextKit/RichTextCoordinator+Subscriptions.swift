@@ -27,7 +27,6 @@ extension RichTextCoordinator {
         subscribeToIsItalic()
         subscribeToIsStrikethrough()
         subscribeToIsUnderlined()
-        subscribeToSelectedRange()
         subscribeToShouldCopySelection()
         subscribeToShouldIncreaseIndent()
         subscribeToShouldDecreaseIndent()
@@ -35,6 +34,7 @@ extension RichTextCoordinator {
         subscribeToShouldPasteImages()
         subscribeToShouldPasteText()
         subscribeToShouldRedoLatestChange()
+        subscribeToShouldSelectRange()
         subscribeToShouldSetAttributedString()
         subscribeToShouldUndoLatestChange()
     }
@@ -137,15 +137,7 @@ private extension RichTextCoordinator {
                 receiveValue: { [weak self] in self?.setStyle(.underlined, to: $0) })
             .store(in: &cancellables)
     }
-
-    func subscribeToSelectedRange() {
-        richTextContext.$selectedRangeChange
-            .sink(
-                receiveCompletion: { _ in },
-                receiveValue: { [weak self] in self?.setSelectedRange(to: $0) })
-            .store(in: &cancellables)
-    }
-
+    
     func subscribeToShouldCopySelection() {
         richTextContext.$shouldCopySelection
             .sink(
@@ -191,6 +183,14 @@ private extension RichTextCoordinator {
             .sink(
                 receiveCompletion: { _ in },
                 receiveValue: { [weak self] in self?.setAttributedString(to: $0) })
+            .store(in: &cancellables)
+    }
+    
+    func subscribeToShouldSelectRange() {
+        richTextContext.$shouldSelectRange
+            .sink(
+                receiveCompletion: { _ in },
+                receiveValue: { [weak self] in self?.setSelectedRange(to: $0) })
             .store(in: &cancellables)
     }
 

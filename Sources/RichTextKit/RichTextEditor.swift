@@ -14,18 +14,18 @@ import SwiftUI
 
  The view uses a platform-specific ``RichTextView`` together
  with a ``RichTextContext`` and a ``RichTextCoordinator`` to
- make any changes to the rich text context display correctly
- everywhere.
-
- The rich text editor must be provided with a `text` binding,
- a rich text `context` and a data `format`. It will then set
- up the platform-specific view with the provided context and
- coordinator, after which you can use the context to trigger
- changes and observe any changes.
-
- Note that since the view wraps a native `UIKit` or `AppKit`
- view, you can not provide it with any toolbar actions. This
- means that this code doesn't work:
+ make view and context changes sync correctly. You will then
+ be able to use the `richTextContext` to trigger and observe
+ changes to the text editor.
+ 
+ Note that changing the value of the `text` binding from the
+ outside will not (yet) update the editor. Until it is fixed,
+ use ``RichTextContext/setAttributedString(to:)`` to set the
+ string to another value.
+ 
+ Since the view wraps a native `UIKit` or `AppKit` text view,
+ you can't apply `.toolbar` modifiers to it, like you can do
+ with other SwiftUI views. This means that this doesn't work:
 
  ```swift
  RichTextEditor(text: $text, context: context)
@@ -36,9 +36,8 @@ import SwiftUI
      }
  ```
 
- The above code will simply not show anything when you start
- to edit text. To work around the limitation on iOS, you can
- use a ``RichTextKeyboardToolbar`` instead.
+ This code will not show anything when you start to edit the
+ text. To work around this use a ``RichTextKeyboardToolbar``.
 
  You may have noticed that `updateUIView/updateNSView` don't
  contain any code. This is because having updates there will
@@ -129,9 +128,7 @@ public struct RichTextEditor: ViewRepresentable {
 
 public extension RichTextEditor {
 
-    /**
-     Get the currently selected range.
-     */
+    /// Get the currently selected range.
     var selectedRange: NSRange {
         textView.selectedRange
     }
@@ -142,9 +139,7 @@ public extension RichTextEditor {
 
 public extension RichTextEditor {
 
-    /**
-     Get the rich text that is managed by the editor.
-     */
+    /// Get the string that is managed by the editor.
     var attributedString: NSAttributedString {
         text.wrappedValue
     }
@@ -155,9 +150,7 @@ public extension RichTextEditor {
 
 public extension RichTextEditor {
 
-    /**
-     Get the mutable rich text that is managed by the editor.
-     */
+    /// Get the mutable string that is managed by the editor.
     var mutableAttributedString: NSMutableAttributedString? {
         textView.mutableAttributedString
     }
