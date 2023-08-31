@@ -83,7 +83,7 @@ public extension RichTextReader {
     func safeRange(for range: NSRange) -> NSRange {
         let length = attributedString.length
         return NSRange(
-            location: max(0, min(length-1, range.location)),
+            location: max(0, min(length, range.location)),
             length: min(range.length, max(0, length - range.location)))
     }
 }

@@ -97,6 +97,7 @@ public extension RichTextViewComponent {
         at index: Int,
         moveCursorToPastedContent: Bool = false
     ) {
+        let selected = selectedRange
         let content = NSMutableAttributedString(attributedString: richText)
         let insertString = NSMutableAttributedString(string: text)
         let insertRange = NSRange(location: index, length: 0)

@@ -12,6 +12,8 @@ This version makes the observable trigger properties internal.
 
 These properties were never made to be used from the outside. Instead, use the functions that trigger them.
 
+`IMPORTANT` The `safeRange` adjustment may lead to crashes, although I haven't been able to make it crash. If so, investigate. Perhaps we should use `attributedString.string.count` instead?
+
 ### ✨ Features
 
 * `RichTextContext` has a new `attributedString` property.
@@ -19,11 +21,13 @@ These properties were never made to be used from the outside. Instead, use the f
 
 ### 💡 Adjustments
 
+* `RichTextReader` `safeRange` no longer subtracts 1 from the string length. 
 * `RichTextViewComponent` image pasting has been rewritten.
 * `RichTextViewComponent` will now clear the selected range when pasting in images using that range.
 
 ### 🐛 Bug Fixes
-        
+                
+* `RichTextReader` safe range fix makes pasting text at the end behave better.
 * `RichTextViewComponent` now properly restores the font size after pasting an image.  
 
 ### 🗑️ Deprecations 
