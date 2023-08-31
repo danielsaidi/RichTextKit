@@ -79,11 +79,16 @@ public extension RichTextReader {
 
      - Parameters:
        - range: The range for which to get a safe range.
+       - isAttributeOperation: Set this to `true` to avoid last position.
      */
-    func safeRange(for range: NSRange) -> NSRange {
+    func safeRange(
+        for range: NSRange,
+        isAttributeOperation: Bool = false
+    ) -> NSRange {
         let length = attributedString.length
+        let subtract = isAttributeOperation ? 1 : 0
         return NSRange(
-            location: max(0, min(length, range.location)),
+            location: max(0, min(length - subtract, range.location)),
             length: min(range.length, max(0, length - range.location)))
     }
 }

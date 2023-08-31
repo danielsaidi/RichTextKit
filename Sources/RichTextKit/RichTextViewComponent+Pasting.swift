@@ -98,6 +98,7 @@ public extension RichTextViewComponent {
         moveCursorToPastedContent: Bool = false
     ) {
         let selected = selectedRange
+        let isSelectedRange = (index == selected.location)
         let content = NSMutableAttributedString(attributedString: richText)
         let insertString = NSMutableAttributedString(string: text)
         let insertRange = NSRange(location: index, length: 0)
@@ -111,6 +112,8 @@ public extension RichTextViewComponent {
         setRichText(content)
         if moveCursorToPastedContent {
             moveInputCursor(to: safeMoveIndex)
+        } else if isSelectedRange {
+            moveInputCursor(to: selected.location + text.count)
         }
     }
 }

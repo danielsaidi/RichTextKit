@@ -21,7 +21,8 @@ These properties were never made to be used from the outside. Instead, use the f
 
 ### 💡 Adjustments
 
-* `RichTextReader` `safeRange` no longer subtracts 1 from the string length. 
+* `RichTextReader` `safeRange` no longer subtracts 1 from the string length.
+* `RichTextReader` will now move the cursor after the pasted text, if it's pasted at selected range. 
 * `RichTextViewComponent` image pasting has been rewritten.
 * `RichTextViewComponent` will now clear the selected range when pasting in images using that range.
 
