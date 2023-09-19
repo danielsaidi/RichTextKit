@@ -6,8 +6,8 @@
 //
 
 import SwiftUI
-import RichTextKit
 
+#if (macOS)
 struct RichTextScriptButtons: View {
 
     /**
@@ -73,3 +73,4 @@ struct RichTextScriptButtons: View {
         }
     }
 }
+#endif

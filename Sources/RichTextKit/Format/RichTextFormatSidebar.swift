@@ -63,6 +63,10 @@ public struct RichTextFormatSidebar: View {
             .font(.callout)
             .padding(.trailing, -8)
 
+            SidebarSection(title: nil) {
+                RichTextScriptButtons(context: context)
+            }
+
             Spacer()
         }
         .padding(8)
