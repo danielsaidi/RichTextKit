@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-#if (macOS)
+#if os(macOS)
 struct RichTextScriptButtons: View {
 
     /**
