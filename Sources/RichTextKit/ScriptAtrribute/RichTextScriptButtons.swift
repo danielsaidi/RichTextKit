@@ -1,6 +1,6 @@
 //
 //  RichTextScriptButtons.swift
-//  QBank
+//  RichTextKit
 //
 //  Created by Mahmudul Hasan on 2023-09-19.
 //
