@@ -39,55 +39,47 @@ public extension RichTextIndentWriter {
      is highly a result of trial and error.
 
      - Parameters:
-       - indent: The indent to set.
+       - points: The indent to set.
        - range: The range for which to set the indent.
      */
-    func setRichTextIndent(
-        _ indent: RichTextIndent,
+    func stepRichTextIndent(
+        points: CGFloat,
         at range: NSRange
     ) -> RichTextAttributes? {
         let text = richText.string
 
         // Text view has selected text
         if range.length > 0 {
-            return stepRichTextIndent(indent, at: range)
+            return stepIndentInternal(points: points, at: range)
         }
 
         // The cursor is at the beginning of the text
         if range.location == 0 {
-            return stepRichTextIndent(indent, atIndex: 0)
+            return stepRichTextIndent(points: points, atIndex: 0)
         }
 
         // The cursor is immediately before a newline
         if let char = text.character(at: range.location), char.isNewLineSeparator {
             let location = UInt(range.location)
             let index = text.findIndexOfCurrentParagraph(from: location)
-            return stepRichTextIndent(indent, atIndex: index)
+            return stepRichTextIndent(points: points, atIndex: index)
         }
 
         // The cursor is somewhere within a paragraph
         let location = UInt(range.location)
         let index = text.findIndexOfCurrentParagraph(from: location)
-        return stepRichTextIndent(indent, atIndex: index)
+        return stepRichTextIndent(points: points, atIndex: index)
     }
-}
-
-private extension RichTextIndentWriter {
-
+    
+    /**
+     Step the text indent at a certain index.
+     
+     - Parameters:
+       - points: The number of points to step.
+       - index: The index to affect.
+     */
     func stepRichTextIndent(
-        _ indent: RichTextIndent,
-        at range: NSRange
-    ) -> RichTextAttributes? {
-        let text = richText.string
-        _ = range.length
-        let location = range.location
-        let ulocation = UInt(location)
-        let index = text.findIndexOfCurrentParagraph(from: ulocation)
-        return stepRichTextIndent(indent, atIndex: index)
-    }
-
-    func stepRichTextIndent(
-        _ indent: RichTextIndent,
+        points: CGFloat,
         atIndex index: Int
     ) -> RichTextAttributes? {
         guard let text = mutableRichText else { return nil }
@@ -96,9 +88,9 @@ private extension RichTextIndentWriter {
         var attributes = text.attributes(at: safeRange.location, effectiveRange: nil)
         let style = attributes[.paragraphStyle] as? NSMutableParagraphStyle ?? NSMutableParagraphStyle()
         
-        let indentation = max(indent == .decrease ? style.headIndent - 30.0 : style.headIndent + 30.0, 0)
-        style.firstLineHeadIndent = indentation
-        style.headIndent = indentation
+        let newIndent = max(style.headIndent + points, 0)
+        style.firstLineHeadIndent = newIndent
+        style.headIndent = newIndent
         
         attributes[.paragraphStyle] = style
         text.beginEditing()
@@ -110,16 +102,44 @@ private extension RichTextIndentWriter {
     }
 
     /**
-     Set the text indent at the provided `index`.
-
+     Step the text indent at a certain index.
+     
      - Parameters:
-       - indent: The indent to set.
-       - index: The text index for which to set the indent.
+       - points: The number of points to step.
+       - index: The index to affect.
      */
     func stepRichTextIndent(
-        _ indent: RichTextIndent,
+        points: CGFloat,
         atIndex index: UInt
     ) -> RichTextAttributes? {
-        stepRichTextIndent(indent, atIndex: Int(index))
+        stepRichTextIndent(
+            points: points,
+            atIndex: Int(index)
+        )
+    }
+}
+
+public extension RichTextIndentWriter {
+
+    /**
+     Step the text indent at a certain range.
+     
+     - Parameters:
+       - points: The number of points to step.
+       - range: The range to affect.
+     */
+    func stepIndentInternal(
+        points: CGFloat,
+        at range: NSRange
+    ) -> RichTextAttributes? {
+        let text = richText.string
+        _ = range.length
+        let location = range.location
+        let ulocation = UInt(location)
+        let index = text.findIndexOfCurrentParagraph(from: ulocation)
+        return stepRichTextIndent(
+            points: points,
+            atIndex: index
+        )
     }
 }

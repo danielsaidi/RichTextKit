@@ -1,16 +1,6 @@
-//
-//  RichTextIndent.swift
-//  RichTextKit
-//
-//  Created by James Bradley on 2022-03-04.
-//  Copyright © 2023 James Bradley. All rights reserved.
-//
-
 import SwiftUI
 
-/**
- This enum simplifies working with different text indents.
- */
+@available(*, deprecated, message: "This type is no longer used")
 public enum RichTextIndent: CaseIterable, Codable, Equatable, Identifiable {
     
     /// Reduce indent space.
@@ -20,6 +10,7 @@ public enum RichTextIndent: CaseIterable, Codable, Equatable, Identifiable {
     case increase
 }
 
+@available(*, deprecated, message: "This type is no longer used")
 public extension RichTextIndent {
 
     /// The indent's unique ID.

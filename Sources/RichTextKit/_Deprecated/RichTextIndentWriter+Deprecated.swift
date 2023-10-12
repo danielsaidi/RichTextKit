@@ -15,6 +15,12 @@ public extension RichTextIndentWriter {
         to indent: RichTextIndent,
         at range: NSRange
     ) -> RichTextAttributes? {
-        setRichTextIndent(indent, at: range)
+        let increase = indent == .increase
+        let change: CGFloat = 30.0
+        let points = increase ? change : -change
+        return stepRichTextIndent(
+            points: points,
+            at: range
+        )
     }
 }

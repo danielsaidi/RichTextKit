@@ -46,7 +46,6 @@ open class RichTextView: UITextView, RichTextViewComponent {
     }
 
 
-
     // MARK: - Properties
 
     /**

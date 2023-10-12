@@ -13,17 +13,17 @@ import SwiftUI
  */
 public struct RichTextCommandsIndentOptionsGroup: View {
 
-    public init() {}
-
     @FocusedValue(\.richTextContext)
     private var context: RichTextContext?
+    
+    private let stepSize = RichTextIndentDefaults.stepSizeInPoints
 
     public var body: some View {
         Button(RTKL10n.menuIndentIncrease.text) {
-            context?.increaseIndent()
+            context?.increaseIndent(points: stepSize)
         }
         Button(RTKL10n.menuIndentDecrease.text) {
-            context?.decreaseIndent()
+            context?.decreaseIndent(points: stepSize)
         }
     }
 }

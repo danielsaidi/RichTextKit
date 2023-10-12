@@ -19,8 +19,7 @@ import AppKit
 public extension RichTextViewComponent {
 
     /**
-     Use the selected range (if any) or text position to get
-     the current rich text alignment.
+     Get the text indent at the current location.
      */
     var currentRichTextIndent: CGFloat? {
         let attribute: NSMutableParagraphStyle? = currentRichTextAttribute(.paragraphStyle)
@@ -29,35 +28,30 @@ public extension RichTextViewComponent {
     }
 
     /**
-     Use the selected range (if any) or text position to set
-     the current rich text alignment.
+     Step the text indent at the current location.
 
      - Parameters:
-       - alignment: The alignment to set.
+       - points: The number of points to step.
      */
-    func setCurrentRichTextIndent(
-        to indent: RichTextIndent
+    func stepCurrentRichTextIndent(
+        points: CGFloat
     ) {
-         if !hasTrimmedText { return setTextIndentAtCurrentPosition(to: indent) }
-         let previousCharacter = richText.string.character(at: selectedRange.location - 1)
-         let isNewLine = previousCharacter?.isNewLineSeparator ?? false
-         if isNewLine { return setTextIndentAtCurrentPosition(to: indent) }
-         typingAttributes = setRichTextIndent(indent, at: selectedRange) ?? typingAttributes
+        if !hasTrimmedText { return step(points: points) }
+        let previousCharacter = richText.string.character(at: selectedRange.location - 1)
+        let isNewLine = previousCharacter?.isNewLineSeparator ?? false
+        if isNewLine { return step(points: points) }
+        typingAttributes = stepRichTextIndent(points: points, at: selectedRange) ?? typingAttributes
     }
 }
 
 private extension RichTextViewComponent {
 
-    /**
-     Set the text indent at the current position.
-     */
-    func setTextIndentAtCurrentPosition(
-        to indent: RichTextIndent
-    ) {
+    /// Step the text indent at the current position.
+    func step(points: CGFloat) {
         guard let style = typingAttributes[.paragraphStyle] as? NSParagraphStyle else { return }
         guard let mutableStyle = style.mutableCopy() as? NSMutableParagraphStyle else { return }
 
-        let indentation = max(indent == .decrease ? style.headIndent - 30.0 : style.headIndent + 30.0, 0)
+        let indentation = max(points, 0)
         mutableStyle.firstLineHeadIndent = indentation
         mutableStyle.headIndent = indentation
 

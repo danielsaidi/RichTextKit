@@ -47,12 +47,19 @@ public struct RichTextColorPicker: View {
         HStack(spacing: 0) {
             iconView
             picker
-            if !quickColors.isEmpty {
+            if hasColors {
                 quickPickerDivider
                 quickPicker
             }
         }
         .labelsHidden()
+    }
+}
+
+private extension RichTextColorPicker {
+    
+    var hasColors: Bool {
+        !quickColors.isEmpty
     }
 }
 

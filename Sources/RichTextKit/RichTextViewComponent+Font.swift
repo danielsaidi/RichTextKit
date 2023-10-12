@@ -70,7 +70,7 @@ public extension RichTextViewComponent {
      */
     func setCurrentFontSize(to size: CGFloat) {
         #if os(macOS)
-        setFontSize(to: size, at: selectedRange)
+        setFontSize(size, at: selectedRange)
         setFontSizeAtCurrentPosition(size)
         #else
         if hasSelectedRange {

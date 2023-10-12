@@ -8,21 +8,9 @@
 
 import SwiftUI
 
-/**
- This picker can be used to pick a rich text indent change.
-
- This view returns a plain SwiftUI `Picker` view that can be
- styled and configured in all ways supported by SwiftUI.
- */
+@available(*, deprecated, message: "This is no longer used. Use a RichTextActionButtonGroup instead.")
 public struct RichTextIndentPicker: View {
 
-    /**
-     Create a rich text indent picker.
-
-     - Parameters:
-       - selection: The binding to update with the picker.
-       - values: The pickable alignments, by default all available alignments.
-     */
     public init(
         selection: Binding<RichTextIndent>,
         values: [RichTextIndent] = RichTextIndent.allCases

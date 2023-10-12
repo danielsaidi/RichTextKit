@@ -2,7 +2,7 @@
 
 RichTextKit will use semver after 1.0. 
 
-Until then, deprecated features may be removed in the next minor version.
+Until then, minor updates may remove deprecated features and introduce breaking changes.
 
 
 
@@ -22,11 +22,18 @@ This version drops support for iOS 14, tvOS 14, macOS 11 and watchOS 7.
 
 ### 🗑️ Deprecations 
 
-* A bunch of "writer" types omits the `to:` parameter name.
+* A bunch of "writer" types omits the `to:` parameter name. 
 
 * `RichTextColorPicker` initializer has been cleaned up and simplified.
 * `RichTextColorPicker.PickerColor` has been deprecated.
 * `RichTextColorPickerColor` has been deprecated.
+* `RichTextIndent` has been deprecated.
+* `RichTextIndentPicker` has been deprecated.
+
+### 💥 Breaking Changes
+
+* The rich text indent feature has been rewritten to use steps.
+
 
 
 ## 0.8

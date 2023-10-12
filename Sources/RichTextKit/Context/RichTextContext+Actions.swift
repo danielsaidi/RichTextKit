@@ -36,13 +36,15 @@ public extension RichTextContext {
        - action: The action to trigger.
      */
     func triggerRichTextAction(_ action: RichTextAction) {
+        let stepSize = RichTextIndentDefaults.stepSizeInPoints
+        
         switch action {
         case .copy: copyCurrentSelection()
         case .dismissKeyboard: stopEditingText()
         case .incrementFontSize: incrementFontSize()
         case .decrementFontSize: decrementFontSize()
-        case .increaseIndent: increaseIndent()
-        case .decreaseIndent: decreaseIndent()
+        case .increaseIndent: increaseIndent(points: stepSize)
+        case .decreaseIndent: decreaseIndent(points: stepSize)
         case .redoLatestChange: redoLatestChange()
         case .undoLatestChange: undoLatestChange()
         }

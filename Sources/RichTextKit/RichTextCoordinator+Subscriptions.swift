@@ -28,14 +28,13 @@ extension RichTextCoordinator {
         subscribeToIsStrikethrough()
         subscribeToIsUnderlined()
         subscribeToShouldCopySelection()
-        subscribeToShouldIncreaseIndent()
-        subscribeToShouldDecreaseIndent()
         subscribeToShouldPasteImage()
         subscribeToShouldPasteImages()
         subscribeToShouldPasteText()
         subscribeToShouldRedoLatestChange()
         subscribeToShouldSelectRange()
         subscribeToShouldSetAttributedString()
+        subscribeToShouldStepTextIndent()
         subscribeToShouldUndoLatestChange()
     }
 }
@@ -202,19 +201,15 @@ private extension RichTextCoordinator {
             .store(in: &cancellables)
     }
     
-    func subscribeToShouldDecreaseIndent() {
-        richTextContext.$shouldDecreaseIndent
+    func subscribeToShouldStepTextIndent() {
+        richTextContext.$shouldStepTextIndentPoints
             .sink(
                 receiveCompletion: { _ in },
-                receiveValue: { [weak self] in self?.setIndent(.decrease, if: $0)})
-            .store(in: &cancellables)
-    }
-    
-    func subscribeToShouldIncreaseIndent() {
-        richTextContext.$shouldIncreaseIndent
-            .sink(
-                receiveCompletion: { _ in },
-                receiveValue: { [weak self] in self?.setIndent(.increase, if: $0)})
+                receiveValue: { [weak self] in
+                    guard let points = $0 else { return }
+                    self?.stepTextIndent(points: points)
+                }
+            )
             .store(in: &cancellables)
     }
 }
@@ -311,9 +306,8 @@ internal extension RichTextCoordinator {
         textView.highlightingStyle = style
     }
 
-    func setIndent(_ indent: RichTextIndent, if shouldSet: Bool) {
-        guard shouldSet else { return }
-        textView.setCurrentRichTextIndent(to: indent)
+    func stepTextIndent(points: CGFloat) {
+        textView.stepCurrentRichTextIndent(points: points)
     }
 
     func setIsEditing(to newValue: Bool) {

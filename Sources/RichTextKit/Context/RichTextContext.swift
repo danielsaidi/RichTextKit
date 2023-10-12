@@ -155,18 +155,14 @@ public class RichTextContext: ObservableObject {
     /// Set this property to trigger a range change.
     @Published
     var shouldSelectRange = NSRange()
+    
+    /// Set this property to trigger a text indent change.
+    @Published
+    var shouldStepTextIndentPoints: CGFloat?
 
     /// Whether or not to undo the latest change.
     @Published
     var shouldUndoLatestChange = false
-
-    /// Whether or not to decrease the current indent.
-    @Published
-    var shouldDecreaseIndent = false
-    
-    /// Whether or not to increase the current indent.
-    @Published
-    var shouldIncreaseIndent = false
 }
 
 public extension RichTextContext {
@@ -345,12 +341,12 @@ public extension RichTextContext {
     }
     
     /// Decrease current indent.
-    func decreaseIndent() {
-        shouldDecreaseIndent = true
+    func decreaseIndent(points: CGFloat) {
+        shouldStepTextIndentPoints = -points
     }
     
     /// Increase current indent.
-    func increaseIndent() {
-        shouldIncreaseIndent = true
+    func increaseIndent(points: CGFloat) {
+        shouldStepTextIndentPoints = points
     }
 }
