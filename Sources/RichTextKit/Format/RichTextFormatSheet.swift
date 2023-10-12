@@ -88,7 +88,7 @@ private extension RichTextFormatSheet {
             styleButtons
             Spacer()
             RichTextFontSizePickerStack(context: context)
-                .prefersBordered()
+                .buttonStyle(.bordered)
         }
     }
 
@@ -113,44 +113,22 @@ private extension RichTextFormatSheet {
 
     @ViewBuilder
     var indentButtons: some View {
-        if #available(iOS 15.0, *) {
-            RichTextActionButtonGroup(
-                context: context,
-                actions: [.decreaseIndent, .increaseIndent],
-                greedy: false
-            )
-        } else {
-            RichTextActionButtonStack(
-                context: context,
-                actions: [.decreaseIndent, .increaseIndent]
-            ).prefersBordered()
-        }
+        RichTextActionButtonGroup(
+            context: context,
+            actions: [.decreaseIndent, .increaseIndent],
+            greedy: false
+        )
     }
 
     @ViewBuilder
     var styleButtons: some View {
-        if #available(iOS 15.0, *) {
-            RichTextStyleToggleGroup(
-                context: context
-            )
-        } else {
-            RichTextStyleToggleStack(
-                context: context
-            ).prefersBordered()
-        }
+        RichTextStyleToggleGroup(
+            context: context
+        )
     }
 }
 
 private extension View {
-
-    @ViewBuilder
-    func prefersBordered() -> some View {
-        if #available(iOS 15.0, *) {
-            self.buttonStyle(.bordered)
-        } else {
-            self
-        }
-    }
 
     @ViewBuilder
     func withAutomaticToolbarRole() -> some View {

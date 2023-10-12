@@ -19,7 +19,6 @@ import SwiftUI
  Since this view controls multiple styles, it binds directly
  to a ``RichTextContext`` instead of individual values.
  */
-@available(iOS 15.0, macOS 12.0, *)
 public struct RichTextStyleToggleGroup: View {
 
     /**
@@ -74,7 +73,6 @@ public struct RichTextStyleToggleGroup: View {
     }
 }
 
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 struct RichTextStyleToggleGroup_Previews: PreviewProvider {
 
     struct Preview: View {

@@ -67,17 +67,13 @@ struct RichTextKeyboardToolbarMenu_Previews: PreviewProvider {
 
     static var previews: some View {
         RichTextKeyboardToolbarMenu {
-            if #available(iOS 15.0, *) {
-                Section("Title") {
+            Section("Title") {
+                buttons
+            }
+            Section {
+                ControlGroup {
                     buttons
                 }
-                Section {
-                    ControlGroup {
-                        buttons
-                    }
-                }
-            } else {
-                buttons
             }
         } label: {
             Label("Menu", systemImage: "ellipsis.circle")

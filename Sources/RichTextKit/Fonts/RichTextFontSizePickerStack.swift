@@ -116,31 +116,15 @@ struct RichTextFontSizePickerStack_Previews: PreviewProvider {
         var body: some View {
             VStack {
                 Text("Size: \(context.fontSize)")
-                if #available(iOS 15.0, *) {
-                    RichTextFontSizePickerStack(context: context)
-                } else {
-                    RichTextFontSizePickerStack(context: context)
-                }
+                RichTextFontSizePickerStack(context: context)
             }
-            .bordered()
+            .buttonStyle(.bordered)
             .padding()
         }
     }
 
     static var previews: some View {
         Preview()
-    }
-}
-
-private extension View {
-
-    @ViewBuilder
-    func bordered() -> some View {
-        if #available(iOS 15.0, *) {
-            self.buttonStyle(.bordered)
-        } else {
-            self
-        }
     }
 }
 #endif

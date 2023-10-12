@@ -56,16 +56,16 @@ public extension RichTextColorPickerColor {
         case .white: return .white
 
         case .blue: return .blue
-        case .brown: if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) { return .brown } else { return nil }
-        case .cyan: if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) { return .cyan } else { return nil }
+        case .brown: return .brown
+        case .cyan: return .cyan
         case .green: return .green
-        case .indigo: if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) { return .indigo } else { return nil }
-        case .mint: if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) { return .mint } else { return nil }
+        case .indigo: return .indigo
+        case .mint: return .mint
         case .orange: return .orange
         case .pink: return .pink
         case .purple: return .purple
         case .red: return .red
-        case .teal: if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) { return .teal } else { return nil }
+        case .teal: return .teal
         case .yellow: return .yellow
         }
     }

@@ -43,7 +43,7 @@ public struct RichTextFormatSidebar: View {
             SidebarSection(title: RTKL10n.font.text) {
                 RichTextFontPicker(selection: $context.fontName, fontSize: 12)
                 HStack {
-                    styleToggles
+                    RichTextStyleToggleGroup(context: context)
                     RichTextFontSizePickerStack(context: context)
                 }
             }
@@ -51,7 +51,10 @@ public struct RichTextFormatSidebar: View {
             SidebarSection(title: nil) {
                 RichTextAlignmentPicker(selection: $context.textAlignment)
                     .pickerStyle(.segmented)
-                indentButtons
+                RichTextActionButtonGroup(
+                    context: context,
+                    actions: [.decreaseIndent, .increaseIndent]
+                )
             }
 
             SidebarSection(title: nil) {
@@ -67,28 +70,6 @@ public struct RichTextFormatSidebar: View {
         }
         .padding(8)
         .background(Color.white.opacity(0.05))
-    }
-}
-
-private extension RichTextFormatSidebar {
-
-    @ViewBuilder
-    var styleToggles: some View {
-        if #available(iOS 15.0, macOS 12.0, *) {
-            RichTextStyleToggleGroup(context: context)
-        } else {
-            RichTextStyleToggleStack(context: context)
-        }
-    }
-
-    @ViewBuilder
-    var indentButtons: some View {
-        if #available(iOS 15.0, macOS 12.0, *) {
-            RichTextActionButtonGroup(
-                context: context,
-                actions: [.decreaseIndent, .increaseIndent]
-            )
-        }
     }
 }
 

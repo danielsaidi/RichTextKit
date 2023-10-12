@@ -16,7 +16,6 @@ import SwiftUI
  Since this view controls multiple values, it binds directly
  to a ``RichTextContext`` instead of individual values.
  */
-@available(iOS 15.0, macOS 12.0, *)
 public struct RichTextActionButtonGroup: View {
 
     /**
@@ -56,7 +55,6 @@ public struct RichTextActionButtonGroup: View {
     }
 }
 
-@available(iOS 15.0, macOS 12.0, *)
 private extension RichTextActionButtonGroup {
 
     var groupWidth: CGFloat? {
@@ -70,7 +68,6 @@ private extension RichTextActionButtonGroup {
     }
 }
 
-@available(iOS 15.0, macOS 12.0, *)
 struct RichTextActionButtonGroup_Previews: PreviewProvider {
 
     struct Preview: View {
@@ -97,18 +94,6 @@ struct RichTextActionButtonGroup_Previews: PreviewProvider {
 
     static var previews: some View {
         Preview()
-    }
-}
-
-private extension View {
-
-    @ViewBuilder
-    func bordered() -> some View {
-        if #available(iOS 15.0, *) {
-            self.buttonStyle(.bordered)
-        } else {
-            self
-        }
     }
 }
 #endif

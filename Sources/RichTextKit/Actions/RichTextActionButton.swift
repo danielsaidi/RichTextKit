@@ -10,19 +10,19 @@ import SwiftUI
 
 /**
  This button can be used to trigger a predefined action.
-
+ 
  This renders a plain `Button`, which means that you can use
  and configure it as normal.
  */
 public struct RichTextActionButton: View {
-
+    
     /**
      Create a rich text action button.
-
+     
      - Parameters:
-       - action: The action to trigger.
-       - context: The context to affect.
-       - fillVertically: Whether or not fill up vertical space in a non-greedy way, by default `false`.
+     - action: The action to trigger.
+     - context: The context to affect.
+     - fillVertically: Whether or not fill up vertical space in a non-greedy way, by default `false`.
      */
     public init(
         action: RichTextAction,
@@ -33,13 +33,13 @@ public struct RichTextActionButton: View {
         self._context = ObservedObject(wrappedValue: context)
         self.fillVertically = fillVertically
     }
-
+    
     private let action: RichTextAction
     private let fillVertically: Bool
-
+    
     @ObservedObject
     private var context: RichTextContext
-
+    
     public var body: some View {
         Button(action: triggerAction) {
             action.icon
@@ -53,11 +53,11 @@ public struct RichTextActionButton: View {
 }
 
 private extension RichTextActionButton {
-
+    
     var canTriggerAction: Bool {
         context.canTriggerRichTextAction(action)
     }
-
+    
     func triggerAction() {
         guard canTriggerAction else { return }
         context.triggerRichTextAction(action)
@@ -65,73 +65,57 @@ private extension RichTextActionButton {
 }
 
 struct RichTextActionButton_Previews: PreviewProvider {
-
+    
     struct Preview: View {
-
+        
         @StateObject
         private var context = RichTextContext()
-
+        
         var body: some View {
-            if #available(iOS 15.0, *) {
-                HStack {
-                    RichTextActionButton(
-                        action: .copy,
-                        context: context,
-                        fillVertically: true
-                    )
-                    RichTextActionButton(
-                        action: .redoLatestChange,
-                        context: context,
-                        fillVertically: true
-                    )
-                    RichTextActionButton(
-                        action: .undoLatestChange,
-                        context: context,
-                        fillVertically: true
-                    )
-                    RichTextActionButton(
-                        action: .incrementFontSize,
-                        context: context,
-                        fillVertically: true
-                    )
-                    RichTextActionButton(
-                        action: .decrementFontSize,
-                        context: context,
-                        fillVertically: true
-                    )
-                    RichTextActionButton(
-                        action: .decreaseIndent,
-                        context: context,
-                        fillVertically: true
-                    )
-                    RichTextActionButton(
-                        action: .increaseIndent,
-                        context: context,
-                        fillVertically: true
-                    )
-                }
-                .fixedSize(horizontal: false, vertical: true)
-                .padding()
-                .bordered()
-            } else {
-                // Fallback on earlier versions
+            HStack {
+                RichTextActionButton(
+                    action: .copy,
+                    context: context,
+                    fillVertically: true
+                )
+                RichTextActionButton(
+                    action: .redoLatestChange,
+                    context: context,
+                    fillVertically: true
+                )
+                RichTextActionButton(
+                    action: .undoLatestChange,
+                    context: context,
+                    fillVertically: true
+                )
+                RichTextActionButton(
+                    action: .incrementFontSize,
+                    context: context,
+                    fillVertically: true
+                )
+                RichTextActionButton(
+                    action: .decrementFontSize,
+                    context: context,
+                    fillVertically: true
+                )
+                RichTextActionButton(
+                    action: .decreaseIndent,
+                    context: context,
+                    fillVertically: true
+                )
+                RichTextActionButton(
+                    action: .increaseIndent,
+                    context: context,
+                    fillVertically: true
+                )
             }
+            .fixedSize(horizontal: false, vertical: true)
+            .padding()
+            .buttonStyle(.bordered)
         }
     }
-
+    
     static var previews: some View {
         Preview()
-    }
-}
-
-private extension View {
-
-    @ViewBuilder
-    func bordered() -> some View {
-        if #available(iOS 15.0, *) {
-            self.buttonStyle(.bordered)
-        } else {
-            self
-        }
     }
 }

@@ -81,22 +81,7 @@ public struct RichTextStyleToggle: View {
         #if os(tvOS)
         toggle
         #else
-        if #available(iOS 15.0, macOS 12.0, watchOS 9.0, *) {
-            toggle.toggleStyle(.button)
-        } else {
-            RichTextStyleButton(
-                style: style,
-                buttonStyle: .init(
-                    inactiveColor: buttonStyle.inactiveColor ?? .primary,
-                    activeColor: buttonStyle.activeColor),
-                value: value,
-                fillVertically: fillVertically
-            )
-            .padding(7)
-            .frame(minWidth: 35)
-            .background(backgroundColor)
-            .cornerRadius(5)
-        }
+        toggle.toggleStyle(.button)
         #endif
     }
 
@@ -105,7 +90,7 @@ public struct RichTextStyleToggle: View {
             style.icon
                 .frame(maxHeight: fillVertically ? .infinity : nil)
         }
-        .tintColor(tintColor)
+        .tint(tintColor)
         .keyboardShortcut(for: style)
         .accessibilityLabel(style.localizedName)
     }
@@ -115,18 +100,6 @@ private extension RichTextStyleToggle {
 
     var backgroundColor: Color {
         value.wrappedValue ? buttonStyle.activeColor.opacity(0.2) : .clear
-    }
-}
-
-private extension View {
-
-    @ViewBuilder
-    func tintColor(_ color: Color?) -> some View {
-        if #available(iOS 15.0, macOS 12.0, tvOS 16.0, watchOS 9.0, *) {
-            self.tint(color)
-        } else {
-            self.accentColor(color)
-        }
     }
 }
 

@@ -6,6 +6,16 @@ Until then, deprecated features may be removed in the next minor version.
 
 
 
+## 0.9
+
+This version drops support for iOS 14, tvOS 14, macOS 11 and watchOS 7.
+
+### 💡 Adjustments
+
+* `RichTextKeyboardToolbar` now opens the format sheet in medium size on iPhone.
+
+
+
 ## 0.8
 
 This version makes the observable trigger properties internal.

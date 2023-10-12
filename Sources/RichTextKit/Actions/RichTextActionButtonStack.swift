@@ -67,24 +67,12 @@ struct RichTextActionButtonStack_Previews: PreviewProvider {
                 context: context,
                 actions: [.undoLatestChange, .redoLatestChange, .copy]
             )
-            .bordered()
+            .buttonStyle(.bordered)
             .padding()
         }
     }
 
     static var previews: some View {
         Preview()
-    }
-}
-
-private extension View {
-
-    @ViewBuilder
-    func bordered() -> some View {
-        if #available(iOS 15.0, *) {
-            self.buttonStyle(.bordered)
-        } else {
-            self
-        }
     }
 }
