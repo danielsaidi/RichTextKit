@@ -41,7 +41,7 @@ public extension RichTextViewComponent {
         if !hasTrimmedText {
             return setTextAlignmentAtCurrentPosition(to: alignment)
         }
-        setRichTextAlignment(to: alignment, at: selectedRange)
+        setRichTextAlignment(alignment, at: selectedRange)
     }
 }
 

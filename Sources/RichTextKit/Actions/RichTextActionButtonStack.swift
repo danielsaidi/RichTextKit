@@ -9,11 +9,10 @@
 import SwiftUI
 
 /**
- This view can be used to list a collection of buttons for a
- set of ``RichTextAction`` values in a horizontal stack.
+ This view can list ``RichTextAction`` buttons in a stack.
 
  Since this view controls multiple values, it binds directly
- to a ``RichTextContext`` instead of individual values.
+ to a ``RichTextContext`` instead of to individual values.
  */
 public struct RichTextActionButtonStack: View {
 

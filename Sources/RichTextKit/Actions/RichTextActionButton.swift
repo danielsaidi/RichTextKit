@@ -20,9 +20,9 @@ public struct RichTextActionButton: View {
      Create a rich text action button.
      
      - Parameters:
-     - action: The action to trigger.
-     - context: The context to affect.
-     - fillVertically: Whether or not fill up vertical space in a non-greedy way, by default `false`.
+       - action: The action to trigger.
+       - context: The context to affect.
+       - fillVertically: Whether or not fill up vertical space in a non-greedy way, by default `false`.
      */
     public init(
         action: RichTextAction,
@@ -59,7 +59,6 @@ private extension RichTextActionButton {
     }
     
     func triggerAction() {
-        guard canTriggerAction else { return }
         context.triggerRichTextAction(action)
     }
 }

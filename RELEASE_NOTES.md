@@ -14,6 +14,10 @@ This version drops support for iOS 14, tvOS 14, macOS 11 and watchOS 7.
 
 * `RichTextKeyboardToolbar` now opens the format sheet in medium size on iPhone.
 
+### 🗑️ Deprecations 
+
+* `View+setRichTextAlignment` omits the first parameter name. 
+
 
 
 ## 0.8

@@ -44,14 +44,10 @@ public enum RichTextAlignment: String, CaseIterable, Codable, Equatable, Identif
 
 public extension RichTextAlignment {
 
-    /**
-     The unique ID of the alignment.
-     */
+    /// The unique ID of the alignment.
     var id: String { rawValue }
     
-    /**
-     The standard icon to use for the alignment.
-     */
+    /// The standard icon to use for the alignment.
     var icon: Image {
         switch self {
         case .left: return .richTextAlignmentLeft
@@ -61,9 +57,7 @@ public extension RichTextAlignment {
         }
     }
 
-    /**
-     The native alignment of the alignment.
-     */
+    /// The native alignment of the alignment.
     var nativeAlignment: NSTextAlignment {
         switch self {
         case .left: return .left
