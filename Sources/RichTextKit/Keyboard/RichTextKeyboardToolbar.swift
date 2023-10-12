@@ -137,7 +137,21 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
         .offset(y: context.isEditingText ? 0 : style.toolbarHeight)
         .frame(height: context.isEditingText ? nil : 0)
         .sheet(isPresented: $isFormatSheetPresented) {
-            richTextFormatSheet(RichTextFormatSheet(context: context))
+            richTextFormatSheet(
+                RichTextFormatSheet(context: context)
+            ).prefersMediumSize()
+        }
+    }
+}
+
+private extension View {
+    
+    @ViewBuilder
+    func prefersMediumSize() -> some View {
+        if #available(iOS 16.0, *) {
+            self.presentationDetents([.medium])
+        } else {
+            self
         }
     }
 }
