@@ -9,7 +9,7 @@
 import SwiftUI
 
 /**
- This button can be used to trigger a predefined action.
+ This button can be used to trigger a ``RichTextAction``.
  
  This renders a plain `Button`, which means that you can use
  and configure it as normal.

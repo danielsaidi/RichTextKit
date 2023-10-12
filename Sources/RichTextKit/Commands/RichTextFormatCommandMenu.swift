@@ -11,11 +11,11 @@ import SwiftUI
 
 /**
  This command menu can be used to add rich text menu options
- to an app, to control rich text formatting.
+ for text formatting to an app's menu bar.
 
  The commands will be disabled if there's no focus value for
- a ``RichTextContext`` available. Make sure to add it to the
- editor to make these commands work:
+ a ``RichTextContext``. Make sure to add it to the editor to
+ make these commands work:
 
  ```swift
  RichTextEditor(...)
@@ -24,9 +24,7 @@ import SwiftUI
  */
 public struct RichTextFormatCommandMenu: Commands {
 
-    /**
-     Create a rich text format command menu.
-     */
+    /// Create a rich text format command menu.
     public init() {}
 
     @FocusedValue(\.richTextContext)

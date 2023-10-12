@@ -9,8 +9,7 @@
 import SwiftUI
 
 /**
- This view can be added to a `Commands`, to expose rich text
- style menu options to an app main menu or key commands.
+ This view defines `Commands` content for text style options.
  */
 public struct RichTextCommandsStyleOptionsGroup: View {
 

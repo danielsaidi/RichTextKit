@@ -11,28 +11,26 @@ import SwiftUI
 
 /**
  This command menu can be used to add rich text menu options
- that let users share, export and print rich text.
+ for share, export and print to an app's menu bar.
 
  The menu includes sharing, exporting and printing. Clicking
- any option in the menu will trigger custom functions, which
- you can implement in any way you like.
+ an option will trigger custom actions that you provide.
 
  Regarding sharing, the macOS exclusive `nsSharing` commands
  require you to return a share url, after which the commands
- take care of the sharing. The other commands trigger custom
- actions, where you have to implement the logic.
+ take care of the sharing.
  
- Setting any action to nil will remove options from the menu.
+ Note that a pdf action menu will only be included if it has
+ a corresponding action. You must also add `isEnabled: false`
+ to disable the menu, since you can't add `.disabled` to the
+ command menu.
+ 
+ Setting an action to `nil` removes the option from the menu.
  */
 public struct RichTextShareCommandMenu: Commands {
 
     /**
-     Create a rich text sharing command menu.
-
-     Note that a pdf action menu will only be included if it
-     has a corresponding action specified. You must also add
-     `isEnabled: false` to disable the menu, since you can't
-     add `.disabled` to the command menu.
+     Create a rich text share command menu.
 
      Setting `formatNSSharingAction` and `pdfNSSharingAction`
      will only have an effect on macOS and will then be used
@@ -117,8 +115,7 @@ private extension RichTextShareCommandMenu {
         if let action = printAction {
             Button(action: action) {
                 Label(RTKL10n.menuPrint.text, .richTextMenuPrint)
-            }
-            .keyboardShortcut("p", modifiers: .command)
+            }.keyboardShortcut(for: .print)
         }
     }
 

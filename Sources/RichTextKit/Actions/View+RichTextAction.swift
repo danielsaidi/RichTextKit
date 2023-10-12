@@ -12,9 +12,6 @@ public extension View {
 
     /**
      Add a keyboard shortcut that triggers a certain action.
-
-     This modifier only has effect on platforms that support
-     keyboard shortcuts.
      */
     @ViewBuilder
     func keyboardShortcut(for action: RichTextAction) -> some View {

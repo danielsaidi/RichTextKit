@@ -13,6 +13,8 @@ This version drops support for iOS 14, tvOS 14, macOS 11 and watchOS 7.
 ### ✨ Features
 
 * `RichTextColorPicker` works on all platforms.
+* `RichTextCommand` is a new type for system commands.
+* `RichTextCommandButton` is a new button to trigger commands.
 
 ### 💡 Adjustments
 

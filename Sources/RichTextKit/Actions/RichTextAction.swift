@@ -34,7 +34,7 @@ public enum RichTextAction: String, CaseIterable, Identifiable {
 
     /// Redo the latest undone change.
     case redoLatestChange
-
+    
     /// Undo the latest change.
     case undoLatestChange
 }
@@ -49,6 +49,9 @@ public extension RichTextAction {
 
     /// A name alias for `.undoLatestChange`.
     static var undo: RichTextAction { .undoLatestChange }
+    
+    /// The action's unique identifier.
+    var id: String { rawValue }
 
     /// The actions's localized name.
     var localizedName: String {
@@ -63,20 +66,8 @@ public extension RichTextAction {
         case .undoLatestChange: return RTKL10n.actionUndoLatestChange.text
         }
     }
-}
 
-public extension Collection where Element == RichTextAction {
-
-    /// All available rich text actions.
-    static var all: [RichTextAction] { RichTextAction.allCases }
-}
-
-public extension RichTextAction {
-
-    /// The action's unique identifier.
-    var id: String { rawValue }
-
-    /// The standard icon to use for the action.
+    /// The action's standard icon.
     var icon: Image {
         switch self {
         case .copy: return .richTextActionCopy
@@ -89,4 +80,10 @@ public extension RichTextAction {
         case .undoLatestChange: return .richTextActionUndo
         }
     }
+}
+
+public extension Collection where Element == RichTextAction {
+
+    /// All available rich text actions.
+    static var all: [RichTextAction] { Element.allCases }
 }
