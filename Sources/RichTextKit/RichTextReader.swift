@@ -17,17 +17,13 @@ import Foundation
  */
 public protocol RichTextReader {
 
-    /**
-     The attributed string to use as rich text.
-     */
+    /// The attributed string to use as rich text.
     var attributedString: NSAttributedString { get }
 }
 
 extension NSAttributedString: RichTextReader {
 
-    /**
-     This type returns itself as the attributed string.
-     */
+    /// This type returns itself as the attributed string.
     public var attributedString: NSAttributedString { self }
 }
 

@@ -23,7 +23,7 @@ public extension RichTextAttributeWriter {
 
     /**
      Set a certain rich text attribute to a certain value at
-     a certain range.
+     the provided range.
 
      The function uses `safeRange(for:)` to handle incorrect
      ranges, which is not handled by the native functions.
@@ -42,7 +42,7 @@ public extension RichTextAttributeWriter {
     }
 
     /**
-     Set a set of rich text attributes at a certain range.
+     Set a set of rich text attributes at the provided range.
 
      The function uses `safeRange(for:)` to handle incorrect
      ranges, which is not handled by the native functions.

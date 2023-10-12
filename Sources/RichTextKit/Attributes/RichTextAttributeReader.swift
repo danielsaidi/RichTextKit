@@ -22,7 +22,7 @@ extension NSAttributedString: RichTextAttributeReader {}
 public extension RichTextAttributeReader {
 
     /**
-     Get a rich text attribute at the provided range.
+     Get a rich text attribute at a certain range.
 
      - Parameters:
        - attribute: The attribute to get.
@@ -36,7 +36,7 @@ public extension RichTextAttributeReader {
     }
 
     /**
-     Get all rich text attributes at the provided range.
+     Get all rich text attributes at a certain range.
 
      The function uses `safeRange(for:)` to handle incorrect
      ranges, which is not handled by the native functions.

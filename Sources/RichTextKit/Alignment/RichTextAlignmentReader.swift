@@ -30,7 +30,7 @@ extension NSAttributedString: RichTextAlignmentReader {}
 public extension RichTextAlignmentReader {
 
     /**
-     Get the rich text alignment at the provided range.
+     Get the rich text alignment at a certain range.
 
      - Parameters:
        - range: The range to get the alignment from.

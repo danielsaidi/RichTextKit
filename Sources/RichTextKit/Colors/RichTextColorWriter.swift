@@ -29,7 +29,7 @@ public extension RichTextColorWriter {
        - range: The range to affect, by default the entire text.
      */
     func setBackgroundColor(
-        to color: ColorRepresentable,
+        _ color: ColorRepresentable,
         at range: NSRange? = nil
     ) {
         setRichTextAttribute(.backgroundColor, to: color, at: range)
@@ -43,7 +43,7 @@ public extension RichTextColorWriter {
        - range: The range to affect, by default the entire text.
      */
     func setForegroundColor(
-        to color: ColorRepresentable,
+        _ color: ColorRepresentable,
         at range: NSRange? = nil
     ) {
         setRichTextAttribute(.foregroundColor, to: color, at: range)

@@ -10,13 +10,21 @@ Until then, deprecated features may be removed in the next minor version.
 
 This version drops support for iOS 14, tvOS 14, macOS 11 and watchOS 7.
 
+### ✨ Features
+
+* `RichTextColorPicker` works on all platforms.
+
 ### 💡 Adjustments
 
 * `RichTextKeyboardToolbar` now opens the format sheet in medium size on iPhone.
 
 ### 🗑️ Deprecations 
 
-* `View+setRichTextAlignment` omits the first parameter name. 
+* `RichTextAlignmentWriter` omits the `to:` parameter name. 
+* `RichTextColorPicker` initializer has been cleaned up and simplified.
+* `RichTextColorPicker.PickerColor` has been deprecated.
+* `RichTextColorPickerColor` has been deprecated.
+* `RichTextColorWriter` omits the `to:` parameter name. 
 
 
 

@@ -1,22 +1,6 @@
-//
-//  RichTextColorPickerColor.swift
-//  RichTextKit
-//
-//  Created by Daniel Saidi on 2023-06-13.
-//  Copyright © 2023 Daniel Saidi. All rights reserved.
-//
-
 import SwiftUI
 
-/**
- This enum describes colors that can be added to a rich text
- color picker.
-
- The enum serves as SwiftUI version checker, and will filter
- out any unavailable colors. This means that you can compact
- map the colors `color` property to get all supported colors,
- or use the `colors` property of any picker color collection.
- */
+@available(*, deprecated, message: "RichTextColorPickerColor is no longer used.")
 public enum RichTextColorPickerColor: String, CaseIterable, Codable, Equatable, Identifiable {
 
     case black
@@ -37,6 +21,7 @@ public enum RichTextColorPickerColor: String, CaseIterable, Codable, Equatable, 
     case yellow
 }
 
+@available(*, deprecated, message: "RichTextColorPickerColor is no longer used.")
 public extension RichTextColorPickerColor {
 
     /// The unique ID of the color.
@@ -91,6 +76,7 @@ public extension RichTextColorPickerColor {
     }
 }
 
+@available(*, deprecated, message: "RichTextColorPickerColor is no longer used.")
 public extension Collection where Element == RichTextColorPickerColor {
 
     /// Get all available SwiftUI colors from the collection.
@@ -101,29 +87,5 @@ public extension Collection where Element == RichTextColorPickerColor {
     /// Get a curated list of picker colors.
     static var curated: [RichTextColorPickerColor] {
         RichTextColorPickerColor.curated
-    }
-}
-
-struct RichTextColorPickerColor_Previews: PreviewProvider {
-
-    struct Preview: View {
-
-        @StateObject
-        private var context = RichTextContext()
-
-        var body: some View {
-            VStack {
-                ForEach(RichTextColorPickerColor.curated) {
-                    Circle()
-                        .fill($0.color ?? .white)
-                        .shadow(radius: 1, x: 0, y: 1)
-                        .frame(width: 20, height: 20)
-                }
-            }
-        }
-    }
-
-    static var previews: some View {
-        Preview()
     }
 }
