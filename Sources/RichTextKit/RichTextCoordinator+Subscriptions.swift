@@ -11,9 +11,7 @@ import SwiftUI
 
 extension RichTextCoordinator {
 
-    /**
-     Make the coordinator subscribe to context changes.
-     */
+    /// Make the coordinator subscribe to context changes.
     func subscribeToContextChanges() {
         subscribeToAlignment()
         subscribeToBackgroundColor()

@@ -48,9 +48,7 @@ open class RichTextView: UITextView, RichTextViewComponent {
 
     // MARK: - Properties
 
-    /**
-     The style to use when highlighting text in the view.
-     */
+    /// The style to use when highlighting text in the view.
     public var highlightingStyle: RichTextHighlightingStyle = .standard
 
     /**
@@ -72,16 +70,12 @@ open class RichTextView: UITextView, RichTextViewComponent {
 
     #if os(iOS)
 
-    /**
-     The image drop interaction to use when dropping images.
-     */
+    /// The image drop interaction to use.
     lazy var imageDropInteraction: UIDropInteraction = {
         UIDropInteraction(delegate: self)
     }()
 
-    /**
-     The interaction types that are supported by drag & drop.
-     */
+    /// The interaction types supported by drag & drop.
     var supportedDropInteractionTypes: [UTType] {
         [.image, .text, .plainText, .utf8PlainText, .utf16PlainText]
     }
@@ -89,15 +83,10 @@ open class RichTextView: UITextView, RichTextViewComponent {
     #endif
 
 
-    /**
-     This keeps track of the first time a valid frame is set.
-     We should find another way to handle this.
-     */
+    /// Keeps track of the first time a valid frame is set.
     private var isInitialFrameSetupNeeded = true
 
-    /**
-     This keeps track of the data format used by the view.
-     */
+    /// Keeps track of the data format used by the view.
     private var richTextDataFormat: RichTextDataFormat = .archivedData
 
 
@@ -182,14 +171,7 @@ open class RichTextView: UITextView, RichTextViewComponent {
 
     // MARK: - Open Functionality
 
-    /**
-     Alert a certain title and message.
-
-     - Parameters:
-       - title: The alert title.
-       - message: The alert message.
-       - buttonTitle: The alert button title.
-     */
+    /// Alert a certain title and message.
     open func alert(title: String, message: String, buttonTitle: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: buttonTitle, style: .default, handler: nil)
@@ -198,9 +180,7 @@ open class RichTextView: UITextView, RichTextViewComponent {
         controller?.present(alert, animated: true, completion: nil)
     }
 
-    /**
-     Copy the current selection.
-     */
+    /// Copy the current selection.
     open func copySelection() {
         #if os(iOS)
         let pasteboard = UIPasteboard.general
@@ -212,12 +192,7 @@ open class RichTextView: UITextView, RichTextViewComponent {
         #endif
     }
 
-    /**
-     Get the frame of a certain range.
-
-     - Parameters:
-       - range: The range to get the frame from.
-     */
+    /// Get the frame of a certain range.
     open func frame(of range: NSRange) -> CGRect {
         let beginning = beginningOfDocument
         guard
@@ -229,12 +204,7 @@ open class RichTextView: UITextView, RichTextViewComponent {
         return convert(rect, from: textInputView)
     }
 
-    /**
-     Get the text range at a certain point.
-
-     - Parameters:
-       - index: The text index to get the range from.
-     */
+    /// Get the text range at a certain point.
     open func range(at index: CGPoint) -> NSRange? {
         guard let range = characterRange(at: index) else { return nil }
         let location = offset(from: beginningOfDocument, to: range.start)
@@ -242,47 +212,28 @@ open class RichTextView: UITextView, RichTextViewComponent {
         return NSRange(location: location, length: length)
     }
 
-    /**
-     Try to redo the latest undone change.
-     */
+    /// Try to redo the latest undone change.
     open func redoLatestChange() {
         undoManager?.redo()
     }
 
-    /**
-     Scroll to a certain range.
-
-     - Parameters:
-       - range: The range to scroll to.
-     */
+    /// Scroll to a certain range.
     open func scroll(to range: NSRange) {
         let caret = frame(of: range)
         scrollRectToVisible(caret, animated: true)
     }
 
-    /**
-     Set the rich text in the text view.
-
-     - Parameters:
-       - text: The rich text to set.
-     */
+    /// Set the rich text in the text view.
     open func setRichText(_ text: NSAttributedString) {
         attributedString = text
     }
 
-    /**
-     Set the selected range in the text view.
-
-     - Parameters:
-       - range: The range to set.
-     */
+    ///  Set the selected range in the text view.
     open func setSelectedRange(_ range: NSRange) {
         selectedRange = range
     }
 
-    /**
-     Undo the latest change.
-     */
+    /// Undo the latest change.
     open func undoLatestChange() {
         undoManager?.undo()
     }
@@ -292,9 +243,7 @@ open class RichTextView: UITextView, RichTextViewComponent {
 
     // MARK: - UIDropInteractionDelegate
 
-    /**
-     Whether or not the view can handle a drop session.
-     */
+    /// Whether or not the view can handle a drop session.
     open func dropInteraction(
         _ interaction: UIDropInteraction,
         canHandle session: UIDropSession
@@ -304,13 +253,7 @@ open class RichTextView: UITextView, RichTextViewComponent {
         return session.hasItemsConforming(toTypeIdentifiers: identifiers)
     }
 
-    /**
-     Handle an updated drop session.
-
-     - Parameters:
-       - interaction: The drop interaction to handle.
-       - sessionDidUpdate: The drop session to handle.
-     */
+    /// Handle an updated drop session.
     open func dropInteraction(
         _ interaction: UIDropInteraction,
         sessionDidUpdate session: UIDropSession
@@ -319,12 +262,7 @@ open class RichTextView: UITextView, RichTextViewComponent {
         return UIDropProposal(operation: operation)
     }
 
-    /**
-     The drop interaction operation for the provided session.
-
-     - Parameters:
-       - session: The drop session to handle.
-     */
+    /// The drop interaction operation for a certain session.
     open func dropInteractionOperation(
         for session: UIDropSession
     ) -> UIDropOperation {
@@ -382,9 +320,7 @@ open class RichTextView: UITextView, RichTextViewComponent {
         }
     }
     
-    /**
-     Refresh the drop interaction based on the drop config.
-     */
+    /// Refresh the drop interaction based on the config.
     open func refreshDropInteraction() {
         switch imageDropConfiguration {
         case .disabled:
@@ -447,9 +383,7 @@ public extension RichTextView {
 
 public extension RichTextView {
 
-    /**
-     Get the rich text that is managed by the text view.
-     */
+    /// Get the rich text managed by the text view.
     var attributedString: NSAttributedString {
         get { super.attributedText ?? NSAttributedString(string: "") }
         set { attributedText = newValue }
@@ -461,9 +395,7 @@ public extension RichTextView {
 
 public extension RichTextView {
 
-    /**
-     Get the mutable rich text that is managed by the view.
-     */
+    /// Get the mutable rich text managed by the view.
     var mutableAttributedString: NSMutableAttributedString? {
         textStorage
     }

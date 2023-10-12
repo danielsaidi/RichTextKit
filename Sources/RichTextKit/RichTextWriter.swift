@@ -17,17 +17,13 @@ import Foundation
  */
 public protocol RichTextWriter: RichTextReader {
 
-    /**
-     Get the writable attributed string provided by the type.
-     */
+    /// Get the writable attributed string for the type.
     var mutableAttributedString: NSMutableAttributedString? { get }
 }
 
 extension NSMutableAttributedString: RichTextWriter {
 
-    /**
-     This type returns itself as mutable attributed string.
-     */
+    /// This type returns itself as the attributed string.
     public var mutableAttributedString: NSMutableAttributedString? {
         self
     }

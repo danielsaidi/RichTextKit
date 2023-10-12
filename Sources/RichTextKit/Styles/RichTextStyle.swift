@@ -97,9 +97,7 @@ public extension Collection where Element == RichTextStyle {
 #if canImport(UIKit)
 public extension RichTextStyle {
 
-    /**
-     The symbolic font traits for the style, if any.
-     */
+    /// The symbolic font traits for the style, if any.
     var symbolicTraits: UIFontDescriptor.SymbolicTraits? {
         switch self {
         case .bold: return .traitBold
@@ -114,9 +112,7 @@ public extension RichTextStyle {
 #if os(macOS)
 public extension RichTextStyle {
 
-    /**
-     The symbolic font traits for the trait, if any.
-     */
+    /// The symbolic font traits for the trait, if any.
     var symbolicTraits: NSFontDescriptor.SymbolicTraits? {
         switch self {
         case .bold: return .bold

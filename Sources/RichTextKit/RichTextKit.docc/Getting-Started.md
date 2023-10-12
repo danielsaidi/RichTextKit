@@ -96,66 +96,6 @@ The various views in the library uses this initializer and data function, but yo
 
 
 
-## SwiftUI views
-
-This will eventually be a separate article, but until then let's take a quick look at some of the views that are available in RichTextKit.
-
-### Actions
-
-* ``RichTextActionButton``
-* ``RichTextActionButtonGroup``
-* ``RichTextActionButtonStack``
-
-### Alignment
-
-* ``RichTextAlignmentPicker``
-
-### Data
-
-* ``RichTextDataFormatMenu``
-
-### Export
-
-* ``RichTextExportMenu``
-
-### Formatting
-
-* ``RichTextFormatSheet``
-* ``RichTextFormatSidebar``
-
-### Keyboard
-
-* ``RichTextKeyboardToolbar``
-* ``RichTextKeyboardToolbarMenu``
-
-### Colors
-
-* ``RichTextColorPicker`` 
-* ``RichTextColorPickerStack``
-
-### Fonts
-
-* ``RichTextFontPicker``
-* ``RichTextFontForEachPicker``
-* ``RichTextFontListPicker``
-* ``RichTextFontSizePicker``
-* ``RichTextFontSizePickerStack``
-
-### Sharing
-
-* ``RichTextShareMenu``
-
-### Styles
-
-* ``RichTextStyleButton``
-* ``RichTextStyleToggle``
-* ``RichTextStyleToggleGroup``
-* ``RichTextStyleToggleStack``
-
-Have a look at the demo apps for some ways that you can use these views.  
-
-
-
 ## Terminology
 
 RichTextKit tries to use native terminology as much as possible, but has a couple of custom name conventions that may require some explanation.

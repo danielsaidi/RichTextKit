@@ -51,29 +51,19 @@ open class RichTextCoordinator: NSObject {
 
     // MARK: - Properties
 
-    /**
-     The rich text context for which the coordinator is used.
-     */
+    /// The rich text context to coordinate with.
     public let richTextContext: RichTextContext
 
-    /**
-     The rich text to edit.
-     */
+    /// The rich text to edit.
     public var text: Binding<NSAttributedString>
 
-    /**
-     The text view for which the coordinator is used.
-     */
+    /// The text view for which the coordinator is used.
     public private(set) var textView: RichTextView
 
-    /**
-     This set is used to store context observations.
-     */
+    /// This set is used to store context observations.
     public var cancellables = Set<AnyCancellable>()
 
-    /**
-     This test flag is used to avoid delaying context sync.
-     */
+    /// This flag is used to avoid delaying context sync.
     internal var shouldDelaySyncContextWithTextView = true
 
 
@@ -153,10 +143,7 @@ extension RichTextCoordinator: NSTextViewDelegate {}
 
 public extension RichTextCoordinator {
 
-    /**
-     Reset the apperance for the currently highlighted range,
-     if any.
-     */
+    /// Reset appearance for the currently highlighted range.
     func resetHighlightedRangeAppearance() {
         guard
             let range = richTextContext.highlightedRange,
@@ -173,17 +160,13 @@ public extension RichTextCoordinator {
 
 extension RichTextCoordinator {
 
-    /**
-     Sync state from the text view's current state.
-     */
+    /// Sync state from the text view's current state.
     func syncWithTextView() {
         syncContextWithTextView()
         syncTextWithTextView()
     }
 
-    /**
-     Sync the rich text context with the text view.
-     */
+    /// Sync the rich text context with the text view.
     func syncContextWithTextView() {
         if shouldDelaySyncContextWithTextView {
             DispatchQueue.main.async {
@@ -280,9 +263,7 @@ extension RichTextCoordinator {
         updateTextViewAttributesIfNeeded()
     }
 
-    /**
-     Sync the text binding with the text view.
-     */
+    /// Sync the text binding with the text view.
     func syncTextWithTextView() {
         DispatchQueue.main.async {
             self.text.wrappedValue = self.textView.attributedString

@@ -28,14 +28,10 @@ public struct RichTextHighlightingStyle: Equatable {
         self.foregroundColor = foregroundColor
     }
     
-    /**
-     The background color to use for highlighted text.
-     */
+    /// The background color to use for highlighted text.
     public let backgroundColor: Color
     
-    /**
-     The foreground color to use for highlighted text.
-     */
+    /// The foreground color to use for highlighted text.
     public let foregroundColor: Color
 }
 

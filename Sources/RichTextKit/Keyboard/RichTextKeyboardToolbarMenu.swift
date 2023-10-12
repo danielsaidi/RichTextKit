@@ -78,7 +78,6 @@ struct RichTextKeyboardToolbarMenu_Previews: PreviewProvider {
         } label: {
             Label("Menu", systemImage: "ellipsis.circle")
         }
-
     }
 }
 #endif

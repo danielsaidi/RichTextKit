@@ -56,23 +56,15 @@ public struct PdfPageMargins: Equatable {
         self.right = all
     }
     
-    /**
-     The top margins.
-     */
+    /// The top margins.
     public var top: CGFloat
 
-    /**
-     The left margins.
-     */
+    /// The left margins.
     public var left: CGFloat
 
-    /**
-     The bottom margins.
-     */
+    /// The bottom margins.
     public var bottom: CGFloat
 
-    /**
-     The right margins.
-     */
+    /// The right margins.
     public var right: CGFloat
 }

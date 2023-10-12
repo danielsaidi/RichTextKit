@@ -17,32 +17,26 @@ import AppKit
  in UIKit. It aims to make these views behave more alike and
  make them implement ``RichTextViewComponent``, which is the
  protocol that is used within this library.
+ 
+ The view will apply a ``RichTextImageConfiguration/disabled``
+ image config by default. You can change this by setting the
+ property manually or by using a ``RichTextDataFormat`` that
+ supports images.
  */
 open class RichTextView: NSTextView, RichTextViewComponent {
 
     // MARK: - Properties
     
-    /**
-     The style to use when highlighting text in the view.
-     */
+    /// The style to use when highlighting text in the view.
     public var highlightingStyle: RichTextHighlightingStyle = .standard
 
-    /**
-     The image configuration to use by the rich text view.
-
-     The view uses the ``RichTextImageConfiguration/disabled``
-     configuration by default. You can change this by either
-     setting the property manually or by setting up the view
-     with a ``RichTextDataFormat`` that supports images.
-     */
+    /// The image configuration to use by the rich text view.
     public var imageConfiguration: RichTextImageConfiguration = .disabled
 
 
     // MARK: - Overrides
 
-    /**
-     Paste the current pasteboard content into the text view.
-     */
+    /// Paste the current pasteboard content into the view.
     open override func paste(_ sender: Any?) {
         let pasteboard = NSPasteboard.general
         if let image = pasteboard.image {
@@ -113,9 +107,7 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         alert.runModal()
     }
 
-    /**
-     Copy the current selection.
-     */
+    /// Copy the current selection.
     open func copySelection() {
         let pasteboard = NSPasteboard.general
         let range = safeRange(for: selectedRange)
@@ -124,36 +116,22 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         pasteboard.setString(text.string, forType: .string)
     }
 
-    /**
-     Try to redo the latest undone change.
-     */
+    /// Try to redo the latest undone change.
     open func redoLatestChange() {
         undoManager?.redo()
     }
 
-    /**
-     Scroll to a certain range.
-
-     - Parameters:
-       - range: The range to scroll to.
-     */
+    /// Scroll to a certain range.
     open func scroll(to range: NSRange) {
         scrollRangeToVisible(range)
     }
 
-    /**
-     Set the rich text in the text view.
-
-     - Parameters:
-       - text: The rich text to set.
-     */
+    /// Set the rich text in the text view.
     open func setRichText(_ text: NSAttributedString) {
         attributedString = text
     }
 
-    /**
-     Undo the latest change.
-     */
+    /// Undo the latest change.
     open func undoLatestChange() {
         undoManager?.undo()
     }
@@ -181,17 +159,13 @@ public extension RichTextView {
 
 public extension RichTextView {
 
-    /**
-     Get the rich text that is managed by the view.
-     */
+    /// Get the rich text that is managed by the view.
     var attributedString: NSAttributedString {
         get { attributedString() }
         set { textStorage?.setAttributedString(newValue) }
     }
 
-    /**
-     Whether or not the text view is the first responder.
-     */
+    /// Whether or not the text view is the first responder.
     var isFirstResponder: Bool {
         window?.firstResponder == self
     }
@@ -202,9 +176,7 @@ public extension RichTextView {
 
 public extension RichTextView {
 
-    /**
-     Get the mutable rich text that is managed by the view.
-     */
+    // Get the rich text that is managed by the view.
     var mutableAttributedString: NSMutableAttributedString? {
         textStorage
     }

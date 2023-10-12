@@ -47,9 +47,6 @@ public extension RichTextViewComponent {
 
 private extension RichTextViewComponent {
 
-    /**
-     Set the text alignment at the current position.
-     */
     func setTextAlignmentAtCurrentPosition(
         to alignment: RichTextAlignment
     ) {
