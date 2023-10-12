@@ -11,9 +11,7 @@ import AppKit
 
 public extension NSImage {
 
-    /**
-     Try to get JPEG compressed data from the AppKit image.
-     */
+    /// Try to get JPEG compressed data for the AppKit image.
     func jpegData(compressionQuality: CGFloat) -> Data? {
         guard let image = cgImage else { return nil }
         let bitmap = NSBitmapImageRep(cgImage: image)

@@ -39,23 +39,19 @@ public extension RichTextDataReader {
 
 private extension RichTextDataReader {
 
-    /**
-     The full text range.
-     */
+    /// The full text range.
     var textRange: NSRange {
         NSRange(location: 0, length: richText.length)
     }
 
-    /**
-     The full text range.
-     */
-    func documentAttributes(for documentType: NSAttributedString.DocumentType) -> [NSAttributedString.DocumentAttributeKey: Any] {
+    /// The full text range.
+    func documentAttributes(
+        for documentType: NSAttributedString.DocumentType
+    ) -> [NSAttributedString.DocumentAttributeKey: Any] {
         [.documentType: documentType]
     }
 
-    /**
-     Generate ``RichTextDataFormat/archivedData`` formatted data.
-     */
+    /// Generate ``RichTextDataFormat/archivedData`` data.
     func richTextArchivedData() throws -> Data {
         try NSKeyedArchiver.archivedData(
             withRootObject: richText,
@@ -63,9 +59,7 @@ private extension RichTextDataReader {
         )
     }
 
-    /**
-     Generate ``RichTextDataFormat/plainText`` formatted data.
-     */
+    /// Generate ``RichTextDataFormat/plainText`` data.
     func richTextPlainTextData() throws -> Data {
         let string = richText.string
         guard let data = string.data(using: .utf8) else {
@@ -75,9 +69,7 @@ private extension RichTextDataReader {
         return data
     }
 
-    /**
-     Generate ``RichTextDataFormat/rtf`` formatted data.
-     */
+    /// Generate ``RichTextDataFormat/rtf`` data.
     func richTextRtfData() throws -> Data {
         try richText.data(
             from: textRange,
@@ -85,9 +77,7 @@ private extension RichTextDataReader {
         )
     }
 
-    /**
-     Generate ``RichTextDataFormat/rtfd`` formatted data.
-     */
+    /// Generate ``RichTextDataFormat/rtfd`` data.
     func richTextRtfdData() throws -> Data {
         try richText.data(
             from: textRange,
@@ -96,9 +86,7 @@ private extension RichTextDataReader {
     }
 
     #if os(macOS)
-    /**
-     Generate ``RichTextDataFormat/word`` formatted data.
-     */
+    /// Generate ``RichTextDataFormat/word`` formatted data.
     func richTextWordData() throws -> Data {
         try richText.data(
             from: textRange,

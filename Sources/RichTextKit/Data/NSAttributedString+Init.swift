@@ -14,8 +14,8 @@ public extension NSAttributedString {
      Try to parse ``RichTextFormat`` formatted data.
 
      - Parameters:
-     - data: The data to initalize the string with.
-     - format: The data format to use.
+       - data: The data to initalize the string with.
+       - format: The data format to use.
      */
     convenience init(
         data: Data,

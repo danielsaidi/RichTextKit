@@ -10,9 +10,7 @@ import UniformTypeIdentifiers
 
 public extension UTType {
     
-    /**
-     The uniform rich text types that RichTextKit supports.
-     */
+    /// Uniform rich text types that RichTextKit supports.
     static let richTextTypes: [UTType] = [
         .archivedData,
         .rtf,
@@ -21,17 +19,13 @@ public extension UTType {
         .data
     ]
     
-    /**
-     The uniform type for ``RichTextFormat/archivedData``.
-     */
+    /// The uniform type for ``RichTextFormat/archivedData``.
     static let archivedData = UTType(
         exportedAs: "com.richtextkit.archiveddata")
 }
 
 public extension Collection where Element == UTType {
 
-    /**
-     The uniforum types that rich text documents support.
-     */
+    /// The uniforum types that rich text documents support.
     static var richTextTypes: [UTType] { UTType.richTextTypes }
 }

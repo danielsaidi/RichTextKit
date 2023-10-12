@@ -310,7 +310,7 @@ public extension RichTextContext {
     /// Set the attributed string to a new rich text.
     func setAttributedString(to string: NSAttributedString) {
         let mutable = NSMutableAttributedString(attributedString: string)
-        mutable.setFontSize(to: fontSize)
+        mutable.setFontSize(fontSize)
         shouldSetAttributedString = mutable
     }
 

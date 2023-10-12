@@ -18,9 +18,8 @@ import AppKit
 public extension NSTextAttachment {
 
     /**
-     This property either returns the `image` property value,
-     if any, else tries to use the `contents` data to create
-     a platform-specific image.
+     Get an `image` value, if any, or use `contents` data to
+     create a platform-specific image.
 
      This additional handling is needed since the `image` is
      not always available on certain platforms.

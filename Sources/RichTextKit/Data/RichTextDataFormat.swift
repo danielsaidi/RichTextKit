@@ -10,8 +10,9 @@ import Foundation
 import UniformTypeIdentifiers
 
 /**
- This enum specifies rich text formats that handle rich text
- in different ways.
+ This enum specifies rich text data formats.
+ 
+ Different formats handle rich text in different ways.
 
  For instance, ``rtf`` supports rich text attributes, styles,
  formatting etc. while ``plainText`` only handles plain text.
@@ -49,9 +50,7 @@ public enum RichTextDataFormat: Equatable, Identifiable {
 
 public extension Collection where Element == RichTextDataFormat {
 
-    /**
-     Get all library supported data formats.
-     */
+    /// Get all library supported data formats.
     static var libraryFormats: [RichTextDataFormat] {
         RichTextDataFormat.libraryFormats
     }
@@ -59,16 +58,12 @@ public extension Collection where Element == RichTextDataFormat {
 
 public extension RichTextDataFormat {
 
-    /**
-     Get all library supported data formats.
-     */
+    /// Get all library supported data formats.
     static var libraryFormats: [RichTextDataFormat] {
         [.archivedData, .plainText, .rtf]
     }
     
-    /**
-     The format's unique identifier.
-     */
+    /// The format's unique identifier.
     var id: String {
         switch self {
         case .archivedData: return "archivedData"
@@ -78,9 +73,7 @@ public extension RichTextDataFormat {
         }
     }
     
-    /**
-     The formats that a format can be converted to.
-     */
+    /// The formats that a format can be converted to.
     var convertibleFormats: [RichTextDataFormat] {
         switch self {
         case .vendorArchivedData: return Self.libraryFormats.removing(.archivedData)
@@ -88,10 +81,7 @@ public extension RichTextDataFormat {
         }
     }
 
-    /**
-     The format's file format text, which can be used in for
-     example menus and pickers.
-     */
+    /// The format's file format display text.
     var fileFormatText: String {
         switch self {
         case .archivedData: return RTKL10n.fileFormatRtk.text
@@ -101,9 +91,7 @@ public extension RichTextDataFormat {
         }
     }
 
-    /**
-     Whether or not the data format is an archived data type.
-     */
+    /// Whether or not the format is an archived data type.
     var isArchivedDataFormat: Bool {
         switch self {
         case .archivedData: return true
@@ -113,9 +101,7 @@ public extension RichTextDataFormat {
         }
     }
     
-    /**
-     The format's standard file extension.
-     */
+    /// The format's standard file extension.
     var standardFileExtension: String {
         switch self {
         case .archivedData: return "rtk"
@@ -125,11 +111,7 @@ public extension RichTextDataFormat {
         }
     }
     
-    /**
-     Whether or not the format supports images.
-
-     For now, 
-     */
+    /// Whether or not the format supports images.
     var supportsImages: Bool {
         switch self {
         case .archivedData: return true
@@ -139,9 +121,7 @@ public extension RichTextDataFormat {
         }
     }
     
-    /**
-     The format's uniform type.
-     */
+    /// The format's uniform type.
     var uniformType: UTType {
         switch self {
         case .archivedData: return .archivedData

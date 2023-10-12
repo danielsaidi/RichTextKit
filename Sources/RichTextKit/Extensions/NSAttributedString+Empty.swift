@@ -10,9 +10,7 @@ import Foundation
 
 public extension NSAttributedString {
  
-    /**
-     Create an empty attributed string.
-     */
+    /// Create an empty attributed string.
     static var empty: NSAttributedString {
         NSAttributedString(string: "")
     }

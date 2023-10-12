@@ -10,9 +10,7 @@ import Foundation
 
 extension Character {
 
-    /**
-     Check if a character is a `newLine` or `carriageReturn`.
-     */
+    /// Check if a character is a new line separator.
     var isNewLineSeparator: Bool {
         self == .newLine || self == .carriageReturn
     }

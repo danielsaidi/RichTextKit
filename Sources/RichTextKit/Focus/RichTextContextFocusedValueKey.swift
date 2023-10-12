@@ -13,6 +13,7 @@ import SwiftUI
  ``RichTextContext`` instance in a multi-window app.
  */
 public struct RichTextContextFocusedValueKey: FocusedValueKey {
+    
     public typealias Value = RichTextContext
 }
 

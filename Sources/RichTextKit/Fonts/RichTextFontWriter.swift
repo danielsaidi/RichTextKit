@@ -26,10 +26,11 @@ public extension RichTextFontWriter {
      Set the font at a certain range.
 
      - Parameters:
+       - font: The font to apply.
        - range: The range to affect, by default the entire text.
      */
     func setFont(
-        to font: FontRepresentable,
+        _ font: FontRepresentable,
         at range: NSRange? = nil
     ) {
         setRichTextAttribute(.font, to: font, at: range)
@@ -56,7 +57,7 @@ public extension RichTextFontWriter {
        - range: The range to affect, by default the entire text.
      */
     func setFontName(
-        to name: String,
+        _ name: String,
         at range: NSRange? = nil
     ) {
         guard let text = mutableRichText else { return }
@@ -87,7 +88,7 @@ public extension RichTextFontWriter {
        - range: The range to affect, by default the entire text.
      */
     func setFontSize(
-        to size: CGFloat,
+        _ size: CGFloat,
         at range: NSRange? = nil
     ) {
         guard let text = mutableRichText else { return }
@@ -119,7 +120,7 @@ public extension RichTextFontWriter {
         guard let font = attr else { return }
         let size = font.pointSize
         let newSize = size + CGFloat(points)
-        setFontSize(to: newSize, at: range)
+        setFontSize(newSize, at: range)
     }
 }
 

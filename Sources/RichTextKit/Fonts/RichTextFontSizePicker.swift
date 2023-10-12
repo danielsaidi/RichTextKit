@@ -58,16 +58,12 @@ public struct RichTextFontSizePicker: View {
 
 public extension RichTextFontSizePicker {
 
-    /**
-     The default font sizes to list in a font size picker.
-     */
+    /// The default font sizes to list in a font size picker.
     static var standardFontSizes: [CGFloat] {
         [10, 12, 14, 18, 20, 22, 24, 28, 36, 48, 64, 72, 96, 144]
     }
 
-    /**
-     Get a list of sizes for a certain selection.
-     */
+    /// Get a list of sizes for a certain selection.
     static func fontSizePickerSizes(
         for sizes: [CGFloat],
         selection: CGFloat) -> [CGFloat] {
@@ -78,9 +74,7 @@ public extension RichTextFontSizePicker {
 
 private extension RichTextFontSizePicker {
 
-    /**
-     Get the text to display for a certain font size.
-     */
+    /// Get the text to display for a certain font size.
     func text(for fontSize: CGFloat) -> some View {
         Text("\(Int(fontSize))")
             .fixedSize(horizontal: true, vertical: false)

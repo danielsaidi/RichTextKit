@@ -26,7 +26,8 @@ This version drops support for iOS 14, tvOS 14, macOS 11 and watchOS 7.
 * `RichTextColorPicker` initializer has been cleaned up and simplified.
 * `RichTextColorPicker.PickerColor` has been deprecated.
 * `RichTextColorPickerColor` has been deprecated.
-* `RichTextColorWriter` omits the `to:` parameter name. 
+* `RichTextColorWriter` omits the `to:` parameter name.
+* `RichTextFontWriter` omits the `to:` parameter name. 
 
 
 
