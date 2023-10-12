@@ -50,6 +50,6 @@ public extension RichTextStyleWriter {
             descriptor: font.fontDescriptor.byTogglingStyle(style),
             size: font.pointSize)
         guard let newFontValue = newFont else { return }
-        setFont(to: newFontValue, at: range)
+        setFont(newFontValue, at: range)
     }
 }

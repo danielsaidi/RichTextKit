@@ -43,45 +43,38 @@ public extension RichTextIndentWriter {
        - range: The range for which to set the indent.
      */
     func setRichTextIndent(
-        to indent: RichTextIndent,
+        _ indent: RichTextIndent,
         at range: NSRange
     ) -> RichTextAttributes? {
         let text = richText.string
 
         // Text view has selected text
         if range.length > 0 {
-            return setRichTextIndent(indent, at: range)
+            return stepRichTextIndent(indent, at: range)
         }
 
         // The cursor is at the beginning of the text
         if range.location == 0 {
-            return setRichTextIndent(indent, atIndex: 0)
+            return stepRichTextIndent(indent, atIndex: 0)
         }
 
         // The cursor is immediately before a newline
         if let char = text.character(at: range.location), char.isNewLineSeparator {
             let location = UInt(range.location)
             let index = text.findIndexOfCurrentParagraph(from: location)
-            return setRichTextIndent(indent, atIndex: index)
+            return stepRichTextIndent(indent, atIndex: index)
         }
 
         // The cursor is somewhere within a paragraph
         let location = UInt(range.location)
         let index = text.findIndexOfCurrentParagraph(from: location)
-        return setRichTextIndent(indent, atIndex: index)
+        return stepRichTextIndent(indent, atIndex: index)
     }
 }
 
 private extension RichTextIndentWriter {
 
-    /**
-     Set the rich text indent at the provided range.
-
-     - Parameters:
-       - indent: The indent to set.
-       - range: The range for which to set the indent.
-     */
-    func setRichTextIndent(
+    func stepRichTextIndent(
         _ indent: RichTextIndent,
         at range: NSRange
     ) -> RichTextAttributes? {
@@ -90,17 +83,10 @@ private extension RichTextIndentWriter {
         let location = range.location
         let ulocation = UInt(location)
         let index = text.findIndexOfCurrentParagraph(from: ulocation)
-        return setRichTextIndent(indent, atIndex: index)
+        return stepRichTextIndent(indent, atIndex: index)
     }
 
-    /**
-     Set the rich text indent at the provided index.
-
-     - Parameters:
-       - indent: The indent to set.
-       - index: The text index for which to set the indent.
-     */
-    func setRichTextIndent(
+    func stepRichTextIndent(
         _ indent: RichTextIndent,
         atIndex index: Int
     ) -> RichTextAttributes? {
@@ -130,11 +116,10 @@ private extension RichTextIndentWriter {
        - indent: The indent to set.
        - index: The text index for which to set the indent.
      */
-    func setRichTextIndent(
+    func stepRichTextIndent(
         _ indent: RichTextIndent,
         atIndex index: UInt
     ) -> RichTextAttributes? {
-        let index = Int(index)
-        return setRichTextIndent(indent, atIndex: index)
+        stepRichTextIndent(indent, atIndex: Int(index))
     }
 }

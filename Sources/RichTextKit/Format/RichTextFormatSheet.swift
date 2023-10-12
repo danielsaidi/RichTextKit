@@ -65,7 +65,8 @@ public struct RichTextFormatSheet: View {
                             value: context.foregroundColorBinding,
                             quickColors: .quickPickerColors)
                     }.padding(.leading, padding)
-                }.padding(.vertical, padding)
+                }
+                .padding(.vertical, padding)
                 .environment(\.sizeCategory, .medium)
                 .accentColor(.primary)
                 .background(background)

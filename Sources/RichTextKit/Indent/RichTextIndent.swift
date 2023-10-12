@@ -22,14 +22,10 @@ public enum RichTextIndent: CaseIterable, Codable, Equatable, Identifiable {
 
 public extension RichTextIndent {
 
-    /**
-     The unique ID of the indent.
-     */
+    /// The indent's unique ID.
     var id: UUID { UUID() }
     
-    /**
-     The standard icon to use for the indent.
-     */
+    /// The indent's standard icon.
     var icon: Image {
         switch self {
         case .decrease: return .richTextIndentDecrease

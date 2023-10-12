@@ -42,7 +42,7 @@ public extension RichTextViewComponent {
          let previousCharacter = richText.string.character(at: selectedRange.location - 1)
          let isNewLine = previousCharacter?.isNewLineSeparator ?? false
          if isNewLine { return setTextIndentAtCurrentPosition(to: indent) }
-         typingAttributes = setRichTextIndent(to: indent, at: selectedRange) ?? typingAttributes
+         typingAttributes = setRichTextIndent(indent, at: selectedRange) ?? typingAttributes
     }
 }
 

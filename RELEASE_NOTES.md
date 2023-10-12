@@ -22,13 +22,11 @@ This version drops support for iOS 14, tvOS 14, macOS 11 and watchOS 7.
 
 ### 🗑️ Deprecations 
 
-* `RichTextAlignmentWriter` omits the `to:` parameter name. 
+* A bunch of "writer" types omits the `to:` parameter name.
+
 * `RichTextColorPicker` initializer has been cleaned up and simplified.
 * `RichTextColorPicker.PickerColor` has been deprecated.
 * `RichTextColorPickerColor` has been deprecated.
-* `RichTextColorWriter` omits the `to:` parameter name.
-* `RichTextFontWriter` omits the `to:` parameter name. 
-
 
 
 ## 0.8

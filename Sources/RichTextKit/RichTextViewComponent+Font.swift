@@ -55,7 +55,7 @@ public extension RichTextViewComponent {
      */
     func setCurrentFontName(to name: String) {
         if hasSelectedRange {
-            setFontName(to: name, at: selectedRange)
+            setFontName(name, at: selectedRange)
         } else {
             setFontNameAtCurrentPosition(to: name)
         }
@@ -74,7 +74,7 @@ public extension RichTextViewComponent {
         setFontSizeAtCurrentPosition(size)
         #else
         if hasSelectedRange {
-            setFontSize(to: size, at: selectedRange)
+            setFontSize(size, at: selectedRange)
         } else {
             setFontSizeAtCurrentPosition(size)
         }

@@ -75,7 +75,7 @@ public extension RichTextViewComponent {
         if move { moveInputCursor(to: safeInsertRange.location + items) }
         if move || isSelectedRange, let fontSize {
             DispatchQueue.main.async {
-                self.setFontSize(to: fontSize)
+                self.setFontSize(fontSize)
                 self.moveInputCursor(to: self.selectedRange.location)
             }
         }

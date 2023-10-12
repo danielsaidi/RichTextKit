@@ -9,7 +9,7 @@
 import SwiftUI
 
 /**
- This picker can be used to pick a rich text indent.
+ This picker can be used to pick a rich text indent change.
 
  This view returns a plain SwiftUI `Picker` view that can be
  styled and configured in all ways supported by SwiftUI.
