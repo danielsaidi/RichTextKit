@@ -19,14 +19,10 @@ import AppKit
 public extension RichTextAttributeWriter {
 
     /**
-     Set the rich text indent at the provided range.
+     Set the text indent at the provided range.
      
-     Unlike some other attributes, text indent applies to an
-     entire paragraph.
-
-     - Parameters:
-       - points: The indent to set.
-       - range: The range for which to set the indent.
+     Unlike some other attributes, this value applies to the
+     entire paragraph, not just the selected range.
      */
     func stepRichTextIndent(
         points: CGFloat,
@@ -57,13 +53,7 @@ public extension RichTextAttributeWriter {
         return stepRichTextIndent(points: points, atIndex: index)
     }
     
-    /**
-     Step the text indent at a certain index.
-     
-     - Parameters:
-       - points: The number of points to step.
-       - index: The index to affect.
-     */
+    /// Step the text indent at a certain index.
     func stepRichTextIndent(
         points: CGFloat,
         atIndex index: Int
@@ -87,13 +77,7 @@ public extension RichTextAttributeWriter {
         return attributes
     }
 
-    /**
-     Step the text indent at a certain index.
-     
-     - Parameters:
-       - points: The number of points to step.
-       - index: The index to affect.
-     */
+    /// Step the text indent at a certain index.
     func stepRichTextIndent(
         points: CGFloat,
         atIndex index: UInt
@@ -107,13 +91,7 @@ public extension RichTextAttributeWriter {
 
 extension RichTextAttributeWriter {
 
-    /**
-     Step the text indent at a certain range.
-     
-     - Parameters:
-       - points: The number of points to step.
-       - range: The range to affect.
-     */
+    /// Step the text indent at a certain range.
     func stepIndentInternal(
         points: CGFloat,
         at range: NSRange

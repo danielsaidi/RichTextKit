@@ -30,7 +30,7 @@ public extension RichTextAttributeWriter {
         let range = safeRange(for: rangeValue)
         let attributeValue = newValue ? 1 : 0
         if style == .underlined { return setRichTextAttribute(.underlineStyle, to: attributeValue, at: range) }
-        guard let font = font(at: range) else { return }
+        guard let font = richTextFont(at: range) else { return }
         let styles = richTextStyles(at: range)
         let shouldAdd = newValue && !styles.hasStyle(style)
         let shouldRemove = !newValue && styles.hasStyle(style)
@@ -38,7 +38,7 @@ public extension RichTextAttributeWriter {
         let newFont: FontRepresentable? = FontRepresentable(
             descriptor: font.fontDescriptor.byTogglingStyle(style),
             size: font.pointSize)
-        guard let newFontValue = newFont else { return }
-        setFont(newFontValue, at: range)
+        guard let newFont = newFont else { return }
+        setRichTextFont(newFont, at: range)
     }
 }

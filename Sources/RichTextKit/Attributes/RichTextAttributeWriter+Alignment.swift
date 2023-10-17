@@ -21,12 +21,8 @@ public extension RichTextAttributeWriter {
     /**
      Set the text alignment at a certain range.
 
-     Unlike some other attributes, text alignment applies to
-     the entire paragraph.
-
-     - Parameters:
-       - alignment: The alignment to set.
-       - range: The range for which to set the alignment.
+     Unlike some other attributes, this value applies to the
+     entire paragraph, not just the selected range.
      */
     func setRichTextAlignment(
         _ alignment: RichTextAlignment,

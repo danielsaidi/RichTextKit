@@ -24,7 +24,8 @@ This version also consolidates all separate attribute readers and writers into t
 
 ### 🗑️ Deprecations 
 
-* All specific attribute reader/writer protocols are deprecated in favor of the base protocols.  
+* All specific attribute reader/writer protocols are deprecated in favor of the base protocols.
+* Color and font reader/writer functions have been prefixed with `richText`.  
 
 * `RichTextAttributeWriter` omits the `to:` parameter name. 
 * `RichTextColorPicker` initializer has been cleaned up and simplified.

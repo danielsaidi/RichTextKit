@@ -22,8 +22,8 @@ public extension RichTextAttributeReader {
     func richTextAlignment(
         at range: NSRange
     ) -> RichTextAlignment? {
-        let attribute: NSMutableParagraphStyle? = richTextAttribute(.paragraphStyle, at: range)
-        guard let style = attribute else { return nil }
+        let style = richTextParagraphStyle(at: range)
+        guard let style = style else { return nil }
         return RichTextAlignment(style.alignment)
     }
 }

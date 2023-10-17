@@ -21,33 +21,15 @@ extension NSAttributedString: RichTextAttributeReader {}
 
 public extension RichTextAttributeReader {
 
-    /**
-     Get a rich text attribute at a certain range.
-
-     - Parameters:
-       - attribute: The attribute to get.
-       - range: The range to get the attribute from.
-     */
+    /// Get a rich text attribute at a certain range.
     func richTextAttribute<Value>(
         _ attribute: RichTextAttribute,
         at range: NSRange
     ) -> Value? {
         richTextAttributes(at: range)[attribute] as? Value
     }
-
-    /**
-     Get all rich text attributes at a certain range.
-
-     The function uses `safeRange(for:)` to handle incorrect
-     ranges, which is not handled by the native functions.
-
-     This function returns an empty attributes dictionary if
-     the rich text is empty, since this check will otherwise
-     cause the application to crash.
-
-     - Parameters:
-       - range: The range to get attributes from.
-     */
+    
+    /// Get all rich text attributes at a certain range.
     func richTextAttributes(
         at range: NSRange
     ) -> RichTextAttributes {

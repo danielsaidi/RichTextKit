@@ -22,8 +22,8 @@ public extension RichTextAttributeReader {
     func richTextIndent(
         at range: NSRange
     ) -> CGFloat? {
-        let attribute: NSMutableParagraphStyle? = richTextAttribute(.paragraphStyle, at: range)
-        guard let style = attribute else { return nil }
+        let style = richTextParagraphStyle(at: range)
+        guard let style = style else { return nil }
         return style.headIndent
     }
 }

@@ -38,12 +38,22 @@ public extension RichTextAttributeReader {
     ) -> ColorRepresentable? {
         richTextAttribute(.backgroundColor, at: range)
     }
-
+    
     @available(*, deprecated, renamed: "richTextForegroundColor(at:)")
     func foregroundColor(
         at range: NSRange
     ) -> ColorRepresentable? {
         richTextAttribute(.foregroundColor, at: range)
+    }
+    
+    @available(*, deprecated, renamed: "richTextFont(at:)")
+    func font(at range: NSRange) -> FontRepresentable? {
+        richTextFont(at: range)
+    }
+
+    @available(*, deprecated, renamed: "richTextFontSize(at:)")
+    func fontSize(at range: NSRange) -> CGFloat? {
+        richTextFontSize(at: range)
     }
 }
 
@@ -97,6 +107,30 @@ public extension RichTextAttributeWriter {
         setRichTextAlignment(alignment, at: range)
     }
     
+    @available(*, deprecated, renamed: "setRichTextFont(_:at:)")
+    func setFont(
+        _ font: FontRepresentable,
+        at range: NSRange? = nil
+    ) {
+        setRichTextFont(font, at: range)
+    }
+    
+    @available(*, deprecated, renamed: "setRichTextFontName(_:at:)")
+    func setFontName(
+        _ name: String,
+        at range: NSRange? = nil
+    ) {
+        setRichTextFontName(name, at: range)
+    }
+    
+    @available(*, deprecated, renamed: "setRichTextFontSize(_:at:)")
+    func setFontSize(
+        _ size: CGFloat,
+        at range: NSRange? = nil
+    ) {
+        setRichTextFontSize(size, at: range)
+    }
+    
     @available(*, deprecated, renamed: "stepRichTextIndent(_:at:)")
     func setRichTextIndent(
         to indent: RichTextIndent,
@@ -109,5 +143,29 @@ public extension RichTextAttributeWriter {
             points: points,
             at: range
         )
+    }
+    
+    @available(*, deprecated, renamed: "stepRichTextFontSize(points:at:)")
+    func stepFontSize(
+        points: Int,
+        at range: NSRange
+    ) {
+        stepRichTextFontSize(points: points, at: range)
+    }
+    
+    @available(*, deprecated, message: "Use stepRichTextFontSize instead")
+    func decrementFontSize(
+        points: UInt = 1,
+        at range: NSRange
+    ) {
+        stepRichTextFontSize(points: -Int(points), at: range)
+    }
+
+    @available(*, deprecated, message: "Use stepRichTextFontSize instead")
+    func incrementFontSize(
+        points: UInt = 1,
+        at range: NSRange
+    ) {
+        stepRichTextFontSize(points: Int(points), at: range)
     }
 }

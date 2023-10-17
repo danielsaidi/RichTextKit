@@ -11,10 +11,8 @@ import Foundation
 
 public extension RichTextAttributeWriter {
 
-    /**
-     Set the font at a certain range.
-     */
-    func setFont(
+    /// Set the font at a certain range.
+    func setRichTextFont(
         _ font: FontRepresentable,
         at range: NSRange? = nil
     ) {
@@ -41,38 +39,28 @@ public extension RichTextAttributeWriter {
        - name: The name of the font to apply.
        - range: The range to affect, by default the entire text.
      */
-    func setFontName(
+    func setRichTextFontName(
         _ name: String,
         at range: NSRange? = nil
     ) {
         guard let text = mutableRichText else { return }
         guard text.length > 0 else { return }
         let range = range ?? richTextRange
-        let key = NSAttributedString.Key.font
         let fontName = settableFontName(for: name)
         text.beginEditing()
-        text.enumerateAttribute(key, in: range, options: .init()) { value, range, _ in
+        text.enumerateAttribute(.font, in: range, options: .init()) { value, range, _ in
             let oldFont = value as? FontRepresentable ?? .standardRichTextFont
             let size = oldFont.pointSize
             let newFont = FontRepresentable(name: fontName, size: size) ?? .standardRichTextFont
-            text.removeAttribute(key, range: range)
-            text.addAttribute(key, value: newFont, range: range)
+            text.removeAttribute(.font, range: range)
+            text.addAttribute(.font, value: newFont, range: range)
             text.fixAttributes(in: range)
         }
         text.endEditing()
     }
 
-    /**
-     Set the font size at a certain range.
-
-     This function will iterate over a the range and replace
-     the old font with a copy where the size has changed.
-
-     - Parameters:
-       - size: The font size to set.
-       - range: The range to affect, by default the entire text.
-     */
-    func setFontSize(
+    /// Set the font size at a certain range.
+    func setRichTextFontSize(
         _ size: CGFloat,
         at range: NSRange? = nil
     ) {
@@ -90,62 +78,20 @@ public extension RichTextAttributeWriter {
         text.endEditing()
     }
 
-    /**
-     Step the font size at a certain range.
-
-     - Parameters:
-       - points: The number of points to increase or decrease the font size.
-       - range: The range affect.
-     */
-    func stepFontSize(
+    /// Step the font size at a certain range.
+    func stepRichTextFontSize(
         points: Int,
         at range: NSRange
     ) {
-        let attr: FontRepresentable? = richTextAttribute(.font, at: range)
-        guard let font = attr else { return }
-        let size = font.pointSize
+        guard let size = richTextFontSize(at: range) else { return }
         let newSize = size + CGFloat(points)
-        setFontSize(newSize, at: range)
-    }
-}
-
-public extension RichTextAttributeWriter {
-
-    /**
-     Decrement the font size at a certain range.
-
-     - Parameters:
-       - points: The number of points to decrement, by default `1`.
-       - range: The range to affect.
-     */
-    func decrementFontSize(
-        points: UInt = 1,
-        at range: NSRange
-    ) {
-        stepFontSize(points: -Int(points), at: range)
-    }
-
-    /**
-     Increment the font size at a certain range.
-
-     - Parameters:
-       - points: The number of points to increment, by default `1`.
-       - range: The range to affect.
-     */
-    func incrementFontSize(
-        points: UInt = 1,
-        at range: NSRange
-    ) {
-        stepFontSize(points: Int(points), at: range)
+        setRichTextFontSize(newSize, at: range)
     }
 }
 
 private extension RichTextAttributeWriter {
 
-    /**
-     We must adjust empty font names on some platforms since
-     it may mess up the font size.
-     */
+    /// We must adjust empty font names on some platforms.
     func settableFontName(for fontName: String) -> String {
         #if os(macOS)
         fontName.isEmpty ? "Helvetica" : fontName
