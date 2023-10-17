@@ -6,7 +6,6 @@
 //  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
 //
 
-import CoreGraphics
 import Foundation
 
 public extension RichTextAttributeReader {

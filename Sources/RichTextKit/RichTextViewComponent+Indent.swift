@@ -18,21 +18,14 @@ import AppKit
 
 public extension RichTextViewComponent {
 
-    /**
-     Get the text indent at the current location.
-     */
+    /// Get the text indent at the current location.
     var currentRichTextIndent: CGFloat? {
         let attribute: NSMutableParagraphStyle? = currentRichTextAttribute(.paragraphStyle)
         guard let style = attribute else { return nil }
         return style.headIndent
     }
 
-    /**
-     Step the text indent at the current location.
-
-     - Parameters:
-       - points: The number of points to step.
-     */
+    /// Step the text indent at the current location.
     func stepCurrentRichTextIndent(
         points: CGFloat
     ) {

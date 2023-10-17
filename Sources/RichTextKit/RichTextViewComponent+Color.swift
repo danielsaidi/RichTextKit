@@ -10,44 +10,26 @@ import Foundation
 
 public extension RichTextViewComponent {
 
-    /**
-     Use the selected range (if any) or text position to get
-     the current background color alignment.
-     */
+    /// Get the current background color.
     var currentBackgroundColor: ColorRepresentable? {
         currentRichTextAttribute(.backgroundColor)
     }
 
-    /**
-     Use the selected range (if any) or text position to get
-     the current foreground color alignment.
-     */
+    /// Get the current foreground color.
     var currentForegroundColor: ColorRepresentable? {
         currentRichTextAttribute(.foregroundColor)
     }
 
-    /**
-     Use the selected range (if any) or text position to set
-     the current background color.
-
-     - Parameters:
-       - color: The color to set.
-     */
+    /// Set the current background color.
     func setCurrentBackgroundColor(
-        to color: ColorRepresentable
+        _ color: ColorRepresentable
     ) {
         setCurrentRichTextAttribute(.backgroundColor, to: color)
     }
 
-    /**
-     Use the selected range (if any) or text position to set
-     the current foreground color.
-
-     - Parameters:
-       - color: The color to set.
-     */
+    /// Set the current foreground color.
     func setCurrentForegroundColor(
-        to color: ColorRepresentable
+        _ color: ColorRepresentable
     ) {
         setCurrentRichTextAttribute(.foregroundColor, to: color)
     }

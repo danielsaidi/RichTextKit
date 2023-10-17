@@ -50,8 +50,8 @@ class RichTextViewComponent_AlignmentTests: XCTestCase {
 
     func testCurrentRichTextAlignmentWorksForSelectedRange() {
         textView.setSelectedRange(selectedRange)
-        textView.setCurrentRichTextAlignment(to: alignment)
-        XCTAssertEqual(textView.currentRichTextAlignment, alignment)
+        textView.setCurrentTextAlignment(alignment)
+        XCTAssertEqual(textView.currentTextAlignment, alignment)
         assertEqualAlignment(textView.currentRichTextAttributes[.paragraphStyle])
         assertEqualAlignment(textView.richTextAttributes(at: selectedRange)[.paragraphStyle])
         #if os(iOS) || os(tvOS)
@@ -63,8 +63,8 @@ class RichTextViewComponent_AlignmentTests: XCTestCase {
 
     func testCurrentRichTextAlignmentSetsAlignmentForEntireParagraph() {
         textView.setSelectedRange(startRange)
-        textView.setCurrentRichTextAlignment(to: alignment)
-        XCTAssertEqual(textView.currentRichTextAlignment, alignment)
+        textView.setCurrentTextAlignment(alignment)
+        XCTAssertEqual(textView.currentTextAlignment, alignment)
         assertEqualAlignment(textView.currentRichTextAttributes[.paragraphStyle])
         assertEqualAlignment(textView.richTextAttributes(at: selectedRange)[.paragraphStyle])
         #if os(iOS) || os(tvOS)
@@ -76,8 +76,8 @@ class RichTextViewComponent_AlignmentTests: XCTestCase {
 
     func testCurrentRichTextAlignmentDoesNotSetAlignmentForParagraphsOutsideOfRange() {
         textView.setSelectedRange(startRange)
-        textView.setCurrentRichTextAlignment(to: alignment)
-        XCTAssertEqual(textView.currentRichTextAlignment, alignment)
+        textView.setCurrentTextAlignment(alignment)
+        XCTAssertEqual(textView.currentTextAlignment, alignment)
         assertEqualAlignment(textView.currentRichTextAttributes[.paragraphStyle])
         assertNonEqualAlignment(textView.richTextAttributes(at: secondRowRange)[.paragraphStyle])
         #if os(iOS) || os(tvOS)

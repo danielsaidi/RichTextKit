@@ -31,7 +31,7 @@ class RichTextCoordinatorTests: XCTestCase {
             richTextContext: context)
         coordinator.shouldDelaySyncContextWithTextView = false
         view.selectedRange = NSRange(location: 0, length: 1)
-        view.setCurrentRichTextAlignment(to: .justified)
+        view.setCurrentTextAlignment(.justified)
     }
 
 
@@ -61,7 +61,7 @@ class RichTextCoordinatorTests: XCTestCase {
         XCTAssertEqual(context.isUnderlined, view.currentRichTextStyles.hasStyle(.underlined))
         XCTAssertEqual(context.selectedRange, view.selectedRange)
         #if os(iOS) || os(tvOS)
-        XCTAssertEqual(context.textAlignment, view.currentRichTextAlignment)
+        XCTAssertEqual(context.textAlignment, view.currentTextAlignment)
         #elseif os(macOS)
         XCTAssertEqual(context.textAlignment, macOSAlignment)
         #endif

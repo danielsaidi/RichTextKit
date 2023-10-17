@@ -18,25 +18,16 @@ import AppKit
 
 public extension RichTextViewComponent {
 
-    /**
-     Use the selected range (if any) or text position to get
-     the current rich text alignment.
-     */
-    var currentRichTextAlignment: RichTextAlignment? {
+    /// Get the current text alignment.
+    var currentTextAlignment: RichTextAlignment? {
         let attribute: NSMutableParagraphStyle? = currentRichTextAttribute(.paragraphStyle)
         guard let style = attribute else { return nil }
         return RichTextAlignment(style.alignment)
     }
 
-    /**
-     Use the selected range (if any) or text position to set
-     the current rich text alignment.
-
-     - Parameters:
-       - alignment: The alignment to set.
-     */
-    func setCurrentRichTextAlignment(
-        to alignment: RichTextAlignment
+    /// Set the current text alignment.
+    func setCurrentTextAlignment(
+        _ alignment: RichTextAlignment
     ) {
         if !hasTrimmedText {
             return setTextAlignmentAtCurrentPosition(to: alignment)

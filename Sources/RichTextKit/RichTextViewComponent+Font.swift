@@ -11,111 +11,54 @@ import Foundation
 
 public extension RichTextViewComponent {
 
-    /**
-     Use the selected range (if any) or text position to get
-     the current font.
-     */
+    /// Set the current font.
     var currentFont: FontRepresentable? {
         currentRichTextAttributes[.font] as? FontRepresentable
     }
 
-    /**
-     Use the selected range (if any) or text position to get
-     the current font size.
-     */
+    /// Set the current font size.
     var currentFontSize: CGFloat? {
         currentFont?.pointSize
     }
 
-    /**
-     Use the selected range (if any) or text position to get
-     the current font name.
-     */
+    /// Set the current font name.
     var currentFontName: String? {
         currentFont?.fontName
     }
 
-    /**
-     Use the selected range (if any) or text position to set
-     the current font.
-
-     - Parameters:
-       - font: The font to set.
-     */
-    func setCurrentFont(to font: FontRepresentable) {
+    /// Set the current font.
+    func setCurrentFont(_ font: FontRepresentable) {
         setCurrentRichTextAttribute(.font, to: font)
     }
 
-    /**
-     Use the selected range (if any) or text position to set
-     the current font name.
-
-     - Parameters:
-       - name: The font name to set.
-     */
-    func setCurrentFontName(to name: String) {
+    /// Set the current font name.
+    func setCurrentFontName(_ name: String) {
         if hasSelectedRange {
-            setFontName(name, at: selectedRange)
+            setRichTextFontName(name, at: selectedRange)
         } else {
             setFontNameAtCurrentPosition(to: name)
         }
     }
 
-    /**
-     Use the selected range (if any) or text position to set
-     the current font size.
-
-     - Parameters:
-       - size: The font size to set.
-     */
-    func setCurrentFontSize(to size: CGFloat) {
+    /// Set the current font size.
+    func setCurrentFontSize(_ size: CGFloat) {
         #if os(macOS)
         setFontSize(size, at: selectedRange)
         setFontSizeAtCurrentPosition(size)
         #else
         if hasSelectedRange {
-            setFontSize(size, at: selectedRange)
+            setRichTextFontSize(size, at: selectedRange)
         } else {
             setFontSizeAtCurrentPosition(size)
         }
         #endif
     }
 
-    /**
-     Use the selected range (if any) or text position to set
-     the current font size by stepping the size up or down a
-     certain number of points.
-
-     - Parameters:
-       - points: The number of points to increase or decrease the font size.
-     */
+    /// Step the current font size up or down.
     func stepCurrentFontSize(points: Int) {
         let currentSize = currentFontSize ?? .standardRichTextFontSize
         let newSize = currentSize + CGFloat(points)
-        setCurrentFontSize(to: newSize)
-    }
-}
-
-public extension RichTextViewComponent {
-
-    /**
-     Decrement the current font size.
-
-     - Parameters:
-       - points: The number of points to decrement the font size, by default `1`.
-     */
-    func decrementCurrentFontSize(points: UInt = 1) {
-        stepCurrentFontSize(points: -Int(points))
-    }
-
-    /**
-     Increment the current font size.
-
-     - Parameters:
-       - points: The number of points to increment the font size, by default `1`.
-     */
-    func incrementCurrentFontSize(points: UInt = 1) {
-        stepCurrentFontSize(points: Int(points))
+        setCurrentFontSize(newSize)
     }
 }
 

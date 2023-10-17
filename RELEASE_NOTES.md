@@ -15,6 +15,8 @@ This version also consolidates all separate attribute readers and writers into t
 ### ✨ Features
 
 * `RichTextColorPicker` now works on all platforms.
+* `RichTextAttributeReader` can handle more colors and superscripting.
+* `RichTextAttributeWriter` can handle more colors and superscripting.
 
 ### 💡 Adjustments
 
@@ -25,14 +27,15 @@ This version also consolidates all separate attribute readers and writers into t
 ### 🗑️ Deprecations 
 
 * All specific attribute reader/writer protocols are deprecated in favor of the base protocols.
-* Color and font reader/writer functions have been prefixed with `richText`.  
+* Many getter/setter functions have been prefixed with `richText`.  
 
-* `RichTextAttributeWriter` omits the `to:` parameter name. 
+* `RichTextAttributeWriter` renames functionality and omits `to:` param name. 
 * `RichTextColorPicker` initializer has been cleaned up and simplified.
 * `RichTextColorPicker.PickerColor` has been deprecated.
 * `RichTextColorPickerColor` has been deprecated.
 * `RichTextIndent` has been deprecated.
 * `RichTextIndentPicker` has been deprecated.
+* `RichTextViewComponent` and omits `to:` param name.
 
 ### 💥 Breaking Changes
 

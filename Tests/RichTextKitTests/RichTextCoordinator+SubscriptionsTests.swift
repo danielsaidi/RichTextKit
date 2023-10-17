@@ -29,7 +29,7 @@ class RichTextCoordinator_SubscriptionsTests: XCTestCase {
             textView: textView,
             richTextContext: textContext)
         textView.selectedRange = NSRange(location: 0, length: 1)
-        textView.setCurrentRichTextAlignment(to: .justified)
+        textView.setCurrentTextAlignment(.justified)
     }
 
 
@@ -118,10 +118,10 @@ class RichTextCoordinator_SubscriptionsTests: XCTestCase {
 
 
     func testTextAlignmentUpdatesTextView() {
-        textView.setCurrentRichTextAlignment(to: .left)
-        XCTAssertEqual(textView.currentRichTextAlignment, .left)
+        textView.setCurrentTextAlignment(.left)
+        XCTAssertEqual(textView.currentTextAlignment, .left)
         textContext.textAlignment = .right
-        XCTAssertEqual(textView.currentRichTextAlignment, .right)
+        XCTAssertEqual(textView.currentTextAlignment, .right)
     }
 }
 #endif

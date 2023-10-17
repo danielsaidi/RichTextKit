@@ -253,8 +253,8 @@ internal extension RichTextCoordinator {
     }
 
     func setAlignment(to newValue: RichTextAlignment) {
-        if newValue == textView.currentRichTextAlignment { return }
-        textView.setCurrentRichTextAlignment(to: newValue)
+        if newValue == textView.currentTextAlignment { return }
+        textView.setCurrentTextAlignment(newValue)
     }
 
     func setAttributedString(to newValue: NSAttributedString?) {
@@ -265,7 +265,7 @@ internal extension RichTextCoordinator {
     func setBackgroundColor(to newValue: ColorRepresentable?) {
         if newValue == textView.currentBackgroundColor { return }
         guard let color = newValue else { return }
-        textView.setCurrentBackgroundColor(to: color)
+        textView.setCurrentBackgroundColor(color)
     }
 
     func setFontName(to newValue: String) {
@@ -281,7 +281,7 @@ internal extension RichTextCoordinator {
     func setForegroundColor(to newValue: ColorRepresentable?) {
         if textView.currentForegroundColor == newValue { return }
         guard let color = newValue else { return }
-        textView.setCurrentForegroundColor(to: color)
+        textView.setCurrentForegroundColor(color)
     }
 
     func setHighlightedRange(to range: NSRange?) {
