@@ -9,7 +9,7 @@
 import SwiftUI
 
 /**
- This enum simplifies working with different text alignments.
+ This enum defines supported rich text alignments.
  
  The enum makes the alignment type identifiable and diffable.
  */

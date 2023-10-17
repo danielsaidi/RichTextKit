@@ -176,16 +176,6 @@ public extension RichTextContext {
 
 public extension RichTextContext {
 
-    /// Whether or not a certain style is enabled.
-    func hasStyle(_ style: RichTextStyle) -> Bool {
-        switch style {
-        case .bold: return isBold
-        case .italic: return isItalic
-        case .strikethrough: return isStrikethrough
-        case .underlined: return isUnderlined
-        }
-    }
-
     /// Set ``highlightedRange`` to a new, optional range.
     func highlightRange(_ range: NSRange?) {
         highlightedRange = range

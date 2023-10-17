@@ -58,11 +58,11 @@ public struct RichTextFormatSheet: View {
                     VStack(spacing: padding) {
                         RichTextColorPicker(
                             icon: .richTextColorForeground,
-                            value: context.foregroundColorBinding,
+                            value: context.binding(for: .foreground),
                             quickColors: .quickPickerColors)
                         RichTextColorPicker(
                             icon: .richTextColorBackground,
-                            value: context.backgroundColorBinding,
+                            value: context.binding(for: .background),
                             quickColors: .quickPickerColors)
                     }.padding(.leading, padding)
                 }

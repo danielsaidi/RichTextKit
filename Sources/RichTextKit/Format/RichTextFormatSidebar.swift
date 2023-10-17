@@ -60,12 +60,12 @@ public struct RichTextFormatSidebar: View {
             SidebarSection(title: nil) {
                 VStack(spacing: 4) {
                     RichTextColorPicker(
-                        icon: .richTextColorBackground,
-                        value: context.backgroundColorBinding,
+                        icon: .richTextColorForeground,
+                        value: context.binding(for: .foreground),
                         quickColors: .quickPickerColors)
                     RichTextColorPicker(
-                        icon: .richTextColorForeground,
-                        value: context.foregroundColorBinding,
+                        icon: .richTextColorBackground,
+                        value: context.binding(for: .background),
                         quickColors: .quickPickerColors)
                 }
             }

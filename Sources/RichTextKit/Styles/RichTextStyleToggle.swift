@@ -60,14 +60,7 @@ public struct RichTextStyleToggle: View {
         self.init(
             style: style,
             buttonStyle: buttonStyle,
-            value: {
-                switch style {
-                case .bold: return context.isBoldBinding
-                case .italic: return context.isItalicBinding
-                case .strikethrough: return context.isStrikethroughBinding
-                case .underlined: return context.isUnderlinedBinding
-                }
-            }(),
+            value: context.binding(for: style),
             fillVertically: fillVertically
         )
     }

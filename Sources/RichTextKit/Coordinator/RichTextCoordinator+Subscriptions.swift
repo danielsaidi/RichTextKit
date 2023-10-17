@@ -345,11 +345,6 @@ internal extension RichTextCoordinator {
         guard let color = newValue else { return }
         textView.setCurrentStrikethroughColor(color)
     }
-
-    func undoLatestChange(_ shouldUndo: Bool) {
-        guard shouldUndo else { return }
-        
-    }
 }
 
 private extension ColorRepresentable {

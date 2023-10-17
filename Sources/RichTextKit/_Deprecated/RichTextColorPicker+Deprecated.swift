@@ -41,8 +41,8 @@ public extension RichTextColorPicker {
             color: color,
             value: {
                 switch color {
-                case .foreground: return context.foregroundColorBinding
-                case .background: return context.backgroundColorBinding
+                case .foreground: return context.binding(for: .foreground)
+                case .background: return context.binding(for: .background)
                 }
             }(),
             showIcon: showIcon,
@@ -60,8 +60,8 @@ public extension RichTextColorPicker {
             color: color,
             value: {
                 switch color {
-                case .foreground: return context.foregroundColorBinding
-                case .background: return context.backgroundColorBinding
+                case .foreground: return context.binding(for: .foreground)
+                case .background: return context.binding(for: .background)
                 }
             }(),
             showIcon: showIcon,
