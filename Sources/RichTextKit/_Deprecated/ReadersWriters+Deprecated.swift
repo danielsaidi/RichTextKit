@@ -30,15 +30,31 @@ public protocol RichTextStyleReader: RichTextAttributeReader {}
 @available(*, deprecated, message: "Use RichTextAttributeWriter directly")
 public protocol RichTextStyleWriter: RichTextAttributeWriter, RichTextStyleReader {}
 
+public extension RichTextAttributeReader {
+    
+    @available(*, deprecated, renamed: "richTextBackgroundColor(at:)")
+    func backgroundColor(
+        at range: NSRange
+    ) -> ColorRepresentable? {
+        richTextAttribute(.backgroundColor, at: range)
+    }
+
+    @available(*, deprecated, renamed: "richTextForegroundColor(at:)")
+    func foregroundColor(
+        at range: NSRange
+    ) -> ColorRepresentable? {
+        richTextAttribute(.foregroundColor, at: range)
+    }
+}
 
 public extension RichTextAttributeWriter {
     
-    @available(*, deprecated, renamed: "setBackgroundColor(_:at:)")
+    @available(*, deprecated, renamed: "setRichTextBackgroundColor(_:at:)")
     func setBackgroundColor(
         to color: ColorRepresentable,
         at range: NSRange? = nil
     ) {
-        setBackgroundColor(color, at: range)
+        setRichTextBackgroundColor(color, at: range)
     }
     
     @available(*, deprecated, renamed: "setFont(_:at:)")
@@ -65,12 +81,12 @@ public extension RichTextAttributeWriter {
         setFontSize(size, at: range)
     }
 
-    @available(*, deprecated, renamed: "setForegroundColor(_:at:)")
+    @available(*, deprecated, renamed: "setRichTextForegroundColor(_:at:)")
     func setForegroundColor(
         to color: ColorRepresentable,
         at range: NSRange? = nil
     ) {
-        setForegroundColor(color, at: range)
+        setRichTextForegroundColor(color, at: range)
     }
     
     @available(*, deprecated, renamed: "setRichTextAlignment(_:at:)")

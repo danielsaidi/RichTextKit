@@ -20,12 +20,9 @@ public extension RichTextAttributeWriter {
 
     /**
      Set the rich text indent at the provided range.
-
-     Unlike some other attributes, the indent is not only
-     used by the provided range, but the entire paragraph. A
-     change must therefore be applied to an entire paragraph,
-     which makes the code a bit more complicated. The result
-     is highly a result of trial and error.
+     
+     Unlike some other attributes, text indent applies to an
+     entire paragraph.
 
      - Parameters:
        - points: The indent to set.

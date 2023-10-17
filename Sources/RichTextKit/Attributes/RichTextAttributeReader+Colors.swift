@@ -10,25 +10,15 @@ import Foundation
 
 public extension RichTextAttributeReader {
 
-    /**
-     Get the background color at the provided range.
-
-     - Parameters:
-       - range: The range to get the color from.
-     */
-    func backgroundColor(
+    /// Get the background color at a certain range.
+    func richTextBackgroundColor(
         at range: NSRange
     ) -> ColorRepresentable? {
         richTextAttribute(.backgroundColor, at: range)
     }
 
-    /**
-     Get the foreground color at the provided range.
-
-     - Parameters:
-       - range: The range to get the color from.
-     */
-    func foregroundColor(
+    /// Get the foreground color at a certain range.
+    func richTextForegroundColor(
         at range: NSRange
     ) -> ColorRepresentable? {
         richTextAttribute(.foregroundColor, at: range)

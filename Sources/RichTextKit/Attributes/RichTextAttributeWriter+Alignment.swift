@@ -19,11 +19,10 @@ import AppKit
 public extension RichTextAttributeWriter {
 
     /**
-     Set a rich text alignment at a certain range.
+     Set the text alignment at a certain range.
 
-     Unlike some other attributes, the alignment is not only
-     used by the provided range, but the entire paragraph. A
-     change must therefore be applied to an entire paragraph.
+     Unlike some other attributes, text alignment applies to
+     the entire paragraph.
 
      - Parameters:
        - alignment: The alignment to set.

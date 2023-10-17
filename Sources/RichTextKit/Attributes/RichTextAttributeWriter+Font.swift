@@ -13,10 +13,6 @@ public extension RichTextAttributeWriter {
 
     /**
      Set the font at a certain range.
-
-     - Parameters:
-       - font: The font to apply.
-       - range: The range to affect, by default the entire text.
      */
     func setFont(
         _ font: FontRepresentable,
@@ -95,7 +91,7 @@ public extension RichTextAttributeWriter {
     }
 
     /**
-     Increase or decrease the font size at a certain range.
+     Step the font size at a certain range.
 
      - Parameters:
        - points: The number of points to increase or decrease the font size.

@@ -10,28 +10,16 @@ import Foundation
 
 public extension RichTextAttributeWriter {
 
-    /**
-     Set the background color at the provided range.
-
-     - Parameters:
-       - color: The color to set.
-       - range: The range to affect, by default the entire text.
-     */
-    func setBackgroundColor(
+    /// Set the background color at a certain range.
+    func setRichTextBackgroundColor(
         _ color: ColorRepresentable,
         at range: NSRange? = nil
     ) {
         setRichTextAttribute(.backgroundColor, to: color, at: range)
     }
 
-    /**
-     Set the foreground color at the provided range.
-
-     - Parameters:
-       - color: The color to set.
-       - range: The range to affect, by default the entire text.
-     */
-    func setForegroundColor(
+    /// Set the foreground color at a certain range.
+    func setRichTextForegroundColor(
         _ color: ColorRepresentable,
         at range: NSRange? = nil
     ) {

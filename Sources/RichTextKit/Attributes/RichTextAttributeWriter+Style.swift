@@ -11,7 +11,7 @@ import Foundation
 public extension RichTextAttributeWriter {
 
     /**
-     Set a certain rich text style at a certain range.
+     Set a rich text style at a certain range.
 
      The function uses `safeRange(for:)` to handle incorrect
      ranges, which is not handled by the native functions.

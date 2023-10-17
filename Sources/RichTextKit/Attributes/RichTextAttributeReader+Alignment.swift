@@ -18,12 +18,7 @@ import AppKit
 
 public extension RichTextAttributeReader {
 
-    /**
-     Get the rich text alignment at a certain range.
-
-     - Parameters:
-       - range: The range to get the alignment from.
-     */
+    /// Get the text alignment at a certain range.
     func richTextAlignment(
         at range: NSRange
     ) -> RichTextAlignment? {

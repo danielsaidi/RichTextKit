@@ -10,12 +10,7 @@ import Foundation
 
 public extension RichTextAttributeReader {
 
-    /**
-     Get the rich text styles at a certain range.
-
-     - Parameters:
-       - range: The range to get the traits from.
-     */
+    /// Get the text styles at a certain range.
     func richTextStyles(at range: NSRange) -> [RichTextStyle] {
         let attributes = richTextAttributes(at: range)
         let traits = font(at: range)?.fontDescriptor.symbolicTraits

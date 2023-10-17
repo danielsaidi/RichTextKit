@@ -11,22 +11,12 @@ import Foundation
 
 public extension RichTextAttributeReader {
 
-    /**
-     Get the font at a certain range.
-
-     - Parameters:
-       - range: The range to get the font from.
-     */
+    /// Get the font at a certain range.
     func font(at range: NSRange) -> FontRepresentable? {
         richTextAttribute(.font, at: range)
     }
 
-    /**
-     Get the font size at a certain range.
-
-     - Parameters:
-       - range: The range to get the font size from.
-     */
+    /// Get the font size (in points) at a certain range.
     func fontSize(at range: NSRange) -> CGFloat? {
         font(at: range)?.pointSize
     }

@@ -18,12 +18,7 @@ import AppKit
 
 public extension RichTextAttributeReader {
 
-    /**
-     Get the rich text indent level at the provided range.
-
-     - Parameters:
-       - range: The range to get the indent from.
-     */
+    /// Get the text indent (in points) at a certain range.
     func richTextIndent(
         at range: NSRange
     ) -> CGFloat? {
