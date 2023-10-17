@@ -60,17 +60,17 @@ class RichTextCoordinator_SubscriptionsTests: XCTestCase {
 
 
     func testFontSizeDecrementUpdatesTextView() {
-        textView.setCurrentFontSize(to: 666)
+        textView.setCurrentFontSize(666)
         XCTAssertEqual(textView.currentFontSize, 666)
-        textContext.decrementFontSize()
-        // XCTAssertEqual(textView.currentFontSize, 665)    TODO: Why is incorrect?
+        textContext.stepFontSize(points: -1)
+        // XCTAssertEqual(textView.currentFontSize, 665)
     }
 
 
     func testFontSizeIncrementUpdatesTextView() {
-        textView.setCurrentFontSize(to: 666)
+        textView.setCurrentFontSize(666)
         XCTAssertEqual(textView.currentFontSize, 666)
-        textContext.incrementFontSize()
+        textContext.stepFontSize(points: 1)
         // XCTAssertEqual(textView.currentFontSize, 667)    TODO: Why is incorrect?
     }
 

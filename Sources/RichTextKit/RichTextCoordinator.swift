@@ -255,7 +255,7 @@ extension RichTextCoordinator {
             richTextContext.isEditingText = isEditingText
         }
 
-        let textAlignment = textView.currentRichTextAlignment ?? .left
+        let textAlignment = textView.currentTextAlignment ?? .left
         if richTextContext.textAlignment != textAlignment {
             richTextContext.textAlignment = textAlignment
         }

@@ -32,8 +32,8 @@
 "menuExport" = "Eksportere";
 "menuExportAs" = "Eksportere som...";
 "menuFont" = "Skrifttype";
-"menuFontLarger" = "Større";
-"menuFontSmaller" = "Mindre";
+"menuFontSizeIncrease" = "Større";
+"menuFontSizeDecrease" = "Mindre";
 "menuFormat" = "Format";
 "menuIndentIncrease" = "Øge indrykning";
 "menuIndentDecrease" = "Mindske indrykning";
@@ -42,6 +42,8 @@
 "menuSaveAs" = "Spare som...";
 "menuShare" = "Del";
 "menuShareAs" = "Del som...";
+"menuSuperscriptIncrease" = "Superscript";
+"menuSuperscriptDecrease" = "Subscript";
 "menuText" = "Tekst";
 
 "styleBold" = "Fremhævet";

@@ -44,9 +44,9 @@ public struct RichTextFontSizePickerStack: View {
     public var body: some View {
         #if os(iOS)
         HStack(spacing: 2) {
-            decrementButton
+            decreaseButton
             picker
-            incrementButton
+            increaseButton
         }
         .fixedSize(horizontal: false, vertical: true)
         #else
@@ -62,24 +62,24 @@ private extension RichTextFontSizePickerStack {
 
     var macShortcutOverlay: some View {
         HStack {
-            decrementButton
-            incrementButton
+            decreaseButton
+            increaseButton
         }
         .opacity(0)
         .allowsHitTesting(false)
     }
 
-    var decrementButton: some View {
+    var decreaseButton: some View {
         RichTextActionButton(
-            action: .decrementFontSize,
+            action: .decreaseFontSize,
             context: context,
             fillVertically: true
         )
     }
 
-    var incrementButton: some View {
+    var increaseButton: some View {
         RichTextActionButton(
-            action: .incrementFontSize,
+            action: .increaseFontSize,
             context: context,
             fillVertically: true
         )

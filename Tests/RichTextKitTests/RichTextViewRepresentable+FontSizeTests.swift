@@ -55,7 +55,7 @@ class RichTextViewComponent_FontSizeTests: XCTestCase {
 
     func testCurrentFontWorksForSelectedRange() {
         textView.setSelectedRange(selectedRange)
-        textView.setCurrentFont(to: font)
+        textView.setCurrentFont(font)
         XCTAssertEqual(textView.currentFont, font)
         XCTAssertEqual(textView.currentFontName, font.fontName)
         assertEqualFont(textView.currentRichTextAttribute(.font))
@@ -65,7 +65,7 @@ class RichTextViewComponent_FontSizeTests: XCTestCase {
 
     func testCurrentFontWorksForNoSelectedRange() {
         textView.setSelectedRange(noRange)
-        textView.setCurrentFont(to: font)
+        textView.setCurrentFont(font)
         #if os(iOS) || os(tvOS)
         XCTAssertEqual(textView.currentFont, font)
         XCTAssertEqual(textView.currentFontName, font.fontName)
@@ -78,7 +78,7 @@ class RichTextViewComponent_FontSizeTests: XCTestCase {
 
     func testCurrentFontSizeWorksForSelectedRange() {
         textView.setSelectedRange(selectedRange)
-        textView.setCurrentFontSize(to: size)
+        textView.setCurrentFontSize(size)
         XCTAssertEqual(textView.currentFontSize, size)
         assertEqualFontSize(textView.currentRichTextAttribute(.font))
         assertEqualFontSize(textView.richTextAttributes(at: selectedRange)[.font])
@@ -87,59 +87,13 @@ class RichTextViewComponent_FontSizeTests: XCTestCase {
 
     func testCurrentFontSizeWorksForNoSelectedRange() {
         textView.setSelectedRange(noRange)
-        textView.setCurrentFontSize(to: size)
+        textView.setCurrentFontSize(size)
         #if os(iOS) || os(tvOS)
         XCTAssertEqual(textView.currentFontSize, size)
         assertEqualFontSize(textView.currentRichTextAttribute(.font))
         #endif
         assertNonEqualFontSize(textView.richTextAttributes(at: selectedRange)[.font])
         assertEqualFontSize(textView.typingAttributes[.font])
-    }
-
-
-    func testDecrementFontSizeWorksForSelectedRange() {
-        textView.setSelectedRange(allRange)
-        textView.setCurrentFontSize(to: size)
-        textView.setSelectedRange(selectedRange)
-        textView.decrementCurrentFontSize()
-        XCTAssertEqual(textView.currentFontSize, size - 1)
-        textView.setSelectedRange(allRange)
-        XCTAssertEqual(textView.currentFontSize, size)
-    }
-
-    func testDecrementFontSizeWorksForNoSelectedRange() {
-        textView.setSelectedRange(allRange)
-        textView.setCurrentFontSize(to: size)
-        textView.setSelectedRange(noRange)
-        textView.decrementCurrentFontSize(points: 2)
-        #if os(iOS) || os(tvOS)
-        XCTAssertEqual(textView.currentFontSize, size - 2)
-        #endif
-        textView.setSelectedRange(allRange)
-        XCTAssertEqual(textView.currentFontSize, size)
-    }
-
-
-    func testIncrementFontSizeWorksForSelectedRange() {
-        textView.setSelectedRange(allRange)
-        textView.setCurrentFontSize(to: size)
-        textView.setSelectedRange(selectedRange)
-        textView.incrementCurrentFontSize()
-        XCTAssertEqual(textView.currentFontSize, size + 1)
-        textView.setSelectedRange(allRange)
-        XCTAssertEqual(textView.currentFontSize, size)
-    }
-
-    func testIncrementFontSizeWorksForNoSelectedRange() {
-        textView.setSelectedRange(allRange)
-        textView.setCurrentFontSize(to: size)
-        textView.setSelectedRange(noRange)
-        textView.incrementCurrentFontSize(points: 2)
-        #if os(iOS) || os(tvOS)
-        XCTAssertEqual(textView.currentFontSize, size + 2)
-        #endif
-        textView.setSelectedRange(allRange)
-        XCTAssertEqual(textView.currentFontSize, size)
     }
 }
 #endif

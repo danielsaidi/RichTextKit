@@ -158,7 +158,7 @@ public class RichTextContext: ObservableObject {
     
     /// Set this property to trigger a text indent change.
     @Published
-    var shouldStepTextIndentPoints: CGFloat?
+    var shouldStepIndentPoints: CGFloat?
 
     /// Whether or not to undo the latest change.
     @Published
@@ -185,16 +185,6 @@ public extension RichTextContext {
         shouldCopySelection = true
     }
 
-    /// Decrement the current font size 1 point.
-    func decrementFontSize() {
-        decrementFontSize(points: 1)
-    }
-
-    /// Decrement the current font size a number of points.
-    func decrementFontSize(points: UInt) {
-        stepFontSize(points: -Int(points))
-    }
-
     /// Whether or not a certain style is enabled.
     func hasStyle(_ style: RichTextStyle) -> Bool {
         switch style {
@@ -209,15 +199,25 @@ public extension RichTextContext {
     func highlightRange(_ range: NSRange?) {
         highlightedRange = range
     }
-
-    /// Increment the current font size 1 point.
-    func incrementFontSize() {
-        incrementFontSize(points: 1)
-    }
-
-    /// Increment  the current font size a number of points.
-    func incrementFontSize(points: UInt) {
+    
+    /// Increase the font size a number of points.
+    func increaseFontSize(points: UInt = 1) {
         stepFontSize(points: Int(points))
+    }
+    
+    /// Decrease the font size a number of points.
+    func decreaseFontSize(points: UInt = 1) {
+        stepFontSize(points: -Int(points))
+    }
+    
+    /// Increase the indent level a number of points.
+    func increaseIndent(points: UInt = 1) {
+        stepIndent(points: CGFloat(points))
+    }
+    
+    /// Decrease the indent level a number of points.
+    func decreaseIndent(points: UInt = 1) {
+        stepIndent(points: -CGFloat(points))
     }
 
     /**
@@ -309,10 +309,15 @@ public extension RichTextContext {
         mutable.setRichTextFontSize(fontSize)
         shouldSetAttributedString = mutable
     }
-
+    
     /// Step the current font size a number of points.
     func stepFontSize(points: Int) {
         fontSize += CGFloat(points)
+    }
+    
+    /// Step the current indent level a number of points.
+    func stepIndent(points: CGFloat) {
+        shouldStepIndentPoints = points
     }
 
     /// Set ``isEditingText`` to `false`.
@@ -338,15 +343,5 @@ public extension RichTextContext {
     /// Undo the latest change.
     func undoLatestChange() {
         shouldUndoLatestChange = true
-    }
-    
-    /// Decrease current indent.
-    func decreaseIndent(points: CGFloat) {
-        shouldStepTextIndentPoints = -points
-    }
-    
-    /// Increase current indent.
-    func increaseIndent(points: CGFloat) {
-        shouldStepTextIndentPoints = points
     }
 }

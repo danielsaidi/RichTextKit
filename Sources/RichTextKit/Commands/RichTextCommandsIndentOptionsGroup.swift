@@ -20,10 +20,10 @@ public struct RichTextCommandsIndentOptionsGroup: View {
 
     public var body: some View {
         Button(RTKL10n.menuIndentIncrease.text) {
-            context?.increaseIndent(points: stepSize)
+            context?.stepIndent(points: stepSize)
         }
         Button(RTKL10n.menuIndentDecrease.text) {
-            context?.decreaseIndent(points: stepSize)
+            context?.stepIndent(points: -stepSize)
         }
     }
 }

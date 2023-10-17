@@ -9,7 +9,7 @@
 import Foundation
 
 public extension RichTextViewComponent {
-
+    
     /// Get the current background color.
     var currentBackgroundColor: ColorRepresentable? {
         currentRichTextAttribute(.backgroundColor)
@@ -19,6 +19,16 @@ public extension RichTextViewComponent {
     var currentForegroundColor: ColorRepresentable? {
         currentRichTextAttribute(.foregroundColor)
     }
+    
+    /// Get the current stroke color.
+    var currentStrokeColor: ColorRepresentable? {
+        currentRichTextAttribute(.strokeColor)
+    }
+
+    /// Get the current strikethrough color.
+    var currentStrikethroughColor: ColorRepresentable? {
+        currentRichTextAttribute(.strikethroughColor)
+    }
 
     /// Set the current background color.
     func setCurrentBackgroundColor(
@@ -26,11 +36,25 @@ public extension RichTextViewComponent {
     ) {
         setCurrentRichTextAttribute(.backgroundColor, to: color)
     }
-
+    
     /// Set the current foreground color.
     func setCurrentForegroundColor(
         _ color: ColorRepresentable
     ) {
         setCurrentRichTextAttribute(.foregroundColor, to: color)
+    }
+    
+    /// Set the current stroke color.
+    func setCurrentStrokeColor(
+        _ color: ColorRepresentable
+    ) {
+        setCurrentRichTextAttribute(.strokeColor, to: color)
+    }
+    
+    /// Set the current strikethrough color.
+    func setCurrentStrikethroughColor(
+        _ color: ColorRepresentable
+    ) {
+        setCurrentRichTextAttribute(.strikethroughColor, to: color)
     }
 }

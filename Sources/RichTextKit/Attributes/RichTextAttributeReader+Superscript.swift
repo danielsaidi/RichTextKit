@@ -13,7 +13,7 @@ public extension RichTextAttributeReader {
 
     /// Get the superscript level at a certain range.
     func richTextSuperscriptLevel(at range: NSRange) -> Int? {
-        richTextAttribute(NSAttributedString.Key.superscript, at: range)
+        richTextAttribute(.superscript, at: range)
     }
 }
 #endif

@@ -8,9 +8,6 @@
 
 import SwiftUI
 
-/**
- This extension defines rich text-specific images.
- */
 public extension Image {
 
     static let richTextActionCopy = symbol("doc.on.clipboard")
@@ -34,8 +31,8 @@ public extension Image {
     static let richTextDocuments = symbol("doc.on.doc")
 
     static let richTextFont = symbol("textformat")
-    static let richTextFontSizeDecrement = symbol("minus")
-    static let richTextFontSizeIncrement = symbol("plus")
+    static let richTextFontSizeDecrease = symbol("minus")
+    static let richTextFontSizeIncrease = symbol("plus")
 
     static let richTextFormat = symbol("textformat")
     static let richTextFormatBrush = symbol("paintbrush")
@@ -47,74 +44,14 @@ public extension Image {
     static let richTextStyleItalic = symbol("italic")
     static let richTextStyleStrikethrough = symbol("strikethrough")
     static let richTextStyleUnderline = symbol("underline")
+
+    static let richTextSuperscriptDecrease = symbol("textformat.subscript")
+    static let richTextSuperscriptIncrease = symbol("textformat.superscript")
 }
 
 private extension Image {
 
     static func symbol(_ name: String) -> Image {
         Image(systemName: name)
-    }
-}
-
-struct Image_RichText_Previews: PreviewProvider {
-
-    static var previews: some View {
-        VStack(spacing: 20) {
-            actionPreviews
-            alignmentPreviews
-            fontPreviews
-            formatPreviews
-            menuPreviews
-            stylePreviews
-        }
-    }
-
-    static var actionPreviews: some View {
-        HStack {
-            Image.richTextActionCopy
-            Image.richTextActionEdit
-            Image.richTextActionRedo
-            Image.richTextActionUndo
-        }
-    }
-
-    static var alignmentPreviews: some View {
-        HStack {
-            Image.richTextAlignmentCenter
-            Image.richTextAlignmentJustified
-            Image.richTextAlignmentLeft
-            Image.richTextAlignmentRight
-        }
-    }
-
-    static var fontPreviews: some View {
-        HStack {
-            Image.richTextFont
-            Image.richTextFontSizeDecrement
-            Image.richTextFontSizeIncrement
-        }
-    }
-
-    static var formatPreviews: some View {
-        HStack {
-            Image.richTextFormat
-            Image.richTextFormatBrush
-        }
-    }
-
-    static var menuPreviews: some View {
-        HStack {
-            Image.richTextActionExport
-            Image.richTextActionShare
-        }
-    }
-
-    static var stylePreviews: some View {
-        HStack {
-            Image.richTextStyleBold
-            Image.richTextStyleItalic
-            Image.richTextStyleStrikethrough
-            Image.richTextStyleUnderline
-        }
     }
 }

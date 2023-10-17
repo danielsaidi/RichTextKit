@@ -32,8 +32,8 @@
 "menuExport" = "Export";
 "menuExportAs" = "Export as...";
 "menuFont" = "Font";
-"menuFontLarger" = "Larger";
-"menuFontSmaller" = "Smaller";
+"menuFontSizeIncrease" = "Larger";
+"menuFontSizeDecrease" = "Smaller";
 "menuFormat" = "Format";
 "menuIndentIncrease" = "Increase indentation level";
 "menuIndentDecrease" = "Reduce indentation level";
@@ -42,6 +42,8 @@
 "menuSaveAs" = "Save as...";
 "menuShare" = "Share";
 "menuShareAs" = "Share as...";
+"menuSuperscriptIncrease" = "Superscript";
+"menuSuperscriptDecrease" = "Subscript";
 "menuText" = "Text";
 
 "styleBold" = "Bold";

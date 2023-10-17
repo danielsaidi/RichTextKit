@@ -12,25 +12,13 @@ import SwiftUI
  This enum defines rich text actions that can be executed on
  a rich text editor.
  */
-public enum RichTextAction: String, CaseIterable, Identifiable {
+public enum RichTextAction: Identifiable, Equatable {
 
     /// Copy the currently selected text, if any.
     case copy
 
     /// Dismiss any presented software keyboard.
     case dismissKeyboard
-
-    /// Increment the current font size.
-    case incrementFontSize
-
-    /// Decrement the current font size.
-    case decrementFontSize
-
-    /// Increase the current indent level.
-    case increaseIndent
-
-    /// Decrease the current indent level.
-    case decreaseIndent
     
     /// A print command.
     case print
@@ -38,14 +26,38 @@ public enum RichTextAction: String, CaseIterable, Identifiable {
     /// Redo the latest undone change.
     case redoLatestChange
     
+    /// Step the font size.
+    case stepFontSize(points: Int)
+    
+    /// Step the indent level.
+    case stepIndent(points: CGFloat)
+    
+    /// Step the superscript level.
+    case stepSuperscript(steps: Int)
+    
     /// Undo the latest change.
     case undoLatestChange
 }
 
 public extension RichTextAction {
+    
+    /// A name alias for `.stepFontSize(points: 1)`.
+    static var increaseFontSize: RichTextAction { stepFontSize(points: 1) }
 
-    /// All available rich text actions.
-    static var all: [Self] { allCases }
+    /// A name alias for `.stepFontSize(points: -1)`.
+    static var decreaseFontSize: RichTextAction { stepFontSize(points: -1) }
+    
+    /// A name alias for `.stepIndent(points: 1)`.
+    static var increaseIndent: RichTextAction { stepIndent(points: 1) }
+
+    /// A name alias for `.stepIndent(points: -1)`.
+    static var decreaseIndent: RichTextAction { stepIndent(points: -1) }
+    
+    /// A name alias for `.stepSuperscript(steps: 1)`.
+    static var increaseSuperscript: RichTextAction { stepSuperscript(steps: 1) }
+
+    /// A name alias for `.stepSuperscript(steps: -1)`.
+    static var decreaseSuperscript: RichTextAction { stepSuperscript(steps: -1) }
 
     /// A name alias for `.redoLatestChange`.
     static var redo: RichTextAction { .redoLatestChange }
@@ -54,19 +66,21 @@ public extension RichTextAction {
     static var undo: RichTextAction { .undoLatestChange }
     
     /// The action's unique identifier.
-    var id: String { rawValue }
+    var id: String { localizedName }
 
     /// The actions's localized name.
     var localizedName: String {
         switch self {
         case .copy: return RTKL10n.actionCopy.text
         case .dismissKeyboard: return RTKL10n.actionDismissKeyboard.text
-        case .incrementFontSize: return RTKL10n.actionIncrementFontSize.text
-        case .decrementFontSize: return RTKL10n.actionDecrementFontSize.text
-        case .increaseIndent: return RTKL10n.actionIncreaseIndent.text
-        case .decreaseIndent: return RTKL10n.actionDecreaseIndent.text
         case .print: return RTKL10n.menuPrint.text
         case .redoLatestChange: return RTKL10n.actionRedoLatestChange.text
+        case .stepFontSize(let points):
+            return (points < 0 ? RTKL10n.actionDecreaseFontSize : .actionIncreaseFontSize).text
+        case .stepIndent(let points):
+            return (points < 0 ? RTKL10n.actionDecreaseIndent : .actionIncreaseIndent).text
+        case .stepSuperscript(let steps):
+            return (steps < 0 ? RTKL10n.actionDecreaseIndent : .actionIncreaseIndent).text
         case .undoLatestChange: return RTKL10n.actionUndoLatestChange.text
         }
     }
@@ -76,19 +90,15 @@ public extension RichTextAction {
         switch self {
         case .copy: return .richTextActionCopy
         case .dismissKeyboard: return .richTextActionDismissKeyboard
-        case .incrementFontSize: return .richTextFontSizeIncrement
-        case .decrementFontSize: return .richTextFontSizeDecrement
-        case .increaseIndent: return .richTextIndentIncrease
-        case .decreaseIndent: return .richTextIndentDecrease
         case .print: return .richTextActionExport
         case .redoLatestChange: return .richTextActionRedo
+        case .stepFontSize(let points):
+            return points < 0 ? .richTextFontSizeDecrease : .richTextFontSizeIncrease
+        case .stepIndent(let points):
+            return points < 0 ? .richTextIndentDecrease : .richTextIndentIncrease
+        case .stepSuperscript(let steps):
+            return steps < 0 ? .richTextSuperscriptDecrease : .richTextSuperscriptIncrease
         case .undoLatestChange: return .richTextActionUndo
         }
     }
-}
-
-public extension Collection where Element == RichTextAction {
-
-    /// All available rich text actions.
-    static var all: [RichTextAction] { Element.allCases }
 }

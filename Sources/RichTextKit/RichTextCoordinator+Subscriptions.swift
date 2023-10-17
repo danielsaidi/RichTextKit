@@ -200,7 +200,7 @@ private extension RichTextCoordinator {
     }
     
     func subscribeToShouldStepTextIndent() {
-        richTextContext.$shouldStepTextIndentPoints
+        richTextContext.$shouldStepIndentPoints
             .sink(
                 receiveCompletion: { _ in },
                 receiveValue: { [weak self] in
@@ -270,12 +270,12 @@ internal extension RichTextCoordinator {
 
     func setFontName(to newValue: String) {
         if newValue == textView.currentFontName { return }
-        textView.setCurrentFontName(to: newValue)
+        textView.setCurrentFontName(newValue)
     }
 
     func setFontSize(to size: CGFloat) {
         if size == textView.currentFontSize { return }
-        textView.setCurrentFontSize(to: size)
+        textView.setCurrentFontSize(size)
     }
 
     func setForegroundColor(to newValue: ColorRepresentable?) {
@@ -303,7 +303,7 @@ internal extension RichTextCoordinator {
     func setHighlightingStyle(to style: RichTextHighlightingStyle) {
         textView.highlightingStyle = style
     }
-
+    
     func stepTextIndent(points: CGFloat) {
         textView.stepCurrentRichTextIndent(points: points)
     }

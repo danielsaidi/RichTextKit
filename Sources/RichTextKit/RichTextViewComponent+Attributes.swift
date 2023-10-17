@@ -10,13 +10,7 @@ import Foundation
 
 public extension RichTextViewComponent {
 
-    /**
-     Use the selected range (if any) or text position to get
-     all rich text attribute values.
-
-     AppKit and UIKit handles this differently, which is why
-     the implementation has different branches.
-     */
+    /// Get the current values of all rich text attributes.
     var currentRichTextAttributes: RichTextAttributes {
         if hasSelectedRange {
             return richTextAttributes(at: selectedRange)
@@ -31,25 +25,14 @@ public extension RichTextViewComponent {
         }
     }
 
-    /**
-     Use the selected range (if any) or text position to get
-     the current value of a certain rich text attribute.
-     */
-    func currentRichTextAttribute<Value>(_ attribute: RichTextAttribute) -> Value? {
+    /// Get the current value of a rich text attribute.
+    func currentRichTextAttribute<Value>(
+        _ attribute: RichTextAttribute
+    ) -> Value? {
         currentRichTextAttributes[attribute] as? Value
     }
 
-    /**
-     Use the selected range (if any) or text position to set
-     the current value of a certain rich text attribute.
-
-     AppKit and UIKit handles this differently, which is why
-     the implementation has different branches.
-
-     - Parameters:
-       - attribute: The attribute to set.
-       - value: The value to set the attribute to.
-     */
+    /// Set the current value of a rich text attribute.
     func setCurrentRichTextAttribute(_ attribute: RichTextAttribute, to value: Any) {
         #if os(macOS)
         setRichTextAttribute(attribute, to: value, at: selectedRange)
@@ -63,16 +46,7 @@ public extension RichTextViewComponent {
         #endif
     }
 
-    /**
-     Use the selected range (if any) or text position to set
-     the current rich text attributes.
-
-     AppKit and UIKit handles this differently, which is why
-     the implementation has different branches.
-
-     - Parameters:
-       - attributes: The attributes to set.
-     */
+    /// Set the values of a bunch of rich text attributes.
     func setCurrentRichTextAttributes(_ attributes: RichTextAttributes) {
         attributes.forEach { attribute, value in
             setCurrentRichTextAttribute(attribute, to: value)

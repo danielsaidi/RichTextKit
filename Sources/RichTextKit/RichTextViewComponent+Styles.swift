@@ -10,10 +10,7 @@ import Foundation
 
 public extension RichTextViewComponent {
 
-    /**
-     Use the selected range (if any) or text position to get
-     the current rich text styles.
-     */
+    /// Get the current rich text styles.
     var currentRichTextStyles: [RichTextStyle] {
         let attributes = currentRichTextAttributes
         let traits = currentFont?.fontDescriptor.symbolicTraits
@@ -23,14 +20,7 @@ public extension RichTextViewComponent {
         return styles
     }
 
-    /**
-     Use the selected range (if any) or text position to set
-     the current value for a certain rich text style.
-
-     - Parameters:
-       - style: The style to set.
-       - newValue: The value to set.
-     */
+    /// Set the current value of a certain rich text style.
     func setCurrentRichTextStyle(
         _ style: RichTextStyle,
         to newValue: Bool

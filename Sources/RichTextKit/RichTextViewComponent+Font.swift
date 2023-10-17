@@ -11,17 +11,17 @@ import Foundation
 
 public extension RichTextViewComponent {
 
-    /// Set the current font.
+    /// Get the current font.
     var currentFont: FontRepresentable? {
         currentRichTextAttributes[.font] as? FontRepresentable
     }
 
-    /// Set the current font size.
+    /// Get the current font size.
     var currentFontSize: CGFloat? {
         currentFont?.pointSize
     }
 
-    /// Set the current font name.
+    /// Get the current font name.
     var currentFontName: String? {
         currentFont?.fontName
     }

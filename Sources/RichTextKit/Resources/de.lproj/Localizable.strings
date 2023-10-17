@@ -32,8 +32,8 @@
 "menuExport" = "Exportieren";
 "menuExportAs" = "Exportieren als...";
 "menuFont" = "Schriftart";
-"menuFontLarger" = "Größer";
-"menuFontSmaller" = "Kleiner";
+"menuFontSizeIncrease" = "Größer";
+"menuFontSizeDecrease" = "Kleiner";
 "menuFormat" = "Format";
 "menuIndentIncrease" = "Einrückungsebene Erhöhen";
 "menuIndentDecrease" = "Einrückungsebene Verringern";
@@ -42,6 +42,8 @@
 "menuSaveAs" = "Speichern als...";
 "menuShare" = "Teilen";
 "menuShareAs" = "Teilen als...";
+"menuSuperscriptIncrease" = "Superscript";
+"menuSuperscriptDecrease" = "Subscript";
 "menuText" = "Text";
 
 "styleBold" = "Fetter";

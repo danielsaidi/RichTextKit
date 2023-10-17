@@ -88,12 +88,12 @@ struct RichTextActionButton_Previews: PreviewProvider {
                     fillVertically: true
                 )
                 RichTextActionButton(
-                    action: .incrementFontSize,
+                    action: .stepFontSize(points: 1),
                     context: context,
                     fillVertically: true
                 )
                 RichTextActionButton(
-                    action: .decrementFontSize,
+                    action: .stepFontSize(points: -1),
                     context: context,
                     fillVertically: true
                 )

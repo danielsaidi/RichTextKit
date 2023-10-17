@@ -19,12 +19,12 @@ public struct RichTextCommandsFontSizeOptionsGroup: View {
     private var context: RichTextContext?
 
     public var body: some View {
-        Button(RTKL10n.menuFontLarger.text) {
-            context?.incrementFontSize()
-        }.keyboardShortcut(for: .incrementFontSize)
+        Button(RTKL10n.menuFontSizeIncrease.text) {
+            context?.increaseFontSize()
+        }.keyboardShortcut(for: .increaseFontSize)
 
-        Button(RTKL10n.menuFontSmaller.text) {
-            context?.decrementFontSize()
-        }.keyboardShortcut(for: .decrementFontSize)
+        Button(RTKL10n.menuFontSizeDecrease.text) {
+            context?.decreaseFontSize()
+        }.keyboardShortcut(for: .decreaseFontSize)
     }
 }

@@ -18,12 +18,7 @@ import AppKit
 
 public extension RichTextViewComponent {
 
-    /**
-     Get the attachment max size for a certain image.
-
-     - Parameters:
-       - image: The image to calculate max size for.
-     */
+    /// Get the attachment max size for a certain image.
     var imageAttachmentMaxSize: CGSize {
         let maxSize = imageConfiguration.maxImageSize
         let insetX = 2 * textContentInset.width
@@ -34,52 +29,36 @@ public extension RichTextViewComponent {
         return CGSize(width: width, height: height)
     }
 
-    /**
-     Get the attachment bounds for a certain image.
-
-     - Parameters:
-       - image: The image to calculate bounds for.
-     */
-    func attachmentBounds(for image: ImageRepresentable) -> CGRect {
+    /// Get the attachment bounds for a certain image.
+    func attachmentBounds(
+        for image: ImageRepresentable
+    ) -> CGRect {
         attributedString.attachmentBounds(
             for: image,
-            maxSize: imageAttachmentMaxSize)
+            maxSize: imageAttachmentMaxSize
+        )
     }
 
-    /**
-     Get the attachment size for a certain image.
-
-     - Parameters:
-       - image: The image to calculate size for.
-     */
+    /// Get the attachment size for a certain image.
     func attachmentSize(for image: ImageRepresentable) -> CGSize {
-        richText.attachmentSize(
+        attributedString.attachmentSize(
             for: image,
-            maxSize: imageAttachmentMaxSize)
+            maxSize: imageAttachmentMaxSize
+        )
     }
 
-    /**
-     The image paste configuration to use by the view.
-     */
+    /// Get the current image drop configuration.
     var imageDropConfiguration: RichTextImageInsertConfiguration {
         imageConfiguration.dropConfiguration
     }
 
-    /**
-     The image paste configuration to use by the view.
-     */
+    /// Get the current image paste configuration.
     var imagePasteConfiguration: RichTextImageInsertConfiguration {
         imageConfiguration.pasteConfiguration
     }
 
 
-    /**
-     Validate that image drop will be performed. If not, the
-     function will present a warning alert.
-
-     - Parameters:
-       - config: The image insert configuration to validate.
-     */
+    /// Validate that image drop will be performed.
     func validateImageInsertion(
         for config: RichTextImageInsertConfiguration
     ) -> Bool {

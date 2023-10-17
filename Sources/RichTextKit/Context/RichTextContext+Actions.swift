@@ -20,12 +20,12 @@ public extension RichTextContext {
         switch action {
         case .copy: return canCopy
         case .dismissKeyboard: return true
-        case .incrementFontSize: return true
-        case .decrementFontSize: return true
-        case .increaseIndent: return canIncreaseIndent
-        case .decreaseIndent: return canDecreaseIndent
         case .print: return false
         case .redoLatestChange: return canRedoLatestChange
+        case .stepFontSize: return true
+        case .stepIndent(let points):
+            return points < 0 ? canDecreaseIndent : canIncreaseIndent
+        case .stepSuperscript: return false
         case .undoLatestChange: return canUndoLatestChange
         }
     }
@@ -37,17 +37,14 @@ public extension RichTextContext {
        - action: The action to trigger.
      */
     func triggerRichTextAction(_ action: RichTextAction) {
-        let stepSize = RichTextIndentDefaults.stepSizeInPoints
-        
         switch action {
         case .copy: copyCurrentSelection()
         case .dismissKeyboard: stopEditingText()
-        case .incrementFontSize: incrementFontSize()
-        case .decrementFontSize: decrementFontSize()
-        case .increaseIndent: increaseIndent(points: stepSize)
-        case .decreaseIndent: decreaseIndent(points: stepSize)
         case .print: return
         case .redoLatestChange: redoLatestChange()
+        case .stepFontSize(let points): stepFontSize(points: points)
+        case .stepIndent(let points): stepIndent(points: points)
+        case .stepSuperscript(let steps): return
         case .undoLatestChange: undoLatestChange()
         }
     }

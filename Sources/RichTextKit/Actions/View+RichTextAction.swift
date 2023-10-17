@@ -19,12 +19,11 @@ public extension View {
         switch action {
         case .copy: keyboardShortcut("c", modifiers: .command)
         case .dismissKeyboard: self
-        case .incrementFontSize: keyboardShortcut("+", modifiers: .command)
-        case .decrementFontSize: keyboardShortcut("-", modifiers: .command)
-        case .increaseIndent: self
-        case .decreaseIndent: self
         case .print: keyboardShortcut("p", modifiers: .command)
         case .redoLatestChange: keyboardShortcut("z", modifiers: [.command, .shift])
+        case .stepFontSize(let points): keyboardShortcut(points < 0 ? "-" : "+", modifiers: .command)
+        case .stepIndent: self
+        case .stepSuperscript: self
         case .undoLatestChange: keyboardShortcut("z", modifiers: .command)
         }
         #else
