@@ -124,8 +124,8 @@ class RichTextCoordinatorTests: XCTestCase {
         coordinator.highlightedRangeOriginalForegroundColor = .yellow
         coordinator.resetHighlightedRangeAppearance()
         view.selectedRange = range
-        XCTAssertEqual(view.currentBackgroundColor, .blue)
-        XCTAssertEqual(view.currentForegroundColor, .yellow)
+        XCTAssertEqual(view.currentColor(.background), .blue)
+        XCTAssertEqual(view.currentColor(.foreground), .yellow)
     }
 }
 #endif

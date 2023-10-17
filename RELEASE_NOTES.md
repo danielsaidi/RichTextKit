@@ -46,6 +46,7 @@ This version also consolidates all separate attribute readers and writers into t
 
 * The rich text indent feature has been rewritten to use steps.
 * Some `richTextMenu*` images are renamed to `richTextAction*`.
+* `RichTextContext` replaces a lot of action-based functions with `handle(_:)`.
 
 
 

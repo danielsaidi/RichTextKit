@@ -17,7 +17,7 @@ public struct RichTextCommandsIndentOptionsGroup: View {
     private var context: RichTextContext?
     
     public var body: some View {
-        RichTextCommandButtonGrop(
+        RichTextCommandButtonGroup(
             actions: [
                 .increaseIndent,
                 .decreaseIndent

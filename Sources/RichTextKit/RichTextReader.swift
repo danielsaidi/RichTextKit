@@ -43,8 +43,8 @@ public extension RichTextReader {
     /**
      Get the range of the entire ``richText``.
 
-     This uses ``safeRange(for:)`` to return a range that is
-     always valid for the current rich text.
+     This uses `safeRange(for:)` to return a range that willö
+     always be valid for the current rich text.
      */
     var richTextRange: NSRange {
         let range = NSRange(location: 0, length: richText.length)
@@ -55,9 +55,9 @@ public extension RichTextReader {
     /**
      Get the rich text at a certain range.
 
-     Since this function uses ``safeRange(for:)`` to account
+     Since this function uses `safeRange(for:)` to not crash
      for invalid ranges, always use this function instead of
-     the unsafe `attributedSubstring` rich text function.
+     the unsafe `attributedSubstring`.
 
      - Parameters:
        - range: The range for which to get the rich text.

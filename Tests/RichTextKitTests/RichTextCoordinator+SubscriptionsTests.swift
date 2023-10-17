@@ -62,7 +62,7 @@ class RichTextCoordinator_SubscriptionsTests: XCTestCase {
     func testFontSizeDecrementUpdatesTextView() {
         textView.setCurrentFontSize(666)
         XCTAssertEqual(textView.currentFontSize, 666)
-        textContext.stepFontSize(points: -1)
+        textContext.handle(.stepFontSize(points: -1))
         // XCTAssertEqual(textView.currentFontSize, 665)
     }
 
@@ -70,7 +70,7 @@ class RichTextCoordinator_SubscriptionsTests: XCTestCase {
     func testFontSizeIncrementUpdatesTextView() {
         textView.setCurrentFontSize(666)
         XCTAssertEqual(textView.currentFontSize, 666)
-        textContext.stepFontSize(points: 1)
+        textContext.handle(.stepFontSize(points: 1))
         // XCTAssertEqual(textView.currentFontSize, 667)    TODO: Why is incorrect?
     }
 

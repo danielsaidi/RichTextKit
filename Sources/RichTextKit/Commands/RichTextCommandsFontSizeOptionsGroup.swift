@@ -19,7 +19,7 @@ public struct RichTextCommandsFontSizeOptionsGroup: View {
     private var context: RichTextContext?
     
     public var body: some View {
-        RichTextCommandButtonGrop(
+        RichTextCommandButtonGroup(
             actions: [
                 .increaseFontSize,
                 .decreaseFontSize

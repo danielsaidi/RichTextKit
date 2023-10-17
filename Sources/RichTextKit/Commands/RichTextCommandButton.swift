@@ -50,7 +50,7 @@ public struct RichTextCommandButton: View {
     }
 }
 
-public struct RichTextCommandButtonGrop: View {
+public struct RichTextCommandButtonGroup: View {
     
     /**
      Create a rich text command button group.

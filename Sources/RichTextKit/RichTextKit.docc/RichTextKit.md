@@ -91,10 +91,13 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 ### Colors
 
 - ``ColorRepresentable``
+- ``RichTextColor``
 - ``RichTextColorPicker``
 
 ### Commands
 
+- ``RichTextCommandButton``
+- ``RichTextCommandButtonGroup``
 - ``RichTextCommandsAlignmentOptionsGroup``
 - ``RichTextCommandsIndentOptionsGroup``
 - ``RichTextCommandsFontSizeOptionsGroup``
@@ -127,8 +130,6 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 - ``FontRepresentable``
 - ``FontDescriptorRepresentable``
 - ``FontTraitsRepresentable``
-- ``RichTextFontReader``
-- ``RichTextFontWriter``
 - ``StandardFontSizeProvider``
 - ``RichTextFontPicker``
 - ``RichTextFontPickerFont``
@@ -150,13 +151,6 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 - ``RichTextImageAttachmentSize``
 - ``RichTextImageConfiguration``
 - ``RichTextImageInsertConfiguration``
-
-### Indent
-
-- ``RichTextIndent``
-- ``RichTextIndentReader``
-- ``RichTextIndentWriter``
-- ``RichTextIndentPicker``
 
 ### Keyboard
 
@@ -190,8 +184,6 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 
 - ``RichTextHighlightingStyle``
 - ``RichTextStyle``
-- ``RichTextStyleReader``
-- ``RichTextStyleWriter``
 - ``RichTextStyleButton``
 - ``RichTextStyleToggle``
 - ``RichTextStyleToggleGroup``

@@ -50,11 +50,11 @@ class RichTextContextTests: XCTestCase {
     func testTriggeringFontSizeTriggersSetsOropertiesToTrue() {
         let context = RichTextContext()
         let fontSize = context.fontSize
-        context.stepFontSize(points: -1)
+        context.handle(.stepFontSize(points: -1))
         XCTAssertNotEqual(context.fontSize, fontSize)
-        context.stepFontSize(points: 3)
+        context.handle(.stepFontSize(points: 3))
         XCTAssertNotEqual(context.fontSize, fontSize)
-        context.stepFontSize(points: -2)
+        context.handle(.stepFontSize(points: -2))
         XCTAssertEqual(context.fontSize, fontSize)
     }
 }
