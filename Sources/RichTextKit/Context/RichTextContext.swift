@@ -271,16 +271,6 @@ public extension RichTextContext {
         isEditingText = false
     }
 
-    /// Toggle a certain rich text style.
-    func toggle(_ style: RichTextStyle) {
-        switch style {
-        case .bold: isBold.toggle()
-        case .italic: isItalic.toggle()
-        case .strikethrough: isStrikethrough.toggle()
-        case .underlined: isUnderlined.toggle()
-        }
-    }
-
     /// Toggle whether or not the text is being edited.
     func toggleIsEditing() {
         isEditingText.toggle()

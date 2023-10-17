@@ -45,17 +45,16 @@ private extension RichTextCoordinator {
             textView.copySelection()
         case .dismissKeyboard:
             textView.resignFirstResponder()
-        case .print:
-            break
+        case .print: break
         case .redoLatestChange:
             textView.redoLatestChange()
             syncContextWithTextView()
-        case .stepFontSize(let points):
-            textView.stepCurrentFontSize(points: points)
+        case .setAlignment: break
+        case .stepFontSize: break
         case .stepIndent(let points):
             textView.stepCurrentIndent(points: points)
-        case .stepSuperscript:
-            break
+        case .stepSuperscript: break
+        case .toggleStyle: break
         case .undoLatestChange:
             textView.undoLatestChange()
             syncContextWithTextView()

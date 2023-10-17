@@ -85,7 +85,7 @@ public struct RichTextStyleToggle: View {
         }
         .tint(tintColor)
         .keyboardShortcut(for: style)
-        .accessibilityLabel(style.localizedName)
+        .accessibilityLabel(style.title)
     }
 }
 

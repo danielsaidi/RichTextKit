@@ -19,20 +19,10 @@ public struct RichTextCommandsStyleOptionsGroup: View {
     private var context: RichTextContext?
 
     public var body: some View {
-        Button(RTKL10n.styleBold.text) {
-            context?.isBold.toggle()
-        }.keyboardShortcut(for: .bold)
-
-        Button(RTKL10n.styleItalic.text) {
-            context?.isItalic.toggle()
-        }.keyboardShortcut(for: .italic)
-
-        Button(RTKL10n.styleUnderlined.text) {
-            context?.isUnderlined.toggle()
-        }.keyboardShortcut(for: .underlined)
-
-        Button(RTKL10n.styleStrikethrough.text) {
-            context?.isStrikethrough.toggle()
-        }.keyboardShortcut(for: .strikethrough)
+        ForEach(RichTextStyle.allCases) {
+            RichTextCommandButton(
+                action: .toggleStyle($0)
+            )
+        }
     }
 }

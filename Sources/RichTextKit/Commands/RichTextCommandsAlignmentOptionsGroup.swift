@@ -15,21 +15,11 @@ public struct RichTextCommandsAlignmentOptionsGroup: View {
 
     public init() {}
 
-    @FocusedValue(\.richTextContext)
-    private var context: RichTextContext?
-
     public var body: some View {
-        Button(RTKL10n.textAlignmentLeft.text) {
-            context?.textAlignment = .left
-        }
-        Button(RTKL10n.textAlignmentCentered.text) {
-            context?.textAlignment = .center
-        }
-        Button(RTKL10n.textAlignmentRight.text) {
-            context?.textAlignment = .right
-        }
-        Button(RTKL10n.textAlignmentJustified.text) {
-            context?.textAlignment = .justified
+        ForEach(RichTextAlignment.allCases) {
+            RichTextCommandButton(
+                action: .setAlignment($0)
+            )
         }
     }
 }

@@ -26,6 +26,9 @@ public enum RichTextAction: Identifiable, Equatable {
     /// Redo the latest undone change.
     case redoLatestChange
     
+    /// Set the text alignment.
+    case setAlignment(_ alignment: RichTextAlignment)
+    
     /// Step the font size.
     case stepFontSize(points: Int)
     
@@ -35,9 +38,68 @@ public enum RichTextAction: Identifiable, Equatable {
     /// Step the superscript level.
     case stepSuperscript(steps: Int)
     
+    /// Toggle a certain style.
+    case toggleStyle(_ style: RichTextStyle)
+    
     /// Undo the latest change.
     case undoLatestChange
 }
+
+public extension RichTextAction {
+    
+    /// The action's unique identifier.
+    var id: String { title }
+
+    /// The action's standard icon.
+    var icon: Image {
+        switch self {
+        case .copy: return .richTextActionCopy
+        case .dismissKeyboard: return .richTextActionDismissKeyboard
+        case .print: return .richTextActionExport
+        case .redoLatestChange: return .richTextActionRedo
+        case .setAlignment(let alignment): return alignment.icon
+        case .stepFontSize(let points):
+            return points < 0 ? .richTextFontSizeDecrease : .richTextFontSizeIncrease
+        case .stepIndent(let points):
+            return points < 0 ? .richTextIndentDecrease : .richTextIndentIncrease
+        case .stepSuperscript(let steps):
+            return steps < 0 ? .richTextSuperscriptDecrease : .richTextSuperscriptIncrease
+        case .toggleStyle(let style): return style.icon
+        case .undoLatestChange: return .richTextActionUndo
+        }
+    }
+    
+    /// The localized title to use in the main menu.
+    var menuTitle: String {
+        switch self {
+        case .stepIndent(let points):
+            return (points < 0 ? RTKL10n.menuIndentDecrease : .menuIndentIncrease).text
+        default: return title
+        }
+    }
+    
+    /// The localized title.
+    var title: String {
+        switch self {
+        case .copy: return RTKL10n.actionCopy.text
+        case .dismissKeyboard: return RTKL10n.actionDismissKeyboard.text
+        case .print: return RTKL10n.menuPrint.text
+        case .redoLatestChange: return RTKL10n.actionRedoLatestChange.text
+        case .setAlignment(let alignment): return alignment.title
+        case .stepFontSize(let points):
+            return (points < 0 ? RTKL10n.actionFontSizeDecrease : .actionFontSizeIncrease).text
+        case .stepIndent(let points):
+            return (points < 0 ? RTKL10n.actionIndentDecrease : .actionIndentIncrease).text
+        case .stepSuperscript(let steps):
+            return (steps < 0 ? RTKL10n.actionIndentDecrease : .actionIndentIncrease).text
+        case .toggleStyle(let style): return style.title
+        case .undoLatestChange: return RTKL10n.actionUndoLatestChange.text
+        }
+    }
+}
+
+
+// MARK: - Aliases
 
 public extension RichTextAction {
     
@@ -121,41 +183,4 @@ public extension RichTextAction {
 
     /// A name alias for `.undoLatestChange`.
     static var undo: RichTextAction { .undoLatestChange }
-    
-    /// The action's unique identifier.
-    var id: String { localizedName }
-
-    /// The actions's localized name.
-    var localizedName: String {
-        switch self {
-        case .copy: return RTKL10n.actionCopy.text
-        case .dismissKeyboard: return RTKL10n.actionDismissKeyboard.text
-        case .print: return RTKL10n.menuPrint.text
-        case .redoLatestChange: return RTKL10n.actionRedoLatestChange.text
-        case .stepFontSize(let points):
-            return (points < 0 ? RTKL10n.actionDecreaseFontSize : .actionIncreaseFontSize).text
-        case .stepIndent(let points):
-            return (points < 0 ? RTKL10n.actionDecreaseIndent : .actionIncreaseIndent).text
-        case .stepSuperscript(let steps):
-            return (steps < 0 ? RTKL10n.actionDecreaseIndent : .actionIncreaseIndent).text
-        case .undoLatestChange: return RTKL10n.actionUndoLatestChange.text
-        }
-    }
-
-    /// The action's standard icon.
-    var icon: Image {
-        switch self {
-        case .copy: return .richTextActionCopy
-        case .dismissKeyboard: return .richTextActionDismissKeyboard
-        case .print: return .richTextActionExport
-        case .redoLatestChange: return .richTextActionRedo
-        case .stepFontSize(let points):
-            return points < 0 ? .richTextFontSizeDecrease : .richTextFontSizeIncrease
-        case .stepIndent(let points):
-            return points < 0 ? .richTextIndentDecrease : .richTextIndentIncrease
-        case .stepSuperscript(let steps):
-            return steps < 0 ? .richTextSuperscriptDecrease : .richTextSuperscriptIncrease
-        case .undoLatestChange: return .richTextActionUndo
-        }
-    }
 }

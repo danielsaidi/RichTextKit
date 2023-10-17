@@ -52,8 +52,8 @@ public extension RichTextStyle {
         }
     }
 
-    /// The styles's localized name.
-    var localizedName: String {
+    /// The styles title.
+    var title: String {
         switch self {
         case .bold: return RTKL10n.styleBold.text
         case .italic: return RTKL10n.styleItalic.text

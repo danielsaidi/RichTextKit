@@ -79,7 +79,7 @@ public struct RichTextStyleButton: View {
                 .contentShape(Rectangle())
         }
         .keyboardShortcut(for: style)
-        .accessibilityLabel(style.localizedName)
+        .accessibilityLabel(style.title)
     }
 }
 

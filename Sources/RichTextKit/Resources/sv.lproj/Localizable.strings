@@ -19,8 +19,10 @@
 
 "actionCopy" = "Kopiera";
 "actionDismissKeyboard" = "Stäng tangentbordet";
-"actionIncrementFontSize" = "Öka teckenstorlek";
-"actionDecrementFontSize" = "Minska teckenstorlek";
+"actionFontSizeIncrease" = "Öka teckenstorlek";
+"actionFontSizeDecrease" = "Minska teckenstorlek";
+"actionIndentIncrease" = "Öka indrag";
+"actionIndentDecrease" = "Minska indrag";
 "actionRedoLatestChange" = "Gör om";
 "actionUndoLatestChange" = "Ångra";
 
@@ -35,8 +37,9 @@
 "menuFontSizeIncrease" = "Större";
 "menuFontSizeDecrease" = "Mindre";
 "menuFormat" = "Format";
-"menuIndentIncrease" = "Öka indragsnivå";
-"menuIndentDecrease" = "Minska indragsnivå";
+"menuIndent" = "Indrag";
+"menuIndentIncrease" = "Öka";
+"menuIndentDecrease" = "Minska";
 "menuPrint" = "Skriv ut...";
 "menuSave" = "Spara";
 "menuSaveAs" = "Spara som...";

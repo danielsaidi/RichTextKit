@@ -19,8 +19,10 @@
 
 "actionCopy" = "Kopieren";
 "actionDismissKeyboard" = "Tastatur schließen";
-"actionIncrementFontSize" = "Schriftgröße vergrößern";
-"actionDecrementFontSize" = "Schriftgröße verkleinern";
+"actionFontSizeIncrease" = "Schriftgröße vergrößern";
+"actionFontSizeDecrease" = "Schriftgröße verkleinern";
+"actionIndentIncrease" = "Indent vergrößern";
+"actionIndentDecrease" = "Indent verkleinern";
 "actionRedoLatestChange" = "Rückgängig";
 "actionUndoLatestChange" = "Wiederholen";
 
@@ -35,8 +37,9 @@
 "menuFontSizeIncrease" = "Größer";
 "menuFontSizeDecrease" = "Kleiner";
 "menuFormat" = "Format";
-"menuIndentIncrease" = "Einrückungsebene Erhöhen";
-"menuIndentDecrease" = "Einrückungsebene Verringern";
+"menuIndent" = "Indent";
+"menuIndentIncrease" = "Vergrößern";
+"menuIndentDecrease" = "Verkleinern";
 "menuPrint" = "Drucken...";
 "menuSave" = "Speichern";
 "menuSaveAs" = "Speichern als...";

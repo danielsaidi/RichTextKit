@@ -12,18 +12,18 @@ import SwiftUI
  This view defines `Commands` content for font size options.
  */
 public struct RichTextCommandsFontSizeOptionsGroup: View {
-
+    
     public init() {}
-
+    
     @FocusedValue(\.richTextContext)
     private var context: RichTextContext?
-
+    
     public var body: some View {
-        Button(RTKL10n.menuFontSizeIncrease.text) {
-            context?.handle(.increaseFontSize)
-        }.keyboardShortcut(for: .increaseFontSize)
-        Button(RTKL10n.menuFontSizeDecrease.text) {
-            context?.handle(.decreaseFontSize)
-        }.keyboardShortcut(for: .decreaseFontSize)
+        RichTextCommandButtonGrop(
+            actions: [
+                .increaseFontSize,
+                .decreaseFontSize
+            ]
+        )
     }
 }

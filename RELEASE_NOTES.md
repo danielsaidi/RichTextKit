@@ -16,6 +16,8 @@ This version also consolidates all separate attribute readers and writers into t
 
 * `RichTextColor` is a new enum that defines supported colors that can be set.
 * `RichTextColorPicker` now works on all platforms.
+* `RichTextCommandButton` is a new button for commands.
+* `RichTextCommandButtonGroup` is a new button group for commands.
 * `RichTextContext` has new enum-based style and color functions.
 * `RichTextAttributeReader` can handle more colors and superscripting.
 * `RichTextAttributeWriter` can handle more colors and superscripting.

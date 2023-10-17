@@ -36,12 +36,12 @@ public enum RichTextAlignment: String, CaseIterable, Codable, Equatable, Identif
 
     /// Center text alignment.
     case center
+    
+    /// Justified text alignment.
+    case justified
 
     /// Right text alignment.
     case right
-
-    /// Justified text alignment.
-    case justified
 }
 
 public extension RichTextAlignment {
@@ -51,6 +51,9 @@ public extension RichTextAlignment {
     
     /// The standard icon to use for the alignment.
     var icon: Image { nativeAlignment.icon }
+    
+    /// The standard title to use for the alignment.
+    var title: String { nativeAlignment.title }
 
     /// The native alignment of the alignment.
     var nativeAlignment: NSTextAlignment {
@@ -73,6 +76,22 @@ public extension NSTextAlignment {
         case .center: return .richTextAlignmentCenter
         case .justified: return .richTextAlignmentJustified
         default: return .richTextAlignmentLeft
+        }
+    }
+    
+    /// The standard title to use for the alignment.
+    var title: String {
+        titleCase.text
+    }
+    
+    /// The standard title to use for the alignment.
+    var titleCase: RTKL10n {
+        switch self {
+        case .left: return RTKL10n.textAlignmentLeft
+        case .right: return RTKL10n.textAlignmentRight
+        case .center: return RTKL10n.textAlignmentCentered
+        case .justified: return RTKL10n.textAlignmentJustified
+        default: return RTKL10n.textAlignmentLeft
         }
     }
 }

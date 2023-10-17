@@ -19,8 +19,10 @@
 
 "actionCopy" = "Kopiere";
 "actionDismissKeyboard" = "Lukk tastaturet";
-"actionIncrementFontSize" = "Øk skriftstørrelsen";
-"actionDecrementFontSize" = "Reduser skriftstørrelsen";
+"actionFontSizeIncrease" = "Øk skriftstørrelsen";
+"actionFontSizeDecrease" = "Reduser skriftstørrelsen";
+"actionIndentIncrease" = "Øk indrag";
+"actionIndentDecrease" = "Reduser indrag";
 "actionRedoLatestChange" = "Angre";
 "actionUndoLatestChange" = "Gjøre om";
 
@@ -35,8 +37,9 @@
 "menuFontSizeIncrease" = "Større";
 "menuFontSizeDecrease" = "Mindre";
 "menuFormat" = "Format";
-"menuIndentIncrease" = "Øk innrykknivået";
-"menuIndentDecrease" = "Reduser innrykknivået";
+"menuIndent" = "Indrag";
+"menuIndentIncrease" = "Øk";
+"menuIndentDecrease" = "Reduser";
 "menuPrint" = "Skrive ut...";
 "menuSave" = "Lagre";
 "menuSaveAs" = "Lagre som...";

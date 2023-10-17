@@ -19,8 +19,10 @@
 
 "actionCopy" = "Copy";
 "actionDismissKeyboard" = "Dismiss Keyboard";
-"actionIncrementFontSize" = "Increment Font Size";
-"actionDecrementFontSize" = "Decrement Font Size";
+"actionFontSizeIncrease" = "Larger Text";
+"actionFontSizeDecrease" = "Smaller Text";
+"actionIndentIncrease" = "Increase Indent";
+"actionIndentDecrease" = "Decrease Indent";
 "actionRedoLatestChange" = "Redo";
 "actionUndoLatestChange" = "Undo";
 
@@ -35,8 +37,9 @@
 "menuFontSizeIncrease" = "Larger";
 "menuFontSizeDecrease" = "Smaller";
 "menuFormat" = "Format";
-"menuIndentIncrease" = "Increase indentation level";
-"menuIndentDecrease" = "Reduce indentation level";
+"menuIndent" = "Indent";
+"menuIndentIncrease" = "Increase";
+"menuIndentDecrease" = "Decrease";
 "menuPrint" = "Print...";
 "menuSave" = "Save";
 "menuSaveAs" = "Save as...";

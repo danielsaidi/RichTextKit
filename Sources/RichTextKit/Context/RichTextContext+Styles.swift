@@ -40,4 +40,9 @@ public extension RichTextContext {
         case .strikethrough: isStrikethrough = val
         }
     }
+    
+    /// Toggle a certain style for the context.
+    func toggle(_ style: RichTextStyle) {
+        set(style, to: !hasStyle(style))
+    }
 }
