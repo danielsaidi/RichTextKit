@@ -34,6 +34,8 @@ extension RichTextCoordinator {
         subscribeToShouldSetAttributedString()
         subscribeToShouldStepTextIndent()
         subscribeToShouldUndoLatestChange()
+        subscribeToStrikethroughColor()
+        subscribeToStrokeColor()
     }
 }
 
@@ -210,6 +212,22 @@ private extension RichTextCoordinator {
             )
             .store(in: &cancellables)
     }
+    
+    func subscribeToStrokeColor() {
+        richTextContext.$strokeColor
+            .sink(
+                receiveCompletion: { _ in },
+                receiveValue: { [weak self] in self?.setStrokeColor(to: $0) })
+            .store(in: &cancellables)
+    }
+    
+    func subscribeToStrikethroughColor() {
+        richTextContext.$strikethroughColor
+            .sink(
+                receiveCompletion: { _ in },
+                receiveValue: { [weak self] in self?.setStrikethroughColor(to: $0) })
+            .store(in: &cancellables)
+    }
 }
 
 internal extension RichTextCoordinator {
@@ -334,6 +352,18 @@ internal extension RichTextCoordinator {
         let hasStyle = textView.currentRichTextStyles.hasStyle(style)
         if newValue == hasStyle { return }
         textView.setCurrentRichTextStyle(style, to: newValue)
+    }
+    
+    func setStrokeColor(to newValue: ColorRepresentable?) {
+        if newValue == textView.currentStrokeColor { return }
+        guard let color = newValue else { return }
+        textView.setCurrentStrokeColor(color)
+    }
+    
+    func setStrikethroughColor(to newValue: ColorRepresentable?) {
+        if newValue == textView.currentStrikethroughColor { return }
+        guard let color = newValue else { return }
+        textView.setCurrentStrikethroughColor(color)
     }
 
     func undoLatestChange(_ shouldUndo: Bool) {

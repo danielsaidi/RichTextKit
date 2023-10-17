@@ -44,7 +44,7 @@ public extension RichTextContext {
         case .redoLatestChange: redoLatestChange()
         case .stepFontSize(let points): stepFontSize(points: points)
         case .stepIndent(let points): stepIndent(points: points)
-        case .stepSuperscript(let steps): return
+        case .stepSuperscript: return
         case .undoLatestChange: undoLatestChange()
         }
     }

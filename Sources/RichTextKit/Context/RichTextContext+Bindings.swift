@@ -21,12 +21,27 @@ public extension RichTextContext {
         )
     }
 
-
     /// A ``RichTextContext/foregroundColor`` binding.
     var foregroundColorBinding: Binding<Color> {
         Binding(
             get: { Color(self.foregroundColor ?? .clear) },
             set: { self.foregroundColor = ColorRepresentable($0) }
+        )
+    }
+    
+    /// A ``RichTextContext/strikethroughColor`` binding.
+    var strikethroughColorBinding: Binding<Color> {
+        Binding(
+            get: { Color(self.strikethroughColor ?? .clear) },
+            set: { self.strikethroughColor = ColorRepresentable($0) }
+        )
+    }
+    
+    /// A ``RichTextContext/strokeColor`` binding.
+    var strokeColorBinding: Binding<Color> {
+        Binding(
+            get: { Color(self.strokeColor ?? .clear) },
+            set: { self.strokeColor = ColorRepresentable($0) }
         )
     }
 

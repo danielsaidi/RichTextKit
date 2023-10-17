@@ -148,7 +148,12 @@ private extension View {
     
     @ViewBuilder
     func prefersMediumSize() -> some View {
-        if #available(iOS 16.0, *) {
+        if #available(iOS 16.4, *) {
+            self.presentationDetents([.medium])
+                .presentationBackgroundInteraction(
+                    .enabled(upThrough: .medium)
+                )
+        } else if #available(iOS 16, *) {
             self.presentationDetents([.medium])
         } else {
             self

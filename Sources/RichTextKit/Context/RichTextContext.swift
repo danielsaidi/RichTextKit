@@ -121,6 +121,14 @@ public class RichTextContext: ObservableObject {
     @Published
     public var isUnderlined = false
     
+    /// The current strikethrough color, if any.
+    @Published
+    public var strikethroughColor: ColorRepresentable?
+    
+    /// The current stroke color, if any.
+    @Published
+    public var strokeColor: ColorRepresentable?
+    
     /// The current text alignment, if any.
     @Published
     public var textAlignment: RichTextAlignment = .left

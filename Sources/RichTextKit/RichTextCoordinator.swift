@@ -254,10 +254,20 @@ extension RichTextCoordinator {
         if richTextContext.isEditingText != isEditingText {
             richTextContext.isEditingText = isEditingText
         }
+        
+        let stroke = textView.currentStrokeColor
+        if richTextContext.strokeColor != stroke {
+            richTextContext.strokeColor = stroke
+        }
+        
+        let strike = textView.currentStrikethroughColor
+        if richTextContext.strikethroughColor != strike {
+            richTextContext.strikethroughColor = strike
+        }
 
-        let textAlignment = textView.currentTextAlignment ?? .left
-        if richTextContext.textAlignment != textAlignment {
-            richTextContext.textAlignment = textAlignment
+        let alignment = textView.currentTextAlignment ?? .left
+        if richTextContext.textAlignment != alignment {
+            richTextContext.textAlignment = alignment
         }
 
         updateTextViewAttributesIfNeeded()
