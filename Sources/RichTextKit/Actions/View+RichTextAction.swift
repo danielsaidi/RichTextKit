@@ -3,7 +3,7 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-12-13.
-//  Copyright © 2022 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
@@ -23,6 +23,7 @@ public extension View {
         case .decrementFontSize: keyboardShortcut("-", modifiers: .command)
         case .increaseIndent: self
         case .decreaseIndent: self
+        case .print: keyboardShortcut("p", modifiers: .command)
         case .redoLatestChange: keyboardShortcut("z", modifiers: [.command, .shift])
         case .undoLatestChange: keyboardShortcut("z", modifiers: .command)
         }

@@ -1,25 +1,14 @@
 //
-//  RichTextStyleWriter.swift
+//  RichTextAttributeWriter+Style.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-05-28.
-//  Copyright © 2022 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
 //
 
 import Foundation
 
-/**
- This protocol extends ``RichTextFontWriter`` with rich text
- font writing functionality.
-
- This protocol is implemented by `NSMutableAttributedString`
- as well as other types in the library.
- */
-public protocol RichTextStyleWriter: RichTextFontWriter, RichTextStyleReader {}
-
-extension NSMutableAttributedString: RichTextStyleWriter {}
-
-public extension RichTextStyleWriter {
+public extension RichTextAttributeWriter {
 
     /**
      Set a certain rich text style at a certain range.

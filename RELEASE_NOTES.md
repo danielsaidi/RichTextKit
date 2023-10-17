@@ -10,20 +10,23 @@ Until then, minor updates may remove deprecated features and introduce breaking 
 
 This version drops support for iOS 14, tvOS 14, macOS 11 and watchOS 7.
 
+This version also consolidates all separate attribute readers and writers into the base attribute reader/writer protocols.
+
 ### ✨ Features
 
-* `RichTextColorPicker` works on all platforms.
-* `RichTextCommand` is a new type for system commands.
-* `RichTextCommandButton` is a new button to trigger commands.
+* `RichTextColorPicker` now works on all platforms.
 
 ### 💡 Adjustments
 
+* `RichTextAttributeReader` now has all specific getter functions.
+* `RichTextAttributeWriter` now has all specific setter functions.
 * `RichTextKeyboardToolbar` now opens the format sheet in medium size on iPhone.
 
 ### 🗑️ Deprecations 
 
-* A bunch of "writer" types omits the `to:` parameter name. 
+* All specific attribute reader/writer protocols are deprecated in favor of the base protocols.  
 
+* `RichTextAttributeWriter` omits the `to:` parameter name. 
 * `RichTextColorPicker` initializer has been cleaned up and simplified.
 * `RichTextColorPicker.PickerColor` has been deprecated.
 * `RichTextColorPickerColor` has been deprecated.
@@ -33,6 +36,7 @@ This version drops support for iOS 14, tvOS 14, macOS 11 and watchOS 7.
 ### 💥 Breaking Changes
 
 * The rich text indent feature has been rewritten to use steps.
+* Some `richTextMenu*` images are renamed to `richTextAction*`.
 
 
 

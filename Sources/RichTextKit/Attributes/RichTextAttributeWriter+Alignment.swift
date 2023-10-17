@@ -1,9 +1,9 @@
 //
-//  RichTextAlignmentWriter.swift
+//  RichTextAttributeWriter+Alignment.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-05-29.
-//  Copyright © 2022 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
 //
 
 import Foundation
@@ -16,18 +16,7 @@ import UIKit
 import AppKit
 #endif
 
-/**
- This protocol extends ``RichTextAttributeWriter`` with rich
- text alignment writing functionality.
-
- This protocol is implemented by `NSMutableAttributedString`
- as well as other types in the library.
- */
-public protocol RichTextAlignmentWriter: RichTextAttributeWriter {}
-
-extension NSMutableAttributedString: RichTextAlignmentWriter {}
-
-public extension RichTextAlignmentWriter {
+public extension RichTextAttributeWriter {
 
     /**
      Set a rich text alignment at a certain range.
@@ -75,7 +64,7 @@ public extension RichTextAlignmentWriter {
     }
 }
 
-private extension RichTextAlignmentWriter {
+private extension RichTextAttributeWriter {
 
     func setAlignment(
         _ alignment: RichTextAlignment,

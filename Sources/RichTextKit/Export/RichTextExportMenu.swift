@@ -3,7 +3,7 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-12-19.
-//  Copyright © 2022 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
 //
 
 #if os(iOS) || os(macOS)
@@ -25,7 +25,7 @@ public struct RichTextExportMenu: View {
 
     public init(
         title: String = RTKL10n.menuExportAs.text,
-        icon: Image = .richTextMenuExport,
+        icon: Image = .richTextActionExport,
         formats: [RichTextDataFormat] = RichTextDataFormat.libraryFormats,
         formatAction: @escaping (RichTextDataFormat) -> Void,
         pdfAction: (() -> Void)? = nil

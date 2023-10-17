@@ -3,7 +3,7 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-12-13.
-//  Copyright © 2022 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
 //
 
 #if os(iOS) || os(macOS)
@@ -71,10 +71,6 @@ public struct RichTextFormatSidebar: View {
             }
             .font(.callout)
             .padding(.trailing, -8)
-
-            SidebarSection(title: nil) {
-                RichTextScriptButtons(context: context)
-            }
 
             Spacer()
         }

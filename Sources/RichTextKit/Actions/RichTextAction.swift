@@ -3,7 +3,7 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-12-08.
-//  Copyright © 2022 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
@@ -31,6 +31,9 @@ public enum RichTextAction: String, CaseIterable, Identifiable {
 
     /// Decrease the current indent level.
     case decreaseIndent
+    
+    /// A print command.
+    case print
 
     /// Redo the latest undone change.
     case redoLatestChange
@@ -62,6 +65,7 @@ public extension RichTextAction {
         case .decrementFontSize: return RTKL10n.actionDecrementFontSize.text
         case .increaseIndent: return RTKL10n.actionIncreaseIndent.text
         case .decreaseIndent: return RTKL10n.actionDecreaseIndent.text
+        case .print: return RTKL10n.menuPrint.text
         case .redoLatestChange: return RTKL10n.actionRedoLatestChange.text
         case .undoLatestChange: return RTKL10n.actionUndoLatestChange.text
         }
@@ -76,6 +80,7 @@ public extension RichTextAction {
         case .decrementFontSize: return .richTextFontSizeDecrement
         case .increaseIndent: return .richTextIndentIncrease
         case .decreaseIndent: return .richTextIndentDecrease
+        case .print: return .richTextActionExport
         case .redoLatestChange: return .richTextActionRedo
         case .undoLatestChange: return .richTextActionUndo
         }

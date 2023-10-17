@@ -1,26 +1,15 @@
 //
-//  RichTextFontWriter.swift
+//  RichTextAttributeWriter+Font.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-05-27.
-//  Copyright © 2022 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
 //
 
 import CoreGraphics
 import Foundation
 
-/**
- This protocol extends ``RichTextAttributeWriter`` with rich
- text font writing functionality.
-
- This protocol is implemented by `NSMutableAttributedString`
- as well as other types in the library.
- */
-public protocol RichTextFontWriter: RichTextAttributeReader, RichTextAttributeWriter {}
-
-extension NSMutableAttributedString: RichTextFontWriter {}
-
-public extension RichTextFontWriter {
+public extension RichTextAttributeWriter {
 
     /**
      Set the font at a certain range.
@@ -35,7 +24,7 @@ public extension RichTextFontWriter {
     ) {
         setRichTextAttribute(.font, to: font, at: range)
     }
-
+    
     /**
      Set the font name at a certain range.
 
@@ -124,7 +113,7 @@ public extension RichTextFontWriter {
     }
 }
 
-public extension RichTextFontWriter {
+public extension RichTextAttributeWriter {
 
     /**
      Decrement the font size at a certain range.
@@ -155,7 +144,7 @@ public extension RichTextFontWriter {
     }
 }
 
-private extension RichTextFontWriter {
+private extension RichTextAttributeWriter {
 
     /**
      We must adjust empty font names on some platforms since

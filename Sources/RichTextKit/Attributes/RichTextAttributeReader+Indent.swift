@@ -1,5 +1,5 @@
 //
-//  RichTextIndentReader.swift
+//  RichTextAttributeReader+Indent.swift
 //  RichTextKit
 //
 //  Created by James Bradley on 2022-03-04.
@@ -16,18 +16,7 @@ import UIKit
 import AppKit
 #endif
 
-/**
- This protocol extends ``RichTextAttributeReader`` with rich
- text indent-specific functionality.
-
- The protocol is implemented by `NSAttributedString` as well
- as other types in the library.
- */
-public protocol RichTextIndentReader: RichTextAttributeReader {}
-
-extension NSAttributedString: RichTextIndentReader {}
-
-public extension RichTextIndentReader {
+public extension RichTextAttributeReader {
 
     /**
      Get the rich text indent level at the provided range.

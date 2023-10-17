@@ -3,7 +3,7 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-12-19.
-//  Copyright © 2022 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
 //
 
 #if os(iOS) || os(macOS)
@@ -66,7 +66,7 @@ struct RichTextDataFormatMenu_Previews: PreviewProvider {
         VStack {
             RichTextDataFormatMenu(
                 title: "Export...",
-                icon: .richTextMenuExport,
+                icon: .richTextActionExport,
                 formatAction: { _ in },
                 pdfAction: {}
             )

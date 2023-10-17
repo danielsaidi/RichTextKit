@@ -1,9 +1,9 @@
 //
-//  RichTextAlignmentReader.swift
+//  RichTextAttributeReader+Alignment.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-05-29.
-//  Copyright © 2022 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
 //
 
 import Foundation
@@ -16,18 +16,7 @@ import UIKit
 import AppKit
 #endif
 
-/**
- This protocol extends ``RichTextAttributeReader`` with rich
- text alignment-specific functionality.
-
- The protocol is implemented by `NSAttributedString` as well
- as other types in the library.
- */
-public protocol RichTextAlignmentReader: RichTextAttributeReader {}
-
-extension NSAttributedString: RichTextAlignmentReader {}
-
-public extension RichTextAlignmentReader {
+public extension RichTextAttributeReader {
 
     /**
      Get the rich text alignment at a certain range.

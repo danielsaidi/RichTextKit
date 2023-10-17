@@ -1,25 +1,14 @@
 //
-//  RichTextStyleReader.swift
+//  RichTextAttributeReader+Style.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-05-28.
-//  Copyright © 2022 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
 //
 
 import Foundation
 
-/**
- This protocol extends ``RichTextFontReader`` with rich text
- style-specific functionality.
-
- The protocol is implemented by `NSAttributedString` as well
- as other types in the library.
- */
-public protocol RichTextStyleReader: RichTextFontReader {}
-
-extension NSAttributedString: RichTextStyleReader {}
-
-public extension RichTextStyleReader {
+public extension RichTextAttributeReader {
 
     /**
      Get the rich text styles at a certain range.

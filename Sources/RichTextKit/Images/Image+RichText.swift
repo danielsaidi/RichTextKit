@@ -3,7 +3,7 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-05-28.
-//  Copyright © 2022 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
@@ -16,9 +16,12 @@ public extension Image {
     static let richTextActionCopy = symbol("doc.on.clipboard")
     static let richTextActionDismissKeyboard = symbol("keyboard.chevron.compact.down")
     static let richTextActionEdit = symbol("square.and.pencil")
+    static let richTextActionExport = symbol("square.and.arrow.up.on.square")
+    static let richTextActionPrint = symbol("printer")
     static let richTextActionRedo = symbol("arrow.uturn.forward")
+    static let richTextActionShare = symbol("square.and.arrow.up")
     static let richTextActionUndo = symbol("arrow.uturn.backward")
-
+    
     static let richTextAlignmentCenter = symbol("text.aligncenter")
     static let richTextAlignmentJustified = symbol("text.justify")
     static let richTextAlignmentLeft = symbol("text.alignleft")
@@ -39,10 +42,6 @@ public extension Image {
 
     static let richTextIndentDecrease = symbol("decrease.indent")
     static let richTextIndentIncrease = symbol("increase.indent")
-
-    static let richTextMenuExport = symbol("square.and.arrow.up.on.square")
-    static let richTextMenuPrint = symbol("printer")
-    static let richTextMenuShare = symbol("square.and.arrow.up")
 
     static let richTextStyleBold = symbol("bold")
     static let richTextStyleItalic = symbol("italic")
@@ -105,8 +104,8 @@ struct Image_RichText_Previews: PreviewProvider {
 
     static var menuPreviews: some View {
         HStack {
-            Image.richTextMenuExport
-            Image.richTextMenuShare
+            Image.richTextActionExport
+            Image.richTextActionShare
         }
     }
 

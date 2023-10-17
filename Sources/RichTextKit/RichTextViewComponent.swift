@@ -3,7 +3,7 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-05-22.
-//  Copyright © 2022 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
 //
 
 import CoreGraphics
@@ -22,21 +22,11 @@ import Foundation
  */
 public protocol RichTextViewComponent: AnyObject,
     RichTextPresenter,
-    // RichTextAttributeReader,
-    // RichTextAttributeWriter,
-    RichTextAlignmentReader,
-    RichTextAlignmentWriter,
-    RichTextIndentReader,
-    RichTextIndentWriter,
-    RichTextColorReader,
-    RichTextColorWriter,
+    RichTextAttributeReader,
+    RichTextAttributeWriter,
     RichTextDataReader,
-    // RichTextFontReader,
-    // RichTextFontWriter,
     RichTextImageAttachmentManager,
-    RichTextPdfDataReader,
-    // RichTextStyleReader,
-    RichTextStyleWriter
+    RichTextPdfDataReader
 {
         
     /// The text view's frame.

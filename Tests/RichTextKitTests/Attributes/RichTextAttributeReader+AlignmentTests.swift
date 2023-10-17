@@ -1,9 +1,9 @@
 //
-//  RichTextAlignmentReaderTests.swift
+//  RichTextAttributeReader+AlignmentTests.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-05-30.
-//  Copyright © 2022 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
 //
 
 #if os(iOS) || os(macOS) || os(tvOS)
@@ -11,7 +11,7 @@ import RichTextKit
 import SwiftUI
 import XCTest
 
-final class RichTextAlignmentReaderTests: XCTestCase {
+final class RichTextAttributeReader_AlignmentTests: XCTestCase {
 
     func testCanReadTextAlignment() {
         let textView = RichTextView()
@@ -24,7 +24,7 @@ final class RichTextAlignmentReaderTests: XCTestCase {
     }
 }
 
-private class TestReader: RichTextAlignmentReader {
+private class TestReader: RichTextAttributeReader {
 
     var attributedString = NSAttributedString(string: "foo bar")
 }

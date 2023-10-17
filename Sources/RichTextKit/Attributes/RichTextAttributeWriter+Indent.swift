@@ -1,5 +1,5 @@
 //
-//  RichTextIndentWriter.swift
+//  RichTextAttributeWriter+Indent.swift
 //  RichTextKit
 //
 //  Created by James Bradley on 2022-03-04.
@@ -16,18 +16,7 @@ import UIKit
 import AppKit
 #endif
 
-/**
- This protocol extends ``RichTextAttributeWriter`` with rich
- text indent writing functionality.
-
- This protocol is implemented by `NSMutableAttributedString`
- as well as other types in the library.
- */
-public protocol RichTextIndentWriter: RichTextAttributeWriter {}
-
-extension NSMutableAttributedString: RichTextIndentWriter {}
-
-public extension RichTextIndentWriter {
+public extension RichTextAttributeWriter {
 
     /**
      Set the rich text indent at the provided range.
@@ -119,7 +108,7 @@ public extension RichTextIndentWriter {
     }
 }
 
-public extension RichTextIndentWriter {
+extension RichTextAttributeWriter {
 
     /**
      Step the text indent at a certain range.
