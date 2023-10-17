@@ -33,6 +33,7 @@ public extension RichTextContext {
         _ color: ColorRepresentable,
         for val: RichTextColor
     ) {
+        if self.color(for: val) == color { return }
         switch val {
         case .foreground: foregroundColor = color
         case .background: backgroundColor = color

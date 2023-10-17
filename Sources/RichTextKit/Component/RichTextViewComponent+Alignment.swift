@@ -29,6 +29,7 @@ public extension RichTextViewComponent {
     func setCurrentTextAlignment(
         _ alignment: RichTextAlignment
     ) {
+        if currentTextAlignment == alignment { return }
         if !hasTrimmedText {
             return setAlignment(alignment)
         }

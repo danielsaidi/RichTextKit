@@ -65,8 +65,9 @@ private extension RichTextCoordinator {
         richTextContext.$triggerAction
             .sink(
                 receiveCompletion: { _ in },
-                receiveValue: { [weak self] in self?.handle($0) }
-            )
+                receiveValue: { [weak self] in
+                    self?.handle($0)
+                })
             .store(in: &cancellables)
     }
     
@@ -75,7 +76,9 @@ private extension RichTextCoordinator {
         richTextContext.$textAlignment
             .sink(
                 receiveCompletion: { _ in },
-                receiveValue: { [weak self] in self?.setAlignment(to: $0) })
+                receiveValue: { [weak self] in
+                    self?.textView.setCurrentTextAlignment($0)
+                })
             .store(in: &cancellables)
     }
 
@@ -83,7 +86,10 @@ private extension RichTextCoordinator {
         richTextContext.$backgroundColor
             .sink(
                 receiveCompletion: { _ in },
-                receiveValue: { [weak self] in self?.setBackgroundColor(to: $0) })
+                receiveValue: { [weak self] in
+                    guard let color = $0 else { return }
+                    self?.textView.setCurrentColor(.background, to: color)
+                })
             .store(in: &cancellables)
     }
 
@@ -91,7 +97,9 @@ private extension RichTextCoordinator {
         richTextContext.$fontName
             .sink(
                 receiveCompletion: { _ in },
-                receiveValue: { [weak self] in self?.setFontName(to: $0) })
+                receiveValue: { [weak self] in
+                    self?.textView.setCurrentFontName($0)
+                })
             .store(in: &cancellables)
     }
 
@@ -99,7 +107,9 @@ private extension RichTextCoordinator {
         richTextContext.$fontSize
             .sink(
                 receiveCompletion: { _ in },
-                receiveValue: { [weak self] in self?.setFontSize(to: $0) })
+                receiveValue: { [weak self] in
+                    self?.textView.setCurrentFontSize($0)
+                })
             .store(in: &cancellables)
     }
 
@@ -107,7 +117,10 @@ private extension RichTextCoordinator {
         richTextContext.$foregroundColor
             .sink(
                 receiveCompletion: { _ in },
-                receiveValue: { [weak self] in self?.setForegroundColor(to: $0) })
+                receiveValue: { [weak self] in
+                    guard let color = $0 else { return }
+                    self?.textView.setCurrentColor(.foreground, to: color)
+                })
             .store(in: &cancellables)
     }
 
@@ -115,7 +128,9 @@ private extension RichTextCoordinator {
         richTextContext.$highlightedRange
             .sink(
                 receiveCompletion: { _ in },
-                receiveValue: { [weak self] in self?.setHighlightedRange(to: $0) })
+                receiveValue: { [weak self] in
+                    self?.setHighlightedRange(to: $0)
+                })
             .store(in: &cancellables)
     }
 
@@ -123,7 +138,9 @@ private extension RichTextCoordinator {
         richTextContext.$highlightingStyle
             .sink(
                 receiveCompletion: { _ in },
-                receiveValue: { [weak self] in self?.setHighlightingStyle(to: $0) })
+                receiveValue: { [weak self] in
+                    self?.textView.highlightingStyle = $0
+                })
             .store(in: &cancellables)
     }
 
@@ -131,7 +148,9 @@ private extension RichTextCoordinator {
         richTextContext.$isBold
             .sink(
                 receiveCompletion: { _ in },
-                receiveValue: { [weak self] in self?.setStyle(.bold, to: $0) })
+                receiveValue: { [weak self] in
+                    self?.setStyle(.bold, to: $0)
+                })
             .store(in: &cancellables)
     }
 
@@ -139,7 +158,9 @@ private extension RichTextCoordinator {
         richTextContext.$isEditingText
             .sink(
                 receiveCompletion: { _ in },
-                receiveValue: { [weak self] in self?.setIsEditing(to: $0) })
+                receiveValue: { [weak self] in
+                    self?.setIsEditing(to: $0)
+                })
             .store(in: &cancellables)
     }
 
@@ -147,7 +168,9 @@ private extension RichTextCoordinator {
         richTextContext.$isItalic
             .sink(
                 receiveCompletion: { _ in },
-                receiveValue: { [weak self] in self?.setStyle(.italic, to: $0) })
+                receiveValue: { [weak self] in
+                    self?.setStyle(.italic, to: $0)
+                })
             .store(in: &cancellables)
     }
 
@@ -155,7 +178,9 @@ private extension RichTextCoordinator {
         richTextContext.$isStrikethrough
             .sink(
                 receiveCompletion: { _ in },
-                receiveValue: { [weak self] in self?.setStyle(.strikethrough, to: $0) })
+                receiveValue: { [weak self] in
+                    self?.setStyle(.strikethrough, to: $0)
+                })
             .store(in: &cancellables)
     }
 
@@ -163,7 +188,9 @@ private extension RichTextCoordinator {
         richTextContext.$isUnderlined
             .sink(
                 receiveCompletion: { _ in },
-                receiveValue: { [weak self] in self?.setStyle(.underlined, to: $0) })
+                receiveValue: { [weak self] in
+                    self?.setStyle(.underlined, to: $0)
+                })
             .store(in: &cancellables)
     }
 
@@ -171,7 +198,9 @@ private extension RichTextCoordinator {
         richTextContext.$shouldPasteImage
             .sink(
                 receiveCompletion: { _ in },
-                receiveValue: { [weak self] in self?.pasteImage($0) })
+                receiveValue: { [weak self] in
+                    self?.pasteImage($0)
+                })
             .store(in: &cancellables)
     }
 
@@ -179,7 +208,9 @@ private extension RichTextCoordinator {
         richTextContext.$shouldPasteImages
             .sink(
                 receiveCompletion: { _ in },
-                receiveValue: { [weak self] in self?.pasteImages($0) })
+                receiveValue: { [weak self] in
+                    self?.pasteImages($0)
+                })
             .store(in: &cancellables)
     }
 
@@ -187,7 +218,9 @@ private extension RichTextCoordinator {
         richTextContext.$shouldPasteText
             .sink(
                 receiveCompletion: { _ in },
-                receiveValue: { [weak self] in self?.pasteText($0) })
+                receiveValue: { [weak self] in
+                    self?.pasteText($0)
+                })
             .store(in: &cancellables)
     }
 
@@ -195,7 +228,9 @@ private extension RichTextCoordinator {
         richTextContext.$shouldSetAttributedString
             .sink(
                 receiveCompletion: { _ in },
-                receiveValue: { [weak self] in self?.setAttributedString(to: $0) })
+                receiveValue: { [weak self] in
+                    self?.setAttributedString(to: $0)
+                })
             .store(in: &cancellables)
     }
     
@@ -203,7 +238,9 @@ private extension RichTextCoordinator {
         richTextContext.$shouldSelectRange
             .sink(
                 receiveCompletion: { _ in },
-                receiveValue: { [weak self] in self?.setSelectedRange(to: $0) })
+                receiveValue: { [weak self] in
+                    self?.setSelectedRange(to: $0)
+                })
             .store(in: &cancellables)
     }
     
@@ -211,7 +248,10 @@ private extension RichTextCoordinator {
         richTextContext.$strokeColor
             .sink(
                 receiveCompletion: { _ in },
-                receiveValue: { [weak self] in self?.setStrokeColor(to: $0) })
+                receiveValue: { [weak self] in
+                    guard let color = $0 else { return }
+                    self?.textView.setCurrentColor(.stroke, to: color)
+                })
             .store(in: &cancellables)
     }
     
@@ -219,7 +259,10 @@ private extension RichTextCoordinator {
         richTextContext.$strikethroughColor
             .sink(
                 receiveCompletion: { _ in },
-                receiveValue: { [weak self] in self?.setStrikethroughColor(to: $0) })
+                receiveValue: { [weak self] in
+                    guard let color = $0 else { return }
+                    self?.textView.setCurrentColor(.strikethrough, to: color)
+                })
             .store(in: &cancellables)
     }
 }
@@ -253,36 +296,9 @@ internal extension RichTextCoordinator {
         )
     }
 
-    func setAlignment(to newValue: RichTextAlignment) {
-        if newValue == textView.currentTextAlignment { return }
-        textView.setCurrentTextAlignment(newValue)
-    }
-
     func setAttributedString(to newValue: NSAttributedString?) {
         guard let newValue else { return }
         textView.setRichText(newValue)
-    }
-
-    func setBackgroundColor(to newValue: ColorRepresentable?) {
-        if newValue == textView.currentBackgroundColor { return }
-        guard let color = newValue else { return }
-        textView.setCurrentBackgroundColor(color)
-    }
-
-    func setFontName(to newValue: String) {
-        if newValue == textView.currentFontName { return }
-        textView.setCurrentFontName(newValue)
-    }
-
-    func setFontSize(to size: CGFloat) {
-        if size == textView.currentFontSize { return }
-        textView.setCurrentFontSize(size)
-    }
-
-    func setForegroundColor(to newValue: ColorRepresentable?) {
-        if textView.currentForegroundColor == newValue { return }
-        guard let color = newValue else { return }
-        textView.setCurrentForegroundColor(color)
     }
 
     func setHighlightedRange(to range: NSRange?) {
@@ -299,10 +315,6 @@ internal extension RichTextCoordinator {
         let text = ColorRepresentable(style.foregroundColor)
         textView.setRichTextBackgroundColor(background, at: range)
         textView.setRichTextForegroundColor(text, at: range)
-    }
-
-    func setHighlightingStyle(to style: RichTextHighlightingStyle) {
-        textView.highlightingStyle = style
     }
 
     func setIsEditing(to newValue: Bool) {
@@ -331,18 +343,6 @@ internal extension RichTextCoordinator {
         let hasStyle = textView.currentRichTextStyles.hasStyle(style)
         if newValue == hasStyle { return }
         textView.setCurrentRichTextStyle(style, to: newValue)
-    }
-    
-    func setStrokeColor(to newValue: ColorRepresentable?) {
-        if newValue == textView.currentStrokeColor { return }
-        guard let color = newValue else { return }
-        textView.setCurrentStrokeColor(color)
-    }
-    
-    func setStrikethroughColor(to newValue: ColorRepresentable?) {
-        if newValue == textView.currentStrikethroughColor { return }
-        guard let color = newValue else { return }
-        textView.setCurrentStrikethroughColor(color)
     }
 }
 

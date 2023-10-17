@@ -33,6 +33,7 @@ public extension RichTextViewComponent {
 
     /// Set the current font name.
     func setCurrentFontName(_ name: String) {
+        if currentFontName == name { return }
         if hasSelectedRange {
             setRichTextFontName(name, at: selectedRange)
         } else {
@@ -42,6 +43,7 @@ public extension RichTextViewComponent {
 
     /// Set the current font size.
     func setCurrentFontSize(_ size: CGFloat) {
+        if size == currentFontSize { return }
         #if os(macOS)
         setRichTextFontSize(size, at: selectedRange)
         setFontSizeAtCurrentPosition(size)

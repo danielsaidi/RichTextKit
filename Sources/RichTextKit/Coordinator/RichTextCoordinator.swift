@@ -194,10 +194,31 @@ extension RichTextCoordinator {
         if richTextContext.selectedRange != range {
             richTextContext.selectedRange = range
         }
+        
+        RichTextColor.allCases.forEach {
+            if let color = textView.currentColor($0) {
+                richTextContext.setColor(color, for: $0)
+            }
+        }
 
-        let background = textView.currentBackgroundColor
+        let foreground = textView.currentColor(.foreground)
+        if richTextContext.foregroundColor != foreground {
+            richTextContext.foregroundColor = foreground
+        }
+        
+        let background = textView.currentColor(.background)
         if richTextContext.backgroundColor != background {
             richTextContext.backgroundColor = background
+        }
+        
+        let stroke = textView.currentColor(.stroke)
+        if richTextContext.strokeColor != stroke {
+            richTextContext.strokeColor = stroke
+        }
+        
+        let strike = textView.currentColor(.strikethrough)
+        if richTextContext.strikethroughColor != strike {
+            richTextContext.strikethroughColor = strike
         }
 
         let hasRange = textView.hasSelectedRange
@@ -225,11 +246,6 @@ extension RichTextCoordinator {
             richTextContext.fontSize = fontSize
         }
 
-        let foreground = textView.currentForegroundColor
-        if richTextContext.foregroundColor != foreground {
-            richTextContext.foregroundColor = foreground
-        }
-
         let isBold = styles.hasStyle(.bold)
         if richTextContext.isBold != isBold {
             richTextContext.isBold = isBold
@@ -253,16 +269,6 @@ extension RichTextCoordinator {
         let isEditingText = textView.isFirstResponder
         if richTextContext.isEditingText != isEditingText {
             richTextContext.isEditingText = isEditingText
-        }
-        
-        let stroke = textView.currentStrokeColor
-        if richTextContext.strokeColor != stroke {
-            richTextContext.strokeColor = stroke
-        }
-        
-        let strike = textView.currentStrikethroughColor
-        if richTextContext.strikethroughColor != strike {
-            richTextContext.strikethroughColor = strike
         }
 
         let alignment = textView.currentTextAlignment ?? .left
