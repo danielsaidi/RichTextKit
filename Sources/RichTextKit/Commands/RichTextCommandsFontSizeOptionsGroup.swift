@@ -20,11 +20,10 @@ public struct RichTextCommandsFontSizeOptionsGroup: View {
 
     public var body: some View {
         Button(RTKL10n.menuFontSizeIncrease.text) {
-            context?.increaseFontSize()
+            context?.handle(.increaseFontSize)
         }.keyboardShortcut(for: .increaseFontSize)
-
         Button(RTKL10n.menuFontSizeDecrease.text) {
-            context?.decreaseFontSize()
+            context?.handle(.decreaseFontSize)
         }.keyboardShortcut(for: .decreaseFontSize)
     }
 }

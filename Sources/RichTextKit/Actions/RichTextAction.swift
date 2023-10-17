@@ -41,23 +41,80 @@ public enum RichTextAction: Identifiable, Equatable {
 
 public extension RichTextAction {
     
-    /// A name alias for `.stepFontSize(points: 1)`.
-    static var increaseFontSize: RichTextAction { stepFontSize(points: 1) }
-
+    /// A name alias for `.stepFontSize`.
+    static var increaseFontSize: RichTextAction {
+        increaseFontSize()
+    }
+    
+    /// A name alias for `.stepFontSize`.
+    static func increaseFontSize(
+        points: UInt = 1
+    ) -> RichTextAction {
+        stepFontSize(points: Int(points))
+    }
+    
+    /// A name alias for `.stepFontSize`.
+    static var decreaseFontSize: RichTextAction {
+        decreaseFontSize()
+    }
+    
     /// A name alias for `.stepFontSize(points: -1)`.
-    static var decreaseFontSize: RichTextAction { stepFontSize(points: -1) }
+    static func decreaseFontSize(
+        points: UInt = 1
+    ) -> RichTextAction {
+        stepFontSize(points: -Int(points))
+    }
     
-    /// A name alias for `.stepIndent(points: 1)`.
-    static var increaseIndent: RichTextAction { stepIndent(points: 1) }
-
+    
+    /// A name alias for `.stepIndent`.
+    static var increaseIndent: RichTextAction {
+        increaseIndent()
+    }
+    
+    /// A name alias for `.stepIndent`.
+    static func increaseIndent(
+        points: UInt = .defaultRichTextIntentStepSize
+    ) -> RichTextAction {
+        stepIndent(points: CGFloat(points))
+    }
+    
+    /// A name alias for `.stepIndent`.
+    static var decreaseIndent: RichTextAction {
+        decreaseIndent()
+    }
+    
     /// A name alias for `.stepIndent(points: -1)`.
-    static var decreaseIndent: RichTextAction { stepIndent(points: -1) }
+    static func decreaseIndent(
+        points: UInt = .defaultRichTextIntentStepSize
+    ) -> RichTextAction {
+        stepIndent(points: -CGFloat(points))
+    }
     
-    /// A name alias for `.stepSuperscript(steps: 1)`.
-    static var increaseSuperscript: RichTextAction { stepSuperscript(steps: 1) }
-
+    
+    /// A name alias for `.stepFontSize`.
+    static var increaseSuperscript: RichTextAction {
+        increaseFontSize()
+    }
+    
+    /// A name alias for `.stepSuperscript`.
+    static func increaseSuperscript(
+        steps: UInt = 1
+    ) -> RichTextAction {
+        stepSuperscript(steps: Int(steps))
+    }
+    
+    /// A name alias for `.stepSuperscript`.
+    static var decreaseSuperscript: RichTextAction {
+        decreaseSuperscript()
+    }
+    
     /// A name alias for `.stepSuperscript(steps: -1)`.
-    static var decreaseSuperscript: RichTextAction { stepSuperscript(steps: -1) }
+    static func decreaseSuperscript(
+        steps: UInt = 1
+    ) -> RichTextAction {
+        stepSuperscript(steps: -Int(steps))
+    }
+    
 
     /// A name alias for `.redoLatestChange`.
     static var redo: RichTextAction { .redoLatestChange }

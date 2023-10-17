@@ -51,9 +51,12 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 
 ## Topics
 
-### Essentials
+### Getting Started
 
 - <doc:Getting-Started>
+
+### Essentials
+
 - ``RichTextEditor``
 - ``RichTextView``
 - ``RichTextContext``

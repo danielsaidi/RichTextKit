@@ -33,7 +33,7 @@ This version also consolidates all separate attribute readers and writers into t
 * `RichTextColorPicker` initializer has been cleaned up and simplified.
 * `RichTextColorPicker.PickerColor` has been deprecated.
 * `RichTextColorPickerColor` has been deprecated.
-* `RichTextContext` replaces `increment/decrement` with `step`.
+* `RichTextContext` replaces a lot of action-based functions with `handle(_:)`.
 * `RichTextIndent` has been deprecated.
 * `RichTextIndentPicker` has been deprecated.
 * `RichTextViewComponent` and omits `to:` param name.

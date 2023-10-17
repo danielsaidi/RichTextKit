@@ -25,21 +25,52 @@ extension RichTextCoordinator {
         subscribeToIsItalic()
         subscribeToIsStrikethrough()
         subscribeToIsUnderlined()
-        subscribeToShouldCopySelection()
         subscribeToShouldPasteImage()
         subscribeToShouldPasteImages()
         subscribeToShouldPasteText()
-        subscribeToShouldRedoLatestChange()
         subscribeToShouldSelectRange()
         subscribeToShouldSetAttributedString()
-        subscribeToShouldStepTextIndent()
-        subscribeToShouldUndoLatestChange()
         subscribeToStrikethroughColor()
         subscribeToStrokeColor()
+        subscribeToTriggerAction()
     }
 }
 
 private extension RichTextCoordinator {
+    
+    func handle(_ action: RichTextAction?) {
+        guard let action else { return }
+        switch action {
+        case .copy:
+            textView.copySelection()
+        case .dismissKeyboard:
+            textView.resignFirstResponder()
+        case .print:
+            break
+        case .redoLatestChange:
+            textView.redoLatestChange()
+            syncContextWithTextView()
+        case .stepFontSize(let points):
+            textView.stepCurrentFontSize(points: points)
+        case .stepIndent(let points):
+            textView.stepCurrentIndent(points: points)
+        case .stepSuperscript:
+            break
+        case .undoLatestChange:
+            textView.undoLatestChange()
+            syncContextWithTextView()
+        }
+    }
+    
+    func subscribeToTriggerAction() {
+        richTextContext.$triggerAction
+            .sink(
+                receiveCompletion: { _ in },
+                receiveValue: { [weak self] in self?.handle($0) }
+            )
+            .store(in: &cancellables)
+    }
+    
 
     func subscribeToAlignment() {
         richTextContext.$textAlignment
@@ -136,14 +167,6 @@ private extension RichTextCoordinator {
                 receiveValue: { [weak self] in self?.setStyle(.underlined, to: $0) })
             .store(in: &cancellables)
     }
-    
-    func subscribeToShouldCopySelection() {
-        richTextContext.$shouldCopySelection
-            .sink(
-                receiveCompletion: { _ in },
-                receiveValue: { [weak self] in self?.copySelection($0) })
-            .store(in: &cancellables)
-    }
 
     func subscribeToShouldPasteImage() {
         richTextContext.$shouldPasteImage
@@ -169,14 +192,6 @@ private extension RichTextCoordinator {
             .store(in: &cancellables)
     }
 
-    func subscribeToShouldRedoLatestChange() {
-        richTextContext.$shouldRedoLatestChange
-            .sink(
-                receiveCompletion: { _ in },
-                receiveValue: { [weak self] in self?.redoLatestChange($0) })
-            .store(in: &cancellables)
-    }
-
     func subscribeToShouldSetAttributedString() {
         richTextContext.$shouldSetAttributedString
             .sink(
@@ -190,26 +205,6 @@ private extension RichTextCoordinator {
             .sink(
                 receiveCompletion: { _ in },
                 receiveValue: { [weak self] in self?.setSelectedRange(to: $0) })
-            .store(in: &cancellables)
-    }
-
-    func subscribeToShouldUndoLatestChange() {
-        richTextContext.$shouldUndoLatestChange
-            .sink(
-                receiveCompletion: { _ in },
-                receiveValue: { [weak self] in self?.undoLatestChange($0) })
-            .store(in: &cancellables)
-    }
-    
-    func subscribeToShouldStepTextIndent() {
-        richTextContext.$shouldStepIndentPoints
-            .sink(
-                receiveCompletion: { _ in },
-                receiveValue: { [weak self] in
-                    guard let points = $0 else { return }
-                    self?.stepTextIndent(points: points)
-                }
-            )
             .store(in: &cancellables)
     }
     
@@ -231,11 +226,6 @@ private extension RichTextCoordinator {
 }
 
 internal extension RichTextCoordinator {
-
-    func copySelection(_ shouldCopy: Bool) {
-        guard shouldCopy else { return }
-        textView.copySelection()
-    }
 
     func pasteImage(_ data: (image: ImageRepresentable, atIndex: Int, moveCursor: Bool)?) {
         guard let data = data else { return }
@@ -262,12 +252,6 @@ internal extension RichTextCoordinator {
             at: data.atIndex,
             moveCursorToPastedContent: data.moveCursor
         )
-    }
-
-    func redoLatestChange(_ shouldRedo: Bool) {
-        guard shouldRedo else { return }
-        textView.redoLatestChange()
-        syncContextWithTextView()
     }
 
     func setAlignment(to newValue: RichTextAlignment) {
@@ -321,10 +305,6 @@ internal extension RichTextCoordinator {
     func setHighlightingStyle(to style: RichTextHighlightingStyle) {
         textView.highlightingStyle = style
     }
-    
-    func stepTextIndent(points: CGFloat) {
-        textView.stepCurrentRichTextIndent(points: points)
-    }
 
     func setIsEditing(to newValue: Bool) {
         if newValue == textView.isFirstResponder { return }
@@ -368,8 +348,7 @@ internal extension RichTextCoordinator {
 
     func undoLatestChange(_ shouldUndo: Bool) {
         guard shouldUndo else { return }
-        textView.undoLatestChange()
-        syncContextWithTextView()
+        
     }
 }
 

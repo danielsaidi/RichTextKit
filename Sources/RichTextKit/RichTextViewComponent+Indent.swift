@@ -19,14 +19,14 @@ import AppKit
 public extension RichTextViewComponent {
 
     /// Get the current text indent.
-    var currentRichTextIndent: CGFloat? {
+    var currentIndent: CGFloat? {
         let attribute: NSMutableParagraphStyle? = currentRichTextAttribute(.paragraphStyle)
         guard let style = attribute else { return nil }
         return style.headIndent
     }
 
     /// Step the current text indent.
-    func stepCurrentRichTextIndent(
+    func stepCurrentIndent(
         points: CGFloat
     ) {
         if !hasTrimmedText { return step(points: points) }

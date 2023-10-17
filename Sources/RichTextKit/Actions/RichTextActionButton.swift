@@ -46,7 +46,7 @@ public struct RichTextActionButton: View {
                 .frame(maxHeight: fillVertically ? .infinity : nil)
                 .contentShape(Rectangle())
         }
-        .disabled(!canTriggerAction)
+        .disabled(!context.canHandle(action))
         .keyboardShortcut(for: action)
         .accessibilityLabel(action.localizedName)
     }
@@ -54,12 +54,8 @@ public struct RichTextActionButton: View {
 
 private extension RichTextActionButton {
     
-    var canTriggerAction: Bool {
-        context.canTriggerRichTextAction(action)
-    }
-    
     func triggerAction() {
-        context.triggerRichTextAction(action)
+        context.handle(action)
     }
 }
 

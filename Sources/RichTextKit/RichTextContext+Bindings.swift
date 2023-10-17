@@ -13,7 +13,6 @@ public extension RichTextContext {
 
     // MARK: - Colors
 
-    /// A ``RichTextContext/backgroundColor`` binding.
     var backgroundColorBinding: Binding<Color> {
         Binding(
             get: { Color(self.backgroundColor ?? .clear) },
@@ -21,7 +20,6 @@ public extension RichTextContext {
         )
     }
 
-    /// A ``RichTextContext/foregroundColor`` binding.
     var foregroundColorBinding: Binding<Color> {
         Binding(
             get: { Color(self.foregroundColor ?? .clear) },
@@ -29,7 +27,6 @@ public extension RichTextContext {
         )
     }
     
-    /// A ``RichTextContext/strikethroughColor`` binding.
     var strikethroughColorBinding: Binding<Color> {
         Binding(
             get: { Color(self.strikethroughColor ?? .clear) },
@@ -37,7 +34,6 @@ public extension RichTextContext {
         )
     }
     
-    /// A ``RichTextContext/strokeColor`` binding.
     var strokeColorBinding: Binding<Color> {
         Binding(
             get: { Color(self.strokeColor ?? .clear) },
@@ -48,7 +44,6 @@ public extension RichTextContext {
 
     // MARK: - Styles
 
-    /// A ``RichTextContext/isBold`` binding.
     var isBoldBinding: Binding<Bool> {
         Binding(
             get: { self.isBold },
@@ -56,7 +51,6 @@ public extension RichTextContext {
         )
     }
 
-    /// A ``RichTextContext/isItalic`` binding.
     var isItalicBinding: Binding<Bool> {
         Binding(
             get: { self.isItalic },
@@ -64,7 +58,6 @@ public extension RichTextContext {
         )
     }
 
-    /// A ``RichTextContext/isStrikethrough`` binding.
     var isStrikethroughBinding: Binding<Bool> {
         Binding(
             get: { self.isStrikethrough },
@@ -72,7 +65,6 @@ public extension RichTextContext {
         )
     }
 
-    /// A ``RichTextContext/isUnderlined`` binding.
     var isUnderlinedBinding: Binding<Bool> {
         Binding(
             get: { self.isUnderlined },

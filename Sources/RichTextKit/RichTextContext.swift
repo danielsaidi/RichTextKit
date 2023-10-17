@@ -136,13 +136,9 @@ public class RichTextContext: ObservableObject {
     
     // MARK: - Internal trigger properties
     
-    /// Whether or not to copy the current text selection.
+    /// Set this property to trigger a certain action.
     @Published
-    var shouldCopySelection = false
-
-    /// Whether or not to redo the latest undone change.
-    @Published
-    var shouldRedoLatestChange = false
+    var triggerAction: RichTextAction?
 
     /// Set this property to trigger a paste operation.
     @Published
@@ -163,14 +159,6 @@ public class RichTextContext: ObservableObject {
     /// Set this property to trigger a range change.
     @Published
     var shouldSelectRange = NSRange()
-    
-    /// Set this property to trigger a text indent change.
-    @Published
-    var shouldStepIndentPoints: CGFloat?
-
-    /// Whether or not to undo the latest change.
-    @Published
-    var shouldUndoLatestChange = false
 }
 
 public extension RichTextContext {
@@ -188,11 +176,6 @@ public extension RichTextContext {
 
 public extension RichTextContext {
 
-    /// Copy the current selection to the pasteboard.
-    func copyCurrentSelection() {
-        shouldCopySelection = true
-    }
-
     /// Whether or not a certain style is enabled.
     func hasStyle(_ style: RichTextStyle) -> Bool {
         switch style {
@@ -206,26 +189,6 @@ public extension RichTextContext {
     /// Set ``highlightedRange`` to a new, optional range.
     func highlightRange(_ range: NSRange?) {
         highlightedRange = range
-    }
-    
-    /// Increase the font size a number of points.
-    func increaseFontSize(points: UInt = 1) {
-        stepFontSize(points: Int(points))
-    }
-    
-    /// Decrease the font size a number of points.
-    func decreaseFontSize(points: UInt = 1) {
-        stepFontSize(points: -Int(points))
-    }
-    
-    /// Increase the indent level a number of points.
-    func increaseIndent(points: UInt = 1) {
-        stepIndent(points: CGFloat(points))
-    }
-    
-    /// Decrease the indent level a number of points.
-    func decreaseIndent(points: UInt = 1) {
-        stepIndent(points: -CGFloat(points))
     }
 
     /**
@@ -279,11 +242,6 @@ public extension RichTextContext {
         shouldPasteText = (text, index, moveCursorToPastedContent)
     }
 
-    /// Redo the latest undone change.
-    func redoLatestChange() {
-        shouldRedoLatestChange = true
-    }
-
     /// Reset the attributed string.
     func resetAttributedString() {
         setAttributedString(to: "")
@@ -317,16 +275,6 @@ public extension RichTextContext {
         mutable.setRichTextFontSize(fontSize)
         shouldSetAttributedString = mutable
     }
-    
-    /// Step the current font size a number of points.
-    func stepFontSize(points: Int) {
-        fontSize += CGFloat(points)
-    }
-    
-    /// Step the current indent level a number of points.
-    func stepIndent(points: CGFloat) {
-        shouldStepIndentPoints = points
-    }
 
     /// Set ``isEditingText`` to `false`.
     func stopEditingText() {
@@ -346,10 +294,5 @@ public extension RichTextContext {
     /// Toggle whether or not the text is being edited.
     func toggleIsEditing() {
         isEditingText.toggle()
-    }
-
-    /// Undo the latest change.
-    func undoLatestChange() {
-        shouldUndoLatestChange = true
     }
 }

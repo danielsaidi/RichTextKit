@@ -16,14 +16,14 @@ public struct RichTextCommandsIndentOptionsGroup: View {
     @FocusedValue(\.richTextContext)
     private var context: RichTextContext?
     
-    private let stepSize = RichTextIndentDefaults.stepSizeInPoints
+    private let stepSize = UInt.defaultRichTextIntentStepSize
 
     public var body: some View {
         Button(RTKL10n.menuIndentIncrease.text) {
-            context?.stepIndent(points: stepSize)
+            context?.handle(.increaseIndent(points: stepSize))
         }
         Button(RTKL10n.menuIndentDecrease.text) {
-            context?.stepIndent(points: -stepSize)
+            context?.handle(.decreaseIndent(points: stepSize))
         }
     }
 }
