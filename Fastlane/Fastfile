@@ -10,58 +10,30 @@ platform :ios do
   build_folder_docs = ".build/docs"
 
 
-    # Documentation ==============
-
-  desc "Generate documentation"
-  lane :documentation do
-      docc_web
-  end
-
-
-  # Lint =======================
-
-  desc "Run SwiftLint"
-  lane :lint do
-    swiftlint(strict: true)
-  end
-
-
-  # Test ===================
-
-  desc "Run unit tests"
-  lane :test do
-    sh("swift test")
-  end
-
-
-  # Validate ===================
-
-  desc "Ensure that the repo is valid for release"
-  lane :ensure_release_ready do
-    ensure_git_status_clean
-    ensure_git_branch(branch: main_branch)
-    lint
-    test
-  end
-
-
   # Version ================
 
   desc "Create a new version"
   lane :version do |options|
-    ensure_release_ready
-    documentation
+    ensure_git_status_clean
+    ensure_git_branch(branch: main_branch)
+    version_build
 
     bump_type = options[:type]
     version = version_bump_podspec(
-      path: pod_name + '.podspec',
+      path: "Version",
       bump_type: bump_type)
 
     git_commit(path: "*", message: "Bump to #{version}")
     add_git_tag(tag: version)
     push_git_tags()
     push_to_git_remote()
-    pod_push()
+  end
+
+  desc "Build a new version"
+  lane :version_build do |options|
+    swiftlint(strict: true)
+    sh("swift test")
+    docc
   end
 
 
@@ -74,6 +46,10 @@ platform :ios do
     docc_platform(destination: 'OS X', name: 'osx')
     docc_platform(destination: 'tvOS', name: 'tvos')
     docc_platform(destination: 'watchOS', name: 'watchos')
+    docc_web_platform(name: 'ios')
+    docc_web_platform(name: 'osx')
+    docc_web_platform(name: 'tvos')
+    docc_web_platform(name: 'watchos')
   end
 
   desc "Build documentation for a single platform"
