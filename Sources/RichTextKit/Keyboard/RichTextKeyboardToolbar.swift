@@ -144,16 +144,17 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
     }
 }
 
+extension UIApplication {
+    func endEditing() {
+        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+
 private extension View {
     
     @ViewBuilder
     func prefersMediumSize() -> some View {
-        if #available(iOS 16.4, *) {
-            self.presentationDetents([.medium])
-                .presentationBackgroundInteraction(
-                    .enabled(upThrough: .medium)
-                )
-        } else if #available(iOS 16, *) {
+        if #available(iOS 16, *) {
             self.presentationDetents([.medium])
         } else {
             self

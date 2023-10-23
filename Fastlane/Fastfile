@@ -5,7 +5,6 @@ default_platform :ios
 platform :ios do
 
   library_name = "RichTextKit"
-  pod_name = "RichTextKit"
   main_branch = "main"
   build_folder_docs = ".build/docs"
 
@@ -72,15 +71,6 @@ platform :ios do
     sh('find ~/Library/Developer/Xcode/DerivedData \
       -name "' + library_name + '.doccarchive" \
       -exec rm -Rf {} \; || true')
-  end
-
-  desc "Build static documentation websites for all platforms"
-  lane :docc_web do
-    docc
-    docc_web_platform(name: 'ios')
-    docc_web_platform(name: 'osx')
-    docc_web_platform(name: 'tvos')
-    docc_web_platform(name: 'watchos')
   end
 
   desc "Build static documentation website for a single platform"

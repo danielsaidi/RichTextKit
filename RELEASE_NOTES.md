@@ -6,6 +6,12 @@ Until then, minor updates may remove deprecated features and introduce breaking 
 
 
 
+## 0.9.1
+
+This version reverts the `.presentationBackgroundInteraction` addition that caused the format sheet to appear behind the keyboard.
+
+
+
 ## 0.9
 
 This version drops support for iOS 14, tvOS 14, macOS 11 and watchOS 7.

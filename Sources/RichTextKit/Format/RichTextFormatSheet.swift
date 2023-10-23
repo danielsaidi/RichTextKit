@@ -11,13 +11,12 @@ import SwiftUI
 
 /**
  This sheet view provides different text format options, and
- is meant to be used on iOS, where rich texts editor may not
- have enough space to present all formatting.
+ is meant to be used on iOS, where space is limited.
 
- Note that the topmost font list picker will take up as much
- height as it can, after the other rows have allocated their
- height. If you show this sheet with custom detents, do make
- sure that it has enough height to show a couple of fonts.
+ The font picker will take up as much height as it can after
+ other rows have allocated their height. If you use a custom
+ presentation detents, make sure the sheet is tall enough to
+ show the fonts.
  */
 public struct RichTextFormatSheet: View {
 
