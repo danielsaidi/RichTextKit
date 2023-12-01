@@ -41,7 +41,7 @@ This demo aims to demonstrate what is currently possible with RichTextKit. The d
 
 You can run the demo in both iOS and macOS, and will get a different layout for the various platforms. The macOS demo has a side menu with options, from which you can navigate around in the app, while the iOS demo just has a simple menu.
 
-Both demo apps should be improved a great deal, especially the iOS demo. The goal is to have it look like a basic Notes och Pages app, which requires some adjustment on all platforms.
+Both demo apps should be improved a great deal, especially the iOS demo. The goal is to have it look like a basic Notes or Pages app, which requires some adjustment on all platforms.
 
 In the demo, you can type in the rich text editor, change styles, font, font size, alignment as well as colors. You can also try the paste and undo/redo feature.
 

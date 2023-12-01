@@ -16,7 +16,7 @@ import SwiftUI
 public enum RichTextAlignment: String, CaseIterable, Codable, Equatable, Identifiable {
 
     /**
-     Initialize a rich text alignment with a native aligment.
+     Initialize a rich text alignment with a native alignment.
 
      - Parameters:
        - alignment: The native alignment to use.

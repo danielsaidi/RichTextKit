@@ -14,7 +14,7 @@ import CoreGraphics
 
  This protocol is implemented by native types like `CGFloat`,
  `Double`, as well as library types like ``RichTextContext``,
- ``RichTextEditor`` and ``RichTextView``. All tese types can
+ ``RichTextEditor`` and ``RichTextView``. All these types can
  use the ``StandardFontSizeProvider/standardRichTextFontSize``
  property to set the standard rich text font size.
  */

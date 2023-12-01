@@ -22,7 +22,7 @@ import AppKit
  for handling image attachments.
 
  The protocol is implemented by `NSAttributedString` but can
- be oimplemented by any `RichTextReader`.
+ be implemented by any `RichTextReader`.
  */
 public protocol RichTextImageAttachmentManager: RichTextReader {}
 
