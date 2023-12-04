@@ -25,7 +25,7 @@ If you prefer to not have external dependencies, you can also just copy the sour
 
 ## Getting started
 
-The <doc:Getting-Started> article has a guide to help you get started with RichTextKit.
+The <doc:Getting-Started> article helps you get started with RichTextKit.
 
 
 
