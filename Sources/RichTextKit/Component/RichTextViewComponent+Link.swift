@@ -21,12 +21,13 @@ public extension RichTextViewComponent {
                     mutableAttributedString.removeAttribute(attribute, range: range)
                     mutableAttributedString.fixAttributes(in: range)
                     mutableAttributedString.addAttribute(.font, value: FontRepresentable.standardRichTextFont, range: range)
+                    mutableAttributedString.addAttribute(.foregroundColor, value: UIColor.label, range: range)
                 }
                 setRichText(mutableAttributedString)
             }
         }
         
-        self.typingAttributes = [.font: FontRepresentable.standardRichTextFont]
+        self.typingAttributes = [.font: FontRepresentable.standardRichTextFont, .foregroundColor: UIColor.label]
         setCurrentFont(.standardRichTextFont)
     }
     
