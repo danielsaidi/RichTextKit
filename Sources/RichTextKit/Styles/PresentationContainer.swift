@@ -30,7 +30,7 @@ private struct PresentationContainer<Value, SheetContent: View>: ViewModifier {
     func body(content: Content) -> some View {
         switch style {
         case .sheet:
-            content.sheet(isPresented: isPresented, content: {  SheetContentContainer(data: $data, sheetContent: sheetContent) })
+            content.sheet(isPresented: isPresented, content: { SheetContentContainer(data: $data, sheetContent: sheetContent) })
         case .alert:
             content.alert(
                 "",

@@ -44,6 +44,7 @@ public struct RichTextStyleToggleGroup<LinkViewContent: View>: View {
         self.linkViewContent = linkViewContent
     }
 
+    @State private var urlString = ""
     @State private var isAlertPresented = false
     
     @ViewBuilder private let linkViewContent: () -> LinkViewContent
@@ -85,10 +86,20 @@ public struct RichTextStyleToggleGroup<LinkViewContent: View>: View {
                 style: .sheet,
                 data: context.binding(for: context.link),
                 isPresented: $isAlertPresented) { url in
-                    Button(
-                        action: { context.setLink(URL(string: "https://seznam.cz")) },
-                        label: { Text("Set link!") }
-                    )
+                    VStack(spacing: 8) {
+                        TextField("", text: $urlString)
+                            .textFieldStyle(.roundedBorder)
+                            .autocorrectionDisabled(true)
+                            .textInputAutocapitalization(.never)
+                        Button(
+                            action: {
+                                context.setLink(URL(string: urlString))
+                                isAlertPresented = false
+                            },
+                            label: { Text("Set link!") }
+                        )
+                    }
+                    .padding(.horizontal, 8)
                 }
           
         }
