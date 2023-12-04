@@ -276,7 +276,7 @@ open class RichTextView: UITextView, RichTextViewComponent {
 
      In this function, we reverse the item collection, since
      each item will be pasted at the drop point, which would
-     result in a revese result.
+     result in a reverse result.
      */
     open func dropInteraction(
         _ interaction: UIDropInteraction,
@@ -293,7 +293,7 @@ open class RichTextView: UITextView, RichTextViewComponent {
     // MARK: - Drop Interaction Support
 
     /**
-     Performe an image drop session.
+     Performs an image drop session.
 
      We reverse the item collection, since each item will be
      pasted at the original drop point.

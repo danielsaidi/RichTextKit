@@ -14,7 +14,7 @@ import SwiftUI
  that can appear when adding a `Menu` to a keyboard toolbar.
 
  The glitch is that the menu label can be incorrectly offset
- vertically, beyound the bounds of the menu. If that happens,
+ vertically, beyond the bounds of the menu. If that happens,
  use this view to ensure that it's correctly positioned.
  */
 public struct RichTextKeyboardToolbarMenu<Label: View, Content: View>: View {

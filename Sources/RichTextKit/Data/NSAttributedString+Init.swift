@@ -14,7 +14,7 @@ public extension NSAttributedString {
      Try to parse ``RichTextFormat`` formatted data.
 
      - Parameters:
-       - data: The data to initalize the string with.
+       - data: The data to initialize the string with.
        - format: The data format to use.
      */
     convenience init(
@@ -39,7 +39,7 @@ private extension NSAttributedString {
      and will be unarchived with a `NSKeyedUnarchiver`.
 
      - Parameters:
-       - data: The data to initalize the string with.
+       - data: The data to initialize the string with.
      */
     convenience init(archivedData data: Data) throws {
         let unarchived = try NSKeyedUnarchiver.unarchivedObject(
@@ -55,7 +55,7 @@ private extension NSAttributedString {
      Try to parse ``RichTextDataFormat/plainText`` data.
 
      - Parameters:
-       - data: The data to initalize the string with.
+       - data: The data to initialize the string with.
      */
     convenience init(plainTextData data: Data) throws {
         let decoded = String(data: data, encoding: .utf8)

@@ -146,7 +146,7 @@ This update reverts a `RichTextEditor` view update that made the editor less per
 * `RichTextIndentPicker` is a new enum for picking a text indent.
 * `RichTextIndentReader` is a new type for managing text indents.
 * `RichTextIndentWriter` is a new type for managing text indents.
-* `RichTextKeyboardToolbar` now supports modofying the format sheet before presenting it.
+* `RichTextKeyboardToolbar` now supports modifying the format sheet before presenting it.
 * `RichTextStyleToggleGroup` is a new view that groups multiple toggles together.
 * `RichTextStyleWriter` now supports affecting the entire text by default.
 
@@ -268,7 +268,7 @@ This release adds support for strikethrough and cleans up some 0.2 code. It also
 * `RichTextActionButtonStack` no longer has a bordered init parameter.
 * `RichTextAlignmentPicker` no longer has title and segmented parameters.
 * `RichTextFontSizePickerStack` no longer has a bordered init parameter.
-* `RichTextFontSizePickerStack` now requires a `RichTextContext` instea dof a binding.
+* `RichTextFontSizePickerStack` now requires a `RichTextContext` instead of a binding.
 
 
 

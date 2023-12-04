@@ -39,7 +39,7 @@ public struct RichTextAlignmentPicker: View {
     public var body: some View {
         Picker("", selection: $selection) {
             ForEach(RichTextAlignment.allCases) {
-                $0.icon.tag($0)
+                $0.icon.tag($0).foregroundColor(.primary)
             }
         }.labelsHidden()
     }
