@@ -32,8 +32,6 @@ public final class RichTextLayoutManager: NSLayoutManager {
     }
  
     private func renderLinks(in characterRange: NSRange, at origin: CGPoint) {
-        
-        
         textStorage?.enumerateAttribute(
             .customLink,
             in: characterRange,
