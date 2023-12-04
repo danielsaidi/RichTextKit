@@ -6,6 +6,12 @@ Until then, minor updates may remove deprecated features and introduce breaking 
 
 
 
+## 0.9.2
+
+This version adjusts some display issues when changing text style.
+
+
+
 ## 0.9.1
 
 This version reverts the `.presentationBackgroundInteraction` addition that caused the format sheet to appear behind the keyboard.
