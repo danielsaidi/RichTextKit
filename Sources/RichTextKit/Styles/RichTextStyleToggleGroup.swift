@@ -19,7 +19,7 @@ import SwiftUI
  Since this view controls multiple styles, it binds directly
  to a ``RichTextContext`` instead of individual values.
  */
-public struct RichTextStyleToggleGroup<LinkViewContent: View>: View {
+public struct RichTextStyleToggleGroup: View {
 
     /**
      Create a rich text style toggle button group.
@@ -34,20 +34,17 @@ public struct RichTextStyleToggleGroup<LinkViewContent: View>: View {
         context: RichTextContext,
         styles: [RichTextStyle] = .all,
         greedy: Bool = true,
-        buttonStyle: RichTextStyleButton.Style = .standard,
-        @ViewBuilder linkViewContent: @escaping () -> LinkViewContent
+        buttonStyle: RichTextStyleButton.Style = .standard
     ) {
         self._context = ObservedObject(wrappedValue: context)
         self.isGreedy = greedy
         self.styles = styles
         self.buttonStyle = buttonStyle
-        self.linkViewContent = linkViewContent
     }
 
     @State private var urlString = ""
     @State private var isAlertPresented = false
     
-    @ViewBuilder private let linkViewContent: () -> LinkViewContent
     private let styles: [RichTextStyle]
     private let isGreedy: Bool
     private let buttonStyle: RichTextStyleButton.Style
@@ -116,8 +113,7 @@ struct RichTextStyleToggleGroup_Previews: PreviewProvider {
         func group(greedy: Bool) -> some View {
             RichTextStyleToggleGroup(
                 context: context,
-                greedy: greedy,
-                linkViewContent: { Text("") }
+                greedy: greedy
             )
         }
 

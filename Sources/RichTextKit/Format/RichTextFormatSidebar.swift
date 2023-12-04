@@ -43,14 +43,7 @@ public struct RichTextFormatSidebar: View {
             SidebarSection(title: RTKL10n.font.text) {
                 RichTextFontPicker(selection: $context.fontName, fontSize: 12)
                 HStack {
-                    RichTextStyleToggleGroup(context: context) {
-                        RichTextLinkInputView(
-                            linkUrl: context.link?.absoluteString ?? "Another time",
-                            content: { url in
-                                Text(url)
-                            }
-                        )
-                    }
+                    RichTextStyleToggleGroup(context: context)
                     RichTextFontSizePickerStack(context: context)
                 }
             }
