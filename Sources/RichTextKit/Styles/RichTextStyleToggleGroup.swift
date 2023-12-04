@@ -19,7 +19,7 @@ import SwiftUI
  Since this view controls multiple styles, it binds directly
  to a ``RichTextContext`` instead of individual values.
  */
-public struct RichTextStyleToggleGroup: View {
+public struct RichTextStyleToggleGroup<LinkViewContent: View>: View {
 
     /**
      Create a rich text style toggle button group.
@@ -34,16 +34,19 @@ public struct RichTextStyleToggleGroup: View {
         context: RichTextContext,
         styles: [RichTextStyle] = .all,
         greedy: Bool = true,
-        buttonStyle: RichTextStyleButton.Style = .standard
+        buttonStyle: RichTextStyleButton.Style = .standard,
+        @ViewBuilder linkViewContent: @escaping () -> LinkViewContent
     ) {
         self._context = ObservedObject(wrappedValue: context)
         self.isGreedy = greedy
         self.styles = styles
         self.buttonStyle = buttonStyle
+        self.linkViewContent = linkViewContent
     }
 
     @State private var isAlertPresented = false
     
+    @ViewBuilder private let linkViewContent: () -> LinkViewContent
     private let styles: [RichTextStyle]
     private let isGreedy: Bool
     private let buttonStyle: RichTextStyleButton.Style
@@ -62,37 +65,24 @@ public struct RichTextStyleToggleGroup: View {
     private var context: RichTextContext
 
     public var body: some View {
-        ControlGroup {
-            ForEach(styles) {
-                RichTextStyleButton(
-                    style: $0,
-                    buttonStyle: buttonStyle,
-                    context: context,
-                    fillVertically: true
-                )
-            }
-            RichTextLinkButton(
-                context: context, 
-                isAlertPresented: $isAlertPresented, 
-                value: context.binding(for: context.link)
-            )
-        }
-        .frame(width: groupWidth)
-        .alert(
-            "URL",
-            isPresented: $isAlertPresented,
-            actions: {
-                TextField(
-                    "", 
-                    text: context.stringBinding(for: context.link)
-                )
-                    .autocorrectionDisabled(true)
-                    .textInputAutocapitalization(.never)
-                Button("Add") {
-//                     $context.link.wrappedValue = URL(string: urlString)
+        ZStack {
+            ControlGroup {
+                ForEach(styles) {
+                    RichTextStyleButton(
+                        style: $0,
+                        buttonStyle: buttonStyle,
+                        context: context,
+                        fillVertically: true
+                    )
                 }
+                RichTextLinkButton(
+                    context: context,
+                    isAlertPresented: $isAlertPresented
+                )
             }
-        )
+            .frame(width: groupWidth)
+            PresentationContainer(style: .alert, isPresented: $isAlertPresented, content: linkViewContent)
+        }
     }
 }
 
@@ -106,7 +96,8 @@ struct RichTextStyleToggleGroup_Previews: PreviewProvider {
         func group(greedy: Bool) -> some View {
             RichTextStyleToggleGroup(
                 context: context,
-                greedy: greedy
+                greedy: greedy,
+                linkViewContent: { Text("") }
             )
         }
 

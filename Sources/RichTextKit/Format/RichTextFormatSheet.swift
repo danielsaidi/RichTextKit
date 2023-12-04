@@ -129,7 +129,15 @@ private extension RichTextFormatSheet {
     @ViewBuilder
     var styleButtons: some View {
         RichTextStyleToggleGroup(
-            context: context
+            context: context,
+            linkViewContent: {
+                RichTextLinkInputView(
+                    linkUrl: context.link?.absoluteString ?? "Yolo",
+                    content: { url in
+                        Text(url)
+                    }
+                )
+            }
         )
     }
 }

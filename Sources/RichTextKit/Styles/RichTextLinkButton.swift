@@ -23,17 +23,14 @@ public struct RichTextLinkButton: View {
     @Binding private var isAlertPresented: Bool
     
     private let fillVertically: Bool
-    private let value: Binding<URL?>
     
     public init(
         context: RichTextContext,
         isAlertPresented: Binding<Bool>,
-        value: Binding<URL?>,
         fillVertically: Bool = false
     ) {
         self.context = context
         self._isAlertPresented = isAlertPresented
-        self.value = value
         self.fillVertically = fillVertically
     }
     
@@ -47,23 +44,9 @@ public struct RichTextLinkButton: View {
     }
 }
 
-extension View {
-    func newAlert(
-        _ title: String,
-        isPresented: Binding<Bool>,
-        @ViewBuilder actions: () -> some View
-    ) -> some View {
-        alert(
-            "URL",
-            isPresented: isPresented,
-            actions: actions
-        )
-    }
-}
-
 extension RichTextLinkButton {
     private var isOn: Bool {
-        value.wrappedValue != nil
+        context.link != nil
     }
     
     private var tintColor: Color {
@@ -71,7 +54,7 @@ extension RichTextLinkButton {
     }
     
     private func toggle() {
-        if value.wrappedValue != nil {
+        if context.link != nil {
             context.setLink(nil)
         } else {
             isAlertPresented = true
@@ -85,7 +68,7 @@ struct RichTextLinkButton_Previews: PreviewProvider {
             HStack(spacing: 8) {
                 RichTextLinkButton(
                     context: RichTextContext(),
-                    isAlertPresented: .constant(false), value: .constant(nil)
+                    isAlertPresented: .constant(false)
                 )
             }.padding(8)
         }
