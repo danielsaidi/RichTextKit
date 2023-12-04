@@ -17,7 +17,7 @@ public extension RichTextContext {
         )
     }
     
-    /// Get a binding for a certain color.
+    /// Get a binding for a certain link as String to pass for example to Text SwiftUI component.
     func stringBinding(for link: URL?) -> Binding<String> {
         Binding(
             get: { self.link?.absoluteString ?? "" },

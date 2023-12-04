@@ -46,7 +46,7 @@ public struct RichTextLinkButton: View {
 
 extension RichTextLinkButton {
     private var isOn: Bool {
-        context.link != nil
+        context.binding(for: context.link).wrappedValue != nil
     }
     
     private var tintColor: Color {

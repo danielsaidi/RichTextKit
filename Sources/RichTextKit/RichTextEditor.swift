@@ -59,17 +59,19 @@ public struct RichTextEditor: ViewRepresentable {
         text: Binding<NSAttributedString>,
         context: RichTextContext,
         format: RichTextDataFormat = .archivedData,
+        linkColor: ColorRepresentable,
         viewConfiguration: @escaping ViewConfiguration = { _ in }
     ) {
         self.text = text
         self._richTextContext = ObservedObject(wrappedValue: context)
         self.format = format
+        self.linkColor = linkColor
         self.viewConfiguration = viewConfiguration
     }
 
     public typealias ViewConfiguration = (RichTextViewComponent) -> Void
 
-
+    private var linkColor: ColorRepresentable
     private var format: RichTextDataFormat
 
     private var text: Binding<NSAttributedString>
@@ -104,7 +106,7 @@ public struct RichTextEditor: ViewRepresentable {
 
     #if iOS || os(tvOS)
     public func makeUIView(context: Context) -> some UIView {
-        textView.setup(with: text.wrappedValue, format: format)
+        textView.setup(with: text.wrappedValue, format: format, linkColor: linkColor)
         viewConfiguration(textView)
         return textView
     }

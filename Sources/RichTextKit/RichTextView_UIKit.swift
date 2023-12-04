@@ -26,23 +26,24 @@ extension RichTextView: UIDropInteractionDelegate {}
  */
 open class RichTextView: UITextView, RichTextViewComponent {
 
-
     // MARK: - Initializers
 
     public convenience init(
         data: Data,
-        format: RichTextDataFormat = .archivedData
+        format: RichTextDataFormat = .archivedData,
+        linkColor: ColorRepresentable
     ) throws {
         self.init()
-        try self.setup(with: data, format: format)
+        try self.setup(with: data, format: format, linkColor: linkColor )
     }
 
     public convenience init(
         string: NSAttributedString,
-        format: RichTextDataFormat = .archivedData
+        format: RichTextDataFormat = .archivedData,
+        linkColor: ColorRepresentable
     ) {
         self.init()
-        self.setup(with: string, format: format)
+        self.setup(with: string, format: format, linkColor: linkColor)
     }
 
     public override init(frame: CGRect, textContainer: NSTextContainer?) {
@@ -84,7 +85,8 @@ open class RichTextView: UITextView, RichTextViewComponent {
             #endif
         }
     }
-
+    
+    public var linkColor: ColorRepresentable = .green
 
     #if iOS
 
@@ -123,7 +125,7 @@ open class RichTextView: UITextView, RichTextViewComponent {
             if frame.size == .zero { return }
             if !isInitialFrameSetupNeeded { return }
             isInitialFrameSetupNeeded = false
-            setup(with: attributedString, format: richTextDataFormat)
+            setup(with: attributedString, format: richTextDataFormat, linkColor: linkColor)
         }
     }
 
@@ -168,7 +170,8 @@ open class RichTextView: UITextView, RichTextViewComponent {
      */
     open func setup(
         with text: NSAttributedString,
-        format: RichTextDataFormat
+        format: RichTextDataFormat,
+        linkColor: ColorRepresentable
     ) {
         attributedString = .empty
         setupInitialFontSize()
@@ -183,6 +186,7 @@ open class RichTextView: UITextView, RichTextViewComponent {
         trySetupInitialTextColor(for: text) {
             textColor = .label
         }
+        self.linkColor = linkColor
         setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
     }
 

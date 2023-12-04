@@ -31,6 +31,13 @@ public extension RichTextViewComponent {
     ) -> Value? {
         currentRichTextAttributes[attribute] as? Value
     }
+    
+    /// Get the current value of a rich text attribute.
+    func currentCustomRichTextAttribute(
+        _ attribute: RichTextAttribute
+    ) -> Any? {
+        currentRichTextAttributes[attribute]
+    }
 
     /// Set the current value of a rich text attribute.
     func setCurrentRichTextAttribute(_ attribute: RichTextAttribute, to value: Any) {

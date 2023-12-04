@@ -357,11 +357,7 @@ internal extension RichTextCoordinator {
     }
     
     func setLink(_ url: URL?) {
-//        let hasStyle = textView.currentRichTextStyles.hasStyle(style)
-//        if url =!  { return }
-        if let url {
-            textView.setCurrentRichTextAttribute(.customLink, to: CustomLinkAttributes(link: url.absoluteString, color: .green))
-        }
+        textView.setCurrentRichTextLink(url, previousLink: richTextContext.link)
     }
 }
 

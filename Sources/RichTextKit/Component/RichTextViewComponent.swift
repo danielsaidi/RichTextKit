@@ -50,13 +50,16 @@ public protocol RichTextViewComponent: AnyObject,
     /// The text view current typing attributes.
     var typingAttributes: RichTextAttributes { get set }
 
+    /// The color which should be used to highlight link in use.
+    var linkColor: ColorRepresentable { get set }
 
     // MARK: - Setup
 
     /// Setup the view with a text and ``RichTextDataFormat``.
     func setup(
         with text: NSAttributedString,
-        format: RichTextDataFormat
+        format: RichTextDataFormat,
+        linkColor: ColorRepresentable
     )
 
 
@@ -109,10 +112,11 @@ public extension RichTextViewComponent {
     /// Setup the view with data and a ``RichTextDataFormat``.
     func setup(
         with data: Data,
-        format: RichTextDataFormat
+        format: RichTextDataFormat,
+        linkColor: ColorRepresentable
     ) throws {
         let string = try NSAttributedString(data: data, format: format)
-        setup(with: string, format: format)
+        setup(with: string, format: format, linkColor: linkColor)
     }
 
     /// Get the image configuration for a certain format.

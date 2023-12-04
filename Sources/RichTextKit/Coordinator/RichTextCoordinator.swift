@@ -201,10 +201,19 @@ extension RichTextCoordinator {
             }
         }
         
-        if let link = richTextContext.link {
-            richTextContext.setLink(link)
+        // IMPORTANT:
+        // When we set custom RichTextAttributes, those are available only for parsing.
+        // That means when UITextView renders the attributed text, it automatically removes
+        // all undocumented attributes from itself and keep only the documented ones
+        // (In customLinks case - `.link` and `.foregroundColor`
+        // This is probably hack because it intervenes with other links (mentions implementation in future)
+        if let link = textView.currentRichTextAttributes[.link] as? String,
+           let url = URL(string: link){
+            richTextContext.setLink(url)
+        } else {
+            richTextContext.setLink(nil)
         }
-
+    
         let foreground = textView.currentColor(.foreground)
         if richTextContext.foregroundColor != foreground {
             richTextContext.foregroundColor = foreground

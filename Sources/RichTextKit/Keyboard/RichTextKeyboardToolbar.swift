@@ -291,7 +291,7 @@ struct RichTextKeyboardToolbar_Previews: PreviewProvider {
 
         var body: some View {
             VStack(spacing: 0) {
-                RichTextEditor(text: $text, context: context)
+                RichTextEditor(text: $text, context: context, linkColor: .green)
                     .background(Color.white)
                     .cornerRadius(10)
                     .padding()
