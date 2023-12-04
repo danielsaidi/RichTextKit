@@ -39,7 +39,7 @@ public extension RichTextViewComponent {
         let shouldRemove = link == nil && previousLink != nil
         guard shouldAdd || shouldRemove else { return }
         if let link {
-            setCurrentRichTextAttribute(.customLink, to: CustomLinkAttributes(link: link.absoluteString, color: .green))
+            setCurrentRichTextAttribute(.customLink, to: CustomLinkAttributes(link: link.absoluteString, color: linkColor))
         } else {
             unsetLinkFromCurrentRichTextStyle()
         }

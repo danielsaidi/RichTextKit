@@ -34,7 +34,8 @@ final class RichTextViewComponent_FontSizeTests: XCTestCase {
         textView = RichTextView()
         textView.setup(
             with: NSAttributedString(string: "foo bar baz"),
-            format: .rtf
+            format: .rtf,
+            linkColor: .cyan
         )
     }
 

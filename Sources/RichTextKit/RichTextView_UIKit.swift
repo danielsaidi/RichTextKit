@@ -183,6 +183,7 @@ open class RichTextView: UITextView, RichTextViewComponent {
         backgroundColor = .clear
         richTextDataFormat = format
         spellCheckingType = .no
+        linkTextAttributes = [:]
         trySetupInitialTextColor(for: text) {
             textColor = .label
         }

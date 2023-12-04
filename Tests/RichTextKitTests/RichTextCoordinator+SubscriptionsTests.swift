@@ -134,5 +134,11 @@ final class RichTextCoordinator_SubscriptionsTests: XCTestCase {
         textContext.textAlignment = .right
         XCTAssertEqual(textView.currentTextAlignment, .right)
     }
+    
+    func testLinkUpdatesTextView() {
+        XCTAssertNil(textView.currentRichTextAttributes[.link])
+        textContext.link = URL(string: "https://google.com")
+        XCTAssertEqual(textView.currentRichTextAttribute(.link), "https://google.com")
+    }
 }
 #endif

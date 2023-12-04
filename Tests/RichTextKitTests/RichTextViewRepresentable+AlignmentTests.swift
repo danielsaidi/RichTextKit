@@ -33,7 +33,8 @@ final class RichTextViewComponent_AlignmentTests: XCTestCase {
         textView = RichTextView()
         textView.setup(
             with: NSAttributedString(string: "foo bar baz\nfoo bar baz"),
-            format: .rtf
+            format: .rtf,
+            linkColor: .cyan
         )
     }
 

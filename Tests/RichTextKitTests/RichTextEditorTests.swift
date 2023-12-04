@@ -27,7 +27,9 @@ final class RichTextEditorTests: XCTestCase {
         context = RichTextContext()
         editor = RichTextEditor(
             text: textBinding,
-            context: context)
+            context: context,
+            linkColor: .cyan
+        )
         coordinator = editor.makeCoordinator()
     }
 

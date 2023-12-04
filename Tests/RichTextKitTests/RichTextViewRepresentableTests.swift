@@ -45,7 +45,7 @@ final class RichTextViewComponentTests: XCTestCase {
 
     func testSettingUpWithEmptyTextWorks() {
         let string = NSAttributedString(string: "")
-        view.setup(with: string, format: .rtf)
+        view.setup(with: string, format: .rtf, linkColor: .cyan)
         XCTAssertEqual(view.richText.string, "")
         #if iOS || os(tvOS)
         XCTAssertFalse(view.allowsEditingTextAttributes)
@@ -63,7 +63,7 @@ final class RichTextViewComponentTests: XCTestCase {
 
     func testSettingUpWithNonEmptyTextWorks() {
         let string = NSAttributedString(string: "foo bar baz")
-        view.setup(with: string, format: .rtf)
+        view.setup(with: string, format: .rtf, linkColor: .cyan)
         XCTAssertEqual(view.richText.string, "foo bar baz")
         #if iOS || os(tvOS)
         XCTAssertFalse(view.allowsEditingTextAttributes)
