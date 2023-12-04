@@ -42,6 +42,8 @@ public struct RichTextStyleToggleGroup: View {
         self.buttonStyle = buttonStyle
     }
 
+    @State private var isAlertPresented = false
+    
     private let styles: [RichTextStyle]
     private let isGreedy: Bool
     private let buttonStyle: RichTextStyleButton.Style
@@ -69,7 +71,28 @@ public struct RichTextStyleToggleGroup: View {
                     fillVertically: true
                 )
             }
-        }.frame(width: groupWidth)
+            RichTextLinkButton(
+                context: context, 
+                isAlertPresented: $isAlertPresented, 
+                value: context.binding(for: context.link)
+            )
+        }
+        .frame(width: groupWidth)
+        .alert(
+            "URL",
+            isPresented: $isAlertPresented,
+            actions: {
+                TextField(
+                    "", 
+                    text: context.stringBinding(for: context.link)
+                )
+                    .autocorrectionDisabled(true)
+                    .textInputAutocapitalization(.never)
+                Button("Add") {
+//                     $context.link.wrappedValue = URL(string: urlString)
+                }
+            }
+        )
     }
 }
 

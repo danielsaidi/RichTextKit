@@ -56,7 +56,11 @@ public class RichTextContext: ObservableObject {
 
 
     // MARK: - Observable properies
-
+    
+    /// The current link, if any.
+    @Published
+    public var link: URL?
+    
     /// The current background color, if any.
     @Published
     public var backgroundColor: ColorRepresentable?
