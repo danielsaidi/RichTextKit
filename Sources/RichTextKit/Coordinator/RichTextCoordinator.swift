@@ -200,6 +200,10 @@ extension RichTextCoordinator {
                 richTextContext.setColor(color, for: $0)
             }
         }
+        
+        if let link = richTextContext.link {
+            richTextContext.setLink(link)
+        }
 
         let foreground = textView.currentColor(.foreground)
         if richTextContext.foregroundColor != foreground {
@@ -275,7 +279,7 @@ extension RichTextCoordinator {
         if richTextContext.textAlignment != alignment {
             richTextContext.textAlignment = alignment
         }
-
+        
         updateTextViewAttributesIfNeeded()
     }
 

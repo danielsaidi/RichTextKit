@@ -32,14 +32,16 @@ public final class RichTextLayoutManager: NSLayoutManager {
     }
  
     private func renderLinks(in characterRange: NSRange, at origin: CGPoint) {
+        
+        
         textStorage?.enumerateAttribute(
             .customLink,
             in: characterRange,
             using: { [weak textStorage] value, range, _ in
-                if let value = value as? String {
-                    textStorage?.addAttribute(.link, value: value, range: range)
-                    textStorage?.addAttribute(.foregroundColor, value: UIColor.systemYellow, range: range)
+                if let value = value as? CustomLinkAttributes, let link = value.link {
+                    textStorage?.addAttribute(.link, value: link, range: range)
                     textStorage?.addAttribute(.font, value: FontRepresentable.standardRichTextFont, range: range)
+                    textStorage?.addAttribute(.foregroundColor, value: UIColor.green, range: range)
                 }
             }
         )

@@ -39,4 +39,5 @@ public extension RichTextViewComponent {
         guard let newFont = newFont else { return }
         setCurrentFont(newFont)
     }
+    
 }

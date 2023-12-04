@@ -81,7 +81,16 @@ public struct RichTextStyleToggleGroup<LinkViewContent: View>: View {
                 )
             }
             .frame(width: groupWidth)
-            PresentationContainer(style: .alert, isPresented: $isAlertPresented, content: linkViewContent)
+            .presentationContainer(
+                style: .sheet,
+                data: context.binding(for: context.link),
+                isPresented: $isAlertPresented) { url in
+                    Button(
+                        action: { context.setLink(URL(string: "https://seznam.cz")) },
+                        label: { Text("Set link!") }
+                    )
+                }
+          
         }
     }
 }

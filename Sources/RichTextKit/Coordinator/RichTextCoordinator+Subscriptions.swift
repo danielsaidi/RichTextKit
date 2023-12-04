@@ -33,6 +33,7 @@ extension RichTextCoordinator {
         subscribeToStrikethroughColor()
         subscribeToStrokeColor()
         subscribeToTriggerAction()
+        subscribeToLink()
     }
 }
 
@@ -193,6 +194,16 @@ private extension RichTextCoordinator {
                 })
             .store(in: &cancellables)
     }
+    
+    func subscribeToLink() {
+        richTextContext.$link
+            .sink(
+                receiveValue: { [weak self] in
+                    self?.setLink($0)
+                }
+            )
+            .store(in: &cancellables)
+    }
 
     func subscribeToShouldPasteImage() {
         richTextContext.$shouldPasteImage
@@ -343,6 +354,14 @@ internal extension RichTextCoordinator {
         let hasStyle = textView.currentRichTextStyles.hasStyle(style)
         if newValue == hasStyle { return }
         textView.setCurrentRichTextStyle(style, to: newValue)
+    }
+    
+    func setLink(_ url: URL?) {
+//        let hasStyle = textView.currentRichTextStyles.hasStyle(style)
+//        if url =!  { return }
+        if let url {
+            textView.setCurrentRichTextAttribute(.customLink, to: CustomLinkAttributes(link: url.absoluteString, color: .green))
+        }
     }
 }
 

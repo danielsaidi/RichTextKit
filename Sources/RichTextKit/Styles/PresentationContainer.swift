@@ -9,31 +9,47 @@ import SwiftUI
 
 public enum PresentationStyle {
     case sheet
-    case push
     case alert
 }
 
-public struct PresentationContainer<Content: View>: View {
+private struct PresentationContainer<Value, SheetContent: View>: ViewModifier {
+    @Binding var data: Value?
     let style: PresentationStyle
-    let content: Content
+    let sheetContent: (Value?) -> SheetContent
     let isPresented: Binding<Bool>
     
-    public init(style: PresentationStyle, isPresented: Binding<Bool>, @ViewBuilder content: () -> Content) {
-        self.style = style
-        self.isPresented = isPresented
-        self.content = content()
+    private struct SheetContentContainer: View {
+        @Binding var data: Value?
+        let sheetContent: (Value?) -> SheetContent
+        
+        var body: some View {
+            sheetContent(data)
+        }
     }
     
-    public var body: some View {
+    func body(content: Content) -> some View {
         switch style {
         case .sheet:
-            content.sheet(isPresented: isPresented, content: { content })
-        case .push:
-             NavigationLink(destination: content, isActive: isPresented, label: { EmptyView() })
+            content.sheet(isPresented: isPresented, content: {  SheetContentContainer(data: $data, sheetContent: sheetContent) })
         case .alert:
-            Text("").alert("Enter URL", isPresented: isPresented, actions: {
-                content
-            })
+            content.alert(
+                "",
+                isPresented: isPresented,
+                actions: {  SheetContentContainer(data: $data, sheetContent: sheetContent) }
+            )
+            
         }
+    }
+}
+
+
+extension View {
+    func presentationContainer<Value, SheetContent: View>(
+        style: PresentationStyle, 
+        data: Binding<Value?>, 
+        isPresented: Binding<Bool>, 
+        content: @escaping (Value?) -> SheetContent
+    ) -> some View {
+        self.modifier(PresentationContainer(data: data, style: style, sheetContent: content, isPresented: isPresented))
     }
 }

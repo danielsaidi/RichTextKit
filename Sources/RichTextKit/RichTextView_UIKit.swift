@@ -55,6 +55,8 @@ open class RichTextView: UITextView, RichTextViewComponent {
         layoutManager.allowsNonContiguousLayout = true
         layoutManager.addTextContainer(textContainer)
         super.init(frame: frame, textContainer: textContainer)
+        // Little hack for custom link colors. Please use custom NSLayoutManager
+        linkTextAttributes = [:]
         textContainer.lineFragmentPadding = 0
     }
     
