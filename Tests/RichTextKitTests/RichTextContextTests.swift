@@ -16,6 +16,7 @@ final class RichTextContextTests: XCTestCase {
         XCTAssertEqual(context.fontName, "")
         XCTAssertEqual(context.fontSize, 16)
         XCTAssertFalse(context.isBold)
+        XCTAssertNil(context.link)
         XCTAssertFalse(context.isItalic)
         XCTAssertFalse(context.isUnderlined)
         XCTAssertFalse(context.isEditingText)
