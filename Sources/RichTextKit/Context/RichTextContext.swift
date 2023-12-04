@@ -61,10 +61,6 @@ public class RichTextContext: ObservableObject {
     @Published
     public var link: URL?
     
-    /// Wether the current selected text or range of cursor is on Link.
-    @Published
-    var isLink = false
-    
     /// The current background color, if any.
     @Published
     public var backgroundColor: ColorRepresentable?
