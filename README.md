@@ -1,30 +1,28 @@
 <p align="center">
-    <img src ="Resources/Logo_GitHub.png" alt="RichTextKit Logo" title="RichTextKit" width=600 />
+    <img src ="Resources/Logo_GitHub.png" alt="RichTextKit Logo" title="RichTextKit" />
 </p>
 
 <p align="center">
     <img src="https://img.shields.io/github/v/release/danielsaidi/RichTextKit?color=%2300550&sort=semver" alt="Version" />
     <img src="https://img.shields.io/badge/Swift-5.6-orange.svg" alt="Swift 5.6" />
     <img src="https://img.shields.io/github/license/danielsaidi/RichTextKit" alt="MIT License" />
-    <a href="https://twitter.com/danielsaidi">
-        <img src="https://img.shields.io/twitter/url?label=Twitter&style=social&url=https%3A%2F%2Ftwitter.com%2Fdanielsaidi" alt="Twitter: @danielsaidi" title="Twitter: @danielsaidi" />
-    </a>
-    <a href="https://mastodon.social/@danielsaidi">
-        <img src="https://img.shields.io/mastodon/follow/000253346?label=mastodon&style=social" alt="Mastodon: @danielsaidi@mastodon.social" title="Mastodon: @danielsaidi@mastodon.social" />
-    </a>
+    <a href="https://twitter.com/danielsaidi"><img src="https://img.shields.io/twitter/url?label=Twitter&style=social&url=https%3A%2F%2Ftwitter.com%2Fdanielsaidi" alt="Twitter: @danielsaidi" title="Twitter: @danielsaidi" /></a>
+    <a href="https://mastodon.social/@danielsaidi"><img src="https://img.shields.io/mastodon/follow/000253346?label=mastodon&style=social" alt="Mastodon: @danielsaidi@mastodon.social" title="Mastodon: @danielsaidi@mastodon.social" /></a>
 </p>
 
 
 
 ## About RichTextKit
 
-RichTextKit helps you view and edit rich text in `SwiftUI`, `UIKit` and `AppKit`. 
+RichTextKit helps you view and edit rich text in `SwiftUI`, `UIKit` and `AppKit`.
 
-RichTextKit has a SwiftUI `RichTextEditor` that builds on a multi-platform `RichTextView` that supports text style (bold, italic, underline, strikethrough etc.), font, font sizes, text and background colors, text alignment, images etc. 
+RichTextKit has a multi-platform SwiftUI `RichTextEditor` and `RichTextView` that supports text styling (bold, italic, underline, strikethrough etc.), fonts and font sizes, text and background colors, text alignment, image attachments etc. 
+
+<p align="center">
+    <img src ="Resources/Demo.jpg" width="300" />
+</p>
 
 RichTextKit is supported by and released with permission from [Oribi](https://oribi.se/en/) and used in [OribiWriter](https://oribi.se/en/apps/oribi-writer/), which is available on iOS and macOS. Have a look at that app or the demo app in this repo if you want to see RichTextKit in action.
-
-RichTextKit supports `iOS 14`, `macOS 11`, `tvOS 14` and `watchOS 7`.
 
 
 
@@ -40,11 +38,11 @@ If you prefer to not have external dependencies, you can also just copy the sour
 
 
 
-## Getting started
+## Getting started in SwiftUI
 
 The [online documentation][Documentation] has a [getting started][Getting-Started] guide to help you get started with RichTextKit.
 
-RichTextKit has a SwiftUI ``RichTextEditor``, which takes a text binding and a ``RichTextContext``:
+RichTextKit has a SwiftUI ``RichTextEditor`` that takes a text binding and a ``RichTextContext``:
 
 ```swift
 struct MyView: View {
@@ -63,37 +61,11 @@ struct MyView: View {
 }
 ```
 
-The editor uses a ``RichTextCoordinator`` to sync changes between the context, the editor and the underlying, platform-specific view. 
+The editor uses a ``RichTextCoordinator`` to sync changes between the editor, the context, and the wrapped, platform-specific view. 
 
-You can now use the context to change the text binding and its font, font size, colors, alignment etc. You can also use the context to observe how these properties change, for instance when you move the text input cursor.
-
-For instance, to display and change the current font size, you can use the context's ``RichTextContext/fontSize``:
-
-```swift
-Button("Set font size") {
-    context.fontSize = 123
-}
-.onChange(of: context.fontSize) {
-    print("The current font size is \(context.fontSize)")
-}
-```
-
-This means that you can observe and act on any property changes in the context with plain SwiftUI events.
+You can now use the context to change the text binding and its font, font size, colors, alignment etc. You can also observe context change to update the UI, for instance when you move the text input cursor.
 
 For more information, please see the [online documentation][Documentation] and [getting started guide][Getting-Started].
-
-
-
-## Getting started in UIKit and AppKit
-
-In UIKit and AppKit, you can use the underlying ``RichTextView`` directly, instead of a `UITextView` or `NSTextView`:
-
-```swift
-RichTextView(data: myData, format: .archivedData)  // Using data
-RichTextView(string: myString, format: .plainText) // Using a string
-```
-
-`RichTextView` has a lot more functionality than the native views and bridges the platform-specific api:s so that the views behave more alike across platforms. 
 
 
 
@@ -109,17 +81,17 @@ The demo app lets you explore the library on iOS and macOS. To try it out, just 
 
 
 
-## Support this library
+## Support my work
 
-I manage my various open-source projects in my free time and am really thankful for any help I can get from the community. 
+I manage many open-source projects on my spare time and am very thankful for any help to keep my work going. 
 
-You can sponsor this project on [GitHub Sponsors][Sponsors] or get in touch for paid support.
+You can sponsor my work on [GitHub Sponsors][Sponsors] or get in touch for paid support.
 
 
 
 ## Contact
 
-Feel free to reach out if you have questions or if you want to contribute in any way:
+Feel free to reach out if you have questions or want to contribute in any way:
 
 * Website: [danielsaidi.com][Website]
 * Mastodon: [@danielsaidi@mastodon.social][Mastodon]

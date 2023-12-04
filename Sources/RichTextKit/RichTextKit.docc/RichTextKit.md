@@ -9,8 +9,6 @@ RichTextKit helps you view and edit rich text in SwiftUI, UIKit and AppKit.
 
 RichTextKit has a SwiftUI `RichTextEditor` that builds on a multi-platform `RichTextView` that supports text style (bold, italic, underline, strikethrough etc.), font, font sizes, text and background colors, text alignment, images etc.
 
-RichTextKit supports `iOS 14`, `macOS 11`, `tvOS 14` and `watchOS 7`.
-
 
 
 ## Installation
@@ -33,13 +31,7 @@ The <doc:Getting-Started> article has a guide to help you get started with RichT
 
 ## Repository
 
-For more information, source code, and to report issues, sponsor the project etc., visit the [project repository](https://github.com/danielsaidi/RichTextKit).
-
-
-
-## About this documentation
-
-The online documentation is currently iOS only. To generate documentation for other platforms, open the package in Xcode, select a simulator then run `Product/Build Documentation`.
+For more information, source code, etc., visit the [project repository][Repository].
 
 
 
@@ -192,3 +184,4 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 
 
 [License]: https://github.com/danielsaidi/RichTextKit/blob/master/LICENSE
+[Repository]: https://github.com/danielsaidi/RichTextKit
