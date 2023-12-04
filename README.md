@@ -71,7 +71,7 @@ For more information, please see the [online documentation][Documentation] and [
 
 ## Documentation
 
-The [online documentation][Documentation] has more information, code examples, etc., and lets you overview the various parts of the library.
+The [online documentation][Documentation] has more information, code examples, etc.
 
 
 
