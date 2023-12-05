@@ -125,7 +125,7 @@ private extension RichTextColorPicker {
     func quickPickerButton(for color: Color) -> some View {
         Button {
             if type == .background && ((colorScheme == .dark && color == .black) || (colorScheme == .light && color == .white)) {
-                #if os(macOS)
+                #if macOS
                 value.wrappedValue = .init(nsColor: .windowBackgroundColor)
                 #else
                 value.wrappedValue = .init(uiColor: .systemBackground)
