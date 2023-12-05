@@ -21,18 +21,18 @@ public class RichTextContext: ObservableObject {
 
     /// Create a new rich text context instance.
     public init() {}
-    
-    
+
+
     // MARK: - Not yet observable properties
-    
+
     /**
      The currently attributed string, if any.
-     
+
      Note that the property is read-only and not `@Published`
      to avoid redrawing the editor when it changes, which is
      done constantly as the user types. We should find a way
      to observe this property without this happening.
-     
+
      The best way to observe this property is to use the raw
      `text` binding that you pass into your text editor. The
      editor will however not redraw if you change this value
@@ -41,10 +41,10 @@ public class RichTextContext: ObservableObject {
      Until then, use `setAttributedString(to:)` to change it.
      */
     public internal(set) var attributedString = NSAttributedString()
-    
+
     /**
      The currently selected range, if any.
-     
+
      Note that the property is read-only and not `@Published`
      to avoid redrawing the editor when it changes, which is
      done constantly as the user types. We should find a way
@@ -56,7 +56,7 @@ public class RichTextContext: ObservableObject {
 
 
     // MARK: - Observable properies
-    
+
     /// The current background color, if any.
     @Published
     public var backgroundColor: ColorRepresentable?
@@ -72,11 +72,11 @@ public class RichTextContext: ObservableObject {
     /// Whether or not the latest change can be undone.
     @Published
     public var canUndoLatestChange = false
-    
+
     /// Whether or not the indent level can be decreased.
     @Published
     public var canDecreaseIndent = true
-    
+
     /// Whether or not the indent level can be increased.
     @Published
     public var canIncreaseIndent = true
@@ -120,22 +120,22 @@ public class RichTextContext: ObservableObject {
     /// Whether or not the current text is underlined.
     @Published
     public var isUnderlined = false
-    
+
     /// The current strikethrough color, if any.
     @Published
     public var strikethroughColor: ColorRepresentable?
-    
+
     /// The current stroke color, if any.
     @Published
     public var strokeColor: ColorRepresentable?
-    
+
     /// The current text alignment, if any.
     @Published
     public var textAlignment: RichTextAlignment = .left
-    
-    
+
+
     // MARK: - Internal trigger properties
-    
+
     /// Set this property to trigger a certain action.
     @Published
     var triggerAction: RichTextAction?
@@ -155,7 +155,7 @@ public class RichTextContext: ObservableObject {
     /// Set this property to trigger a string update.
     @Published
     var shouldSetAttributedString: NSAttributedString?
-    
+
     /// Set this property to trigger a range change.
     @Published
     var shouldSelectRange = NSRange()

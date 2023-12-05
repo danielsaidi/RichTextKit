@@ -24,10 +24,10 @@ import SwiftUI
  control over hot items are listed.
  */
 public struct RichTextFontListPicker: View {
-    
+
     /**
      Create a font picker.
-     
+
      - Parameters:
        - selection: The selected font name.
        - selectionTopmost: Whether or not to place the selected font topmost.
@@ -56,16 +56,16 @@ public struct RichTextFontListPicker: View {
     private var fonts: [RichTextFontPickerFont]
     private let fontSize: CGFloat
     private let dismissAfterPick: Bool
-    
+
     @Binding
     private var selection: FontName
-    
+
     public var body: some View {
         let font = Binding(
             get: { RichTextFontPickerFont(fontName: selection) },
             set: { selection = $0.fontName }
         )
-        
+
         ListPicker(
             items: fonts,
             selection: font,
@@ -81,11 +81,11 @@ public struct RichTextFontListPicker: View {
 }
 
 struct RichTextFontListPicker_Previews: PreviewProvider {
-    
+
     struct Preview: View {
-        
+
         @State private var font = ""
-        
+
         var body: some View {
             NavigationView {
                 RichTextFontListPicker(
@@ -95,7 +95,7 @@ struct RichTextFontListPicker_Previews: PreviewProvider {
             }
         }
     }
-    
+
     static var previews: some View {
         Preview()
     }

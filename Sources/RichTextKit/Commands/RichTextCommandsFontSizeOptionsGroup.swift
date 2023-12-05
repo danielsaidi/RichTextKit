@@ -12,12 +12,12 @@ import SwiftUI
  This view defines `Commands` content for font size options.
  */
 public struct RichTextCommandsFontSizeOptionsGroup: View {
-    
+
     public init() {}
-    
+
     @FocusedValue(\.richTextContext)
     private var context: RichTextContext?
-    
+
     public var body: some View {
         RichTextCommandButtonGroup(
             actions: [

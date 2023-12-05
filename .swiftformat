@@ -1,0 +1,5 @@
+# options
+--swiftversion 5.8
+
+# rules
+--rules trailingSpace

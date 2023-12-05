@@ -17,7 +17,7 @@ import Foundation
  the platform-specific ``RichTextView`` components.
  */
 public protocol RichTextPresenter: RichTextReader {
-    
+
     /// Get the currently selected range.
     var selectedRange: NSRange { get }
 }
@@ -35,14 +35,14 @@ public extension RichTextPresenter {
         let trimmed = string.trimmingCharacters(in: .whitespaces)
         return !trimmed.isEmpty
     }
-    
+
     /// Get the range after the input cursor.
     var rangeAfterInputCursor: NSRange {
         let location = selectedRange.location
         let length = richText.length - location
         return NSRange(location: location, length: length)
     }
-    
+
     /// Get the range before the input cursor.
     var rangeBeforeInputCursor: NSRange {
         let location = selectedRange.location

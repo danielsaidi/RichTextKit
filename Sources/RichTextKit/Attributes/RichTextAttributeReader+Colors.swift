@@ -16,28 +16,28 @@ public extension RichTextAttributeReader {
     ) -> ColorRepresentable? {
         richTextAttribute(.backgroundColor, at: range)
     }
-    
+
     /// Get the foreground color at a certain range.
     func richTextForegroundColor(
         at range: NSRange
     ) -> ColorRepresentable? {
         richTextAttribute(.foregroundColor, at: range)
     }
-    
+
     /// Get the strikethrough color at a certain range.
     func richTextStrikethroughColor(
         at range: NSRange
     ) -> ColorRepresentable? {
         richTextAttribute(.strikethroughColor, at: range)
     }
-    
+
     /// Get the stroke color at a certain range.
     func richTextStrokeColor(
         at range: NSRange
     ) -> ColorRepresentable? {
         richTextAttribute(.strokeColor, at: range)
     }
-    
+
     /// Get the underline color at a certain range.
     func richTextUnderlineColor(
         at range: NSRange

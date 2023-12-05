@@ -37,7 +37,7 @@ extension RichTextCoordinator {
 }
 
 private extension RichTextCoordinator {
-    
+
     func handle(_ action: RichTextAction?) {
         guard let action else { return }
         switch action {
@@ -60,7 +60,7 @@ private extension RichTextCoordinator {
             syncContextWithTextView()
         }
     }
-    
+
     func subscribeToTriggerAction() {
         richTextContext.$triggerAction
             .sink(
@@ -70,7 +70,7 @@ private extension RichTextCoordinator {
                 })
             .store(in: &cancellables)
     }
-    
+
 
     func subscribeToAlignment() {
         richTextContext.$textAlignment
@@ -233,7 +233,7 @@ private extension RichTextCoordinator {
                 })
             .store(in: &cancellables)
     }
-    
+
     func subscribeToShouldSelectRange() {
         richTextContext.$shouldSelectRange
             .sink(
@@ -243,7 +243,7 @@ private extension RichTextCoordinator {
                 })
             .store(in: &cancellables)
     }
-    
+
     func subscribeToStrokeColor() {
         richTextContext.$strokeColor
             .sink(
@@ -254,7 +254,7 @@ private extension RichTextCoordinator {
                 })
             .store(in: &cancellables)
     }
-    
+
     func subscribeToStrikethroughColor() {
         richTextContext.$strikethroughColor
             .sink(

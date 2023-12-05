@@ -319,7 +319,7 @@ open class RichTextView: UITextView, RichTextViewComponent {
             strings.forEach { self.pasteText($0, at: range.location) }
         }
     }
-    
+
     /// Refresh the drop interaction based on the config.
     open func refreshDropInteraction() {
         switch imageDropConfiguration {

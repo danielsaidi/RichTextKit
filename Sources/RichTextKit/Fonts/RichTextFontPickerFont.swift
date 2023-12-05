@@ -102,7 +102,7 @@ public extension RichTextFontPickerFont {
 // MARK: - Public Properties
 
 public extension RichTextFontPickerFont {
-    
+
     /**
      Get the display name for the font.
 
@@ -114,7 +114,7 @@ public extension RichTextFontPickerFont {
         let systemName = Self.standardSystemFontDisplayName
         return isSystemFont ? systemName : fontName
     }
-    
+
     /**
      Check whether or not a certain font name represents the
      standard system font (e.g. San Francisco for iOS).
@@ -160,7 +160,7 @@ public extension Collection where Element == RichTextFontPickerFont {
 // MARK: - System Fonts
 
 private extension RichTextFontPickerFont {
-    
+
     /**
      Get all available font picker fonts.
      */

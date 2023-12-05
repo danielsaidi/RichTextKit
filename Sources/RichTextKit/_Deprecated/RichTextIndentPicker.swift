@@ -23,7 +23,7 @@ public struct RichTextIndentPicker: View {
 
     @Binding
     private var selection: RichTextIndent
-    
+
     public var body: some View {
         Picker("", selection: $selection) {
             ForEach(RichTextIndent.allCases) {

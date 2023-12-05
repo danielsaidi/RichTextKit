@@ -33,14 +33,14 @@ public class StandardRichTextShareService: RichTextShareService {
 
     private let urlResolver: RichTextExportUrlResolver
     private let directory: FileManager.SearchPathDirectory
-    
+
     /**
      Generate a file with a certain name, content and format.
 
      Share files will by default be added to the app's cache
      folder, which means that we don't have to care about if
      a file with the same name already exists.
-     
+
      - Parameters:
        - fileName: The name of the shared file.
        - content: The rich text content to share.
@@ -59,14 +59,14 @@ public class StandardRichTextShareService: RichTextShareService {
         try data.write(to: fileUrl)
         return fileUrl
     }
-    
+
     /**
      Generate a PDF share file with a certain text content.
 
      Share files will by default be added to the app's cache
      folder, which means that we don't have to care about if
      a file with the same name already exists.
-     
+
      - Parameters:
        - fileName: The name of the shared file.
        - content: The rich text content to share.

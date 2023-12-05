@@ -9,11 +9,11 @@
 import Foundation
 
 public extension String {
-    
+
     /**
      Backs to find the index of the first new line paragraph
      before the provided location, if any.
-     
+
      A new paragraph is considered to start at the character
      after the newline char, not the newline itself.
      */
@@ -29,12 +29,12 @@ public extension String {
         } while true
         return max(index, 0)
     }
-    
+
     /**
      Looks forward to find the next new line paragraph after
      the provided location, if any. If no next paragraph can
      be found, the current is returned.
-     
+
      A new paragraph is considered to start at the character
      after the newline char, not the newline itself.
      */
@@ -49,16 +49,16 @@ public extension String {
         let found = index < count
         return found ? index : findIndexOfCurrentParagraph(from: location)
     }
-    
+
     /**
      Looks forward to find the next new line paragraph after
      the provided location, if any. If no next paragraph can
      be found, the last index of the paragraph is returned.
-     
+
      A new paragraph is considered to start at the character
      after the newline char, not the newline itself.
      */
-    
+
     func findIndexOfNextParagraphOrEndofCurrent(from location: UInt) -> UInt {
         var index = location
         repeat {
@@ -70,10 +70,10 @@ public extension String {
         let found = index < count
         return UInt(found ? index : UInt(count))
     }
-    
+
     /**
      Returns the length of the paragraph found at the location provided..
-     
+
      A new paragraph is considered to start at the character
      after the newline char, not the newline itself.
      */
@@ -83,10 +83,10 @@ public extension String {
         let endIndex = findIndexOfNextParagraphOrEndofCurrent(from: location)
         return Int(endIndex)-Int(startIndex)
     }
-    
+
     /**
      Returns the index of the word at the location provided..
-     
+
      A word is considered to be a length of text between two
      breaking characters or space characters.
      */

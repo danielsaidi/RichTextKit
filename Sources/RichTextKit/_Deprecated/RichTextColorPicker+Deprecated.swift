@@ -3,7 +3,7 @@ import SwiftUI
 
 @available(*, deprecated, renamed: "init(icon:value:showIcon:quickColors:)")
 public extension RichTextColorPicker {
-    
+
     init(
         color: PickerColor,
         value: Binding<Color>,
@@ -16,7 +16,7 @@ public extension RichTextColorPicker {
             quickColors: quickColors
         )
     }
-    
+
     init(
         color: PickerColor,
         value: Binding<Color>,
@@ -30,7 +30,7 @@ public extension RichTextColorPicker {
             quickColors: quickPickerColors.colors
         )
     }
-    
+
     init(
         color: PickerColor,
         context: RichTextContext,
@@ -49,7 +49,7 @@ public extension RichTextColorPicker {
             quickColors: quickColors
         )
     }
-    
+
     init(
         color: PickerColor,
         context: RichTextContext,

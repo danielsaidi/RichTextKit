@@ -19,12 +19,12 @@ import SwiftUI
  Regarding sharing, the macOS exclusive `nsSharing` commands
  require you to return a share url, after which the commands
  take care of the sharing.
- 
+
  Note that a pdf action menu will only be included if it has
  a corresponding action. You must also add `isEnabled: false`
  to disable the menu, since you can't add `.disabled` to the
  command menu.
- 
+
  Setting an action to `nil` removes the option from the menu.
  */
 public struct RichTextShareCommandMenu: Commands {

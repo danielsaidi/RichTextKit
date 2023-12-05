@@ -25,10 +25,10 @@ import SwiftUI
  want to use a plain `List`.
  */
 public struct RichTextFontForEachPicker: View {
-    
+
     /**
      Create a font picker.
-     
+
      - Parameters:
        - selection: The selected font name.
        - selectionTopmost: Whether or not to place the selected font topmost.
@@ -57,16 +57,16 @@ public struct RichTextFontForEachPicker: View {
     private var fonts: [RichTextFontPickerFont]
     private let fontSize: CGFloat
     private let dismissAfterPick: Bool
-    
+
     @Binding
     private var selection: FontName
-    
+
     public var body: some View {
         let font = Binding(
             get: { RichTextFontPickerFont(fontName: selection) },
             set: { selection = $0.fontName }
         )
-        
+
         ForEachPicker(
             items: fonts,
             selection: font,
@@ -82,11 +82,11 @@ public struct RichTextFontForEachPicker: View {
 }
 
 struct RichTextFontForEachPicker_Previews: PreviewProvider {
-    
+
     struct Preview: View {
-        
+
         @State private var font = ""
-        
+
         var body: some View {
             NavigationView {
                 List {
@@ -96,7 +96,7 @@ struct RichTextFontForEachPicker_Previews: PreviewProvider {
             }
         }
     }
-    
+
     static var previews: some View {
         Preview()
     }

@@ -61,7 +61,7 @@ public enum RTKL10n: String, CaseIterable, Identifiable {
     textAlignmentRight,
     textAlignmentCentered,
     textAlignmentJustified,
-    
+
     indent
 }
 
@@ -77,24 +77,24 @@ public extension RTKL10n {
 }
 
 public extension RTKL10n {
-    
+
     /**
      The item's unique identifier.
      */
     var id: String { rawValue }
-    
+
     /**
      The item's localization key.
      */
     var key: String { rawValue }
-    
+
     /**
      The item's localized text.
      */
     var text: String {
         text(for: .current)
     }
-    
+
     /**
      Get the localized text for a certain `Locale`.
      */
@@ -114,7 +114,7 @@ struct RTKL10n_Previews: PreviewProvider {
         .init(identifier: "nb"),
         .init(identifier: "sv")
     ]
-    
+
     static var previews: some View {
         NavigationView {
             List {

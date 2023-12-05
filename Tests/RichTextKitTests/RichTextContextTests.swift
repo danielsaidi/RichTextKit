@@ -10,7 +10,7 @@ import RichTextKit
 import XCTest
 
 final class RichTextContextTests: XCTestCase {
-    
+
     func testInitializerSetsDefaultValues() {
         let context = RichTextContext()
         XCTAssertEqual(context.fontName, "")

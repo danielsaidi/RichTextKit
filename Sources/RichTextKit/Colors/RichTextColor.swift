@@ -10,14 +10,14 @@ import SwiftUI
 
 /**
  This enum defines supported rich text color types.
- 
+
  The enum makes the colors identifiable and diffable.
  */
 public enum RichTextColor: String, CaseIterable, Codable, Equatable, Identifiable {
 
     /// Foreground color.
     case foreground
-    
+
     /// Background color.
     case background
 
@@ -32,7 +32,7 @@ public extension RichTextColor {
 
     /// The unique ID of the alignment.
     var id: String { rawValue }
-    
+
     /// The standard icon to use for the alignment.
     var icon: Image {
         switch self {

@@ -9,7 +9,7 @@
 import Foundation
 
 public extension RichTextViewComponent {
-    
+
     /// Get the current value of a certain color.
     func currentColor(
         _ color: RichTextColor
@@ -25,7 +25,7 @@ public extension RichTextViewComponent {
             return currentRichTextAttribute(.strokeColor)
         }
     }
-    
+
     /// Set the current value of a certain color.
     func setCurrentColor(
         _ color: RichTextColor,

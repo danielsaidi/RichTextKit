@@ -53,13 +53,13 @@ final class RichTextPresenterTests: XCTestCase {
 }
 
 private class MockRichTextPresenter: RichTextPresenter {
-    
+
     init(text: NSAttributedString) {
         self.attributedString = text
         self.selectedRange = NSRange()
     }
-    
+
     var attributedString: NSAttributedString
-    
+
     var selectedRange: NSRange
 }

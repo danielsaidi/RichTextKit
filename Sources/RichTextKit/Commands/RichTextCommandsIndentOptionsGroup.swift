@@ -15,7 +15,7 @@ public struct RichTextCommandsIndentOptionsGroup: View {
 
     @FocusedValue(\.richTextContext)
     private var context: RichTextContext?
-    
+
     public var body: some View {
         RichTextCommandButtonGroup(
             actions: [

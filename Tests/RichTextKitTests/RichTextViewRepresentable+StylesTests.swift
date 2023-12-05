@@ -37,7 +37,7 @@ final class RichTextViewComponent_StylesTests: XCTestCase {
 
     override func tearDown() {
         textView = nil
-        
+
         super.tearDown()
     }
 

@@ -17,10 +17,10 @@ import Foundation
  another data format.
  */
 public class StandardRichTextExportService: RichTextExportService {
-    
+
     /**
      Create a standard rich text export service.
-     
+
      - Parameters:
        - urlResolver: The type to use to resolve file urls, by default `FileManager.default`.
        - directory: The directory to save the file in, by default `.documentDirectory`.
@@ -32,10 +32,10 @@ public class StandardRichTextExportService: RichTextExportService {
         self.urlResolver = urlResolver
         self.directory = directory
     }
-    
+
     private let urlResolver: RichTextExportUrlResolver
     private let directory: FileManager.SearchPathDirectory
-    
+
     /**
      Generate a file with a certain name, content and format.
 
@@ -46,7 +46,7 @@ public class StandardRichTextExportService: RichTextExportService {
      To achieve this, we'll use the `uniqueFileUrl` function
      of the url resolver, which by default will add a suffix
      until the file name no longer exists.
-     
+
      - Parameters:
        - fileName: The preferred name of the exported name.
        - content: The rich text content to export.
@@ -65,7 +65,7 @@ public class StandardRichTextExportService: RichTextExportService {
         try data.write(to: fileUrl)
         return fileUrl
     }
-    
+
     /**
      Generate a PDF file with a certain name and content.
 
@@ -76,7 +76,7 @@ public class StandardRichTextExportService: RichTextExportService {
      To achieve this, we'll use the `uniqueFileUrl` function
      of the url resolver, which by default will add a suffix
      until the file name no longer exists.
-     
+
      - Parameters:
        - fileName: The preferred file name.
        - content: The rich text content to export.

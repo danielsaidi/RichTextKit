@@ -19,7 +19,7 @@ final class RichTextViewComponentTests: XCTestCase {
 
         view = RichTextView()
     }
-    
+
     override func tearDown() {
         view = nil
 

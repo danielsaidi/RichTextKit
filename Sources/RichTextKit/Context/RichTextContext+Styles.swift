@@ -9,7 +9,7 @@
 import SwiftUI
 
 public extension RichTextContext {
-    
+
     /// Get a binding for a certain style.
     func binding(for style: RichTextStyle) -> Binding<Bool> {
         Binding(
@@ -17,7 +17,7 @@ public extension RichTextContext {
             set: { self.set(style, to: $0) }
         )
     }
-    
+
     /// Check whether or not the context has a certain style.
     func hasStyle(_ style: RichTextStyle) -> Bool {
         switch style {
@@ -27,7 +27,7 @@ public extension RichTextContext {
         case .strikethrough: return isStrikethrough
         }
     }
-    
+
     /// Set whether or not the context has a certain style.
     func set(
         _ style: RichTextStyle,
@@ -40,7 +40,7 @@ public extension RichTextContext {
         case .strikethrough: isStrikethrough = val
         }
     }
-    
+
     /// Toggle a certain style for the context.
     func toggle(_ style: RichTextStyle) {
         set(style, to: !hasStyle(style))

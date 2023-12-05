@@ -17,11 +17,11 @@ import Foundation
  a ``RichTextShareService`` instead.
  */
 public protocol RichTextExportService: AnyObject {
-    
+
     /**
      Generate an export file with a certain name and content,
      that uses a certain rich text data format.
-     
+
      - Parameters:
        - fileName: The preferred file name.
        - content: The rich text content to export.
@@ -31,11 +31,11 @@ public protocol RichTextExportService: AnyObject {
         withName fileName: String,
         content: NSAttributedString,
         format: RichTextDataFormat) throws -> URL
-    
+
     /**
      Generate a PDF export file with a certain name and rich
      text content.
-     
+
      - Parameters:
        - fileName: The preferred file name.
        - content: The rich text content to export.

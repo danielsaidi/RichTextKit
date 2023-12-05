@@ -35,7 +35,7 @@ public struct RichTextAlignmentPicker: View {
 
     @Binding
     private var selection: RichTextAlignment
-    
+
     public var body: some View {
         Picker("", selection: $selection) {
             ForEach(RichTextAlignment.allCases) {

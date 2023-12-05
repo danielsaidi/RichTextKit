@@ -20,12 +20,12 @@ import UniformTypeIdentifiers
 /**
  This custom attachment type inherits `NSTextAttachment` and
  aims to solve multi-platform image attachment problems.
- 
+
  When using `NSTextAttachment` directly, any images added by
  iOS can't be loaded on macOS, and vice versa. To solve this,
  this custom attachment class uses the `contents` data, then
  overrides `image` on iOS and `attachmentCell` on macOS.
- 
+
  This is probably the wrong way to solve this problem, but I
  haven't been able to find another way. If we set the `image`
  property of a plain `NSTextAttachment`, it works to add and
@@ -38,7 +38,7 @@ import UniformTypeIdentifiers
  attachments as (potentially) huge png data. This attachment
  allows you to easily use jpg with a custom compression rate
  instead, which results in much smaller files.
- 
+
  # WARNING
 
  If we use ``RichTextDataFormat/archivedData`` to persist an
@@ -155,7 +155,7 @@ open class RichTextImageAttachment: NSTextAttachment {
      */
     public override class var supportsSecureCoding: Bool { true }
 
-    
+
     #if iOS || os(tvOS)
     /**
      Get or set the attachment image.
@@ -173,7 +173,7 @@ open class RichTextImageAttachment: NSTextAttachment {
         }
     }
     #endif
-    
+
     #if macOS
     /**
      Get or set the attachment image.

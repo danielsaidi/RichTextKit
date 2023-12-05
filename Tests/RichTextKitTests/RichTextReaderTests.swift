@@ -10,7 +10,7 @@ import RichTextKit
 import XCTest
 
 final class RichTextReaderTests: XCTestCase {
-    
+
     private let string = NSAttributedString(string: "foo bar baz")
 
     func testRichTextAtRangeIsValidForEmptyRangeInEmptyString() {
@@ -67,14 +67,14 @@ final class RichTextReaderTests: XCTestCase {
         XCTAssertEqual(result.location, 8)
         XCTAssertEqual(result.length, 3)
     }
-    
+
     func testSafeRangeLimitsLocationToUpperLimit() {
         let range = NSRange(location: 12, length: 4)
         let result = string.safeRange(for: range)
         XCTAssertEqual(result.location, 11)
         XCTAssertEqual(result.length, 0)
     }
-    
+
     func testSafeRangeLimitsLocationToNextToUpperLimitForAttributes() {
         let range = NSRange(location: 12, length: 4)
         let result = string.safeRange(for: range, isAttributeOperation: true)

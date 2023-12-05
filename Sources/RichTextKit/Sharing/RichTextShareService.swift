@@ -18,11 +18,11 @@ import Foundation
  format, should use a ``RichTextExportService`` instead.
  */
 public protocol RichTextShareService: AnyObject {
-    
+
     /**
      Generate a share file with a certain name and rich text
      content, that uses a certain rich text data format.
-     
+
      - Parameters:
        - withName: The name of the shared file.
        - content: The rich text content to share.
@@ -33,11 +33,11 @@ public protocol RichTextShareService: AnyObject {
         content: NSAttributedString,
         format: RichTextDataFormat
     ) throws -> URL
-    
+
     /**
      Generate a PDF formatted share file with a certain name
      and rich text content.
-     
+
      - Parameters:
        - withName: The name of the shared file.
        - content: The rich text content to share.

@@ -37,7 +37,7 @@ final class RichTextViewComponent_FontSizeTests: XCTestCase {
             format: .rtf
         )
     }
-    
+
     override func tearDown() {
         textView = nil
 

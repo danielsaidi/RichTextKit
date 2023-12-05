@@ -21,7 +21,7 @@ import AppKit
 
 /**
  This typealias bridges platform-specific fonts, to simplify
- multi-platform support. 
+ multi-platform support.
  */
 public typealias FontRepresentable = NSFont
 #endif

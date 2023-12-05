@@ -27,7 +27,7 @@ import UIKit
  simplify multi-platform support.
 
  The typealias also defines additional functionality as type
- extensions for the platform-specific types. 
+ extensions for the platform-specific types.
  */
 public typealias FontTraitsRepresentable = UIFontDescriptor.SymbolicTraits
 #endif

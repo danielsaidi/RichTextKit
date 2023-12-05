@@ -22,10 +22,10 @@ import SwiftUI
  instead, which can be more customized.
  */
 public struct RichTextFontPicker: View {
-    
+
     /**
      Create a font picker.
-     
+
      - Parameters:
        - selection: The selected font name.
        - fonts: The fonts to display in the list, by default `all`.
@@ -43,14 +43,14 @@ public struct RichTextFontPicker: View {
     }
 
     public typealias FontName = String
-    
+
     private let fonts: [RichTextFontPickerFont]
     private let itemFontSize: CGFloat
     private let selectedFont: RichTextFontPickerFont?
-    
+
     @Binding
     private var selection: FontName
-    
+
     public var body: some View {
         Picker(selection: $selection) {
             ForEach(fonts) { font in
@@ -67,7 +67,7 @@ public struct RichTextFontPicker: View {
 }
 
 private extension RichTextFontPickerFont {
-    
+
     /**
      A system font has a font name that may be resolved to a
      different font name when it's picked. We must therefore
@@ -84,7 +84,7 @@ private extension RichTextFontPickerFont {
         if selected.hasPrefix(fontName.replacingOccurrences(of: " ", with: "-")) { return true }
         return false
     }
-    
+
     /**
      Use the selected font name as tag for the selected font.
      */
@@ -95,12 +95,12 @@ private extension RichTextFontPickerFont {
 }
 
 struct FontPicker_Previews: PreviewProvider {
-    
+
     struct Preview: View {
-        
+
         @State
         private var selection = ""
-        
+
         var body: some View {
             NavigationView {
                 RichTextFontPicker(selection: $selection)
@@ -109,14 +109,14 @@ struct FontPicker_Previews: PreviewProvider {
             }
         }
     }
-    
+
     static var previews: some View {
         Preview()
     }
 }
 
 private extension View {
-    
+
     @ViewBuilder
     func withStyle() -> some View {
         #if iOS || macOS

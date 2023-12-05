@@ -12,7 +12,7 @@ import SwiftUI
 import XCTest
 
 final class RichTextCoordinator_SubscriptionsTests: XCTestCase {
-    
+
     private var text: NSAttributedString!
     private var textBinding: Binding<NSAttributedString>!
     private var textView: RichTextView!
@@ -40,7 +40,7 @@ final class RichTextCoordinator_SubscriptionsTests: XCTestCase {
         textView = nil
         textContext = nil
         coordinator = nil
-        
+
         super.tearDown()
     }
 

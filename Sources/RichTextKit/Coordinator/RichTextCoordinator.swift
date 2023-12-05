@@ -189,12 +189,12 @@ extension RichTextCoordinator {
         if richTextContext.attributedString != string {
             richTextContext.attributedString = string
         }
-        
+
         let range = textView.selectedRange
         if richTextContext.selectedRange != range {
             richTextContext.selectedRange = range
         }
-        
+
         RichTextColor.allCases.forEach {
             if let color = textView.currentColor($0) {
                 richTextContext.setColor(color, for: $0)
@@ -205,17 +205,17 @@ extension RichTextCoordinator {
         if richTextContext.foregroundColor != foreground {
             richTextContext.foregroundColor = foreground
         }
-        
+
         let background = textView.currentColor(.background)
         if richTextContext.backgroundColor != background {
             richTextContext.backgroundColor = background
         }
-        
+
         let stroke = textView.currentColor(.stroke)
         if richTextContext.strokeColor != stroke {
             richTextContext.strokeColor = stroke
         }
-        
+
         let strike = textView.currentColor(.strikethrough)
         if richTextContext.strikethroughColor != strike {
             richTextContext.strikethroughColor = strike

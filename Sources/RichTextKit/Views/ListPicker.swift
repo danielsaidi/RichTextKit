@@ -41,17 +41,17 @@ struct ListPicker<Item: Identifiable, ItemView: View>: View {
         self.dismissAfterPick = dismissAfterPick
         self.listItem = listItem
     }
-    
+
     private let sections: [ListPickerSection<Item>]
     private let selection: Binding<Item>
     private let animatedSelection: Bool
     private let dismissAfterPick: Bool
     private let listItem: ItemViewBuilder
-    
+
     typealias ItemViewBuilder = (_ item: Item, _ isSelected: Bool) -> ItemView
-    
+
     @Environment(\.presentationMode) var presentationMode
-    
+
     var body: some View {
         List {
             ForEach(sections) { section in

@@ -11,7 +11,7 @@ import UniformTypeIdentifiers
 
 /**
  This enum specifies rich text data formats.
- 
+
  Different formats handle rich text in different ways.
 
  For instance, ``rtf`` supports rich text attributes, styles,
@@ -30,10 +30,10 @@ import UniformTypeIdentifiers
  open with the app. Have a look at the demo app for examples.
  */
 public enum RichTextDataFormat: Equatable, Identifiable {
-    
+
     /// Archived data that's persisted with a keyed archiver.
     case archivedData
-    
+
     /// Plain data is persisted as plain text.
     case plainText
 
@@ -62,7 +62,7 @@ public extension RichTextDataFormat {
     static var libraryFormats: [RichTextDataFormat] {
         [.archivedData, .plainText, .rtf]
     }
-    
+
     /// The format's unique identifier.
     var id: String {
         switch self {
@@ -72,7 +72,7 @@ public extension RichTextDataFormat {
         case .vendorArchivedData(let id, _, _, _): return id
         }
     }
-    
+
     /// The formats that a format can be converted to.
     var convertibleFormats: [RichTextDataFormat] {
         switch self {
@@ -100,7 +100,7 @@ public extension RichTextDataFormat {
         case .vendorArchivedData: return true
         }
     }
-    
+
     /// The format's standard file extension.
     var standardFileExtension: String {
         switch self {
@@ -110,7 +110,7 @@ public extension RichTextDataFormat {
         case .vendorArchivedData(_, let ext, _, _): return ext
         }
     }
-    
+
     /// Whether or not the format supports images.
     var supportsImages: Bool {
         switch self {
@@ -120,7 +120,7 @@ public extension RichTextDataFormat {
         case .vendorArchivedData: return true
         }
     }
-    
+
     /// The format's uniform type.
     var uniformType: UTType {
         switch self {

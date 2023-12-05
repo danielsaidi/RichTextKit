@@ -10,7 +10,7 @@ import SwiftUI
 
 /**
  This enum defines supported rich text alignments.
- 
+
  The enum makes the alignment type identifiable and diffable.
  */
 public enum RichTextAlignment: String, CaseIterable, Codable, Equatable, Identifiable {
@@ -36,7 +36,7 @@ public enum RichTextAlignment: String, CaseIterable, Codable, Equatable, Identif
 
     /// Center text alignment.
     case center
-    
+
     /// Justified text alignment.
     case justified
 
@@ -48,10 +48,10 @@ public extension RichTextAlignment {
 
     /// The unique ID of the alignment.
     var id: String { rawValue }
-    
+
     /// The standard icon to use for the alignment.
     var icon: Image { nativeAlignment.icon }
-    
+
     /// The standard title to use for the alignment.
     var title: String { nativeAlignment.title }
 
@@ -67,7 +67,7 @@ public extension RichTextAlignment {
 }
 
 public extension NSTextAlignment {
-    
+
     /// The standard icon to use for the alignment.
     var icon: Image {
         switch self {
@@ -78,12 +78,12 @@ public extension NSTextAlignment {
         default: return .richTextAlignmentLeft
         }
     }
-    
+
     /// The standard title to use for the alignment.
     var title: String {
         titleCase.text
     }
-    
+
     /// The standard title to use for the alignment.
     var titleCase: RTKL10n {
         switch self {

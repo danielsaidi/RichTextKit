@@ -20,7 +20,7 @@ public extension RichTextAttributeWriter {
 
     /**
      Set the text indent at the provided range.
-     
+
      Unlike some other attributes, this value applies to the
      entire paragraph, not just the selected range.
      */
@@ -52,7 +52,7 @@ public extension RichTextAttributeWriter {
         let index = text.findIndexOfCurrentParagraph(from: location)
         return stepRichTextIndent(points: points, atIndex: index)
     }
-    
+
     /// Step the text indent at a certain index.
     func stepRichTextIndent(
         points: CGFloat,
@@ -63,17 +63,17 @@ public extension RichTextAttributeWriter {
         let safeRange = safeRange(for: range, isAttributeOperation: true)
         var attributes = text.attributes(at: safeRange.location, effectiveRange: nil)
         let style = attributes[.paragraphStyle] as? NSMutableParagraphStyle ?? NSMutableParagraphStyle()
-        
+
         let newIndent = max(style.headIndent + points, 0)
         style.firstLineHeadIndent = newIndent
         style.headIndent = newIndent
-        
+
         attributes[.paragraphStyle] = style
         text.beginEditing()
         text.setAttributes(attributes, range: safeRange)
         text.fixAttributes(in: safeRange)
         text.endEditing()
-        
+
         return attributes
     }
 

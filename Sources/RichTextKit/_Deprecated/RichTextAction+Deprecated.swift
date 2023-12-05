@@ -1,7 +1,7 @@
 import SwiftUI
 
 public extension RichTextAction {
-    
+
     @available(*, deprecated, renamed: "increaseFontSize")
     static var incrementFontSize: RichTextAction { stepFontSize(points: 1) }
 
