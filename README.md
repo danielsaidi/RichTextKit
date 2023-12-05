@@ -38,7 +38,7 @@ If you prefer to not have external dependencies, you can also just copy the sour
 
 
 
-## Getting started in SwiftUI
+## Getting started
 
 RichTextKit has a SwiftUI ``RichTextEditor`` that takes a text binding and a ``RichTextContext``:
 
