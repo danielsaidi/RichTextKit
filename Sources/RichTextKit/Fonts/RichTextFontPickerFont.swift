@@ -78,7 +78,7 @@ public extension RichTextFontPickerFont {
      used if the font name is empty.
      */
     static var standardSystemFontDisplayName: String {
-        #if os(macOS) && !targetEnvironment(macCatalyst)
+        #if macOS
         return "Standard"
         #else
         return "San Francisco"
@@ -90,7 +90,7 @@ public extension RichTextFontPickerFont {
      is used if the font name is empty.
      */
     static var systemFontNamePrefix: String {
-        #if os(macOS) && !targetEnvironment(macCatalyst)
+        #if macOS
         return ".AppleSystemUIFont"
         #else
         return ".SFUI"

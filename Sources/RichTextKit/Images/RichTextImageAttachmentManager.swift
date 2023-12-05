@@ -9,11 +9,11 @@
 import CoreGraphics
 import Foundation
 
-#if os(iOS) || targetEnvironment(macCatalyst) || os(tvOS)
+#if iOS || os(tvOS)
 import UIKit
 #endif
 
-#if os(macOS) && !targetEnvironment(macCatalyst)
+#if macOS
 import AppKit
 #endif
 
@@ -63,7 +63,7 @@ public extension RichTextImageAttachmentManager {
     }
 }
 
-#if os(iOS) || targetEnvironment(macCatalyst) || os(macOS) || os(tvOS)
+#if iOS || macOS || os(tvOS)
 public extension RichTextImageAttachmentManager {
 
     /**
