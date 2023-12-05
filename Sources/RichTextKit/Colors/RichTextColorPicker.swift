@@ -53,8 +53,6 @@ public struct RichTextColorPicker: View {
     @Environment(\.colorScheme)
     private var colorScheme
 
-    private let spacing = 10.0
-
     public var body: some View {
         HStack(spacing: 0) {
             iconView
