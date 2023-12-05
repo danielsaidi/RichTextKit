@@ -40,6 +40,7 @@ public struct RichTextColorPicker: View {
     private let icon: Image?
     private let value: Binding<Color>
     private let quickColors: [Color]
+    @Environment(\.colorScheme) var colorScheme
 
     private let spacing = 10.0
 
@@ -116,7 +117,11 @@ private extension RichTextColorPicker {
 
     func quickPickerButton(for color: Color) -> some View {
         Button {
-            value.wrappedValue = color
+            if (colorScheme == .dark && color == .white) || (colorScheme == .light && color == .black) {
+                value.wrappedValue = .primary
+            } else {
+                value.wrappedValue = color
+            }
         } label: {
             color
         }
