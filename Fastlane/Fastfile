@@ -13,13 +13,12 @@ platform :ios do
 
   desc "Create a new version"
   lane :version do |options|
-    ensure_git_status_clean
-    ensure_git_branch(branch: main_branch)
-    version_build
+    version_validate
+    docc
 
     bump_type = options[:type]
     version = version_bump_podspec(
-      path: "Version",
+      path: 'Version',
       bump_type: bump_type)
 
     git_commit(path: "*", message: "Bump to #{version}")
@@ -27,12 +26,13 @@ platform :ios do
     push_git_tags()
     push_to_git_remote()
   end
-
-  desc "Build a new version"
-  lane :version_build do |options|
+  
+  desc "Validate that the repo is valid for release"
+  lane :version_validate do
+    ensure_git_status_clean
+    ensure_git_branch(branch: main_branch)
     swiftlint(strict: true)
     sh("swift test")
-    docc
   end
 
 
