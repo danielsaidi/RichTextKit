@@ -119,7 +119,7 @@ private extension View {
     
     @ViewBuilder
     func withStyle() -> some View {
-        #if os(iOS) || os(macOS)
+        #if os(iOS) || targetEnvironment(macCatalyst) || os(macOS)
         self.pickerStyle(.menu)
         #else
         self

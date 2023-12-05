@@ -6,7 +6,7 @@
 //  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
 //
 
-#if os(iOS) || os(macOS)
+#if os(iOS) || targetEnvironment(macCatalyst) || os(macOS)
 import SwiftUI
 
 /**
@@ -121,7 +121,7 @@ private extension RichTextShareCommandMenu {
 
     @ViewBuilder
     var nssharingMenu: some View {
-        #if os(macOS)
+        #if os(macOS) && !targetEnvironment(macCatalyst)
         if hasShareFormats, let action = formatNSSharingAction {
             RichTextNSSharingMenu(
                 formats: shareFormats,

@@ -18,7 +18,7 @@ public extension View {
      */
     @ViewBuilder
     func keyboardShortcut(for alignment: RichTextAlignment) -> some View {
-        #if os(iOS) || os(macOS)
+        #if os(iOS) || targetEnvironment(macCatalyst) || os(macOS)
         switch alignment {
         case .left: keyboardShortcut("Ö", modifiers: [.command, .shift])
         case .center: keyboardShortcut("*", modifiers: [.command])

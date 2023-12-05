@@ -15,7 +15,7 @@ public extension RichTextViewComponent {
         if hasSelectedRange {
             return richTextAttributes(at: selectedRange)
         } else {
-            #if os(macOS)
+            #if os(macOS) && !targetEnvironment(macCatalyst)
             let range = NSRange(location: selectedRange.location - 1, length: 1)
             let safeRange = safeRange(for: range)
             return richTextAttributes(at: safeRange)
@@ -34,7 +34,7 @@ public extension RichTextViewComponent {
 
     /// Set the current value of a rich text attribute.
     func setCurrentRichTextAttribute(_ attribute: RichTextAttribute, to value: Any) {
-        #if os(macOS)
+        #if os(macOS) && !targetEnvironment(macCatalyst)
         setRichTextAttribute(attribute, to: value, at: selectedRange)
         typingAttributes[attribute] = value
         #else

@@ -8,7 +8,7 @@
 
 import Foundation
 
-#if canImport(AppKit)
+#if canImport(AppKit) && !targetEnvironment(macCatalyst)
 import AppKit
 #endif
 
@@ -78,7 +78,7 @@ public extension RichTextFontPickerFont {
      used if the font name is empty.
      */
     static var standardSystemFontDisplayName: String {
-        #if os(macOS)
+        #if os(macOS) && !targetEnvironment(macCatalyst)
         return "Standard"
         #else
         return "San Francisco"
@@ -90,7 +90,7 @@ public extension RichTextFontPickerFont {
      is used if the font name is empty.
      */
     static var systemFontNamePrefix: String {
-        #if os(macOS)
+        #if os(macOS) && !targetEnvironment(macCatalyst)
         return ".AppleSystemUIFont"
         #else
         return ".SFUI"
@@ -165,7 +165,7 @@ private extension RichTextFontPickerFont {
      Get all available font picker fonts.
      */
     static var systemFonts: [RichTextFontPickerFont] {
-        #if canImport(AppKit)
+        #if canImport(AppKit) && !targetEnvironment(macCatalyst)
         return NSFontManager.shared
             .availableFontFamilies
             .map {

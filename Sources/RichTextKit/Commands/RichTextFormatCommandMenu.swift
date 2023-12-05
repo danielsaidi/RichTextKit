@@ -6,7 +6,7 @@
 //  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
 //
 
-#if os(iOS) || os(macOS)
+#if os(iOS) || targetEnvironment(macCatalyst) || os(macOS)
 import SwiftUI
 
 /**
