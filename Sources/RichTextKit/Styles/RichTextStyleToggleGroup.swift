@@ -87,7 +87,7 @@ public struct RichTextStyleToggleGroup: View {
                         TextField("", text: $urlString)
                             .textFieldStyle(.roundedBorder)
                             .autocorrectionDisabled(true)
-                            .textInputAutocapitalization(.never)
+                           // .textInputAutocapitalization(.never)
                         Button(
                             action: {
                                 context.setLink(URL(string: urlString))

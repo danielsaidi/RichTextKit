@@ -24,7 +24,7 @@ final class RichTextCoordinator_SubscriptionsTests: XCTestCase {
 
         text = NSAttributedString(string: "foo bar baz")
         textBinding = Binding(get: { self.text }, set: { self.text = $0 })
-        textView = RichTextView()
+        textView = RichTextView(frame: .zero)
         textContext = RichTextContext()
         coordinator = RichTextCoordinator(
             text: textBinding,

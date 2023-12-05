@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 public extension RichTextViewComponent {
     /// Unsets the current link at the given range.
@@ -15,19 +14,20 @@ public extension RichTextViewComponent {
     /// Note if nothing is selected, we just set typing attributes so we can continue writing in normal pace
     func unsetLinkFromCurrentRichTextStyle() {
         if hasSelectedRange {
-            richText.enumerateAttributes(in: selectedRange) { attributes, range, _ in
+            richText.enumerateAttributes(in: selectedRange) { [weak self] attributes, range, _ in
+                guard let self else { return }
                 let mutableAttributedString = NSMutableAttributedString(attributedString: richText)
                 attributes.forEach { attribute, _ in
                     mutableAttributedString.removeAttribute(attribute, range: range)
                     mutableAttributedString.fixAttributes(in: range)
                     mutableAttributedString.addAttribute(.font, value: FontRepresentable.standardRichTextFont, range: range)
-                    mutableAttributedString.addAttribute(.foregroundColor, value: UIColor.label, range: range)
+                    mutableAttributedString.addAttribute(.foregroundColor, value: ColorRepresentable.textColor, range: range)
                 }
                 setRichText(mutableAttributedString)
             }
         }
         
-        self.typingAttributes = [.font: FontRepresentable.standardRichTextFont, .foregroundColor: UIColor.label]
+        self.typingAttributes = [.font: FontRepresentable.standardRichTextFont, .foregroundColor: ColorRepresentable.textColor]
         setCurrentFont(.standardRichTextFont)
     }
     

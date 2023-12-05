@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 extension RichTextAttribute {
     /**
@@ -18,11 +17,11 @@ extension RichTextAttribute {
 }
 
 public struct CustomLinkAttributes {
-    init(link: String?, color: UIColor) {
+    init(link: String?, color: ColorRepresentable) {
         self.link = link
         self.color = color
     }
     
     let link: String?
-    let color: UIColor
+    let color: ColorRepresentable
 }

@@ -33,6 +33,7 @@ open class RichTextView: NSTextView, RichTextViewComponent {
     /// The image configuration to use by the rich text view.
     public var imageConfiguration: RichTextImageConfiguration = .disabled
 
+    public var linkColor: ColorRepresentable = .green
 
     // MARK: - Overrides
 
@@ -75,7 +76,6 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         return super.performDragOperation(draggingInfo)
     }
 
-
     // MARK: - Setup
 
     /**
@@ -88,7 +88,8 @@ open class RichTextView: NSTextView, RichTextViewComponent {
      */
     open func setup(
         with text: NSAttributedString,
-        format: RichTextDataFormat
+        format: RichTextDataFormat,
+        linkColor: ColorRepresentable
     ) {
         attributedString = .empty
         setupInitialFontSize()
@@ -101,10 +102,30 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         }
         imageConfiguration = standardImageConfiguration(for: format)
         layoutManager?.defaultAttachmentScaling = NSImageScaling.scaleProportionallyDown
+        self.linkColor = linkColor
         setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
     }
+    
+  
+    public override init(frame: CGRect) {
+        let layoutManager = RichTextLayoutManager()
+        let textStorage = NSTextStorage()
+        textStorage.addLayoutManager(layoutManager)
+        let textContainer = NSTextContainer()
+        layoutManager.allowsNonContiguousLayout = true
+        layoutManager.addTextContainer(textContainer)
+        super.init(frame: frame, textContainer: textContainer)
+        // Little hack for custom link colors. Please use custom NSLayoutManager
+        linkTextAttributes = [:]
+        textContainer.lineFragmentPadding = 0
+    }
+    
 
-
+    
+    required public init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Open Functionality
 
     /**

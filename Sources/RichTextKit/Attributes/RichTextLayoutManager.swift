@@ -1,4 +1,8 @@
+#if os(macOS)
+import AppKit
+#else
 import UIKit
+#endif
 
 public final class RichTextLayoutManager: NSLayoutManager {
     public override init() {
@@ -9,6 +13,24 @@ public final class RichTextLayoutManager: NSLayoutManager {
         fatalError("init(coder:) has not been implemented")
     }
     
+#if os(macOS)
+    public override func processEditing(
+        for textStorage: NSTextStorage, 
+        edited editMask: NSTextStorageEditActions, 
+        range newCharRange: NSRange, 
+        changeInLength delta: Int, 
+        invalidatedRange invalidatedCharRange: NSRange
+    ) {
+        super.processEditing(
+            for: textStorage, 
+            edited: editMask, 
+            range: newCharRange, 
+            changeInLength: delta, 
+            invalidatedRange: invalidatedCharRange
+        )
+        drawCustomAttributes(forGlyphRange: textStorage.richTextRange, at: .zero)
+    }
+#else
     public override func processEditing(
         for textStorage: NSTextStorage,
         edited editMask: NSTextStorage.EditActions,
@@ -25,6 +47,8 @@ public final class RichTextLayoutManager: NSLayoutManager {
         )
         drawCustomAttributes(forGlyphRange: textStorage.richTextRange, at: .zero)
     }
+#endif
+    
     
     private func drawCustomAttributes(forGlyphRange glyphsToShow: NSRange, at origin: CGPoint) {
         let characterRange = characterRange(forGlyphRange: glyphsToShow, actualGlyphRange: nil)

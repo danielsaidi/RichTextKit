@@ -57,7 +57,7 @@ class RichTextViewComponent_LinkTests: XCTestCase {
         textView.setCurrentRichTextLink(nil, previousLink: URL(string: "https://google.com"))
         
         XCTAssertNil(textView.currentRichTextAttributes[.link])
-        XCTAssertNil(textView.currentRichTextAttributes[.foregroundColor])
+        XCTAssertEqual(try XCTUnwrap(textView.currentRichTextAttributes[.foregroundColor] as? ColorRepresentable), ColorRepresentable.textColor)
     }
 }
 #endif

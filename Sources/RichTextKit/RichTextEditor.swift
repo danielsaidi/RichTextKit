@@ -90,7 +90,8 @@ public struct RichTextEditor: ViewRepresentable {
     public let scrollView = RichTextView.scrollableTextView()
 
     public var textView: RichTextView {
-        scrollView.documentView as? RichTextView ?? RichTextView()
+        print(scrollView.frame)
+        return scrollView.documentView as? RichTextView ?? RichTextView(frame: .zero)
     }
     #endif
 
@@ -116,7 +117,7 @@ public struct RichTextEditor: ViewRepresentable {
 
     #if macOS
     public func makeNSView(context: Context) -> some NSView {
-        textView.setup(with: text.wrappedValue, format: format)
+        textView.setup(with: text.wrappedValue, format: format, linkColor: .green)
         viewConfiguration(textView)
         return scrollView
     }
