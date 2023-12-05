@@ -40,8 +40,6 @@ If you prefer to not have external dependencies, you can also just copy the sour
 
 ## Getting started in SwiftUI
 
-The [online documentation][Documentation] has a [getting started][Getting-Started] guide to help you get started with RichTextKit.
-
 RichTextKit has a SwiftUI ``RichTextEditor`` that takes a text binding and a ``RichTextContext``:
 
 ```swift
@@ -61,11 +59,9 @@ struct MyView: View {
 }
 ```
 
-The editor uses a ``RichTextCoordinator`` to sync changes between the editor, the context, and the wrapped, platform-specific view. 
+The editor uses a ``RichTextCoordinator`` to sync changes between the editor, the context, and the wrapped, platform-specific view. You can now use the context to change the text binding and its font, font size, colors, alignment etc. and observe context changes to update the UI.
 
-You can now use the context to change the text binding and its font, font size, colors, alignment etc. You can also observe context change to update the UI, for instance when you move the text input cursor.
-
-For more information, please see the [online documentation][Documentation] and [getting started guide][Getting-Started].
+For more information, please see the [getting started guide][Getting-Started].
 
 
 
