@@ -90,7 +90,6 @@ public struct RichTextEditor: ViewRepresentable {
     public let scrollView = RichTextView.scrollableTextView()
 
     public var textView: RichTextView {
-        print(scrollView.frame)
         return scrollView.documentView as? RichTextView ?? RichTextView(frame: .zero)
     }
     #endif
