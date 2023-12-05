@@ -41,10 +41,12 @@ platform :ios do
   desc "Build documentation for all platforms"
   lane :docc do
     sh('cd .. && rm -rf ' + build_folder_docs)
+    
     docc_platform(destination: 'iOS', name: 'ios')
     docc_platform(destination: 'OS X', name: 'osx')
     docc_platform(destination: 'tvOS', name: 'tvos')
     docc_platform(destination: 'watchOS', name: 'watchos')
+    
     docc_web_platform(name: 'ios')
     docc_web_platform(name: 'osx')
     docc_web_platform(name: 'tvos')
