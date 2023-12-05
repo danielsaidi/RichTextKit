@@ -79,7 +79,7 @@ The demo app lets you explore the library on iOS and macOS. To try it out, just 
 
 ## Support my work
 
-You can sponsor me on [GitHub Sponsors][Sponsors] or [get in touch][Email] for paid support, to help support my [various projects][GitHub].
+You can sponsor me on [GitHub Sponsors][Sponsors] or [get in touch][Email] for paid support, to help support my [open-source projects][GitHub].
 
 
 
