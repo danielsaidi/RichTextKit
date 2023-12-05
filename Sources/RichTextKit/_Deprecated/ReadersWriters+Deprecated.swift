@@ -31,21 +31,21 @@ public protocol RichTextStyleReader: RichTextAttributeReader {}
 public protocol RichTextStyleWriter: RichTextAttributeWriter, RichTextStyleReader {}
 
 public extension RichTextAttributeReader {
-    
+
     @available(*, deprecated, renamed: "richTextBackgroundColor(at:)")
     func backgroundColor(
         at range: NSRange
     ) -> ColorRepresentable? {
         richTextAttribute(.backgroundColor, at: range)
     }
-    
+
     @available(*, deprecated, renamed: "richTextForegroundColor(at:)")
     func foregroundColor(
         at range: NSRange
     ) -> ColorRepresentable? {
         richTextAttribute(.foregroundColor, at: range)
     }
-    
+
     @available(*, deprecated, renamed: "richTextFont(at:)")
     func font(at range: NSRange) -> FontRepresentable? {
         richTextFont(at: range)
@@ -58,7 +58,7 @@ public extension RichTextAttributeReader {
 }
 
 public extension RichTextAttributeWriter {
-    
+
     @available(*, deprecated, renamed: "setRichTextBackgroundColor(_:at:)")
     func setBackgroundColor(
         to color: ColorRepresentable,
@@ -66,7 +66,7 @@ public extension RichTextAttributeWriter {
     ) {
         setRichTextBackgroundColor(color, at: range)
     }
-    
+
     @available(*, deprecated, renamed: "setFont(_:at:)")
     func setFont(
         to font: FontRepresentable,
@@ -98,7 +98,7 @@ public extension RichTextAttributeWriter {
     ) {
         setRichTextForegroundColor(color, at: range)
     }
-    
+
     @available(*, deprecated, renamed: "setRichTextAlignment(_:at:)")
     func setRichTextAlignment(
         to alignment: RichTextAlignment,
@@ -106,7 +106,7 @@ public extension RichTextAttributeWriter {
     ) {
         setRichTextAlignment(alignment, at: range)
     }
-    
+
     @available(*, deprecated, renamed: "setRichTextFont(_:at:)")
     func setFont(
         _ font: FontRepresentable,
@@ -114,7 +114,7 @@ public extension RichTextAttributeWriter {
     ) {
         setRichTextFont(font, at: range)
     }
-    
+
     @available(*, deprecated, renamed: "setRichTextFontName(_:at:)")
     func setFontName(
         _ name: String,
@@ -122,7 +122,7 @@ public extension RichTextAttributeWriter {
     ) {
         setRichTextFontName(name, at: range)
     }
-    
+
     @available(*, deprecated, renamed: "setRichTextFontSize(_:at:)")
     func setFontSize(
         _ size: CGFloat,
@@ -130,7 +130,7 @@ public extension RichTextAttributeWriter {
     ) {
         setRichTextFontSize(size, at: range)
     }
-    
+
     @available(*, deprecated, renamed: "stepRichTextIndent(_:at:)")
     func setRichTextIndent(
         to indent: RichTextIndent,
@@ -144,7 +144,7 @@ public extension RichTextAttributeWriter {
             at: range
         )
     }
-    
+
     @available(*, deprecated, renamed: "stepRichTextFontSize(points:at:)")
     func stepFontSize(
         points: Int,
@@ -152,7 +152,7 @@ public extension RichTextAttributeWriter {
     ) {
         stepRichTextFontSize(points: points, at: range)
     }
-    
+
     @available(*, deprecated, message: "Use stepRichTextFontSize instead")
     func decrementFontSize(
         points: UInt = 1,

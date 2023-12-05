@@ -18,17 +18,17 @@ public extension Image {
     static let richTextActionRedo = symbol("arrow.uturn.forward")
     static let richTextActionShare = symbol("square.and.arrow.up")
     static let richTextActionUndo = symbol("arrow.uturn.backward")
-    
+
     static let richTextAlignmentCenter = symbol("text.aligncenter")
     static let richTextAlignmentJustified = symbol("text.justify")
     static let richTextAlignmentLeft = symbol("text.alignleft")
     static let richTextAlignmentRight = symbol("text.alignright")
-    
+
     static let richTextColorBackground = symbol("highlighter")
     static let richTextColorForeground = symbol("character")
     static let richTextColorStroke = symbol("a.square")
     static let richTextColorStrikethrough = symbol("strikethrough")
-    
+
     static let richTextDocument = symbol("doc.text")
     static let richTextDocuments = symbol("doc.on.doc")
 

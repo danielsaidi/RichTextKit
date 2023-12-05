@@ -13,16 +13,16 @@ import CoreGraphics
  used in a rich text.
  */
 public enum RichTextImageAttachmentSize {
-    
+
     /// This size aims to make image fit the frame.
     case frame
-    
+
     /// This size aims to make image fit the size in points.
     case points(CGFloat)
 }
 
 public extension RichTextImageAttachmentSize {
-    
+
     /**
      The image's resulting height in a certain frame.
      */
@@ -32,7 +32,7 @@ public extension RichTextImageAttachmentSize {
         case .points(let points): return points
         }
     }
-    
+
     /**
      The image's resulting width in a certain frame.
      */

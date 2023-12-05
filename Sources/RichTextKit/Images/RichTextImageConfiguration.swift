@@ -11,16 +11,16 @@ import Foundation
 /**
  This struct can be used to configure how images are handled
  in e.g. a ``RichTextView``.
- 
+
  The paste and drop configurations should be `.disabled` for
  rich text formats that don't support inserting images, like
  .txt and .rtf (where images must be added to a sub-folder).
  */
 public struct RichTextImageConfiguration {
-    
+
     /**
      Create a rich text image configuration.
-     
+
      - Parameters:
        - pasteConfiguration: The configuration to use when pasting images.
        - dropConfiguration: The configuration to use when dropping images.
@@ -35,19 +35,19 @@ public struct RichTextImageConfiguration {
         self.dropConfiguration = dropConfiguration
         self.maxImageSize = maxImageSize
     }
-    
+
     /// The image configuration to use when dropping images.
     public var dropConfiguration: RichTextImageInsertConfiguration
-    
+
     /// The max size to limit images in the text view to.
     public var maxImageSize: (width: RichTextImageAttachmentSize, height: RichTextImageAttachmentSize)
-    
+
     /// The image configuration to use when pasting images.
     public var pasteConfiguration: RichTextImageInsertConfiguration
 }
 
 public extension RichTextImageConfiguration {
-    
+
     /// Get a disabled image configuration.
     static var disabled: RichTextImageConfiguration {
         RichTextImageConfiguration(

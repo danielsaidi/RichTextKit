@@ -17,12 +17,12 @@ import SwiftUI
  make view and context changes sync correctly. You will then
  be able to use the `richTextContext` to trigger and observe
  changes to the text editor.
- 
+
  Note that changing the value of the `text` binding from the
  outside will not (yet) update the editor. Until it is fixed,
  use ``RichTextContext/setAttributedString(to:)`` to set the
  string to another value.
- 
+
  Since the view wraps a native `UIKit` or `AppKit` text view,
  you can't apply `.toolbar` modifiers to it, like you can do
  with other SwiftUI views. This means that this doesn't work:
@@ -71,7 +71,7 @@ public struct RichTextEditor: ViewRepresentable {
 
 
     private var format: RichTextDataFormat
-    
+
     private var text: Binding<NSAttributedString>
 
     @ObservedObject

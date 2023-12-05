@@ -17,7 +17,7 @@ public extension RichTextAttributeWriter {
     ) {
         setRichTextAttribute(.font, to: font, at: range)
     }
-    
+
     /**
      Set the font name at a certain range.
 

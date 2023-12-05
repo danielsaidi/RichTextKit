@@ -14,15 +14,15 @@ import SwiftUI
  This will not be made public or documented for this library.
  */
 protocol ListPickerItem: View {
-    
+
     associatedtype Item: Equatable
-    
+
     var item: Item { get }
     var isSelected: Bool { get }
 }
 
 extension ListPickerItem {
-    
+
     var checkmark: some View {
         Image(systemName: "checkmark")
             .opacity(isSelected ? 1 : 0)

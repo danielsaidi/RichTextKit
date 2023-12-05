@@ -10,7 +10,7 @@ import SwiftUI
 
 /**
  This picker can be used to select a color.
- 
+
  This picker renders an icon next to the color picker and an
  optional list of horizontally scrolling quick colors.
 
@@ -18,7 +18,7 @@ import SwiftUI
  custom set of colors, for instance `.quickPickerColors`.
  */
 public struct RichTextColorPicker: View {
-    
+
     /**
      Create a rich text color picker that binds to a color.
 
@@ -40,7 +40,7 @@ public struct RichTextColorPicker: View {
     private let icon: Image?
     private let value: Binding<Color>
     private let quickColors: [Color]
-    
+
     private let spacing = 10.0
 
     @Environment(\.colorScheme)
@@ -60,14 +60,14 @@ public struct RichTextColorPicker: View {
 }
 
 private extension RichTextColorPicker {
-    
+
     var hasColors: Bool {
         !quickColors.isEmpty
     }
 }
 
 public extension Color {
-    
+
     /// Get a curated list of quick color picker colors.
     static var quickPickerColors: [Self] {
         [
@@ -80,7 +80,7 @@ public extension Color {
 }
 
 public extension Collection where Element == Color {
-    
+
     /// Get a curated list of quick color picker colors.
     static var quickPickerColors: [Element] {
         Element.quickPickerColors
@@ -135,24 +135,24 @@ private extension RichTextColorPicker {
 }
 
 private extension ColorScheme {
-    
+
     func textColor(for color: Color) -> Color {
         let usePrimary = usePrimaryColor(for: color)
         return usePrimary ? .primary : color
     }
-    
+
     func usePrimaryColor(for color: Color) -> Bool {
         (self == .dark && color == .white) || (self == .light && color == .black)
     }
 }
 
 private struct ColorButtonStyle: ButtonStyle {
-    
+
     let isSelected: Bool
-    
+
     @Environment(\.isFocused)
     var isFocused: Bool
-    
+
     func makeBody(configuration: Configuration) -> some View {
         let focusSize: Double = isFocused ? 25 : 20
         let size: Double = isSelected ? 30 : focusSize

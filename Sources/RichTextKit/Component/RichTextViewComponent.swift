@@ -28,7 +28,7 @@ public protocol RichTextViewComponent: AnyObject,
     RichTextImageAttachmentManager,
     RichTextPdfDataReader
 {
-        
+
     /// The text view's frame.
     var frame: CGRect { get }
 
@@ -93,7 +93,7 @@ public extension RichTextViewComponent {
     func alert(title: String, message: String) {
         alert(title: title, message: message, buttonTitle: "OK")
     }
-    
+
     /// Delete all characters in a certain range.
     func deleteCharacters(in range: NSRange) {
         mutableAttributedString?.deleteCharacters(in: range)

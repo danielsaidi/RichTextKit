@@ -9,11 +9,11 @@
 import Foundation
 
 public extension CGFloat {
-    
+
     static var defaultRichTextIntentStepSize: CGFloat = 30.0
 }
 
 public extension UInt {
-    
+
     static var defaultRichTextIntentStepSize: UInt = 30
 }

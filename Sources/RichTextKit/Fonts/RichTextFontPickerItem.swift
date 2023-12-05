@@ -24,13 +24,13 @@ struct RichTextFontPickerItem: View, ListPickerItem {
     }
 
     typealias Item = RichTextFontPickerFont
-    
+
     let font: RichTextFontPickerFont
     let fontSize: CGFloat
     let isSelected: Bool
 
     var item: RichTextFontPickerFont { font }
-    
+
     var body: some View {
         HStack {
             Text(font.fontDisplayName)

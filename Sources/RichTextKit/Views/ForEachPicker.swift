@@ -27,17 +27,17 @@ struct ForEachPicker<Item: Identifiable, ItemView: View>: View {
         self.dismissAfterPick = dismissAfterPick
         self.listItem = listItem
     }
-    
+
     private let items: [Item]
     private let selection: Binding<Item>
     private let animatedSelection: Bool
     private let dismissAfterPick: Bool
     private let listItem: ItemViewBuilder
-    
+
     typealias ItemViewBuilder = (_ item: Item, _ isSelected: Bool) -> ItemView
-    
+
     @Environment(\.presentationMode) var presentationMode
-    
+
     var body: some View {
         ForEach(items) { item in
             Button(action: { select(item) }, label: {
@@ -48,7 +48,7 @@ struct ForEachPicker<Item: Identifiable, ItemView: View>: View {
 }
 
 private extension ForEachPicker {
-    
+
     var selectedId: Item.ID {
         selection.wrappedValue.id
     }
@@ -59,11 +59,11 @@ private extension ForEachPicker {
     func dismiss() {
         presentationMode.wrappedValue.dismiss()
     }
-    
+
     func isSelected(_ item: Item) -> Bool {
         selectedId == item.id
     }
-    
+
     func select(_ item: Item) {
         if animatedSelection {
             selectWithAnimation(item)
@@ -71,13 +71,13 @@ private extension ForEachPicker {
             selectWithoutAnimation(item)
         }
     }
-    
+
     func selectWithAnimation(_ item: Item) {
         withAnimation {
             selectWithoutAnimation(item)
         }
     }
-    
+
     func selectWithoutAnimation(_ item: Item) {
         selection.wrappedValue = item
         if dismissAfterPick {

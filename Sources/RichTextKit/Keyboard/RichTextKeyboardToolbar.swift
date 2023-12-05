@@ -151,7 +151,7 @@ extension UIApplication {
 }
 
 private extension View {
-    
+
     @ViewBuilder
     func prefersMediumSize() -> some View {
         if #available(iOS 16, *) {

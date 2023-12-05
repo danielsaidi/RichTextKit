@@ -9,7 +9,7 @@
 import SwiftUI
 
 public extension RichTextContext {
-    
+
     /// Get a binding for a certain color.
     func binding(for val: RichTextColor) -> Binding<Color> {
         Binding(
@@ -17,7 +17,7 @@ public extension RichTextContext {
             set: { self.setColor(ColorRepresentable($0), for: val) }
         )
     }
-    
+
     /// Get the value for a certain color.
     func color(for val: RichTextColor) -> ColorRepresentable? {
         switch val {
@@ -27,7 +27,7 @@ public extension RichTextContext {
         case .stroke: return strokeColor
         }
     }
-    
+
     /// Set the value for a certain color.
     func setColor(
         _ color: ColorRepresentable,

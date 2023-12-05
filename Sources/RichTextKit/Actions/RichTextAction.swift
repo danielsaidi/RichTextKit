@@ -19,34 +19,34 @@ public enum RichTextAction: Identifiable, Equatable {
 
     /// Dismiss any presented software keyboard.
     case dismissKeyboard
-    
+
     /// A print command.
     case print
 
     /// Redo the latest undone change.
     case redoLatestChange
-    
+
     /// Set the text alignment.
     case setAlignment(_ alignment: RichTextAlignment)
-    
+
     /// Step the font size.
     case stepFontSize(points: Int)
-    
+
     /// Step the indent level.
     case stepIndent(points: CGFloat)
-    
+
     /// Step the superscript level.
     case stepSuperscript(steps: Int)
-    
+
     /// Toggle a certain style.
     case toggleStyle(_ style: RichTextStyle)
-    
+
     /// Undo the latest change.
     case undoLatestChange
 }
 
 public extension RichTextAction {
-    
+
     /// The action's unique identifier.
     var id: String { title }
 
@@ -68,7 +68,7 @@ public extension RichTextAction {
         case .undoLatestChange: return .richTextActionUndo
         }
     }
-    
+
     /// The localized title to use in the main menu.
     var menuTitle: String {
         switch self {
@@ -77,7 +77,7 @@ public extension RichTextAction {
         default: return title
         }
     }
-    
+
     /// The localized title.
     var title: String {
         switch self {
@@ -102,81 +102,81 @@ public extension RichTextAction {
 // MARK: - Aliases
 
 public extension RichTextAction {
-    
+
     /// A name alias for `.stepFontSize`.
     static var increaseFontSize: RichTextAction {
         increaseFontSize()
     }
-    
+
     /// A name alias for `.stepFontSize`.
     static func increaseFontSize(
         points: UInt = 1
     ) -> RichTextAction {
         stepFontSize(points: Int(points))
     }
-    
+
     /// A name alias for `.stepFontSize`.
     static var decreaseFontSize: RichTextAction {
         decreaseFontSize()
     }
-    
+
     /// A name alias for `.stepFontSize(points: -1)`.
     static func decreaseFontSize(
         points: UInt = 1
     ) -> RichTextAction {
         stepFontSize(points: -Int(points))
     }
-    
-    
+
+
     /// A name alias for `.stepIndent`.
     static var increaseIndent: RichTextAction {
         increaseIndent()
     }
-    
+
     /// A name alias for `.stepIndent`.
     static func increaseIndent(
         points: UInt = .defaultRichTextIntentStepSize
     ) -> RichTextAction {
         stepIndent(points: CGFloat(points))
     }
-    
+
     /// A name alias for `.stepIndent`.
     static var decreaseIndent: RichTextAction {
         decreaseIndent()
     }
-    
+
     /// A name alias for `.stepIndent(points: -1)`.
     static func decreaseIndent(
         points: UInt = .defaultRichTextIntentStepSize
     ) -> RichTextAction {
         stepIndent(points: -CGFloat(points))
     }
-    
-    
+
+
     /// A name alias for `.stepFontSize`.
     static var increaseSuperscript: RichTextAction {
         increaseFontSize()
     }
-    
+
     /// A name alias for `.stepSuperscript`.
     static func increaseSuperscript(
         steps: UInt = 1
     ) -> RichTextAction {
         stepSuperscript(steps: Int(steps))
     }
-    
+
     /// A name alias for `.stepSuperscript`.
     static var decreaseSuperscript: RichTextAction {
         decreaseSuperscript()
     }
-    
+
     /// A name alias for `.stepSuperscript(steps: -1)`.
     static func decreaseSuperscript(
         steps: UInt = 1
     ) -> RichTextAction {
         stepSuperscript(steps: -Int(steps))
     }
-    
+
 
     /// A name alias for `.redoLatestChange`.
     static var redo: RichTextAction { .redoLatestChange }

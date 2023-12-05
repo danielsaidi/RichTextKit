@@ -17,7 +17,7 @@ import AppKit
  in UIKit. It aims to make these views behave more alike and
  make them implement ``RichTextViewComponent``, which is the
  protocol that is used within this library.
- 
+
  The view will apply a ``RichTextImageConfiguration/disabled``
  image config by default. You can change this by setting the
  property manually or by using a ``RichTextDataFormat`` that
@@ -26,7 +26,7 @@ import AppKit
 open class RichTextView: NSTextView, RichTextViewComponent {
 
     // MARK: - Properties
-    
+
     /// The style to use when highlighting text in the view.
     public var highlightingStyle: RichTextHighlightingStyle = .standard
 
@@ -71,7 +71,7 @@ open class RichTextView: NSTextView, RichTextViewComponent {
             pasteImages(images, at: selectedRange().location, moveCursorToPastedContent: true)
             return true
         }
-        
+
         return super.performDragOperation(draggingInfo)
     }
 

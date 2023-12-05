@@ -9,7 +9,7 @@
 import UniformTypeIdentifiers
 
 public extension UTType {
-    
+
     /// Uniform rich text types that RichTextKit supports.
     static let richTextTypes: [UTType] = [
         .archivedData,
@@ -18,7 +18,7 @@ public extension UTType {
         .plainText,
         .data
     ]
-    
+
     /// The uniform type for ``RichTextFormat/archivedData``.
     static let archivedData = UTType(
         exportedAs: "com.richtextkit.archiveddata")

@@ -26,7 +26,7 @@ public struct PdfPageConfiguration: Equatable {
         self.pageSize = pageSize
         self.pageMargins = pageMargins
     }
-    
+
     /// The page size in points.
     public var pageSize: CGSize
 

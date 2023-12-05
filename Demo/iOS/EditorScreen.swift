@@ -58,7 +58,7 @@ private extension EditorScreen {
 }
 
 struct EditorScreen_Previews: PreviewProvider {
-    
+
     static var previews: some View {
         EditorScreen()
     }

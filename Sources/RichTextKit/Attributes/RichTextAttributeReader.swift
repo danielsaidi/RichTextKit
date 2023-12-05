@@ -28,7 +28,7 @@ public extension RichTextAttributeReader {
     ) -> Value? {
         richTextAttributes(at: range)[attribute] as? Value
     }
-    
+
     /// Get all rich text attributes at a certain range.
     func richTextAttributes(
         at range: NSRange

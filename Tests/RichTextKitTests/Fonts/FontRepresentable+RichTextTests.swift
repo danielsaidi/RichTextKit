@@ -10,7 +10,7 @@ import RichTextKit
 import XCTest
 
 final class FontRepresentable_RichTextTests: XCTestCase {
-    
+
     func testStandardRichTextFont() {
         let expected = FontRepresentable.systemFont(ofSize: .standardRichTextFontSize)
         XCTAssertEqual(FontRepresentable.standardRichTextFont, expected)
