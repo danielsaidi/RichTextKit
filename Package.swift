@@ -1,4 +1,4 @@
-// swift-tools-version: 5.6
+// swift-tools-version: 5.8
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -24,7 +24,12 @@ let package = Package(
         .target(
             name: "RichTextKit",
             dependencies: [],
-            resources: [.process("Resources")]),
+            resources: [.process("Resources")],
+            swiftSettings: [
+                .define("macOS", .when(platforms: [.macOS])),
+                .define("iOS", .when(platforms: [.iOS, .macCatalyst])),
+            ]
+        ),
         .testTarget(
             name: "RichTextKitTests",
             dependencies: ["RichTextKit", "MockingKit"]),

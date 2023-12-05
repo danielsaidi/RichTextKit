@@ -10,11 +10,11 @@
 import UIKit
 #endif
 
-#if os(macOS) && !targetEnvironment(macCatalyst)
+#if macOS
 import AppKit
 #endif
 
-#if os(iOS) || targetEnvironment(macCatalyst) || os(macOS) || os(tvOS)
+#if iOS || macOS || os(tvOS)
 import RichTextKit
 import XCTest
 
@@ -53,7 +53,7 @@ final class RichTextViewComponent_AttributesTests: XCTestCase {
     func testTextAttributesIsValidForNoSelectedRange() {
         textView.setSelectedRange(noRange)
         textView.setCurrentRichTextAttribute(.font, to: font)
-        #if os(iOS) || targetEnvironment(macCatalyst) || os(tvOS)
+        #if iOS || os(tvOS)
         assertEqualAttributes(textView.currentRichTextAttributes)
         #endif
         assertNonEqualAttributes(textView.richTextAttributes(at: selectedRange))
@@ -72,7 +72,7 @@ final class RichTextViewComponent_AttributesTests: XCTestCase {
     func testTextAttributeValueForKeyIsValidForNoSelectedRange() {
         textView.setSelectedRange(noRange)
         textView.setCurrentRichTextAttribute(.font, to: font)
-        #if os(iOS) || targetEnvironment(macCatalyst) || os(tvOS)
+        #if iOS || os(tvOS)
         assertEqualAttribute(textView.currentRichTextAttribute(.font))
         #endif
         assertNonEqualAttribute(textView.richTextAttribute(.font, at: selectedRange))

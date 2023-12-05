@@ -23,7 +23,7 @@ import SwiftUI
  */
 public struct RichTextNSSharingMenu: View {
 
-    #if os(macOS) && !targetEnvironment(macCatalyst)
+    #if macOS
     public init(
         title: String = RTKL10n.menuShareAs.text,
         icon: Image = .richTextActionShare,
@@ -71,7 +71,7 @@ public struct RichTextNSSharingMenu: View {
     #endif
 }
 
-#if os(macOS) && !targetEnvironment(macCatalyst)
+#if macOS
 private extension RichTextNSSharingMenu {
 
     var services: [NSSharingService] {

@@ -6,7 +6,7 @@
 //  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
 //
 
-#if os(iOS) || targetEnvironment(macCatalyst) || os(macOS) || os(tvOS)
+#if iOS || macOS || os(tvOS)
 import Combine
 import SwiftUI
 
@@ -127,7 +127,7 @@ open class RichTextCoordinator: NSObject {
 }
 
 
-#if os(iOS) || targetEnvironment(macCatalyst) || os(tvOS)
+#if iOS || os(tvOS)
 import UIKit
 
 extension RichTextCoordinator: UITextViewDelegate {}
@@ -301,7 +301,7 @@ extension RichTextCoordinator {
      type, the last selected font, colors etc. will be used.
      */
     func updateTextViewAttributesIfNeeded() {
-        #if os(macOS) && !targetEnvironment(macCatalyst)
+        #if macOS
         if textView.hasSelectedRange { return }
         let attributes = textView.currentRichTextAttributes
         textView.setCurrentRichTextAttributes(attributes)

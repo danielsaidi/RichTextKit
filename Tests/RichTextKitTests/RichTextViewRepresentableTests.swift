@@ -6,7 +6,7 @@
 //  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
 //
 
-#if os(iOS) || targetEnvironment(macCatalyst) || os(macOS) || os(tvOS)
+#if iOS || macOS || os(tvOS)
 import RichTextKit
 import XCTest
 
@@ -47,13 +47,13 @@ final class RichTextViewComponentTests: XCTestCase {
         let string = NSAttributedString(string: "")
         view.setup(with: string, format: .rtf)
         XCTAssertEqual(view.richText.string, "")
-        #if os(iOS) || targetEnvironment(macCatalyst) || os(tvOS)
+        #if iOS || os(tvOS)
         XCTAssertFalse(view.allowsEditingTextAttributes)
         XCTAssertEqual(view.autocapitalizationType, .sentences)
         #endif
         XCTAssertEqual(view.backgroundColor, .clear)
         XCTAssertEqual(view.contentCompressionResistancePriority(for: .horizontal), .defaultLow)
-        #if os(iOS) || targetEnvironment(macCatalyst) || os(tvOS)
+        #if iOS || os(tvOS)
         XCTAssertEqual(view.spellCheckingType, .no)
         XCTAssertEqual(view.textColor, .label)
         #elseif os(macOS)
@@ -65,13 +65,13 @@ final class RichTextViewComponentTests: XCTestCase {
         let string = NSAttributedString(string: "foo bar baz")
         view.setup(with: string, format: .rtf)
         XCTAssertEqual(view.richText.string, "foo bar baz")
-        #if os(iOS) || targetEnvironment(macCatalyst) || os(tvOS)
+        #if iOS || os(tvOS)
         XCTAssertFalse(view.allowsEditingTextAttributes)
         XCTAssertEqual(view.autocapitalizationType, .sentences)
         #endif
         XCTAssertEqual(view.backgroundColor, .clear)
         XCTAssertEqual(view.contentCompressionResistancePriority(for: .horizontal), .defaultLow)
-        #if os(iOS) || targetEnvironment(macCatalyst) || os(tvOS)
+        #if iOS || os(tvOS)
         XCTAssertEqual(view.spellCheckingType, .no)
         XCTAssertEqual(view.textColor, nil)
         #elseif os(macOS)
