@@ -10,11 +10,11 @@
 import UIKit
 #endif
 
-#if os(macOS) && !targetEnvironment(macCatalyst)
+#if macOS
 import AppKit
 #endif
 
-#if os(iOS) || targetEnvironment(macCatalyst) || os(macOS) || os(tvOS)
+#if iOS || macOS || os(tvOS)
 import RichTextKit
 import XCTest
 
@@ -44,7 +44,7 @@ final class RichTextViewComponent_StylesTests: XCTestCase {
     func testIsCurrentTextBoldWorksForSelectedRange() {
         textView.setSelectedRange(selectedRange)
         textView.setCurrentRichTextStyle(.bold, to: true)
-        #if os(macOS) && !targetEnvironment(macCatalyst)   // TODO: Why did this stop working for iOS and tvOS
+        #if macOS   // TODO: Why did this stop working for iOS and tvOS
         XCTAssertTrue(textView.currentRichTextStyles.hasStyle(.bold))
         #endif
         textView.setSelectedRange(noRange)
@@ -54,7 +54,7 @@ final class RichTextViewComponent_StylesTests: XCTestCase {
     func testIsCurrentTextItalicWorksForSelectedRange() {
         textView.setSelectedRange(selectedRange)
         textView.setCurrentRichTextStyle(.italic, to: true)
-        #if os(macOS) && !targetEnvironment(macCatalyst)   // TODO: Why did this stop working for iOS and tvOS
+        #if macOS   // TODO: Why did this stop working for iOS and tvOS
         XCTAssertTrue(textView.currentRichTextStyles.hasStyle(.italic))
         #endif
         textView.setSelectedRange(noRange)
@@ -72,7 +72,7 @@ final class RichTextViewComponent_StylesTests: XCTestCase {
     func testIsCurrentTextUnderlinedWorksForNoSelectedRange() {
         textView.setSelectedRange(noRange)
         textView.setCurrentRichTextStyle(.underlined, to: true)
-        #if os(iOS) || targetEnvironment(macCatalyst) || os(tvOS)
+        #if iOS || os(tvOS)
         XCTAssertTrue(textView.currentRichTextStyles.hasStyle(.underlined))
         #endif
         textView.setSelectedRange(selectedRange)

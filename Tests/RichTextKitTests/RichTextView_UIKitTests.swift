@@ -6,7 +6,7 @@
 //  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
 //
 
-#if os(iOS) || targetEnvironment(macCatalyst) || os(tvOS)
+#if iOS || os(tvOS)
 import XCTest
 @testable import RichTextKit
 

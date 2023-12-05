@@ -24,7 +24,12 @@ let package = Package(
         .target(
             name: "RichTextKit",
             dependencies: [],
-            resources: [.process("Resources")]),
+            resources: [.process("Resources")],
+            swiftSettings: [
+                .define("macOS", .when(platforms: [.macOS])),
+                .define("iOS", .when(platforms: [.iOS, .macCatalyst])),
+            ]
+        ),
         .testTarget(
             name: "RichTextKitTests",
             dependencies: ["RichTextKit", "MockingKit"]),

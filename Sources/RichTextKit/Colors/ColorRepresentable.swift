@@ -6,7 +6,7 @@
 //  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
 //
 
-#if os(macOS) && !targetEnvironment(macCatalyst)
+#if macOS
 import AppKit
 
 /**
@@ -17,7 +17,7 @@ public typealias ColorRepresentable = NSColor
 #endif
 
 
-#if os(iOS) || targetEnvironment(macCatalyst) || os(tvOS) || os(watchOS)
+#if iOS || os(tvOS) || os(watchOS)
 import UIKit
 
 /**

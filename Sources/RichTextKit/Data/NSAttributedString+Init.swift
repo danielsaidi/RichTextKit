@@ -88,7 +88,7 @@ private extension NSAttributedString {
             documentAttributes: &attributes)
     }
 
-    #if os(macOS) && !targetEnvironment(macCatalyst)
+    #if macOS
     /**
      Try to parse ``RichTextDataFormat/word`` data.
      */
@@ -116,7 +116,7 @@ private extension NSAttributedString {
         [.documentType: NSAttributedString.DocumentType.rtfd]
     }
 
-    #if os(macOS) && !targetEnvironment(macCatalyst)
+    #if macOS
     static var wordDataAttributes: [DocumentAttributeKey: Any] {
         [.documentType: NSAttributedString.DocumentType.docFormat]
     }
