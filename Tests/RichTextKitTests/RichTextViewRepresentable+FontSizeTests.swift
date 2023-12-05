@@ -10,11 +10,11 @@
 import UIKit
 #endif
 
-#if os(macOS) && !targetEnvironment(macCatalyst)
+#if macOS
 import AppKit
 #endif
 
-#if os(iOS) || targetEnvironment(macCatalyst) || os(macOS) || os(tvOS)
+#if iOS || macOS || os(tvOS)
 import RichTextKit
 import XCTest
 
@@ -57,7 +57,7 @@ final class RichTextViewComponent_FontSizeTests: XCTestCase {
     func testCurrentFontWorksForNoSelectedRange() {
         textView.setSelectedRange(noRange)
         textView.setCurrentFont(font)
-        #if os(iOS) || targetEnvironment(macCatalyst) || os(tvOS)
+        #if iOS || os(tvOS)
         XCTAssertEqual(textView.currentFont, font)
         XCTAssertEqual(textView.currentFontName, font.fontName)
         assertEqualFont(textView.currentRichTextAttribute(.font))
@@ -79,7 +79,7 @@ final class RichTextViewComponent_FontSizeTests: XCTestCase {
     func testCurrentFontSizeWorksForNoSelectedRange() {
         textView.setSelectedRange(noRange)
         textView.setCurrentFontSize(size)
-        #if os(iOS) || targetEnvironment(macCatalyst) || os(tvOS)
+        #if iOS || os(tvOS)
         XCTAssertEqual(textView.currentFontSize, size)
         assertEqualFontSize(textView.currentRichTextAttribute(.font))
         #endif

@@ -29,7 +29,7 @@ public extension RichTextPdfDataReader {
      a ``PdfDataError/unsupportedPlatform`` error.
      */
     func richTextPdfData(configuration: PdfPageConfiguration = .standard) throws -> Data {
-        #if os(iOS) || targetEnvironment(macCatalyst)
+        #if iOS
         try richText.iosPdfData(for: configuration)
         #elseif os(macOS)
         try richText.macosPdfData(for: configuration)
@@ -39,7 +39,7 @@ public extension RichTextPdfDataReader {
     }
 }
 
-#if os(macOS) && !targetEnvironment(macCatalyst)
+#if macOS
 import AppKit
 
 private extension NSAttributedString {
@@ -100,7 +100,7 @@ private extension NSAttributedString {
 }
 #endif
 
-#if os(iOS) || targetEnvironment(macCatalyst)
+#if iOS
 import UIKit
 
 private extension NSAttributedString {

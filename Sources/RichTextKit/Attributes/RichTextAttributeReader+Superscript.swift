@@ -6,7 +6,7 @@
 //  Copyright © 2023 Daniel Saidi. All rights reserved.
 //
 
-#if os(macOS) && !targetEnvironment(macCatalyst)
+#if macOS
 import Foundation
 
 public extension RichTextAttributeReader {

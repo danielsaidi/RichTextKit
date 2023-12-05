@@ -109,7 +109,7 @@ public extension RichTextStyle {
 }
 #endif
 
-#if os(macOS) && !targetEnvironment(macCatalyst)
+#if macOS
 public extension RichTextStyle {
 
     /// The symbolic font traits for the trait, if any.
