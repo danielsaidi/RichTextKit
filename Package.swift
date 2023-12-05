@@ -24,8 +24,7 @@ let package = Package(
         .target(
             name: "RichTextKit",
             dependencies: [],
-            resources: [.process("Resources")]
-        ),
+            resources: [.process("Resources")]),
         .testTarget(
             name: "RichTextKitTests",
             dependencies: ["RichTextKit", "MockingKit"]),
