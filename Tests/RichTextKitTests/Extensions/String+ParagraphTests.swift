@@ -10,19 +10,18 @@ import RichTextKit
 import XCTest
 
 final class String_ParagraphTests: XCTestCase {
-    
-    let none = "foo bar baz"
-    let single = "foo\nbar baz"
-    let multi = "foo\nbar\rbaz"
 
-    func currentResult(for string: String, from location: UInt) -> UInt {
+    private let none = "foo bar baz"
+    private let single = "foo\nbar baz"
+    private let multi = "foo\nbar\rbaz"
+
+    private func currentResult(for string: String, from location: UInt) -> UInt {
         string.findIndexOfCurrentParagraph(from: location)
     }
 
-    func nextTesult(for string: String, from location: UInt) -> UInt {
+    private func nextResult(for string: String, from location: UInt) -> UInt {
         string.findIndexOfNextParagraph(from: location)
     }
-
 
     func testIndexOfCurrentParagraphIsCorrectForEmptyString() {
         XCTAssertEqual(currentResult(for: "", from: 0), 0)
@@ -49,25 +48,25 @@ final class String_ParagraphTests: XCTestCase {
 
 
     func testIndexOfNextParagraphIsCorrectForEmptyString() {
-        XCTAssertEqual(nextTesult(for: "", from: 0), 0)
-        XCTAssertEqual(nextTesult(for: "", from: 20), 0)
+        XCTAssertEqual(nextResult(for: "", from: 0), 0)
+        XCTAssertEqual(nextResult(for: "", from: 20), 0)
     }
 
     func testIndexOfNextParagraphIsCorrectForStringWithNoNextParagraph() {
-        XCTAssertEqual(nextTesult(for: none, from: 0), 0)
-        XCTAssertEqual(nextTesult(for: none, from: 10), 0)
-        XCTAssertEqual(nextTesult(for: none, from: 20), 0)
+        XCTAssertEqual(nextResult(for: none, from: 0), 0)
+        XCTAssertEqual(nextResult(for: none, from: 10), 0)
+        XCTAssertEqual(nextResult(for: none, from: 20), 0)
     }
 
     func testIndexOfNextParagraphIsCorrectForStringWithSingleNextParagraph() {
-        XCTAssertEqual(nextTesult(for: single, from: 0), 4)
-        XCTAssertEqual(nextTesult(for: single, from: 5), 4)
-        XCTAssertEqual(nextTesult(for: single, from: 10), 4)
+        XCTAssertEqual(nextResult(for: single, from: 0), 4)
+        XCTAssertEqual(nextResult(for: single, from: 5), 4)
+        XCTAssertEqual(nextResult(for: single, from: 10), 4)
     }
 
     func testIndexOfNextParagraphIsCorrectForStringWithMultipleNextParagraphs() {
-        XCTAssertEqual(nextTesult(for: multi, from: 0), 4)
-        XCTAssertEqual(nextTesult(for: multi, from: 5), 8)
-        XCTAssertEqual(nextTesult(for: multi, from: 10), 8)
+        XCTAssertEqual(nextResult(for: multi, from: 0), 4)
+        XCTAssertEqual(nextResult(for: multi, from: 5), 8)
+        XCTAssertEqual(nextResult(for: multi, from: 10), 8)
     }
 }

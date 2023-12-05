@@ -20,12 +20,14 @@ import XCTest
 
 final class RichTextViewComponent_StylesTests: XCTestCase {
 
-    var textView: RichTextViewComponent!
+    private var textView: RichTextViewComponent!
 
-    let noRange = NSRange(location: 0, length: 0)
-    let selectedRange = NSRange(location: 4, length: 3)
+    private let noRange = NSRange(location: 0, length: 0)
+    private let selectedRange = NSRange(location: 4, length: 3)
 
     override func setUp() {
+        super.setUp()
+
         textView = RichTextView()
         textView.setup(
             with: NSAttributedString(string: "foo bar baz"),
@@ -33,6 +35,11 @@ final class RichTextViewComponent_StylesTests: XCTestCase {
         )
     }
 
+    override func tearDown() {
+        textView = nil
+        
+        super.tearDown()
+    }
 
     func testIsCurrentTextBoldWorksForSelectedRange() {
         textView.setSelectedRange(selectedRange)

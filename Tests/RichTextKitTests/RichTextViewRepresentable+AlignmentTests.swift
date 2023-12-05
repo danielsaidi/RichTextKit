@@ -20,14 +20,16 @@ import XCTest
 
 final class RichTextViewComponent_AlignmentTests: XCTestCase {
 
-    var textView: RichTextViewComponent!
+    private var textView: RichTextViewComponent!
 
-    let alignment = RichTextAlignment.right
-    let startRange = NSRange(location: 0, length: 1)
-    let selectedRange = NSRange(location: 4, length: 3)
-    let secondRowRange = NSRange(location: 14, length: 3)
+    private let alignment = RichTextAlignment.right
+    private let startRange = NSRange(location: 0, length: 1)
+    private let selectedRange = NSRange(location: 4, length: 3)
+    private let secondRowRange = NSRange(location: 14, length: 3)
 
     override func setUp() {
+        super.setUp()
+
         textView = RichTextView()
         textView.setup(
             with: NSAttributedString(string: "foo bar baz\nfoo bar baz"),
@@ -35,13 +37,19 @@ final class RichTextViewComponent_AlignmentTests: XCTestCase {
         )
     }
 
-    func assertEqualAlignment(_ attr: Any?) {
+    override func tearDown() {
+        textView = nil
+
+        super.tearDown()
+    }
+
+    private func assertEqualAlignment(_ attr: Any?) {
         let paragraphAlignment = (attr as? NSMutableParagraphStyle)?.alignment ?? .left
         let align = RichTextAlignment(paragraphAlignment)
         XCTAssertEqual(align, alignment)
     }
 
-    func assertNonEqualAlignment(_ attr: Any?) {
+    private func assertNonEqualAlignment(_ attr: Any?) {
         let paragraphAlignment = (attr as? NSMutableParagraphStyle)?.alignment ?? .left
         let align = RichTextAlignment(paragraphAlignment)
         XCTAssertNotEqual(align, alignment)

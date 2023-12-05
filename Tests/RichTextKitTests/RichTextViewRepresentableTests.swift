@@ -12,17 +12,23 @@ import XCTest
 
 final class RichTextViewComponentTests: XCTestCase {
 
-    var view: RichTextView!
+    private var view: RichTextView!
 
     override func setUp() {
+        super.setUp()
+
         view = RichTextView()
     }
+    
+    override func tearDown() {
+        view = nil
 
+        super.tearDown()
+    }
 
     func testHighlightingStyleIsStandardByDefault() {
         XCTAssertEqual(view.highlightingStyle, .standard)
     }
-
 
     func testAttributedStringIsProperlySetAndRetrieved() {
         let string = NSAttributedString(string: "foo bar baz")
@@ -30,8 +36,7 @@ final class RichTextViewComponentTests: XCTestCase {
         XCTAssertEqual(view.attributedString.string, "foo bar baz")
     }
 
-
-    func testTextisProperlyRetrieved() {
+    func testTextIsProperlyRetrieved() {
         let string = NSAttributedString(string: "foo bar baz")
         view.attributedString = string
         XCTAssertEqual(view.richText.string, "foo bar baz")

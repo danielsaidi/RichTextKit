@@ -13,13 +13,15 @@ import XCTest
 
 final class RichTextCoordinator_SubscriptionsTests: XCTestCase {
     
-    var text: NSAttributedString!
-    var textBinding: Binding<NSAttributedString>!
-    var textView: RichTextView!
-    var textContext: RichTextContext!
-    var coordinator: RichTextCoordinator!
+    private var text: NSAttributedString!
+    private var textBinding: Binding<NSAttributedString>!
+    private var textView: RichTextView!
+    private var textContext: RichTextContext!
+    private var coordinator: RichTextCoordinator!
 
     override func setUp() {
+        super.setUp()
+
         text = NSAttributedString(string: "foo bar baz")
         textBinding = Binding(get: { self.text }, set: { self.text = $0 })
         textView = RichTextView()
@@ -32,6 +34,15 @@ final class RichTextCoordinator_SubscriptionsTests: XCTestCase {
         textView.setCurrentTextAlignment(.justified)
     }
 
+    override func tearDown() {
+        text = nil
+        textBinding = nil
+        textView = nil
+        textContext = nil
+        coordinator = nil
+        
+        super.tearDown()
+    }
 
     func testTextCoordinatorIsNeededForUpdatesToTakePlace() {
         XCTAssertNotNil(coordinator)

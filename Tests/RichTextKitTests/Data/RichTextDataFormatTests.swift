@@ -12,44 +12,42 @@ import XCTest
 
 final class RichTextDataFormatTests: XCTestCase {
 
-    let vendorType = UTType(exportedAs: "fooType")
+    private let vendorType = UTType(exportedAs: "fooType")
 
-    lazy var vendorFormat = RichTextDataFormat.vendorArchivedData(
+    private lazy var vendorFormat = RichTextDataFormat.vendorArchivedData(
         id: "foo",
         fileExtension: "fooFile",
         fileFormatText: "Foo File (*.foo)",
         uniformType: vendorType
     )
 
-    func idResult(for format: RichTextDataFormat) -> String {
+    private func idResult(for format: RichTextDataFormat) -> String {
         format.id
     }
 
-    func isArchivedDataResult(for format: RichTextDataFormat) -> Bool {
+    private func isArchivedDataResult(for format: RichTextDataFormat) -> Bool {
         format.isArchivedDataFormat
     }
 
-    func formatResult(for format: RichTextDataFormat) -> [RichTextDataFormat] {
+    private func formatResult(for format: RichTextDataFormat) -> [RichTextDataFormat] {
         format.convertibleFormats
     }
 
-    func extensionResult(for format: RichTextDataFormat) -> String {
+    private func extensionResult(for format: RichTextDataFormat) -> String {
         format.standardFileExtension
     }
 
-    func imageResult(for format: RichTextDataFormat) -> Bool {
+    private func imageResult(for format: RichTextDataFormat) -> Bool {
         format.supportsImages
     }
 
-    func uniformTypeResult(for format: RichTextDataFormat) -> UTType {
+    private func uniformTypeResult(for format: RichTextDataFormat) -> UTType {
         format.uniformType
     }
-
 
     func testLibraryFormatsReturnAllNonVendorFormats() {
         XCTAssertEqual(RichTextDataFormat.libraryFormats, [.archivedData, .plainText, .rtf])
     }
-
 
     func testIdIsValidForAllFormats() {
         XCTAssertEqual(idResult(for: .archivedData), "archivedData")
@@ -65,7 +63,7 @@ final class RichTextDataFormatTests: XCTestCase {
         XCTAssertEqual(isArchivedDataResult(for: vendorFormat), true)
     }
 
-    func testConvertableFormatsAreValidForAllFormats() {
+    func testConvertibleFormatsAreValidForAllFormats() {
         XCTAssertEqual(formatResult(for: .archivedData), [.plainText, .rtf])
         XCTAssertEqual(formatResult(for: .plainText), [.archivedData, .rtf])
         XCTAssertEqual(formatResult(for: .rtf), [.archivedData, .plainText])

@@ -24,8 +24,4 @@ final class RichTextAttributeReader_AlignmentTests: XCTestCase {
     }
 }
 
-private class TestReader: RichTextAttributeReader {
-
-    var attributedString = NSAttributedString(string: "foo bar")
-}
 #endif

@@ -11,7 +11,6 @@ import RichTextKit
 import XCTest
 
 final class StandardFontSizeProviderTests: XCTestCase {
-    
     func testStandardRichTextFontSize() {
         XCTAssertEqual(CGFloat.standardRichTextFontSize, 16)
         CGFloat.standardRichTextFontSize = .standardRichTextFontSize

@@ -10,7 +10,6 @@ import RichTextKit
 import XCTest
 
 final class RichTextViewHighlightingStyleTests: XCTestCase {
-    
     func testStandardHighlightingStyleIsValid() {
         let style = RichTextHighlightingStyle.standard
         XCTAssertEqual(style.backgroundColor, .clear)

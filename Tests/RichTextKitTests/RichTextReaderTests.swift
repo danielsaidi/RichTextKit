@@ -11,8 +11,7 @@ import XCTest
 
 final class RichTextReaderTests: XCTestCase {
     
-    let string = NSAttributedString(string: "foo bar baz")
-
+    private let string = NSAttributedString(string: "foo bar baz")
 
     func testRichTextAtRangeIsValidForEmptyRangeInEmptyString() {
         let range = NSRange(location: 0, length: 0)

@@ -10,7 +10,6 @@ import RichTextKit
 import XCTest
 
 final class NSAttributedString_EmptyTests: XCTestCase {
-    
     func testEmptyAttributedString() {
         let string = NSAttributedString.empty
         XCTAssertEqual(string.string, "")

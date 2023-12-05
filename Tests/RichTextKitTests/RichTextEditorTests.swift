@@ -13,13 +13,15 @@ import XCTest
 
 final class RichTextEditorTests: XCTestCase {
 
-    var text: NSAttributedString!
-    var textBinding: Binding<NSAttributedString>!
-    var editor: RichTextEditor!
-    var context: RichTextContext!
-    var coordinator: RichTextCoordinator!
+    private var text: NSAttributedString!
+    private var textBinding: Binding<NSAttributedString>!
+    private var editor: RichTextEditor!
+    private var context: RichTextContext!
+    private var coordinator: RichTextCoordinator!
 
     override func setUp() {
+        super.setUp()
+
         text = NSAttributedString(string: "foo bar baz")
         textBinding = Binding(get: { self.text }, set: { self.text = $0 })
         context = RichTextContext()
@@ -27,6 +29,16 @@ final class RichTextEditorTests: XCTestCase {
             text: textBinding,
             context: context)
         coordinator = editor.makeCoordinator()
+    }
+
+    override func tearDown() {
+        text = nil
+        textBinding = nil
+        editor = nil
+        context = nil
+        coordinator = nil
+
+        super.tearDown()
     }
 
     func testRichTextPresenterUsesContextSelectedRange() {
