@@ -10,11 +10,11 @@
 import UIKit
 #endif
 
-#if os(macOS)
+#if os(macOS) && !targetEnvironment(macCatalyst)
 import AppKit
 #endif
 
-#if os(iOS) || os(macOS) || os(tvOS)
+#if os(iOS) || targetEnvironment(macCatalyst) || os(macOS) || os(tvOS)
 import RichTextKit
 import XCTest
 
@@ -54,7 +54,7 @@ final class RichTextViewComponent_AlignmentTests: XCTestCase {
         XCTAssertEqual(textView.currentTextAlignment, alignment)
         assertEqualAlignment(textView.currentRichTextAttributes[.paragraphStyle])
         assertEqualAlignment(textView.richTextAttributes(at: selectedRange)[.paragraphStyle])
-        #if os(iOS) || os(tvOS)
+        #if os(iOS) || targetEnvironment(macCatalyst) || os(tvOS)
         assertEqualAlignment(textView.typingAttributes[.paragraphStyle])
         #elseif os(macOS)
         assertNonEqualAlignment(textView.typingAttributes[.paragraphStyle])
@@ -67,7 +67,7 @@ final class RichTextViewComponent_AlignmentTests: XCTestCase {
         XCTAssertEqual(textView.currentTextAlignment, alignment)
         assertEqualAlignment(textView.currentRichTextAttributes[.paragraphStyle])
         assertEqualAlignment(textView.richTextAttributes(at: selectedRange)[.paragraphStyle])
-        #if os(iOS) || os(tvOS)
+        #if os(iOS) || targetEnvironment(macCatalyst) || os(tvOS)
         assertEqualAlignment(textView.typingAttributes[.paragraphStyle])
         #elseif os(macOS)
         assertNonEqualAlignment(textView.typingAttributes[.paragraphStyle])
@@ -80,7 +80,7 @@ final class RichTextViewComponent_AlignmentTests: XCTestCase {
         XCTAssertEqual(textView.currentTextAlignment, alignment)
         assertEqualAlignment(textView.currentRichTextAttributes[.paragraphStyle])
         assertNonEqualAlignment(textView.richTextAttributes(at: secondRowRange)[.paragraphStyle])
-        #if os(iOS) || os(tvOS)
+        #if os(iOS) || targetEnvironment(macCatalyst) || os(tvOS)
         assertEqualAlignment(textView.typingAttributes[.paragraphStyle])
         #elseif os(macOS)
         assertNonEqualAlignment(textView.typingAttributes[.paragraphStyle])

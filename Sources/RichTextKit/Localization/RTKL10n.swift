@@ -104,7 +104,7 @@ public extension RTKL10n {
     }
 }
 
-#if os(iOS) || os(tvOS)
+#if os(iOS) || targetEnvironment(macCatalyst) || os(tvOS)
 struct RTKL10n_Previews: PreviewProvider {
 
     static var locales: [Locale] = [

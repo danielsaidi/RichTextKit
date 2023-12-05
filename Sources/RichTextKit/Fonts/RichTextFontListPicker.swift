@@ -105,7 +105,7 @@ private extension View {
 
     @ViewBuilder
     func withTitle(_ title: String) -> some View {
-        #if os(iOS) || os(tvOS) || os(watchOS)
+        #if os(iOS) || targetEnvironment(macCatalyst) || os(tvOS) || os(watchOS)
         self.navigationBarTitle(title)
         #else
         self

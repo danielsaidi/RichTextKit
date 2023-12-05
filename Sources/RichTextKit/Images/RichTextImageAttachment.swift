@@ -6,15 +6,15 @@
 //  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
 //
 
-#if os(iOS) || os(tvOS)
+#if os(iOS) || targetEnvironment(macCatalyst) || os(tvOS)
 import UIKit
 #endif
 
-#if os(macOS)
+#if os(macOS) && !targetEnvironment(macCatalyst)
 import AppKit
 #endif
 
-#if os(iOS) || os(tvOS) || os(macOS)
+#if os(iOS) || targetEnvironment(macCatalyst) || os(tvOS) || os(macOS)
 import UniformTypeIdentifiers
 
 /**
@@ -156,7 +156,7 @@ open class RichTextImageAttachment: NSTextAttachment {
     public override class var supportsSecureCoding: Bool { true }
 
     
-    #if os(iOS) || os(tvOS)
+    #if os(iOS) || targetEnvironment(macCatalyst) || os(tvOS)
     /**
      Get or set the attachment image.
 
@@ -174,7 +174,7 @@ open class RichTextImageAttachment: NSTextAttachment {
     }
     #endif
     
-    #if os(macOS)
+    #if os(macOS) && !targetEnvironment(macCatalyst)
     /**
      Get or set the attachment image.
 

@@ -1,4 +1,4 @@
-#if os(iOS) || os(macOS)
+#if os(iOS) || targetEnvironment(macCatalyst) || os(macOS)
 import SwiftUI
 
 @available(*, deprecated, renamed: "init(icon:value:showIcon:quickColors:)")

@@ -10,11 +10,11 @@
 import UIKit
 #endif
 
-#if os(macOS)
+#if os(macOS) && !targetEnvironment(macCatalyst)
 import AppKit
 #endif
 
-#if os(iOS) || os(macOS) || os(tvOS)
+#if os(iOS) || targetEnvironment(macCatalyst) || os(macOS) || os(tvOS)
 import RichTextKit
 import XCTest
 
@@ -55,7 +55,7 @@ final class RichTextViewComponent_ColorTests: XCTestCase {
     func testCurrentBackgroundColorWorksForNoSelectedRange() {
         textView.setSelectedRange(noRange)
         textView.setCurrentColor(.background, to: color)
-        #if os(iOS) || os(tvOS)
+        #if os(iOS) || targetEnvironment(macCatalyst) || os(tvOS)
         XCTAssertEqual(textView.currentColor(.background), color)
         assertEqualColor(textView.currentRichTextAttributes[.backgroundColor])
         #endif
@@ -76,7 +76,7 @@ final class RichTextViewComponent_ColorTests: XCTestCase {
     func testCurrentForegroundColorWorksForNoSelectedRange() {
         textView.setSelectedRange(noRange)
         textView.setCurrentColor(.foreground, to: color)
-        #if os(iOS) || os(tvOS)
+        #if os(iOS) || targetEnvironment(macCatalyst) || os(tvOS)
         XCTAssertEqual(textView.currentColor(.foreground), color)
         assertEqualColor(textView.currentRichTextAttributes[.foregroundColor])
         #endif

@@ -6,7 +6,7 @@
 //  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
 //
 
-#if os(iOS) || os(macOS) || os(tvOS)
+#if os(iOS) || targetEnvironment(macCatalyst) || os(macOS) || os(tvOS)
 import SwiftUI
 import XCTest
 
@@ -60,7 +60,7 @@ final class RichTextCoordinatorTests: XCTestCase {
         XCTAssertEqual(context.isItalic, view.currentRichTextStyles.hasStyle(.italic))
         XCTAssertEqual(context.isUnderlined, view.currentRichTextStyles.hasStyle(.underlined))
         XCTAssertEqual(context.selectedRange, view.selectedRange)
-        #if os(iOS) || os(tvOS)
+        #if os(iOS) || targetEnvironment(macCatalyst) || os(tvOS)
         XCTAssertEqual(context.textAlignment, view.currentTextAlignment)
         #elseif os(macOS)
         XCTAssertEqual(context.textAlignment, macOSAlignment)
@@ -68,7 +68,7 @@ final class RichTextCoordinatorTests: XCTestCase {
     }
 
 
-    #if os(iOS) || os(tvOS)
+    #if os(iOS) || targetEnvironment(macCatalyst) || os(tvOS)
 
     func testTextViewDelegateHandlesTextViewDidBeginEditing() {
         coordinator.textViewDidBeginEditing(view)
