@@ -40,8 +40,11 @@ public struct RichTextColorPicker: View {
     private let icon: Image?
     private let value: Binding<Color>
     private let quickColors: [Color]
-
+    
     private let spacing = 10.0
+
+    @Environment(\.colorScheme)
+    private var colorScheme
 
     public var body: some View {
         HStack(spacing: 0) {
@@ -128,6 +131,18 @@ private extension RichTextColorPicker {
         Divider()
             .padding(0)
             .frame(maxHeight: 30)
+    }
+}
+
+private extension ColorScheme {
+    
+    func textColor(for color: Color) -> Color {
+        let usePrimary = usePrimaryColor(for: color)
+        return usePrimary ? .primary : color
+    }
+    
+    func usePrimaryColor(for color: Color) -> Bool {
+        (self == .dark && color == .white) || (self == .light && color == .black)
     }
 }
 
