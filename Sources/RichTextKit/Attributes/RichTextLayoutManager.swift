@@ -38,7 +38,6 @@ public final class RichTextLayoutManager: NSLayoutManager {
             using: { [weak textStorage] value, range, _ in
                 if let value = value as? CustomLinkAttributes, let link = value.link {
                     textStorage?.addAttribute(.link, value: link, range: range)
-                    textStorage?.addAttribute(.font, value: FontRepresentable.standardRichTextFont, range: range)
                     textStorage?.addAttribute(.foregroundColor, value: value.color, range: range)
                 }
             }
