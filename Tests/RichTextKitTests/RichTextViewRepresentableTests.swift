@@ -10,7 +10,7 @@
 import RichTextKit
 import XCTest
 
-class RichTextViewComponentTests: XCTestCase {
+final class RichTextViewComponentTests: XCTestCase {
 
     var view: RichTextView!
 

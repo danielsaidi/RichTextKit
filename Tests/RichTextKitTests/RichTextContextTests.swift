@@ -9,7 +9,7 @@
 import RichTextKit
 import XCTest
 
-class RichTextContextTests: XCTestCase {
+final class RichTextContextTests: XCTestCase {
     
     func testInitializerSetsDefaultValues() {
         let context = RichTextContext()

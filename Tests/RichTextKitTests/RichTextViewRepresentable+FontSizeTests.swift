@@ -18,7 +18,7 @@ import AppKit
 import RichTextKit
 import XCTest
 
-class RichTextViewComponent_FontSizeTests: XCTestCase {
+final class RichTextViewComponent_FontSizeTests: XCTestCase {
 
     var textView: RichTextViewComponent!
 

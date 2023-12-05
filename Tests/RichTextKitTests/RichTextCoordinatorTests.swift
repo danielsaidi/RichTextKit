@@ -12,7 +12,7 @@ import XCTest
 
 @testable import RichTextKit
 
-class RichTextCoordinatorTests: XCTestCase {
+final class RichTextCoordinatorTests: XCTestCase {
     
     var text: NSAttributedString!
     var textBinding: Binding<NSAttributedString>!

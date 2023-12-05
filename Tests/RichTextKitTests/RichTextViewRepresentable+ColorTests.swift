@@ -18,7 +18,7 @@ import AppKit
 import RichTextKit
 import XCTest
 
-class RichTextViewComponent_ColorTests: XCTestCase {
+final class RichTextViewComponent_ColorTests: XCTestCase {
 
     var textView: RichTextViewComponent!
 

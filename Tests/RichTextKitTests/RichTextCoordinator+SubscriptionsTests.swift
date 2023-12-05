@@ -11,7 +11,7 @@ import RichTextKit
 import SwiftUI
 import XCTest
 
-class RichTextCoordinator_SubscriptionsTests: XCTestCase {
+final class RichTextCoordinator_SubscriptionsTests: XCTestCase {
     
     var text: NSAttributedString!
     var textBinding: Binding<NSAttributedString>!

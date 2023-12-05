@@ -10,7 +10,7 @@ import RichTextKit
 import UniformTypeIdentifiers
 import XCTest
 
-class RichTextDataFormatTests: XCTestCase {
+final class RichTextDataFormatTests: XCTestCase {
 
     let vendorType = UTType(exportedAs: "fooType")
 

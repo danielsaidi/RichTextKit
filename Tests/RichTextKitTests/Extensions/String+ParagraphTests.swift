@@ -9,7 +9,7 @@
 import RichTextKit
 import XCTest
 
-class String_ParagraphTests: XCTestCase {
+final class String_ParagraphTests: XCTestCase {
     
     let none = "foo bar baz"
     let single = "foo\nbar baz"

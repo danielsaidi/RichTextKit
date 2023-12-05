@@ -9,7 +9,7 @@
 import RichTextKit
 import XCTest
 
-class RichTextPresenterTests: XCTestCase {
+final class RichTextPresenterTests: XCTestCase {
     
     var text: NSAttributedString!
     

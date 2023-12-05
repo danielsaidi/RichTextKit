@@ -10,7 +10,7 @@ import RichTextKit
 import SwiftUI
 import XCTest
 
-class RichTextStyleTests: XCTestCase {
+final class RichTextStyleTests: XCTestCase {
 
     func icon(for style: RichTextStyle) -> Image {
         style.icon

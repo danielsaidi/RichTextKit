@@ -10,7 +10,7 @@ import CoreGraphics
 import RichTextKit
 import XCTest
 
-class StandardFontSizeProviderTests: XCTestCase {
+final class StandardFontSizeProviderTests: XCTestCase {
     
     func testStandardRichTextFontSize() {
         XCTAssertEqual(CGFloat.standardRichTextFontSize, 16)

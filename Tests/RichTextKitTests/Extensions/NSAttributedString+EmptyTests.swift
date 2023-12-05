@@ -9,7 +9,7 @@
 import RichTextKit
 import XCTest
 
-class NSAttributedString_EmptyTests: XCTestCase {
+final class NSAttributedString_EmptyTests: XCTestCase {
     
     func testEmptyAttributedString() {
         let string = NSAttributedString.empty

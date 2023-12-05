@@ -18,7 +18,7 @@ import AppKit
 import RichTextKit
 import XCTest
 
-class RichTextViewComponent_AttributesTests: XCTestCase {
+final class RichTextViewComponent_AttributesTests: XCTestCase {
 
     var textView: RichTextViewComponent!
 

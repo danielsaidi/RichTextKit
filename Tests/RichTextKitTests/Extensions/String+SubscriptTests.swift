@@ -9,7 +9,7 @@
 import RichTextKit
 import XCTest
 
-class String_SubscriptTest: XCTestCase {
+final class String_SubscriptTest: XCTestCase {
     
     let string = "foo bar baz"
 

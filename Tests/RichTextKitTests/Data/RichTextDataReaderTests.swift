@@ -10,7 +10,7 @@ import RichTextKit
 import UniformTypeIdentifiers
 import XCTest
 
-class RichTextDataReaderWriterTests: XCTestCase {
+final class RichTextDataReaderWriterTests: XCTestCase {
 
     func testCanGenerateDataForArchivedFormat() {
         let string = NSAttributedString(string: "foo bar baz")

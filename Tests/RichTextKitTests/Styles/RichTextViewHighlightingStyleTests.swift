@@ -9,7 +9,7 @@
 import RichTextKit
 import XCTest
 
-class RichTextViewHighlightingStyleTests: XCTestCase {
+final class RichTextViewHighlightingStyleTests: XCTestCase {
     
     func testStandardHighlightingStyleIsValid() {
         let style = RichTextHighlightingStyle.standard
