@@ -21,30 +21,6 @@ final class RichTextDataFormatTests: XCTestCase {
         uniformType: vendorType
     )
 
-    private func idResult(for format: RichTextDataFormat) -> String {
-        format.id
-    }
-
-    private func isArchivedDataResult(for format: RichTextDataFormat) -> Bool {
-        format.isArchivedDataFormat
-    }
-
-    private func formatResult(for format: RichTextDataFormat) -> [RichTextDataFormat] {
-        format.convertibleFormats
-    }
-
-    private func extensionResult(for format: RichTextDataFormat) -> String {
-        format.standardFileExtension
-    }
-
-    private func imageResult(for format: RichTextDataFormat) -> Bool {
-        format.supportsImages
-    }
-
-    private func uniformTypeResult(for format: RichTextDataFormat) -> UTType {
-        format.uniformType
-    }
-
     func testLibraryFormatsReturnAllNonVendorFormats() {
         XCTAssertEqual(RichTextDataFormat.libraryFormats, [.archivedData, .plainText, .rtf])
     }
@@ -89,5 +65,31 @@ final class RichTextDataFormatTests: XCTestCase {
         XCTAssertEqual(uniformTypeResult(for: .plainText), .plainText)
         XCTAssertEqual(uniformTypeResult(for: .rtf), .rtf)
         XCTAssertEqual(uniformTypeResult(for: vendorFormat), vendorType)
+    }
+}
+
+private extension RichTextDataFormatTests {
+    func idResult(for format: RichTextDataFormat) -> String {
+        format.id
+    }
+
+    func isArchivedDataResult(for format: RichTextDataFormat) -> Bool {
+        format.isArchivedDataFormat
+    }
+
+    func formatResult(for format: RichTextDataFormat) -> [RichTextDataFormat] {
+        format.convertibleFormats
+    }
+
+    func extensionResult(for format: RichTextDataFormat) -> String {
+        format.standardFileExtension
+    }
+
+    func imageResult(for format: RichTextDataFormat) -> Bool {
+        format.supportsImages
+    }
+
+    func uniformTypeResult(for format: RichTextDataFormat) -> UTType {
+        format.uniformType
     }
 }

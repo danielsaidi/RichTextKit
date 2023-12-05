@@ -15,14 +15,6 @@ final class String_ParagraphTests: XCTestCase {
     private let single = "foo\nbar baz"
     private let multi = "foo\nbar\rbaz"
 
-    private func currentResult(for string: String, from location: UInt) -> UInt {
-        string.findIndexOfCurrentParagraph(from: location)
-    }
-
-    private func nextResult(for string: String, from location: UInt) -> UInt {
-        string.findIndexOfNextParagraph(from: location)
-    }
-
     func testIndexOfCurrentParagraphIsCorrectForEmptyString() {
         XCTAssertEqual(currentResult(for: "", from: 0), 0)
         XCTAssertEqual(currentResult(for: "", from: 20), 0)
@@ -68,5 +60,15 @@ final class String_ParagraphTests: XCTestCase {
         XCTAssertEqual(nextResult(for: multi, from: 0), 4)
         XCTAssertEqual(nextResult(for: multi, from: 5), 8)
         XCTAssertEqual(nextResult(for: multi, from: 10), 8)
+    }
+}
+
+private extension String_ParagraphTests {
+    func currentResult(for string: String, from location: UInt) -> UInt {
+        string.findIndexOfCurrentParagraph(from: location)
+    }
+
+    func nextResult(for string: String, from location: UInt) -> UInt {
+        string.findIndexOfNextParagraph(from: location)
     }
 }

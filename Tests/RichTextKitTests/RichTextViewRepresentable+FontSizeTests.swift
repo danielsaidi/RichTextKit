@@ -44,23 +44,6 @@ final class RichTextViewComponent_FontSizeTests: XCTestCase {
         super.tearDown()
     }
 
-    private func assertEqualFont(_ attr: Any?) {
-        XCTAssertEqual(attr as? FontRepresentable, font)
-    }
-
-    private func assertEqualFontSize(_ attr: Any?) {
-        XCTAssertEqual((attr as? FontRepresentable)?.pointSize, size)
-    }
-
-    private func assertNonEqualFont(_ attr: Any?) {
-        XCTAssertNotEqual(attr as? FontRepresentable, font)
-    }
-
-    private func assertNonEqualFontSize(_ attr: Any?) {
-        XCTAssertNotEqual((attr as? FontRepresentable)?.pointSize, size)
-    }
-
-
     func testCurrentFontWorksForSelectedRange() {
         textView.setSelectedRange(selectedRange)
         textView.setCurrentFont(font)
@@ -102,6 +85,24 @@ final class RichTextViewComponent_FontSizeTests: XCTestCase {
         #endif
         assertNonEqualFontSize(textView.richTextAttributes(at: selectedRange)[.font])
         assertEqualFontSize(textView.typingAttributes[.font])
+    }
+}
+
+private extension RichTextViewComponent_FontSizeTests {
+    func assertEqualFont(_ attr: Any?) {
+        XCTAssertEqual(attr as? FontRepresentable, font)
+    }
+
+    func assertEqualFontSize(_ attr: Any?) {
+        XCTAssertEqual((attr as? FontRepresentable)?.pointSize, size)
+    }
+
+    func assertNonEqualFont(_ attr: Any?) {
+        XCTAssertNotEqual(attr as? FontRepresentable, font)
+    }
+
+    func assertNonEqualFontSize(_ attr: Any?) {
+        XCTAssertNotEqual((attr as? FontRepresentable)?.pointSize, size)
     }
 }
 #endif

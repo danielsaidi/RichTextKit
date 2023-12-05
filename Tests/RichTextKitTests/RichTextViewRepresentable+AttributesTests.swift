@@ -42,23 +42,6 @@ final class RichTextViewComponent_AttributesTests: XCTestCase {
         super.tearDown()
     }
 
-    private func assertEqualAttribute(_ attr: Any?) {
-        XCTAssertEqual(attr as? FontRepresentable, font)
-    }
-
-    private func assertEqualAttributes(_ attr: [NSAttributedString.Key: Any]) {
-        assertEqualAttribute(attr[.font])
-    }
-
-    private func assertNonEqualAttribute(_ attr: Any?) {
-        XCTAssertNotEqual(attr as? FontRepresentable, font)
-    }
-
-    private func assertNonEqualAttributes(_ attr: [NSAttributedString.Key: Any]) {
-        assertNonEqualAttribute(attr[.font])
-    }
-
-
     func testTextAttributesIsValidForSelectedRange() {
         textView.setSelectedRange(selectedRange)
         textView.setCurrentRichTextAttribute(.font, to: font)
@@ -96,4 +79,23 @@ final class RichTextViewComponent_AttributesTests: XCTestCase {
         assertEqualAttribute(textView.typingAttributes[.font])
     }
 }
+
+private extension RichTextViewComponent_AttributesTests {
+    func assertEqualAttribute(_ attr: Any?) {
+        XCTAssertEqual(attr as? FontRepresentable, font)
+    }
+
+    func assertEqualAttributes(_ attr: [NSAttributedString.Key: Any]) {
+        assertEqualAttribute(attr[.font])
+    }
+
+    func assertNonEqualAttribute(_ attr: Any?) {
+        XCTAssertNotEqual(attr as? FontRepresentable, font)
+    }
+
+    func assertNonEqualAttributes(_ attr: [NSAttributedString.Key: Any]) {
+        assertNonEqualAttribute(attr[.font])
+    }
+}
+
 #endif
