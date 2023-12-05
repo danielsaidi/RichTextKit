@@ -59,7 +59,7 @@ struct MyView: View {
 }
 ```
 
-The editor uses a ``RichTextCoordinator`` to sync changes between the editor, the context, and the wrapped, platform-specific view. You can now use the context to change the text binding and its font, font size, colors, alignment etc. and observe context changes to update the UI.
+The editor uses a ``RichTextCoordinator`` to sync changes between the editor, context, and platform-specific view. You can use the context to change font, colors, alignment etc. and observe context changes to update the UI.
 
 For more information, please see the [getting started guide][Getting-Started].
 
