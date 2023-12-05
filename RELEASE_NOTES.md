@@ -10,6 +10,8 @@ Until then, minor updates may remove deprecated features and introduce breaking 
 
 Thanks to [@Mcrich23](https://github.com/Mcrich23), RichTextKit now supports Mac Catalyst.
 
+Thanks to [@msrutek-paylocity](https://github.com/msrutek-paylocity) the unit tests are in a much better shape. 
+
 
 
 ## 0.9.2
