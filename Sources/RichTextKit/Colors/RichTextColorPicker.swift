@@ -48,8 +48,10 @@ public struct RichTextColorPicker: View {
     private let value: Binding<Color>
     private let quickColors: [Color]
     
-    @Environment(\.colorScheme) var colorScheme
     private let spacing = 10.0
+    
+    @Environment(\.colorScheme)
+    private var colorScheme
 
     public var body: some View {
         HStack(spacing: 0) {
