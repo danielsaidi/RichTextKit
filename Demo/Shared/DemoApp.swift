@@ -15,7 +15,7 @@ struct DemoApp: App {
         WindowGroup {
             ContentView()
         }.commands {
-            #if macOS
+            #if os(macOS) && !targetEnvironment(macCatalyst)
             AboutCommand()
             RichTextFormatCommandMenu()
             RichTextShareCommandMenu(

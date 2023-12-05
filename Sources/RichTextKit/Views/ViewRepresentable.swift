@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-#if iOS || os(tvOS)
+#if os(iOS) || targetEnvironment(macCatalyst) || os(tvOS)
 import UIKit
 
 /**
@@ -18,7 +18,7 @@ import UIKit
 typealias ViewRepresentable = UIViewRepresentable
 #endif
 
-#if macOS
+#if os(macOS) && !targetEnvironment(macCatalyst)
 import AppKit
 
 /**

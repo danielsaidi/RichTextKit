@@ -6,7 +6,7 @@
 //  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
 //
 
-#if iOS || macOS
+#if os(iOS) || targetEnvironment(macCatalyst) || os(macOS)
 import SwiftUI
 
 /**
@@ -59,7 +59,7 @@ private extension RichTextActionButtonGroup {
     var groupWidth: CGFloat? {
         if isGreedy { return nil }
         let count = Double(actions.count)
-        #if macOS
+        #if os(macOS) && !targetEnvironment(macCatalyst)
         return 30 * count
         #else
         return 50 * count

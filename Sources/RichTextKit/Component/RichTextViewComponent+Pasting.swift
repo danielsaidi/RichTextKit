@@ -62,7 +62,7 @@ public extension RichTextViewComponent {
         at index: Int,
         moveCursorToPastedContent move: Bool = false
     ) {
-        #if iOS || os(tvOS) || os(macOS)
+        #if os(iOS) || targetEnvironment(macCatalyst) || os(tvOS) || os(macOS)
         guard validateImageInsertion(for: imagePasteConfiguration) else { return }
         let items = images.count * 2   // The number of inserted "items" is the images and a newline for each
         let insertRange = NSRange(location: index, length: 0)
@@ -118,7 +118,7 @@ public extension RichTextViewComponent {
     }
 }
 
-#if iOS || os(tvOS) || os(macOS)
+#if os(iOS) || targetEnvironment(macCatalyst) || os(tvOS) || os(macOS)
 private extension RichTextViewComponent {
 
     func getAttachmentString(

@@ -6,7 +6,7 @@
 //  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
 //
 
-#if iOS || macOS
+#if os(iOS) || targetEnvironment(macCatalyst) || os(macOS)
 import SwiftUI
 
 /**
@@ -42,7 +42,7 @@ public struct RichTextFontSizePickerStack: View {
     private var context: RichTextContext
 
     public var body: some View {
-        #if iOS
+        #if os(iOS) || targetEnvironment(macCatalyst)
         HStack(spacing: 2) {
             decreaseButton
             picker

@@ -6,7 +6,7 @@
 //  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
 //
 
-#if iOS || macOS || os(tvOS)
+#if os(iOS) || targetEnvironment(macCatalyst) || os(macOS) || os(tvOS)
 import SwiftUI
 
 extension RichTextCoordinator {
@@ -320,13 +320,13 @@ internal extension RichTextCoordinator {
     func setIsEditing(to newValue: Bool) {
         if newValue == textView.isFirstResponder { return }
         if newValue {
-#if iOS
+#if os(iOS) || targetEnvironment(macCatalyst)
             textView.becomeFirstResponder()
 #else
             print("macOS currently doesn't resign first responder.")
 #endif
         } else {
-#if iOS
+#if os(iOS) || targetEnvironment(macCatalyst)
             textView.resignFirstResponder()
 #else
             print("macOS currently doesn't resign first responder.")
@@ -348,7 +348,7 @@ internal extension RichTextCoordinator {
 
 private extension ColorRepresentable {
 
-    #if iOS || os(tvOS)
+    #if os(iOS) || targetEnvironment(macCatalyst) || os(tvOS)
     static var textColor: ColorRepresentable { .label }
     #endif
 }

@@ -85,7 +85,7 @@ private extension RichTextDataReader {
         )
     }
 
-    #if macOS
+    #if os(macOS) && !targetEnvironment(macCatalyst)
     /// Generate ``RichTextDataFormat/word`` formatted data.
     func richTextWordData() throws -> Data {
         try richText.data(
