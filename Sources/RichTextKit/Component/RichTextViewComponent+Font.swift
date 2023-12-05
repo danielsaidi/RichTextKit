@@ -44,7 +44,7 @@ public extension RichTextViewComponent {
     /// Set the current font size.
     func setCurrentFontSize(_ size: CGFloat) {
         if size == currentFontSize { return }
-        #if macOS
+        #if os(macOS) && !targetEnvironment(macCatalyst)
         setRichTextFontSize(size, at: selectedRange)
         setFontSizeAtCurrentPosition(size)
         #else

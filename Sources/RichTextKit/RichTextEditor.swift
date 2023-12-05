@@ -6,7 +6,7 @@
 //  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
 //
 
-#if iOS || macOS || os(tvOS)
+#if os(iOS) || targetEnvironment(macCatalyst) || os(macOS) || os(tvOS)
 import SwiftUI
 
 /**
@@ -80,11 +80,11 @@ public struct RichTextEditor: ViewRepresentable {
     private var viewConfiguration: ViewConfiguration
 
 
-    #if iOS || os(tvOS)
+    #if os(iOS) || targetEnvironment(macCatalyst) || os(tvOS)
     public let textView = RichTextView()
     #endif
 
-    #if macOS
+    #if os(macOS) && !targetEnvironment(macCatalyst)
     public let scrollView = RichTextView.scrollableTextView()
 
     public var textView: RichTextView {
@@ -102,7 +102,7 @@ public struct RichTextEditor: ViewRepresentable {
     }
 
 
-    #if iOS || os(tvOS)
+    #if os(iOS) || targetEnvironment(macCatalyst) || os(tvOS)
     public func makeUIView(context: Context) -> some UIView {
         textView.setup(with: text.wrappedValue, format: format)
         viewConfiguration(textView)
@@ -112,7 +112,7 @@ public struct RichTextEditor: ViewRepresentable {
     public func updateUIView(_ view: UIViewType, context: Context) {}
     #endif
 
-    #if macOS
+    #if os(macOS) && !targetEnvironment(macCatalyst)
     public func makeNSView(context: Context) -> some NSView {
         textView.setup(with: text.wrappedValue, format: format)
         viewConfiguration(textView)

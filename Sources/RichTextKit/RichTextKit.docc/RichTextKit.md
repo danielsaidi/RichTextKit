@@ -3,7 +3,6 @@
 RichTextKit helps you view and edit rich text in SwiftUI, UIKit and AppKit.
 
 
-
 ## Overview
 
 ![RichTextKit logo](Logo.png)

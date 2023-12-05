@@ -6,7 +6,7 @@
 //  Copyright © 2023 Daniel Saidi. All rights reserved.
 //
 
-#if iOS || macOS
+#if os(iOS) || targetEnvironment(macCatalyst) || os(macOS)
 import SwiftUI
 
 /**
@@ -49,7 +49,7 @@ public struct RichTextStyleToggleGroup: View {
     private var groupWidth: CGFloat? {
         if isGreedy { return nil }
         let count = Double(styles.count)
-        #if macOS
+        #if os(macOS) && !targetEnvironment(macCatalyst)
         return 30 * count
         #else
         return 50 * count

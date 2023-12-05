@@ -53,6 +53,8 @@ public struct RichTextColorPicker: View {
     @Environment(\.colorScheme)
     private var colorScheme
 
+    private let spacing = 10.0
+
     public var body: some View {
         HStack(spacing: 0) {
             iconView
@@ -105,7 +107,7 @@ private extension RichTextColorPicker {
 
     @ViewBuilder
     var picker: some View {
-        #if iOS || macOS
+        #if os(iOS) || targetEnvironment(macCatalyst) || os(macOS)
         ColorPicker("", selection: value)
             .fixedSize()
             .padding(.horizontal, spacing)
@@ -148,18 +150,6 @@ private extension RichTextColorPicker {
         Divider()
             .padding(0)
             .frame(maxHeight: 30)
-    }
-}
-
-private extension ColorScheme {
-    
-    func textColor(for color: Color) -> Color {
-        let usePrimary = usePrimaryColor(for: color)
-        return usePrimary ? .primary : color
-    }
-    
-    func usePrimaryColor(for color: Color) -> Bool {
-        (self == .dark && color == .white) || (self == .light && color == .black)
     }
 }
 

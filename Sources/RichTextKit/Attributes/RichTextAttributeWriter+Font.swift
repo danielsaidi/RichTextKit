@@ -92,7 +92,7 @@ private extension RichTextAttributeWriter {
 
     /// We must adjust empty font names on some platforms.
     func settableFontName(for fontName: String) -> String {
-        #if macOS
+        #if os(macOS) && !targetEnvironment(macCatalyst)
         fontName.isEmpty ? "Helvetica" : fontName
         #else
         fontName

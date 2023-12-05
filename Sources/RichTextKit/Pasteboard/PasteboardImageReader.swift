@@ -33,13 +33,13 @@ public extension PasteboardImageReader {
     }
 }
 
-#if iOS
+#if os(iOS) || targetEnvironment(macCatalyst)
 import UIKit
 
 extension UIPasteboard: PasteboardImageReader {}
 #endif
 
-#if macOS
+#if os(macOS) && !targetEnvironment(macCatalyst)
 import AppKit
 
 extension NSPasteboard: PasteboardImageReader {}
