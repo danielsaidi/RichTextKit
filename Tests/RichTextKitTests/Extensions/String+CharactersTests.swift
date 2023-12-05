@@ -10,7 +10,6 @@ import RichTextKit
 import XCTest
 
 final class String_CharactersTest: XCTestCase {
-    
     func testStringCharactersAreValid() {
         XCTAssertEqual(String.carriageReturn, "\r")
         XCTAssertEqual(String.newLine, "\n")

@@ -10,16 +10,23 @@ import RichTextKit
 import XCTest
 
 final class RichTextPresenterTests: XCTestCase {
-    
-    var text: NSAttributedString!
-    
+
+    private var text: NSAttributedString!
     private var presenter: MockRichTextPresenter!
 
     override func setUp() {
+        super.setUp()
+
         text = NSAttributedString(string: "foo bar baz")
         presenter = MockRichTextPresenter(text: text)
     }
 
+    override func tearDown() {
+        text = nil
+        presenter = nil
+
+        super.tearDown()
+    }
 
     func testTextRangeBeforeCursorReturnsRangeBeforeSelectionStart() {
         presenter.selectedRange = NSRange(location: 4, length: 3)

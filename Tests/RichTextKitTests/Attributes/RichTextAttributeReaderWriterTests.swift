@@ -11,7 +11,7 @@ import XCTest
 
 final class RichTextAttributeReaderWriterTests: XCTestCase {
 
-    let string = NSMutableAttributedString(string: "foo bar baz")
+    private let string = NSMutableAttributedString(string: "foo bar baz")
 
     func testSettingAttributeWithinRangeOnlySetsAttributeWithinTheProvidedRange() {
         let color = ColorRepresentable.yellow

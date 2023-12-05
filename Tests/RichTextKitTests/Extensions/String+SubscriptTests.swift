@@ -10,15 +10,15 @@ import RichTextKit
 import XCTest
 
 final class String_SubscriptTest: XCTestCase {
-    
-    let string = "foo bar baz"
 
-    func testSharacterAtIndexIsValidWithinBounds() {
+    private let string = "foo bar baz"
+
+    func testCharacterAtIndexIsValidWithinBounds() {
         XCTAssertEqual(string.character(at: 0), "f")
         XCTAssertEqual(string.character(at: 10), "z")
     }
 
-    func testSharacterAtIndexIsNilOutsideBounds() {
+    func testCharacterAtIndexIsNilOutsideBounds() {
         XCTAssertNil(string.character(at: -1))
         XCTAssertNil(string.character(at: 11))
     }

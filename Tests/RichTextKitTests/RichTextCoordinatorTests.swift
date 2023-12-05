@@ -13,14 +13,15 @@ import XCTest
 @testable import RichTextKit
 
 final class RichTextCoordinatorTests: XCTestCase {
-    
-    var text: NSAttributedString!
-    var textBinding: Binding<NSAttributedString>!
-    var view: RichTextView!
-    var context: RichTextContext!
-    var coordinator: RichTextCoordinator!
+    private var text: NSAttributedString!
+    private var textBinding: Binding<NSAttributedString>!
+    private var view: RichTextView!
+    private var context: RichTextContext!
+    private var coordinator: RichTextCoordinator!
 
     override func setUp() {
+        super.setUp()
+
         text = NSAttributedString(string: "foo bar baz")
         textBinding = Binding(get: { self.text }, set: { self.text = $0 })
         view = RichTextView()
@@ -34,6 +35,15 @@ final class RichTextCoordinatorTests: XCTestCase {
         view.setCurrentTextAlignment(.justified)
     }
 
+    override func tearDown() {
+        text = nil
+        textBinding = nil
+        view = nil
+        context = nil
+        coordinator = nil
+
+        super.tearDown()
+    }
 
     func testInitializerSetsUpTextViewText() {
         XCTAssertEqual(view.richText.string, "foo bar baz")
@@ -43,15 +53,12 @@ final class RichTextCoordinatorTests: XCTestCase {
         XCTAssertTrue(view.delegate === coordinator)
     }
 
-
     func testRichTextPresenterUsesNestedTextView() {
         let range = NSRange(location: 4, length: 3)
         view.selectedRange = range
         XCTAssertEqual(coordinator.text.wrappedValue.string, "foo bar baz")
         XCTAssertEqual(coordinator.richTextContext.selectedRange, range)
     }
-
-
 
     func assertIsSyncedWithContext(macOSAlignment: RichTextAlignment = .left) {
         XCTAssertEqual(context.fontName, view.currentFontName)

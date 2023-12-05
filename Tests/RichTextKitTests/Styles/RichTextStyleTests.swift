@@ -12,7 +12,7 @@ import XCTest
 
 final class RichTextStyleTests: XCTestCase {
 
-    func icon(for style: RichTextStyle) -> Image {
+    private func icon(for style: RichTextStyle) -> Image {
         style.icon
     }
 

@@ -20,13 +20,15 @@ import XCTest
 
 final class RichTextViewComponent_AttributesTests: XCTestCase {
 
-    var textView: RichTextViewComponent!
+    private var textView: RichTextViewComponent!
 
-    let font = FontRepresentable.systemFont(ofSize: 666)
-    let noRange = NSRange(location: 0, length: 0)
-    let selectedRange = NSRange(location: 4, length: 3)
+    private let font = FontRepresentable.systemFont(ofSize: 666)
+    private let noRange = NSRange(location: 0, length: 0)
+    private let selectedRange = NSRange(location: 4, length: 3)
 
     override func setUp() {
+        super.setUp()
+
         textView = RichTextView()
         textView.setup(
             with: NSAttributedString(string: "foo bar baz"),
@@ -34,23 +36,11 @@ final class RichTextViewComponent_AttributesTests: XCTestCase {
         )
     }
 
+    override func tearDown() {
+        textView = nil
 
-    func assertEqualAttribute(_ attr: Any?) {
-        XCTAssertEqual(attr as? FontRepresentable, font)
+        super.tearDown()
     }
-
-    func assertEqualAttributes(_ attr: [NSAttributedString.Key: Any]) {
-        assertEqualAttribute(attr[.font])
-    }
-
-    func assertNonEqualAttribute(_ attr: Any?) {
-        XCTAssertNotEqual(attr as? FontRepresentable, font)
-    }
-
-    func assertNonEqualAttributes(_ attr: [NSAttributedString.Key: Any]) {
-        assertNonEqualAttribute(attr[.font])
-    }
-
 
     func testTextAttributesIsValidForSelectedRange() {
         textView.setSelectedRange(selectedRange)
@@ -89,4 +79,23 @@ final class RichTextViewComponent_AttributesTests: XCTestCase {
         assertEqualAttribute(textView.typingAttributes[.font])
     }
 }
+
+private extension RichTextViewComponent_AttributesTests {
+    func assertEqualAttribute(_ attr: Any?) {
+        XCTAssertEqual(attr as? FontRepresentable, font)
+    }
+
+    func assertEqualAttributes(_ attr: [NSAttributedString.Key: Any]) {
+        assertEqualAttribute(attr[.font])
+    }
+
+    func assertNonEqualAttribute(_ attr: Any?) {
+        XCTAssertNotEqual(attr as? FontRepresentable, font)
+    }
+
+    func assertNonEqualAttributes(_ attr: [NSAttributedString.Key: Any]) {
+        assertNonEqualAttribute(attr[.font])
+    }
+}
+
 #endif
