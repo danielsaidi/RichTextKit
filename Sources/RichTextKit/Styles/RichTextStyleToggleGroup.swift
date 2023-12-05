@@ -93,7 +93,7 @@ public struct RichTextStyleToggleGroup: View {
                                 context.setLink(URL(string: urlString))
                                 isAlertPresented = false
                             },
-                            label: { Text("Set link!") }
+                            label: { Text(RTKL10n.setLink.text) }
                         )
                     }
                     .padding(.horizontal, 8)

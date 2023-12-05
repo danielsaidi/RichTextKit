@@ -55,6 +55,8 @@ public enum RTKL10n: String, CaseIterable, Identifiable {
     styleItalic,
     styleStrikethrough,
     styleUnderlined,
+    
+    setLink,
 
     textAlignment,
     textAlignmentLeft,

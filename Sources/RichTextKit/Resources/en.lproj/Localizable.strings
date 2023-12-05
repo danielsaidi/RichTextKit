@@ -54,6 +54,8 @@
 "styleStrikethrough" = "Strikethrough";
 "styleUnderlined" = "Underline";
 
+"setLink" = "Set link";
+
 "textAlignment" = "Text Alignment";
 "textAlignmentLeft" = "Left";
 "textAlignmentRight" = "Right";
