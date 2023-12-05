@@ -72,7 +72,6 @@ private extension RichTextCoordinator {
             .store(in: &cancellables)
     }
 
-
     func subscribeToAlignment() {
         richTextContext.$textAlignment
             .sink(
