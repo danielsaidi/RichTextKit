@@ -67,7 +67,7 @@ For more information, please see the [getting started guide][Getting-Started].
 
 ## Documentation
 
-The [online documentation][Documentation] has more information, code examples, etc.
+The [online documentation][Documentation] has more information, articles, code examples, etc.
 
 
 
@@ -79,9 +79,7 @@ The demo app lets you explore the library on iOS and macOS. To try it out, just 
 
 ## Support my work
 
-I manage many open-source projects on my spare time and am very thankful for any help to keep my work going. 
-
-You can sponsor my work on [GitHub Sponsors][Sponsors] or get in touch for paid support.
+You can sponsor my work on [GitHub Sponsors][Sponsors] or get in touch for paid support. I manage many open-source projects on my spare time and am very thankful for any help to keep my work going. 
 
 
 
