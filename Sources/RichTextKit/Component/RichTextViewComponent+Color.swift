@@ -15,14 +15,11 @@ public extension RichTextViewComponent {
         _ color: RichTextColor
     ) -> ColorRepresentable? {
         switch color {
-        case .foreground:
-            return currentRichTextAttribute(.foregroundColor)
-        case .background:
-            return currentRichTextAttribute(.backgroundColor)
-        case .strikethrough:
-            return currentRichTextAttribute(.strikethroughColor)
-        case .stroke:
-            return currentRichTextAttribute(.strokeColor)
+        case .foreground: currentRichTextAttribute(.foregroundColor)
+        case .background: currentRichTextAttribute(.backgroundColor)
+        case .strikethrough: currentRichTextAttribute(.strikethroughColor)
+        case .stroke: currentRichTextAttribute(.strokeColor)
+        case .undefined: nil
         }
     }
 
@@ -33,14 +30,11 @@ public extension RichTextViewComponent {
     ) {
         if currentColor(color) == val { return }
         switch color {
-        case .foreground:
-            setCurrentRichTextAttribute(.foregroundColor, to: val)
-        case .background:
-            setCurrentRichTextAttribute(.backgroundColor, to: val)
-        case .strikethrough:
-            setCurrentRichTextAttribute(.strikethroughColor, to: val)
-        case .stroke:
-            setCurrentRichTextAttribute(.strokeColor, to: val)
+        case .foreground: setCurrentRichTextAttribute(.foregroundColor, to: val)
+        case .background: setCurrentRichTextAttribute(.backgroundColor, to: val)
+        case .strikethrough: setCurrentRichTextAttribute(.strikethroughColor, to: val)
+        case .stroke: setCurrentRichTextAttribute(.strokeColor, to: val)
+        case .undefined: return
         }
     }
 }

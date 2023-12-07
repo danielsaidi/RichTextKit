@@ -25,6 +25,7 @@ public extension RichTextContext {
         case .background: return backgroundColor
         case .strikethrough: return strikethroughColor
         case .stroke: return strokeColor
+        case .undefined: return nil
         }
     }
 
@@ -39,6 +40,7 @@ public extension RichTextContext {
         case .background: backgroundColor = color
         case .strikethrough: strikethroughColor = color
         case .stroke: strokeColor = color
+        case .undefined: return
         }
     }
 }

@@ -6,6 +6,23 @@ Until then, minor updates may remove deprecated features and introduce breaking 
 
 
 
+## 0.9.4
+
+Thanks to [@Mcrich23](https://github.com/Mcrich23), the `RichTextColorPicker` now adjusts foreground and background color for the current color scheme.
+
+### ✨ Features
+
+* `RichTextColor` has a new `.undefined` type.
+* `RichTextColor` has a new color adjust function.
+* `RichTextColorPicker` now takes an `RichTextColor`.
+
+### 💡 Adjustments
+
+* `RichTextColorPicker` now uses the color type icon by default.
+* `RichTextColorPicker` now uses the color type color adjustment.
+
+
+
 ## 0.9.3
 
 Thanks to [@Mcrich23](https://github.com/Mcrich23), RichTextKit now supports Mac Catalyst.

@@ -23,36 +23,30 @@ public struct RichTextColorPicker: View {
      Create a rich text color picker that binds to a color.
 
      - Parameters:
-       - icon: The icon to show, if any.
+       - type: The type of color to pick, by default `.undefined`.
+       - icon: The icon to show, if any, by default the `type` icon.
        - value: The value to bind to.
-       - quickColors: Colors to show in the trailing list, by default `empty`.
+       - quickColors: Colors to show in the trailing list, by default no colors.
      */
     public init(
-        icon: Image?,
+        type: RichTextColor = .undefined,
+        icon: Image? = nil,
         value: Binding<Color>,
-        quickColors: [Color] = [],
-        type: ColorType = .normal
+        quickColors: [Color] = []
     ) {
-        self.icon = icon
+        self.type = type
+        self.icon = icon ?? type.icon
         self.value = value
         self.quickColors = quickColors
-        self.type = type
-    }
-    
-    public enum ColorType {
-        case normal, background
     }
 
-    private let type: ColorType
+    private let type: RichTextColor
     private let icon: Image?
     private let value: Binding<Color>
     private let quickColors: [Color]
     
     private let spacing = 10.0
     
-    @Environment(\.colorScheme)
-    private var colorScheme
-
     @Environment(\.colorScheme)
     private var colorScheme
 
@@ -129,17 +123,7 @@ private extension RichTextColorPicker {
 
     func quickPickerButton(for color: Color) -> some View {
         Button {
-            if type == .background && ((colorScheme == .dark && color == .black) || (colorScheme == .light && color == .white)) {
-                #if macOS
-                value.wrappedValue = .init(nsColor: .windowBackgroundColor)
-                #else
-                value.wrappedValue = .init(uiColor: .systemBackground)
-                #endif
-            } else if (colorScheme == .dark && color == .white) || (colorScheme == .light && color == .black) {
-                value.wrappedValue = .primary
-            } else {
-                value.wrappedValue = color
-            }
+            value.wrappedValue = type.adjust(color: color, for: colorScheme)
         } label: {
             color
         }
@@ -151,18 +135,6 @@ private extension RichTextColorPicker {
         Divider()
             .padding(0)
             .frame(maxHeight: 30)
-    }
-}
-
-private extension ColorScheme {
-
-    func textColor(for color: Color) -> Color {
-        let usePrimary = usePrimaryColor(for: color)
-        return usePrimary ? .primary : color
-    }
-
-    func usePrimaryColor(for color: Color) -> Bool {
-        (self == .dark && color == .white) || (self == .light && color == .black)
     }
 }
 
@@ -195,32 +167,43 @@ private extension RichTextColorPicker {
     }
 }
 
-struct RichTextColorPicker_Previews: PreviewProvider {
+#Preview {
 
     struct Preview: View {
 
         @State
-        private var text = Color.black
+        private var foregroundColor = Color.black
 
         @State
-        private var background = Color.white
+        private var backgroundColor = Color.white
 
         var body: some View {
-            VStack(alignment: .leading, spacing: 0) {
+            VStack(alignment: .leading, spacing: 10) {
+                Text("Preview")
+                    .foregroundStyle(foregroundColor)
+                    .padding()
+                    .background(backgroundColor)
+                    .frame(maxWidth: .infinity)
+                    .border(Color.black)
+                    .background(Color.red)
+                    .padding()
+                
                 RichTextColorPicker(
-                    icon: .richTextColorBackground,
-                    value: $text
+                    type: .foreground,
+                    value: $foregroundColor,
+                    quickColors: [.white, .black, .red, .green, .blue]
                 )
+                .padding(.leading)
+                
                 RichTextColorPicker(
-                    icon: .richTextColorForeground,
-                    value: $background,
-                    quickColors: [.red, .green, .blue]
+                    type: .background,
+                    value: $backgroundColor,
+                    quickColors: [.white, .black, .red, .green, .blue]
                 )
-            }.padding(.leading)
+                .padding(.leading)
+            }
         }
     }
 
-    static var previews: some View {
-        Preview()
-    }
+    return Preview()
 }

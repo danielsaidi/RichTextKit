@@ -23,9 +23,12 @@ public enum RichTextColor: String, CaseIterable, Codable, Equatable, Identifiabl
 
     /// Strikethrough color.
     case strikethrough
-
+    
     /// Stroke color.
     case stroke
+    
+    /// An undefined color type.
+    case undefined
 }
 
 public extension RichTextColor {
@@ -34,12 +37,35 @@ public extension RichTextColor {
     var id: String { rawValue }
 
     /// The standard icon to use for the alignment.
-    var icon: Image {
+    var icon: Image? {
         switch self {
         case .foreground: return .richTextColorForeground
         case .background: return .richTextColorBackground
         case .strikethrough: return .richTextColorStrikethrough
         case .stroke: return .richTextColorStroke
+        case .undefined: return nil
+        }
+    }
+    
+    /// Adjust a `color` for a certain `colorScheme`.
+    func adjust(
+        color: Color,
+        for scheme: ColorScheme
+    ) -> Color {
+        switch self {
+        case .background:
+            if (color == .black && scheme == .dark) || (color == .white && scheme == .light) {
+                return .clear
+            }
+            return color
+        case .foreground:
+            if (color == .white && scheme == .dark) || (color == .black && scheme == .light) {
+                return .primary
+            }
+            return color
+        case .strikethrough: return color
+        case .stroke: return color
+        case .undefined: return color
         }
     }
 }
