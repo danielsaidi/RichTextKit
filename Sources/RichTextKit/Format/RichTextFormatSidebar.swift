@@ -66,7 +66,8 @@ public struct RichTextFormatSidebar: View {
                     RichTextColorPicker(
                         icon: .richTextColorBackground,
                         value: context.binding(for: .background),
-                        quickColors: .quickPickerColors)
+                        quickColors: .quickPickerColors,
+                        type: .background)
                 }
             }
             .font(.callout)

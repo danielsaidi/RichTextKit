@@ -62,7 +62,8 @@ public struct RichTextFormatSheet: View {
                         RichTextColorPicker(
                             icon: .richTextColorBackground,
                             value: context.binding(for: .background),
-                            quickColors: .quickPickerColors)
+                            quickColors: .quickPickerColors,
+                            type: .background)
                     }.padding(.leading, padding)
                 }
                 .padding(.vertical, padding)

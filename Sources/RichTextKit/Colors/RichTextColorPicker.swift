@@ -30,18 +30,28 @@ public struct RichTextColorPicker: View {
     public init(
         icon: Image?,
         value: Binding<Color>,
-        quickColors: [Color] = []
+        quickColors: [Color] = [],
+        type: ColorType = .normal
     ) {
         self.icon = icon
         self.value = value
         self.quickColors = quickColors
+        self.type = type
+    }
+    
+    public enum ColorType {
+        case normal, background
     }
 
+    private let type: ColorType
     private let icon: Image?
     private let value: Binding<Color>
     private let quickColors: [Color]
-
+    
     private let spacing = 10.0
+    
+    @Environment(\.colorScheme)
+    private var colorScheme
 
     @Environment(\.colorScheme)
     private var colorScheme
@@ -119,7 +129,17 @@ private extension RichTextColorPicker {
 
     func quickPickerButton(for color: Color) -> some View {
         Button {
-            value.wrappedValue = color
+            if type == .background && ((colorScheme == .dark && color == .black) || (colorScheme == .light && color == .white)) {
+                #if macOS
+                value.wrappedValue = .init(nsColor: .windowBackgroundColor)
+                #else
+                value.wrappedValue = .init(uiColor: .systemBackground)
+                #endif
+            } else if (colorScheme == .dark && color == .white) || (colorScheme == .light && color == .black) {
+                value.wrappedValue = .primary
+            } else {
+                value.wrappedValue = color
+            }
         } label: {
             color
         }
