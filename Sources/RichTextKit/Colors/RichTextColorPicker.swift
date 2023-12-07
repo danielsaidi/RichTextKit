@@ -44,9 +44,9 @@ public struct RichTextColorPicker: View {
     private let icon: Image?
     private let value: Binding<Color>
     private let quickColors: [Color]
-    
+
     private let spacing = 10.0
-    
+
     @Environment(\.colorScheme)
     private var colorScheme
 
@@ -187,14 +187,14 @@ private extension RichTextColorPicker {
                     .border(Color.black)
                     .background(Color.red)
                     .padding()
-                
+
                 RichTextColorPicker(
                     type: .foreground,
                     value: $foregroundColor,
                     quickColors: [.white, .black, .red, .green, .blue]
                 )
                 .padding(.leading)
-                
+
                 RichTextColorPicker(
                     type: .background,
                     value: $backgroundColor,

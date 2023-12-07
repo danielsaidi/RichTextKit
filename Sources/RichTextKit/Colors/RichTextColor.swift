@@ -23,10 +23,10 @@ public enum RichTextColor: String, CaseIterable, Codable, Equatable, Identifiabl
 
     /// Strikethrough color.
     case strikethrough
-    
+
     /// Stroke color.
     case stroke
-    
+
     /// An undefined color type.
     case undefined
 }
@@ -46,7 +46,7 @@ public extension RichTextColor {
         case .undefined: return nil
         }
     }
-    
+
     /// Adjust a `color` for a certain `colorScheme`.
     func adjust(
         color: Color,
