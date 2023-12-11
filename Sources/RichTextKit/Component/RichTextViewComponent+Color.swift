@@ -30,10 +30,10 @@ public extension RichTextViewComponent {
     ) {
         if currentColor(color) == val { return }
         switch color {
-        case .foreground: setCurrentRichTextAttribute(.foregroundColor, to: val)
-        case .background: setCurrentRichTextAttribute(.backgroundColor, to: val)
-        case .strikethrough: setCurrentRichTextAttribute(.strikethroughColor, to: val)
-        case .stroke: setCurrentRichTextAttribute(.strokeColor, to: val)
+        case .foreground: setTypingAttribute(.foregroundColor, to: val)
+        case .background: setTypingAttribute(.backgroundColor, to: val)
+        case .strikethrough: setTypingAttribute(.strikethroughColor, to: val)
+        case .stroke: setTypingAttribute(.strokeColor, to: val)
         case .undefined: return
         }
     }

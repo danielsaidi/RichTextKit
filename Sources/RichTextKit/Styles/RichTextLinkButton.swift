@@ -54,6 +54,7 @@ extension RichTextLinkButton {
     }
     
     private func toggle() {
+        // This turns off/disables link.
         if context.link != nil {
             context.setLink(nil)
         } else {

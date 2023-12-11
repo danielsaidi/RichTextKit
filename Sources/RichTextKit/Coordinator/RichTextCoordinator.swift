@@ -23,7 +23,6 @@ import SwiftUI
  your own use cases.
  */
 open class RichTextCoordinator: NSObject {
-
     // MARK: - Initialization
 
     /**
@@ -45,9 +44,11 @@ open class RichTextCoordinator: NSObject {
         self.richTextContext = richTextContext
         super.init()
         self.textView.delegate = self
-        subscribeToContextChanges()
+       // subscribeToContextChanges()
+        subscribeToUserActions()
     }
 
+   
 
     // MARK: - Properties
 
@@ -154,7 +155,6 @@ public extension RichTextCoordinator {
         textView.setRichTextForegroundColor(text, at: range)
     }
 }
-
 
 // MARK: - Internal Extensions
 

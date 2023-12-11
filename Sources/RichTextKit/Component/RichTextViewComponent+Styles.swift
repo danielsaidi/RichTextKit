@@ -26,8 +26,8 @@ public extension RichTextViewComponent {
         to newValue: Bool
     ) {
         let attributeValue = newValue ? 1 : 0
-        if style == .strikethrough { return setCurrentRichTextAttribute(.strikethroughStyle, to: attributeValue) }
-        if style == .underlined { return setCurrentRichTextAttribute(.underlineStyle, to: attributeValue) }
+        if style == .strikethrough { return setTypingAttribute(.strikethroughStyle, to: attributeValue) }
+        if style == .underlined { return setTypingAttribute(.underlineStyle, to: attributeValue) }
         let styles = currentRichTextStyles
         let shouldAdd = newValue && !styles.hasStyle(style)
         let shouldRemove = !newValue && styles.hasStyle(style)

@@ -11,6 +11,16 @@ import SwiftUI
 
 extension RichTextCoordinator {
 
+    func subscribeToUserActions() {
+        richTextContext.userActionPublisher.sink { [weak self] action in
+            switch action {
+            case .changeStyle(let style, let newValue):
+                self?.setStyle(style, to: newValue, applyToSelectedRange: true)
+            }
+        }
+        .store(in: &cancellables)
+    }
+    
     /// Make the coordinator subscribe to context changes.
     func subscribeToContextChanges() {
         subscribeToAlignment()
@@ -349,9 +359,13 @@ internal extension RichTextCoordinator {
         textView.selectedRange = range
     }
 
-    func setStyle(_ style: RichTextStyle, to newValue: Bool) {
+    func setStyle(_ style: RichTextStyle, to newValue: Bool, applyToSelectedRange: Bool = false) {
         let hasStyle = textView.currentRichTextStyles.hasStyle(style)
         if newValue == hasStyle { return }
+        if applyToSelectedRange {
+            textView.applyToCurrentSelection(style, to: newValue)
+        }
+        // We need to update the toolbar highlight on style.
         textView.setCurrentRichTextStyle(style, to: newValue)
     }
     

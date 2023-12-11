@@ -6,6 +6,7 @@
 //  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
 //
 
+import Combine
 import SwiftUI
 
 /**
@@ -19,6 +20,8 @@ import SwiftUI
  */
 public class RichTextContext: ObservableObject {
 
+    var userActionPublisher: PassthroughSubject<RichTextUserAction, Never> = .init()
+    
     /// Create a new rich text context instance.
     public init() {}
 

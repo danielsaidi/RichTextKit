@@ -35,12 +35,14 @@ public struct RichTextStyleButton: View {
         style: RichTextStyle,
         buttonStyle: Style = .standard,
         value: Binding<Bool>,
+        context: RichTextContext,
         fillVertically: Bool = false
     ) {
         self.style = style
         self.buttonStyle = buttonStyle
         self.value = value
         self.fillVertically = fillVertically
+        self.context = context
     }
 
     /**
@@ -62,6 +64,7 @@ public struct RichTextStyleButton: View {
             style: style,
             buttonStyle: buttonStyle,
             value: context.binding(for: style),
+            context: context,
             fillVertically: fillVertically
         )
     }
@@ -70,6 +73,8 @@ public struct RichTextStyleButton: View {
     private let buttonStyle: Style
     private let value: Binding<Bool>
     private let fillVertically: Bool
+    
+    let context: RichTextContext
 
     public var body: some View {
         Button(action: toggle) {
@@ -133,44 +138,55 @@ private extension RichTextStyleButton {
 
     func toggle() {
         value.wrappedValue.toggle()
+        context.userActionPublisher.send(RichTextUserAction.changeStyle(style, value.wrappedValue))
     }
 }
 
-struct RichTextStyleButton_Previews: PreviewProvider {
-
-    struct Preview: View {
-
-        @State
-        private var isBoldOn = false
-
-        @State
-        private var isItalicOn = true
-
-        @State
-        private var isStrikethroughOn = false
-
-        @State
-        private var isUnderlinedOn = false
-
-        var body: some View {
-            HStack {
-                RichTextStyleButton(
-                    style: .bold,
-                    value: $isBoldOn)
-                RichTextStyleButton(
-                    style: .italic,
-                    value: $isItalicOn)
-                RichTextStyleButton(
-                    style: .strikethrough,
-                    value: $isStrikethroughOn)
-                RichTextStyleButton(
-                    style: .underlined,
-                    value: $isUnderlinedOn)
-            }.padding()
-        }
-    }
-
-    static var previews: some View {
-        Preview()
-    }
-}
+//struct RichTextStyleButton_Previews: PreviewProvider {
+//
+//    struct Preview: View {
+//
+//        @State
+//        private var isBoldOn = false
+//
+//        @State
+//        private var isItalicOn = true
+//
+//        @State
+//        private var isStrikethroughOn = false
+//
+//        @State
+//        private var isUnderlinedOn = false
+//
+//        var body: some View {
+//            HStack {
+//                RichTextStyleButton(
+//                    style: .bold,
+//                    value: $isBoldOn,
+//                context: RichTextContext()
+//                )
+//                RichTextStyleButton(
+//                    style: .italic,
+//                    buttonStyle: $isItalicOn, 
+//                    context: RichTextContext(),
+//                    value: RichTextContext()
+//                )
+//                RichTextStyleButton(
+//                    style: .strikethrough,
+//                    value: $isStrikethroughOn,
+//                    context: RichTextContext(),
+//                    RichTextContext()
+//                )
+//                RichTextStyleButton(
+//                    style: .underlined,
+//                    value: $isUnderlinedOn,
+//                    RichTextContext()
+//                )
+//            }.padding()
+//        }
+//    }
+//
+//    static var previews: some View {
+//        Preview()
+//    }
+//}
