@@ -14,21 +14,20 @@ public extension RichTextViewComponent {
     /// Note if nothing is selected, we just set typing attributes so we can continue writing in normal pace
     func unsetLinkFromCurrentRichTextStyle() {
         if hasSelectedRange {
-            richText.enumerateAttributes(in: selectedRange) { [weak self] attributes, range, _ in
-                guard let self else { return }
-                let mutableAttributedString = NSMutableAttributedString(attributedString: richText)
-                attributes.forEach { attribute, _ in
-                    mutableAttributedString.removeAttribute(attribute, range: range)
-                    mutableAttributedString.fixAttributes(in: range)
-                    mutableAttributedString.addAttribute(.font, value: FontRepresentable.standardRichTextFont, range: range)
-                    mutableAttributedString.addAttribute(.foregroundColor, value: ColorRepresentable.textColor, range: range)
-                }
-                setRichText(mutableAttributedString)
+            let range = safeRange(for: selectedRange)
+            guard let string = mutableRichText else { return }
+            string.beginEditing()
+            string.enumerateAttribute(.customLink, in: range, options: .init()) { _, range, _ in
+                string.removeAttribute(.customLink, range: range)
+                string.removeAttribute(.link, range: range)
+                string.addAttribute(.foregroundColor, value: ColorRepresentable.textColor, range: range)
+                string.fixAttributes(in: range)
             }
+            
+            string.endEditing()
+            self.typingAttributes = [.font: FontRepresentable.standardRichTextFont, .foregroundColor: ColorRepresentable.textColor]
+            setCurrentFont(.standardRichTextFont)
         }
-        
-        self.typingAttributes = [.font: FontRepresentable.standardRichTextFont, .foregroundColor: ColorRepresentable.textColor]
-        setCurrentFont(.standardRichTextFont)
     }
     
     /// Set the current value of a certain rich text style.
