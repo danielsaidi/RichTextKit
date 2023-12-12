@@ -90,6 +90,7 @@ public struct RichTextStyleToggleGroup: View {
                            // .textInputAutocapitalization(.never)
                         Button(
                             action: {
+                                context.userActionPublisher.send(.link(URL(string:urlString)))
                                 context.setLink(URL(string: urlString))
                                 isAlertPresented = false
                             },

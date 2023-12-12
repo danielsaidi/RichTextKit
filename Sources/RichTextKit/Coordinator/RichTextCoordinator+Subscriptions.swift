@@ -16,6 +16,8 @@ extension RichTextCoordinator {
             switch action {
             case .changeStyle(let style, let newValue):
                 self?.setStyle(style, to: newValue, applyToSelectedRange: true)
+            case .link(let url):
+                self?.setLink(url)
             }
         }
         .store(in: &cancellables)

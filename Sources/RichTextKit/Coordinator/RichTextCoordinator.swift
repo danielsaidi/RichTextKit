@@ -45,7 +45,6 @@ open class RichTextCoordinator: NSObject {
         self.richTextLinkSetter = RichTextLinkSetter(textView: textView)
         super.init()
         self.textView.delegate = self
-       // subscribeToContextChanges()
         subscribeToUserActions()
     }
 
@@ -210,11 +209,14 @@ extension RichTextCoordinator {
         // all undocumented attributes from itself and keeps only the documented ones
         // (In customLinks case - `.link` and `.foregroundColor`
         // This is probably hack because it intervenes with other links (mentions implementation in future)
-        if let link = textView.currentRichTextAttributes[.link] as? String,
-           let url = URL(string: link) {
-            richTextContext.setLink(url)
+        if let linkString = textView.currentRichTextAttributes[.link] as? String,
+           let color = textView.currentRichTextAttributes[.foregroundColor] as? ColorRepresentable,
+           color == self.textView.linkColor{
+            richTextContext.setLink(URL(string: linkString))
         } else {
             richTextContext.setLink(nil)
+            textView.setTypingAttribute(.customLink, to: nil)
+            textView.setTypingAttribute(.link, to: nil)
         }
     
         let foreground = textView.currentColor(.foreground)
@@ -320,7 +322,7 @@ extension RichTextCoordinator {
         #if macOS
         if textView.hasSelectedRange { return }
         let attributes = textView.currentRichTextAttributes
-        textView.setCurrentRichTextAttributes(attributes)
+        textView.appendCurrentRichTextAttributes(attributes)
         #endif
     }
 }

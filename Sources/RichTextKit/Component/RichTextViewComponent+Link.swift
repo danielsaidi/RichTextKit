@@ -35,8 +35,8 @@ public extension RichTextViewComponent {
         _ link: URL?,
         previousLink: URL?
     ) {
-        let shouldAdd = link != nil && previousLink == nil
-        let shouldRemove = link == nil && previousLink != nil
+        let shouldAdd = link != nil
+        let shouldRemove = link == nil
         guard shouldAdd || shouldRemove else { return }
         if let link {
             applyToCurrentSelection(.customLink, to: CustomLinkAttributes(link: link.absoluteString, color: linkColor))

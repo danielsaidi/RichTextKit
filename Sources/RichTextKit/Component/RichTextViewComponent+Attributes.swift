@@ -41,8 +41,8 @@ public extension RichTextViewComponent {
     }
 
     /// Set the current value of a rich text attribute.
-    func setTypingAttribute(_ attribute: RichTextAttribute, to value: Any) {
-            typingAttributes[attribute] = value
+    func setTypingAttribute(_ attribute: RichTextAttribute, to value: Any?) {
+        typingAttributes[attribute] = value
     }
     
     /// Set the current value of a rich text attribute.
@@ -71,7 +71,7 @@ public extension RichTextViewComponent {
     }
 
     /// This sets flags in toolbar to see if the attribute is on/off.
-    func setCurrentRichTextAttributes(_ attributes: RichTextAttributes) {
+    func appendCurrentRichTextAttributes(_ attributes: RichTextAttributes) {
         attributes.forEach { attribute, value in
             setTypingAttribute(attribute, to: value)
         }

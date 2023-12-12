@@ -28,6 +28,6 @@ enum RichTextUserAction {
 //    case .StrikethroughColor
 //    case .StrokeColor
 //    case .TriggerAction
-//    case .Link
+    case link(URL?)
     case changeStyle(RichTextStyle, Bool)
 }
