@@ -46,25 +46,6 @@ open class RichTextView: UITextView, RichTextViewComponent {
         self.setup(with: string, format: format, linkColor: linkColor)
     }
 
-    public override init(frame: CGRect, textContainer: NSTextContainer?) {
-        let layoutManager = RichTextLayoutManager()
-        let textStorage = NSTextStorage()
-        textStorage.addLayoutManager(layoutManager)
-        let textContainer = NSTextContainer()
-        textContainer.heightTracksTextView = true
-        textContainer.widthTracksTextView = true
-        layoutManager.allowsNonContiguousLayout = true
-        layoutManager.addTextContainer(textContainer)
-        super.init(frame: frame, textContainer: textContainer)
-        // Little hack for custom link colors. Please use custom NSLayoutManager
-        linkTextAttributes = [:]
-        textContainer.lineFragmentPadding = 0
-    }
-    
-    required public init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
     // MARK: - Properties
 
     /// The style to use when highlighting text in the view.
@@ -188,6 +169,7 @@ open class RichTextView: UITextView, RichTextViewComponent {
             textColor = .label
         }
         self.linkColor = linkColor
+        linkTextAttributes = [:]
         setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
     }
 

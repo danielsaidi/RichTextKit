@@ -104,26 +104,8 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         layoutManager?.defaultAttachmentScaling = NSImageScaling.scaleProportionallyDown
         self.linkColor = linkColor
         setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-    }
-    
-  
-    public override init(frame: CGRect) {
-        let layoutManager = RichTextLayoutManager()
-        let textStorage = NSTextStorage()
-        textStorage.addLayoutManager(layoutManager)
-        let textContainer = NSTextContainer()
-        layoutManager.allowsNonContiguousLayout = true
-        layoutManager.addTextContainer(textContainer)
-        super.init(frame: frame, textContainer: textContainer)
         // Little hack for custom link colors. Please use custom NSLayoutManager
         linkTextAttributes = [:]
-        textContainer.lineFragmentPadding = 0
-    }
-    
-
-    
-    required public init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - Open Functionality
