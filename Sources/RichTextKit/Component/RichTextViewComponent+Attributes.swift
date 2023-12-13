@@ -56,8 +56,8 @@ public extension RichTextViewComponent {
         guard hasSelectedRange else { return }
         
         let attributeValue = newValue ? 1 : 0
-        if style == .strikethrough { return setTypingAttribute(.strikethroughStyle, to: attributeValue) }
-        if style == .underlined { return setTypingAttribute(.underlineStyle, to: attributeValue) }
+        if style == .strikethrough { applyToCurrentSelection(.strikethroughStyle, to: attributeValue) }
+        if style == .underlined { applyToCurrentSelection(.underlineStyle, to: attributeValue) }
         let styles = currentRichTextStyles
         let shouldAdd = newValue && !styles.hasStyle(style)
         let shouldRemove = !newValue && styles.hasStyle(style)

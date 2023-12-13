@@ -7,6 +7,7 @@
 
 import Foundation
  
+// TODO: Rename :) 
 enum RichTextUserAction {
 //    case .Alignment
 //    case .BackgroundColor
@@ -15,19 +16,29 @@ enum RichTextUserAction {
 //    case .ForegroundColor
 //    case .HighlightedRange
 //    case .HighlightingStyle
-//    case .IsBold
-//    case .IsEditingText
-//    case .IsItalic
-//    case .IsStrikethrough
-//    case .IsUnderlined
-//    case .ShouldPasteImage
-//    case .ShouldPasteImages
-//    case .ShouldPasteText
-//    case .ShouldSelectRange
-//    case .ShouldSetAttributedString
-//    case .StrikethroughColor
-//    case .StrokeColor
-//    case .TriggerAction
+    case shouldPasteImage(Insertion<ImageRepresentable>)
+    case shouldPasteImages(Insertion<[ImageRepresentable]>)
+    // TODO: Paste attributed string??
+    case shouldPasteText(Insertion<String>)
+    case shouldSelectRange(NSRange)
+    case shouldSetAttributedString(NSAttributedString)
+    case strikethroughColor(ColorRepresentable)
+    case strokeColor(ColorRepresentable)
+    case triggerAction(RichTextAction)
     case link(URL?)
     case changeStyle(RichTextStyle, Bool)
+}
+
+extension String: Insertable {}
+extension ImageRepresentable: Insertable {}
+extension [ImageRepresentable]: Insertable {}
+extension NSAttributedString: Insertable {}
+
+protocol Insertable { }
+
+struct Insertion<T: Insertable> {
+    typealias Index = Int
+    let content: T
+    let at: Index
+    let moveCursor: Bool
 }

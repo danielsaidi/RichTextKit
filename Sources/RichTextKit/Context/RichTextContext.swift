@@ -202,7 +202,15 @@ public extension RichTextContext {
         moveCursorToPastedContent: Bool = false
     ) {
         let index = index ?? selectedRange.location
-        shouldPasteImage = (image, index, moveCursorToPastedContent)
+        userActionPublisher.send(
+            .shouldPasteImage(
+                 Insertion(
+                 content: image, 
+                 at: index, 
+                 moveCursor: moveCursorToPastedContent
+             )
+            )
+        )
     }
 
     /**
@@ -237,6 +245,7 @@ public extension RichTextContext {
     ) {
         let index = index ?? selectedRange.location
         shouldPasteText = (text, index, moveCursorToPastedContent)
+        userActionPublisher.send(.shouldPasteText(.init(content: text, at: index, moveCursor: moveCursorToPastedContent)))
     }
 
     /// Reset the attributed string.
@@ -271,6 +280,7 @@ public extension RichTextContext {
         let mutable = NSMutableAttributedString(attributedString: string)
         mutable.setRichTextFontSize(fontSize)
         shouldSetAttributedString = mutable
+        
     }
 
     /// Set ``isEditingText`` to `false`.
