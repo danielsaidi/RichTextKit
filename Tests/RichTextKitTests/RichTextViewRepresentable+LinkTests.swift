@@ -9,7 +9,7 @@
 import UIKit
 #endif
 
-#if os(macOS)
+#if macOS
 import AppKit
 #endif
 
@@ -37,7 +37,7 @@ class RichTextViewComponent_LinkTests: XCTestCase {
         textView.setSelectedRange(selectedRange)
         textView.setCurrentRichTextLink(URL(string: "https://google.com"), previousLink: nil)
         XCTAssertEqual(try XCTUnwrap(textView.currentRichTextAttributes[.link] as? String), "https://google.com")
-        XCTAssertEqual(try XCTUnwrap(textView.currentRichTextAttributes[.foregroundColor] as? ColorRepresentable), UIColor.cyan)
+        XCTAssertEqual(try XCTUnwrap(textView.currentRichTextAttributes[.foregroundColor] as? ColorRepresentable), ColorRepresentable.cyan)
     }
     
     func test_whenChangesRangeFromLink_linkIsNotSet_colorIsNotSet() {
@@ -52,7 +52,7 @@ class RichTextViewComponent_LinkTests: XCTestCase {
         textView.setSelectedRange(selectedRange)
         textView.setCurrentRichTextLink(URL(string: "https://google.com"), previousLink: nil)
         XCTAssertEqual(try XCTUnwrap(textView.currentRichTextAttributes[.link] as? String), "https://google.com")
-        XCTAssertEqual(try XCTUnwrap(textView.currentRichTextAttributes[.foregroundColor] as? ColorRepresentable), UIColor.cyan)
+        XCTAssertEqual(try XCTUnwrap(textView.currentRichTextAttributes[.foregroundColor] as? ColorRepresentable), ColorRepresentable.cyan)
         
         textView.setCurrentRichTextLink(nil, previousLink: URL(string: "https://google.com"))
         

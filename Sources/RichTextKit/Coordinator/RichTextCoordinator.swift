@@ -130,12 +130,12 @@ open class RichTextCoordinator: NSObject {
 }
 
 
-#if iOS || os(tvOS)
+#if iOS || tvOS
 import UIKit
 
 extension RichTextCoordinator: UITextViewDelegate {}
 
-#elseif os(macOS)
+#elseif macOS
 import AppKit
 
 extension RichTextCoordinator: NSTextViewDelegate {}
