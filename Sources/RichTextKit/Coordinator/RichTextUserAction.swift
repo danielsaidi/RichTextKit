@@ -1,6 +1,6 @@
 //
-//  File.swift
-//  
+//  RichTextUserAction.swift
+//
 //
 //  Created by Dominik Bucher on 07.12.2023.
 //
@@ -9,13 +9,13 @@ import Foundation
  
 // TODO: Rename :) 
 enum RichTextUserAction {
-//    case .Alignment
-//    case .BackgroundColor
-//    case .FontName
-//    case .FontSize
-//    case .ForegroundColor
-//    case .HighlightedRange
-//    case .HighlightingStyle
+//    case alignment
+    case backgroundColor(ColorRepresentable)
+    case fontName(String)
+    case fontSize(CGFloat)
+    case foregroundColor(ColorRepresentable)
+    case highlightedRange(NSRange?)
+    case highlightingStyle(RichTextHighlightingStyle)
     case shouldPasteImage(Insertion<ImageRepresentable>)
     case shouldPasteImages(Insertion<[ImageRepresentable]>)
     // TODO: Paste attributed string??

@@ -15,13 +15,13 @@ extension RichTextCoordinator {
         richTextContext.userActionPublisher.sink { [weak self] action in
             switch action {
             case .changeStyle(let style, let newValue):
-                self?.setStyle(style, to: newValue, applyToSelectedRange: true)
+                self?.setStyle(style, to: newValue)
             case .link(let url):
                 self?.setLink(url)
             case .triggerAction(let action):
                 self?.handle(action)
             case .shouldPasteImage(let insertion):
-                // TODO: Only paste action and switch in other function?
+                // TODO: Only one paste action and switch in other function?
                 self?.pasteImage(insertion)
             case .shouldPasteImages(let images):
                 self?.pasteImages(images)
@@ -31,7 +31,6 @@ extension RichTextCoordinator {
             case .shouldSelectRange(let range):
                 // TODO: Is this even used?
                 self?.setSelectedRange(to: range)
-                
             case .shouldSetAttributedString(let attributedString):
                 // TODO: Is this even used?
                 self?.setAttributedString(to: attributedString)
@@ -39,31 +38,35 @@ extension RichTextCoordinator {
                 // TODO: Refactor into function on self instead.
                 self?.textView.setCurrentColor(.strikethrough, to: color)
             case .strokeColor(let color):
+                // TODO: Refactor into function on self instead.
                 self?.textView.setCurrentColor(.stroke, to: color)
+            case .foregroundColor(let color):
+                // TODO: Selected range vs typingAttributes, Refactor into function on self instead.
+                self?.textView.setRichTextForegroundColor(color)
+            case .backgroundColor(let color):
+                // TODO: Selected range vs typingAttributes, Refactor into function on self instead.
+                self?.textView.setRichTextBackgroundColor(color)
+            case .fontName(let name):
+                self?.textView.setCurrentFontName(name)
+            case .fontSize(let size):
+                self?.textView.setCurrentFontSize(size)
+            case .highlightedRange(let range):
+                self?.setHighlightedRange(to: range)
+            case .highlightingStyle(let style):
+                self?.textView.highlightingStyle = style
             }
         }
         .store(in: &cancellables)
+        // TODO: Is this needed?
+        subscribeToIsEditingText()
     }
     
     /// Make the coordinator subscribe to context changes.
     func subscribeToContextChanges() {
         subscribeToAlignment()
-        subscribeToBackgroundColor()
         subscribeToFontName()
         subscribeToFontSize()
         subscribeToForegroundColor()
-        subscribeToHighlightedRange()
-        subscribeToHighlightingStyle()
-        subscribeToIsBold()
-        subscribeToIsEditingText()
-        subscribeToIsItalic()
-        subscribeToIsStrikethrough()
-        subscribeToIsUnderlined()
-        subscribeToShouldSelectRange()
-        subscribeToShouldSetAttributedString()
-        subscribeToStrikethroughColor()
-        subscribeToStrokeColor()
-        subscribeToTriggerAction()
     }
 }
 
@@ -154,92 +157,12 @@ private extension RichTextCoordinator {
             .store(in: &cancellables)
     }
 
-    func subscribeToHighlightedRange() {
-        richTextContext.$highlightedRange
-            .sink(
-                receiveCompletion: { _ in },
-                receiveValue: { [weak self] in
-                    self?.setHighlightedRange(to: $0)
-                })
-            .store(in: &cancellables)
-    }
-
-    func subscribeToHighlightingStyle() {
-        richTextContext.$highlightingStyle
-            .sink(
-                receiveCompletion: { _ in },
-                receiveValue: { [weak self] in
-                    self?.textView.highlightingStyle = $0
-                })
-            .store(in: &cancellables)
-    }
-
-    func subscribeToIsBold() {
-        richTextContext.$isBold
-            .sink(
-                receiveCompletion: { _ in },
-                receiveValue: { [weak self] in
-                    self?.setStyle(.bold, to: $0)
-                })
-            .store(in: &cancellables)
-    }
-
     func subscribeToIsEditingText() {
         richTextContext.$isEditingText
             .sink(
                 receiveCompletion: { _ in },
                 receiveValue: { [weak self] in
                     self?.setIsEditing(to: $0)
-                })
-            .store(in: &cancellables)
-    }
-
-    func subscribeToIsItalic() {
-        richTextContext.$isItalic
-            .sink(
-                receiveCompletion: { _ in },
-                receiveValue: { [weak self] in
-                    self?.setStyle(.italic, to: $0)
-                })
-            .store(in: &cancellables)
-    }
-
-    func subscribeToIsStrikethrough() {
-        richTextContext.$isStrikethrough
-            .sink(
-                receiveCompletion: { _ in },
-                receiveValue: { [weak self] in
-                    self?.setStyle(.strikethrough, to: $0)
-                })
-            .store(in: &cancellables)
-    }
-
-    func subscribeToIsUnderlined() {
-        richTextContext.$isUnderlined
-            .sink(
-                receiveCompletion: { _ in },
-                receiveValue: { [weak self] in
-                    self?.setStyle(.underlined, to: $0)
-                })
-            .store(in: &cancellables)
-    }
-    
-    func subscribeToShouldSetAttributedString() {
-        richTextContext.$shouldSetAttributedString
-            .sink(
-                receiveCompletion: { _ in },
-                receiveValue: { [weak self] in
-                    self?.setAttributedString(to: $0)
-                })
-            .store(in: &cancellables)
-    }
-
-    func subscribeToShouldSelectRange() {
-        richTextContext.$shouldSelectRange
-            .sink(
-                receiveCompletion: { _ in },
-                receiveValue: { [weak self] in
-                    self?.setSelectedRange(to: $0)
                 })
             .store(in: &cancellables)
     }
@@ -339,14 +262,14 @@ internal extension RichTextCoordinator {
         textView.selectedRange = range
     }
 
-    func setStyle(_ style: RichTextStyle, to newValue: Bool, applyToSelectedRange: Bool = false) {
+    func setStyle(_ style: RichTextStyle, to newValue: Bool) {
         let hasStyle = textView.currentRichTextStyles.hasStyle(style)
         if newValue == hasStyle { return }
-        if applyToSelectedRange {
+        if textView.hasSelectedRange {
             textView.applyToCurrentSelection(style, to: newValue)
+        } else {
+            textView.setCurrentRichTextStyle(style, to: newValue)
         }
-        // We need to update the toolbar highlight on style.
-        textView.setCurrentRichTextStyle(style, to: newValue)
     }
     
     func setLink(_ url: URL?) {

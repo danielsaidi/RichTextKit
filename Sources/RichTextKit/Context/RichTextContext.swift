@@ -185,6 +185,7 @@ public extension RichTextContext {
 
     /// Set ``highlightedRange`` to a new, optional range.
     func highlightRange(_ range: NSRange?) {
+        userActionPublisher.send(.highlightedRange(range))
         highlightedRange = range
     }
 
@@ -268,6 +269,7 @@ public extension RichTextContext {
     func selectRange(_ range: NSRange) {
         isEditingText = true
         shouldSelectRange = range
+        userActionPublisher.send(.shouldSelectRange(range))
     }
 
     /// Set the attributed string to a new plain text.
@@ -280,7 +282,7 @@ public extension RichTextContext {
         let mutable = NSMutableAttributedString(attributedString: string)
         mutable.setRichTextFontSize(fontSize)
         shouldSetAttributedString = mutable
-        
+        userActionPublisher.send(.shouldSetAttributedString(mutable))
     }
 
     /// Set ``isEditingText`` to `false`.
