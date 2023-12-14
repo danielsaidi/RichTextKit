@@ -141,10 +141,9 @@ public extension RichTextViewComponent {
 internal extension RichTextViewComponent {
 
     /// This can be called to setup the initial font size.
-    func setupInitialFontSize() {
+    func setupInitialFont() {
         let font = FontRepresentable.standardRichTextFont
-        let size = font.pointSize
-        setCurrentFontSize(size)
+        setCurrentFont(font)
     }
 
     /// This can be called to setup an initial text color.

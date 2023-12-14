@@ -155,7 +155,7 @@ open class RichTextView: UITextView, RichTextViewComponent {
         linkColor: ColorRepresentable
     ) {
         attributedString = .empty
-        setupInitialFontSize()
+        setupInitialFont()
         imageConfiguration = standardImageConfiguration(for: format)
         text.autosizeImageAttachments(maxSize: imageAttachmentMaxSize)
         attributedString = text

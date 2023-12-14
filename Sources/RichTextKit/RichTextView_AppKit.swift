@@ -92,7 +92,7 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         linkColor: ColorRepresentable
     ) {
         attributedString = .empty
-        setupInitialFontSize()
+        setupInitialFont()
         attributedString = text
         allowsImageEditing = true
         allowsUndo = true
