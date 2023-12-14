@@ -14,7 +14,7 @@ import AppKit
 #endif
 
 #if os(iOS) || os(macOS) || os(tvOS)
-import RichTextKit
+@testable import RichTextKit
 import XCTest
 
 class RichTextViewComponent_LinkTests: XCTestCase {
@@ -33,31 +33,36 @@ class RichTextViewComponent_LinkTests: XCTestCase {
         )
     }
     
-    func test_whenSetLinkAtSelectedRange_linkIsSet_colorIsSet() {
+    func test_whenSetLinkAtSelectedRange_linkIsSet_colorIsSet() throws {
         textView.setSelectedRange(selectedRange)
-        textView.setCurrentRichTextLink(URL(string: "https://google.com"), previousLink: nil)
-        XCTAssertEqual(try XCTUnwrap(textView.currentRichTextAttributes[.link] as? String), "https://google.com")
-        XCTAssertEqual(try XCTUnwrap(textView.currentRichTextAttributes[.foregroundColor] as? ColorRepresentable), ColorRepresentable.cyan)
+        textView.setCurrentRichTextLink(URL(string: "https://google.com"))
+        // This occurs before processEditing is set, so we ensure that customLink attributes are set.
+        let linkAttributes = try XCTUnwrap(textView.currentRichTextAttributes[.customLink] as? CustomLinkAttributes)
+        XCTAssertEqual(linkAttributes.link, "https://google.com")
+        XCTAssertEqual(linkAttributes.color, ColorRepresentable.cyan)
     }
     
-    func test_whenChangesRangeFromLink_linkIsNotSet_colorIsNotSet() {
+    func test_whenChangesRangeFromLink_linkIsNotSet_colorIsNotSet() throws {
         textView.setSelectedRange(selectedRange)
-        textView.setCurrentRichTextLink(URL(string: "https://google.com"), previousLink: nil)
+        textView.setCurrentRichTextLink(URL(string: "https://google.com"))
         textView.setSelectedRange(noRange)
         XCTAssertNil(textView.currentRichTextAttributes[.link])
         XCTAssertNil(textView.currentRichTextAttributes[.foregroundColor])
+        XCTAssertNil(textView.currentRichTextAttributes[.customLink])
     }
     
-    func test_whenUnsetLinkAtSelectedRange_linkIsUnset_colorIsUnset() {
+    func test_whenUnsetLinkAtSelectedRange_linkIsUnset_colorIsUnset() throws {
         textView.setSelectedRange(selectedRange)
-        textView.setCurrentRichTextLink(URL(string: "https://google.com"), previousLink: nil)
-        XCTAssertEqual(try XCTUnwrap(textView.currentRichTextAttributes[.link] as? String), "https://google.com")
-        XCTAssertEqual(try XCTUnwrap(textView.currentRichTextAttributes[.foregroundColor] as? ColorRepresentable), ColorRepresentable.cyan)
+        textView.setCurrentRichTextLink(URL(string: "https://google.com"))
+        let linkAttributes = try XCTUnwrap(textView.currentRichTextAttributes[.customLink] as? CustomLinkAttributes)
+        XCTAssertEqual(linkAttributes.link, "https://google.com")
+        XCTAssertEqual(linkAttributes.color, ColorRepresentable.cyan)
         
-        textView.setCurrentRichTextLink(nil, previousLink: URL(string: "https://google.com"))
+        textView.setCurrentRichTextLink(nil)
         
         XCTAssertNil(textView.currentRichTextAttributes[.link])
         XCTAssertEqual(try XCTUnwrap(textView.currentRichTextAttributes[.foregroundColor] as? ColorRepresentable), ColorRepresentable.textColor)
+        XCTAssertNil(textView.currentRichTextAttributes[.customLink])
     }
 }
 #endif

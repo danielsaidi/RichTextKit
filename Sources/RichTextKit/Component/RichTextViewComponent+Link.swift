@@ -31,10 +31,7 @@ public extension RichTextViewComponent {
     }
     
     /// Set the current value of a certain rich text style.
-    func setCurrentRichTextLink(
-        _ link: URL?,
-        previousLink: URL?
-    ) {
+    func setCurrentRichTextLink(_ link: URL?) {
         let shouldAdd = link != nil
         let shouldRemove = link == nil
         guard shouldAdd || shouldRemove else { return }

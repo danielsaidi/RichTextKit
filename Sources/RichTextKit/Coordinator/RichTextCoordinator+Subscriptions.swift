@@ -273,7 +273,7 @@ internal extension RichTextCoordinator {
     }
     
     func setLink(_ url: URL?) {
-        textView.setCurrentRichTextLink(url, previousLink: richTextContext.link)
+        textView.setCurrentRichTextLink(url)
     }
 }
 
