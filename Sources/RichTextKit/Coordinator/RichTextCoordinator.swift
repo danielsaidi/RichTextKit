@@ -185,7 +185,7 @@ extension RichTextCoordinator {
      purple alert warnings about how state is updated.
      */
     func syncContextWithTextViewAfterDelay() {
-        let styles = textView.currentRichTextStyles
+        let styles = textView.currentRichTextTypingAttributeStyles
 
         let string = textView.attributedString
         if richTextContext.attributedString != string {
@@ -195,12 +195,6 @@ extension RichTextCoordinator {
         let range = textView.selectedRange
         if richTextContext.selectedRange != range {
             richTextContext.selectedRange = range
-        }
-
-        RichTextColor.allCases.forEach {
-            if let color = textView.currentColor($0) {
-                richTextContext.setColor(color, for: $0)
-            }
         }
         
         // IMPORTANT:

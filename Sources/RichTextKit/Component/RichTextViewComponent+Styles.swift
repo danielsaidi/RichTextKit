@@ -11,7 +11,7 @@ import Foundation
 public extension RichTextViewComponent {
 
     /// Get the current rich text styles.
-    var currentRichTextStyles: [RichTextStyle] {
+    var currentRichTextTypingAttributeStyles: [RichTextStyle] {
         let attributes = currentRichTextAttributes
         let traits = currentFont?.fontDescriptor.symbolicTraits
         var styles = traits?.enabledRichTextStyles ?? []
@@ -21,14 +21,14 @@ public extension RichTextViewComponent {
     }
 
     /// Set the current value of a certain rich text style.
-    func setCurrentRichTextStyle(
+    func setCurrentRichTextStyleTypingAttributes(
         _ style: RichTextStyle,
         to newValue: Bool
     ) {
         let attributeValue = newValue ? 1 : 0
         if style == .strikethrough { return setTypingAttribute(.strikethroughStyle, to: attributeValue) }
         if style == .underlined { return setTypingAttribute(.underlineStyle, to: attributeValue) }
-        let styles = currentRichTextStyles
+        let styles = currentRichTextTypingAttributeStyles
         let shouldAdd = newValue && !styles.hasStyle(style)
         let shouldRemove = !newValue && styles.hasStyle(style)
         guard shouldAdd || shouldRemove else { return }

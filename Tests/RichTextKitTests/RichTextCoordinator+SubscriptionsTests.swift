@@ -101,23 +101,23 @@ final class RichTextCoordinator_SubscriptionsTests: XCTestCase {
 
 
     func testIsBoldUpdatesTextView() {
-        XCTAssertFalse(textView.currentRichTextStyles.hasStyle(.bold))
+        XCTAssertFalse(textView.currentRichTextTypingAttributeStyles.hasStyle(.bold))
         textContext.isBold = true
-        XCTAssertTrue(textView.currentRichTextStyles.hasStyle(.bold))
+        XCTAssertTrue(textView.currentRichTextTypingAttributeStyles.hasStyle(.bold))
     }
 
 
     func testIsItalicUpdatesTextView() {
-        XCTAssertFalse(textView.currentRichTextStyles.hasStyle(.italic))
+        XCTAssertFalse(textView.currentRichTextTypingAttributeStyles.hasStyle(.italic))
         textContext.isItalic = true
-        XCTAssertTrue(textView.currentRichTextStyles.hasStyle(.italic))
+        XCTAssertTrue(textView.currentRichTextTypingAttributeStyles.hasStyle(.italic))
     }
 
 
     func testIsUnderlinedUpdatesTextView() {
-        XCTAssertFalse(textView.currentRichTextStyles.hasStyle(.underlined))
+        XCTAssertFalse(textView.currentRichTextTypingAttributeStyles.hasStyle(.underlined))
         textContext.isUnderlined = true
-        XCTAssertTrue(textView.currentRichTextStyles.hasStyle(.underlined))
+        XCTAssertTrue(textView.currentRichTextTypingAttributeStyles.hasStyle(.underlined))
     }
 
 

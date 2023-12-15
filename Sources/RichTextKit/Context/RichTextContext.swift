@@ -20,7 +20,7 @@ import SwiftUI
  */
 public class RichTextContext: ObservableObject {
 
-    var userActionPublisher: PassthroughSubject<RichTextUserAction, Never> = .init()
+    let userActionPublisher: PassthroughSubject<RichTextUserAction, Never> = .init()
     
     /// Create a new rich text context instance.
     public init() {}

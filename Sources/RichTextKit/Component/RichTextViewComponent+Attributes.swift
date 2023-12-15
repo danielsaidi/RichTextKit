@@ -15,15 +15,14 @@ public extension RichTextViewComponent {
         if hasSelectedRange {
             return richTextAttributes(at: selectedRange)
         } else {
+//            #if macOS
+//            // TODO: If is link or any mention, set range to location and 0.
+//            let range = NSRange(location: selectedRange.location - 1, length: 1)
+//            let safeRange = safeRange(for: range)
+//            return richTextAttributes(at: safeRange)
+//            #else
             return typingAttributes
-           // #if macOS
-            // TODO: If is link or any mention, set range to location and 0.
-            let range = NSRange(location: selectedRange.location - 1, length: 1)
-            let safeRange = safeRange(for: range)
-            return richTextAttributes(at: safeRange)
-         //   #else
-            return typingAttributes
-          //  #endif
+//            #endif
         }
     }
 
@@ -59,7 +58,7 @@ public extension RichTextViewComponent {
         let attributeValue = newValue ? 1 : 0
         if style == .strikethrough { applyToCurrentSelection(.strikethroughStyle, to: attributeValue) }
         if style == .underlined { applyToCurrentSelection(.underlineStyle, to: attributeValue) }
-        let styles = currentRichTextStyles
+        let styles = currentRichTextTypingAttributeStyles
         let shouldAdd = newValue && !styles.hasStyle(style)
         let shouldRemove = !newValue && styles.hasStyle(style)
         guard shouldAdd || shouldRemove else { return }

@@ -149,6 +149,10 @@ open class RichTextView: NSTextView, RichTextViewComponent {
     /// Set the rich text in the text view.
     open func setRichText(_ text: NSAttributedString) {
         attributedString = text
+        let attributes = text.attributes(at: 0, effectiveRange: nil)
+        if attributes.isEmpty {
+            setRichTextFont(.standardRichTextFont, at: text.richTextRange)
+        }
     }
 
     /// Undo the latest change.

@@ -47,9 +47,12 @@ final class RichTextViewComponent_StylesTests: XCTestCase {
         textView.setCurrentRichTextStyle(.bold, to: true)
         #if macOS // TODO: Why did this stop working for iOS and tvOS
         XCTAssertTrue(textView.currentRichTextStyles.hasStyle(.bold))
+        textView.setCurrentRichTextStyleTypingAttributes(.bold, to: true)
+        #if macOS   // TODO: Why did this stop working for iOS and tvOS
+        XCTAssertTrue(textView.currentRichTextTypingAttributeStyles.hasStyle(.bold))
         #endif
         textView.setSelectedRange(noRange)
-        XCTAssertFalse(textView.currentRichTextStyles.hasStyle(.bold))
+        XCTAssertFalse(textView.currentRichTextTypingAttributeStyles.hasStyle(.bold))
     }
 
     func testIsCurrentTextItalicWorksForSelectedRange() {
@@ -57,27 +60,30 @@ final class RichTextViewComponent_StylesTests: XCTestCase {
         textView.setCurrentRichTextStyle(.italic, to: true)
         #if macOS // TODO: Why did this stop working for iOS and tvOS
         XCTAssertTrue(textView.currentRichTextStyles.hasStyle(.italic))
+        textView.setCurrentRichTextStyleTypingAttributes(.italic, to: true)
+        #if macOS   // TODO: Why did this stop working for iOS and tvOS
+        XCTAssertTrue(textView.currentRichTextTypingAttributeStyles.hasStyle(.italic))
         #endif
         textView.setSelectedRange(noRange)
-        XCTAssertFalse(textView.currentRichTextStyles.hasStyle(.italic))
+        XCTAssertFalse(textView.currentRichTextTypingAttributeStyles.hasStyle(.italic))
     }
 
     func testIsCurrentTextUnderlinedWorksForSelectedRange() {
         textView.setSelectedRange(selectedRange)
-        textView.setCurrentRichTextStyle(.underlined, to: true)
-        XCTAssertTrue(textView.currentRichTextStyles.hasStyle(.underlined))
+        textView.setCurrentRichTextStyleTypingAttributes(.underlined, to: true)
+        XCTAssertTrue(textView.currentRichTextTypingAttributeStyles.hasStyle(.underlined))
         textView.setSelectedRange(noRange)
-        XCTAssertFalse(textView.currentRichTextStyles.hasStyle(.underlined))
+        XCTAssertFalse(textView.currentRichTextTypingAttributeStyles.hasStyle(.underlined))
     }
 
     func testIsCurrentTextUnderlinedWorksForNoSelectedRange() {
         textView.setSelectedRange(noRange)
-        textView.setCurrentRichTextStyle(.underlined, to: true)
+        textView.setCurrentRichTextStyleTypingAttributes(.underlined, to: true)
         #if iOS || os(tvOS)
-        XCTAssertTrue(textView.currentRichTextStyles.hasStyle(.underlined))
+        XCTAssertTrue(textView.currentRichTextTypingAttributeStyles.hasStyle(.underlined))
         #endif
         textView.setSelectedRange(selectedRange)
-        XCTAssertFalse(textView.currentRichTextStyles.hasStyle(.underlined))
+        XCTAssertFalse(textView.currentRichTextTypingAttributeStyles.hasStyle(.underlined))
     }
 }
 #endif

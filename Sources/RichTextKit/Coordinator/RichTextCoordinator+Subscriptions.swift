@@ -35,17 +35,13 @@ extension RichTextCoordinator {
                 // TODO: Is this even used?
                 self?.setAttributedString(to: attributedString)
             case .strikethroughColor(let color):
-                // TODO: Refactor into function on self instead.
-                self?.textView.setCurrentColor(.strikethrough, to: color)
+                self?.setColor(color, for: .strikethrough)
             case .strokeColor(let color):
-                // TODO: Refactor into function on self instead.
-                self?.textView.setCurrentColor(.stroke, to: color)
+                self?.setColor(color, for: .stroke)
             case .foregroundColor(let color):
-                // TODO: Selected range vs typingAttributes, Refactor into function on self instead.
-                self?.textView.setRichTextForegroundColor(color)
+                self?.setColor(color, for: .foreground)
             case .backgroundColor(let color):
-                // TODO: Selected range vs typingAttributes, Refactor into function on self instead.
-                self?.textView.setRichTextBackgroundColor(color)
+                self?.setColor(color, for: .background)
             case .fontName(let name):
                 self?.textView.setCurrentFontName(name)
             case .fontSize(let size):
@@ -263,12 +259,12 @@ internal extension RichTextCoordinator {
     }
 
     func setStyle(_ style: RichTextStyle, to newValue: Bool) {
-        let hasStyle = textView.currentRichTextStyles.hasStyle(style)
+        let hasStyle = textView.currentRichTextTypingAttributeStyles.hasStyle(style)
         if newValue == hasStyle { return }
         if textView.hasSelectedRange {
             textView.applyToCurrentSelection(style, to: newValue)
         } else {
-            textView.setCurrentRichTextStyle(style, to: newValue)
+            textView.setCurrentRichTextStyleTypingAttributes(style, to: newValue)
         }
     }
     
