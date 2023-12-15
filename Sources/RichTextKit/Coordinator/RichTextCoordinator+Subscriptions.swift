@@ -62,7 +62,6 @@ extension RichTextCoordinator {
         subscribeToAlignment()
         subscribeToFontName()
         subscribeToFontSize()
-        subscribeToForegroundColor()
     }
 }
 
@@ -90,7 +89,17 @@ private extension RichTextCoordinator {
             syncContextWithTextView()
         }
     }
-
+    
+    func subscribeToIsEditingText() {
+        richTextContext.$isEditingText
+            .sink(
+                receiveCompletion: { _ in },
+                receiveValue: { [weak self] in
+                    self?.setIsEditing(to: $0)
+                })
+            .store(in: &cancellables)
+    }
+    
     func subscribeToAlignment() {
         richTextContext.$textAlignment
             .sink(
