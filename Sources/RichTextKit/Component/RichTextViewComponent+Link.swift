@@ -25,9 +25,9 @@ public extension RichTextViewComponent {
             }
             
             string.endEditing()
-            self.typingAttributes = [.font: FontRepresentable.standardRichTextFont, .foregroundColor: ColorRepresentable.textColor]
-            setCurrentFont(.standardRichTextFont)
         }
+        self.typingAttributes = [.font: FontRepresentable.standardRichTextFont, .foregroundColor: ColorRepresentable.textColor]
+        setCurrentFont(.standardRichTextFont)
     }
     
     /// Set the current value of a certain rich text style.
