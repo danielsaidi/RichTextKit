@@ -91,33 +91,12 @@ private extension RichTextCoordinator {
         }
     }
 
-    func subscribeToTriggerAction() {
-        richTextContext.$triggerAction
-            .sink(
-                receiveCompletion: { _ in },
-                receiveValue: { [weak self] in
-                    self?.handle($0)
-                })
-            .store(in: &cancellables)
-    }
-
     func subscribeToAlignment() {
         richTextContext.$textAlignment
             .sink(
                 receiveCompletion: { _ in },
                 receiveValue: { [weak self] in
                     self?.textView.setCurrentTextAlignment($0)
-                })
-            .store(in: &cancellables)
-    }
-
-    func subscribeToBackgroundColor() {
-        richTextContext.$backgroundColor
-            .sink(
-                receiveCompletion: { _ in },
-                receiveValue: { [weak self] in
-                    guard let color = $0 else { return }
-                    self?.textView.setCurrentColor(.background, to: color)
                 })
             .store(in: &cancellables)
     }
@@ -138,49 +117,6 @@ private extension RichTextCoordinator {
                 receiveCompletion: { _ in },
                 receiveValue: { [weak self] in
                     self?.textView.setCurrentFontSize($0)
-                })
-            .store(in: &cancellables)
-    }
-
-    func subscribeToForegroundColor() {
-        richTextContext.$foregroundColor
-            .sink(
-                receiveCompletion: { _ in },
-                receiveValue: { [weak self] in
-                    guard let color = $0 else { return }
-                    self?.textView.setCurrentColor(.foreground, to: color)
-                })
-            .store(in: &cancellables)
-    }
-
-    func subscribeToIsEditingText() {
-        richTextContext.$isEditingText
-            .sink(
-                receiveCompletion: { _ in },
-                receiveValue: { [weak self] in
-                    self?.setIsEditing(to: $0)
-                })
-            .store(in: &cancellables)
-    }
-
-    func subscribeToStrokeColor() {
-        richTextContext.$strokeColor
-            .sink(
-                receiveCompletion: { _ in },
-                receiveValue: { [weak self] in
-                    guard let color = $0 else { return }
-                    self?.textView.setCurrentColor(.stroke, to: color)
-                })
-            .store(in: &cancellables)
-    }
-
-    func subscribeToStrikethroughColor() {
-        richTextContext.$strikethroughColor
-            .sink(
-                receiveCompletion: { _ in },
-                receiveValue: { [weak self] in
-                    guard let color = $0 else { return }
-                    self?.textView.setCurrentColor(.strikethrough, to: color)
                 })
             .store(in: &cancellables)
     }
