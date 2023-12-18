@@ -9,7 +9,6 @@ import Foundation
  
 // TODO: Rename :) 
 enum RichTextUserAction {
-//    case alignment
     case backgroundColor(ColorRepresentable)
     case fontName(String)
     case fontSize(CGFloat)

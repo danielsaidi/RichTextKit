@@ -53,15 +53,18 @@ extension RichTextCoordinator {
             }
         }
         .store(in: &cancellables)
+       
+        // TODO: Alignment is binded to buttons, way much easier to maintain it like this.
+        subscribeToAlignment()
+        subscribeToFontName()
+        subscribeToFontSize()
         // TODO: Is this needed?
         subscribeToIsEditingText()
     }
     
     /// Make the coordinator subscribe to context changes.
     func subscribeToContextChanges() {
-        subscribeToAlignment()
-        subscribeToFontName()
-        subscribeToFontSize()
+       
     }
 }
 
