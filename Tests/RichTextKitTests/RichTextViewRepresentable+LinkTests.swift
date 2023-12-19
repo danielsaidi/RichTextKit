@@ -21,16 +21,22 @@ class RichTextViewComponent_LinkTests: XCTestCase {
     
     var textView: RichTextViewComponent!
     
-    let noRange = NSRange(location: 0, length: 0)
-    let selectedRange = NSRange(location: 4, length: 3)
+    private let noRange = NSRange(location: 0, length: 0)
+    private let selectedRange = NSRange(location: 4, length: 3)
     
     override func setUp() {
+        super.setUp()
         textView = RichTextView()
         textView.setup(
             with: NSAttributedString(string: "foo bar baz"),
             format: .rtf,
             linkColor: .cyan
         )
+    }
+    
+    override func tearDown() {
+        textView = nil
+        super.tearDown()
     }
     
     func test_whenSetLinkAtSelectedRange_linkIsSet_colorIsSet() throws {
