@@ -109,7 +109,20 @@ open class RichTextView: UITextView, RichTextViewComponent {
             setup(with: attributedString, format: richTextDataFormat, linkColor: linkColor)
         }
     }
-
+    
+    @available(
+        *,
+        deprecated,
+        message: "Please use one of the convenience initializers to provide text for TextView."
+    )
+    override public init(frame: CGRect, textContainer: NSTextContainer?) {
+        super.init(frame: frame, textContainer: textContainer)
+    }
+    
+    required public init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     #if iOS
     /**
      Check whether or not a certain action can be performed.
@@ -211,7 +224,7 @@ open class RichTextView: UITextView, RichTextViewComponent {
 
     /// Get the text range at a certain point.
     open func range(at index: CGPoint) -> NSRange? {
-        guard let range = characterRange(at: index) else { return nil }
+        let range = characterRange(at: index) ?? UITextRange() // When open empty document, we want to drag and drop too.
         let location = offset(from: beginningOfDocument, to: range.start)
         let length = offset(from: range.start, to: range.end)
         return NSRange(location: location, length: length)
