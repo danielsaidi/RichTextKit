@@ -61,11 +61,6 @@ extension RichTextCoordinator {
         // TODO: Is this needed?
         subscribeToIsEditingText()
     }
-    
-    /// Make the coordinator subscribe to context changes.
-    func subscribeToContextChanges() {
-       
-    }
 }
 
 private extension RichTextCoordinator {
