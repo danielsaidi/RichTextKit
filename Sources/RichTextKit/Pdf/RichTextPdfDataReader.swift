@@ -113,7 +113,7 @@ private extension NSAttributedString {
         let range = NSRange(location: 0, length: pageRenderer.numberOfPages)
         pageRenderer.prepare(forDrawingPages: range)
         let bounds = UIGraphicsGetPDFContextBounds()
-        for i in 0  ..< pageRenderer.numberOfPages {
+        for i in 0 ..< pageRenderer.numberOfPages {
             UIGraphicsBeginPDFPage()
             pageRenderer.drawPage(at: i, in: bounds)
         }
