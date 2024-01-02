@@ -2,4 +2,5 @@
 --swiftversion 5.8
 
 # rules
+--rules consecutiveSpaces
 --rules trailingSpace
