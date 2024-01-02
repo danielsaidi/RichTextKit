@@ -5,9 +5,8 @@
 //  Created by Dominik Bucher on 14.12.2023.
 //
 
-#if canImport(UIKit)
+#if os(iOS)
 import UIKit
-#endif
 
 import CoreGraphics
 import SwiftUI
@@ -138,3 +137,4 @@ final class RichTextViewIntegrationTests: XCTestCase {
         XCTAssertTrue(try XCTUnwrap(fontForLastString?.fontDescriptor.symbolicTraits.contains(.traitBold)))
     }
 }
+#endif
