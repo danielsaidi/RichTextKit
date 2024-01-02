@@ -46,34 +46,53 @@ final class RichTextViewIntegrationTests: XCTestCase {
         super.tearDown()
     }
     
-    func test_behavior_whenTextViewEmpty() throws {
+    private let stringWithoutAttributes = "String without any attributes"
+    private let lastStringToAppend = " Last addition..."
+    private let otherStringToAppend = ". And This is some text with other attributes!"
+    
+    func test_behavior_forFontStyle() throws {
         // When starting RichTextEditor we want to check if the font and color is set correctly.
-        textView.setSelectedRange(.init(location: 0, length: 0))
+        textContext.selectRange(.init(location: 0, length: 0))
         
         XCTAssertEqual(textView.currentRichTextAttributes[.font] as? FontRepresentable, FontRepresentable.systemFont(ofSize: 16))
         XCTAssertEqual(textView.currentRichTextAttributes[.foregroundColor] as? ColorRepresentable, ColorRepresentable.textColor)
         
-        let stringWithoutAttributes = "String without any attributes"
+        // First we fill in the empty textView with some text, select it and set bold and italic to it.
+        assertFirstTextPart()
+        // After that we append more text, asserting that this text carries same attributes as the one before
+        // and we change it.
+        assertSecondTextPart()
+        // Finally, we set typingAttributes before we append last text and check if those typingAttributes are set to our
+        // new text.
+        assertFinalTextPart()
+    }
+    
+    private func assertFirstTextPart() {
         textView.replace(
             textView.textRange(
                 from: textView.endOfDocument,
                 to: textView.endOfDocument)!,
-                withText: stringWithoutAttributes
+            withText: stringWithoutAttributes
         )
         
-        textView.setSelectedRange(.init(location: 0, length: stringWithoutAttributes.count))
+        textContext.selectRange(.init(location: 0, length: stringWithoutAttributes.count))
         
         XCTAssertEqual(textView.currentRichTextAttributes[.font] as? FontRepresentable, FontRepresentable.systemFont(ofSize: 16))
         XCTAssertEqual(textView.currentRichTextAttributes[.foregroundColor] as? ColorRepresentable, ColorRepresentable.textColor)
         
         textView.setRichTextStyle(.bold, to: true)
+        textView.setRichTextStyle(.italic, to: true)
         
         XCTAssertTrue(try XCTUnwrap(textView.currentFont?.fontDescriptor.symbolicTraits.contains(.traitBold)))
+        XCTAssertTrue(try XCTUnwrap(textView.currentFont?.fontDescriptor.symbolicTraits.contains(.traitItalic)))
         
         textView.setRichTextStyle(.bold, to: false)
+        textView.setRichTextStyle(.italic, to: false)
         XCTAssertFalse(try XCTUnwrap(textView.currentFont?.fontDescriptor.symbolicTraits.contains(.traitBold)))
-        
-        let otherStringToAppend = ". And This is some text with other attributes!"
+        XCTAssertFalse(try XCTUnwrap(textView.currentFont?.fontDescriptor.symbolicTraits.contains(.traitItalic)))
+    }
+    
+    private func assertSecondTextPart() {
         textView.replace(
             textView.textRange(
                 from: textView.endOfDocument,
@@ -82,7 +101,7 @@ final class RichTextViewIntegrationTests: XCTestCase {
             withText: otherStringToAppend
         )
         
-        textView.setSelectedRange(NSRange(location: stringWithoutAttributes.count , length: otherStringToAppend.count))
+        textContext.selectRange(NSRange(location: stringWithoutAttributes.count , length: otherStringToAppend.count))
         let selectedRange = textView.selectedRange
         XCTAssertFalse(try XCTUnwrap(textView.currentFont?.fontDescriptor.symbolicTraits.contains(.traitBold)))
         textView.setRichTextStyle(.strikethrough, to: true, at: selectedRange)
@@ -90,9 +109,32 @@ final class RichTextViewIntegrationTests: XCTestCase {
         XCTAssertEqual(textView.currentRichTextAttributes[.strikethroughStyle] as? Int, 1)
         XCTAssertEqual(textView.richTextAttributes(at: selectedRange)[.strikethroughStyle] as? Int, 1)
         XCTAssertNil(
-            textView.richTextAttributes(
-                at: NSRange(location: .zero, length: stringWithoutAttributes.count))[.strikethroughStyle]
+            textView.richTextAttributes(at: NSRange(location: .zero, length: stringWithoutAttributes.count))[.strikethroughStyle]
         )
         
+        textContext.selectRange(NSRange(location: 2 , length: .zero))
+        XCTAssertNil(textView.currentRichTextAttributes[.strikethroughStyle])
+    }
+    
+    private func assertFinalTextPart() {
+       
+        textView.setCurrentRichTextStyleTypingAttributes(.bold, to: true)
+        textView.replace(
+            textView.textRange(
+                from: textView.endOfDocument,
+                to: textView.endOfDocument
+            )!,
+            withText: lastStringToAppend
+        )
+        
+        XCTAssertTrue(try XCTUnwrap(textView.currentFont?.fontDescriptor.symbolicTraits.contains(.traitBold)))
+        
+        let lastPartLocation = NSRange(
+            location: stringWithoutAttributes.count + otherStringToAppend.count,
+            length: lastStringToAppend.count
+        )
+        
+        let fontForLastString = textView.richTextAttributes(at: lastPartLocation)[.font] as? FontRepresentable
+        XCTAssertTrue(try XCTUnwrap(fontForLastString?.fontDescriptor.symbolicTraits.contains(.traitBold)))
     }
 }
