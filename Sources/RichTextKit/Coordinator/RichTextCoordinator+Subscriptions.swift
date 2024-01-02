@@ -42,10 +42,6 @@ extension RichTextCoordinator {
                 self?.setColor(color, for: .foreground)
             case .backgroundColor(let color):
                 self?.setColor(color, for: .background)
-            case .fontName(let _):
-                break
-            case .fontSize(let _):
-                break
             case .highlightedRange(let range):
                 self?.setHighlightedRange(to: range)
             case .highlightingStyle(let style):

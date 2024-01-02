@@ -10,8 +10,6 @@ import Foundation
 // TODO: Rename :) 
 enum RichTextUserAction {
     case backgroundColor(ColorRepresentable)
-    case fontName(String)
-    case fontSize(CGFloat)
     case foregroundColor(ColorRepresentable)
     case highlightedRange(NSRange?)
     case highlightingStyle(RichTextHighlightingStyle)
