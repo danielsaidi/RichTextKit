@@ -206,7 +206,7 @@ open class RichTextView: UITextView, RichTextViewComponent {
 
     /// Get the text range at a certain point.
     open func range(at index: CGPoint) -> NSRange? {
-        guard let range = characterRange(at: index) else { return nil }
+        let range = characterRange(at: index) ?? UITextRange()
         let location = offset(from: beginningOfDocument, to: range.start)
         let length = offset(from: range.start, to: range.end)
         return NSRange(location: location, length: length)
