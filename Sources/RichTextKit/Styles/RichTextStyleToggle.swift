@@ -71,7 +71,7 @@ public struct RichTextStyleToggle: View {
     private let fillVertically: Bool
 
     public var body: some View {
-        #if os(tvOS) || os(watchOS)
+        #if tvOS || os(watchOS)
         toggle
         #else
         toggle.toggleStyle(.button)

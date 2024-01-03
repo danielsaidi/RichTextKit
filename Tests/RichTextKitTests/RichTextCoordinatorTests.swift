@@ -6,7 +6,7 @@
 //  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
 //
 
-#if iOS || macOS || os(tvOS)
+#if iOS || macOS || tvOS
 import SwiftUI
 import XCTest
 
@@ -67,15 +67,15 @@ final class RichTextCoordinatorTests: XCTestCase {
         XCTAssertEqual(context.isItalic, view.currentRichTextStyles.hasStyle(.italic))
         XCTAssertEqual(context.isUnderlined, view.currentRichTextStyles.hasStyle(.underlined))
         XCTAssertEqual(context.selectedRange, view.selectedRange)
-        #if iOS || os(tvOS)
+        #if iOS || tvOS
         XCTAssertEqual(context.textAlignment, view.currentTextAlignment)
-        #elseif os(macOS)
+        #elseif macOS
         XCTAssertEqual(context.textAlignment, macOSAlignment)
         #endif
     }
 
 
-    #if iOS || os(tvOS)
+    #if iOS || tvOS
 
     func testTextViewDelegateHandlesTextViewDidBeginEditing() {
         coordinator.textViewDidBeginEditing(view)
@@ -99,7 +99,7 @@ final class RichTextCoordinatorTests: XCTestCase {
         XCTAssertFalse(context.isEditingText)
     }
 
-    #elseif os(macOS)
+    #elseif macOS
 
     let notification = Notification(
         name: NSText.didEndEditingNotification,

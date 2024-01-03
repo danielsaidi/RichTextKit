@@ -6,7 +6,7 @@
 //  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
 //
 
-#if iOS || macOS || os(tvOS)
+#if iOS || macOS || tvOS
 import RichTextKit
 import SwiftUI
 import XCTest
@@ -54,9 +54,9 @@ final class RichTextCoordinator_SubscriptionsTests: XCTestCase {
         textContext.fontName = ""
 
         eventually {
-            #if iOS || os(tvOS)
+            #if iOS || tvOS
             XCTAssertEqual(self.textView.currentFontName, ".SFUI-Regular")
-            #elseif os(macOS)
+            #elseif macOS
             XCTAssertEqual(self.textView.currentFontName, "Helvetica")
             #endif
         }

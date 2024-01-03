@@ -6,6 +6,7 @@
 //  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
 //
 
+import Combine
 import SwiftUI
 
 /**
@@ -19,6 +20,8 @@ import SwiftUI
  */
 public class RichTextContext: ObservableObject {
 
+    let userActionPublisher: PassthroughSubject<RichTextUserAction, Never> = .init()
+    
     /// Create a new rich text context instance.
     public init() {}
 
@@ -178,6 +181,7 @@ public extension RichTextContext {
 
     /// Set ``highlightedRange`` to a new, optional range.
     func highlightRange(_ range: NSRange?) {
+        userActionPublisher.send(.highlightedRange(range))
         highlightedRange = range
     }
 
@@ -195,7 +199,15 @@ public extension RichTextContext {
         moveCursorToPastedContent: Bool = false
     ) {
         let index = index ?? selectedRange.location
-        shouldPasteImage = (image, index, moveCursorToPastedContent)
+        userActionPublisher.send(
+            .shouldPasteImage(
+                Insertion(
+                    content: image,
+                    at: index,
+                    moveCursor: moveCursorToPastedContent
+                )
+            )
+        )
     }
 
     /**
@@ -229,7 +241,7 @@ public extension RichTextContext {
         moveCursorToPastedContent: Bool = false
     ) {
         let index = index ?? selectedRange.location
-        shouldPasteText = (text, index, moveCursorToPastedContent)
+        userActionPublisher.send(.shouldPasteText(.init(content: text, at: index, moveCursor: moveCursorToPastedContent)))
     }
 
     /// Reset the attributed string.
@@ -252,6 +264,7 @@ public extension RichTextContext {
     func selectRange(_ range: NSRange) {
         isEditingText = true
         shouldSelectRange = range
+        userActionPublisher.send(.shouldSelectRange(range))
     }
 
     /// Set the attributed string to a new plain text.
@@ -264,6 +277,7 @@ public extension RichTextContext {
         let mutable = NSMutableAttributedString(attributedString: string)
         mutable.setRichTextFontSize(fontSize)
         shouldSetAttributedString = mutable
+        userActionPublisher.send(.shouldSetAttributedString(mutable))
     }
 
     /// Set ``isEditingText`` to `false`.

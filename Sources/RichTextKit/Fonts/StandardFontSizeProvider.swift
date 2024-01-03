@@ -26,7 +26,7 @@ extension Double: StandardFontSizeProvider {}
 
 extension RichTextContext: StandardFontSizeProvider {}
 
-#if iOS || macOS || os(tvOS)
+#if iOS || macOS || tvOS
 extension RichTextEditor: StandardFontSizeProvider {}
 
 extension RichTextView: StandardFontSizeProvider {}

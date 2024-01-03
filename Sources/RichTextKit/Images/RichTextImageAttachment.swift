@@ -6,7 +6,7 @@
 //  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
 //
 
-#if iOS || os(tvOS)
+#if iOS || tvOS
 import UIKit
 #endif
 
@@ -14,7 +14,7 @@ import UIKit
 import AppKit
 #endif
 
-#if iOS || os(tvOS) || os(macOS)
+#if iOS || tvOS || macOS
 import UniformTypeIdentifiers
 
 /**
@@ -156,7 +156,7 @@ open class RichTextImageAttachment: NSTextAttachment {
     public override class var supportsSecureCoding: Bool { true }
 
 
-    #if iOS || os(tvOS)
+    #if iOS || tvOS
     /**
      Get or set the attachment image.
 
