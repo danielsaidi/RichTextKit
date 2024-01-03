@@ -12,7 +12,7 @@ import SwiftUI
 extension RichTextCoordinator {
     
     func subscribeToUserActions() {
-        richTextContext.userActionPublisher.sink { [weak self] action in
+        richTextContext.userInitiatedActionPublisher.sink { [weak self] action in
             switch action {
             case .changeStyle(let style, let newValue):
                 self?.setStyle(style, to: newValue)

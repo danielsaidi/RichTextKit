@@ -138,7 +138,7 @@ private extension RichTextStyleButton {
     
     func toggle() {
         value.wrappedValue.toggle()
-        context.userActionPublisher.send(RichTextUserAction.changeStyle(style, value.wrappedValue))
+        context.userInitiatedActionPublisher.send(RichTextUserInitiatedAction.changeStyle(style, value.wrappedValue))
     }
 }
 

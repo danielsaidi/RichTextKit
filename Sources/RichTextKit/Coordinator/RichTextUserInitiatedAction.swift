@@ -7,8 +7,7 @@
 
 import Foundation
 
-// TODO: Rename :)
-enum RichTextUserAction {
+enum RichTextUserInitiatedAction {
     case backgroundColor(ColorRepresentable)
     case foregroundColor(ColorRepresentable)
     case highlightedRange(NSRange?)
