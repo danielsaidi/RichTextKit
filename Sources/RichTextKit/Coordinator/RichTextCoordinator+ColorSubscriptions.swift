@@ -8,7 +8,7 @@
 import Foundation
 
 extension RichTextCoordinator {
-    
+
     func setColor(_ color: ColorRepresentable, for coloredAttribute: RichTextColor) {
         var applyRange: NSRange? = nil
         if textView.hasSelectedRange {
@@ -27,7 +27,7 @@ extension RichTextCoordinator {
             break
         }
     }
-    
+
     private func setStrikethroughColor(_ color: ColorRepresentable, at range: NSRange?) {
         if let range {
             self.textView.setRichTextStrikethroughColor(color, at: range)
@@ -35,7 +35,7 @@ extension RichTextCoordinator {
             self.textView.setTypingAttribute(.strikethroughColor, to: color)
         }
     }
-    
+
     private func setStrokeColor(_ color: ColorRepresentable, at range: NSRange?) {
         if let range {
             self.textView.setRichTextStrokeColor(color, at: range)
@@ -43,7 +43,7 @@ extension RichTextCoordinator {
             self.textView.setTypingAttribute(.strokeColor, to: color)
         }
     }
-    
+
     private func setForegroundColor(_ color: ColorRepresentable, at range: NSRange?) {
         if let range {
             self.textView.setRichTextForegroundColor(color, at: range)
@@ -51,7 +51,7 @@ extension RichTextCoordinator {
             self.textView.setTypingAttribute(.foregroundColor, to: color)
         }
     }
-    
+
     private func setBackgroundColor(_ color: ColorRepresentable, at range: NSRange?) {
         if let range {
             self.textView.setRichTextBackgroundColor(color, at: range)

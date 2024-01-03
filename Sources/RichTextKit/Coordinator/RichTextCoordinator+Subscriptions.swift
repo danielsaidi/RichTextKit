@@ -10,7 +10,7 @@
 import SwiftUI
 
 extension RichTextCoordinator {
-    
+
     func subscribeToUserActions() {
         richTextContext.userInitiatedActionPublisher.sink { [weak self] action in
             switch action {
@@ -123,7 +123,7 @@ private extension RichTextCoordinator {
 }
 
 internal extension RichTextCoordinator {
-    
+
     func pasteImage(_ data: Insertion<ImageRepresentable>?) {
         guard let data = data else { return }
         textView.pasteImage(
@@ -132,7 +132,7 @@ internal extension RichTextCoordinator {
             moveCursorToPastedContent: data.moveCursor
         )
     }
-    
+
     func pasteImages(_ data: Insertion<[ImageRepresentable]>?) {
         guard let data = data else { return }
         textView.pasteImages(
@@ -141,7 +141,7 @@ internal extension RichTextCoordinator {
             moveCursorToPastedContent: data.moveCursor
         )
     }
-    
+
     func pasteText(_ data: Insertion<String>?) {
         guard let data = data else { return }
         textView.pasteText(
@@ -150,18 +150,18 @@ internal extension RichTextCoordinator {
             moveCursorToPastedContent: data.moveCursor
         )
     }
-    
+
     func setAttributedString(to newValue: NSAttributedString?) {
         guard let newValue else { return }
         textView.setRichText(newValue)
     }
-    
+
     func setHighlightedRange(to range: NSRange?) {
         resetHighlightedRangeAppearance()
         guard let range = range else { return }
         setHighlightedRangeAppearance(for: range)
     }
-    
+
     func setHighlightedRangeAppearance(for range: NSRange) {
         highlightedRangeOriginalBackgroundColor = textView.richTextBackgroundColor(at: range) ?? .clear
         highlightedRangeOriginalForegroundColor = textView.richTextForegroundColor(at: range) ?? .textColor
@@ -171,29 +171,29 @@ internal extension RichTextCoordinator {
         textView.setRichTextBackgroundColor(background, at: range)
         textView.setRichTextForegroundColor(text, at: range)
     }
-    
+
     func setIsEditing(to newValue: Bool) {
         if newValue == textView.isFirstResponder { return }
         if newValue {
-#if iOS
+            #if iOS
             textView.becomeFirstResponder()
-#else
+            #else
             print("macOS currently doesn't resign first responder.")
-#endif
+            #endif
         } else {
-#if iOS
+            #if iOS
             textView.resignFirstResponder()
-#else
+            #else
             print("macOS currently doesn't resign first responder.")
-#endif
+            #endif
         }
     }
-    
+
     func setSelectedRange(to range: NSRange) {
         if range == textView.selectedRange { return }
         textView.selectedRange = range
     }
-    
+
     func setStyle(_ style: RichTextStyle, to newValue: Bool) {
         let hasStyle = textView.currentRichTextTypingAttributeStyles.hasStyle(style)
         if newValue == hasStyle { return }
@@ -206,9 +206,8 @@ internal extension RichTextCoordinator {
 }
 
 public extension ColorRepresentable {
-    
-#if iOS || tvOS
+    #if iOS || tvOS
     static var textColor: ColorRepresentable { .label }
-#endif
+    #endif
 }
 #endif

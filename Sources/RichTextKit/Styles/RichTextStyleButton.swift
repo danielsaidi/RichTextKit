@@ -1,4 +1,4 @@
-////
+//
 //  RichTextStyleButton.swift
 //  RichTextKit
 //
@@ -10,18 +10,18 @@ import SwiftUI
 
 /**
  This button can be used to toggle a ``RichTextStyle`` value.
- 
+
  This view renders a plain `Button`, which means you can use
  and configure it in all ways supported by SwiftUI. The only
  exception is the content color, which is set by a style you
  can provide in the initializer.
- 
+
  If you want a more prominent button, you may consider using
  a ``RichTextStyleToggle`` instead, but it requires a higher
  deployment target.
  */
 public struct RichTextStyleButton: View {
-    
+
     /**
      Create a rich text style button.
      
@@ -44,10 +44,10 @@ public struct RichTextStyleButton: View {
         self.fillVertically = fillVertically
         self.context = context
     }
-    
+
     /**
      Create a rich text style button.
-     
+
      - Parameters:
      - style: The style to toggle.
      - buttonStyle: The button style to use, by default ``RichTextStyleButton/Style/standard``.
@@ -68,14 +68,14 @@ public struct RichTextStyleButton: View {
             fillVertically: fillVertically
         )
     }
-    
+
     private let style: RichTextStyle
     private let buttonStyle: Style
     private let value: Binding<Bool>
     private let fillVertically: Bool
-    
+
     let context: RichTextContext
-    
+
     public var body: some View {
         Button(action: toggle) {
             style.icon
@@ -89,15 +89,15 @@ public struct RichTextStyleButton: View {
 }
 
 public extension RichTextStyleButton {
-    
+
     /**
      This style can be used to style a ``RichTextStyleButton``.
      */
     struct Style {
-        
+
         /**
          Create a rich text style button style.
-         
+
          - Parameters:
          - inactiveColor: The color to apply when the button is inactive, by default `.primary`.
          - activeColor: The color to apply when the button is active, by default `.blue`.
@@ -109,17 +109,16 @@ public extension RichTextStyleButton {
             self.inactiveColor = inactiveColor
             self.activeColor = activeColor
         }
-        
+
         /// The color to apply when the button is inactive.
         public var inactiveColor: Color
-        
+
         /// The color to apply when the button is active.
         public var activeColor: Color
     }
 }
 
 public extension RichTextStyleButton.Style {
-    
     /**
      The standard ``RichTextStyleButton`` style.
      */
@@ -127,15 +126,15 @@ public extension RichTextStyleButton.Style {
 }
 
 private extension RichTextStyleButton {
-    
+
     var isOn: Bool {
         value.wrappedValue
     }
-    
+
     var tintColor: Color {
         isOn ? buttonStyle.activeColor : buttonStyle.inactiveColor
     }
-    
+
     func toggle() {
         value.wrappedValue.toggle()
         context.userInitiatedActionPublisher.send(RichTextUserInitiatedAction.changeStyle(style, value.wrappedValue))

@@ -9,48 +9,48 @@
 import Foundation
 
 public extension RichTextViewComponent {
-    
+
     /// Get the current values of all rich text attributes.
     var currentRichTextAttributes: RichTextAttributes {
         if hasSelectedRange {
             return richTextAttributes(at: selectedRange)
         } else {
-#if macOS
+            #if macOS
             // TODO: If is link or any mention, set range to location and 0.
             let range = NSRange(location: selectedRange.location - 1, length: 1)
             let safeRange = safeRange(for: range)
             return richTextAttributes(at: safeRange)
-#else
+            #else
             return typingAttributes
-#endif
+        #endif
         }
     }
-    
+
     /// Get the current value of a rich text attribute.
     func currentRichTextAttribute<Value>(
         _ attribute: RichTextAttribute
     ) -> Value? {
         currentRichTextAttributes[attribute] as? Value
     }
-    
+
     /// Get the current value of a rich text attribute.
     func currentCustomRichTextAttribute(
         _ attribute: RichTextAttribute
     ) -> Any? {
         currentRichTextAttributes[attribute]
     }
-    
+
     /// Set the current value of a rich text attribute.
     func setTypingAttribute(_ attribute: RichTextAttribute, to value: Any?) {
         typingAttributes[attribute] = value
     }
-    
+
     /// Set the current value of a rich text attribute.
     func applyToCurrentSelection(_ attribute: RichTextAttribute, to value: Any) {
         guard hasSelectedRange else { return }
         setRichTextAttribute(attribute, to: value, at: selectedRange)
     }
-    
+
     // Move this to style
     func applyToCurrentSelection(_ style: RichTextStyle, to newValue: Bool) {
         guard hasSelectedRange else { return }
@@ -69,7 +69,7 @@ public extension RichTextViewComponent {
         guard let newFont = newFont else { return }
         setRichTextAttribute(.font, to: newFont, at: self.selectedRange)
     }
-    
+
     /// This sets flags in toolbar to see if the attribute is on/off.
     func appendCurrentRichTextAttributes(_ attributes: RichTextAttributes) {
         attributes.forEach { attribute, value in

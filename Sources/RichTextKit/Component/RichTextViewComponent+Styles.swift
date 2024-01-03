@@ -9,7 +9,7 @@
 import Foundation
 
 public extension RichTextViewComponent {
-    
+
     /// Get the current rich text styles.
     var currentRichTextTypingAttributeStyles: [RichTextStyle] {
         let attributes = currentRichTextAttributes
@@ -19,7 +19,7 @@ public extension RichTextViewComponent {
         if attributes.isUnderlined { styles.append(.underlined) }
         return styles
     }
-    
+
     /// Set the current value of a certain rich text style.
     func setCurrentRichTextStyleTypingAttributes(
         _ style: RichTextStyle,
