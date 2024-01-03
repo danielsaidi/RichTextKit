@@ -1,4 +1,4 @@
-//
+////
 //  RichTextStyleButton.swift
 //  RichTextKit
 //
@@ -10,47 +10,49 @@ import SwiftUI
 
 /**
  This button can be used to toggle a ``RichTextStyle`` value.
-
+ 
  This view renders a plain `Button`, which means you can use
  and configure it in all ways supported by SwiftUI. The only
  exception is the content color, which is set by a style you
  can provide in the initializer.
-
+ 
  If you want a more prominent button, you may consider using
  a ``RichTextStyleToggle`` instead, but it requires a higher
  deployment target.
  */
 public struct RichTextStyleButton: View {
-
+    
     /**
      Create a rich text style button.
-
+     
      - Parameters:
-       - style: The style to toggle.
-       - buttonStyle: The button style to use, by default ``RichTextStyleButton/Style/standard``.
-       - value: The value to bind to.
-       - fillVertically: Whether or not fill up vertical space in a non-greedy way, by default `false`.
+     - style: The style to toggle.
+     - buttonStyle: The button style to use, by default ``RichTextStyleButton/Style/standard``.
+     - value: The value to bind to.
+     - fillVertically: Whether or not fill up vertical space in a non-greedy way, by default `false`.
      */
     public init(
         style: RichTextStyle,
         buttonStyle: Style = .standard,
         value: Binding<Bool>,
+        context: RichTextContext,
         fillVertically: Bool = false
     ) {
         self.style = style
         self.buttonStyle = buttonStyle
         self.value = value
         self.fillVertically = fillVertically
+        self.context = context
     }
-
+    
     /**
      Create a rich text style button.
-
+     
      - Parameters:
-       - style: The style to toggle.
-       - buttonStyle: The button style to use, by default ``RichTextStyleButton/Style/standard``.
-       - context: The context to affect.
-       - fillVertically: Whether or not fill up vertical space in a non-greedy way, by default `false`.
+     - style: The style to toggle.
+     - buttonStyle: The button style to use, by default ``RichTextStyleButton/Style/standard``.
+     - context: The context to affect.
+     - fillVertically: Whether or not fill up vertical space in a non-greedy way, by default `false`.
      */
     public init(
         style: RichTextStyle,
@@ -62,15 +64,18 @@ public struct RichTextStyleButton: View {
             style: style,
             buttonStyle: buttonStyle,
             value: context.binding(for: style),
+            context: context,
             fillVertically: fillVertically
         )
     }
-
+    
     private let style: RichTextStyle
     private let buttonStyle: Style
     private let value: Binding<Bool>
     private let fillVertically: Bool
-
+    
+    let context: RichTextContext
+    
     public var body: some View {
         Button(action: toggle) {
             style.icon
@@ -84,18 +89,18 @@ public struct RichTextStyleButton: View {
 }
 
 public extension RichTextStyleButton {
-
+    
     /**
      This style can be used to style a ``RichTextStyleButton``.
      */
     struct Style {
-
+        
         /**
          Create a rich text style button style.
-
+         
          - Parameters:
-           - inactiveColor: The color to apply when the button is inactive, by default `.primary`.
-           - activeColor: The color to apply when the button is active, by default `.blue`.
+         - inactiveColor: The color to apply when the button is inactive, by default `.primary`.
+         - activeColor: The color to apply when the button is active, by default `.blue`.
          */
         public init(
             inactiveColor: Color = .primary,
@@ -104,17 +109,17 @@ public extension RichTextStyleButton {
             self.inactiveColor = inactiveColor
             self.activeColor = activeColor
         }
-
+        
         /// The color to apply when the button is inactive.
         public var inactiveColor: Color
-
+        
         /// The color to apply when the button is active.
         public var activeColor: Color
     }
 }
 
 public extension RichTextStyleButton.Style {
-
+    
     /**
      The standard ``RichTextStyleButton`` style.
      */
@@ -122,17 +127,18 @@ public extension RichTextStyleButton.Style {
 }
 
 private extension RichTextStyleButton {
-
+    
     var isOn: Bool {
         value.wrappedValue
     }
-
+    
     var tintColor: Color {
         isOn ? buttonStyle.activeColor : buttonStyle.inactiveColor
     }
-
+    
     func toggle() {
         value.wrappedValue.toggle()
+        context.userActionPublisher.send(RichTextUserAction.changeStyle(style, value.wrappedValue))
     }
 }
 
@@ -140,6 +146,7 @@ struct RichTextStyleButton_Previews: PreviewProvider {
 
     struct Preview: View {
 
+        private let context = RichTextContext()
         @State
         private var isBoldOn = false
 
@@ -156,16 +163,24 @@ struct RichTextStyleButton_Previews: PreviewProvider {
             HStack {
                 RichTextStyleButton(
                     style: .bold,
-                    value: $isBoldOn)
+                    value: $isBoldOn, 
+                    context: context
+                )
                 RichTextStyleButton(
                     style: .italic,
-                    value: $isItalicOn)
+                    value: $isItalicOn,
+                    context: context
+                )
                 RichTextStyleButton(
                     style: .strikethrough,
-                    value: $isStrikethroughOn)
+                    value: $isStrikethroughOn,
+                    context: context
+                )
                 RichTextStyleButton(
                     style: .underlined,
-                    value: $isUnderlinedOn)
+                    value: $isUnderlinedOn,
+                    context: context
+                )
             }.padding()
         }
     }
