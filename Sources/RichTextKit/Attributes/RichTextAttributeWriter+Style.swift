@@ -30,6 +30,7 @@ public extension RichTextAttributeWriter {
         let range = safeRange(for: rangeValue)
         let attributeValue = newValue ? 1 : 0
         if style == .underlined { return setRichTextAttribute(.underlineStyle, to: attributeValue, at: range) }
+        if style == .strikethrough { return setRichTextAttribute(.strikethroughStyle, to: attributeValue, at: range) }
         guard let font = richTextFont(at: range) else { return }
         let styles = richTextStyles(at: range)
         let shouldAdd = newValue && !styles.hasStyle(style)
