@@ -16,6 +16,7 @@ Thanks to [@DominikBucher12][DominikBucher12] and [@msrutek-paylocity][msrutek-p
 
 ### 💡 Adjustments
                                 
+* `RichTextAttributeReader` now allows providing a `nil` range.
 * `RichTextAttributeWriter` now handles `setRichTextStyle` with a switch.
 * `RichTextAttributeWriter` and `RichTextViewComponent` shares more code.
 * `RichTextViewComponent` now handles `setCurrentRichTextStyle` with a switch.
