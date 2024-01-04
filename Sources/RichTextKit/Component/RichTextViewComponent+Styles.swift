@@ -20,23 +20,28 @@ public extension RichTextViewComponent {
         return styles
     }
 
-    /// Set the current value of a certain rich text style.
+    /**
+     Set the current value of a certain rich text style.
+
+     > Note: When adding logic to the function, make sure to
+     also adjust ``setRichTextStyle(_:to:at:)``.
+     */
     func setCurrentRichTextStyleTypingAttributes(
         _ style: RichTextStyle,
         to newValue: Bool
     ) {
-        let attributeValue = newValue ? 1 : 0
-        if style == .strikethrough { return setTypingAttribute(.strikethroughStyle, to: attributeValue) }
-        if style == .underlined { return setTypingAttribute(.underlineStyle, to: attributeValue) }
-        let styles = currentRichTextTypingAttributeStyles
-        let shouldAdd = newValue && !styles.hasStyle(style)
-        let shouldRemove = !newValue && styles.hasStyle(style)
-        guard shouldAdd || shouldRemove else { return }
-        guard let font = currentFont else { return }
-        let newFont: FontRepresentable? = FontRepresentable(
-            descriptor: font.fontDescriptor.byTogglingStyle(style),
-            size: font.pointSize)
-        guard let newFont = newFont else { return }
-        setCurrentFont(newFont)
+        let value = newValue ? 1 : 0
+        switch style {
+        case .bold, .italic:
+            let styles = currentRichTextStyles
+            guard shouldAddOrRemove(style, newValue, given: styles) else { return }
+            guard let font = currentFont else { return }
+            guard let newFont = newFont(for: font, byToggling: style) else { return }
+            setCurrentFont(newFont)
+        case .underlined:
+            setTypingAttribute(.underlineStyle, to: value)
+        case .strikethrough:
+            setTypingAttribute(.strikethroughStyle, to: value)
+        }
     }
 }

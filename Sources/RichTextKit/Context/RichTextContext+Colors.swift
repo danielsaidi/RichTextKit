@@ -25,6 +25,7 @@ public extension RichTextContext {
         case .background: return backgroundColor
         case .strikethrough: return strikethroughColor
         case .stroke: return strokeColor
+        case .underline: return underlineColor
         case .undefined: return nil
         }
     }
@@ -40,6 +41,7 @@ public extension RichTextContext {
         case .background: userInitiatedActionPublisher.send(.backgroundColor(color))
         case .strikethrough: userInitiatedActionPublisher.send(.strikethroughColor(color))
         case .stroke: userInitiatedActionPublisher.send(.strokeColor(color))
+        case .underline: userInitiatedActionPublisher.send(.underlineColor(color))
         case .undefined: return
         }
     }

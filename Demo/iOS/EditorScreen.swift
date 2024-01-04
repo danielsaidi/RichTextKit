@@ -53,7 +53,11 @@ private extension EditorScreen {
             context: context,
             leadingButtons: {},
             trailingButtons: {}
-        )
+        ) {
+            var sheet = $0
+            sheet.colorPickers = .all
+            return sheet
+        }
     }
 }
 

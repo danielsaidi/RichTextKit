@@ -27,6 +27,9 @@ public enum RichTextColor: String, CaseIterable, Codable, Equatable, Identifiabl
     /// Stroke color.
     case stroke
 
+    /// Underline color.
+    case underline
+
     /// An undefined color type.
     case undefined
 }
@@ -36,20 +39,33 @@ public extension RichTextColor {
     /// The unique ID of the alignment.
     var id: String { rawValue }
 
+    /// The corresponding rich text attribute, if any.
+    var attribute: NSAttributedString.Key? {
+        switch self {
+        case .foreground: .foregroundColor
+        case .background: .backgroundColor
+        case .strikethrough: .strikethroughColor
+        case .stroke: .strokeColor
+        case .underline: .underlineColor
+        case .undefined: nil
+        }
+    }
+
     /// The standard icon to use for the alignment.
     var icon: Image? {
         switch self {
-        case .foreground: return .richTextColorForeground
-        case .background: return .richTextColorBackground
-        case .strikethrough: return .richTextColorStrikethrough
-        case .stroke: return .richTextColorStroke
-        case .undefined: return nil
+        case .foreground: .richTextColorForeground
+        case .background: .richTextColorBackground
+        case .strikethrough: .richTextColorStrikethrough
+        case .stroke: .richTextColorStroke
+        case .underline: .richTextColorUnderline
+        case .undefined: nil
         }
     }
 
     /// Adjust a `color` for a certain `colorScheme`.
     func adjust(
-        color: Color,
+        _ color: Color,
         for scheme: ColorScheme
     ) -> Color {
         switch self {
@@ -58,14 +74,21 @@ public extension RichTextColor {
                 return .clear
             }
             return color
-        case .foreground:
+        default:
             if (color == .white && scheme == .dark) || (color == .black && scheme == .light) {
                 return .primary
             }
             return color
-        case .strikethrough: return color
-        case .stroke: return color
-        case .undefined: return color
         }
     }
+}
+
+public extension RichTextColor {
+
+    static var all: [RichTextColor] { allCases.filter { $0 != .undefined } }
+}
+
+public extension Array where Element == RichTextColor {
+
+    static var all: [RichTextColor] { Element.all }
 }

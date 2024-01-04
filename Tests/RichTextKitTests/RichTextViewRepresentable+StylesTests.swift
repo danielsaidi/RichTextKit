@@ -44,7 +44,7 @@ final class RichTextViewComponent_StylesTests: XCTestCase {
     func testIsCurrentTextBoldWorksForSelectedRange() {
         textView.setSelectedRange(selectedRange)
         textView.setCurrentRichTextStyle(.bold, to: true)
-        #if macOS   // TODO: Why did this stop working for iOS and tvOS
+        #if macOS // TODO: Why did this stop working for iOS and tvOS
         XCTAssertTrue(textView.currentRichTextStyles.hasStyle(.bold))
         #endif
         textView.setSelectedRange(noRange)
@@ -54,7 +54,7 @@ final class RichTextViewComponent_StylesTests: XCTestCase {
     func testIsCurrentTextItalicWorksForSelectedRange() {
         textView.setSelectedRange(selectedRange)
         textView.setCurrentRichTextStyle(.italic, to: true)
-        #if macOS   // TODO: Why did this stop working for iOS and tvOS
+        #if macOS // TODO: Why did this stop working for iOS and tvOS
         XCTAssertTrue(textView.currentRichTextStyles.hasStyle(.italic))
         #endif
         textView.setSelectedRange(noRange)

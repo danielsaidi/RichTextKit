@@ -10,31 +10,21 @@ import Foundation
 
 public extension RichTextViewComponent {
 
-    /// Get the current value of a certain color.
+    /// Get the current value of a certain rich text color.
     func currentColor(
         _ color: RichTextColor
     ) -> ColorRepresentable? {
-        switch color {
-        case .foreground: currentRichTextAttribute(.foregroundColor)
-        case .background: currentRichTextAttribute(.backgroundColor)
-        case .strikethrough: currentRichTextAttribute(.strikethroughColor)
-        case .stroke: currentRichTextAttribute(.strokeColor)
-        case .undefined: nil
-        }
+        guard let attribute = color.attribute else { return nil }
+        return currentRichTextAttribute(attribute)
     }
 
-    /// Set the current value of a certain color.
+    /// Set the current value of a certain rich text color.
     func setCurrentColor(
         _ color: RichTextColor,
         to val: ColorRepresentable
     ) {
         if currentColor(color) == val { return }
-        switch color {
-        case .foreground: setTypingAttribute(.foregroundColor, to: val)
-        case .background: setTypingAttribute(.backgroundColor, to: val)
-        case .strikethrough: setTypingAttribute(.strikethroughColor, to: val)
-        case .stroke: setTypingAttribute(.strokeColor, to: val)
-        case .undefined: return
-        }
+        guard let attribute = color.attribute else { return }
+        setTypingAttribute(attribute, to: val)
     }
 }

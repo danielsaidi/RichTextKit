@@ -136,6 +136,10 @@ public class RichTextContext: ObservableObject {
     @Published
     public var textAlignment: RichTextAlignment = .left
 
+    /// The current underline color, if any.
+    @Published
+    public var underlineColor: ColorRepresentable?
+
 
     // MARK: - Internal trigger properties
 

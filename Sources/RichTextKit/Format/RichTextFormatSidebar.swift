@@ -13,11 +13,9 @@ import SwiftUI
  This sidebar view provides various text format options, and
  is meant to be used on macOS, in a trailing sidebar.
 
- > Important: Although this view is designed for macOS, it's
- not excluded for iOS, since it should be to the docs. If we
- find a way to combine all platform docs, we can exclude the
- view for iOS as well. Until then, don't use it on iOS since
- it will look off.
+ > Note: The sidebar is currently designed for macOS, but it
+ should also be made to look good on iPadOS in landscape, to
+ let us use it instead of the ``RichTextFormatSheet``.
  */
 public struct RichTextFormatSidebar: View {
 
@@ -26,17 +24,24 @@ public struct RichTextFormatSidebar: View {
 
      - Parameters:
        - context: The context to apply changes to.
+       - colorPickers: The color pickers to use, by default `.foreground` and `.background`.
      */
     public init(
-        context: RichTextContext
+        context: RichTextContext,
+        colorPickers: [RichTextColor] = [.foreground, .background]
     ) {
         self._context = ObservedObject(wrappedValue: context)
+        self.colorPickers = colorPickers
     }
 
     @ObservedObject
     private var context: RichTextContext
 
-    private let spacing = 10.0
+    /// The sidebar spacing.
+    public var spacing = 10.0
+
+    /// The color pickers to use.
+    public var colorPickers: [RichTextColor]
 
     public var body: some View {
         VStack(alignment: .leading, spacing: spacing) {
@@ -59,14 +64,13 @@ public struct RichTextFormatSidebar: View {
 
             SidebarSection(title: nil) {
                 VStack(spacing: 4) {
-                    RichTextColorPicker(
-                        type: .foreground,
-                        value: context.binding(for: .foreground),
-                        quickColors: .quickPickerColors)
-                    RichTextColorPicker(
-                        type: .background,
-                        value: context.binding(for: .background),
-                        quickColors: .quickPickerColors)
+                    ForEach(colorPickers) {
+                        RichTextColorPicker(
+                            type: $0,
+                            value: context.binding(for: $0),
+                            quickColors: .quickPickerColors
+                        )
+                    }
                 }
             }
             .font(.callout)
@@ -75,6 +79,7 @@ public struct RichTextFormatSidebar: View {
             Spacer()
         }
         .padding(8)
+        .focusable()
         .background(Color.white.opacity(0.05))
     }
 }

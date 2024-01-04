@@ -14,9 +14,7 @@ import SwiftUI
  is meant to be used on iOS, where space is limited.
 
  The font picker will take up as much height as it can after
- other rows have allocated their height. If you use a custom
- presentation detents, make sure the sheet is tall enough to
- show the fonts.
+ the other rows have allocated their height.
  */
 public struct RichTextFormatSheet: View {
 
@@ -25,11 +23,14 @@ public struct RichTextFormatSheet: View {
 
      - Parameters:
        - context: The context to apply changes to.
+       - colorPickers: The color pickers to use, by default `.foreground` and `.background`.
      */
     public init(
-        context: RichTextContext
+        context: RichTextContext,
+        colorPickers: [RichTextColor] = [.foreground, .background]
     ) {
         self._context = ObservedObject(wrappedValue: context)
+        self.colorPickers = colorPickers
     }
 
     @ObservedObject
@@ -38,8 +39,14 @@ public struct RichTextFormatSheet: View {
     @Environment(\.presentationMode)
     private var presentationMode
 
-    private let padding = 10.0
-    private let topOffset = -35.0
+    /// The sheet padding.
+    public var padding = 10.0
+
+    /// The sheet top offset.
+    public var topOffset = -35.0
+
+    /// The color pickers to use.
+    public var colorPickers: [RichTextColor]
 
     public var body: some View {
         NavigationView {
@@ -55,14 +62,13 @@ public struct RichTextFormatSheet: View {
                         Divider()
                     }.padding(.horizontal, padding)
                     VStack(spacing: padding) {
-                        RichTextColorPicker(
-                            type: .foreground,
-                            value: context.binding(for: .foreground),
-                            quickColors: .quickPickerColors)
-                        RichTextColorPicker(
-                            type: .background,
-                            value: context.binding(for: .background),
-                            quickColors: .quickPickerColors)
+                        ForEach(colorPickers) {
+                            RichTextColorPicker(
+                                type: $0,
+                                value: context.binding(for: $0),
+                                quickColors: .quickPickerColors
+                            )
+                        }
                     }.padding(.leading, padding)
                 }
                 .padding(.vertical, padding)

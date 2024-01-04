@@ -6,9 +6,45 @@ Until then, minor updates may remove deprecated features and introduce breaking 
 
 
 
+## 0.9.5
+
+Thanks to [@DominikBucher12][DominikBucher12] and [@msrutek-paylocity][msrutek-paylocity], some bugs have been fixed and some formatting adjusted.
+
+### ✨ Features
+
+* `RichTextColor` has a new `attribute` property.
+* `RichTextColor` has a new `underline` color.
+* `RichTextFormatSheet` has a new `colorPickers` init parameter.
+* `RichTextFormatSidebar` has a new `colorPickers` init parameter.
+
+### 💡 Adjustments
+              
+* `RichTextAttributeReader` now allows providing a `nil` range.
+* `RichTextAttributeWriter` now handles `setRichTextStyle` with a switch.
+* `RichTextAttributeWriter` and `RichTextViewComponent` shares more code.
+* `RichTextFormatSheet` now exposes its init params as mutable properties.
+* `RichTextFormatSidebar` now handles keyboard focus way better than before.
+* `RichTextFormatSidebar` now exposes its init params as mutable properties.
+* `RichTextViewComponent` now handles `setCurrentRichTextStyle` with a switch.
+* `RichTextViewComponent` now handles `setCurrentRichTextStyle` with a switch.
+* `RichTextViewComponent` uses the new color `attribute` to optimize some code.
+* `SwiftFormat` now uses `consecutiveSpaces`.
+
+### 🐛 Bug Fixes
+                
+* `RichTextAttributeWriter` now handles `strikethrough` with a switch.
+* `RichTextView` now handles initial drag & drop better on iOS.
+    
+### 🗑️ Deprecations 
+
+* `RichTextAttributeReader` color functions are replaced with a single `richTextColor(_:at:)`.
+* `RichTextAttributeWriter` color functions are replaced with a single `setRichTextColor(_:to:at:)`.
+
+
+
 ## 0.9.4
 
-Thanks to [@Mcrich23](https://github.com/Mcrich23), the `RichTextColorPicker` now adjusts foreground and background color for the current color scheme.
+Thanks to [@Mcrich23][Mcrich23], the `RichTextColorPicker` now adjusts foreground and background color for the current color scheme.
 
 ### ✨ Features
 
@@ -22,12 +58,11 @@ Thanks to [@Mcrich23](https://github.com/Mcrich23), the `RichTextColorPicker` no
 * `RichTextColorPicker` now uses the color type color adjustment.
 
 
-
 ## 0.9.3
 
-Thanks to [@Mcrich23](https://github.com/Mcrich23), RichTextKit now supports Mac Catalyst.
+Thanks to [@Mcrich23][Mcrich23], RichTextKit now supports Mac Catalyst.
 
-Thanks to [@msrutek-paylocity](https://github.com/msrutek-paylocity) the unit tests are in a much better shape. 
+Thanks to [@msrutek-paylocity][msrutek-paylocity] the unit tests are in a much better shape. 
 
 
 
@@ -404,3 +439,8 @@ RichTextKit adds extensive support for a bunch of rich text features:
 * Sharing
 * Styles
 * Views
+
+
+[DominikBucher12]: https://github.com/DominikBucher12
+[Mcrich23]: https://github.com/Mcrich23
+[msrutek-paylocity]: https://github.com/msrutek-paylocity
