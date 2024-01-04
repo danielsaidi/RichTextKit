@@ -15,7 +15,7 @@ Thanks to [@DominikBucher12][DominikBucher12] and [@msrutek-paylocity][msrutek-p
 * `RichTextColor` has a new `attribute` property.
 
 ### 💡 Adjustments
-                                
+              
 * `RichTextAttributeReader` now allows providing a `nil` range.
 * `RichTextAttributeWriter` now handles `setRichTextStyle` with a switch.
 * `RichTextAttributeWriter` and `RichTextViewComponent` shares more code.
@@ -28,8 +28,10 @@ Thanks to [@DominikBucher12][DominikBucher12] and [@msrutek-paylocity][msrutek-p
                 
 * `RichTextAttributeWriter` now handles `strikethrough` with a switch.
 * `RichTextView` now handles initial drag & drop better on iOS.
+    
+### 🗑️ Deprecations 
 
-
+* `RichTextAttributeWriter` color functions are replaced with `setRichTextColor(_:to:at:)`.
 
 
 
@@ -47,7 +49,6 @@ Thanks to [@Mcrich23][Mcrich23], the `RichTextColorPicker` now adjusts foregroun
 
 * `RichTextColorPicker` now uses the color type icon by default.
 * `RichTextColorPicker` now uses the color type color adjustment.
-
 
 
 ## 0.9.3

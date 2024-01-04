@@ -10,36 +10,24 @@ import Foundation
 
 public extension RichTextAttributeWriter {
 
-    /// Set the background color at a certain range.
-    func setRichTextBackgroundColor(
-        _ color: ColorRepresentable,
+    /// Get the value of a certain rich text color.
+    func richTextColor(
+        _ color: RichTextColor,
         at range: NSRange? = nil
-    ) {
-        setRichTextAttribute(.backgroundColor, to: color, at: range)
+    ) -> ColorRepresentable? {
+        guard let attribute = color.attribute else { return nil }
+        return richTextAttribute(attribute, at: range)
     }
 
-    /// Set the foreground color at a certain range.
-    func setRichTextForegroundColor(
-        _ color: ColorRepresentable,
+    /// Set the current value of a certain rich text color.
+    func setRichTextColor(
+        _ color: RichTextColor,
+        to val: ColorRepresentable,
         at range: NSRange? = nil
     ) {
-        setRichTextAttribute(.foregroundColor, to: color, at: range)
-    }
-
-    /// Set the strikethrough color at a certain range.
-    func setRichTextStrikethroughColor(
-        _ color: ColorRepresentable,
-        at range: NSRange? = nil
-    ) {
-        setRichTextAttribute(.strikethroughColor, to: color, at: range)
-    }
-
-    /// Set the stroke color at a certain range.
-    func setRichTextStrokeColor(
-        _ color: ColorRepresentable,
-        at range: NSRange? = nil
-    ) {
-        setRichTextAttribute(.strokeColor, to: color, at: range)
+        guard let attribute = color.attribute else { return }
+        if richTextColor(color, at: range) == val { return }
+        setRichTextAttribute(attribute, to: color, at: range)
     }
 
     /// Set the underline color at a certain range.
@@ -49,5 +37,4 @@ public extension RichTextAttributeWriter {
     ) {
         setRichTextAttribute(.underlineColor, to: color, at: range)
     }
-
 }
