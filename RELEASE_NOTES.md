@@ -34,7 +34,8 @@ Thanks to [@DominikBucher12][DominikBucher12] and [@msrutek-paylocity][msrutek-p
     
 ### 🗑️ Deprecations 
 
-* `RichTextAttributeWriter` color functions are replaced with `setRichTextColor(_:to:at:)`.
+* `RichTextAttributeReader` color functions are replaced with a single `richTextColor(_:at:)`.
+* `RichTextAttributeWriter` color functions are replaced with a single `setRichTextColor(_:to:at:)`.
 
 
 

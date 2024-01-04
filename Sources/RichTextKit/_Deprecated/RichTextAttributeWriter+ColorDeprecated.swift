@@ -33,4 +33,12 @@ public extension RichTextAttributeWriter {
     ) {
         setRichTextAttribute(.strokeColor, to: color, at: range)
     }
+    
+    @available(*, deprecated, renamed: "setRichTextColor(_:to:at:)")
+    func setRichTextUnderlineColor(
+        _ color: ColorRepresentable,
+        at range: NSRange? = nil
+    ) {
+        setRichTextAttribute(.underlineColor, to: color, at: range)
+    }
 }
