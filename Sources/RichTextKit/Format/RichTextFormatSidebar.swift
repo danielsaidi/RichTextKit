@@ -79,8 +79,20 @@ public struct RichTextFormatSidebar: View {
             Spacer()
         }
         .padding(8)
-        .focusable()
+        .prefersFocusable()
         .background(Color.white.opacity(0.05))
+    }
+}
+
+private extension View {
+
+    @ViewBuilder
+    func prefersFocusable() -> some View {
+        if #available(iOS 17.0, macOS 14.0, *) {
+            self.focusable()
+        } else {
+            self
+        }
     }
 }
 
