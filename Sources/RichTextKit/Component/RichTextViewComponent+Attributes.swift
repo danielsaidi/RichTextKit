@@ -54,20 +54,19 @@ public extension RichTextViewComponent {
     // Move this to style
     func applyToCurrentSelection(_ style: RichTextStyle, to newValue: Bool) {
         guard hasSelectedRange else { return }
-        
-        let attributeValue = newValue ? 1 : 0
-        if style == .strikethrough { applyToCurrentSelection(.strikethroughStyle, to: attributeValue) }
-        if style == .underlined { applyToCurrentSelection(.underlineStyle, to: attributeValue) }
-        let styles = currentRichTextTypingAttributeStyles
-        let shouldAdd = newValue && !styles.hasStyle(style)
-        let shouldRemove = !newValue && styles.hasStyle(style)
-        guard shouldAdd || shouldRemove else { return }
-        guard let font = currentFont else { return }
-        let newFont: FontRepresentable? = FontRepresentable(
-            descriptor: font.fontDescriptor.byTogglingStyle(style),
-            size: font.pointSize)
-        guard let newFont = newFont else { return }
-        setRichTextAttribute(.font, to: newFont, at: self.selectedRange)
+        let value = newValue ? 1 : 0
+        switch style {
+        case .bold, .italic:
+            let styles = currentRichTextTypingAttributeStyles
+            guard shouldAddOrRemove(style, newValue, given: styles) else { return }
+            guard let font = currentFont else { return }
+            guard let newFont = newFont(for: font, byToggling: style) else { return }
+            setRichTextAttribute(.font, to:newFont, at: selectedRange)
+        case .underlined:
+            applyToCurrentSelection(.underlineStyle, to: value)
+        case .strikethrough:
+            applyToCurrentSelection(.strikethroughStyle, to: value)
+        }
     }
 
     /// This sets flags in toolbar to see if the attribute is on/off.

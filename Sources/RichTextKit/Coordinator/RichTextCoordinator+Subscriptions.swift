@@ -24,13 +24,10 @@ extension RichTextCoordinator {
             case .shouldPasteImages(let images):
                 self?.pasteImages(images)
             case .shouldPasteText(let text):
-                // TODO: Is this even used?
                 self?.pasteText(text)
             case .shouldSelectRange(let range):
-                // TODO: Is this even used?
                 self?.setSelectedRange(to: range)
             case .shouldSetAttributedString(let attributedString):
-                // TODO: Is this even used?
                 self?.setAttributedString(to: attributedString)
             case .strikethroughColor(let color):
                 self?.setColor(color, for: .strikethrough)
@@ -50,11 +47,10 @@ extension RichTextCoordinator {
         }
         .store(in: &cancellables)
         
-        // TODO: Alignment is binded to buttons, way much easier to maintain it like this.
+        // Alignment and Font are bound to buttons, way much easier to maintain it like this.
         subscribeToAlignment()
         subscribeToFontName()
         subscribeToFontSize()
-        // TODO: Is this needed?
         subscribeToIsEditingText()
     }
 }
@@ -86,7 +82,6 @@ private extension RichTextCoordinator {
     func subscribeToIsEditingText() {
         richTextContext.$isEditingText
             .sink(
-                receiveCompletion: { _ in },
                 receiveValue: { [weak self] in
                     self?.setIsEditing(to: $0)
                 })
@@ -96,7 +91,6 @@ private extension RichTextCoordinator {
     func subscribeToAlignment() {
         richTextContext.$textAlignment
             .sink(
-                receiveCompletion: { _ in },
                 receiveValue: { [weak self] in
                     self?.textView.setCurrentTextAlignment($0)
                 })
@@ -106,7 +100,6 @@ private extension RichTextCoordinator {
     func subscribeToFontName() {
         richTextContext.$fontName
             .sink(
-                receiveCompletion: { _ in },
                 receiveValue: { [weak self] in
                     self?.textView.setCurrentFontName($0)
                 })
@@ -116,7 +109,6 @@ private extension RichTextCoordinator {
     func subscribeToFontSize() {
         richTextContext.$fontSize
             .sink(
-                receiveCompletion: { _ in },
                 receiveValue: { [weak self] in
                     self?.textView.setCurrentFontSize($0)
                 })

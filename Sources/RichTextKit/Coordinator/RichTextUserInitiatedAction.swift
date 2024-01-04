@@ -14,7 +14,6 @@ enum RichTextUserInitiatedAction {
     case highlightingStyle(RichTextHighlightingStyle)
     case shouldPasteImage(Insertion<ImageRepresentable>)
     case shouldPasteImages(Insertion<[ImageRepresentable]>)
-    // TODO: Paste attributed string??
     case shouldPasteText(Insertion<String>)
     case shouldSelectRange(NSRange)
     case shouldSetAttributedString(NSAttributedString)
@@ -30,7 +29,7 @@ extension ImageRepresentable: Insertable {}
 extension [ImageRepresentable]: Insertable {}
 extension NSAttributedString: Insertable {}
 
-protocol Insertable { }
+protocol Insertable {}
 
 struct Insertion<T: Insertable> {
     typealias Index = Int
