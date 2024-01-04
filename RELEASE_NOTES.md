@@ -6,9 +6,24 @@ Until then, minor updates may remove deprecated features and introduce breaking 
 
 
 
+## 0.9.5
+
+Thanks to [@DominikBucher12][DominikBucher12] and [@msrutek-paylocity][msrutek-paylocity], a couple of bugs have been fixed and some more formatting has been adjusted.
+
+### 🐛 Bug Fixes
+                
+* `RichTextView` now handles initial drag & drop better on iOS.
+
+### 💡 Adjustments
+
+* `SwiftFormat` now uses `consecutiveSpaces`.
+
+
+
+
 ## 0.9.4
 
-Thanks to [@Mcrich23](https://github.com/Mcrich23), the `RichTextColorPicker` now adjusts foreground and background color for the current color scheme.
+Thanks to [@Mcrich23][Mcrich23], the `RichTextColorPicker` now adjusts foreground and background color for the current color scheme.
 
 ### ✨ Features
 
@@ -25,9 +40,9 @@ Thanks to [@Mcrich23](https://github.com/Mcrich23), the `RichTextColorPicker` no
 
 ## 0.9.3
 
-Thanks to [@Mcrich23](https://github.com/Mcrich23), RichTextKit now supports Mac Catalyst.
+Thanks to [@Mcrich23][Mcrich23], RichTextKit now supports Mac Catalyst.
 
-Thanks to [@msrutek-paylocity](https://github.com/msrutek-paylocity) the unit tests are in a much better shape. 
+Thanks to [@msrutek-paylocity][msrutek-paylocity] the unit tests are in a much better shape. 
 
 
 
@@ -404,3 +419,8 @@ RichTextKit adds extensive support for a bunch of rich text features:
 * Sharing
 * Styles
 * Views
+
+
+[DominikBucher12]: https://github.com/DominikBucher12
+[Mcrich23]: https://github.com/Mcrich23
+[msrutek-paylocity]: https://github.com/msrutek-paylocity
