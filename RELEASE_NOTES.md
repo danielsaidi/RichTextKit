@@ -13,6 +13,7 @@ Thanks to [@DominikBucher12][DominikBucher12] and [@msrutek-paylocity][msrutek-p
 ### ✨ Features
 
 * `RichTextColor` has a new `attribute` property.
+* `RichTextColor` has a new `underline` color.
 
 ### 💡 Adjustments
               

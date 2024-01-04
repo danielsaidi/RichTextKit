@@ -23,9 +23,12 @@ public enum RichTextColor: String, CaseIterable, Codable, Equatable, Identifiabl
 
     /// Strikethrough color.
     case strikethrough
-
+    
     /// Stroke color.
     case stroke
+    
+    /// Underline color.
+    case underline
 
     /// An undefined color type.
     case undefined
@@ -43,6 +46,7 @@ public extension RichTextColor {
         case .background: .backgroundColor
         case .strikethrough: .strikethroughColor
         case .stroke: .strokeColor
+        case .underline: .underlineColor
         case .undefined: nil
         }
     }
@@ -50,11 +54,12 @@ public extension RichTextColor {
     /// The standard icon to use for the alignment.
     var icon: Image? {
         switch self {
-        case .foreground: return .richTextColorForeground
-        case .background: return .richTextColorBackground
-        case .strikethrough: return .richTextColorStrikethrough
-        case .stroke: return .richTextColorStroke
-        case .undefined: return nil
+        case .foreground: .richTextColorForeground
+        case .background: .richTextColorBackground
+        case .strikethrough: .richTextColorStrikethrough
+        case .stroke: .richTextColorStroke
+        case .underline: .richTextColorUnderline
+        case .undefined: nil
         }
     }
 
@@ -69,14 +74,11 @@ public extension RichTextColor {
                 return .clear
             }
             return color
-        case .foreground:
+        default:
             if (color == .white && scheme == .dark) || (color == .black && scheme == .light) {
                 return .primary
             }
             return color
-        case .strikethrough: return color
-        case .stroke: return color
-        case .undefined: return color
         }
     }
 }

@@ -216,9 +216,14 @@ extension RichTextCoordinator {
             richTextContext.strokeColor = stroke
         }
 
-        let strike = textView.currentColor(.strikethrough)
-        if richTextContext.strikethroughColor != strike {
-            richTextContext.strikethroughColor = strike
+        let strikethrough = textView.currentColor(.strikethrough)
+        if richTextContext.strikethroughColor != strikethrough {
+            richTextContext.strikethroughColor = strikethrough
+        }
+        
+        let underline = textView.currentColor(.underline)
+        if richTextContext.foregroundColor != underline {
+            richTextContext.foregroundColor = underline
         }
 
         let hasRange = textView.hasSelectedRange

@@ -33,6 +33,7 @@ extension RichTextCoordinator {
         subscribeToStrikethroughColor()
         subscribeToStrokeColor()
         subscribeToTriggerAction()
+        subscribeToUnderlineColor()
     }
 }
 
@@ -254,7 +255,7 @@ private extension RichTextCoordinator {
                 })
             .store(in: &cancellables)
     }
-
+    
     func subscribeToStrikethroughColor() {
         richTextContext.$strikethroughColor
             .sink(
@@ -262,6 +263,17 @@ private extension RichTextCoordinator {
                 receiveValue: { [weak self] in
                     guard let color = $0 else { return }
                     self?.textView.setCurrentColor(.strikethrough, to: color)
+                })
+            .store(in: &cancellables)
+    }
+    
+    func subscribeToUnderlineColor() {
+        richTextContext.$underlineColor
+            .sink(
+                receiveCompletion: { _ in },
+                receiveValue: { [weak self] in
+                    guard let color = $0 else { return }
+                    self?.textView.setCurrentColor(.underline, to: color)
                 })
             .store(in: &cancellables)
     }

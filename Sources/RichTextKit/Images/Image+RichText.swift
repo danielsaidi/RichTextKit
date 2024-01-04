@@ -28,6 +28,7 @@ public extension Image {
     static let richTextColorForeground = symbol("character")
     static let richTextColorStroke = symbol("a.square")
     static let richTextColorStrikethrough = symbol("strikethrough")
+    static let richTextColorUnderline = symbol("underline")
 
     static let richTextDocument = symbol("doc.text")
     static let richTextDocuments = symbol("doc.on.doc")
