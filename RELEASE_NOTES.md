@@ -6,7 +6,7 @@ Until then, minor updates may remove deprecated features and introduce breaking 
 
 
 
-## 0.9.5
+## 0.10.0
 
 Thanks to [@DominikBucher12][DominikBucher12] and [@msrutek-paylocity][msrutek-paylocity], a couple of bugs have been fixed and some more formatting has been adjusted.
 
@@ -14,6 +14,8 @@ Thanks to [@DominikBucher12][DominikBucher12] and [@msrutek-paylocity][msrutek-p
 
 * `RichTextColor` has a new `attribute` property.
 * `RichTextColor` has a new `underline` color.
+* `RichTextFormatSheet` now lets you customize its `colorPickers`.
+* `RichTextFormatSidebar` now lets you customize its `colorPickers`.
 
 ### 💡 Adjustments
               
