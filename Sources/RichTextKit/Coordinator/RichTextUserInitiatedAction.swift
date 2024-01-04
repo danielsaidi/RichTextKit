@@ -21,6 +21,7 @@ enum RichTextUserInitiatedAction {
     case strikethroughColor(ColorRepresentable)
     case strokeColor(ColorRepresentable)
     case triggerAction(RichTextAction)
+    case underlineColor(ColorRepresentable)
     case changeStyle(RichTextStyle, Bool)
 }
 
