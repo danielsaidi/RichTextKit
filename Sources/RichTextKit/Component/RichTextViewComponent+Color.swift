@@ -14,13 +14,8 @@ public extension RichTextViewComponent {
     func currentColor(
         _ color: RichTextColor
     ) -> ColorRepresentable? {
-        switch color {
-        case .foreground: currentRichTextAttribute(.foregroundColor)
-        case .background: currentRichTextAttribute(.backgroundColor)
-        case .strikethrough: currentRichTextAttribute(.strikethroughColor)
-        case .stroke: currentRichTextAttribute(.strokeColor)
-        case .undefined: nil
-        }
+        guard let attribute = color.attribute else { return nil }
+        return currentRichTextAttribute(attribute)
     }
 
     /// Set the current value of a certain color.
@@ -29,12 +24,7 @@ public extension RichTextViewComponent {
         to val: ColorRepresentable
     ) {
         if currentColor(color) == val { return }
-        switch color {
-        case .foreground: setCurrentRichTextAttribute(.foregroundColor, to: val)
-        case .background: setCurrentRichTextAttribute(.backgroundColor, to: val)
-        case .strikethrough: setCurrentRichTextAttribute(.strikethroughColor, to: val)
-        case .stroke: setCurrentRichTextAttribute(.strokeColor, to: val)
-        case .undefined: return
-        }
+        guard let attribute = color.attribute else { return }
+        setCurrentRichTextAttribute(attribute, to: val)
     }
 }

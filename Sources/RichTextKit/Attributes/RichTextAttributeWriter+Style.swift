@@ -15,7 +15,7 @@ public extension RichTextAttributeWriter {
 
      The function uses `safeRange(for:)` to handle incorrect
      ranges, which is not handled by the native functions.
-     
+
      > Note: When adding logic to the function, make sure to
      also adjust `setCurrentRichTextStyle`.
 
@@ -47,7 +47,7 @@ public extension RichTextAttributeWriter {
 }
 
 extension RichTextAttributeWriter {
-    
+
     func newFont(
         for font: FontRepresentable,
         byToggling style: RichTextStyle
@@ -57,7 +57,7 @@ extension RichTextAttributeWriter {
             size: font.pointSize
         )
     }
-    
+
     func shouldAddOrRemove(
         _ style: RichTextStyle,
         _ newValue: Bool,

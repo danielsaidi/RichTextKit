@@ -22,7 +22,7 @@ public extension RichTextViewComponent {
 
     /**
      Set the current value of a certain rich text style.
-     
+
      > Note: When adding logic to the function, make sure to
      also adjust ``setRichTextStyle(_:to:at:)``.
      */

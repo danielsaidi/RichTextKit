@@ -36,6 +36,17 @@ public extension RichTextColor {
     /// The unique ID of the alignment.
     var id: String { rawValue }
 
+    /// The corresponding rich text attribute, if any.
+    var attribute: NSAttributedString.Key? {
+        switch self {
+        case .foreground: .foregroundColor
+        case .background: .backgroundColor
+        case .strikethrough: .strikethroughColor
+        case .stroke: .strokeColor
+        case .undefined: nil
+        }
+    }
+
     /// The standard icon to use for the alignment.
     var icon: Image? {
         switch self {

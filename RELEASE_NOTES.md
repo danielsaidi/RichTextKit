@@ -10,10 +10,9 @@ Until then, minor updates may remove deprecated features and introduce breaking 
 
 Thanks to [@DominikBucher12][DominikBucher12] and [@msrutek-paylocity][msrutek-paylocity], a couple of bugs have been fixed and some more formatting has been adjusted.
 
-### 🐛 Bug Fixes
-                
-* `RichTextAttributeWriter` now handles `strikethrough` with a switch.
-* `RichTextView` now handles initial drag & drop better on iOS.
+### ✨ Features
+
+* `RichTextColor` has a new `attribute` property.
 
 ### 💡 Adjustments
                                 
@@ -21,7 +20,14 @@ Thanks to [@DominikBucher12][DominikBucher12] and [@msrutek-paylocity][msrutek-p
 * `RichTextAttributeWriter` and `RichTextViewComponent` shares more code.
 * `RichTextViewComponent` now handles `setCurrentRichTextStyle` with a switch.
 * `RichTextViewComponent` now handles `setCurrentRichTextStyle` with a switch.
+* `RichTextViewComponent` uses the new color `attribute` to optimize some code.
 * `SwiftFormat` now uses `consecutiveSpaces`.
+
+### 🐛 Bug Fixes
+                
+* `RichTextAttributeWriter` now handles `strikethrough` with a switch.
+* `RichTextView` now handles initial drag & drop better on iOS.
+
 
 
 
