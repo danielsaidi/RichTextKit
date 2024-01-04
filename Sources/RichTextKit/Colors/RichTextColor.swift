@@ -82,3 +82,13 @@ public extension RichTextColor {
         }
     }
 }
+
+public extension RichTextColor {
+    
+    static var all: [RichTextColor] { allCases.filter { $0 != .undefined } }
+}
+
+public extension Array where Element == RichTextColor {
+    
+    static var all: [RichTextColor] { Element.all }
+}

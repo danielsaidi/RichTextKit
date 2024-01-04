@@ -23,7 +23,7 @@ public struct RichTextFormatSheet: View {
 
      - Parameters:
        - context: The context to apply changes to.
-       - colorPickers: The color pickers to add, by default `.foreground` and `.background`.
+       - colorPickers: The color pickers to use, by default `.foreground` and `.background`.
      */
     public init(
         context: RichTextContext,
@@ -39,9 +39,14 @@ public struct RichTextFormatSheet: View {
     @Environment(\.presentationMode)
     private var presentationMode
 
-    private let padding = 10.0
-    private let topOffset = -35.0
-    private let colorPickers: [RichTextColor]
+    /// The sheet padding.
+    public var padding = 10.0
+    
+    /// The sheet top offset.
+    public var topOffset = -35.0
+    
+    /// The color pickers to use.
+    public var colorPickers: [RichTextColor]
 
     public var body: some View {
         NavigationView {

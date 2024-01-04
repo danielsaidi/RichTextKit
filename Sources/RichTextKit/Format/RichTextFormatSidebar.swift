@@ -24,7 +24,7 @@ public struct RichTextFormatSidebar: View {
 
      - Parameters:
        - context: The context to apply changes to.
-       - colorPickers: The color pickers to add, by default `.foreground` and `.background`.
+       - colorPickers: The color pickers to use, by default `.foreground` and `.background`.
      */
     public init(
         context: RichTextContext,
@@ -37,8 +37,11 @@ public struct RichTextFormatSidebar: View {
     @ObservedObject
     private var context: RichTextContext
 
-    private let spacing = 10.0
-    private let colorPickers: [RichTextColor]
+    /// The sidebar spacing.
+    public var spacing = 10.0
+    
+    /// The color pickers to use.
+    public var colorPickers: [RichTextColor]
 
     public var body: some View {
         VStack(alignment: .leading, spacing: spacing) {

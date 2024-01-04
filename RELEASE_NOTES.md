@@ -14,14 +14,16 @@ Thanks to [@DominikBucher12][DominikBucher12] and [@msrutek-paylocity][msrutek-p
 
 * `RichTextColor` has a new `attribute` property.
 * `RichTextColor` has a new `underline` color.
-* `RichTextFormatSheet` now lets you customize its `colorPickers`.
-* `RichTextFormatSidebar` now lets you customize its `colorPickers`.
+* `RichTextFormatSheet` has a new `colorPickers` init parameter.
+* `RichTextFormatSidebar` has a new `colorPickers` init parameter.
 
 ### 💡 Adjustments
               
 * `RichTextAttributeReader` now allows providing a `nil` range.
 * `RichTextAttributeWriter` now handles `setRichTextStyle` with a switch.
 * `RichTextAttributeWriter` and `RichTextViewComponent` shares more code.
+* `RichTextFormatSheet` now exposes its init params as mutable properties.
+* `RichTextFormatSidebar` now exposes its init params as mutable properties.
 * `RichTextViewComponent` now handles `setCurrentRichTextStyle` with a switch.
 * `RichTextViewComponent` now handles `setCurrentRichTextStyle` with a switch.
 * `RichTextViewComponent` uses the new color `attribute` to optimize some code.
