@@ -33,7 +33,7 @@ public extension RichTextViewComponent {
         let value = newValue ? 1 : 0
         switch style {
         case .bold, .italic:
-            let styles = currentRichTextStyles
+            let styles = currentRichTextTypingAttributeStyles
             guard shouldAddOrRemove(style, newValue, given: styles) else { return }
             guard let font = currentFont else { return }
             guard let newFont = newFont(for: font, byToggling: style) else { return }

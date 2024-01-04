@@ -23,6 +23,8 @@ extension RichTextCoordinator {
             setStrikethroughColor(color, at: applyRange)
         case .stroke:
             setStrokeColor(color, at: applyRange)
+        case .underline:
+            setUnderlineColor(color, at: applyRange)
         case .undefined:
             break
         }
@@ -30,7 +32,7 @@ extension RichTextCoordinator {
 
     private func setStrikethroughColor(_ color: ColorRepresentable, at range: NSRange?) {
         if let range {
-            self.textView.setRichTextStrikethroughColor(color, at: range)
+            self.textView.setRichTextColor(.strikethrough, to: color, at: range)
         } else {
             self.textView.setTypingAttribute(.strikethroughColor, to: color)
         }
@@ -38,7 +40,7 @@ extension RichTextCoordinator {
 
     private func setStrokeColor(_ color: ColorRepresentable, at range: NSRange?) {
         if let range {
-            self.textView.setRichTextStrokeColor(color, at: range)
+            self.textView.setRichTextColor(.stroke, to: color, at: range)
         } else {
             self.textView.setTypingAttribute(.strokeColor, to: color)
         }
@@ -46,7 +48,7 @@ extension RichTextCoordinator {
 
     private func setForegroundColor(_ color: ColorRepresentable, at range: NSRange?) {
         if let range {
-            self.textView.setRichTextForegroundColor(color, at: range)
+            self.textView.setRichTextColor(.foreground, to: color, at: range)
         } else {
             self.textView.setTypingAttribute(.foregroundColor, to: color)
         }
@@ -54,9 +56,17 @@ extension RichTextCoordinator {
 
     private func setBackgroundColor(_ color: ColorRepresentable, at range: NSRange?) {
         if let range {
-            self.textView.setRichTextBackgroundColor(color, at: range)
+            self.textView.setRichTextColor(.background, to: color, at: range)
         } else {
             self.textView.setTypingAttribute(.backgroundColor, to: color)
+        }
+    }
+
+    private func setUnderlineColor(_ color: ColorRepresentable, at range: NSRange?) {
+        if let range {
+            self.textView.setRichTextColor(.underline, to: color, at: range)
+        } else {
+            self.textView.setTypingAttribute(.underlineColor, to: color)
         }
     }
 }
