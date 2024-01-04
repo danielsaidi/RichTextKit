@@ -255,7 +255,7 @@ private extension RichTextCoordinator {
                 })
             .store(in: &cancellables)
     }
-    
+
     func subscribeToStrikethroughColor() {
         richTextContext.$strikethroughColor
             .sink(
@@ -266,7 +266,7 @@ private extension RichTextCoordinator {
                 })
             .store(in: &cancellables)
     }
-    
+
     func subscribeToUnderlineColor() {
         richTextContext.$underlineColor
             .sink(

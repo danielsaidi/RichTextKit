@@ -9,7 +9,7 @@
 import Foundation
 
 public extension RichTextAttributeReader {
-    
+
     /// Get a certain rich text color at the provided range.
     func richTextColor(
         _ color: RichTextColor,

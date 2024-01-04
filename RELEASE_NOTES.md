@@ -6,9 +6,9 @@ Until then, minor updates may remove deprecated features and introduce breaking 
 
 
 
-## 0.10.0
+## 0.9.5
 
-Thanks to [@DominikBucher12][DominikBucher12] and [@msrutek-paylocity][msrutek-paylocity], a couple of bugs have been fixed and some more formatting has been adjusted.
+Thanks to [@DominikBucher12][DominikBucher12] and [@msrutek-paylocity][msrutek-paylocity], some bugs have been fixed and some formatting adjusted.
 
 ### ✨ Features
 
@@ -23,6 +23,7 @@ Thanks to [@DominikBucher12][DominikBucher12] and [@msrutek-paylocity][msrutek-p
 * `RichTextAttributeWriter` now handles `setRichTextStyle` with a switch.
 * `RichTextAttributeWriter` and `RichTextViewComponent` shares more code.
 * `RichTextFormatSheet` now exposes its init params as mutable properties.
+* `RichTextFormatSidebar` now handles keyboard focus way better than before.
 * `RichTextFormatSidebar` now exposes its init params as mutable properties.
 * `RichTextViewComponent` now handles `setCurrentRichTextStyle` with a switch.
 * `RichTextViewComponent` now handles `setCurrentRichTextStyle` with a switch.

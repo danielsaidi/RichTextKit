@@ -220,7 +220,7 @@ extension RichTextCoordinator {
         if richTextContext.strikethroughColor != strikethrough {
             richTextContext.strikethroughColor = strikethrough
         }
-        
+
         let underline = textView.currentColor(.underline)
         if richTextContext.foregroundColor != underline {
             richTextContext.foregroundColor = underline

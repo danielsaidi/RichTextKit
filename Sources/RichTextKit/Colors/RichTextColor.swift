@@ -23,10 +23,10 @@ public enum RichTextColor: String, CaseIterable, Codable, Equatable, Identifiabl
 
     /// Strikethrough color.
     case strikethrough
-    
+
     /// Stroke color.
     case stroke
-    
+
     /// Underline color.
     case underline
 
@@ -65,7 +65,7 @@ public extension RichTextColor {
 
     /// Adjust a `color` for a certain `colorScheme`.
     func adjust(
-        color: Color,
+        _ color: Color,
         for scheme: ColorScheme
     ) -> Color {
         switch self {
@@ -84,11 +84,11 @@ public extension RichTextColor {
 }
 
 public extension RichTextColor {
-    
+
     static var all: [RichTextColor] { allCases.filter { $0 != .undefined } }
 }
 
 public extension Array where Element == RichTextColor {
-    
+
     static var all: [RichTextColor] { Element.all }
 }

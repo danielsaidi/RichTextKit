@@ -12,7 +12,7 @@ import SwiftUI
 /**
  This sidebar view provides various text format options, and
  is meant to be used on macOS, in a trailing sidebar.
- 
+
  > Note: The sidebar is currently designed for macOS, but it
  should also be made to look good on iPadOS in landscape, to
  let us use it instead of the ``RichTextFormatSheet``.
@@ -39,7 +39,7 @@ public struct RichTextFormatSidebar: View {
 
     /// The sidebar spacing.
     public var spacing = 10.0
-    
+
     /// The color pickers to use.
     public var colorPickers: [RichTextColor]
 
@@ -79,6 +79,7 @@ public struct RichTextFormatSidebar: View {
             Spacer()
         }
         .padding(8)
+        .focusable()
         .background(Color.white.opacity(0.05))
     }
 }

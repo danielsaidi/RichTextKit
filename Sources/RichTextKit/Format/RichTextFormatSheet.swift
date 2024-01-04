@@ -41,10 +41,10 @@ public struct RichTextFormatSheet: View {
 
     /// The sheet padding.
     public var padding = 10.0
-    
+
     /// The sheet top offset.
     public var topOffset = -35.0
-    
+
     /// The color pickers to use.
     public var colorPickers: [RichTextColor]
 

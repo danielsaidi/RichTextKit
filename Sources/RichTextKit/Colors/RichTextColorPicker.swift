@@ -36,14 +36,16 @@ public struct RichTextColorPicker: View {
     ) {
         self.type = type
         self.icon = icon ?? type.icon
-        self.value = value
+        self._value = value
         self.quickColors = quickColors
     }
 
     private let type: RichTextColor
     private let icon: Image?
-    private let value: Binding<Color>
     private let quickColors: [Color]
+
+    @Binding
+    private var value: Color
 
     private let spacing = 10.0
 
@@ -103,7 +105,7 @@ private extension RichTextColorPicker {
     @ViewBuilder
     var picker: some View {
         #if iOS || macOS
-        ColorPicker("", selection: value)
+        ColorPicker("", selection: $value)
             .fixedSize()
             .padding(.horizontal, spacing)
         #endif
@@ -123,12 +125,11 @@ private extension RichTextColorPicker {
 
     func quickPickerButton(for color: Color) -> some View {
         Button {
-            value.wrappedValue = type.adjust(color: color, for: colorScheme)
+            value = type.adjust(color, for: colorScheme)
         } label: {
             color
         }
-        .buttonStyle(ColorButtonStyle(isSelected: isSelected(color)))
-        .animation(.default, value: value.wrappedValue)
+        .buttonStyle(ColorButtonStyle( ))
     }
 
     var quickPickerDivider: some View {
@@ -140,30 +141,11 @@ private extension RichTextColorPicker {
 
 private struct ColorButtonStyle: ButtonStyle {
 
-    let isSelected: Bool
-
-    @Environment(\.isFocused)
-    var isFocused: Bool
-
     func makeBody(configuration: Configuration) -> some View {
-        let focusSize: Double = isFocused ? 25 : 20
-        let size: Double = isSelected ? 30 : focusSize
-        return configuration.label
-            .frame(width: size, height: size)
+        configuration.label
+            .frame(width: 20, height: 20)
             .clipShape(Circle())
             .shadow(radius: 1, x: 0, y: 1)
-            .padding(.vertical, isSelected ? 0 : 5)
-    }
-}
-
-private extension RichTextColorPicker {
-
-    func isSelected(_ color: Color) -> Bool {
-        value.wrappedValue == color
-    }
-
-    func select(color: Color) {
-        value.wrappedValue = color
     }
 }
 
