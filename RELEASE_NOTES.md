@@ -12,10 +12,15 @@ Thanks to [@DominikBucher12][DominikBucher12] and [@msrutek-paylocity][msrutek-p
 
 ### 🐛 Bug Fixes
                 
+* `RichTextAttributeWriter` now handles `strikethrough` with a switch.
 * `RichTextView` now handles initial drag & drop better on iOS.
 
 ### 💡 Adjustments
-
+                                
+* `RichTextAttributeWriter` now handles `setRichTextStyle` with a switch.
+* `RichTextAttributeWriter` and `RichTextViewComponent` shares more code.
+* `RichTextViewComponent` now handles `setCurrentRichTextStyle` with a switch.
+* `RichTextViewComponent` now handles `setCurrentRichTextStyle` with a switch.
 * `SwiftFormat` now uses `consecutiveSpaces`.
 
 

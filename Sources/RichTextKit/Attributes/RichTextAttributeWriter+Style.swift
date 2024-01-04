@@ -15,6 +15,9 @@ public extension RichTextAttributeWriter {
 
      The function uses `safeRange(for:)` to handle incorrect
      ranges, which is not handled by the native functions.
+     
+     > Note: When adding logic to the function, make sure to
+     also adjust `setCurrentRichTextStyle`.
 
      - Parameters:
        - style: The style to set.
@@ -26,19 +29,42 @@ public extension RichTextAttributeWriter {
         to newValue: Bool,
         at range: NSRange? = nil
     ) {
-        let rangeValue = range ?? richTextRange
-        let range = safeRange(for: rangeValue)
-        let attributeValue = newValue ? 1 : 0
-        if style == .underlined { return setRichTextAttribute(.underlineStyle, to: attributeValue, at: range) }
-        guard let font = richTextFont(at: range) else { return }
-        let styles = richTextStyles(at: range)
+        let value = newValue ? 1 : 0
+        let range = safeRange(for: range ?? richTextRange)
+        switch style {
+        case .bold, .italic:
+            let styles = richTextStyles(at: range)
+            guard shouldAddOrRemove(style, newValue, given: styles) else { return }
+            guard let font = richTextFont(at: range) else { return }
+            guard let newFont = newFont(for: font, byToggling: style) else { return }
+            setRichTextFont(newFont, at: range)
+        case .strikethrough:
+            setRichTextAttribute(.strikethroughStyle, to: value, at: range)
+        case .underlined:
+            setRichTextAttribute(.underlineStyle, to: value, at: range)
+        }
+    }
+}
+
+extension RichTextAttributeWriter {
+    
+    func newFont(
+        for font: FontRepresentable,
+        byToggling style: RichTextStyle
+    ) -> FontRepresentable? {
+        FontRepresentable(
+            descriptor: font.fontDescriptor.byTogglingStyle(style),
+            size: font.pointSize
+        )
+    }
+    
+    func shouldAddOrRemove(
+        _ style: RichTextStyle,
+        _ newValue: Bool,
+        given styles: [RichTextStyle]
+    ) -> Bool {
         let shouldAdd = newValue && !styles.hasStyle(style)
         let shouldRemove = !newValue && styles.hasStyle(style)
-        guard shouldAdd || shouldRemove else { return }
-        let newFont: FontRepresentable? = FontRepresentable(
-            descriptor: font.fontDescriptor.byTogglingStyle(style),
-            size: font.pointSize)
-        guard let newFont = newFont else { return }
-        setRichTextFont(newFont, at: range)
+        return shouldAdd || shouldRemove
     }
 }
