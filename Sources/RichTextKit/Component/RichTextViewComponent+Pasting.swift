@@ -70,12 +70,10 @@ public extension RichTextViewComponent {
         let isSelectedRange = (index == selectedRange.location)
         if isSelectedRange { deleteCharacters(in: selectedRange) }
         if move { moveInputCursor(to: index) }
-        let fontSize = currentFontSize
         images.reversed().forEach { performPasteImage($0, at: index) }
         if move { moveInputCursor(to: safeInsertRange.location + items) }
-        if move || isSelectedRange, let fontSize {
+        if move || isSelectedRange {
             DispatchQueue.main.async {
-                self.setRichTextFontSize(fontSize)
                 self.moveInputCursor(to: self.selectedRange.location)
             }
         }
@@ -135,10 +133,14 @@ private extension RichTextViewComponent {
         _ image: ImageRepresentable,
         at index: Int
     ) {
+        let newLine = NSAttributedString(string: "\n", attributes: currentRichTextAttributes)
         let content = NSMutableAttributedString(attributedString: richText)
         guard let insertString = getAttachmentString(for: image) else { return }
-        content.insert(NSAttributedString(string: "\n"), at: index)
+        
+        insertString.insert(newLine, at: insertString.length)
+        insertString.addAttributes(currentRichTextAttributes, range: insertString.richTextRange)
         content.insert(insertString, at: index)
+        
         setRichText(content)
     }
 }
