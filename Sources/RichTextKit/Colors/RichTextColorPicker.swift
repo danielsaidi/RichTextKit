@@ -149,6 +149,7 @@ private struct ColorButtonStyle: ButtonStyle {
     }
 }
 
+/*
 #Preview {
 
     struct Preview: View {
@@ -189,3 +190,4 @@ private struct ColorButtonStyle: ButtonStyle {
 
     return Preview()
 }
+*/
