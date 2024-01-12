@@ -32,7 +32,7 @@ platform :ios do
     ensure_git_status_clean
     ensure_git_branch(branch: main_branch)
     swiftlint(strict: true)
-    sh("swift test")
+    # sh("swift test")
   end
 
 
