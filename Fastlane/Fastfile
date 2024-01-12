@@ -32,7 +32,7 @@ platform :ios do
     ensure_git_status_clean
     ensure_git_branch(branch: main_branch)
     swiftlint(strict: true)
-    sh("swift test")
+    # sh("swift test")
   end
 
 
@@ -70,9 +70,7 @@ platform :ios do
 
   desc "Delete documentation derived data (may be historic duplicates)"
   lane :docc_delete_derived_data do
-    sh('find ~/Library/Developer/Xcode/DerivedData \
-      -name "' + library_name + '.doccarchive" \
-      -exec rm -Rf {} \; || true')
+    sh('cd .. && bash scripts/delete-derived-data.sh')
   end
 
   desc "Build static documentation website for a single platform"

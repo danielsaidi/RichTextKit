@@ -241,8 +241,9 @@ extension RichTextCoordinator {
             richTextContext.canUndoLatestChange = canUndo
         }
 
-        let fontName = textView.currentFontName ?? ""
-        if richTextContext.fontName != fontName {
+        if let fontName = textView.currentFontName,
+            !fontName.isEmpty,
+            richTextContext.fontName != fontName {
             richTextContext.fontName = fontName
         }
 

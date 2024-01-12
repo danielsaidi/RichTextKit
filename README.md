@@ -16,13 +16,15 @@
 
 RichTextKit helps you view and edit rich text in `SwiftUI`, `UIKit` and `AppKit`.
 
-RichTextKit has a multi-platform SwiftUI `RichTextEditor` and `RichTextView` that support text styles (bold, italic, underline, etc.), fonts and font sizes, text and background colors, text alignment, image attachments etc. 
+RichTextKit has a multi-platform SwiftUI `RichTextEditor` that can be added to any app:
 
 <p align="center">
     <img src ="Resources/Demo.jpg" />
 </p>
 
-RichTextKit is supported by and released with permission from [Oribi](https://oribi.se/en/) and used in [OribiWriter](https://oribi.se/en/apps/oribi-writer/), which is available on iOS and macOS. Have a look at that app or the demo app in this repo if you want to see RichTextKit in action.
+The `RichTextEditor` supports text styles (bold, italic, underline, etc.), fonts and font sizes, colors, text alignments, image attachments, etc.
+
+The `RichTextEditor` is powered by a UIKit/AppKit `RichTextView` that bridges the UIKit `UITextView` and AppKit `NSTextView` and adds APIs to make the view work similar on both platforms.
 
 
 

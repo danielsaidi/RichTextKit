@@ -18,6 +18,6 @@ public extension RichTextAttributeWriter {
     ) {
         guard let attribute = color.attribute else { return }
         if richTextColor(color, at: range) == val { return }
-        setRichTextAttribute(attribute, to: color, at: range)
+        setRichTextAttribute(attribute, to: val, at: range)
     }
 }
