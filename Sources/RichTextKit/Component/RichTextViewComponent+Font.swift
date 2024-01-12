@@ -13,7 +13,7 @@ public extension RichTextViewComponent {
 
     /// Get the current font.
     var currentFont: FontRepresentable? {
-        currentRichTextAttributes[.font] as? FontRepresentable
+        currentRichTextAttributes[.font] as? FontRepresentable ?? typingAttributes[.font] as? FontRepresentable
     }
 
     /// Get the current font size.
