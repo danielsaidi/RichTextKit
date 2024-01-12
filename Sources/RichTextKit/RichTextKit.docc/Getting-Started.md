@@ -2,11 +2,13 @@
 
 RichTextKit is a Swift-based library that lets you work with rich text in UIKit, AppKit and SwiftUI.
 
+Although much of the public APIs are for SwiftUI, all works by using UIKit and AppKit functionality, as provided by the `RichTextView`.
+
 
 
 ## SwiftUI
 
-RichTextKit has a SwiftUI ``RichTextEditor``, which takes a text binding and a ``RichTextContext``:
+RichTextKit has a multi-platform SwiftUI ``RichTextEditor`` that can be added to any app:
 
 ```swift
 struct MyView: View {
@@ -25,7 +27,7 @@ struct MyView: View {
 }
 ```
 
-The editor uses a ``RichTextCoordinator`` to sync changes between the context, the editor and the underlying, platform-specific view. 
+The editor takes a `text` binding and  a``RichTextContext``, and uses a ``RichTextCoordinator`` to sync changes between the context, the editor and the underlying, platform-specific view. 
 
 You can now use the context to change the text binding and its font, font size, colors, alignment etc. You can also use the context to observe how these properties change, for instance when you move the text input cursor.
 
