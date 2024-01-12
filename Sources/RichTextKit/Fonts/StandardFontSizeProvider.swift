@@ -42,10 +42,11 @@ public extension StandardFontSizeProvider {
      */
     static var standardRichTextFontSize: CGFloat {
         get { StandardFontSizeProviderStorage.standardRichTextFontSize }
+        set { StandardFontSizeProviderStorage.standardRichTextFontSize = newValue }
     }
 }
 
 private class StandardFontSizeProviderStorage {
 
-    static let standardRichTextFontSize: CGFloat = 16
+    static var standardRichTextFontSize: CGFloat = 16
 }

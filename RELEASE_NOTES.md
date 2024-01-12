@@ -6,6 +6,16 @@ Until then, minor updates may remove deprecated features and introduce breaking 
 
 
 
+## 0.9.6
+
+Thanks to [@DominikBucher12][DominikBucher12], fonts and pasting images behave a lot better than before!
+
+### 💡 Adjustments
+              
+* `pasteImage(_:at:moveCursorToPastedContent:)` now uses `true` as default move parameter.
+
+
+
 ## 0.9.5
 
 Thanks to [@DominikBucher12][DominikBucher12] and [@msrutek-paylocity][msrutek-paylocity], some bugs have been fixed and some formatting adjusted.
