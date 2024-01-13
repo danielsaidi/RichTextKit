@@ -83,10 +83,12 @@ public protocol RichTextViewComponent: AnyObject,
      - Parameters:
        - text: The text to edit with the text view.
        - format: The rich text format to use.
+       - scrollingDisabled: Disables the scrolling in the NSTextView
      */
     func setup(
         with text: NSAttributedString,
-        format: RichTextDataFormat
+        format: RichTextDataFormat,
+        scrollingDisabled: Bool
     )
 
 
@@ -182,7 +184,7 @@ public extension RichTextViewComponent {
         format: RichTextDataFormat
     ) throws {
         let string = try NSAttributedString(data: data, format: format)
-        setup(with: string, format: format)
+        setup(with: string, format: format, scrollingDisabled: false)
     }
 
     /**

@@ -200,6 +200,12 @@ public class RichTextContext: ObservableObject {
      */
     @Published
     public var textAlignment: RichTextAlignment = .left
+    
+    /**
+     Whether or not to disable the scrolling of text view.
+     */
+    @Published
+    public var scrollingDisabled: Bool = false
 }
 
 public extension RichTextContext {
