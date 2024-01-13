@@ -214,9 +214,9 @@ public extension RichTextView {
 
 // MARK: - Content Size
 
-extension NSTextView {
+public extension RichTextView {
 
-    var contentSize: CGSize {
+     var contentSize: CGSize {
         get {
             guard let layoutManager = layoutManager, let textContainer = textContainer else {
                 return .zero
