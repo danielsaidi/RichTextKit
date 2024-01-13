@@ -44,7 +44,6 @@ public class RichTextContext: ObservableObject {
     @Published
     var selectedRangeChange = NSRange()
 
-
     /**
      The current background color, if any.
      */
@@ -123,6 +122,12 @@ public class RichTextContext: ObservableObject {
     @Published
     public var isEditingText = false
 
+    /**
+    The size of the TextView
+     */
+    @Published
+    public var contentSize: CGSize = .zero
+    
     /**
      Whether or not the current text is italic.
      */

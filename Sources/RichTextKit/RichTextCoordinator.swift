@@ -46,6 +46,8 @@ open class RichTextCoordinator: NSObject {
         super.init()
         self.textView.delegate = self
         subscribeToContextChanges()
+        
+        syncContentSize()
     }
 
 
@@ -60,6 +62,7 @@ open class RichTextCoordinator: NSObject {
      The rich text to edit.
      */
     public var text: Binding<NSAttributedString>
+    
 
     /**
      The text view for which the coordinator is used.
@@ -120,14 +123,20 @@ open class RichTextCoordinator: NSObject {
 
     open func textDidBeginEditing(_ notification: Notification) {
         richTextContext.isEditingText = true
+        
+        syncContentSize()
     }
 
     open func textDidChange(_ notification: Notification) {
         syncWithTextView()
+
+        syncContentSize()
     }
 
     open func textViewDidChangeSelection(_ notification: Notification) {
         syncWithTextView()
+        
+        syncContentSize()
     }
 
     open func textDidEndEditing(_ notification: Notification) {
@@ -179,6 +188,12 @@ extension RichTextCoordinator {
     func syncWithTextView() {
         syncContextWithTextView()
         syncTextWithTextView()
+    }
+    
+    func syncContentSize() {
+        DispatchQueue.main.async {
+            self.richTextContext.contentSize = self.textView.contentSize
+        }
     }
 
     /**

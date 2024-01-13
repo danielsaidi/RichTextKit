@@ -21,6 +21,8 @@ import AppKit
 open class RichTextView: NSTextView, RichTextViewComponent {
 
     // MARK: - Properties
+
+    var heightConstraint: NSLayoutConstraint?
     
     /**
      The style to use when highlighting text in the view.
@@ -209,4 +211,21 @@ public extension RichTextView {
         textStorage
     }
 }
+
+// MARK: - Content Size
+
+extension NSTextView {
+
+    var contentSize: CGSize {
+        get {
+            guard let layoutManager = layoutManager, let textContainer = textContainer else {
+                return .zero
+            }
+
+            layoutManager.ensureLayout(for: textContainer)
+            return layoutManager.usedRect(for: textContainer).size
+        }
+    }
+}
+
 #endif
