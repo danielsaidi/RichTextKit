@@ -10,10 +10,10 @@ import Foundation
 
 public extension RichTextAttributeReader {
 
-    /// Get a certain rich text color at the provided range.
+    /// Get a rich text color at a certain range.
     func richTextColor(
         _ color: RichTextColor,
-        at range: NSRange? = nil
+        at range: NSRange
     ) -> ColorRepresentable? {
         guard let attribute = color.attribute else { return nil }
         return richTextAttribute(attribute, at: range)

@@ -22,7 +22,7 @@ public extension RichTextViewComponent {
             return richTextAttributes(at: safeRange)
             #else
             return typingAttributes
-        #endif
+            #endif
         }
     }
 

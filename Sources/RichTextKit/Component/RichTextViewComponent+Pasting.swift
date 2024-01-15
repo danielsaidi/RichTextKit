@@ -135,7 +135,7 @@ private extension RichTextViewComponent {
         guard let insertString = getAttachmentString(for: image) else { return }
 
         insertString.insert(newLine, at: insertString.length)
-        insertString.addAttributes(currentRichTextAttributes, range: insertString.richTextRange)
+        insertString.addAttributes(currentRichTextAttributes, range: insertString.richTextFullRange)
         content.insert(insertString, at: index)
 
         setRichText(content)

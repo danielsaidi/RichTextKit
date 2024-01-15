@@ -10,18 +10,21 @@ Until then, minor updates may remove deprecated features and introduce breaking 
 
 This version makes the `RichTextReader` types require a range, to make the `RichTextComponent` functions be able to use `nil` and default to the current position or selection.
 
+This change makes is possible for `RichTextViewComponent` to have the same naming for functions that use the current text position or selection.
+
 This version will keep all deprecations, to serve as support when migrating from 0.x to 1.0. These deprecations will be removed in 1.1.
 
 For older release notes, check out older tags.
 
-
 ### 🗑️ Deprecations 
 
-* `RichTextReader` `.richTextRange` has been renamed to `.richTextFullRange`. 
+* `RichTextReader` `.richTextRange` has been renamed to `.richTextFullRange`.
+* `RichTextViewComponent` renames many functions. 
 
 ### 💥 Breaking Changes
 
-* `RichTextAttributeReader` `richTextAttribute` and `richTextAttributes` now require a range.
+* `RichTextAttributeReader` range functions now require a range.
+* `RichTextAttributeWriter` range functions now require a range.
 
 
 

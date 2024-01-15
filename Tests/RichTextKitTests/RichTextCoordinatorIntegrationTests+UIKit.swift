@@ -21,8 +21,8 @@ final class RichTextCoordinatorIntegrationTests: XCTestCase {
     
     static let initialAttributedString: NSAttributedString = {
         let text = NSMutableAttributedString(string: "This is red text")
-        text.addAttributes([.foregroundColor: ColorRepresentable.red], range: text.richTextRange)
-        text.addAttributes([.font: FontRepresentable.systemFont(ofSize: 16)], range: text.richTextRange)
+        text.addAttributes([.foregroundColor: ColorRepresentable.red], range: text.richTextFullRange)
+        text.addAttributes([.font: FontRepresentable.systemFont(ofSize: 16)], range: text.richTextFullRange)
         return text
     }()
     
@@ -65,7 +65,7 @@ final class RichTextCoordinatorIntegrationTests: XCTestCase {
         // Only ArchivedData textView format support images...
         coordinator.pasteImage(.init(content: imageToPaste, at: textView.richText.length, moveCursor: true))
         
-        XCTAssertTrue(textView.richText.containsAttachments(in: textView.richTextRange))
+        XCTAssertTrue(textView.richText.containsAttachments(in: textView.richTextFullRange))
         
         textView.simulateTyping(of: firstTypingPart)
         

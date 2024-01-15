@@ -21,42 +21,21 @@ extension NSMutableAttributedString: RichTextAttributeWriter {}
 
 public extension RichTextAttributeWriter {
 
-    /**
-     Set a certain rich text attribute to a certain value at
-     the provided range.
-
-     The function uses `safeRange(for:)` to handle incorrect
-     ranges, which is not handled by the native functions.
-
-     - Parameters:
-       - attribute: The attribute to set.
-       - newValue: The new value to set the attribute to.
-       - range: The range to affect, by default the entire text.
-     */
+    /// Set a rich text attribute at a certain range.
     func setRichTextAttribute(
         _ attribute: RichTextAttribute,
         to newValue: Any,
-        at range: NSRange? = nil
+        at range: NSRange
     ) {
         setRichTextAttributes([attribute: newValue], at: range)
     }
 
-    /**
-     Set a set of rich text attributes at the provided range.
-
-     The function uses `safeRange(for:)` to handle incorrect
-     ranges, which is not handled by the native functions.
-
-     - Parameters:
-       - attributes: The attributes to set.
-       - range: The range to affect, by default the entire text.
-     */
+    /// Set many rich text attributes at a certain range.
     func setRichTextAttributes(
         _ attributes: RichTextAttributes,
-        at range: NSRange? = nil
+        at range: NSRange
     ) {
-        let rangeValue = range ?? richTextFullRange
-        let range = safeRange(for: rangeValue)
+        let range = safeRange(for: range)
         guard let string = mutableRichText else { return }
         string.beginEditing()
         attributes.forEach { attribute, newValue in

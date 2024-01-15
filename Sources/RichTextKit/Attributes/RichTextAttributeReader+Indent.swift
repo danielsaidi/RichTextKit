@@ -10,12 +10,10 @@ import Foundation
 
 public extension RichTextAttributeReader {
 
-    /// Get the text indent (in points) at a certain range.
+    /// Get the text indent in points at a certain range.
     func richTextIndent(
         at range: NSRange
     ) -> CGFloat? {
-        let style = richTextParagraphStyle(at: range)
-        guard let style = style else { return nil }
-        return style.headIndent
+        richTextParagraphStyle(at: range)?.headIndent
     }
 }

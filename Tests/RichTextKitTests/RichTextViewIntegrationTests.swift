@@ -79,14 +79,14 @@ final class RichTextViewIntegrationTests: XCTestCase {
         XCTAssertEqual(textView.currentRichTextAttributes[.font] as? FontRepresentable, FontRepresentable.systemFont(ofSize: 16))
         XCTAssertEqual(textView.currentRichTextAttributes[.foregroundColor] as? ColorRepresentable, ColorRepresentable.textColor)
         
-        textView.setRichTextStyle(.bold, to: true)
-        textView.setRichTextStyle(.italic, to: true)
+        textView.setRichTextStyle(.bold, to: true, at: textView.richTextFullRange)
+        textView.setRichTextStyle(.italic, to: true, at: textView.richTextFullRange)
         
         XCTAssertTrue(try XCTUnwrap(textView.currentFont?.fontDescriptor.symbolicTraits.contains(.traitBold)))
         XCTAssertTrue(try XCTUnwrap(textView.currentFont?.fontDescriptor.symbolicTraits.contains(.traitItalic)))
         
-        textView.setRichTextStyle(.bold, to: false)
-        textView.setRichTextStyle(.italic, to: false)
+        textView.setRichTextStyle(.bold, to: false, at: textView.richTextFullRange)
+        textView.setRichTextStyle(.italic, to: false, at: textView.richTextFullRange)
         XCTAssertFalse(try XCTUnwrap(textView.currentFont?.fontDescriptor.symbolicTraits.contains(.traitBold)))
         XCTAssertFalse(try XCTUnwrap(textView.currentFont?.fontDescriptor.symbolicTraits.contains(.traitItalic)))
     }

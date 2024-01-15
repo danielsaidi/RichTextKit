@@ -112,7 +112,7 @@ public extension RichTextAttributeWriter {
         _ font: FontRepresentable,
         at range: NSRange? = nil
     ) {
-        setRichTextFont(font, at: range)
+        setRichTextFont(font, at: range ?? richTextFullRange)
     }
 
     @available(*, deprecated, renamed: "setRichTextFontName(_:at:)")
@@ -120,7 +120,7 @@ public extension RichTextAttributeWriter {
         _ name: String,
         at range: NSRange? = nil
     ) {
-        setRichTextFontName(name, at: range)
+        setRichTextFontName(name, at: range ?? richTextFullRange)
     }
 
     @available(*, deprecated, renamed: "setRichTextFontSize(_:at:)")
@@ -128,7 +128,7 @@ public extension RichTextAttributeWriter {
         _ size: CGFloat,
         at range: NSRange? = nil
     ) {
-        setRichTextFontSize(size, at: range)
+        setRichTextFontSize(size, at: range ?? richTextFullRange)
     }
 
     @available(*, deprecated, renamed: "stepRichTextIndent(_:at:)")

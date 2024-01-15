@@ -24,18 +24,17 @@ public extension RichTextAttributeReader {
     /// Get a rich text attribute at a certain range.
     func richTextAttribute<Value>(
         _ attribute: RichTextAttribute,
-        at range: NSRange? = nil
+        at range: NSRange
     ) -> Value? {
         richTextAttributes(at: range)[attribute] as? Value
     }
 
     /// Get all rich text attributes at a certain range.
     func richTextAttributes(
-        at range: NSRange? = nil
+        at range: NSRange
     ) -> RichTextAttributes {
-        let rangeValue = range ?? richTextFullRange
         if richText.length == 0 { return [:] }
-        let range = safeRange(for: rangeValue, isAttributeOperation: true)
+        let range = safeRange(for: range, isAttributeOperation: true)
         return richText.attributes(at: range.location, effectiveRange: nil)
     }
 }

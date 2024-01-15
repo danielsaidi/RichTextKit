@@ -19,3 +19,5 @@ public extension RichTextAttributeReader {
         return RichTextAlignment(style.alignment)
     }
 }
+
+

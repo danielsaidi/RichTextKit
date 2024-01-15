@@ -21,8 +21,8 @@ final class RichTextViewFilledIntegrationTests: XCTestCase {
     
     static let initialAttributedString: NSAttributedString = {
         let text = NSMutableAttributedString(string: "This is red text")
-        text.addAttributes([.foregroundColor: ColorRepresentable.red], range: text.richTextRange)
-        text.addAttributes([.font: FontRepresentable.systemFont(ofSize: 16)], range: text.richTextRange)
+        text.addAttributes([.foregroundColor: ColorRepresentable.red], range: text.richTextFullRange)
+        text.addAttributes([.font: FontRepresentable.systemFont(ofSize: 16)], range: text.richTextFullRange)
         return text
     }()
 
