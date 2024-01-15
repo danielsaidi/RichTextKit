@@ -55,7 +55,7 @@ public extension RichTextAttributeWriter {
         _ attributes: RichTextAttributes,
         at range: NSRange? = nil
     ) {
-        let rangeValue = range ?? richTextRange
+        let rangeValue = range ?? richTextFullRange
         let range = safeRange(for: rangeValue)
         guard let string = mutableRichText else { return }
         string.beginEditing()

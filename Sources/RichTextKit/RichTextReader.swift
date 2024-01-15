@@ -46,7 +46,7 @@ public extension RichTextReader {
      This uses `safeRange(for:)` to return a range that willö
      always be valid for the current rich text.
      */
-    var richTextRange: NSRange {
+    var richTextFullRange: NSRange {
         let range = NSRange(location: 0, length: richText.length)
         let safeRange = safeRange(for: range)
         return safeRange

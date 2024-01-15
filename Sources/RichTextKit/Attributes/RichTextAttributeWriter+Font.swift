@@ -44,7 +44,7 @@ public extension RichTextAttributeWriter {
     ) {
         guard let text = mutableRichText else { return }
         guard text.length > 0 else { return }
-        let range = range ?? richTextRange
+        let range = range ?? richTextFullRange
         let fontName = settableFontName(for: name)
         text.beginEditing()
         text.enumerateAttribute(.font, in: range, options: .init()) { value, range, _ in
@@ -65,7 +65,7 @@ public extension RichTextAttributeWriter {
     ) {
         guard let text = mutableRichText else { return }
         guard text.length > 0 else { return }
-        let range = range ?? richTextRange
+        let range = range ?? richTextFullRange
         text.beginEditing()
         text.enumerateAttribute(.font, in: range, options: .init()) { value, range, _ in
             let oldFont = value as? FontRepresentable ?? .standardRichTextFont

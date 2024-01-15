@@ -33,7 +33,7 @@ public extension RichTextAttributeReader {
     func richTextAttributes(
         at range: NSRange? = nil
     ) -> RichTextAttributes {
-        let rangeValue = range ?? richTextRange
+        let rangeValue = range ?? richTextFullRange
         if richText.length == 0 { return [:] }
         let range = safeRange(for: rangeValue, isAttributeOperation: true)
         return richText.attributes(at: range.location, effectiveRange: nil)

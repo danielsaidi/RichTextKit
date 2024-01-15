@@ -30,7 +30,7 @@ public extension RichTextAttributeWriter {
         at range: NSRange? = nil
     ) {
         let value = newValue ? 1 : 0
-        let range = safeRange(for: range ?? richTextRange)
+        let range = safeRange(for: range ?? richTextFullRange)
         switch style {
         case .bold, .italic:
             let styles = richTextStyles(at: range)
