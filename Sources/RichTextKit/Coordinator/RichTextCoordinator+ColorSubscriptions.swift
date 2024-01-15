@@ -5,6 +5,7 @@
 //  Created by Dominik Bucher on 15.12.2023.
 //
 
+#if iOS || macOS || tvOS
 import Foundation
 
 extension RichTextCoordinator {
@@ -70,3 +71,4 @@ extension RichTextCoordinator {
         }
     }
 }
+#endif

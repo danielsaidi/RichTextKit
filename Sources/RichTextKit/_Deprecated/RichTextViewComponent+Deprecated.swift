@@ -2,7 +2,6 @@ import Foundation
 
 public extension RichTextViewComponent {
 
-
     @available(*, deprecated, renamed: "currentColor(_:)")
     var currentBackgroundColor: ColorRepresentable? {
         currentColor(.background)

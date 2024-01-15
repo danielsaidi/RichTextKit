@@ -8,7 +8,7 @@
 import Foundation
 import RichTextKit
 
-#if canImport(UIKit)
+#if iOS || tvOS
 import UIKit
 
 extension UITextView {
@@ -22,7 +22,7 @@ extension UITextView {
         )
     }
 }
-#else
+#elseif macOS
 import AppKit
 extension NSTextView {
     func simulateTyping(of text: String) {
