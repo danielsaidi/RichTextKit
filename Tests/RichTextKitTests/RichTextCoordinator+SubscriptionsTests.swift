@@ -30,7 +30,7 @@ final class RichTextCoordinator_SubscriptionsTests: XCTestCase {
             text: textBinding,
             textView: textView,
             richTextContext: textContext)
-        textView.selectedRange = NSRange(location: 0, length: 1)
+        textView.selectedRange = NSRange(location: 0, length: 0)
         textView.setCurrentTextAlignment(.justified)
     }
 
