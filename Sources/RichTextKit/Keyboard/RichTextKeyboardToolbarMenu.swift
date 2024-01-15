@@ -6,8 +6,8 @@
 //  Copyright © 2022 Dnaiel Saidi. All rights reserved.
 //
 
-#if iOS
-import SwiftUI
+#if iOS || os(visionOS)
+import SwiftUI 
 
 /**
  This keyboard toolbar menu can be used to solve a UI glitch

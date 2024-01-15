@@ -15,7 +15,7 @@ public extension View {
      */
     @ViewBuilder
     func keyboardShortcut(for action: RichTextAction) -> some View {
-        #if iOS || macOS
+        #if iOS || macOS || os(visionOS)
         switch action {
         case .copy: keyboardShortcut("c", modifiers: .command)
         case .dismissKeyboard: self

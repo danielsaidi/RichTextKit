@@ -6,10 +6,10 @@
 //  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
 //
 
-#if iOS || os(tvOS)
+#if iOS || os(tvOS) || os(visionOS)
 import UIKit
 
-#if iOS
+#if iOS || os(visionOS)
 import UniformTypeIdentifiers
 
 extension RichTextView: UIDropInteractionDelegate {}
@@ -61,14 +61,14 @@ open class RichTextView: UITextView, RichTextViewComponent {
      */
     public var imageConfiguration: RichTextImageConfiguration = .disabled {
         didSet {
-            #if iOS
+            #if iOS || os(visionOS)
             refreshDropInteraction()
             #endif
         }
     }
 
 
-    #if iOS
+    #if iOS || os(visionOS)
 
     /// The image drop interaction to use.
     lazy var imageDropInteraction: UIDropInteraction = {
@@ -109,7 +109,7 @@ open class RichTextView: UITextView, RichTextViewComponent {
         }
     }
 
-    #if iOS
+    #if iOS || os(visionOS)
     /**
      Check whether or not a certain action can be performed.
      */
@@ -182,7 +182,7 @@ open class RichTextView: UITextView, RichTextViewComponent {
 
     /// Copy the current selection.
     open func copySelection() {
-        #if iOS
+        #if iOS || os(visionOS)
         let pasteboard = UIPasteboard.general
         let range = safeRange(for: selectedRange)
         let text = richText(at: range)
@@ -239,7 +239,7 @@ open class RichTextView: UITextView, RichTextViewComponent {
     }
 
 
-    #if iOS
+    #if iOS || os(visionOS)
 
     // MARK: - UIDropInteractionDelegate
 
@@ -333,7 +333,7 @@ open class RichTextView: UITextView, RichTextViewComponent {
     #endif
 }
 
-#if iOS
+#if iOS || os(visionOS)
 private extension UIDropSession {
 
     var hasDroppableContent: Bool {
