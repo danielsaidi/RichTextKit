@@ -24,33 +24,35 @@ public struct RichTextStyleButton: View {
 
     /**
      Create a rich text style button.
-
+     
      - Parameters:
-       - style: The style to toggle.
-       - buttonStyle: The button style to use, by default ``RichTextStyleButton/Style/standard``.
-       - value: The value to bind to.
-       - fillVertically: Whether or not fill up vertical space in a non-greedy way, by default `false`.
+     - style: The style to toggle.
+     - buttonStyle: The button style to use, by default ``RichTextStyleButton/Style/standard``.
+     - value: The value to bind to.
+     - fillVertically: Whether or not fill up vertical space in a non-greedy way, by default `false`.
      */
     public init(
         style: RichTextStyle,
         buttonStyle: Style = .standard,
         value: Binding<Bool>,
+        context: RichTextContext,
         fillVertically: Bool = false
     ) {
         self.style = style
         self.buttonStyle = buttonStyle
         self.value = value
         self.fillVertically = fillVertically
+        self.context = context
     }
 
     /**
      Create a rich text style button.
 
      - Parameters:
-       - style: The style to toggle.
-       - buttonStyle: The button style to use, by default ``RichTextStyleButton/Style/standard``.
-       - context: The context to affect.
-       - fillVertically: Whether or not fill up vertical space in a non-greedy way, by default `false`.
+     - style: The style to toggle.
+     - buttonStyle: The button style to use, by default ``RichTextStyleButton/Style/standard``.
+     - context: The context to affect.
+     - fillVertically: Whether or not fill up vertical space in a non-greedy way, by default `false`.
      */
     public init(
         style: RichTextStyle,
@@ -62,6 +64,7 @@ public struct RichTextStyleButton: View {
             style: style,
             buttonStyle: buttonStyle,
             value: context.binding(for: style),
+            context: context,
             fillVertically: fillVertically
         )
     }
@@ -70,6 +73,8 @@ public struct RichTextStyleButton: View {
     private let buttonStyle: Style
     private let value: Binding<Bool>
     private let fillVertically: Bool
+
+    let context: RichTextContext
 
     public var body: some View {
         Button(action: toggle) {
@@ -94,8 +99,8 @@ public extension RichTextStyleButton {
          Create a rich text style button style.
 
          - Parameters:
-           - inactiveColor: The color to apply when the button is inactive, by default `.primary`.
-           - activeColor: The color to apply when the button is active, by default `.blue`.
+         - inactiveColor: The color to apply when the button is inactive, by default `.primary`.
+         - activeColor: The color to apply when the button is active, by default `.blue`.
          */
         public init(
             inactiveColor: Color = .primary,
@@ -114,7 +119,6 @@ public extension RichTextStyleButton {
 }
 
 public extension RichTextStyleButton.Style {
-
     /**
      The standard ``RichTextStyleButton`` style.
      */
@@ -133,6 +137,7 @@ private extension RichTextStyleButton {
 
     func toggle() {
         value.wrappedValue.toggle()
+        context.userInitiatedActionPublisher.send(RichTextUserInitiatedAction.changeStyle(style, value.wrappedValue))
     }
 }
 
@@ -140,6 +145,7 @@ struct RichTextStyleButton_Previews: PreviewProvider {
 
     struct Preview: View {
 
+        private let context = RichTextContext()
         @State
         private var isBoldOn = false
 
@@ -156,16 +162,24 @@ struct RichTextStyleButton_Previews: PreviewProvider {
             HStack {
                 RichTextStyleButton(
                     style: .bold,
-                    value: $isBoldOn)
+                    value: $isBoldOn, 
+                    context: context
+                )
                 RichTextStyleButton(
                     style: .italic,
-                    value: $isItalicOn)
+                    value: $isItalicOn,
+                    context: context
+                )
                 RichTextStyleButton(
                     style: .strikethrough,
-                    value: $isStrikethroughOn)
+                    value: $isStrikethroughOn,
+                    context: context
+                )
                 RichTextStyleButton(
                     style: .underlined,
-                    value: $isUnderlinedOn)
+                    value: $isUnderlinedOn,
+                    context: context
+                )
             }.padding()
         }
     }

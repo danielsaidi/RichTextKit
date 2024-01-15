@@ -37,11 +37,11 @@ public extension RichTextContext {
     ) {
         if self.color(for: val) == color { return }
         switch val {
-        case .foreground: foregroundColor = color
-        case .background: backgroundColor = color
-        case .strikethrough: strikethroughColor = color
-        case .stroke: strokeColor = color
-        case .underline: underlineColor = color
+        case .foreground: userInitiatedActionPublisher.send(.foregroundColor(color))
+        case .background: userInitiatedActionPublisher.send(.backgroundColor(color))
+        case .strikethrough: userInitiatedActionPublisher.send(.strikethroughColor(color))
+        case .stroke: userInitiatedActionPublisher.send(.strokeColor(color))
+        case .underline: userInitiatedActionPublisher.send(.underlineColor(color))
         case .undefined: return
         }
     }

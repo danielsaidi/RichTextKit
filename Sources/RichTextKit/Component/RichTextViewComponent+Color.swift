@@ -25,6 +25,6 @@ public extension RichTextViewComponent {
     ) {
         if currentColor(color) == val { return }
         guard let attribute = color.attribute else { return }
-        setCurrentRichTextAttribute(attribute, to: val)
+        setTypingAttribute(attribute, to: val)
     }
 }

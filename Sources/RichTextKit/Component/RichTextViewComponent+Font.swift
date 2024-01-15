@@ -28,7 +28,7 @@ public extension RichTextViewComponent {
 
     /// Set the current font.
     func setCurrentFont(_ font: FontRepresentable) {
-        setCurrentRichTextAttribute(.font, to: font)
+        setTypingAttribute(.font, to: font)
     }
 
     /// Set the current font name.

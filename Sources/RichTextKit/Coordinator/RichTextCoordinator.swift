@@ -6,7 +6,7 @@
 //  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
 //
 
-#if iOS || macOS || os(tvOS)
+#if iOS || macOS || tvOS
 import Combine
 import SwiftUI
 
@@ -45,7 +45,7 @@ open class RichTextCoordinator: NSObject {
         self.richTextContext = richTextContext
         super.init()
         self.textView.delegate = self
-        subscribeToContextChanges()
+        subscribeToUserActions()
     }
 
 
@@ -127,12 +127,12 @@ open class RichTextCoordinator: NSObject {
 }
 
 
-#if iOS || os(tvOS)
+#if iOS || tvOS
 import UIKit
 
 extension RichTextCoordinator: UITextViewDelegate {}
 
-#elseif os(macOS)
+#elseif macOS
 import AppKit
 
 extension RichTextCoordinator: NSTextViewDelegate {}
@@ -183,7 +183,7 @@ extension RichTextCoordinator {
      purple alert warnings about how state is updated.
      */
     func syncContextWithTextViewAfterDelay() {
-        let styles = textView.currentRichTextStyles
+        let styles = textView.currentRichTextTypingAttributeStyles
 
         let string = textView.attributedString
         if richTextContext.attributedString != string {
@@ -310,7 +310,7 @@ extension RichTextCoordinator {
         #if macOS
         if textView.hasSelectedRange { return }
         let attributes = textView.currentRichTextAttributes
-        textView.setCurrentRichTextAttributes(attributes)
+        textView.appendCurrentRichTextAttributes(attributes)
         #endif
     }
 }

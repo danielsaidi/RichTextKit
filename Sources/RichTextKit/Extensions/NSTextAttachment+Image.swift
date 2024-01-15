@@ -14,7 +14,7 @@ import UIKit
 import AppKit
 #endif
 
-#if iOS || macOS || os(tvOS)
+#if iOS || macOS || tvOS
 public extension NSTextAttachment {
 
     /**

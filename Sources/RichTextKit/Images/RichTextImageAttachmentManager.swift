@@ -9,7 +9,7 @@
 import CoreGraphics
 import Foundation
 
-#if iOS || os(tvOS)
+#if iOS || tvOS
 import UIKit
 #endif
 
@@ -63,7 +63,7 @@ public extension RichTextImageAttachmentManager {
     }
 }
 
-#if iOS || macOS || os(tvOS)
+#if iOS || macOS || tvOS
 public extension RichTextImageAttachmentManager {
 
     /**
