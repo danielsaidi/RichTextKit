@@ -23,6 +23,9 @@
 "actionFontSizeDecrease" = "Reduser skriftstørrelsen";
 "actionIndentIncrease" = "Øk indrag";
 "actionIndentDecrease" = "Reduser indrag";
+"actionSuperscriptIncrease" = "Superscript";
+"actionSuperscriptDecrease" = "Subscript";
+
 "actionRedoLatestChange" = "Angre";
 "actionUndoLatestChange" = "Gjøre om";
 

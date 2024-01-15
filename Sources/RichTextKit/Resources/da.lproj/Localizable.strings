@@ -23,6 +23,9 @@
 "actionFontSizeDecrease" = "Mindske skriftstørrelsen";
 "actionIndentIncrease" = "Øge indrag";
 "actionIndentDecrease" = "Mindske indrag";
+"actionSuperscriptIncrease" = "Superscript";
+"actionSuperscriptDecrease" = "Subscript";
+
 "actionRedoLatestChange" = "Lave om";
 "actionUndoLatestChange" = "Fortryd";
 
@@ -45,6 +48,8 @@
 "menuSaveAs" = "Spare som...";
 "menuShare" = "Del";
 "menuShareAs" = "Del som...";
+"menuSuperscriptIncrease" = "Superscript";
+"menuSuperscriptDecrease" = "Subscript";
 "menuText" = "Tekst";
 
 "styleBold" = "Fremhævet";

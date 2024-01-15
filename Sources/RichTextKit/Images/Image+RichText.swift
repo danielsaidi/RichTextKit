@@ -52,6 +52,33 @@ public extension Image {
     static let richTextSuperscriptIncrease = symbol("textformat.superscript")
 }
 
+public extension Image {
+    
+    static func richTextStepFontSize(
+        _ points: Int
+    ) -> Image {
+        points < 0 ?
+            .richTextFontSizeDecrease :
+            .richTextFontSizeIncrease
+    }
+    
+    static func richTextStepIndent(
+        _ points: Double
+    ) -> Image {
+        points < 0 ?
+            .richTextIndentDecrease :
+            .richTextIndentIncrease
+    }
+    
+    static func richTextStepSuperscript(
+        _ steps: Int
+    ) -> Image {
+        steps < 0 ?
+            .richTextSuperscriptDecrease :
+            .richTextSuperscriptIncrease
+    }
+}
+
 private extension Image {
 
     static func symbol(_ name: String) -> Image {

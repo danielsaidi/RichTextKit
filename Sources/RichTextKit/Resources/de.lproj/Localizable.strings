@@ -23,6 +23,9 @@
 "actionFontSizeDecrease" = "Schriftgröße verkleinern";
 "actionIndentIncrease" = "Indent vergrößern";
 "actionIndentDecrease" = "Indent verkleinern";
+"actionSuperscriptIncrease" = "Superscript";
+"actionSuperscriptDecrease" = "Subscript";
+
 "actionRedoLatestChange" = "Rückgängig";
 "actionUndoLatestChange" = "Wiederholen";
 

@@ -23,6 +23,9 @@
 "actionFontSizeDecrease" = "Smaller Text";
 "actionIndentIncrease" = "Increase Indent";
 "actionIndentDecrease" = "Decrease Indent";
+"actionSuperscriptIncrease" = "Superscript";
+"actionSuperscriptDecrease" = "Subscript";
+
 "actionRedoLatestChange" = "Redo";
 "actionUndoLatestChange" = "Undo";
 

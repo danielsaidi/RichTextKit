@@ -53,47 +53,41 @@ public extension RichTextAction {
     /// The action's standard icon.
     var icon: Image {
         switch self {
-        case .copy: return .richTextActionCopy
-        case .dismissKeyboard: return .richTextActionDismissKeyboard
-        case .print: return .richTextActionExport
-        case .redoLatestChange: return .richTextActionRedo
-        case .setAlignment(let alignment): return alignment.icon
-        case .stepFontSize(let points):
-            return points < 0 ? .richTextFontSizeDecrease : .richTextFontSizeIncrease
-        case .stepIndent(let points):
-            return points < 0 ? .richTextIndentDecrease : .richTextIndentIncrease
-        case .stepSuperscript(let steps):
-            return steps < 0 ? .richTextSuperscriptDecrease : .richTextSuperscriptIncrease
-        case .toggleStyle(let style): return style.icon
-        case .undoLatestChange: return .richTextActionUndo
+        case .copy: .richTextActionCopy
+        case .dismissKeyboard: .richTextActionDismissKeyboard
+        case .print: .richTextActionExport
+        case .redoLatestChange: .richTextActionRedo
+        case .setAlignment(let alignment): alignment.icon
+        case .stepFontSize(let points): .richTextStepFontSize(points)
+        case .stepIndent(let points): .richTextStepIndent(points)
+        case .stepSuperscript(let steps): .richTextStepSuperscript(steps)
+        case .toggleStyle(let style): style.icon
+        case .undoLatestChange: .richTextActionUndo
         }
     }
 
     /// The localized title to use in the main menu.
     var menuTitle: String {
         switch self {
-        case .stepIndent(let points):
-            return (points < 0 ? RTKL10n.menuIndentDecrease : .menuIndentIncrease).text
-        default: return title
+        case .stepIndent(let points): RTKL10n.menuStepIndent(points).text
+        case .stepSuperscript(let steps): RTKL10n.menuStepSuperscript(steps).text
+        default: title
         }
     }
 
     /// The localized title.
     var title: String {
         switch self {
-        case .copy: return RTKL10n.actionCopy.text
-        case .dismissKeyboard: return RTKL10n.actionDismissKeyboard.text
-        case .print: return RTKL10n.menuPrint.text
-        case .redoLatestChange: return RTKL10n.actionRedoLatestChange.text
-        case .setAlignment(let alignment): return alignment.title
-        case .stepFontSize(let points):
-            return (points < 0 ? RTKL10n.actionFontSizeDecrease : .actionFontSizeIncrease).text
-        case .stepIndent(let points):
-            return (points < 0 ? RTKL10n.actionIndentDecrease : .actionIndentIncrease).text
-        case .stepSuperscript(let steps):
-            return (steps < 0 ? RTKL10n.actionIndentDecrease : .actionIndentIncrease).text
-        case .toggleStyle(let style): return style.title
-        case .undoLatestChange: return RTKL10n.actionUndoLatestChange.text
+        case .copy: RTKL10n.actionCopy.text
+        case .dismissKeyboard: RTKL10n.actionDismissKeyboard.text
+        case .print: RTKL10n.menuPrint.text
+        case .redoLatestChange: RTKL10n.actionRedoLatestChange.text
+        case .setAlignment(let alignment): alignment.title
+        case .stepFontSize(let points): RTKL10n.actionStepFontSize(points).text
+        case .stepIndent(let points): RTKL10n.actionStepIndent(points).text
+        case .stepSuperscript(let steps): RTKL10n.actionStepSuperscript(steps).text
+        case .toggleStyle(let style): style.title
+        case .undoLatestChange: RTKL10n.actionUndoLatestChange.text
         }
     }
 }

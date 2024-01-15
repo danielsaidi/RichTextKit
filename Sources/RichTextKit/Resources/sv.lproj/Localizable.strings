@@ -23,6 +23,9 @@
 "actionFontSizeDecrease" = "Minska teckenstorlek";
 "actionIndentIncrease" = "Öka indrag";
 "actionIndentDecrease" = "Minska indrag";
+"actionSuperscriptIncrease" = "Superscript";
+"actionSuperscriptDecrease" = "Subscript";
+
 "actionRedoLatestChange" = "Gör om";
 "actionUndoLatestChange" = "Ångra";
 

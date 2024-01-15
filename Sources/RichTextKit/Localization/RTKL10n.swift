@@ -29,6 +29,9 @@ public enum RTKL10n: String, CaseIterable, Identifiable {
     actionFontSizeDecrease,
     actionIndentIncrease,
     actionIndentDecrease,
+    actionSuperscriptIncrease,
+    actionSuperscriptDecrease,
+    
     actionRedoLatestChange,
     actionUndoLatestChange,
 
@@ -49,6 +52,8 @@ public enum RTKL10n: String, CaseIterable, Identifiable {
     menuSaveAs,
     menuShare,
     menuShareAs,
+    menuSuperscriptIncrease,
+    menuSuperscriptDecrease,
     menuText,
 
     styleBold,
@@ -63,6 +68,39 @@ public enum RTKL10n: String, CaseIterable, Identifiable {
     textAlignmentJustified,
 
     indent
+}
+
+public extension RTKL10n {
+    
+    static func actionStepFontSize(_ points: Int) -> RTKL10n {
+        points < 0 ?
+            .actionFontSizeDecrease :
+            .actionFontSizeIncrease
+    }
+    
+    static func actionStepIndent(_ points: Double) -> RTKL10n {
+        points < 0 ?
+            .actionIndentDecrease :
+            .actionIndentIncrease
+    }
+    
+    static func actionStepSuperscript(_ steps: Int) -> RTKL10n {
+        steps < 0 ?
+            .actionSuperscriptDecrease :
+            .actionSuperscriptIncrease
+    }
+    
+    static func menuStepIndent(_ points: Double) -> RTKL10n {
+        points < 0 ?
+            .menuIndentDecrease :
+            .menuIndentIncrease
+    }
+    
+    static func menuStepSuperscript(_ steps: Int) -> RTKL10n {
+        steps < 0 ?
+            .menuSuperscriptDecrease :
+            .menuSuperscriptIncrease
+    }
 }
 
 public extension RTKL10n {
