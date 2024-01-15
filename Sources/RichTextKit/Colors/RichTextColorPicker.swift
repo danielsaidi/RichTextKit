@@ -149,10 +149,8 @@ private struct ColorButtonStyle: ButtonStyle {
     }
 }
 
-#Preview {
-
-    struct Preview: View {
-
+struct RichTextColorPicker_Previews: PreviewProvider {
+    private struct RichTextColorPickerPreview: View {
         @State
         private var foregroundColor = Color.black
 
@@ -187,5 +185,7 @@ private struct ColorButtonStyle: ButtonStyle {
         }
     }
 
-    return Preview()
+    static var previews: some View {
+        RichTextColorPickerPreview()
+    }
 }
