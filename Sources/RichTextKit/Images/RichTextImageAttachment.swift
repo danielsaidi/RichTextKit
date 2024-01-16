@@ -14,7 +14,7 @@ import UIKit
 import AppKit
 #endif
 
-#if iOS || os(tvOS) || os(macOS) || os(visionOS)
+#if iOS || macOS || os(tvOS) || os(visionOS)
 import UniformTypeIdentifiers
 
 /**

@@ -31,7 +31,7 @@ public extension RichTextPdfDataReader {
     func richTextPdfData(configuration: PdfPageConfiguration = .standard) throws -> Data {
         #if iOS || os(visionOS)
         try richText.iosPdfData(for: configuration)
-        #elseif os(macOS)
+        #elseif macOS
         try richText.macosPdfData(for: configuration)
         #else
         throw PdfDataError.unsupportedPlatform

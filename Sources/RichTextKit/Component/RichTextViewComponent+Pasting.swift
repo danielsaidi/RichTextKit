@@ -59,7 +59,9 @@ public extension RichTextViewComponent {
         at index: Int,
         moveCursorToPastedContent move: Bool = false
     ) {
-        #if iOS || os(tvOS) || os(macOS) || os(visionOS)
+        #if os(watchOS)
+        assertionFailure("Image pasting is not supported on this platform")
+        #else
         guard validateImageInsertion(for: imagePasteConfiguration) else { return }
         let items = images.count * 2 // The number of inserted "items" is the images and a newline for each
         let insertRange = NSRange(location: index, length: 0)
@@ -74,8 +76,6 @@ public extension RichTextViewComponent {
                 self.moveInputCursor(to: self.selectedRange.location)
             }
         }
-        #else
-        assertionFailure("Image pasting is not supported on this platform")
         #endif
     }
 
@@ -113,7 +113,7 @@ public extension RichTextViewComponent {
     }
 }
 
-#if iOS || os(tvOS) || os(macOS) || os(visionOS)
+#if iOS || macOS || os(tvOS) || os(visionOS)
 private extension RichTextViewComponent {
 
     func getAttachmentString(

@@ -132,7 +132,7 @@ import UIKit
 
 extension RichTextCoordinator: UITextViewDelegate {}
 
-#elseif os(macOS)
+#elseif macOS
 import AppKit
 
 extension RichTextCoordinator: NSTextViewDelegate {}

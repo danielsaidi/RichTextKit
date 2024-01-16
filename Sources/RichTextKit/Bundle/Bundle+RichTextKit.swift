@@ -69,7 +69,7 @@ extension Bundle {
     }
 
     func bundlePath(for locale: Locale) -> String? {
-        bundlePath(named: locale.identifier) ?? bundlePath(named: locale.language.languageCode?.identifier)
+        bundlePath(named: locale.identifier) ?? bundlePath(named: locale.languageCode)
     }
 
     func bundlePath(named name: String?) -> String? {
