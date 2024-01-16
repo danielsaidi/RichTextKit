@@ -33,7 +33,7 @@ public extension PasteboardImageReader {
     }
 }
 
-#if iOS
+#if iOS || os(visionOS)
 import UIKit
 
 extension UIPasteboard: PasteboardImageReader {}

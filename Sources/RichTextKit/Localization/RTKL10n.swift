@@ -129,7 +129,7 @@ public extension RTKL10n {
     }
 }
 
-#if iOS || os(tvOS)
+#if iOS || os(tvOS) || os(visionOS)
 struct RTKL10n_Previews: PreviewProvider {
 
     static var locales: [Locale] = [
