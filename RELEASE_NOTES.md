@@ -19,7 +19,8 @@ This change however makes is possible for `RichTextViewComponent` to have the sa
 
 ### 🐛 Bug Fixes
 
-* `RichTextAttributeReader` `setRichTextSuperscriptLevel` didn't use `range`.
+* `RichTextAttributeReader` now use `range` in `setRichTextSuperscriptLevel`.
+* `RichTextCoordinator` now sets correct `underline` color instead of `foreground`.
 
 ### 💥 Breaking Changes
 
