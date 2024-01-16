@@ -222,8 +222,8 @@ extension RichTextCoordinator {
         }
 
         let underline = textView.richTextColor(.underline)
-        if richTextContext.foregroundColor != underline {
-            richTextContext.foregroundColor = underline
+        if richTextContext.underlineColor != underline {
+            richTextContext.underlineColor = underline
         }
 
         let hasRange = textView.hasSelectedRange
