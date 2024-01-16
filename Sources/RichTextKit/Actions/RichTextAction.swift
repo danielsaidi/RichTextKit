@@ -53,19 +53,16 @@ public extension RichTextAction {
     /// The action's standard icon.
     var icon: Image {
         switch self {
-        case .copy: return .richTextActionCopy
-        case .dismissKeyboard: return .richTextActionDismissKeyboard
-        case .print: return .richTextActionExport
-        case .redoLatestChange: return .richTextActionRedo
-        case .setAlignment(let alignment): return alignment.icon
-        case .stepFontSize(let points):
-            return points < 0 ? .richTextFontSizeDecrease : .richTextFontSizeIncrease
-        case .stepIndent(let points):
-            return points < 0 ? .richTextIndentDecrease : .richTextIndentIncrease
-        case .stepSuperscript(let steps):
-            return steps < 0 ? .richTextSuperscriptDecrease : .richTextSuperscriptIncrease
-        case .toggleStyle(let style): return style.icon
-        case .undoLatestChange: return .richTextActionUndo
+        case .copy: .richTextActionCopy
+        case .dismissKeyboard: .richTextActionDismissKeyboard
+        case .print: .richTextActionExport
+        case .redoLatestChange: .richTextActionRedo
+        case .setAlignment(let alignment): alignment.icon
+        case .stepFontSize(let points): .richTextStepFontSize(points)
+        case .stepIndent(let points): .richTextStepIndent(points)
+        case .stepSuperscript(let steps): .richTextStepSuperscript(steps)
+        case .toggleStyle(let style): style.icon
+        case .undoLatestChange: .richTextActionUndo
         }
     }
 

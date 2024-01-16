@@ -13,6 +13,10 @@ This version has a breaking change, where `RichTextAttributeReader` and `RichTex
 
 This change however makes is possible for `RichTextViewComponent` to have the same naming for its functions that use the current text position or selection.
 
+### ✨ Features
+
+* `Image` has a new rich text-specific image builders.
+
 ### 🗑️ Deprecations 
 
 * `RichTextAction` static properties have been deprecated in favor of their corresponding functions.

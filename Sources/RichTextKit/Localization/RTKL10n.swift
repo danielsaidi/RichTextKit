@@ -60,9 +60,10 @@ public enum RTKL10n: String, CaseIterable, Identifiable {
     textAlignmentLeft,
     textAlignmentRight,
     textAlignmentCentered,
-    textAlignmentJustified,
+    textAlignmentJustified
+}
 
-    indent
+public extension RTKL10n {
 }
 
 public extension RTKL10n {
@@ -78,26 +79,18 @@ public extension RTKL10n {
 
 public extension RTKL10n {
 
-    /**
-     The item's unique identifier.
-     */
+    /// The item's unique identifier.
     var id: String { rawValue }
 
-    /**
-     The item's localization key.
-     */
+    /// The item's localization key.
     var key: String { rawValue }
 
-    /**
-     The item's localized text.
-     */
+    /// The item's localized text.
     var text: String {
         text(for: .current)
     }
 
-    /**
-     Get the localized text for a certain `Locale`.
-     */
+    /// Get the localized text for a certain `Locale`.
     func text(for locale: Locale) -> String {
         guard let bundle = Bundle.richTextKit.bundle(for: locale) else { return "" }
         return NSLocalizedString(key, bundle: bundle, comment: "")
