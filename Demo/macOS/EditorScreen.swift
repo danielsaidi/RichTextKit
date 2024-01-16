@@ -48,7 +48,7 @@ private extension EditorScreen {
         RichTextEditor(
             text: $text,
             context: context,
-            config: .init(isScrollingEnabled: false)
+            config: .init(isScrollingEnabled: true)
         ) {
             $0.textContentInset = CGSize(width: 10, height: 20)
         }
