@@ -9,9 +9,7 @@ Until then, minor updates may remove deprecated features and introduce breaking 
 
 ## 0.9.7
 
-This version has a breaking change, where `RichTextAttributeReader` and `RichTextAttributeWriter` both now require a range.
-
-This change however makes is possible for `RichTextViewComponent` to have the same naming for its functions that use the current text position or selection.
+Thanks to [@ropellanda][ropellanda], RichTextKit now supports Vision OS.
 
 ### ✨ Features
 
@@ -482,3 +480,4 @@ RichTextKit adds extensive support for a bunch of rich text features:
 [DominikBucher12]: https://github.com/DominikBucher12
 [Mcrich23]: https://github.com/Mcrich23
 [msrutek-paylocity]: https://github.com/msrutek-paylocity
+[ropellanda]: https://github.com/ropellanda
