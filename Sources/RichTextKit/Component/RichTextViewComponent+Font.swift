@@ -11,29 +11,29 @@ import Foundation
 
 public extension RichTextViewComponent {
 
-    /// Get the current font.
-    var currentFont: FontRepresentable? {
-        currentRichTextAttributes[.font] as? FontRepresentable ?? typingAttributes[.font] as? FontRepresentable
+    /// Get the current rich text font.
+    var richTextFont: FontRepresentable? {
+        richTextAttributes[.font] as? FontRepresentable ?? typingAttributes[.font] as? FontRepresentable
     }
 
-    /// Get the current font size.
-    var currentFontSize: CGFloat? {
-        currentFont?.pointSize
+    /// Get the current rich text font size.
+    var richTextFontSize: CGFloat? {
+        richTextFont?.pointSize
     }
 
-    /// Get the current font name.
-    var currentFontName: String? {
-        currentFont?.fontName
+    /// Get the current rich text font name.
+    var richTextFontName: String? {
+        richTextFont?.fontName
     }
 
-    /// Set the current font.
-    func setCurrentFont(_ font: FontRepresentable) {
-        setCurrentRichTextAttribute(.font, to: font)
+    /// Set the current rich text font.
+    func setRichTextFont(_ font: FontRepresentable) {
+        setRichTextAttribute(.font, to: font)
     }
 
-    /// Set the current font name.
-    func setCurrentFontName(_ name: String) {
-        if currentFontName == name { return }
+    /// Set the current rich text font name.
+    func setRichTextFontName(_ name: String) {
+        if richTextFontName == name { return }
         if hasSelectedRange {
             setRichTextFontName(name, at: selectedRange)
         } else {
@@ -41,9 +41,9 @@ public extension RichTextViewComponent {
         }
     }
 
-    /// Set the current font size.
-    func setCurrentFontSize(_ size: CGFloat) {
-        if size == currentFontSize { return }
+    /// Set the current rich text font size.
+    func setRichTextFontSize(_ size: CGFloat) {
+        if size == richTextFontSize { return }
         #if macOS
         setRichTextFontSize(size, at: selectedRange)
         setFontSizeAtCurrentPosition(size)
@@ -56,11 +56,11 @@ public extension RichTextViewComponent {
         #endif
     }
 
-    /// Step the current font size up or down.
-    func stepCurrentFontSize(points: Int) {
-        let currentSize = currentFontSize ?? .standardRichTextFontSize
+    /// Step the current rich text font size up or down.
+    func stepRichTextFontSize(points: Int) {
+        let currentSize = richTextFontSize ?? .standardRichTextFontSize
         let newSize = currentSize + CGFloat(points)
-        setCurrentFontSize(newSize)
+        setRichTextFontSize(newSize)
     }
 }
 

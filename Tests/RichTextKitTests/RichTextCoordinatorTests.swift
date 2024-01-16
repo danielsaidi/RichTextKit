@@ -32,7 +32,7 @@ final class RichTextCoordinatorTests: XCTestCase {
             richTextContext: context)
         coordinator.shouldDelaySyncContextWithTextView = false
         view.selectedRange = NSRange(location: 0, length: 1)
-        view.setCurrentTextAlignment(.justified)
+        view.setRichTextAlignment(.justified)
     }
 
     override func tearDown() {
@@ -61,14 +61,15 @@ final class RichTextCoordinatorTests: XCTestCase {
     }
 
     func assertIsSyncedWithContext(macOSAlignment: RichTextAlignment = .left) {
-        XCTAssertEqual(context.fontName, view.currentFontName)
-        XCTAssertEqual(context.fontSize, view.currentFontSize)
-        XCTAssertEqual(context.isBold, view.currentRichTextStyles.hasStyle(.bold))
-        XCTAssertEqual(context.isItalic, view.currentRichTextStyles.hasStyle(.italic))
-        XCTAssertEqual(context.isUnderlined, view.currentRichTextStyles.hasStyle(.underlined))
+        let styles = view.richTextStyles
+        XCTAssertEqual(context.fontName, view.richTextFontName)
+        XCTAssertEqual(context.fontSize, view.richTextFontSize)
+        XCTAssertEqual(context.isBold, styles.hasStyle(.bold))
+        XCTAssertEqual(context.isItalic, styles.hasStyle(.italic))
+        XCTAssertEqual(context.isUnderlined, styles.hasStyle(.underlined))
         XCTAssertEqual(context.selectedRange, view.selectedRange)
         #if iOS || os(tvOS)
-        XCTAssertEqual(context.textAlignment, view.currentTextAlignment)
+        XCTAssertEqual(context.textAlignment, view.richTextAlignment)
         #elseif os(macOS)
         XCTAssertEqual(context.textAlignment, macOSAlignment)
         #endif
@@ -131,8 +132,8 @@ final class RichTextCoordinatorTests: XCTestCase {
         coordinator.highlightedRangeOriginalForegroundColor = .yellow
         coordinator.resetHighlightedRangeAppearance()
         view.selectedRange = range
-        XCTAssertEqual(view.currentColor(.background), .blue)
-        XCTAssertEqual(view.currentColor(.foreground), .yellow)
+        XCTAssertEqual(view.richTextColor(.background), .blue)
+        XCTAssertEqual(view.richTextColor(.foreground), .yellow)
     }
 }
 #endif

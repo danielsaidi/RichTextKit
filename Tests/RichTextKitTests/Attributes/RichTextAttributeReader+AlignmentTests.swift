@@ -18,7 +18,7 @@ final class RichTextAttributeReader_AlignmentTests: XCTestCase {
         textView.attributedString = NSAttributedString(string: "foo bar")
         let range = NSRange(location: 2, length: 3)
         textView.selectedRange = range
-        textView.setCurrentTextAlignment(.justified)
+        textView.setRichTextAlignment(.justified)
         let result = textView.attributedString.richTextAlignment(at: range)
         XCTAssertEqual(result, .justified)
     }

@@ -44,17 +44,17 @@ final class RichTextViewComponent_AttributesTests: XCTestCase {
 
     func testTextAttributesIsValidForSelectedRange() {
         textView.setSelectedRange(selectedRange)
-        textView.setCurrentRichTextAttribute(.font, to: font)
-        assertEqualAttributes(textView.currentRichTextAttributes)
+        textView.setRichTextAttribute(.font, to: font)
+        assertEqualAttributes(textView.richTextAttributes)
         assertEqualAttributes(textView.richTextAttributes(at: selectedRange))
         assertEqualAttributes(textView.typingAttributes)
     }
 
     func testTextAttributesIsValidForNoSelectedRange() {
         textView.setSelectedRange(noRange)
-        textView.setCurrentRichTextAttribute(.font, to: font)
+        textView.setRichTextAttribute(.font, to: font)
         #if iOS || os(tvOS)
-        assertEqualAttributes(textView.currentRichTextAttributes)
+        assertEqualAttributes(textView.richTextAttributes)
         #endif
         assertNonEqualAttributes(textView.richTextAttributes(at: selectedRange))
         assertEqualAttributes(textView.typingAttributes)
@@ -63,17 +63,17 @@ final class RichTextViewComponent_AttributesTests: XCTestCase {
 
     func testTextAttributeValueForKeyIsValidForSelectedRange() {
         textView.setSelectedRange(selectedRange)
-        textView.setCurrentRichTextAttribute(.font, to: font)
-        assertEqualAttribute(textView.currentRichTextAttribute(.font))
+        textView.setRichTextAttribute(.font, to: font)
+        assertEqualAttribute(textView.richTextAttribute(.font))
         assertEqualAttribute(textView.richTextAttribute(.font, at: selectedRange))
         assertEqualAttribute(textView.typingAttributes[.font])
     }
 
     func testTextAttributeValueForKeyIsValidForNoSelectedRange() {
         textView.setSelectedRange(noRange)
-        textView.setCurrentRichTextAttribute(.font, to: font)
+        textView.setRichTextAttribute(.font, to: font)
         #if iOS || os(tvOS)
-        assertEqualAttribute(textView.currentRichTextAttribute(.font))
+        assertEqualAttribute(textView.richTextAttribute(.font))
         #endif
         assertNonEqualAttribute(textView.richTextAttribute(.font, at: selectedRange))
         assertEqualAttribute(textView.typingAttributes[.font])

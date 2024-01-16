@@ -18,15 +18,15 @@ import AppKit
 
 public extension RichTextViewComponent {
 
-    /// Get the current text indent.
-    var currentIndent: CGFloat? {
-        let attribute: NSMutableParagraphStyle? = currentRichTextAttribute(.paragraphStyle)
+    /// Get the current rich text indent.
+    var richTextIndent: CGFloat? {
+        let attribute: NSMutableParagraphStyle? = richTextAttribute(.paragraphStyle)
         guard let style = attribute else { return nil }
         return style.headIndent
     }
 
-    /// Step the current text indent.
-    func stepCurrentIndent(
+    /// Step the current rich text indent.
+    func stepRichTextIndent(
         points: CGFloat
     ) {
         if !hasTrimmedText { return step(points: points) }
@@ -48,7 +48,7 @@ private extension RichTextViewComponent {
         mutableStyle.firstLineHeadIndent = indentation
         mutableStyle.headIndent = indentation
 
-        var attributes = currentRichTextAttributes
+        var attributes = richTextAttributes
         attributes[.paragraphStyle] = mutableStyle
         typingAttributes = attributes
     }

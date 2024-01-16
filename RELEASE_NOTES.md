@@ -11,7 +11,7 @@ Until then, minor updates may remove deprecated features and introduce breaking 
 
 This version has a breaking change, where `RichTextAttributeReader` and `RichTextAttributeWriter` both now require a range.
 
-This change makes is possible for `RichTextViewComponent` to have the same naming for its functions that use the current text position or selection.
+This change however makes is possible for `RichTextViewComponent` to have the same naming for its functions that use the current text position or selection.
 
 ### 🗑️ Deprecations 
 

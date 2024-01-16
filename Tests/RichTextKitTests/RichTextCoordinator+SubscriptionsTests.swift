@@ -31,7 +31,7 @@ final class RichTextCoordinator_SubscriptionsTests: XCTestCase {
             textView: textView,
             richTextContext: textContext)
         textView.selectedRange = NSRange(location: 0, length: 1)
-        textView.setCurrentTextAlignment(.justified)
+        textView.setRichTextAlignment(.justified)
     }
 
     override func tearDown() {
@@ -50,39 +50,39 @@ final class RichTextCoordinator_SubscriptionsTests: XCTestCase {
 
 
     func testFontNameChangesUpdatesTextView() {
-        XCTAssertNotEqual(textView.currentFontName, "Arial")
+        XCTAssertNotEqual(textView.richTextFontName, "Arial")
         textContext.fontName = ""
 
         eventually {
             #if iOS || os(tvOS)
-            XCTAssertEqual(self.textView.currentFontName, ".SFUI-Regular")
+            XCTAssertEqual(self.textView.richTextFontName, ".SFUI-Regular")
             #elseif os(macOS)
-            XCTAssertEqual(self.textView.currentFontName, "Helvetica")
+            XCTAssertEqual(self.textView.richTextFontName, ".AppleSystemUIFont")
             #endif
         }
     }
 
 
     func testFontSizeChangesUpdatesTextView() {
-        XCTAssertNotEqual(textView.currentFontSize, 666)
+        XCTAssertNotEqual(textView.richTextFontSize, 666)
         textContext.fontSize = 666
-        XCTAssertEqual(textView.currentFontSize, 666)
+        XCTAssertEqual(textView.richTextFontSize, 666)
     }
 
 
     func testFontSizeDecrementUpdatesTextView() {
-        textView.setCurrentFontSize(666)
-        XCTAssertEqual(textView.currentFontSize, 666)
+        textView.setRichTextFontSize(666)
+        XCTAssertEqual(textView.richTextFontSize, 666)
         textContext.handle(.stepFontSize(points: -1))
-        // XCTAssertEqual(textView.currentFontSize, 665)
+        // XCTAssertEqual(textView.richTextFontSize, 665)
     }
 
 
     func testFontSizeIncrementUpdatesTextView() {
-        textView.setCurrentFontSize(666)
-        XCTAssertEqual(textView.currentFontSize, 666)
+        textView.setRichTextFontSize(666)
+        XCTAssertEqual(textView.richTextFontSize, 666)
         textContext.handle(.stepFontSize(points: 1))
-        // XCTAssertEqual(textView.currentFontSize, 667)    TODO: Why is incorrect?
+        // XCTAssertEqual(textView.richTextFontSize, 667)    TODO: Why is incorrect?
     }
 
 
@@ -101,23 +101,23 @@ final class RichTextCoordinator_SubscriptionsTests: XCTestCase {
 
 
     func testIsBoldUpdatesTextView() {
-        XCTAssertFalse(textView.currentRichTextStyles.hasStyle(.bold))
+        XCTAssertFalse(textView.richTextStyles.hasStyle(.bold))
         textContext.isBold = true
-        XCTAssertTrue(textView.currentRichTextStyles.hasStyle(.bold))
+        XCTAssertTrue(textView.richTextStyles.hasStyle(.bold))
     }
 
 
     func testIsItalicUpdatesTextView() {
-        XCTAssertFalse(textView.currentRichTextStyles.hasStyle(.italic))
+        XCTAssertFalse(textView.richTextStyles.hasStyle(.italic))
         textContext.isItalic = true
-        XCTAssertTrue(textView.currentRichTextStyles.hasStyle(.italic))
+        XCTAssertTrue(textView.richTextStyles.hasStyle(.italic))
     }
 
 
     func testIsUnderlinedUpdatesTextView() {
-        XCTAssertFalse(textView.currentRichTextStyles.hasStyle(.underlined))
+        XCTAssertFalse(textView.richTextStyles.hasStyle(.underlined))
         textContext.isUnderlined = true
-        XCTAssertTrue(textView.currentRichTextStyles.hasStyle(.underlined))
+        XCTAssertTrue(textView.richTextStyles.hasStyle(.underlined))
     }
 
 
@@ -129,10 +129,10 @@ final class RichTextCoordinator_SubscriptionsTests: XCTestCase {
 
 
     func testTextAlignmentUpdatesTextView() {
-        textView.setCurrentTextAlignment(.left)
-        XCTAssertEqual(textView.currentTextAlignment, .left)
+        textView.setRichTextAlignment(.left)
+        XCTAssertEqual(textView.richTextAlignment, .left)
         textContext.textAlignment = .right
-        XCTAssertEqual(textView.currentTextAlignment, .right)
+        XCTAssertEqual(textView.richTextAlignment, .right)
     }
 }
 #endif

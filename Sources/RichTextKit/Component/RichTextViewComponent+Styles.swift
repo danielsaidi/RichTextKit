@@ -11,9 +11,9 @@ import Foundation
 public extension RichTextViewComponent {
 
     /// Get the current rich text styles.
-    var currentRichTextStyles: [RichTextStyle] {
-        let attributes = currentRichTextAttributes
-        let traits = currentFont?.fontDescriptor.symbolicTraits
+    var richTextStyles: [RichTextStyle] {
+        let attributes = richTextAttributes
+        let traits = richTextFont?.fontDescriptor.symbolicTraits
         var styles = traits?.enabledRichTextStyles ?? []
         if attributes.isStrikethrough { styles.append(.strikethrough) }
         if attributes.isUnderlined { styles.append(.underlined) }
@@ -26,22 +26,22 @@ public extension RichTextViewComponent {
      > Note: When adding logic to the function, make sure to
      also adjust ``setRichTextStyle(_:to:at:)``.
      */
-    func setCurrentRichTextStyle(
+    func setRichTextStyle(
         _ style: RichTextStyle,
         to newValue: Bool
     ) {
         let value = newValue ? 1 : 0
         switch style {
         case .bold, .italic:
-            let styles = currentRichTextStyles
+            let styles = richTextStyles
             guard shouldAddOrRemove(style, newValue, given: styles) else { return }
-            guard let font = currentFont else { return }
+            guard let font = richTextFont else { return }
             guard let newFont = newFont(for: font, byToggling: style) else { return }
-            setCurrentFont(newFont)
+            setRichTextFont(newFont)
         case .underlined:
-            setCurrentRichTextAttribute(.underlineStyle, to: value)
+            setRichTextAttribute(.underlineStyle, to: value)
         case .strikethrough:
-            setCurrentRichTextAttribute(.strikethroughStyle, to: value)
+            setRichTextAttribute(.strikethroughStyle, to: value)
         }
     }
 }

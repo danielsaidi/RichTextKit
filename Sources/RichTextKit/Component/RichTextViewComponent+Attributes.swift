@@ -10,30 +10,33 @@ import Foundation
 
 public extension RichTextViewComponent {
 
-    /// Get the current values of all rich text attributes.
-    var currentRichTextAttributes: RichTextAttributes {
+    /// Get all current rich text attributes.
+    var richTextAttributes: RichTextAttributes {
         if hasSelectedRange {
             return richTextAttributes(at: selectedRange)
-        } else {
-            #if macOS
-            let range = NSRange(location: selectedRange.location - 1, length: 1)
-            let safeRange = safeRange(for: range)
-            return richTextAttributes(at: safeRange)
-            #else
-            return typingAttributes
-            #endif
         }
+        
+        #if macOS
+        let range = NSRange(location: selectedRange.location - 1, length: 1)
+        let safeRange = safeRange(for: range)
+        return richTextAttributes(at: safeRange)
+        #else
+        return typingAttributes
+        #endif
     }
 
-    /// Get the current value of a rich text attribute.
-    func currentRichTextAttribute<Value>(
+    /// Get a current rich text attribute.
+    func richTextAttribute<Value>(
         _ attribute: RichTextAttribute
     ) -> Value? {
-        currentRichTextAttributes[attribute] as? Value
+        richTextAttributes[attribute] as? Value
     }
 
-    /// Set the current value of a rich text attribute.
-    func setCurrentRichTextAttribute(_ attribute: RichTextAttribute, to value: Any) {
+    /// Set a current rich text attribute.
+    func setRichTextAttribute(
+        _ attribute: RichTextAttribute,
+        to value: Any
+    ) {
         #if macOS
         setRichTextAttribute(attribute, to: value, at: selectedRange)
         typingAttributes[attribute] = value
@@ -46,10 +49,10 @@ public extension RichTextViewComponent {
         #endif
     }
 
-    /// Set the values of a bunch of rich text attributes.
-    func setCurrentRichTextAttributes(_ attributes: RichTextAttributes) {
+    /// Set some current rich text attributes.
+    func setRichTextAttributes(_ attributes: RichTextAttributes) {
         attributes.forEach { attribute, value in
-            setCurrentRichTextAttribute(attribute, to: value)
+            setRichTextAttribute(attribute, to: value)
         }
     }
 }

@@ -2,7 +2,6 @@ import Foundation
 
 public extension RichTextViewComponent {
 
-
     @available(*, deprecated, renamed: "currentColor(_:)")
     var currentBackgroundColor: ColorRepresentable? {
         currentColor(.background)
@@ -100,5 +99,115 @@ public extension RichTextViewComponent {
     @available(*, deprecated, message: "Use stepCurrentFontSize instead.")
     func incrementCurrentFontSize(points: UInt = 1) {
         stepCurrentFontSize(points: Int(points))
+    }
+}
+
+public extension RichTextViewComponent {
+    
+    @available(*, deprecated, message: "richTextAttributes")
+    var currentRichTextAttributes: RichTextAttributes {
+        richTextAttributes
+    }
+    
+    @available(*, deprecated, message: "richTextAttribute(_:)")
+    func currentRichTextAttribute<Value>(_ attribute: RichTextAttribute) -> Value? {
+        richTextAttributes[attribute] as? Value
+    }
+    
+    @available(*, deprecated, message: "setRichTextAttribute(_:to:)")
+    func setCurrentRichTextAttribute(_ attribute: RichTextAttribute, to value: Any) {
+        setRichTextAttribute(attribute, to: value)
+    }
+    
+    @available(*, deprecated, message: "setRichTextAttributes(_:)")
+    func setCurrentRichTextAttributes(_ attributes: RichTextAttributes) {
+        setRichTextAttributes(attributes)
+    }
+    
+    
+    @available(*, deprecated, message: "richTextAlignment")
+    var currentTextAlignment: RichTextAlignment? {
+        richTextAlignment
+    }
+    
+    @available(*, deprecated, message: "setRichTextAlignment(_:)")
+    func setCurrentTextAlignment(_ alignment: RichTextAlignment) {
+        setRichTextAlignment(alignment)
+    }
+    
+    
+    @available(*, deprecated, message: "richTextColor(_:)")
+    func currentColor(_ color: RichTextColor) -> ColorRepresentable? {
+        richTextColor(color)
+    }
+
+    @available(*, deprecated, message: "setRichTextColor(_:to:)")
+    func setCurrentColor(_ color: RichTextColor, to val: ColorRepresentable) {
+        if currentColor(color) == val { return }
+        guard let attribute = color.attribute else { return }
+        setRichTextAttribute(attribute, to: val)
+    }
+    
+    
+    @available(*, deprecated, message: "richTextFont")
+    var currentFont: FontRepresentable? {
+        richTextFont
+    }
+
+    @available(*, deprecated, message: "richTextFontSize")
+    var currentFontSize: CGFloat? {
+        richTextFontSize
+    }
+
+    @available(*, deprecated, message: "richTextFontName")
+    var currentFontName: String? {
+        richTextFontName
+    }
+
+    @available(*, deprecated, message: "setRichTextFont(_:)")
+    func setCurrentFont(_ font: FontRepresentable) {
+        setRichTextFont(font)
+    }
+
+    @available(*, deprecated, message: "setRichTextFontName(_:)")
+    func setCurrentFontName(_ name: String) {
+        setRichTextFontName(name)
+    }
+
+    @available(*, deprecated, message: "setRichTextFontSize(_:)")
+    func setCurrentFontSize(_ size: CGFloat) {
+        setRichTextFontSize(size)
+    }
+
+    @available(*, deprecated, message: "stepRichTextFontSize(points:)")
+    func stepCurrentFontSize(points: Int) {
+        stepRichTextFontSize(points: points)
+    }
+    
+    
+    @available(*, deprecated, message: "richTextIndent")
+    var currentIndent: CGFloat? {
+        richTextIndent
+    }
+
+    @available(*, deprecated, message: "stepRichTextIndent(points:)")
+    func stepCurrentIndent(
+        points: CGFloat
+    ) {
+        stepRichTextIndent(points: points)
+    }
+    
+    
+    @available(*, deprecated, message: "richTextStyles")
+    var currentRichTextStyles: [RichTextStyle] {
+        richTextStyles
+    }
+
+    @available(*, deprecated, message: "setRichTextStyle(_:to:)")
+    func setCurrentRichTextStyle(
+        _ style: RichTextStyle,
+        to newValue: Bool
+    ) {
+        setRichTextStyle(style, to: newValue)
     }
 }

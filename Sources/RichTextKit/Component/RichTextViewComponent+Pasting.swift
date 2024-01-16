@@ -130,12 +130,12 @@ private extension RichTextViewComponent {
         _ image: ImageRepresentable,
         at index: Int
     ) {
-        let newLine = NSAttributedString(string: "\n", attributes: currentRichTextAttributes)
+        let newLine = NSAttributedString(string: "\n", attributes: richTextAttributes)
         let content = NSMutableAttributedString(attributedString: richText)
         guard let insertString = getAttachmentString(for: image) else { return }
 
         insertString.insert(newLine, at: insertString.length)
-        insertString.addAttributes(currentRichTextAttributes, range: insertString.richTextRange)
+        insertString.addAttributes(richTextAttributes, range: insertString.richTextRange)
         content.insert(insertString, at: index)
 
         setRichText(content)

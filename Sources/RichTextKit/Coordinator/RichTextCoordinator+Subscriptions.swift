@@ -53,7 +53,7 @@ private extension RichTextCoordinator {
         case .setAlignment: break
         case .stepFontSize: break
         case .stepIndent(let points):
-            textView.stepCurrentIndent(points: points)
+            textView.stepRichTextIndent(points: points)
         case .stepSuperscript: break
         case .toggleStyle: break
         case .undoLatestChange:
@@ -78,7 +78,7 @@ private extension RichTextCoordinator {
             .sink(
                 receiveCompletion: { _ in },
                 receiveValue: { [weak self] in
-                    self?.textView.setCurrentTextAlignment($0)
+                    self?.textView.setRichTextAlignment($0)
                 })
             .store(in: &cancellables)
     }
@@ -89,7 +89,7 @@ private extension RichTextCoordinator {
                 receiveCompletion: { _ in },
                 receiveValue: { [weak self] in
                     guard let color = $0 else { return }
-                    self?.textView.setCurrentColor(.background, to: color)
+                    self?.textView.setRichTextColor(.background, to: color)
                 })
             .store(in: &cancellables)
     }
@@ -99,7 +99,7 @@ private extension RichTextCoordinator {
             .sink(
                 receiveCompletion: { _ in },
                 receiveValue: { [weak self] in
-                    self?.textView.setCurrentFontName($0)
+                    self?.textView.setRichTextFontName($0)
                 })
             .store(in: &cancellables)
     }
@@ -109,7 +109,7 @@ private extension RichTextCoordinator {
             .sink(
                 receiveCompletion: { _ in },
                 receiveValue: { [weak self] in
-                    self?.textView.setCurrentFontSize($0)
+                    self?.textView.setRichTextFontSize($0)
                 })
             .store(in: &cancellables)
     }
@@ -120,7 +120,7 @@ private extension RichTextCoordinator {
                 receiveCompletion: { _ in },
                 receiveValue: { [weak self] in
                     guard let color = $0 else { return }
-                    self?.textView.setCurrentColor(.foreground, to: color)
+                    self?.textView.setRichTextColor(.foreground, to: color)
                 })
             .store(in: &cancellables)
     }
@@ -251,7 +251,7 @@ private extension RichTextCoordinator {
                 receiveCompletion: { _ in },
                 receiveValue: { [weak self] in
                     guard let color = $0 else { return }
-                    self?.textView.setCurrentColor(.stroke, to: color)
+                    self?.textView.setRichTextColor(.stroke, to: color)
                 })
             .store(in: &cancellables)
     }
@@ -262,7 +262,7 @@ private extension RichTextCoordinator {
                 receiveCompletion: { _ in },
                 receiveValue: { [weak self] in
                     guard let color = $0 else { return }
-                    self?.textView.setCurrentColor(.strikethrough, to: color)
+                    self?.textView.setRichTextColor(.strikethrough, to: color)
                 })
             .store(in: &cancellables)
     }
@@ -273,7 +273,7 @@ private extension RichTextCoordinator {
                 receiveCompletion: { _ in },
                 receiveValue: { [weak self] in
                     guard let color = $0 else { return }
-                    self?.textView.setCurrentColor(.underline, to: color)
+                    self?.textView.setRichTextColor(.underline, to: color)
                 })
             .store(in: &cancellables)
     }
@@ -354,9 +354,9 @@ internal extension RichTextCoordinator {
     }
 
     func setStyle(_ style: RichTextStyle, to newValue: Bool) {
-        let hasStyle = textView.currentRichTextStyles.hasStyle(style)
+        let hasStyle = textView.richTextStyles.hasStyle(style)
         if newValue == hasStyle { return }
-        textView.setCurrentRichTextStyle(style, to: newValue)
+        textView.setRichTextStyle(style, to: newValue)
     }
 }
 
