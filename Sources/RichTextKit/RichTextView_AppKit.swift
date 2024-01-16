@@ -26,6 +26,9 @@ import AppKit
 open class RichTextView: NSTextView, RichTextViewComponent {
 
     // MARK: - Properties
+    
+    /// The configuration to use by the rich text view.
+    public var configuration: Configuration = .standard
 
     /// The style to use when highlighting text in the view.
     public var highlightingStyle: RichTextHighlightingStyle = .standard
@@ -73,6 +76,21 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         }
 
         return super.performDragOperation(draggingInfo)
+    }
+    
+    open override func scrollWheel(with event: NSEvent) {
+        
+        if configuration.isScrollingEnabled {
+            return super.scrollWheel(with: event)
+        }
+
+        // 1st nextResponder is NSClipView
+        // 2nd nextResponder is NSScrollView
+        // 3rd nextResponder is NSResponder SwiftUIPlatformViewHost
+        self.nextResponder?
+            .nextResponder?
+            .nextResponder?
+            .scrollWheel(with: event)
     }
 
 

@@ -18,9 +18,8 @@ import SwiftUI
  
  You can use the provided context to trigger and observe any
  changes to the text editor. Note that changing the value of
- the `text` binding will not (yet) update this editor. Until
- it is fixed, use `setAttributedString(to:)` to set the rich
- text or plain string to another value.
+ the `text` binding will not yet update the editor. Until it
+ is fixed, use `setAttributedString(to:)`.
 
  Since the view wraps a native `UIKit` or `AppKit` text view,
  you can't apply `.toolbar` modifiers to it, like you can do
@@ -51,32 +50,32 @@ public struct RichTextEditor: ViewRepresentable {
      - Parameters:
        - text: The rich text to edit.
        - context: The rich text context to use.
+       - config: The rich text configuration to use, by deafult `standard`.
        - format: The rich text data format, by default ``RichTextDataFormat/archivedData``.
      */
     public init(
         text: Binding<NSAttributedString>,
         context: RichTextContext,
+        config: RichTextView.Configuration = .standard,
         format: RichTextDataFormat = .archivedData,
         viewConfiguration: @escaping ViewConfiguration = { _ in }
     ) {
         self.text = text
-        self._richTextContext = ObservedObject(wrappedValue: context)
+        self.config = config
+        self._context = ObservedObject(wrappedValue: context)
         self.format = format
         self.viewConfiguration = viewConfiguration
     }
 
     public typealias ViewConfiguration = (RichTextViewComponent) -> Void
-
-
-    private var format: RichTextDataFormat
-
-    private var text: Binding<NSAttributedString>
-
+    
     @ObservedObject
-    private var richTextContext: RichTextContext
-
+    private var context: RichTextContext
+    
+    private var text: Binding<NSAttributedString>
+    private let config: RichTextView.Configuration
+    private var format: RichTextDataFormat
     private var viewConfiguration: ViewConfiguration
-
 
     #if iOS || os(tvOS) || os(visionOS)
     public let textView = RichTextView()
@@ -95,7 +94,7 @@ public struct RichTextEditor: ViewRepresentable {
         RichTextCoordinator(
             text: text,
             textView: textView,
-            richTextContext: richTextContext
+            richTextContext: context
         )
     }
 
@@ -103,16 +102,18 @@ public struct RichTextEditor: ViewRepresentable {
     #if iOS || os(tvOS) || os(visionOS)
     public func makeUIView(context: Context) -> some UIView {
         textView.setup(with: text.wrappedValue, format: format)
+        textView.configuration = config
         viewConfiguration(textView)
         return textView
     }
 
     public func updateUIView(_ view: UIViewType, context: Context) {}
-    #endif
-
-    #if macOS
+    
+    #else
+    
     public func makeNSView(context: Context) -> some NSView {
         textView.setup(with: text.wrappedValue, format: format)
+        textView.configuration = config
         viewConfiguration(textView)
         return scrollView
     }

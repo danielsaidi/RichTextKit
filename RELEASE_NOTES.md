@@ -11,9 +11,13 @@ Until then, minor updates may remove deprecated features and introduce breaking 
 
 Thanks to [@ropellanda][ropellanda], RichTextKit now supports Vision OS.
 
+Thanks to [@screenworker][screenworker], RichTextEditor now has a `config` that can disable scrolling.
+
 ### ✨ Features
 
 * `Image` has a new rich text-specific image builders.
+* `RichTextEditor` has a new `config` value parameter that can disable scrolling.
+* `RichTextView` has a new `configuration` property that can disable scrolling.
 
 ### 🗑️ Deprecations 
 
@@ -481,3 +485,4 @@ RichTextKit adds extensive support for a bunch of rich text features:
 [Mcrich23]: https://github.com/Mcrich23
 [msrutek-paylocity]: https://github.com/msrutek-paylocity
 [ropellanda]: https://github.com/ropellanda
+[screenworker]: https://github.com/screenworker

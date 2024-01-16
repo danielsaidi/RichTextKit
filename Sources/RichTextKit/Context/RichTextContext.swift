@@ -185,14 +185,7 @@ public extension RichTextContext {
         highlightedRange = range
     }
 
-    /**
-     Paste an image into the text view, at a certain index.
-
-     - Parameters:
-       - image: The image to paste.
-       - index: The index to paste at, by default the `selectedRange` location.
-       - moveCursorToPastedContent: Whether or not to move the cursor to the end of the pasted content, by default `false`.
-     */
+    /// Paste an image into the editor, at a certain index.
     func pasteImage(
         _ image: ImageRepresentable,
         at index: Int? = nil,
@@ -202,15 +195,8 @@ public extension RichTextContext {
         shouldPasteImage = (image, index, moveCursorToPastedContent)
     }
 
-    /**
-     Paste images into the text view, at a certain index.
-
-     - Parameters:
-       - images: The images to paste.
-       - index: The index to paste at, by default the `selectedRange` location.
-       - moveCursorToPastedContent: Whether or not to move the cursor to the end of the pasted content, by default `false`.
-     */
-    func pasteImage(
+    /// Paste images into the editor, at a certain index.
+    func pasteImages(
         _ images: [ImageRepresentable],
         at index: Int? = nil,
         moveCursorToPastedContent: Bool = false
@@ -219,14 +205,7 @@ public extension RichTextContext {
         shouldPasteImages = (images, index, moveCursorToPastedContent)
     }
 
-    /**
-     Paste text into the text view, at a certain index.
-
-     - Parameters:
-       - text: The text to paste.
-       - index: The index to paste at, by default the `selectedRange` location.
-       - moveCursorToPastedContent: Whether or not to move the cursor to the end of the pasted content, by default `false`.
-     */
+    /// Paste text into the editor, at a certain index.
     func pasteText(
         _ text: String,
         at index: Int? = nil,

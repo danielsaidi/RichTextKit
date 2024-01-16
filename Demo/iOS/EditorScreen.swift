@@ -40,7 +40,11 @@ struct EditorScreen: View {
 private extension EditorScreen {
 
     var editor: some View {
-        RichTextEditor(text: $text, context: context) {
+        RichTextEditor(
+            text: $text,
+            context: context,
+            config: .init(isScrollingEnabled: false)
+        ) {
             $0.textContentInset = CGSize(width: 10, height: 20)
         }
         .background(Material.regular)
