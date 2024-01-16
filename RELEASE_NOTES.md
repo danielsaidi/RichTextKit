@@ -15,12 +15,14 @@ This change however makes is possible for `RichTextViewComponent` to have the sa
 
 ### 🗑️ Deprecations 
 
+* `RichTextAction` static properties have been deprecated in favor of their corresponding functions.
 * `RichTextReader` `.richTextRange` has been renamed to `.richTextFullRange`.  
 
 ### 🐛 Bug Fixes
 
-* `RichTextAttributeReader` now use `range` in `setRichTextSuperscriptLevel`.
-* `RichTextCoordinator` now sets correct `underline` color instead of `foreground`.
+* `RichTextAction` corrects some icons and localized strings.
+* `RichTextAttributeReader` now use `range` correctly in `setRichTextSuperscriptLevel`.
+* `RichTextCoordinator` now sets correct `underline` color instead of `foreground` color.
 
 ### 💥 Breaking Changes
 

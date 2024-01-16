@@ -104,20 +104,10 @@ public extension RichTextAction {
 public extension RichTextAction {
 
     /// A name alias for `.stepFontSize`.
-    static var increaseFontSize: RichTextAction {
-        increaseFontSize()
-    }
-
-    /// A name alias for `.stepFontSize`.
     static func increaseFontSize(
         points: UInt = 1
     ) -> RichTextAction {
         stepFontSize(points: Int(points))
-    }
-
-    /// A name alias for `.stepFontSize`.
-    static var decreaseFontSize: RichTextAction {
-        decreaseFontSize()
     }
 
     /// A name alias for `.stepFontSize(points: -1)`.
@@ -127,22 +117,11 @@ public extension RichTextAction {
         stepFontSize(points: -Int(points))
     }
 
-
-    /// A name alias for `.stepIndent`.
-    static var increaseIndent: RichTextAction {
-        increaseIndent()
-    }
-
     /// A name alias for `.stepIndent`.
     static func increaseIndent(
         points: UInt = .defaultRichTextIntentStepSize
     ) -> RichTextAction {
         stepIndent(points: CGFloat(points))
-    }
-
-    /// A name alias for `.stepIndent`.
-    static var decreaseIndent: RichTextAction {
-        decreaseIndent()
     }
 
     /// A name alias for `.stepIndent(points: -1)`.
@@ -152,22 +131,11 @@ public extension RichTextAction {
         stepIndent(points: -CGFloat(points))
     }
 
-
-    /// A name alias for `.stepFontSize`.
-    static var increaseSuperscript: RichTextAction {
-        increaseFontSize()
-    }
-
     /// A name alias for `.stepSuperscript`.
     static func increaseSuperscript(
         steps: UInt = 1
     ) -> RichTextAction {
         stepSuperscript(steps: Int(steps))
-    }
-
-    /// A name alias for `.stepSuperscript`.
-    static var decreaseSuperscript: RichTextAction {
-        decreaseSuperscript()
     }
 
     /// A name alias for `.stepSuperscript(steps: -1)`.
@@ -176,7 +144,6 @@ public extension RichTextAction {
     ) -> RichTextAction {
         stepSuperscript(steps: -Int(steps))
     }
-
 
     /// A name alias for `.redoLatestChange`.
     static var redo: RichTextAction { .redoLatestChange }
