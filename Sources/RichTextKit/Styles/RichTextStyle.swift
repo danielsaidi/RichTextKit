@@ -51,12 +51,12 @@ public extension RichTextStyle {
         case .underlined: .richTextStyleUnderline
         }
     }
-    
+
     /// The localized style title.
     var title: String {
         titleKey.text
     }
-    
+
     /// The localized style title key.
     var titleKey: RTKL10n {
         switch self {

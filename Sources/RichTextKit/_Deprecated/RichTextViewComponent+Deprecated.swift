@@ -103,39 +103,39 @@ public extension RichTextViewComponent {
 }
 
 public extension RichTextViewComponent {
-    
+
     @available(*, deprecated, message: "richTextAttributes")
     var currentRichTextAttributes: RichTextAttributes {
         richTextAttributes
     }
-    
+
     @available(*, deprecated, message: "richTextAttribute(_:)")
     func currentRichTextAttribute<Value>(_ attribute: RichTextAttribute) -> Value? {
         richTextAttributes[attribute] as? Value
     }
-    
+
     @available(*, deprecated, message: "setRichTextAttribute(_:to:)")
     func setCurrentRichTextAttribute(_ attribute: RichTextAttribute, to value: Any) {
         setRichTextAttribute(attribute, to: value)
     }
-    
+
     @available(*, deprecated, message: "setRichTextAttributes(_:)")
     func setCurrentRichTextAttributes(_ attributes: RichTextAttributes) {
         setRichTextAttributes(attributes)
     }
-    
-    
+
+
     @available(*, deprecated, message: "richTextAlignment")
     var currentTextAlignment: RichTextAlignment? {
         richTextAlignment
     }
-    
+
     @available(*, deprecated, message: "setRichTextAlignment(_:)")
     func setCurrentTextAlignment(_ alignment: RichTextAlignment) {
         setRichTextAlignment(alignment)
     }
-    
-    
+
+
     @available(*, deprecated, message: "richTextColor(_:)")
     func currentColor(_ color: RichTextColor) -> ColorRepresentable? {
         richTextColor(color)
@@ -147,8 +147,8 @@ public extension RichTextViewComponent {
         guard let attribute = color.attribute else { return }
         setRichTextAttribute(attribute, to: val)
     }
-    
-    
+
+
     @available(*, deprecated, message: "richTextFont")
     var currentFont: FontRepresentable? {
         richTextFont
@@ -183,8 +183,8 @@ public extension RichTextViewComponent {
     func stepCurrentFontSize(points: Int) {
         stepRichTextFontSize(points: points)
     }
-    
-    
+
+
     @available(*, deprecated, message: "richTextIndent")
     var currentIndent: CGFloat? {
         richTextIndent
@@ -196,8 +196,8 @@ public extension RichTextViewComponent {
     ) {
         stepRichTextIndent(points: points)
     }
-    
-    
+
+
     @available(*, deprecated, message: "richTextStyles")
     var currentRichTextStyles: [RichTextStyle] {
         richTextStyles

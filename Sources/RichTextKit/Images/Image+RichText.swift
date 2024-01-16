@@ -53,27 +53,27 @@ public extension Image {
 }
 
 public extension Image {
-    
+
     static func richTextStepFontSize(
         _ points: Int
     ) -> Image {
-        points < 0 ? 
+        points < 0 ?
             .richTextFontSizeDecrease :
             .richTextFontSizeIncrease
     }
-    
+
     static func richTextStepIndent(
         _ points: Double
     ) -> Image {
-        points < 0 ? 
+        points < 0 ?
             .richTextIndentDecrease :
             .richTextIndentIncrease
     }
-    
+
     static func richTextStepSuperscript(
         _ steps: Int
     ) -> Image {
-        steps < 0 ? 
+        steps < 0 ?
             .richTextSuperscriptDecrease :
             .richTextSuperscriptIncrease
     }

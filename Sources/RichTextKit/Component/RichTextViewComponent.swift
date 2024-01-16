@@ -18,7 +18,7 @@ import Foundation
 
  The protocol implements and extends many other protocols to
  provide more features for components with more capabilities.
- 
+
  The protocol for instance extends ``RichTextAttributeReader``
  and ``RichTextAttributeWriter`` and adds new functions that
  don't require a `range`, since it can use the current range.

@@ -65,12 +65,12 @@ public extension RichTextAction {
         case .undoLatestChange: .richTextActionUndo
         }
     }
-    
+
     /// The localized title to use in the main menu.
     var menuTitle: String {
         menuTitleKey.text
     }
-    
+
     /// The localized title key to use in the main menu.
     var menuTitleKey: RTKL10n {
         switch self {
@@ -83,7 +83,7 @@ public extension RichTextAction {
     var title: String {
         titleKey.text
     }
-    
+
     /// The localized action title key.
     var titleKey: RTKL10n {
         switch self {

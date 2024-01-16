@@ -14,8 +14,8 @@ import SwiftUI
 
  The view uses a platform-specific ``RichTextView`` together
  with a ``RichTextContext`` and a ``RichTextCoordinator`` to
- make view and context changes sync correctly. 
- 
+ make view and context changes sync correctly.
+
  You can use the provided context to trigger and observe any
  changes to the text editor. Note that changing the value of
  the `text` binding will not yet update the editor. Until it
@@ -68,10 +68,10 @@ public struct RichTextEditor: ViewRepresentable {
     }
 
     public typealias ViewConfiguration = (RichTextViewComponent) -> Void
-    
+
     @ObservedObject
     private var context: RichTextContext
-    
+
     private var text: Binding<NSAttributedString>
     private let config: RichTextView.Configuration
     private var format: RichTextDataFormat
@@ -108,9 +108,9 @@ public struct RichTextEditor: ViewRepresentable {
     }
 
     public func updateUIView(_ view: UIViewType, context: Context) {}
-    
+
     #else
-    
+
     public func makeNSView(context: Context) -> some NSView {
         textView.setup(with: text.wrappedValue, format: format)
         textView.configuration = config

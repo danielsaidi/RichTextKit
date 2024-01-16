@@ -26,7 +26,7 @@ import AppKit
 open class RichTextView: NSTextView, RichTextViewComponent {
 
     // MARK: - Properties
-    
+
     /// The configuration to use by the rich text view.
     public var configuration: Configuration = .standard
 
@@ -77,9 +77,9 @@ open class RichTextView: NSTextView, RichTextViewComponent {
 
         return super.performDragOperation(draggingInfo)
     }
-    
+
     open override func scrollWheel(with event: NSEvent) {
-        
+
         if configuration.isScrollingEnabled {
             return super.scrollWheel(with: event)
         }

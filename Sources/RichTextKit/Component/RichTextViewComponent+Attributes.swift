@@ -15,7 +15,7 @@ public extension RichTextViewComponent {
         if hasSelectedRange {
             return richTextAttributes(at: selectedRange)
         }
-        
+
         #if macOS
         let range = NSRange(location: selectedRange.location - 1, length: 1)
         let safeRange = safeRange(for: range)

@@ -30,7 +30,7 @@ public enum RTKL10n: String, CaseIterable, Identifiable {
     actionIndentIncrease,
     actionIndentDecrease,
     actionPrint,
-    
+
     actionRedoLatestChange,
     actionUndoLatestChange,
 
@@ -66,7 +66,7 @@ public enum RTKL10n: String, CaseIterable, Identifiable {
 }
 
 public extension RTKL10n {
-    
+
     static func actionStepFontSize(
         _ points: Int
     ) -> RTKL10n {
@@ -74,7 +74,7 @@ public extension RTKL10n {
             .actionFontSizeDecrease :
             .actionFontSizeIncrease
     }
-    
+
     static func actionStepIndent(
         _ points: Double
     ) -> RTKL10n {
@@ -82,7 +82,7 @@ public extension RTKL10n {
             .actionIndentDecrease :
             .actionIndentIncrease
     }
-    
+
     static func actionStepSuperscript(
         _ steps: Int
     ) -> RTKL10n {
@@ -90,9 +90,9 @@ public extension RTKL10n {
             .actionIndentDecrease :
             .actionIndentIncrease
     }
-    
+
     static func menuIndent(_ points: Double) -> RTKL10n {
-        points < 0 ? 
+        points < 0 ?
             .menuIndentDecrease :
             .menuIndentIncrease
     }

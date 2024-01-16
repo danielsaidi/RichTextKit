@@ -51,10 +51,10 @@ public extension RichTextAlignment {
 
     /// The standard icon to use for the alignment.
     var icon: Image { nativeAlignment.icon }
-    
+
     /// The standard title to use for the alignment.
     var title: String { nativeAlignment.title }
-    
+
     /// The standard title key to use for the alignment.
     var titleKey: RTKL10n { nativeAlignment.titleKey }
 
@@ -86,7 +86,7 @@ public extension NSTextAlignment {
     var title: String {
         titleKey.text
     }
-    
+
     /// The standard title key to use for the alignment.
     var titleKey: RTKL10n {
         switch self {

@@ -47,14 +47,14 @@ open class RichTextView: UITextView, RichTextViewComponent {
 
 
     // MARK: - Properties
-    
+
     /// The configuration to use by the rich text view.
     public var configuration: Configuration = .standard {
         didSet {
             isScrollEnabled = configuration.isScrollingEnabled
         }
     }
-    
+
     /// The style to use when highlighting text in the view.
     public var highlightingStyle: RichTextHighlightingStyle = .standard
 
