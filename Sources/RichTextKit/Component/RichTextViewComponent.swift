@@ -16,9 +16,12 @@ import Foundation
  By implementing and using this protocol in the library, the
  library doesn't have to do a bunch of `#if` checks.
 
- This protocol aggregates many other protocols, although the
- protocols often implement each other. To show all protocols,
- some are commented out in the list below.
+ The protocol implements and extends many other protocols to
+ provide more features for components with more capabilities.
+ 
+ The protocol for instance extends ``RichTextAttributeReader``
+ and ``RichTextAttributeWriter`` and adds new functions that
+ don't require a `range`, since it can use the current range.
  */
 public protocol RichTextViewComponent: AnyObject,
     RichTextPresenter,
@@ -140,7 +143,7 @@ internal extension RichTextViewComponent {
     func setupInitialFontSize() {
         let font = FontRepresentable.standardRichTextFont
         let size = font.pointSize
-        setCurrentFontSize(size)
+        setRichTextFontSize(size)
     }
 
     /// This can be called to setup an initial text color.

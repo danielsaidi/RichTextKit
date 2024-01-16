@@ -13,38 +13,32 @@ public extension RichTextAttributeWriter {
     /// Set the font at a certain range.
     func setRichTextFont(
         _ font: FontRepresentable,
-        at range: NSRange? = nil
+        at range: NSRange
     ) {
         setRichTextAttribute(.font, to: font, at: range)
     }
 
-    /**
-     Set the font name at a certain range.
-
-     This function may seem complicated, but so far it's the
-     only way setting the font name seems to work correctly.
-
-     I previously grabbed the `typingAttributes` and grabbed
-     the `[.font]` attribute from that dictionary, then took
-     its `fontDescriptor` and created the new font using the
-     `withFamily` function, then created a new font with the
-     new descriptor and the old font point size. However, it
-     fails, since the San Francisco font specifies a certain
-     usage that causes the font name to not apply. This code
-     just creates a new font, but be aware of this change if
-     something turns out not to work as expected.
-
-     - Parameters:
-       - name: The name of the font to apply.
-       - range: The range to affect, by default the entire text.
-     */
+    /// Set the font name at a certain range.
+    ///
+    /// This may seem complicated, but so far it is the only
+    /// way that seems to work correctly.
+    ///
+    /// I previously grabbed the `typingAttributes` and took
+    /// the `.font` attribute from the dictionary, then took
+    /// its `fontDescriptor` and created a new font with the
+    /// `withFamily` function, then created a new font using
+    /// the new descriptor and the old font point size.
+    ///
+    /// However, that approach fails since the San Francisco
+    /// font specifies a certain usage, that causes the font
+    /// name to not apply. This code just creates a new font,
+    /// but be aware if something doesn't work as expected.
     func setRichTextFontName(
         _ name: String,
-        at range: NSRange? = nil
+        at range: NSRange
     ) {
         guard let text = mutableRichText else { return }
         guard text.length > 0 else { return }
-        let range = range ?? richTextRange
         let fontName = settableFontName(for: name)
         text.beginEditing()
         text.enumerateAttribute(.font, in: range, options: .init()) { value, range, _ in
@@ -61,11 +55,10 @@ public extension RichTextAttributeWriter {
     /// Set the font size at a certain range.
     func setRichTextFontSize(
         _ size: CGFloat,
-        at range: NSRange? = nil
+        at range: NSRange
     ) {
         guard let text = mutableRichText else { return }
         guard text.length > 0 else { return }
-        let range = range ?? richTextRange
         text.beginEditing()
         text.enumerateAttribute(.font, in: range, options: .init()) { value, range, _ in
             let oldFont = value as? FontRepresentable ?? .standardRichTextFont

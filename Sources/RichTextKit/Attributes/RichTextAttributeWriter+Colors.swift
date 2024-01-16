@@ -10,11 +10,11 @@ import Foundation
 
 public extension RichTextAttributeWriter {
 
-    /// Set a certain rich text color at the provided range.
+    /// Set a certain rich text color at a certain range.
     func setRichTextColor(
         _ color: RichTextColor,
         to val: ColorRepresentable,
-        at range: NSRange? = nil
+        at range: NSRange
     ) {
         guard let attribute = color.attribute else { return }
         if richTextColor(color, at: range) == val { return }

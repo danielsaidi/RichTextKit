@@ -10,21 +10,21 @@ import Foundation
 
 public extension RichTextViewComponent {
 
-    /// Get the current value of a certain rich text color.
-    func currentColor(
+    /// Get a current rich text color value.
+    func richTextColor(
         _ color: RichTextColor
     ) -> ColorRepresentable? {
         guard let attribute = color.attribute else { return nil }
-        return currentRichTextAttribute(attribute)
+        return richTextAttribute(attribute)
     }
 
-    /// Set the current value of a certain rich text color.
-    func setCurrentColor(
+    /// Set a current rich text color value.
+    func setRichTextColor(
         _ color: RichTextColor,
         to val: ColorRepresentable
     ) {
-        if currentColor(color) == val { return }
+        if richTextColor(color) == val { return }
         guard let attribute = color.attribute else { return }
-        setCurrentRichTextAttribute(attribute, to: val)
+        setRichTextAttribute(attribute, to: val)
     }
 }

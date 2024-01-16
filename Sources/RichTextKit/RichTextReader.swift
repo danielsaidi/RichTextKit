@@ -41,9 +41,9 @@ public extension RichTextReader {
     }
 
     /**
-     Get the range of the entire ``richText``.
+     Get the full range of the entire ``richText``.
 
-     This uses `safeRange(for:)` to return a range that willö
+     This uses `safeRange(for:)` to return a range that will
      always be valid for the current rich text.
      */
     var richTextRange: NSRange {

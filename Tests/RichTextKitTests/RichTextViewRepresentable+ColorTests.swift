@@ -50,42 +50,42 @@ final class RichTextViewComponent_ColorTests: XCTestCase {
         XCTAssertNotEqual(attr as? ColorRepresentable, color)
     }
 
-    func testCurrentBackgroundColorWorksForSelectedRange() {
+    func testRichTextBackgroundColorWorksForSelectedRange() {
         textView.setSelectedRange(selectedRange)
-        textView.setCurrentColor(.background, to: color)
-        XCTAssertEqual(textView.currentColor(.background), color)
-        assertEqualColor(textView.currentRichTextAttributes[.backgroundColor])
+        textView.setRichTextColor(.background, to: color)
+        XCTAssertEqual(textView.richTextColor(.background), color)
+        assertEqualColor(textView.richTextAttributes[.backgroundColor])
         assertEqualColor(textView.richTextAttributes(at: selectedRange)[.backgroundColor])
         assertEqualColor(textView.typingAttributes[.backgroundColor])
     }
 
-    func testCurrentBackgroundColorWorksForNoSelectedRange() {
+    func testRichTextBackgroundColorWorksForNoSelectedRange() {
         textView.setSelectedRange(noRange)
-        textView.setCurrentColor(.background, to: color)
+        textView.setRichTextColor(.background, to: color)
         #if iOS || os(tvOS)
-        XCTAssertEqual(textView.currentColor(.background), color)
-        assertEqualColor(textView.currentRichTextAttributes[.backgroundColor])
+        XCTAssertEqual(textView.richTextColor(.background), color)
+        assertEqualColor(textView.richTextAttributes[.backgroundColor])
         #endif
         XCTAssertNil(textView.richTextAttributes(at: selectedRange)[.backgroundColor])
         assertEqualColor(textView.typingAttributes[.backgroundColor])
     }
 
 
-    func testCurrentForegroundColorWorksForSelectedRange() {
+    func testRichTextForegroundColorWorksForSelectedRange() {
         textView.setSelectedRange(selectedRange)
-        textView.setCurrentColor(.foreground, to: color)
-        XCTAssertEqual(textView.currentColor(.foreground), color)
-        assertEqualColor(textView.currentRichTextAttributes[.foregroundColor])
+        textView.setRichTextColor(.foreground, to: color)
+        XCTAssertEqual(textView.richTextColor(.foreground), color)
+        assertEqualColor(textView.richTextAttributes[.foregroundColor])
         assertEqualColor(textView.richTextAttributes(at: selectedRange)[.foregroundColor])
         assertEqualColor(textView.typingAttributes[.foregroundColor])
     }
 
-    func testCurrentForegroundColorWorksForNoSelectedRange() {
+    func testRichTextForegroundColorWorksForNoSelectedRange() {
         textView.setSelectedRange(noRange)
-        textView.setCurrentColor(.foreground, to: color)
+        textView.setRichTextColor(.foreground, to: color)
         #if iOS || os(tvOS)
-        XCTAssertEqual(textView.currentColor(.foreground), color)
-        assertEqualColor(textView.currentRichTextAttributes[.foregroundColor])
+        XCTAssertEqual(textView.richTextColor(.foreground), color)
+        assertEqualColor(textView.richTextAttributes[.foregroundColor])
         #endif
         XCTAssertNotEqual(textView.richTextAttributes(at: selectedRange)[.foregroundColor] as? ColorRepresentable, color)
         assertEqualColor(textView.typingAttributes[.foregroundColor])

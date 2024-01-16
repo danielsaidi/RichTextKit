@@ -183,7 +183,7 @@ extension RichTextCoordinator {
      purple alert warnings about how state is updated.
      */
     func syncContextWithTextViewAfterDelay() {
-        let styles = textView.currentRichTextStyles
+        let styles = textView.richTextStyles
 
         let string = textView.attributedString
         if richTextContext.attributedString != string {
@@ -196,32 +196,32 @@ extension RichTextCoordinator {
         }
 
         RichTextColor.allCases.forEach {
-            if let color = textView.currentColor($0) {
+            if let color = textView.richTextColor($0) {
                 richTextContext.setColor(color, for: $0)
             }
         }
 
-        let foreground = textView.currentColor(.foreground)
+        let foreground = textView.richTextColor(.foreground)
         if richTextContext.foregroundColor != foreground {
             richTextContext.foregroundColor = foreground
         }
 
-        let background = textView.currentColor(.background)
+        let background = textView.richTextColor(.background)
         if richTextContext.backgroundColor != background {
             richTextContext.backgroundColor = background
         }
 
-        let stroke = textView.currentColor(.stroke)
+        let stroke = textView.richTextColor(.stroke)
         if richTextContext.strokeColor != stroke {
             richTextContext.strokeColor = stroke
         }
 
-        let strikethrough = textView.currentColor(.strikethrough)
+        let strikethrough = textView.richTextColor(.strikethrough)
         if richTextContext.strikethroughColor != strikethrough {
             richTextContext.strikethroughColor = strikethrough
         }
 
-        let underline = textView.currentColor(.underline)
+        let underline = textView.richTextColor(.underline)
         if richTextContext.foregroundColor != underline {
             richTextContext.foregroundColor = underline
         }
@@ -241,13 +241,13 @@ extension RichTextCoordinator {
             richTextContext.canUndoLatestChange = canUndo
         }
 
-        if let fontName = textView.currentFontName,
+        if let fontName = textView.richTextFontName,
             !fontName.isEmpty,
             richTextContext.fontName != fontName {
             richTextContext.fontName = fontName
         }
 
-        let fontSize = textView.currentFontSize ?? .standardRichTextFontSize
+        let fontSize = textView.richTextFontSize ?? .standardRichTextFontSize
         if richTextContext.fontSize != fontSize {
             richTextContext.fontSize = fontSize
         }
@@ -277,7 +277,7 @@ extension RichTextCoordinator {
             richTextContext.isEditingText = isEditingText
         }
 
-        let alignment = textView.currentTextAlignment ?? .left
+        let alignment = textView.richTextAlignment ?? .left
         if richTextContext.textAlignment != alignment {
             richTextContext.textAlignment = alignment
         }
@@ -309,8 +309,8 @@ extension RichTextCoordinator {
     func updateTextViewAttributesIfNeeded() {
         #if macOS
         if textView.hasSelectedRange { return }
-        let attributes = textView.currentRichTextAttributes
-        textView.setCurrentRichTextAttributes(attributes)
+        let attributes = textView.richTextAttributes
+        textView.setRichTextAttributes(attributes)
         #endif
     }
 }

@@ -10,27 +10,14 @@ import Foundation
 
 public extension RichTextAttributeWriter {
 
-    /**
-     Set a rich text style at a certain range.
-
-     The function uses `safeRange(for:)` to handle incorrect
-     ranges, which is not handled by the native functions.
-
-     > Note: When adding logic to the function, make sure to
-     also adjust `setCurrentRichTextStyle`.
-
-     - Parameters:
-       - style: The style to set.
-       - newValue: The new value to set the attribute to.
-       - range: The range to affect, by default the entire text.
-     */
+    /// Set a rich text style at a certain range.
     func setRichTextStyle(
         _ style: RichTextStyle,
         to newValue: Bool,
-        at range: NSRange? = nil
+        at range: NSRange
     ) {
         let value = newValue ? 1 : 0
-        let range = safeRange(for: range ?? richTextRange)
+        let range = safeRange(for: range)
         switch style {
         case .bold, .italic:
             let styles = richTextStyles(at: range)

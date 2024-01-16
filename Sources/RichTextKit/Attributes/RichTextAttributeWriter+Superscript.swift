@@ -14,9 +14,13 @@ public extension RichTextAttributeWriter {
     /// Set the superscript level at a certain range.
     func setRichTextSuperscriptLevel(
         _ level: Int,
-        at range: NSRange? = nil
+        at range: NSRange
     ) {
-        setRichTextAttribute(.superscript, to: level)
+        setRichTextAttribute(
+            .superscript,
+            to: level,
+            at: range
+        )
     }
 }
 #endif

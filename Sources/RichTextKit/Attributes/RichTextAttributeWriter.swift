@@ -10,7 +10,7 @@ import Foundation
 
 /**
  This protocol extends ``RichTextWriter`` with functionality
- for writing rich text attributes to the current rich text.
+ for writing attributes to the current ``richText``.
 
  This protocol is implemented by `NSMutableAttributedString`
  as well as other types in the library.
@@ -21,36 +21,16 @@ extension NSMutableAttributedString: RichTextAttributeWriter {}
 
 public extension RichTextAttributeWriter {
 
-    /**
-     Set a certain rich text attribute to a certain value at
-     the provided range.
-
-     The function uses `safeRange(for:)` to handle incorrect
-     ranges, which is not handled by the native functions.
-
-     - Parameters:
-       - attribute: The attribute to set.
-       - newValue: The new value to set the attribute to.
-       - range: The range to affect, by default the entire text.
-     */
+    /// Set a certain rich text attribute at a certain range.
     func setRichTextAttribute(
         _ attribute: RichTextAttribute,
         to newValue: Any,
-        at range: NSRange? = nil
+        at range: NSRange
     ) {
         setRichTextAttributes([attribute: newValue], at: range)
     }
 
-    /**
-     Set a set of rich text attributes at the provided range.
-
-     The function uses `safeRange(for:)` to handle incorrect
-     ranges, which is not handled by the native functions.
-
-     - Parameters:
-       - attributes: The attributes to set.
-       - range: The range to affect, by default the entire text.
-     */
+    /// Set certain rich text attributes at a certain range.
     func setRichTextAttributes(
         _ attributes: RichTextAttributes,
         at range: NSRange? = nil
