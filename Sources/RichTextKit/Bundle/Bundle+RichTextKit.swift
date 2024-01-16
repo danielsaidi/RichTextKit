@@ -69,7 +69,11 @@ extension Bundle {
     }
 
     func bundlePath(for locale: Locale) -> String? {
-        bundlePath(named: locale.identifier) ?? bundlePath(named: locale.languageCode)
+        if #available(iOS 16, macOS 13, tvOS 16, watchOS 9, *) {
+            bundlePath(named: locale.identifier) ?? bundlePath(named: locale.language.languageCode?.identifier)
+        } else {
+            bundlePath(named: locale.identifier) ?? bundlePath(named: locale.languageCode)
+        }
     }
 
     func bundlePath(named name: String?) -> String? {
