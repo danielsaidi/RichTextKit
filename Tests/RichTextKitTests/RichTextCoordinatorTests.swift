@@ -70,7 +70,7 @@ final class RichTextCoordinatorTests: XCTestCase {
         XCTAssertEqual(context.selectedRange, view.selectedRange)
         #if iOS || os(tvOS)
         XCTAssertEqual(context.textAlignment, view.richTextAlignment)
-        #elseif os(macOS)
+        #elseif macOS
         XCTAssertEqual(context.textAlignment, macOSAlignment)
         #endif
     }
@@ -100,7 +100,7 @@ final class RichTextCoordinatorTests: XCTestCase {
         XCTAssertFalse(context.isEditingText)
     }
 
-    #elseif os(macOS)
+    #elseif macOS
 
     let notification = Notification(
         name: NSText.didEndEditingNotification,

@@ -56,7 +56,7 @@ final class RichTextViewComponentTests: XCTestCase {
         #if iOS || os(tvOS)
         XCTAssertEqual(view.spellCheckingType, .no)
         XCTAssertEqual(view.textColor, .label)
-        #elseif os(macOS)
+        #elseif macOS
         XCTAssertEqual(view.textColor, .textColor)
         #endif
     }
@@ -74,7 +74,7 @@ final class RichTextViewComponentTests: XCTestCase {
         #if iOS || os(tvOS)
         XCTAssertEqual(view.spellCheckingType, .no)
         XCTAssertEqual(view.textColor, nil)
-        #elseif os(macOS)
+        #elseif macOS
         XCTAssertEqual(view.textColor, nil)
         #endif
     }
