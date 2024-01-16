@@ -17,13 +17,11 @@ import AppKit
 #endif
 
 public extension RichTextAttributeWriter {
-
-    /**
-     Set the text indent at the provided range.
-
-     Unlike some other attributes, this value applies to the
-     entire paragraph, not just the selected range.
-     */
+    
+    /// Set the rich text indent at a certain range.
+    ///
+    /// Unlike some other attributes, this attribute applies
+    /// to the entire paragraph, not just the selected range.
     func stepRichTextIndent(
         points: CGFloat,
         at range: NSRange

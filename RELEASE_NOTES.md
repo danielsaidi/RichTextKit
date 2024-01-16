@@ -6,6 +6,27 @@ Until then, minor updates may remove deprecated features and introduce breaking 
 
 
 
+
+## 0.9.7
+
+This version has a breaking change, where `RichTextAttributeReader` and `RichTextAttributeWriter` both now require a range.
+
+This change makes is possible for `RichTextViewComponent` to have the same naming for its functions that use the current text position or selection.
+
+### 🗑️ Deprecations 
+
+* `RichTextReader` `.richTextRange` has been renamed to `.richTextFullRange`.  
+
+### 🐛 Bug Fixes
+
+* `RichTextAttributeReader` `setRichTextSuperscriptLevel` didn't use `range`.
+
+### 💥 Breaking Changes
+
+* `RichTextAttributeReader/Writer` functions now require a range.
+
+
+
 ## 0.9.6
 
 Thanks to [@DominikBucher12][DominikBucher12], fonts and pasting images behave a lot better than before!

@@ -12,7 +12,9 @@ import Foundation
 public extension RichTextAttributeReader {
 
     /// Get the superscript level at a certain range.
-    func richTextSuperscriptLevel(at range: NSRange) -> Int? {
+    func richTextSuperscriptLevel(
+        at range: NSRange
+    ) -> Int? {
         richTextAttribute(.superscript, at: range)
     }
 }

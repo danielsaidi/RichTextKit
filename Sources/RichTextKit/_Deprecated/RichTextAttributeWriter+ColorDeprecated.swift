@@ -7,7 +7,11 @@ public extension RichTextAttributeWriter {
         _ color: ColorRepresentable,
         at range: NSRange? = nil
     ) {
-        setRichTextAttribute(.backgroundColor, to: color, at: range)
+        setRichTextAttribute(
+            .backgroundColor,
+            to: color,
+            at: range ?? richTextRange
+        )
     }
 
     @available(*, deprecated, renamed: "setRichTextColor(_:to:at:)")
@@ -15,7 +19,11 @@ public extension RichTextAttributeWriter {
         _ color: ColorRepresentable,
         at range: NSRange? = nil
     ) {
-        setRichTextAttribute(.foregroundColor, to: color, at: range)
+        setRichTextAttribute(
+            .foregroundColor,
+            to: color,
+            at: range ?? richTextRange
+        )
     }
 
     @available(*, deprecated, renamed: "setRichTextColor(_:to:at:)")
@@ -23,7 +31,11 @@ public extension RichTextAttributeWriter {
         _ color: ColorRepresentable,
         at range: NSRange? = nil
     ) {
-        setRichTextAttribute(.strikethroughColor, to: color, at: range)
+        setRichTextAttribute(
+            .strikethroughColor,
+            to: color,
+            at: range ?? richTextRange
+        )
     }
 
     @available(*, deprecated, renamed: "setRichTextColor(_:to:at:)")
@@ -31,7 +43,11 @@ public extension RichTextAttributeWriter {
         _ color: ColorRepresentable,
         at range: NSRange? = nil
     ) {
-        setRichTextAttribute(.strokeColor, to: color, at: range)
+        setRichTextAttribute(
+            .strokeColor,
+            to: color,
+            at: range ?? richTextRange
+        )
     }
 
     @available(*, deprecated, renamed: "setRichTextColor(_:to:at:)")
@@ -39,6 +55,10 @@ public extension RichTextAttributeWriter {
         _ color: ColorRepresentable,
         at range: NSRange? = nil
     ) {
-        setRichTextAttribute(.underlineColor, to: color, at: range)
+        setRichTextAttribute(
+            .underlineColor,
+            to: color,
+            at: range ?? richTextRange
+        )
     }
 }
