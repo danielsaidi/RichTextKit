@@ -23,6 +23,7 @@
 "actionFontSizeDecrease" = "Minska teckenstorlek";
 "actionIndentIncrease" = "Öka indrag";
 "actionIndentDecrease" = "Minska indrag";
+"actionPrint" = "Skriv ut";
 "actionRedoLatestChange" = "Gör om";
 "actionUndoLatestChange" = "Ångra";
 

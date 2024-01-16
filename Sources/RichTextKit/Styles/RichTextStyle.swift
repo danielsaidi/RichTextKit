@@ -45,20 +45,25 @@ public extension RichTextStyle {
      */
     var icon: Image {
         switch self {
-        case .bold: return .richTextStyleBold
-        case .italic: return .richTextStyleItalic
-        case .strikethrough: return .richTextStyleStrikethrough
-        case .underlined: return .richTextStyleUnderline
+        case .bold: .richTextStyleBold
+        case .italic: .richTextStyleItalic
+        case .strikethrough: .richTextStyleStrikethrough
+        case .underlined: .richTextStyleUnderline
         }
     }
-
-    /// The styles title.
+    
+    /// The localized style title.
     var title: String {
+        titleKey.text
+    }
+    
+    /// The localized style title key.
+    var titleKey: RTKL10n {
         switch self {
-        case .bold: return RTKL10n.styleBold.text
-        case .italic: return RTKL10n.styleItalic.text
-        case .underlined: return RTKL10n.styleUnderlined.text
-        case .strikethrough: return RTKL10n.styleStrikethrough.text
+        case .bold: .styleBold
+        case .italic: .styleItalic
+        case .underlined: .styleUnderlined
+        case .strikethrough: .styleStrikethrough
         }
     }
 
@@ -100,10 +105,10 @@ public extension RichTextStyle {
     /// The symbolic font traits for the style, if any.
     var symbolicTraits: UIFontDescriptor.SymbolicTraits? {
         switch self {
-        case .bold: return .traitBold
-        case .italic: return .traitItalic
-        case .strikethrough: return nil
-        case .underlined: return nil
+        case .bold: .traitBold
+        case .italic: .traitItalic
+        case .strikethrough: nil
+        case .underlined: nil
         }
     }
 }
@@ -115,10 +120,10 @@ public extension RichTextStyle {
     /// The symbolic font traits for the trait, if any.
     var symbolicTraits: NSFontDescriptor.SymbolicTraits? {
         switch self {
-        case .bold: return .bold
-        case .italic: return .italic
-        case .strikethrough: return nil
-        case .underlined: return nil
+        case .bold: .bold
+        case .italic: .italic
+        case .strikethrough: nil
+        case .underlined: nil
         }
     }
 }

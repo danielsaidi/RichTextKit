@@ -23,6 +23,7 @@
 "actionFontSizeDecrease" = "Schriftgröße verkleinern";
 "actionIndentIncrease" = "Indent vergrößern";
 "actionIndentDecrease" = "Indent verkleinern";
+"actionPrint" = "Drucken";
 "actionRedoLatestChange" = "Rückgängig";
 "actionUndoLatestChange" = "Wiederholen";
 

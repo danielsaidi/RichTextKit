@@ -11,7 +11,7 @@ import Foundation
 public extension NSAttributedString {
 
     /**
-     Try to parse ``RichTextFormat`` formatted data.
+     Try to parse ``RichTextDataFormat`` formatted data.
 
      - Parameters:
        - data: The data to initialize the string with.

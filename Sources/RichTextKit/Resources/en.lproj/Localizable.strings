@@ -23,6 +23,7 @@
 "actionFontSizeDecrease" = "Smaller Text";
 "actionIndentIncrease" = "Increase Indent";
 "actionIndentDecrease" = "Decrease Indent";
+"actionPrint" = "Print";
 "actionRedoLatestChange" = "Redo";
 "actionUndoLatestChange" = "Undo";
 

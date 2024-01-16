@@ -23,6 +23,7 @@
 "actionFontSizeDecrease" = "Reduser skriftstørrelsen";
 "actionIndentIncrease" = "Øk indrag";
 "actionIndentDecrease" = "Reduser indrag";
+"actionPrint" = "Skrive ut";
 "actionRedoLatestChange" = "Angre";
 "actionUndoLatestChange" = "Gjøre om";
 

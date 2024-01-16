@@ -94,12 +94,12 @@ struct RichTextActionButton_Previews: PreviewProvider {
                     fillVertically: true
                 )
                 RichTextActionButton(
-                    action: .decreaseIndent,
+                    action: .decreaseIndent(),
                     context: context,
                     fillVertically: true
                 )
                 RichTextActionButton(
-                    action: .increaseIndent,
+                    action: .increaseIndent(),
                     context: context,
                     fillVertically: true
                 )

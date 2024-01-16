@@ -51,17 +51,20 @@ public extension RichTextAlignment {
 
     /// The standard icon to use for the alignment.
     var icon: Image { nativeAlignment.icon }
-
+    
     /// The standard title to use for the alignment.
     var title: String { nativeAlignment.title }
+    
+    /// The standard title key to use for the alignment.
+    var titleKey: RTKL10n { nativeAlignment.titleKey }
 
     /// The native alignment of the alignment.
     var nativeAlignment: NSTextAlignment {
         switch self {
-        case .left: return .left
-        case .right: return .right
-        case .center: return .center
-        case .justified: return .justified
+        case .left: .left
+        case .right: .right
+        case .center: .center
+        case .justified: .justified
         }
     }
 }
@@ -71,27 +74,27 @@ public extension NSTextAlignment {
     /// The standard icon to use for the alignment.
     var icon: Image {
         switch self {
-        case .left: return .richTextAlignmentLeft
-        case .right: return .richTextAlignmentRight
-        case .center: return .richTextAlignmentCenter
-        case .justified: return .richTextAlignmentJustified
-        default: return .richTextAlignmentLeft
+        case .left: .richTextAlignmentLeft
+        case .right: .richTextAlignmentRight
+        case .center: .richTextAlignmentCenter
+        case .justified: .richTextAlignmentJustified
+        default: .richTextAlignmentLeft
         }
     }
 
     /// The standard title to use for the alignment.
     var title: String {
-        titleCase.text
+        titleKey.text
     }
-
-    /// The standard title to use for the alignment.
-    var titleCase: RTKL10n {
+    
+    /// The standard title key to use for the alignment.
+    var titleKey: RTKL10n {
         switch self {
-        case .left: return RTKL10n.textAlignmentLeft
-        case .right: return RTKL10n.textAlignmentRight
-        case .center: return RTKL10n.textAlignmentCentered
-        case .justified: return RTKL10n.textAlignmentJustified
-        default: return RTKL10n.textAlignmentLeft
+        case .left: .textAlignmentLeft
+        case .right: .textAlignmentRight
+        case .center: .textAlignmentCentered
+        case .justified: .textAlignmentJustified
+        default: .textAlignmentLeft
         }
     }
 }
