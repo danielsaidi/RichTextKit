@@ -71,7 +71,7 @@ private extension RichTextFontSizePickerStack {
 
     var decreaseButton: some View {
         RichTextActionButton(
-            action: .decreaseFontSize,
+            action: .decreaseFontSize(),
             context: context,
             fillVertically: true
         )
@@ -79,7 +79,7 @@ private extension RichTextFontSizePickerStack {
 
     var increaseButton: some View {
         RichTextActionButton(
-            action: .increaseFontSize,
+            action: .increaseFontSize(),
             context: context,
             fillVertically: true
         )

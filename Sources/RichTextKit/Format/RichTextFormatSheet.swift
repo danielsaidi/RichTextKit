@@ -127,7 +127,7 @@ private extension RichTextFormatSheet {
     var indentButtons: some View {
         RichTextActionButtonGroup(
             context: context,
-            actions: [.decreaseIndent, .increaseIndent],
+            actions: [.decreaseIndent(), .increaseIndent()],
             greedy: false
         )
     }

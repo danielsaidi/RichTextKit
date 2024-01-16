@@ -14,14 +14,13 @@ import SwiftUI
 
  The view uses a platform-specific ``RichTextView`` together
  with a ``RichTextContext`` and a ``RichTextCoordinator`` to
- make view and context changes sync correctly. You will then
- be able to use the `richTextContext` to trigger and observe
- changes to the text editor.
-
- Note that changing the value of the `text` binding from the
- outside will not (yet) update the editor. Until it is fixed,
- use ``RichTextContext/setAttributedString(to:)`` to set the
- string to another value.
+ make view and context changes sync correctly. 
+ 
+ You can use the provided context to trigger and observe any
+ changes to the text editor. Note that changing the value of
+ the `text` binding will not (yet) update this editor. Until
+ it is fixed, use `setAttributedString(to:)` to set the rich
+ text or plain string to another value.
 
  Since the view wraps a native `UIKit` or `AppKit` text view,
  you can't apply `.toolbar` modifiers to it, like you can do
@@ -41,8 +40,7 @@ import SwiftUI
 
  You may have noticed that `updateUIView/updateNSView` don't
  contain any code. This is because having updates there will
- update this view, which in turn makes typing very slow. Use
- the rich text context to modify the text instead.
+ update this view, which in turn makes typing very slow.
  */
 public struct RichTextEditor: ViewRepresentable {
 

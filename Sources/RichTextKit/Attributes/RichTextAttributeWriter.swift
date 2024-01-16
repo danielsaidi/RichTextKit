@@ -10,7 +10,7 @@ import Foundation
 
 /**
  This protocol extends ``RichTextWriter`` with functionality
- for writing attributes to the current ``richText``.
+ for writing attributes to the ``RichTextWriter/richText`.
 
  This protocol is implemented by `NSMutableAttributedString`
  as well as other types in the library.

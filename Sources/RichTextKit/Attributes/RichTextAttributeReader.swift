@@ -10,7 +10,7 @@ import Foundation
 
 /**
  This protocol extends ``RichTextReader`` with functionality
- for reading attributes from the current ``richText``.
+ for reading attributes from the ``RichTextReader/richText``.
 
  The protocol is implemented by `NSAttributedString` as well
  as other types in the library.

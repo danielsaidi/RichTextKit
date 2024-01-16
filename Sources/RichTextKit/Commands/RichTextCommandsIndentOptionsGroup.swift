@@ -19,8 +19,8 @@ public struct RichTextCommandsIndentOptionsGroup: View {
     public var body: some View {
         RichTextCommandButtonGroup(
             actions: [
-                .increaseIndent,
-                .decreaseIndent
+                .increaseIndent(),
+                .decreaseIndent()
             ]
         )
     }

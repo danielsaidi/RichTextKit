@@ -21,8 +21,8 @@ public struct RichTextCommandsFontSizeOptionsGroup: View {
     public var body: some View {
         RichTextCommandButtonGroup(
             actions: [
-                .increaseFontSize,
-                .decreaseFontSize
+                .increaseFontSize(),
+                .decreaseFontSize()
             ]
         )
     }

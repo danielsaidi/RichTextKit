@@ -19,7 +19,7 @@ public extension UTType {
         .data
     ]
 
-    /// The uniform type for ``RichTextFormat/archivedData``.
+    /// The uniform type for ``RichTextDataFormat/archivedData``.
     static let archivedData = UTType(
         exportedAs: "com.richtextkit.archiveddata")
 }

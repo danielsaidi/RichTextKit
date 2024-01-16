@@ -20,12 +20,7 @@ public extension RichTextViewComponent {
         return styles
     }
 
-    /**
-     Set the current value of a certain rich text style.
-
-     > Note: When adding logic to the function, make sure to
-     also adjust ``setRichTextStyle(_:to:at:)``.
-     */
+    /// Set the current value of a certain rich text style.
     func setRichTextStyle(
         _ style: RichTextStyle,
         to newValue: Bool

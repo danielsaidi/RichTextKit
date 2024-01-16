@@ -58,7 +58,7 @@ public struct RichTextFormatSidebar: View {
                     .pickerStyle(.segmented)
                 RichTextActionButtonGroup(
                     context: context,
-                    actions: [.decreaseIndent, .increaseIndent]
+                    actions: [.decreaseIndent(), .increaseIndent()]
                 )
             }
 
