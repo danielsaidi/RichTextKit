@@ -23,9 +23,9 @@ public extension RichTextAction {
          Create a rich text action button stack.
          
          - Parameters:
-         - context: The context to affect.
-         - actions: The actions to list, by default all non-size actions.
-         - greedy: Whether or not the group is horizontally greedy, by default `true`.
+           - context: The context to affect.
+           - actions: The actions to list, by default all non-size actions.
+           - greedy: Whether or not the group is horizontally greedy, by default `true`.
          */
         public init(
             context: RichTextContext,

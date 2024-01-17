@@ -54,7 +54,7 @@ public struct RichTextFormatSidebar: View {
             }
 
             SidebarSection(title: nil) {
-                RichTextAlignmentPicker(selection: $context.textAlignment)
+                RichTextAlignment.Picker(selection: $context.textAlignment)
                     .pickerStyle(.segmented)
                 RichTextAction.ButtonGroup(
                     context: context,

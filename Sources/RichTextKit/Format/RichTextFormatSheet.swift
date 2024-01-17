@@ -106,7 +106,7 @@ private extension RichTextFormatSheet {
 
     var paragraphRow: some View {
         HStack {
-            RichTextAlignmentPicker(selection: $context.textAlignment)
+            RichTextAlignment.Picker(selection: $context.textAlignment)
                 .pickerStyle(.segmented)
             Spacer()
             indentButtons

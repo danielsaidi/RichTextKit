@@ -3,15 +3,14 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-05-28.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
 
 /**
- This enum defines supported rich text alignments.
-
- The enum makes the alignment type identifiable and diffable.
+ This enum defines supported rich text alignments, like left,
+ right, center, and justified.
  */
 public enum RichTextAlignment: String, CaseIterable, Codable, Equatable, Identifiable {
 
@@ -42,6 +41,11 @@ public enum RichTextAlignment: String, CaseIterable, Codable, Equatable, Identif
 
     /// Right text alignment.
     case right
+}
+
+public extension Collection where Element == RichTextAlignment {
+    
+    static var all: [Element] { RichTextAlignment.allCases }
 }
 
 public extension RichTextAlignment {

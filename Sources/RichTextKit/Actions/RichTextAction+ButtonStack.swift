@@ -13,8 +13,8 @@ public extension RichTextAction {
     /**
      This view lists ``RichTextAction`` buttons in a stack.
      
-     Since this view controls multiple values, it binds directly
-     to a ``RichTextContext`` instead of to individual values.
+     Since this view uses multiple values, it binds directly
+     to a ``RichTextContext`` instead of individual values.
      */
     struct ButtonStack: View {
         
@@ -22,9 +22,9 @@ public extension RichTextAction {
          Create a rich text action button stack.
          
          - Parameters:
-         - context: The context to affect.
-         - actions: The actions to list, by default all non-size actions.
-         - spacing: The spacing to apply to stack items, by default `5`.
+           - context: The context to affect.
+           - actions: The actions to list, by default all non-size actions.
+           - spacing: The spacing to apply to stack items, by default `5`.
          */
         public init(
             context: RichTextContext,
@@ -49,7 +49,8 @@ public extension RichTextAction {
                         action: $0,
                         context: context,
                         fillVertically: true
-                    ).frame(maxHeight: .infinity)
+                    )
+                    .frame(maxHeight: .infinity)
                 }
             }
             .fixedSize(horizontal: false, vertical: true)

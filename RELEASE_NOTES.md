@@ -8,11 +8,18 @@ Until then, minor updates may remove deprecated features and introduce breaking 
 
 ## 0.9.8
 
-This release starts moving types into namespaces, to make the surface area smaller.
+This release starts moving types and views that relate to other types into the type namespaces, to make the surface area of the library smaller.
+
+### ✨ Features
+
+* `RichTextAlignment.Picker` has a new style parameter.
 
 ### 🗑️ Deprecations 
 
 * `RichTextActionButton` has been renamed to `RichTextAction.Button`.
+* `RichTextActionButtonGroup` has been renamed to `RichTextAction.ButtonGroup`.
+* `RichTextActionButtonStack` has been renamed to `RichTextAction.ButtonStack`.
+* `RichTextAlignmentPicker` has been renamed to `RichTextAlignment.Picker`.
 
 
 
