@@ -48,7 +48,7 @@ final class RichTextViewComponent_FontSizeTests: XCTestCase {
         textView.setSelectedRange(selectedRange)
         textView.setRichTextFont(font)
         XCTAssertEqual(textView.richTextFont, font)
-        XCTAssertEqual(textView.richTextFontName, font.fontName)
+        XCTAssertEqual(textView.richTextFont?.fontName, font.fontName)
         assertEqualFont(textView.richTextAttribute(.font))
         assertEqualFont(textView.richTextAttributes(at: selectedRange)[.font])
         assertEqualFont(textView.typingAttributes[.font])
@@ -59,7 +59,7 @@ final class RichTextViewComponent_FontSizeTests: XCTestCase {
         textView.setRichTextFont(font)
         #if iOS || os(tvOS)
         XCTAssertEqual(textView.richTextFont, font)
-        XCTAssertEqual(textView.richTextFontName, font.fontName)
+        XCTAssertEqual(textView.richTextFont?.fontName, font.fontName)
         assertEqualFont(textView.richTextAttribute(.font))
         #endif
         assertNonEqualFont(textView.richTextAttributes(at: selectedRange)[.font])
@@ -70,7 +70,7 @@ final class RichTextViewComponent_FontSizeTests: XCTestCase {
     func testRichTextFontSizeWorksForSelectedRange() {
         textView.setSelectedRange(selectedRange)
         textView.setRichTextFontSize(size)
-        XCTAssertEqual(textView.richTextFontSize, size)
+        XCTAssertEqual(textView.richTextFont?.pointSize, size)
         assertEqualFontSize(textView.richTextAttribute(.font))
         assertEqualFontSize(textView.richTextAttributes(at: selectedRange)[.font])
         assertEqualFontSize(textView.typingAttributes[.font], expected: nil)
@@ -80,7 +80,7 @@ final class RichTextViewComponent_FontSizeTests: XCTestCase {
         textView.setSelectedRange(noRange)
         textView.setRichTextFontSize(size)
         #if iOS || os(tvOS)
-        XCTAssertEqual(textView.richTextFontSize, size)
+        XCTAssertEqual(textView.richTextFont?.pointSize, size)
         assertEqualFontSize(textView.richTextAttribute(.font))
         #endif
         assertNonEqualFontSize(textView.richTextAttributes(at: selectedRange)[.font])

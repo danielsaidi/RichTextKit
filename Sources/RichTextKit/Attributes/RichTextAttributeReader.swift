@@ -21,7 +21,7 @@ extension NSAttributedString: RichTextAttributeReader {}
 
 public extension RichTextAttributeReader {
 
-    /// Get a rich text attribute at a certain range.
+    /// Get a certain rich text attribute at a certain range.
     func richTextAttribute<Value>(
         _ attribute: RichTextAttribute,
         at range: NSRange

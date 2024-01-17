@@ -1,5 +1,5 @@
 //
-//  RichTextAttributeWriter+Style.swift
+//  RichTextAttributeWriter+Styles.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-05-28.

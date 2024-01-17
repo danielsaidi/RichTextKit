@@ -10,7 +10,7 @@ import Foundation
 
 public extension RichTextAttributeReader {
 
-    /// Get the text styles at a certain range.
+    /// Get all rich text styles at a certain range.
     func richTextStyles(
         at range: NSRange
     ) -> [RichTextStyle] {

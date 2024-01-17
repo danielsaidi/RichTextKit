@@ -51,7 +51,7 @@ public extension RichTextAttributeWriter {
         return stepRichTextIndent(points: points, atIndex: index)
     }
 
-    /// Step the text indent at a certain index.
+    /// Step the rich text indent at a certain index.
     func stepRichTextIndent(
         points: CGFloat,
         atIndex index: Int
@@ -75,7 +75,7 @@ public extension RichTextAttributeWriter {
         return attributes
     }
 
-    /// Step the text indent at a certain index.
+    /// Step the rich text text indent at a certain index.
     func stepRichTextIndent(
         points: CGFloat,
         atIndex index: UInt

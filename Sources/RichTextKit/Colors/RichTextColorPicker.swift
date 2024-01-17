@@ -129,7 +129,7 @@ private extension RichTextColorPicker {
         } label: {
             color
         }
-        .buttonStyle(ColorButtonStyle( ))
+        .buttonStyle(ColorButtonStyle())
     }
 
     var quickPickerDivider: some View {

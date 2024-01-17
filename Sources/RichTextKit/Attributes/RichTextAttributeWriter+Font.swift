@@ -10,7 +10,7 @@ import Foundation
 
 public extension RichTextAttributeWriter {
 
-    /// Set the font at a certain range.
+    /// Set the rich text font at a certain range.
     func setRichTextFont(
         _ font: FontRepresentable,
         at range: NSRange
@@ -18,7 +18,7 @@ public extension RichTextAttributeWriter {
         setRichTextAttribute(.font, to: font, at: range)
     }
 
-    /// Set the font name at a certain range.
+    /// Set the rich text font name at a certain range.
     ///
     /// This may seem complicated, but so far it is the only
     /// way that seems to work correctly.
@@ -52,7 +52,7 @@ public extension RichTextAttributeWriter {
         text.endEditing()
     }
 
-    /// Set the font size at a certain range.
+    /// Set the rich text font size at a certain range.
     func setRichTextFontSize(
         _ size: CGFloat,
         at range: NSRange
@@ -70,12 +70,12 @@ public extension RichTextAttributeWriter {
         text.endEditing()
     }
 
-    /// Step the font size at a certain range.
+    /// Step the rich text font size at a certain range.
     func stepRichTextFontSize(
         points: Int,
         at range: NSRange
     ) {
-        guard let size = richTextFontSize(at: range) else { return }
+        guard let size = richTextFont(at: range)?.pointSize else { return }
         let newSize = size + CGFloat(points)
         setRichTextFontSize(newSize, at: range)
     }

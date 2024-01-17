@@ -62,8 +62,8 @@ final class RichTextCoordinatorTests: XCTestCase {
 
     func assertIsSyncedWithContext(macOSAlignment: RichTextAlignment = .left) {
         let styles = view.richTextStyles
-        XCTAssertEqual(context.fontName, view.richTextFontName)
-        XCTAssertEqual(context.fontSize, view.richTextFontSize)
+        XCTAssertEqual(context.fontName, view.richTextFont?.fontName)
+        XCTAssertEqual(context.fontSize, view.richTextFont?.pointSize)
         XCTAssertEqual(context.isBold, styles.hasStyle(.bold))
         XCTAssertEqual(context.isItalic, styles.hasStyle(.italic))
         XCTAssertEqual(context.isUnderlined, styles.hasStyle(.underlined))

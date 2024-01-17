@@ -18,14 +18,13 @@ import AppKit
 
 public extension RichTextViewComponent {
 
-    /// Get the current rich text alignment.
+    /// Get the rich text alignment at current range.
     var richTextAlignment: RichTextAlignment? {
-        let attribute: NSMutableParagraphStyle? = richTextAttribute(.paragraphStyle)
-        guard let style = attribute else { return nil }
+        guard let style = richTextParagraphStyle else { return nil }
         return RichTextAlignment(style.alignment)
     }
 
-    /// Set the current text alignment.
+    /// Set the rich text alignment at current range.
     func setRichTextAlignment(
         _ alignment: RichTextAlignment
     ) {

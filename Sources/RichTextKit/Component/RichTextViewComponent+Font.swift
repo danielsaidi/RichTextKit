@@ -11,29 +11,19 @@ import Foundation
 
 public extension RichTextViewComponent {
 
-    /// Get the current rich text font.
+    /// Get the rich text font at current range.
     var richTextFont: FontRepresentable? {
         richTextAttributes[.font] as? FontRepresentable ?? typingAttributes[.font] as? FontRepresentable
     }
 
-    /// Get the current rich text font size.
-    var richTextFontSize: CGFloat? {
-        richTextFont?.pointSize
-    }
-
-    /// Get the current rich text font name.
-    var richTextFontName: String? {
-        richTextFont?.fontName
-    }
-
-    /// Set the current rich text font.
+    /// Set the rich text font at current range.
     func setRichTextFont(_ font: FontRepresentable) {
         setRichTextAttribute(.font, to: font)
     }
 
-    /// Set the current rich text font name.
+    /// Set the rich text font name at current range.
     func setRichTextFontName(_ name: String) {
-        if richTextFontName == name { return }
+        if richTextFont?.fontName == name { return }
         if hasSelectedRange {
             setRichTextFontName(name, at: selectedRange)
         } else {
@@ -41,9 +31,9 @@ public extension RichTextViewComponent {
         }
     }
 
-    /// Set the current rich text font size.
+    /// Set the rich text font size at current range.
     func setRichTextFontSize(_ size: CGFloat) {
-        if size == richTextFontSize { return }
+        if size == richTextFont?.pointSize { return }
         #if macOS
         setRichTextFontSize(size, at: selectedRange)
         setFontSizeAtCurrentPosition(size)
@@ -56,9 +46,9 @@ public extension RichTextViewComponent {
         #endif
     }
 
-    /// Step the current rich text font size up or down.
+    /// Step the rich text font size at current range.
     func stepRichTextFontSize(points: Int) {
-        let currentSize = richTextFontSize ?? .standardRichTextFontSize
+        let currentSize = richTextFont?.pointSize ?? .standardRichTextFontSize
         let newSize = currentSize + CGFloat(points)
         setRichTextFontSize(newSize)
     }

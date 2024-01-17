@@ -18,7 +18,7 @@ import AppKit
 
 public extension RichTextAttributeReader {
 
-    /// Get the paragraph style at a certain range.
+    /// Get the rich text paragraph style at a certain range.
     func richTextParagraphStyle(
         at range: NSRange
     ) -> NSMutableParagraphStyle? {

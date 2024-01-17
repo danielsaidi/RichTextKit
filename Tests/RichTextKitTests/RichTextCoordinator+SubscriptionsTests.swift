@@ -50,12 +50,12 @@ final class RichTextCoordinator_SubscriptionsTests: XCTestCase {
 
 
     func testFontNameChangesUpdatesTextView() {
-        XCTAssertNotEqual(textView.richTextFontName, "Arial")
+        XCTAssertNotEqual(textView.richTextFont?.fontName, "Arial")
         textContext.fontName = ""
 
         eventually {
             #if iOS || os(tvOS)
-            XCTAssertEqual(self.textView.richTextFontName, ".SFUI-Regular")
+            XCTAssertEqual(self.textView.richTextFont?.fontName, ".SFUI-Regular")
             #elseif macOS
             XCTAssertEqual(self.textView.richTextFontName, ".AppleSystemUIFont")
             #endif
@@ -64,25 +64,25 @@ final class RichTextCoordinator_SubscriptionsTests: XCTestCase {
 
 
     func testFontSizeChangesUpdatesTextView() {
-        XCTAssertNotEqual(textView.richTextFontSize, 666)
+        XCTAssertNotEqual(textView.richTextFont?.pointSize, 666)
         textContext.fontSize = 666
-        XCTAssertEqual(textView.richTextFontSize, 666)
+        XCTAssertEqual(textView.richTextFont?.pointSize, 666)
     }
 
 
     func testFontSizeDecrementUpdatesTextView() {
         textView.setRichTextFontSize(666)
-        XCTAssertEqual(textView.richTextFontSize, 666)
+        XCTAssertEqual(textView.richTextFont?.pointSize, 666)
         textContext.handle(.stepFontSize(points: -1))
-        // XCTAssertEqual(textView.richTextFontSize, 665)
+        // XCTAssertEqual(textView.richTextFont?.pointSize, 665)
     }
 
 
     func testFontSizeIncrementUpdatesTextView() {
         textView.setRichTextFontSize(666)
-        XCTAssertEqual(textView.richTextFontSize, 666)
+        XCTAssertEqual(textView.richTextFont?.pointSize, 666)
         textContext.handle(.stepFontSize(points: 1))
-        // XCTAssertEqual(textView.richTextFontSize, 667)    TODO: Why is incorrect?
+        // XCTAssertEqual(textView.richTextFont?.pointSize, 667)    TODO: Why is incorrect?
     }
 
 

@@ -241,13 +241,13 @@ extension RichTextCoordinator {
             richTextContext.canUndoLatestChange = canUndo
         }
 
-        if let fontName = textView.richTextFontName,
+        if let fontName = textView.richTextFont?.fontName,
             !fontName.isEmpty,
             richTextContext.fontName != fontName {
             richTextContext.fontName = fontName
         }
 
-        let fontSize = textView.richTextFontSize ?? .standardRichTextFontSize
+        let fontSize = textView.richTextFont?.pointSize ?? .standardRichTextFontSize
         if richTextContext.fontSize != fontSize {
             richTextContext.fontSize = fontSize
         }

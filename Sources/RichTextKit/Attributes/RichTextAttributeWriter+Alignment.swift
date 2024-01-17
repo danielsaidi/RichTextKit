@@ -19,9 +19,6 @@ import AppKit
 public extension RichTextAttributeWriter {
 
     /// Set the rich text alignment at a certain range.
-    ///
-    /// Unlike some other attributes, this attribute applies
-    /// to the entire paragraph, not just the selected range.
     func setRichTextAlignment(
         _ alignment: RichTextAlignment,
         at range: NSRange

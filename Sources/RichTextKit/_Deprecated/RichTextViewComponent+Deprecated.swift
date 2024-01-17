@@ -1,6 +1,17 @@
 import Foundation
 
 public extension RichTextViewComponent {
+    
+    @available(*, deprecated, message: "Use richTextFont?.fontName instead")
+    var richTextFontName: String? {
+        richTextFont?.fontName
+    }
+
+    @available(*, deprecated, message: "Use richTextFont?.pointSize instead")
+    var richTextFontSize: CGFloat? {
+        richTextFont?.pointSize
+    }
+    
 
     @available(*, deprecated, renamed: "currentColor(_:)")
     var currentBackgroundColor: ColorRepresentable? {
@@ -154,12 +165,12 @@ public extension RichTextViewComponent {
         richTextFont
     }
 
-    @available(*, deprecated, message: "richTextFontSize")
+    @available(*, deprecated, message: "Use richTextFont?.pointSize instead")
     var currentFontSize: CGFloat? {
         richTextFontSize
     }
 
-    @available(*, deprecated, message: "richTextFontName")
+    @available(*, deprecated, message: "Use richTextFont?.fontName instead")
     var currentFontName: String? {
         richTextFontName
     }

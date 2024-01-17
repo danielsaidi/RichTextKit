@@ -11,7 +11,7 @@ import Foundation
 
 public extension RichTextAttributeWriter {
 
-    /// Set the superscript level at a certain range.
+    /// Set the rich text superscript at a certain range.
     func setRichTextSuperscriptLevel(
         _ level: Int,
         at range: NSRange

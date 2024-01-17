@@ -10,7 +10,7 @@ import Foundation
 
 public extension RichTextAttributeReader {
 
-    /// Get the text alignment at a certain range.
+    /// Get the rich text alignment at a certain range.
     func richTextAlignment(
         at range: NSRange
     ) -> RichTextAlignment? {

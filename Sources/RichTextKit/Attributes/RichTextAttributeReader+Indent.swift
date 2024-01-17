@@ -10,7 +10,7 @@ import Foundation
 
 public extension RichTextAttributeReader {
 
-    /// Get the text indent in points at a certain range.
+    /// Get the rich text indent at a certain range.
     func richTextIndent(
         at range: NSRange
     ) -> CGFloat? {

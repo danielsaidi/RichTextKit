@@ -57,7 +57,6 @@ public extension RichTextViewComponent {
         imageConfiguration.pasteConfiguration
     }
 
-
     /// Validate that image drop will be performed.
     func validateImageInsertion(
         for config: RichTextImageInsertConfiguration
