@@ -22,7 +22,7 @@ public struct RichTextActionButton: View {
      - Parameters:
        - action: The action to trigger.
        - context: The context to affect.
-       - fillVertically: Whether or not fill up vertical space in a non-greedy way, by default `false`.
+       - fillVertically: Whether or not fill up vertical space, by default `false`.
      */
     public init(
         action: RichTextAction,
@@ -46,9 +46,9 @@ public struct RichTextActionButton: View {
                 .frame(maxHeight: fillVertically ? .infinity : nil)
                 .contentShape(Rectangle())
         }
-        .disabled(!context.canHandle(action))
         .keyboardShortcut(for: action)
         .accessibilityLabel(action.title)
+        .disabled(!context.canHandle(action))
     }
 }
 

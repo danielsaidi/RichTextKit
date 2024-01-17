@@ -10,13 +10,13 @@
 import SwiftUI
 
 /**
- This view can list ``RichTextAction`` buttons in a group.
+ This view lists ``RichTextAction`` buttons in a solid group.
 
  Since this view controls multiple values, it binds directly
  to a ``RichTextContext`` instead of to individual values.
  */
 public struct RichTextActionButtonGroup: View {
-
+    
     /**
      Create a rich text action button stack.
 
@@ -50,7 +50,8 @@ public struct RichTextActionButtonGroup: View {
                     fillVertically: true
                 )
             }
-        }.frame(width: groupWidth)
+        }
+        .frame(width: groupWidth)
     }
 }
 

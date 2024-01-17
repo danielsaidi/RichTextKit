@@ -9,7 +9,7 @@
 import SwiftUI
 
 /**
- This view can list ``RichTextAction`` buttons in a stack.
+ This view lists ``RichTextAction`` buttons in a stack.
 
  Since this view controls multiple values, it binds directly
  to a ``RichTextContext`` instead of to individual values.

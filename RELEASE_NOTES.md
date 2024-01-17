@@ -6,6 +6,15 @@ Until then, minor updates may remove deprecated features and introduce breaking 
 
 
 
+## 0.9.8
+
+This release starts moving types into namespaces, to make the surface area smaller.
+
+### 🗑️ Deprecations 
+
+* `RichTextActionButton` has been renamed to `RichTextAction.Button`.
+
+
 
 ## 0.9.7
 
