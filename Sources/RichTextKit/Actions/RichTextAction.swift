@@ -46,6 +46,43 @@ public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
 
     /// Undo the latest change.
     case undoLatestChange
+    
+    // Change background color
+    case backgroundColor(ColorRepresentable)
+    
+    // Change foreground color
+    case foregroundColor(ColorRepresentable)
+    
+    // Change underline color
+    case underlineColor(ColorRepresentable)
+    
+    // Change strikethrough color
+    case strikethroughColor(ColorRepresentable)
+    
+    // Change stroke color
+    case strokeColor(ColorRepresentable)
+    
+    // Highlighted renge
+    case highlightedRange(NSRange?)
+    
+    // Change highlighting style
+    case highlightingStyle(RichTextHighlightingStyle)
+    
+    case pasteImage(Insertion<ImageRepresentable>)
+    
+    case pasteImages(Insertion<[ImageRepresentable]>)
+    
+    case pasteText(Insertion<String>)
+    
+    case selectRange(NSRange)
+    
+    case setAttributedString(NSAttributedString)
+    
+    case triggerAction(RichTextAction)
+    
+    // Change style of text (bold, italic, underline, strikethrough
+    case changeStyle(RichTextStyle, Bool)
+    
 }
 
 public extension RichTextAction {
@@ -66,6 +103,25 @@ public extension RichTextAction {
         case .stepSuperscript(let val): .richTextStepSuperscript(val)
         case .toggleStyle(let val): val.icon
         case .undoLatestChange: .richTextActionUndo
+        case .backgroundColor: Image.richTextColorBackground
+        case .foregroundColor: Image.richTextColorForeground
+        case .underlineColor: Image.richTextColorUnderline
+        case .strikethroughColor: Image.richTextColorStrikethrough
+        case .strokeColor: Image.richTextColorStroke
+        case .highlightedRange:Image.richTextAlignmentCenter
+        case .highlightingStyle: Image.richTextAlignmentCenter
+        case .pasteImage: Image.richTextDocuments
+        case .pasteImages: Image.richTextDocuments
+        case .pasteText: Image.richTextStepIndent(1)
+        case .selectRange: Image.richTextAlignmentCenter
+        case .setAttributedString: Image.richTextAlignmentCenter
+        case .triggerAction: Image.richTextActionEdit
+        case .changeStyle(let style):
+            switch style {
+            case .bold: Image.richTextStyleBold
+            case .italic: Image.richTextStyleItalic
+            case .strikethrough: Image.richTextStyleStrikethrough
+            case .underlined: Image.richTextStyleUnderline
         }
     }
 
@@ -100,6 +156,26 @@ public extension RichTextAction {
         case .stepSuperscript(let steps): .actionStepSuperscript(steps)
         case .toggleStyle(let style): style.titleKey
         case .undoLatestChange: .actionUndoLatestChange
+        case .backgroundColor: RTKL10n(rawValue: "1")!
+        case .foregroundColor: RTKL10n(rawValue: "1")!
+        case .underlineColor: RTKL10n(rawValue: "1")!
+        case .strikethroughColor: RTKL10n(rawValue: "1")!
+        case .strokeColor: RTKL10n(rawValue: "1")!
+        case .highlightedRange: RTKL10n(rawValue: "1")!
+        case .highlightingStyle: RTKL10n(rawValue: "1")!
+        case .pasteImage: RTKL10n(rawValue: "1")!
+        case .pasteImages: RTKL10n(rawValue: "1")!
+        case .pasteText: RTKL10n(rawValue: "1")!
+        case .selectRange: RTKL10n(rawValue: "1")!
+        case .setAttributedString: RTKL10n(rawValue: "1")!
+        case .triggerAction: RTKL10n(rawValue: "1")!
+        case .changeStyle(let style):
+            switch style {
+            case .bold: RTKL10n(rawValue: "1")
+            case .italic: RTKL10n(rawValue: "1")
+            case .strikethrough: RTKL10n(rawValue: "1")
+            case .underlined: RTKL10n(rawValue: "1")
+            }
         }
     }
 }
