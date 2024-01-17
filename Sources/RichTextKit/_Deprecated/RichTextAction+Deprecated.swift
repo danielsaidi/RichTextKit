@@ -38,3 +38,12 @@ public extension RichTextAction {
         decreaseSuperscript()
     }
 }
+
+@available(*, deprecated, renamed: "RichTextAction.Button")
+public typealias RichTextActionButton = RichTextAction.Button
+
+@available(*, deprecated, renamed: "RichTextAction.ButtonGroup")
+public typealias RichTextActionButtonGroup = RichTextAction.ButtonGroup
+
+@available(*, deprecated, renamed: "RichTextAction.ButtonStack")
+public typealias RichTextActionButtonStack = RichTextAction.ButtonStack

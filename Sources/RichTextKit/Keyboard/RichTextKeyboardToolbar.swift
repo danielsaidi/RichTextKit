@@ -175,7 +175,7 @@ private extension RichTextKeyboardToolbar {
 
     @ViewBuilder
     var leadingViews: some View {
-        RichTextActionButtonStack(
+        RichTextAction.ButtonStack(
             context: context,
             actions: leadingActions,
             spacing: style.itemSpacing
@@ -206,7 +206,7 @@ private extension RichTextKeyboardToolbar {
 
         trailingButtons()
 
-        RichTextActionButtonStack(
+        RichTextAction.ButtonStack(
             context: context,
             actions: trailingActions,
             spacing: style.itemSpacing

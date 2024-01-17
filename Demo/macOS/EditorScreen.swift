@@ -32,7 +32,7 @@ struct EditorScreen: View {
         }
         .toolbar {
             ToolbarItem(placement: .automatic) {
-                RichTextActionButtonStack(
+                RichTextAction.ButtonStack(
                     context: context,
                     actions: [.undo, .redo, .copy]
                 )

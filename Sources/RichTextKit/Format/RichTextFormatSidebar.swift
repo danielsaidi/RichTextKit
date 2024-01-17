@@ -56,7 +56,7 @@ public struct RichTextFormatSidebar: View {
             SidebarSection(title: nil) {
                 RichTextAlignmentPicker(selection: $context.textAlignment)
                     .pickerStyle(.segmented)
-                RichTextActionButtonGroup(
+                RichTextAction.ButtonGroup(
                     context: context,
                     actions: [.decreaseIndent(), .increaseIndent()]
                 )
