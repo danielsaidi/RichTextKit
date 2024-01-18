@@ -30,7 +30,7 @@ public struct RichTextShareMenu: View {
         formatAction: @escaping (RichTextDataFormat) -> Void,
         pdfAction: (() -> Void)? = nil
     ) {
-        self.menu = RichTextDataFormatMenu(
+        self.menu = RichTextDataFormat.Menu(
             title: title,
             icon: icon,
             formats: formats,
@@ -39,7 +39,7 @@ public struct RichTextShareMenu: View {
         )
     }
 
-    private let menu: RichTextDataFormatMenu
+    private let menu: RichTextDataFormat.Menu
 
     public var body: some View {
         menu

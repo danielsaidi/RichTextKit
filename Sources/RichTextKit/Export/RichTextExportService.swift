@@ -30,7 +30,8 @@ public protocol RichTextExportService: AnyObject {
     func generateExportFile(
         withName fileName: String,
         content: NSAttributedString,
-        format: RichTextDataFormat) throws -> URL
+        format: RichTextDataFormat
+    ) throws -> URL
 
     /**
      Generate a PDF export file with a certain name and rich
@@ -42,5 +43,6 @@ public protocol RichTextExportService: AnyObject {
      */
     func generatePdfExportFile(
         withName fileName: String,
-        content: NSAttributedString) throws -> URL
+        content: NSAttributedString
+    ) throws -> URL
 }

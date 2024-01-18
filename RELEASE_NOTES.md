@@ -26,6 +26,7 @@ This release starts moving types and views that relate to other types into the t
 * `RichTextColorPicker` has been renamed to `RichTextColor.Picker`.
 * `RichTextCommand` views are now nested within the new `RichTextCommand` type.
 * `RichTextComponent` deprecates the font name and size functions.
+* `RichTextDataFormatMenu` has been renamed to `RichTextDataFormat.Menu`.
 
 
 

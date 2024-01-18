@@ -29,7 +29,8 @@ public extension FileManager {
     func fileUrl(
         withName fileName: String,
         extension: String,
-        in directory: FileManager.SearchPathDirectory) throws -> URL {
+        in directory: FileManager.SearchPathDirectory
+    ) throws -> URL {
         let url = self
             .urls(for: directory, in: .userDomainMask).first?
             .appendingPathComponent(fileName)
@@ -54,7 +55,8 @@ public extension FileManager {
     func uniqueFileUrl(
         withName fileName: String,
         extension: String,
-        in directory: FileManager.SearchPathDirectory) throws -> URL {
+        in directory: FileManager.SearchPathDirectory
+    ) throws -> URL {
         let url = try fileUrl(withName: fileName, extension: `extension`, in: directory)
         let uniqueUrl = uniqueUrl(for: url)
         return uniqueUrl

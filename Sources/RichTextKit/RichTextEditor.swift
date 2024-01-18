@@ -50,8 +50,8 @@ public struct RichTextEditor: ViewRepresentable {
      - Parameters:
        - text: The rich text to edit.
        - context: The rich text context to use.
-       - config: The rich text configuration to use, by deafult `standard`.
-       - format: The rich text data format, by default ``RichTextDataFormat/archivedData``.
+       - config: The rich text configuration to use, by deafult `.standard`.
+       - format: The rich text data format, by default `.archivedData`.
      */
     public init(
         text: Binding<NSAttributedString>,

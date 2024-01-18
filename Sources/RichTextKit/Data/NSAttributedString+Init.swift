@@ -3,7 +3,7 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-06-03.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 import Foundation
@@ -74,7 +74,8 @@ private extension NSAttributedString {
         try self.init(
             data: data,
             options: [.characterEncoding: Self.utf8],
-            documentAttributes: &attributes)
+            documentAttributes: &attributes
+        )
     }
 
     /**
@@ -85,7 +86,8 @@ private extension NSAttributedString {
         try self.init(
             data: data,
             options: [.characterEncoding: Self.utf8],
-            documentAttributes: &attributes)
+            documentAttributes: &attributes
+        )
     }
 
     #if macOS
@@ -97,7 +99,8 @@ private extension NSAttributedString {
         try self.init(
             data: data,
             options: [.characterEncoding: Self.utf8],
-            documentAttributes: &attributes)
+            documentAttributes: &attributes
+        )
     }
     #endif
 }

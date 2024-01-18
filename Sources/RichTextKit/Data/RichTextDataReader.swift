@@ -3,7 +3,7 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-06-03.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 import Foundation
@@ -27,12 +27,14 @@ public extension RichTextDataReader {
      - Parameters:
        - format: The data format to use.
      */
-    func richTextData(for format: RichTextDataFormat) throws -> Data {
+    func richTextData(
+        for format: RichTextDataFormat
+    ) throws -> Data {
         switch format {
-        case .archivedData: return try richTextArchivedData()
-        case .plainText: return try richTextPlainTextData()
-        case .rtf: return try richTextRtfData()
-        case .vendorArchivedData: return try richTextArchivedData()
+        case .archivedData: try richTextArchivedData()
+        case .plainText: try richTextPlainTextData()
+        case .rtf: try richTextRtfData()
+        case .vendorArchivedData: try richTextArchivedData()
         }
     }
 }
@@ -51,7 +53,7 @@ private extension RichTextDataReader {
         [.documentType: documentType]
     }
 
-    /// Generate ``RichTextDataFormat/archivedData`` data.
+    /// Generate archived formatted data.
     func richTextArchivedData() throws -> Data {
         try NSKeyedArchiver.archivedData(
             withRootObject: richText,
@@ -59,7 +61,7 @@ private extension RichTextDataReader {
         )
     }
 
-    /// Generate ``RichTextDataFormat/plainText`` data.
+    /// Generate plain text formatted data.
     func richTextPlainTextData() throws -> Data {
         let string = richText.string
         guard let data = string.data(using: .utf8) else {
@@ -69,7 +71,7 @@ private extension RichTextDataReader {
         return data
     }
 
-    /// Generate ``RichTextDataFormat/rtf`` data.
+    /// Generate RTF formatted data.
     func richTextRtfData() throws -> Data {
         try richText.data(
             from: textRange,
@@ -77,7 +79,7 @@ private extension RichTextDataReader {
         )
     }
 
-    /// Generate ``RichTextDataFormat/rtfd`` data.
+    /// Generate RTFD formatted data.
     func richTextRtfdData() throws -> Data {
         try richText.data(
             from: textRange,
@@ -86,7 +88,7 @@ private extension RichTextDataReader {
     }
 
     #if macOS
-    /// Generate ``RichTextDataFormat/word`` formatted data.
+    /// Generate Word formatted data.
     func richTextWordData() throws -> Data {
         try richText.data(
             from: textRange,

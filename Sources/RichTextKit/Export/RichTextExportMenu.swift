@@ -13,13 +13,13 @@ import SwiftUI
  This menu can be used to trigger various export actions for
  a list of ``RichTextDataFormat`` values.
 
- This menu uses a ``RichTextDataFormatMenu`` that by default
- is configured for exporting. It has customizable actions to
- make it possible to use it in any custom way.
+ This menu uses a ``RichTextDataFormat/Menu`` configured for
+ exporting. It has customizable actions, to make it possible
+ to use it in any custom way.
 
- If you have a ``RichTextDataFormat`` value, you can use its
- ``RichTextDataFormat/convertibleFormats`` as init parameter
- to get an export menu for all other formats.
+ You can use a custom ``RichTextDataFormat`` you can use its
+ `convertibleFormats` as `formats` init parameter, to get an
+ export menu for all other formats.
  */
 public struct RichTextExportMenu: View {
 
@@ -30,7 +30,7 @@ public struct RichTextExportMenu: View {
         formatAction: @escaping (RichTextDataFormat) -> Void,
         pdfAction: (() -> Void)? = nil
     ) {
-        self.menu = RichTextDataFormatMenu(
+        self.menu = RichTextDataFormat.Menu(
             title: title,
             icon: icon,
             formats: formats,
@@ -38,8 +38,8 @@ public struct RichTextExportMenu: View {
             pdfAction: pdfAction
         )
     }
-
-    private let menu: RichTextDataFormatMenu
+    
+    private let menu: RichTextDataFormat.Menu
 
     public var body: some View {
         menu

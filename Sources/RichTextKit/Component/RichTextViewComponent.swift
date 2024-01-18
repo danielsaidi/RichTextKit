@@ -56,7 +56,7 @@ public protocol RichTextViewComponent: AnyObject,
 
     // MARK: - Setup
 
-    /// Setup the view with a text and ``RichTextDataFormat``.
+    /// Setup the view with a text and data format.
     func setup(
         with text: NSAttributedString,
         format: RichTextDataFormat
@@ -109,7 +109,7 @@ public extension RichTextViewComponent {
         setSelectedRange(safeRange)
     }
 
-    /// Setup the view with data and a ``RichTextDataFormat``.
+    /// Setup the view with data and a data format.
     func setup(
         with data: Data,
         format: RichTextDataFormat
