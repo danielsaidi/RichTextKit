@@ -42,8 +42,10 @@ public extension RichTextAction {
 @available(*, deprecated, renamed: "RichTextAction.Button")
 public typealias RichTextActionButton = RichTextAction.Button
 
+#if iOS || macOS || os(visionOS)
 @available(*, deprecated, renamed: "RichTextAction.ButtonGroup")
 public typealias RichTextActionButtonGroup = RichTextAction.ButtonGroup
+#endif
 
 @available(*, deprecated, renamed: "RichTextAction.ButtonStack")
 public typealias RichTextActionButtonStack = RichTextAction.ButtonStack

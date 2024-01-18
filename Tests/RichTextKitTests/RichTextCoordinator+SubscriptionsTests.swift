@@ -57,7 +57,7 @@ final class RichTextCoordinator_SubscriptionsTests: XCTestCase {
             #if iOS || os(tvOS)
             XCTAssertEqual(self.textView.richTextFont?.fontName, ".SFUI-Regular")
             #elseif macOS
-            XCTAssertEqual(self.textView.richTextFontName, ".AppleSystemUIFont")
+            XCTAssertEqual(self.textView.richTextFont?.fontName, ".AppleSystemUIFont")
             #endif
         }
     }

@@ -18,9 +18,10 @@ public typealias RichTextCommandsIndentOptionsGroup = RichTextCommand.IndentOpti
 @available(*, deprecated, renamed: "RichTextCommand.StyleOptionsGroup")
 public typealias RichTextCommandsStyleOptionsGroup = RichTextCommand.StyleOptionsGroup
 
+#if iOS || macOS || os(visionOS)
 @available(*, deprecated, renamed: "RichTextCommand.FormatMenu")
 public typealias RichTextFormatCommandMenu = RichTextCommand.FormatMenu
 
 @available(*, deprecated, renamed: "RichTextCommand.ShareMenu")
 public typealias RichTextShareCommandMenu = RichTextCommand.ShareMenu
-
+#endif
