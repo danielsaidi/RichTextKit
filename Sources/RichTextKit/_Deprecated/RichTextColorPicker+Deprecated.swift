@@ -4,7 +4,7 @@ import SwiftUI
 @available(*, deprecated, renamed: "RichTextColor.Picker")
 public typealias RichTextColorPicker = RichTextColor.Picker
 
-public extension RichTextColorPicker {
+public extension RichTextColor.Picker {
 
     @available(*, deprecated, renamed: "init(icon:value:showIcon:quickColors:)")
     init(
@@ -76,7 +76,7 @@ public extension RichTextColorPicker {
     }
 }
 
-public extension RichTextColorPicker {
+public extension RichTextColor.Picker {
 
     @available(*, deprecated, message: "PickerColor is no longer used.")
     enum PickerColor: String, CaseIterable, Identifiable {

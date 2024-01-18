@@ -86,14 +86,7 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 
 ### Commands
 
-- ``RichTextCommandButton``
-- ``RichTextCommandButtonGroup``
-- ``RichTextCommandsAlignmentOptionsGroup``
-- ``RichTextCommandsIndentOptionsGroup``
-- ``RichTextCommandsFontSizeOptionsGroup``
-- ``RichTextCommandsStyleOptionsGroup``
-- ``RichTextFormatCommandMenu``
-- ``RichTextShareCommandMenu``
+- ``RichTextCommand``
 
 ### Data
 

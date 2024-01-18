@@ -13,6 +13,7 @@ This release starts moving types and views that relate to other types into the t
 ### ✨ Features
 
 * `RichTextAlignment.Picker` has a new style parameter.
+* `RichTextCommand` is a new namespace for command-related views.
 
 ### 🗑️ Deprecations 
 
@@ -23,6 +24,7 @@ This release starts moving types and views that relate to other types into the t
 * `RichTextArgumentReader` deprecates the font name and size functions.
 * `RichTextArgumentWriter` deprecates the font name and size functions.
 * `RichTextColorPicker` has been renamed to `RichTextColor.Picker`.
+* `RichTextCommand` views are now nested within the new `RichTextCommand` type.
 * `RichTextComponent` deprecates the font name and size functions.
 
 
