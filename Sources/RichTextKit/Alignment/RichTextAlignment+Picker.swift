@@ -11,7 +11,7 @@ import SwiftUI
 public extension RichTextAlignment {
  
     /**
-     This picker can be used to pick rich text alignments.
+     This picker can be used to pick a rich text alignment.
 
      The view returns a plain SwiftUI `Picker` view that can
      be styled and configured with plain SwiftUI.

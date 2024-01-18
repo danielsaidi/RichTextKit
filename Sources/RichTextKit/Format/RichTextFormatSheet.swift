@@ -63,7 +63,7 @@ public struct RichTextFormatSheet: View {
                     }.padding(.horizontal, padding)
                     VStack(spacing: padding) {
                         ForEach(colorPickers) {
-                            RichTextColorPicker(
+                            RichTextColor.Picker(
                                 type: $0,
                                 value: context.binding(for: $0),
                                 quickColors: .quickPickerColors

@@ -36,7 +36,7 @@ public enum RichTextColor: String, CaseIterable, Codable, Equatable, Identifiabl
 
 public extension RichTextColor {
 
-    /// The unique ID of the alignment.
+    /// The unique color ID.
     var id: String { rawValue }
 
     /// The corresponding rich text attribute, if any.
@@ -83,12 +83,7 @@ public extension RichTextColor {
     }
 }
 
-public extension RichTextColor {
+public extension Collection where Element == RichTextColor {
 
-    static var all: [RichTextColor] { allCases.filter { $0 != .undefined } }
-}
-
-public extension Array where Element == RichTextColor {
-
-    static var all: [RichTextColor] { Element.all }
+    static var all: [RichTextColor] { Element.allCases }
 }

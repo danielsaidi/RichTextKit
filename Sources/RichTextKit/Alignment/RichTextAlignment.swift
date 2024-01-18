@@ -50,7 +50,7 @@ public extension Collection where Element == RichTextAlignment {
 
 public extension RichTextAlignment {
 
-    /// The unique ID of the alignment.
+    /// The unique alignment ID.
     var id: String { rawValue }
 
     /// The standard icon to use for the alignment.

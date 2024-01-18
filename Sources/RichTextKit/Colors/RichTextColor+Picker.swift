@@ -1,71 +1,74 @@
 //
-//  RichTextColorPicker.swift
+//  RichTextColor+Picker.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-12-08.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
 
-/**
- This picker can be used to select a color.
-
- This picker renders an icon next to the color picker and an
- optional list of horizontally scrolling quick colors.
-
- The quick color list is empty by default, but you can add a
- custom set of colors, for instance `.quickPickerColors`.
- */
-public struct RichTextColorPicker: View {
-
+public extension RichTextColor {
+    
     /**
-     Create a rich text color picker that binds to a color.
-
-     - Parameters:
-       - type: The type of color to pick, by default `.undefined`.
-       - icon: The icon to show, if any, by default the `type` icon.
-       - value: The value to bind to.
-       - quickColors: Colors to show in the trailing list, by default no colors.
+     This picker can be used to select a rich text color.
+     
+     This picker renders an icon next to the color picker as
+     well as an optional list of quick colors.
+     
+     The quick color list is empty by default. You can add a
+     custom set of colors, for instance `.quickPickerColors`.
      */
-    public init(
-        type: RichTextColor = .undefined,
-        icon: Image? = nil,
-        value: Binding<Color>,
-        quickColors: [Color] = []
-    ) {
-        self.type = type
-        self.icon = icon ?? type.icon
-        self._value = value
-        self.quickColors = quickColors
-    }
-
-    private let type: RichTextColor
-    private let icon: Image?
-    private let quickColors: [Color]
-
-    @Binding
-    private var value: Color
-
-    private let spacing = 10.0
-
-    @Environment(\.colorScheme)
-    private var colorScheme
-
-    public var body: some View {
-        HStack(spacing: 0) {
-            iconView
-            picker
-            if hasColors {
-                quickPickerDivider
-                quickPicker
-            }
+    struct Picker: View {
+        
+        /**
+         Create a rich text color picker that binds to a color.
+         
+         - Parameters:
+          - type: The type of color to pick, by default `.undefined`.
+          - icon: The icon to show, if any, by default the `type` icon.
+          - value: The value to bind to.
+          - quickColors: Colors to show in the trailing list, by default no colors.
+         */
+        public init(
+            type: RichTextColor = .undefined,
+            icon: Image? = nil,
+            value: Binding<Color>,
+            quickColors: [Color] = []
+        ) {
+            self.type = type
+            self.icon = icon ?? type.icon
+            self._value = value
+            self.quickColors = quickColors
         }
-        .labelsHidden()
+        
+        private let type: RichTextColor
+        private let icon: Image?
+        private let quickColors: [Color]
+        
+        @Binding
+        private var value: Color
+        
+        private let spacing = 10.0
+        
+        @Environment(\.colorScheme)
+        private var colorScheme
+        
+        public var body: some View {
+            HStack(spacing: 0) {
+                iconView
+                picker
+                if hasColors {
+                    quickPickerDivider
+                    quickPicker
+                }
+            }
+            .labelsHidden()
+        }
     }
 }
 
-private extension RichTextColorPicker {
+private extension RichTextColor.Picker {
 
     var hasColors: Bool {
         !quickColors.isEmpty
@@ -93,7 +96,7 @@ public extension Collection where Element == Color {
     }
 }
 
-private extension RichTextColorPicker {
+private extension RichTextColor.Picker {
 
     @ViewBuilder
     var iconView: some View {
@@ -149,8 +152,9 @@ private struct ColorButtonStyle: ButtonStyle {
     }
 }
 
-struct RichTextColorPicker_Previews: PreviewProvider {
-    private struct RichTextColorPickerPreview: View {
+struct RichTextColor_Picker_Previews: PreviewProvider {
+    
+    private struct Preview: View {
         @State
         private var foregroundColor = Color.black
 
@@ -168,14 +172,14 @@ struct RichTextColorPicker_Previews: PreviewProvider {
                     .background(Color.red)
                     .padding()
 
-                RichTextColorPicker(
+                RichTextColor.Picker(
                     type: .foreground,
                     value: $foregroundColor,
                     quickColors: [.white, .black, .red, .green, .blue]
                 )
                 .padding(.leading)
 
-                RichTextColorPicker(
+                RichTextColor.Picker(
                     type: .background,
                     value: $backgroundColor,
                     quickColors: [.white, .black, .red, .green, .blue]
@@ -186,6 +190,6 @@ struct RichTextColorPicker_Previews: PreviewProvider {
     }
 
     static var previews: some View {
-        RichTextColorPickerPreview()
+        Preview()
     }
 }

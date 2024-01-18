@@ -22,6 +22,7 @@ This release starts moving types and views that relate to other types into the t
 * `RichTextAlignmentPicker` has been renamed to `RichTextAlignment.Picker`.
 * `RichTextArgumentReader` deprecates the font name and size functions.
 * `RichTextArgumentWriter` deprecates the font name and size functions.
+* `RichTextColorPicker` has been renamed to `RichTextColor.Picker`.
 * `RichTextComponent` deprecates the font name and size functions.
 
 

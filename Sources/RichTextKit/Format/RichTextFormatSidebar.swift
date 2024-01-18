@@ -65,7 +65,7 @@ public struct RichTextFormatSidebar: View {
             SidebarSection(title: nil) {
                 VStack(spacing: 4) {
                     ForEach(colorPickers) {
-                        RichTextColorPicker(
+                        RichTextColor.Picker(
                             type: $0,
                             value: context.binding(for: $0),
                             quickColors: .quickPickerColors

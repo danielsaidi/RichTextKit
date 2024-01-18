@@ -1,9 +1,12 @@
 #if iOS || macOS
 import SwiftUI
 
-@available(*, deprecated, renamed: "init(icon:value:showIcon:quickColors:)")
+@available(*, deprecated, renamed: "RichTextColor.Picker")
+public typealias RichTextColorPicker = RichTextColor.Picker
+
 public extension RichTextColorPicker {
 
+    @available(*, deprecated, renamed: "init(icon:value:showIcon:quickColors:)")
     init(
         color: PickerColor,
         value: Binding<Color>,
@@ -17,6 +20,7 @@ public extension RichTextColorPicker {
         )
     }
 
+    @available(*, deprecated, renamed: "init(icon:value:showIcon:quickColors:)")
     init(
         color: PickerColor,
         value: Binding<Color>,
@@ -31,6 +35,7 @@ public extension RichTextColorPicker {
         )
     }
 
+    @available(*, deprecated, renamed: "init(icon:value:showIcon:quickColors:)")
     init(
         color: PickerColor,
         context: RichTextContext,
@@ -50,6 +55,7 @@ public extension RichTextColorPicker {
         )
     }
 
+    @available(*, deprecated, renamed: "init(icon:value:showIcon:quickColors:)")
     init(
         color: PickerColor,
         context: RichTextContext,
@@ -70,12 +76,9 @@ public extension RichTextColorPicker {
     }
 }
 
-@available(*, deprecated, message: "PickerColor is no longer used.")
 public extension RichTextColorPicker {
 
-    /**
-     This enum specifies which colors this picker can pick.
-     */
+    @available(*, deprecated, message: "PickerColor is no longer used.")
     enum PickerColor: String, CaseIterable, Identifiable {
         case foreground, background
 
