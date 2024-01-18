@@ -1,6 +1,6 @@
 //
 //  RichTextCoordinator+ColorSubscriptions.swift
-//  
+//
 //
 //  Created by Dominik Bucher on 18.01.2024.
 //
