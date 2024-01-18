@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Combine
 
 /**
  This observable context can be used to affect and observe a
@@ -21,7 +22,6 @@ public class RichTextContext: ObservableObject {
 
     /// Create a new rich text context instance.
     public init() {}
-
 
     // MARK: - Not yet observable properties
 
@@ -57,6 +57,8 @@ public class RichTextContext: ObservableObject {
 
     // MARK: - Observable properies
 
+    let userActionPublisher: PassthroughSubject<RichTextAction, Never> = .init()
+    
     /// The current background color, if any.
     @Published
     public var backgroundColor: ColorRepresentable?
@@ -182,6 +184,7 @@ public extension RichTextContext {
 
     /// Set ``highlightedRange`` to a new, optional range.
     func highlightRange(_ range: NSRange?) {
+        userActionPublisher.send(.highlightedRange(range))
         highlightedRange = range
     }
 
@@ -192,7 +195,15 @@ public extension RichTextContext {
         moveCursorToPastedContent: Bool = false
     ) {
         let index = index ?? selectedRange.location
-        shouldPasteImage = (image, index, moveCursorToPastedContent)
+        userActionPublisher.send(
+            .pasteImage(
+                Insertion(
+                    content: image,
+                    at: index,
+                    moveCursor: moveCursorToPastedContent
+                )
+            )
+        )
     }
 
     /// Paste images into the editor, at a certain index.
@@ -202,7 +213,15 @@ public extension RichTextContext {
         moveCursorToPastedContent: Bool = false
     ) {
         let index = index ?? selectedRange.location
-        shouldPasteImages = (images, index, moveCursorToPastedContent)
+        userActionPublisher.send(
+            .pasteImages(
+                Insertion(
+                    content: images,
+                    at: index,
+                    moveCursor: moveCursorToPastedContent
+                )
+            )
+        )
     }
 
     /// Paste text into the editor, at a certain index.
@@ -212,7 +231,15 @@ public extension RichTextContext {
         moveCursorToPastedContent: Bool = false
     ) {
         let index = index ?? selectedRange.location
-        shouldPasteText = (text, index, moveCursorToPastedContent)
+        userActionPublisher.send(
+            .pasteText(
+                Insertion(
+                    content: text,
+                    at: index,
+                    moveCursor: moveCursorToPastedContent
+                )
+            )
+        )
     }
 
     /// Reset the attributed string.
@@ -235,6 +262,7 @@ public extension RichTextContext {
     func selectRange(_ range: NSRange) {
         isEditingText = true
         shouldSelectRange = range
+        userActionPublisher.send(.selectRange(range))
     }
 
     /// Set the attributed string to a new plain text.
@@ -247,6 +275,7 @@ public extension RichTextContext {
         let mutable = NSMutableAttributedString(attributedString: string)
         mutable.setRichTextFontSize(fontSize, at: mutable.richTextRange)
         shouldSetAttributedString = mutable
+        userActionPublisher.send(.setAttributedString(mutable))
     }
 
     /// Set ``isEditingText`` to `false`.

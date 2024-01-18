@@ -46,6 +46,7 @@ open class RichTextCoordinator: NSObject {
         super.init()
         self.textView.delegate = self
         subscribeToContextChanges()
+        subscribeToUserActions()
     }
 
 

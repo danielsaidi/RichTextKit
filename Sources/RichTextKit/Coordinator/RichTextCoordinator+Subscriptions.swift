@@ -11,29 +11,37 @@ import SwiftUI
 
 extension RichTextCoordinator {
 
-    /// Make the coordinator subscribe to context changes.
-    func subscribeToContextChanges() {
+    func subscribeToUserActions() {
+        richTextContext.userActionPublisher.sink { [weak self] action in
+            self?.handle(action)
+        }
+        .store(in: &cancellables)
+        
         subscribeToAlignment()
-        subscribeToBackgroundColor()
         subscribeToFontName()
         subscribeToFontSize()
-        subscribeToForegroundColor()
-        subscribeToHighlightedRange()
-        subscribeToHighlightingStyle()
-        subscribeToIsBold()
         subscribeToIsEditingText()
-        subscribeToIsItalic()
-        subscribeToIsStrikethrough()
-        subscribeToIsUnderlined()
-        subscribeToShouldPasteImage()
-        subscribeToShouldPasteImages()
-        subscribeToShouldPasteText()
-        subscribeToShouldSelectRange()
-        subscribeToShouldSetAttributedString()
-        subscribeToStrikethroughColor()
-        subscribeToStrokeColor()
-        subscribeToTriggerAction()
-        subscribeToUnderlineColor()
+    }
+    /// Make the coordinator subscribe to context changes.
+    func subscribeToContextChanges() {
+//        subscribeToAlignment()
+//        subscribeToBackgroundColor()
+//        subscribeToFontName()
+//        subscribeToFontSize()
+//        subscribeToForegroundColor()
+//        subscribeToHighlightedRange()
+//        subscribeToHighlightingStyle()
+//        subscribeToIsBold()
+//        subscribeToIsEditingText()
+//        subscribeToIsItalic()
+//        subscribeToIsStrikethrough()
+//        subscribeToIsUnderlined()
+//        subscribeToShouldSelectRange()
+//        subscribeToShouldSetAttributedString()
+//        subscribeToStrikethroughColor()
+//        subscribeToStrokeColor()
+//        subscribeToTriggerAction()
+//        subscribeToUnderlineColor()
     }
 }
 
@@ -59,34 +67,32 @@ private extension RichTextCoordinator {
         case .undoLatestChange:
             textView.undoLatestChange()
             syncContextWithTextView()
-        case .backgroundColor(_):
-            break
-        case .foregroundColor(_):
-            break
-        case .underlineColor(_):
-            break
-        case .strikethroughColor(_):
-            break
-        case .strokeColor(_):
-            break
-        case .highlightedRange(_):
-            break
-        case .highlightingStyle(_):
-            break
-        case .pasteImage(_):
-            break
-        case .pasteImages(_):
-            break
-        case .pasteText(_):
-            break
-        case .selectRange(_):
-            break
-        case .setAttributedString(_):
-            break
-        case .triggerAction(_):
-            break
-        case .changeStyle(_, _):
-            break
+        case .backgroundColor(let color):
+            setColor(color, for: .background)
+        case .foregroundColor(let color):
+            setColor(color, for: .foreground)
+        case .underlineColor(let color):
+            setColor(color, for: .underline)
+        case .strikethroughColor(let color):
+            setColor(color, for: .strikethrough)
+        case .strokeColor(let color):
+            setColor(color, for: .stroke)
+        case .highlightedRange(let range):
+            setHighlightedRange(to: range)
+        case .highlightingStyle(let style):
+            textView.highlightingStyle = style
+        case .pasteImage(let image):
+            pasteImage(image)
+        case .pasteImages(let images):
+            pasteImages(images)
+        case .pasteText(let text):
+            pasteText(text)
+        case .selectRange(let range):
+            setSelectedRange(to: range)
+        case .setAttributedString(let attributedString):
+            setAttributedString(to: attributedString)
+        case .changeStyle(let style, let newValue):
+            setStyle(style, to: newValue)
         }
     }
 
@@ -223,36 +229,6 @@ private extension RichTextCoordinator {
             .store(in: &cancellables)
     }
 
-    func subscribeToShouldPasteImage() {
-        richTextContext.$shouldPasteImage
-            .sink(
-                receiveCompletion: { _ in },
-                receiveValue: { [weak self] in
-                    self?.pasteImage($0)
-                })
-            .store(in: &cancellables)
-    }
-
-    func subscribeToShouldPasteImages() {
-        richTextContext.$shouldPasteImages
-            .sink(
-                receiveCompletion: { _ in },
-                receiveValue: { [weak self] in
-                    self?.pasteImages($0)
-                })
-            .store(in: &cancellables)
-    }
-
-    func subscribeToShouldPasteText() {
-        richTextContext.$shouldPasteText
-            .sink(
-                receiveCompletion: { _ in },
-                receiveValue: { [weak self] in
-                    self?.pasteText($0)
-                })
-            .store(in: &cancellables)
-    }
-
     func subscribeToShouldSetAttributedString() {
         richTextContext.$shouldSetAttributedString
             .sink(
@@ -309,29 +285,29 @@ private extension RichTextCoordinator {
 
 internal extension RichTextCoordinator {
 
-    func pasteImage(_ data: (image: ImageRepresentable, atIndex: Int, moveCursor: Bool)?) {
+    func pasteImage(_ data: Insertion<ImageRepresentable>?) {
         guard let data = data else { return }
         textView.pasteImage(
-            data.image,
-            at: data.atIndex,
+            data.content,
+            at: data.at,
             moveCursorToPastedContent: data.moveCursor
         )
     }
-
-    func pasteImages(_ data: (images: [ImageRepresentable], atIndex: Int, moveCursor: Bool)?) {
+    
+    func pasteImages(_ data: Insertion<[ImageRepresentable]>?) {
         guard let data = data else { return }
         textView.pasteImages(
-            data.images,
-            at: data.atIndex,
+            data.content,
+            at: data.at,
             moveCursorToPastedContent: data.moveCursor
         )
     }
-
-    func pasteText(_ data: (text: String, atIndex: Int, moveCursor: Bool)?) {
+    
+    func pasteText(_ data: Insertion<String>?) {
         guard let data = data else { return }
         textView.pasteText(
-            data.text,
-            at: data.atIndex,
+            data.content,
+            at: data.at,
             moveCursorToPastedContent: data.moveCursor
         )
     }

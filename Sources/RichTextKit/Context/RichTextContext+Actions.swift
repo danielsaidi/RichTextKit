@@ -46,7 +46,6 @@ public extension RichTextContext {
         case .pasteText: return true
         case .selectRange: return true
         case .setAttributedString: return true
-        case .triggerAction: return true
         case .changeStyle: return true
         }
     }

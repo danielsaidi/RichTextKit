@@ -35,13 +35,13 @@ public extension RichTextContext {
         _ color: ColorRepresentable,
         for val: RichTextColor
     ) {
-        if self.color(for: val) == color { return }
+        guard self.color(for: val) != color else { return }
         switch val {
-        case .foreground: foregroundColor = color
-        case .background: backgroundColor = color
-        case .strikethrough: strikethroughColor = color
-        case .stroke: strokeColor = color
-        case .underline: underlineColor = color
+        case .foreground: userActionPublisher.send(.foregroundColor(color))
+        case .background: userActionPublisher.send(.backgroundColor(color))
+        case .strikethrough: userActionPublisher.send(.strikethroughColor(color))
+        case .stroke: userActionPublisher.send(.strokeColor(color))
+        case .underline: userActionPublisher.send(.underlineColor(color))
         case .undefined: return
         }
     }

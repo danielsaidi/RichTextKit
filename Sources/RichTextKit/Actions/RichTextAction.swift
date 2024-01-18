@@ -78,8 +78,6 @@ public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
     
     case setAttributedString(NSAttributedString)
     
-    case triggerAction(RichTextAction)
-    
     // Change style of text (bold, italic, underline, strikethrough
     case changeStyle(RichTextStyle, Bool)
     
@@ -115,7 +113,6 @@ public extension RichTextAction {
         case .pasteText: .richTextStepIndent(1)
         case .selectRange: .richTextAlignmentCenter
         case .setAttributedString: .richTextAlignmentCenter
-        case .triggerAction: .richTextActionEdit
         case .changeStyle:
             Image.richTextStyleBold
         }
@@ -164,7 +161,6 @@ public extension RichTextAction {
         case .pasteText: RTKL10n(rawValue: "1")!
         case .selectRange: RTKL10n(rawValue: "1")!
         case .setAttributedString: RTKL10n(rawValue: "1")!
-        case .triggerAction: RTKL10n(rawValue: "1")!
         case .changeStyle:
             RTKL10n(rawValue: "1")!
         }
