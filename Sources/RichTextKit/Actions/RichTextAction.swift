@@ -103,25 +103,21 @@ public extension RichTextAction {
         case .stepSuperscript(let val): .richTextStepSuperscript(val)
         case .toggleStyle(let val): val.icon
         case .undoLatestChange: .richTextActionUndo
-        case .backgroundColor: Image.richTextColorBackground
-        case .foregroundColor: Image.richTextColorForeground
-        case .underlineColor: Image.richTextColorUnderline
-        case .strikethroughColor: Image.richTextColorStrikethrough
-        case .strokeColor: Image.richTextColorStroke
-        case .highlightedRange:Image.richTextAlignmentCenter
-        case .highlightingStyle: Image.richTextAlignmentCenter
-        case .pasteImage: Image.richTextDocuments
-        case .pasteImages: Image.richTextDocuments
-        case .pasteText: Image.richTextStepIndent(1)
-        case .selectRange: Image.richTextAlignmentCenter
-        case .setAttributedString: Image.richTextAlignmentCenter
-        case .triggerAction: Image.richTextActionEdit
-        case .changeStyle(let style):
-            switch style {
-            case .bold: Image.richTextStyleBold
-            case .italic: Image.richTextStyleItalic
-            case .strikethrough: Image.richTextStyleStrikethrough
-            case .underlined: Image.richTextStyleUnderline
+        case .backgroundColor: .richTextColorBackground
+        case .foregroundColor: .richTextColorForeground
+        case .underlineColor: .richTextColorUnderline
+        case .strikethroughColor: .richTextColorStrikethrough
+        case .strokeColor: .richTextColorStroke
+        case .highlightedRange: .richTextAlignmentCenter
+        case .highlightingStyle: .richTextAlignmentCenter
+        case .pasteImage: .richTextDocuments
+        case .pasteImages: .richTextDocuments
+        case .pasteText: .richTextStepIndent(1)
+        case .selectRange: .richTextAlignmentCenter
+        case .setAttributedString: .richTextAlignmentCenter
+        case .triggerAction: .richTextActionEdit
+        case .changeStyle:
+            Image.richTextStyleBold
         }
     }
 
@@ -169,13 +165,8 @@ public extension RichTextAction {
         case .selectRange: RTKL10n(rawValue: "1")!
         case .setAttributedString: RTKL10n(rawValue: "1")!
         case .triggerAction: RTKL10n(rawValue: "1")!
-        case .changeStyle(let style):
-            switch style {
-            case .bold: RTKL10n(rawValue: "1")
-            case .italic: RTKL10n(rawValue: "1")
-            case .strikethrough: RTKL10n(rawValue: "1")
-            case .underlined: RTKL10n(rawValue: "1")
-            }
+        case .changeStyle:
+            RTKL10n(rawValue: "1")!
         }
     }
 }

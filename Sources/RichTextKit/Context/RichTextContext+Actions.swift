@@ -23,16 +23,31 @@ public extension RichTextContext {
     /// Check if the context can handle a certain action.
     func canHandle(_ action: RichTextAction) -> Bool {
         switch action {
-        case .copy: canCopy
-        case .dismissKeyboard: true
-        case .print: false
-        case .redoLatestChange: canRedoLatestChange
-        case .setAlignment: true
-        case .stepFontSize: true
-        case .stepIndent(let points): points < 0 ? canDecreaseIndent : canIncreaseIndent
-        case .stepSuperscript: false
-        case .toggleStyle: true
-        case .undoLatestChange: canUndoLatestChange
+        case .copy: return canCopy
+        case .dismissKeyboard: return true
+        case .print: return false
+        case .redoLatestChange: return canRedoLatestChange
+        case .setAlignment: return true
+        case .stepFontSize: return true
+        case .stepIndent(let points):
+            return points < 0 ? canDecreaseIndent : canIncreaseIndent
+        case .stepSuperscript: return false
+        case .toggleStyle: return true
+        case .undoLatestChange: return canUndoLatestChange
+        case .backgroundColor: return true
+        case .foregroundColor: return true
+        case .underlineColor: return true
+        case .strikethroughColor: return true
+        case .strokeColor: return true
+        case .highlightedRange: return true
+        case .highlightingStyle: return true
+        case .pasteImage: return true
+        case .pasteImages: return true
+        case .pasteText: return true
+        case .selectRange: return true
+        case .setAttributedString: return true
+        case .triggerAction: return true
+        case .changeStyle: return true
         }
     }
 }

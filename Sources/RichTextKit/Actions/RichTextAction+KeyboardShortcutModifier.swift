@@ -48,6 +48,7 @@ public extension View {
         case .stepSuperscript: self
         case .toggleStyle(let style): keyboardShortcut(for: style)
         case .undoLatestChange: keyboardShortcut("z", modifiers: .command)
+        default: self // FIXME: ?
         }
         #else
         self

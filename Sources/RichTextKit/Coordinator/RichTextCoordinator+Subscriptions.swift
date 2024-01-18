@@ -59,6 +59,34 @@ private extension RichTextCoordinator {
         case .undoLatestChange:
             textView.undoLatestChange()
             syncContextWithTextView()
+        case .backgroundColor(_):
+            break
+        case .foregroundColor(_):
+            break
+        case .underlineColor(_):
+            break
+        case .strikethroughColor(_):
+            break
+        case .strokeColor(_):
+            break
+        case .highlightedRange(_):
+            break
+        case .highlightingStyle(_):
+            break
+        case .pasteImage(_):
+            break
+        case .pasteImages(_):
+            break
+        case .pasteText(_):
+            break
+        case .selectRange(_):
+            break
+        case .setAttributedString(_):
+            break
+        case .triggerAction(_):
+            break
+        case .changeStyle(_, _):
+            break
         }
     }
 

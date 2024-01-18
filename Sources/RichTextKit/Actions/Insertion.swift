@@ -20,3 +20,11 @@ public struct Insertion<T: Insertable> {
     let at: Index
     let moveCursor: Bool
 }
+
+extension Insertion: Equatable {
+    public static func == (lhs: Insertion<T>, rhs: Insertion<T>) -> Bool {
+        return true
+    }
+    
+    
+}
