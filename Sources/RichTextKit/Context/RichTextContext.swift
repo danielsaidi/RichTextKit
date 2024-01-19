@@ -86,59 +86,59 @@ public class RichTextContext: ObservableObject {
     var backgroundColor: ColorRepresentable?
 
     /// Whether or not the current rich text can be copied.
-    @Published 
+    @Published
     var canCopy = false
 
     /// Whether or not the latest undone change can be redone.
-    @Published 
+    @Published
     var canRedoLatestChange = false
 
     /// Whether or not the latest change can be undone.
-    @Published 
+    @Published
     var canUndoLatestChange = false
 
     /// Whether or not the indent level can be decreased.
-    @Published 
+    @Published
     var canDecreaseIndent = true
 
     /// Whether or not the indent level can be increased.
-    @Published 
+    @Published
     var canIncreaseIndent = true
     
     /// The current foreground color, if any.
-    @Published 
+    @Published
     var foregroundColor: ColorRepresentable?
 
     /// The style to apply when highlighting a range.
-    @Published 
+    @Published
     var highlightingStyle = RichTextHighlightingStyle.standard
 
     /// Whether or not the current text is bold.
-    @Published 
+    @Published
     var isBold = false
 
     /// Whether or not the current text is italic.
-    @Published 
+    @Published
     var isItalic = false
 
     /// Whether or not the current text is striked through.
-    @Published 
+    @Published
     var isStrikethrough = false
 
     /// Whether or not the current text is underlined.
-    @Published 
+    @Published
     var isUnderlined = false
 
     /// The current strikethrough color, if any.
-    @Published 
+    @Published
     var strikethroughColor: ColorRepresentable?
 
     /// The current stroke color, if any.
-    @Published 
+    @Published
     var strokeColor: ColorRepresentable?
 
     /// The current underline color, if any.
-    @Published 
+    @Published
     var underlineColor: ColorRepresentable?
 }
 
