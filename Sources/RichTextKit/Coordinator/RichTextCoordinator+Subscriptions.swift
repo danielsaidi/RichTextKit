@@ -78,40 +78,40 @@ private extension RichTextCoordinator {
     func subscribeToAlignment() {
         richTextContext.$textAlignment
             .sink(
-                receiveCompletion: { _ in },
                 receiveValue: { [weak self] in
                     self?.textView.setRichTextAlignment($0)
-                })
+                }
+            )
             .store(in: &cancellables)
     }
 
     func subscribeToFontName() {
         richTextContext.$fontName
             .sink(
-                receiveCompletion: { _ in },
                 receiveValue: { [weak self] in
                     self?.textView.setRichTextFontName($0)
-                })
+                }
+            )
             .store(in: &cancellables)
     }
 
     func subscribeToFontSize() {
         richTextContext.$fontSize
             .sink(
-                receiveCompletion: { _ in },
                 receiveValue: { [weak self] in
                     self?.textView.setRichTextFontSize($0)
-                })
+                }
+            )
             .store(in: &cancellables)
     }
 
     func subscribeToIsEditingText() {
         richTextContext.$isEditingText
             .sink(
-                receiveCompletion: { _ in },
                 receiveValue: { [weak self] in
                     self?.setIsEditing(to: $0)
-                })
+                }
+            )
             .store(in: &cancellables)
     }
 }
