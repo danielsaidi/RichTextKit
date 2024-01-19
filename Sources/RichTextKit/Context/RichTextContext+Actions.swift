@@ -16,7 +16,7 @@ public extension RichTextContext {
         case .setAlignment(let align): textAlignment = align
         case .stepFontSize(let points): fontSize += CGFloat(points)
         case .toggleStyle(let style): toggle(style)
-        default: triggerAction = action
+        default: break
         }
     }
 

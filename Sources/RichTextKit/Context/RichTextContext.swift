@@ -55,116 +55,76 @@ public class RichTextContext: ObservableObject {
     public internal(set) var selectedRange = NSRange()
 
 
-    // MARK: - Observable properies
-
-    let userActionPublisher: PassthroughSubject<RichTextAction, Never> = .init()
-    
-    /// The current background color, if any.
-    @Published
-    public var backgroundColor: ColorRepresentable?
-
-    /// Whether or not the current rich text can be copied.
-    @Published
-    public var canCopy = false
-
-    /// Whether or not the latest undone change can be redone.
-    @Published
-    public var canRedoLatestChange = false
-
-    /// Whether or not the latest change can be undone.
-    @Published
-    public var canUndoLatestChange = false
-
-    /// Whether or not the indent level can be decreased.
-    @Published
-    public var canDecreaseIndent = true
-
-    /// Whether or not the indent level can be increased.
-    @Published
-    public var canIncreaseIndent = true
-
-    /// The current font name.
-    @Published
-    public var fontName = ""
-
-    /// The current font size.
-    @Published
-    public var fontSize = CGFloat.standardRichTextFontSize
-
-    /// The current foreground color, if any.
-    @Published
-    public var foregroundColor: ColorRepresentable?
-
-    /// The currently highlighted range, if any.
-    @Published
-    public var highlightedRange: NSRange?
-
-    /// The style to apply when highlighting a range.
-    @Published
-    public var highlightingStyle = RichTextHighlightingStyle.standard
-
-    /// Whether or not the current text is bold.
-    @Published
-    public var isBold = false
+    // MARK: - Public properies
 
     /// Whether or not the text is currently being edited.
     @Published
     public var isEditingText = false
-
-    /// Whether or not the current text is italic.
-    @Published
-    public var isItalic = false
-
-    /// Whether or not the current text is striked through.
-    @Published
-    public var isStrikethrough = false
-
-    /// Whether or not the current text is underlined.
-    @Published
-    public var isUnderlined = false
-
-    /// The current strikethrough color, if any.
-    @Published
-    public var strikethroughColor: ColorRepresentable?
-
-    /// The current stroke color, if any.
-    @Published
-    public var strokeColor: ColorRepresentable?
-
+    
     /// The current text alignment, if any.
     @Published
     public var textAlignment: RichTextAlignment = .left
+    
+    /// The current font name.
+    @Published
+    public var fontName = ""
+    
+    /// The current font size.
+    @Published
+    public var fontSize = CGFloat.standardRichTextFontSize
+    
+    /// The currently highlighted range, if any.
+    public var highlightedRange: NSRange?
+    
+    /// Use this Publisher to emit any attribute changes to textView.
+    public let userActionPublisher: PassthroughSubject<RichTextAction, Never> = .init()
+    
+    // MARK: - Internal properties
+    
+    /// The current background color, if any.
+    var backgroundColor: ColorRepresentable?
+
+    /// Whether or not the current rich text can be copied.
+    var canCopy = false
+
+    /// Whether or not the latest undone change can be redone.
+    var canRedoLatestChange = false
+
+    /// Whether or not the latest change can be undone.
+    var canUndoLatestChange = false
+
+    /// Whether or not the indent level can be decreased.
+    var canDecreaseIndent = true
+
+    /// Whether or not the indent level can be increased.
+    var canIncreaseIndent = true
+    
+    /// The current foreground color, if any.
+    var foregroundColor: ColorRepresentable?
+
+    /// The style to apply when highlighting a range.
+    var highlightingStyle = RichTextHighlightingStyle.standard
+
+    /// Whether or not the current text is bold.
+    var isBold = false
+
+    /// Whether or not the current text is italic.
+    var isItalic = false
+
+    /// Whether or not the current text is striked through.
+    var isStrikethrough = false
+
+    /// Whether or not the current text is underlined.
+    var isUnderlined = false
+
+    /// The current strikethrough color, if any.
+    var strikethroughColor: ColorRepresentable?
+
+    /// The current stroke color, if any.
+    var strokeColor: ColorRepresentable?
 
     /// The current underline color, if any.
-    @Published
-    public var underlineColor: ColorRepresentable?
-
-
-    // MARK: - Internal trigger properties
-
-    /// Set this property to trigger a certain action.
-    @Published
-    var triggerAction: RichTextAction?
-
-    /// Set this property to trigger a paste operation.
-    @Published
-    var shouldPasteImage: (image: ImageRepresentable, atIndex: Int, moveCursor: Bool)?
-
-    /// Set this property to trigger an image paste operation.
-    @Published
-    var shouldPasteImages: (images: [ImageRepresentable], atIndex: Int, moveCursor: Bool)?
-
-    /// Set this property to trigger a text paste operation.
-    @Published
-    var shouldPasteText: (text: String, atIndex: Int, moveCursor: Bool)?
-
-    /// Set this property to trigger a string update.
-    @Published
-    var shouldSetAttributedString: NSAttributedString?
-
-    /// Set this property to trigger a range change.
-    @Published
-    var shouldSelectRange = NSRange()
+    var underlineColor: ColorRepresentable?
 }
 
 public extension RichTextContext {
@@ -261,7 +221,6 @@ public extension RichTextContext {
     /// Set a new range and start editing.
     func selectRange(_ range: NSRange) {
         isEditingText = true
-        shouldSelectRange = range
         userActionPublisher.send(.selectRange(range))
     }
 
@@ -274,7 +233,6 @@ public extension RichTextContext {
     func setAttributedString(to string: NSAttributedString) {
         let mutable = NSMutableAttributedString(attributedString: string)
         mutable.setRichTextFontSize(fontSize, at: mutable.richTextRange)
-        shouldSetAttributedString = mutable
         userActionPublisher.send(.setAttributedString(mutable))
     }
 
