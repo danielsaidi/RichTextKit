@@ -64,7 +64,7 @@ open class RichTextCoordinator: NSObject {
     public var cancellables = Set<AnyCancellable>()
 
     /// This flag is used to avoid delaying context sync.
-    internal var shouldDelaySyncContextWithTextView = true
+    var shouldDelaySyncContextWithTextView = true
 
 
     // MARK: - Internal Properties
@@ -73,13 +73,13 @@ open class RichTextCoordinator: NSObject {
      The background color that was used before the currently
      highlighted range was set.
      */
-    internal var highlightedRangeOriginalBackgroundColor: ColorRepresentable?
+    var highlightedRangeOriginalBackgroundColor: ColorRepresentable?
 
     /**
      The foreground color that was used before the currently
      highlighted range was set.
      */
-    internal var highlightedRangeOriginalForegroundColor: ColorRepresentable?
+     var highlightedRangeOriginalForegroundColor: ColorRepresentable?
 
 
     #if canImport(UIKit)

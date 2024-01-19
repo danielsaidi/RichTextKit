@@ -116,7 +116,7 @@ private extension RichTextCoordinator {
     }
 }
 
-internal extension RichTextCoordinator {
+extension RichTextCoordinator {
 
     func pasteImage(_ data: Insertion<ImageRepresentable>?) {
         guard let data = data else { return }
