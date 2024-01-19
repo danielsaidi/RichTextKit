@@ -149,20 +149,29 @@ public extension RichTextAction {
         case .stepSuperscript(let steps): .actionStepSuperscript(steps)
         case .toggleStyle(let style): style.titleKey
         case .undoLatestChange: .actionUndoLatestChange
-        case .backgroundColor: RTKL10n(rawValue: "1")!
-        case .foregroundColor: RTKL10n(rawValue: "1")!
-        case .underlineColor: RTKL10n(rawValue: "1")!
-        case .strikethroughColor: RTKL10n(rawValue: "1")!
-        case .strokeColor: RTKL10n(rawValue: "1")!
-        case .highlightedRange: RTKL10n(rawValue: "1")!
-        case .highlightingStyle: RTKL10n(rawValue: "1")!
-        case .pasteImage: RTKL10n(rawValue: "1")!
-        case .pasteImages: RTKL10n(rawValue: "1")!
-        case .pasteText: RTKL10n(rawValue: "1")!
-        case .selectRange: RTKL10n(rawValue: "1")!
-        case .setAttributedString: RTKL10n(rawValue: "1")!
-        case .changeStyle:
-            RTKL10n(rawValue: "1")!
+        case .backgroundColor: .backgroundColor
+        case .foregroundColor: .foregroundColor
+        case .underlineColor: .underlineColor
+        case .strikethroughColor: .strikethroughColor
+        case .strokeColor: .strokeColor
+        case .highlightedRange: .highlightedRange
+        case .highlightingStyle: .highlightingStyle
+        case .pasteImage: .pasteImage
+        case .pasteImages: .pasteImages
+        case .pasteText: .pasteText
+        case .selectRange: .selectRange
+        case .setAttributedString: .setAttributedString
+        case .changeStyle(let style, _):
+            switch style {
+            case .bold:
+                .styleBold
+            case .italic:
+                .styleItalic
+            case .underlined:
+                .styleUnderlined
+            case .strikethrough:
+                .styleStrikethrough
+            }
         }
     }
 }
