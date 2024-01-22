@@ -14,6 +14,15 @@ This release starts moving types and views that relate to other types into the t
 
 * `RichTextAlignment.Picker` has a new style parameter.
 * `RichTextCommand` is a new namespace for command-related views.
+* `RichTextLabelValue` is a new protocol to harmonize label-compatible label values.
+
+### 💡 Adjustments
+              
+* Many value types implement `RichTextLabelValue` to get a `label` property.
+
+### 🐛 Bug Fixes
+
+* `Image.symbol(...)` removes `palette` rendering mode.
 
 ### 🗑️ Deprecations 
 

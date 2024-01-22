@@ -79,10 +79,9 @@ public extension Image {
     }
 }
 
-private extension Image {
+extension Image {
 
     static func symbol(_ name: String) -> Image {
-        Image(systemName: name)
-            .symbolRenderingMode(.palette)
+        .init(systemName: name)
     }
 }
