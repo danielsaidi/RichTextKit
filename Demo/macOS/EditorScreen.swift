@@ -59,7 +59,7 @@ private extension EditorScreen {
     var toolbar: some View {
         RichTextFormatSidebar(
             context: context,
-            colorPickers: .allRelevant
+            colorPickers: .all
         )
         .frame(width: 250)
     }

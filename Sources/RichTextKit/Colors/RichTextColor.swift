@@ -86,10 +86,8 @@ public extension RichTextColor {
     }
 }
 
-public extension Collection where Element == RichTextColor {
-    static var allRelevant: [RichTextColor] { Element.allCases - .undefined }
-    
-    static var all: [RichTextColor] { Element.allCases }
+public extension Collection where Element == RichTextColor {    
+    static var all: [RichTextColor] { Element.allCases - .undefined }
 }
 
 extension Array where Element == RichTextColor {
