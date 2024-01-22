@@ -23,20 +23,16 @@ public extension RichTextAlignment {
 
          - Parameters:
            - selection: The binding to update with the picker.
-           - style: The style to apply, by default `.standard`.
            - values: The pickable alignments, by default `.allCases`.
          */
         public init(
             selection: Binding<RichTextAlignment>,
-            style: Style = .standard,
             values: [RichTextAlignment] = RichTextAlignment.allCases
         ) {
             self._selection = selection
-            self.style = style
             self.values = values
         }
 
-        let style: Style
         let values: [RichTextAlignment]
 
         @Binding
@@ -45,35 +41,13 @@ public extension RichTextAlignment {
         public var body: some View {
             SwiftUI.Picker("", selection: $selection) {
                 ForEach(RichTextAlignment.allCases) { value in
-                    value.icon
-                        .foregroundColor(style.iconColor)
-                        .accessibilityLabel(value.title)
-                        .tag(value)
+                    value.label
+                        .labelStyle(.iconOnly)
                 }
             }
             .accessibilityLabel(RTKL10n.textAlignment.text)
         }
     }
-}
-
-public extension RichTextAlignment.Picker {
-    
-    /// This style can be used to style an alignment picker.
-    struct Style {
-        
-        public init(
-            iconColor: Color = .primary
-        ) {
-            self.iconColor = iconColor
-        }
-        
-        public var iconColor: Color
-    }
-}
-
-public extension RichTextAlignment.Picker.Style {
-    
-    static var standard = Self.init()
 }
 
 struct RichTextAlignment_Picker_Previews: PreviewProvider {
