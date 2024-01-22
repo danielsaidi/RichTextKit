@@ -78,7 +78,6 @@ public struct RichTextStyleButton: View {
                 .foregroundColor(tintColor)
                 .contentShape(Rectangle())
         }
-        .tint(tintColor)
         .keyboardShortcut(for: style)
         .accessibilityLabel(style.title)
     }
@@ -90,12 +89,6 @@ public extension RichTextStyleButton {
      This style can be used to style a ``RichTextStyleButton``.
      */
     struct Style {
-
-        #if macOS
-        private let systemSpecificTextColor: Color? = Color(NSColor.textColor)
-        #else
-        private let systemSpecificTextColor: Color? = nil
-        #endif
         /**
          Create a rich text style button style.
          
@@ -107,7 +100,7 @@ public extension RichTextStyleButton {
             inactiveColor: Color? = nil,
             activeColor: Color = .blue
         ) {
-            self.inactiveColor = inactiveColor ?? systemSpecificTextColor
+            self.inactiveColor = inactiveColor ?? Color.systemSpecificTextColor
             self.activeColor = activeColor
         }
 

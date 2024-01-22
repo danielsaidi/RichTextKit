@@ -360,7 +360,7 @@ internal extension RichTextCoordinator {
     }
 }
 
-private extension ColorRepresentable {
+extension ColorRepresentable {
 
     #if iOS || os(tvOS) || os(visionOS)
     static var textColor: ColorRepresentable { .label }
