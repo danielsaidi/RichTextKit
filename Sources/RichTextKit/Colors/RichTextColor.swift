@@ -65,20 +65,12 @@ public extension RichTextColor {
 
     /// Adjust a `color` for a certain `colorScheme`.
     func adjust(
-        _ color: Color,
+        _ color: Color?,
         for scheme: ColorScheme
     ) -> Color {
         switch self {
-        case .background:
-            if (color == .black && scheme == .dark) || (color == .white && scheme == .light) {
-                return .clear
-            }
-            return color
-        default:
-            if (color == .white && scheme == .dark) || (color == .black && scheme == .light) {
-                return .primary
-            }
-            return color
+        case .background: return color ?? .clear
+        default: return color ?? .primary
         }
     }
 }

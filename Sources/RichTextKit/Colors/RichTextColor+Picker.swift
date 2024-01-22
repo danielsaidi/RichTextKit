@@ -59,7 +59,11 @@ public extension RichTextColor {
                 iconView
                 picker
                 if hasColors {
-                    quickPickerDivider
+                    HStack(spacing: spacing) {
+                        quickPickerDivider
+                        quickPickerButton(for: nil)
+                        quickPickerDivider
+                    }
                     quickPicker
                 }
             }
@@ -126,11 +130,15 @@ private extension RichTextColor.Picker {
         }.frame(maxWidth: .infinity)
     }
 
-    func quickPickerButton(for color: Color) -> some View {
+    func quickPickerButton(for color: Color?) -> some View {
         Button {
             value = type.adjust(color, for: colorScheme)
         } label: {
-            color
+            if let color {
+                color
+            } else {
+                Image.richTextColorReset
+            }
         }
         .buttonStyle(ColorButtonStyle())
     }

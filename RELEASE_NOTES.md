@@ -14,6 +14,7 @@ This release starts moving types and views that relate to other types into the t
 
 * `RichTextAlignment.Picker` has a new style parameter.
 * `RichTextCommand` is a new namespace for command-related views.
+* `RichTextColorPicker` now shows a quick button to reset the color. 
 * `RichTextLabelValue` is a new protocol to harmonize label-compatible label values.
 
 ### 💡 Adjustments
@@ -21,9 +22,12 @@ This release starts moving types and views that relate to other types into the t
 * Many value types implement `RichTextLabelValue` to get a `label` property.
 * All types that implement `RichTextLabelValue` get a `label` that has improved accessibility.
 
+* `RichTextColor` `.adjust` now takes an optional 
+
 ### 🐛 Bug Fixes
 
-* `Image.symbol(...)` removes `palette` rendering mode.
+* `Image.symbol(...)` removes `palette` rendering mode to fix incorrect color scheme behavior.
+* `RichTextColorPicker` no longer auto-adjusts black and white to make it possible to actually set those colors.
 
 ### 🗑️ Deprecations 
 

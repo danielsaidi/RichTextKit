@@ -26,6 +26,7 @@ public extension Image {
 
     static let richTextColorBackground = symbol("highlighter")
     static let richTextColorForeground = symbol("character")
+    static let richTextColorReset = symbol("circle.slash")
     static let richTextColorStroke = symbol("a.square")
     static let richTextColorStrikethrough = symbol("strikethrough")
     static let richTextColorUnderline = symbol("underline")
