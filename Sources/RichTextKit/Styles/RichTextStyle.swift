@@ -16,7 +16,7 @@ import SwiftUI
  a single way to toggle certain traits and attributes on and
  off, although they may be handled differently by the system.
  */
-public enum RichTextStyle: String, CaseIterable, Identifiable {
+public enum RichTextStyle: String, CaseIterable, Identifiable, RichTextLabelValue {
 
     case bold
     case italic

@@ -48,7 +48,7 @@ public struct RichTextFormatSidebar: View {
             SidebarSection(title: RTKL10n.font.text) {
                 RichTextFont.Picker(selection: $context.fontName, fontSize: 12)
                 HStack {
-                    RichTextStyleToggleGroup(context: context)
+                    RichTextStyle.ToggleGroup(context: context)
                     RichTextFont.SizePickerStack(context: context)
                 }
             }

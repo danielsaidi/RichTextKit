@@ -40,6 +40,7 @@ This release starts moving types and views that relate to other types into the t
 * `RichTextComponent` deprecates the font name and size functions.
 * `RichTextDataFormatMenu` has been renamed to `RichTextDataFormat.Menu`.
 * `RichTextFont*` views have been renamed to `RichTextFont.*`.
+* `RichTextStyle*` views have been renamed to `RichTextStyle.*`.
 
 
 
