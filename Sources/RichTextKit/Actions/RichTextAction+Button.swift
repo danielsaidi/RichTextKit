@@ -18,6 +18,12 @@ public extension RichTextAction {
      */
     struct Button: View {
         
+        #if macOS
+        private let systemSpecificTextColor: Color? = Color(NSColor.textColor)
+        #else
+        private let systemSpecificTextColor: Color? = nil
+        #endif
+        
         /**
          Create a rich text action button.
          
@@ -48,6 +54,7 @@ public extension RichTextAction {
                     .labelStyle(.iconOnly)
                     .frame(maxHeight: fillVertically ? .infinity : nil)
                     .contentShape(Rectangle())
+                    .foregroundColor(systemSpecificTextColor)
             }
             .keyboardShortcut(for: action)
             .disabled(!context.canHandle(action))
