@@ -58,10 +58,14 @@ struct RichTextAlignment_Picker_Previews: PreviewProvider {
         private var alignment = RichTextAlignment.left
 
         var body: some View {
-            RichTextAlignment.Picker(
-                selection: $alignment,
-                values: .all
-            )
+            VStack(spacing: 10) {
+                RichTextAlignment.Picker(
+                    selection: $alignment,
+                    values: .all
+                )
+                .withPreviewPickerStyles()
+            }
+            .padding()
         }
     }
 

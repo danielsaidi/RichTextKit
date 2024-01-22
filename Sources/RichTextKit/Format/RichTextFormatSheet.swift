@@ -51,7 +51,7 @@ public struct RichTextFormatSheet: View {
     public var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-                RichTextFontListPicker(selection: $context.fontName)
+                RichTextFont.ListPicker(selection: $context.fontName)
                     .offset(y: topOffset)
                     .padding(.bottom, topOffset)
                 Divider()
@@ -99,7 +99,7 @@ private extension RichTextFormatSheet {
         HStack {
             styleButtons
             Spacer()
-            RichTextFontSizePickerStack(context: context)
+            RichTextFont.SizePickerStack(context: context)
                 .buttonStyle(.bordered)
         }
     }

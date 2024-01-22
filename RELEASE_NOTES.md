@@ -14,7 +14,7 @@ This release starts moving types and views that relate to other types into the t
 
 * `RichTextAlignment.Picker` has a new style parameter.
 * `RichTextCommand` is a new namespace for command-related views.
-* `RichTextColorPicker` now shows a quick button to reset the color. 
+* `RichTextColor.Picker` now shows a quick button to reset the color. 
 * `RichTextLabelValue` is a new protocol to harmonize label-compatible label values.
 
 ### 💡 Adjustments
@@ -22,25 +22,24 @@ This release starts moving types and views that relate to other types into the t
 * Many value types implement `RichTextLabelValue` to get a `label` property.
 * All types that implement `RichTextLabelValue` get a `label` that has improved accessibility.
 
-* `RichTextColor` `.adjust` now takes an optional 
+* `RichTextColor` `.adjust` now takes an optional color. 
 
 ### 🐛 Bug Fixes
 
 * `Image.symbol(...)` removes `palette` rendering mode to fix incorrect color scheme behavior.
-* `RichTextColorPicker` no longer auto-adjusts black and white to make it possible to actually set those colors.
+* `RichTextColor.Picker` no longer auto-adjusts black and white to make it possible to actually set those colors.
 
 ### 🗑️ Deprecations 
 
-* `RichTextActionButton` has been renamed to `RichTextAction.Button`.
-* `RichTextActionButtonGroup` has been renamed to `RichTextAction.ButtonGroup`.
-* `RichTextActionButtonStack` has been renamed to `RichTextAction.ButtonStack`.
-* `RichTextAlignmentPicker` has been renamed to `RichTextAlignment.Picker`.
+* `RichTextAction*` views have been renamed to `RichTextAction.Button*`.
+* `RichTextAlignment*` views have been renamed to `RichTextAlignment.*`.
 * `RichTextArgumentReader` deprecates the font name and size functions.
 * `RichTextArgumentWriter` deprecates the font name and size functions.
-* `RichTextColorPicker` has been renamed to `RichTextColor.Picker`.
+* `RichTextColor*` views have been renamed to `RichTextColor.*`.
 * `RichTextCommand` views are now nested within the new `RichTextCommand` type.
 * `RichTextComponent` deprecates the font name and size functions.
 * `RichTextDataFormatMenu` has been renamed to `RichTextDataFormat.Menu`.
+* `RichTextFont*` views have been renamed to `RichTextFont.*`.
 
 
 

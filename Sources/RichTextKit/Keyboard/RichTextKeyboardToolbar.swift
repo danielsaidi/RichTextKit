@@ -193,7 +193,7 @@ private extension RichTextKeyboardToolbar {
         RichTextStyleToggleStack(context: context)
             .keyboardShortcutsOnly(if: isCompact)
 
-        RichTextFontSizePickerStack(context: context)
+        RichTextFont.SizePickerStack(context: context)
             .keyboardShortcutsOnly(if: true)
     }
 

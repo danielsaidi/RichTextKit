@@ -9,56 +9,53 @@
 #if iOS || macOS || os(visionOS)
 import SwiftUI
 
-/**
- This view lists a ``RichTextFontSizePicker`` and buttons to
- increment and a decrement the font size.
-
- iOS adds plain `Button` steppers to each side of the picker
- while macOS adds a native `Stepper` after the picker.
-
- iOS will by default apply a border to the steppers. You can
- disable this by adding `bordered: false` to the initializer.
- */
-public struct RichTextFontSizePickerStack: View {
-
+public extension RichTextFont {
+    
     /**
-     Create a rich text font size picker stack.
-
-     - Parameters:
-       - context: The context to affect.
-       - values: The sizes to display in the list, by default ``RichTextFontSizePicker/standardFontSizes``.
+     This view uses a ``RichTextFont/SizePicker`` and button
+     steppers to increment and a decrement the font size.
      */
-    public init(
-        context: RichTextContext,
-        values: [CGFloat] = RichTextFontSizePicker.standardFontSizes
-    ) {
-        self._context = ObservedObject(wrappedValue: context)
-        self.values = values
-    }
-
-    private let values: [CGFloat]
-
-    @ObservedObject
-    private var context: RichTextContext
-
-    public var body: some View {
-        #if iOS || os(visionOS)
-        HStack(spacing: 2) {
-            decreaseButton
-            picker
-            increaseButton
+    struct SizePickerStack: View {
+        
+        /**
+         Create a rich text font size picker stack.
+         
+         - Parameters:
+           - context: The context to affect.
+           - values: The sizes to display in the list, by default ``RichTextFontSizePicker/standardFontSizes``.
+         */
+        public init(
+            context: RichTextContext,
+            values: [CGFloat] = RichTextFont.SizePicker.standardFontSizes
+        ) {
+            self._context = ObservedObject(wrappedValue: context)
+            self.values = values
         }
-        .fixedSize(horizontal: false, vertical: true)
-        #else
-        HStack(spacing: 3) {
-            picker
-            stepper
-        }.overlay(macShortcutOverlay)
-        #endif
+        
+        private let values: [CGFloat]
+        
+        @ObservedObject
+        private var context: RichTextContext
+        
+        public var body: some View {
+            #if iOS || os(visionOS)
+            HStack(spacing: 2) {
+                decreaseButton
+                picker
+                increaseButton
+            }
+            .fixedSize(horizontal: false, vertical: true)
+            #else
+            HStack(spacing: 3) {
+                picker
+                stepper
+            }.overlay(macShortcutOverlay)
+            #endif
+        }
     }
 }
 
-private extension RichTextFontSizePickerStack {
+private extension RichTextFont.SizePickerStack {
 
     var macShortcutOverlay: some View {
         HStack {
@@ -86,7 +83,7 @@ private extension RichTextFontSizePickerStack {
     }
 
     var picker: some View {
-        RichTextFontSizePicker(
+        RichTextFont.SizePicker(
             selection: $context.fontSize,
             values: values
         )
@@ -106,7 +103,7 @@ private extension RichTextFontSizePickerStack {
     }
 }
 
-struct RichTextFontSizePickerStack_Previews: PreviewProvider {
+struct RichTextFont_SizePickerStack_Previews: PreviewProvider {
 
     struct Preview: View {
 
@@ -116,7 +113,7 @@ struct RichTextFontSizePickerStack_Previews: PreviewProvider {
         var body: some View {
             VStack {
                 Text("Size: \(context.fontSize)")
-                RichTextFontSizePickerStack(context: context)
+                RichTextFont.SizePickerStack(context: context)
             }
             .buttonStyle(.bordered)
             .padding()

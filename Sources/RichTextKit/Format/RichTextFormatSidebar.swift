@@ -46,10 +46,10 @@ public struct RichTextFormatSidebar: View {
     public var body: some View {
         VStack(alignment: .leading, spacing: spacing) {
             SidebarSection(title: RTKL10n.font.text) {
-                RichTextFontPicker(selection: $context.fontName, fontSize: 12)
+                RichTextFont.Picker(selection: $context.fontName, fontSize: 12)
                 HStack {
                     RichTextStyleToggleGroup(context: context)
-                    RichTextFontSizePickerStack(context: context)
+                    RichTextFont.SizePickerStack(context: context)
                 }
             }
 

@@ -112,13 +112,8 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 - ``FontRepresentable``
 - ``FontDescriptorRepresentable``
 - ``FontTraitsRepresentable``
+- ``RichTextFont``
 - ``StandardFontSizeProvider``
-- ``RichTextFontPicker``
-- ``RichTextFontPickerFont``
-- ``RichTextFontForEachPicker``
-- ``RichTextFontListPicker``
-- ``RichTextFontSizePicker``
-- ``RichTextFontSizePickerStack``
 
 ### Format
 
