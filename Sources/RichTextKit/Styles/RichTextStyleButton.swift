@@ -91,18 +91,23 @@ public extension RichTextStyleButton {
      */
     struct Style {
 
+        #if macOS
+        private let systemSpecificTextColor: Color? = Color(NSColor.textColor)
+        #else
+        private let systemSpecificTextColor: Color? = nil
+        #endif
         /**
          Create a rich text style button style.
-
+         
          - Parameters:
-           - inactiveColor: The color to apply when the button is inactive, by default `.primary`.
-           - activeColor: The color to apply when the button is active, by default `.blue`.
+         - inactiveColor: The color to apply when the button is inactive, by default `.primary`.
+         - activeColor: The color to apply when the button is active, by default `.blue`.
          */
         public init(
             inactiveColor: Color? = nil,
             activeColor: Color = .blue
         ) {
-            self.inactiveColor = inactiveColor
+            self.inactiveColor = inactiveColor ?? systemSpecificTextColor
             self.activeColor = activeColor
         }
 
