@@ -37,16 +37,11 @@ public extension RichTextViewComponent {
         _ attribute: RichTextAttribute,
         to value: Any
     ) {
-        #if macOS
-        setRichTextAttribute(attribute, to: value, at: selectedRange)
-        typingAttributes[attribute] = value
-        #else
         if hasSelectedRange {
             setRichTextAttribute(attribute, to: value, at: selectedRange)
         } else {
             typingAttributes[attribute] = value
         }
-        #endif
     }
 
     /// Set certain attributes at current range.
