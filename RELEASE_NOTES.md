@@ -17,8 +17,9 @@ This release starts moving types and views that relate to other types into the t
 * `RichTextLabelValue` is a new protocol to harmonize label-compatible label values.
 
 ### 💡 Adjustments
-              
+
 * Many value types implement `RichTextLabelValue` to get a `label` property.
+* All types that implement `RichTextLabelValue` get a `label` that has improved accessibility.
 
 ### 🐛 Bug Fixes
 

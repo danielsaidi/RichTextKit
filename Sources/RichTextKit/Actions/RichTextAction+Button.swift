@@ -44,12 +44,12 @@ public extension RichTextAction {
         
         public var body: some View {
             SwiftUI.Button(action: triggerAction) {
-                action.icon
+                action.label
+                    .labelStyle(.iconOnly)
                     .frame(maxHeight: fillVertically ? .infinity : nil)
                     .contentShape(Rectangle())
             }
             .keyboardShortcut(for: action)
-            .accessibilityLabel(action.title)
             .disabled(!context.canHandle(action))
         }
     }
@@ -68,48 +68,50 @@ struct RichTextAction_Button_Previews: PreviewProvider {
 
         @StateObject
         private var context = RichTextContext()
+        
+        func button(
+            for action: RichTextAction
+        ) -> some View {
+            RichTextAction.Button(
+                action: action,
+                context: context,
+                fillVertically: true
+            )
+        }
 
         var body: some View {
-            HStack {
-                RichTextAction.Button(
-                    action: .copy,
-                    context: context,
-                    fillVertically: true
-                )
-                RichTextAction.Button(
-                    action: .redoLatestChange,
-                    context: context,
-                    fillVertically: true
-                )
-                RichTextAction.Button(
-                    action: .undoLatestChange,
-                    context: context,
-                    fillVertically: true
-                )
-                RichTextAction.Button(
-                    action: .stepFontSize(points: 1),
-                    context: context,
-                    fillVertically: true
-                )
-                RichTextAction.Button(
-                    action: .stepFontSize(points: -1),
-                    context: context,
-                    fillVertically: true
-                )
-                RichTextAction.Button(
-                    action: .decreaseIndent(),
-                    context: context,
-                    fillVertically: true
-                )
-                RichTextAction.Button(
-                    action: .increaseIndent(),
-                    context: context,
-                    fillVertically: true
-                )
+            VStack {
+                Group {
+                    HStack {
+                        button(for: .copy)
+                        button(for: .dismissKeyboard)
+                        button(for: .print)
+                        button(for: .redoLatestChange)
+                        button(for: .undoLatestChange)
+                    }
+                    HStack {
+                        ForEach(RichTextAlignment.allCases) {
+                            button(for: .setAlignment($0))
+                        }
+                    }
+                    HStack {
+                        button(for: .stepFontSize(points: 1))
+                        button(for: .stepFontSize(points: -1))
+                        button(for: .stepIndent(points: 1))
+                        button(for: .stepIndent(points: -1))
+                        button(for: .stepSuperscript(steps: 1))
+                        button(for: .stepSuperscript(steps: -1))
+                    }
+                    HStack {
+                        ForEach(RichTextStyle.allCases) {
+                            button(for: .toggleStyle($0))
+                        }
+                    }
+                }
+                .fixedSize(horizontal: false, vertical: true)
+                .padding()
+                .buttonStyle(.bordered)
             }
-            .fixedSize(horizontal: false, vertical: true)
-            .padding()
-            .buttonStyle(.bordered)
         }
     }
 

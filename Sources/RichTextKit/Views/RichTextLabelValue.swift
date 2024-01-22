@@ -26,7 +26,6 @@ public extension RichTextLabelValue {
             icon: { icon }
         )
         .tag(self)
-        .accessibilityLabel(title)
     }
 }
 

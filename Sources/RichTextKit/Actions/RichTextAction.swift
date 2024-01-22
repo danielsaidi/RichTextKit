@@ -15,7 +15,7 @@ import SwiftUI
  This type also serves as a type namespace for other related
  types and views, like ``RichTextAction/Button``.
  */
-public enum RichTextAction: Identifiable, Equatable {
+public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
 
     /// Copy the currently selected text, if any.
     case copy
