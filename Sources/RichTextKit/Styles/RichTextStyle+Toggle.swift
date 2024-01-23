@@ -27,18 +27,15 @@ public extension RichTextStyle {
          
          - Parameters:
            - style: The style to toggle.
-           - buttonStyle: The button style to use, by default `.standard`.
            - value: The value to bind to.
            - fillVertically: Whether or not fill up vertical space in a non-greedy way, by default `false`.
          */
         public init(
             style: RichTextStyle,
-            buttonStyle: Style = .standard,
             value: Binding<Bool>,
             fillVertically: Bool = false
         ) {
             self.style = style
-            self.buttonStyle = buttonStyle
             self.value = value
             self.fillVertically = fillVertically
         }
@@ -48,26 +45,22 @@ public extension RichTextStyle {
          
          - Parameters:
            - style: The style to toggle.
-           - buttonStyle: The button style to use, by default `.standard`.
            - context: The context to affect.
            - fillVertically: Whether or not fill up vertical space in a non-greedy way, by default `false`.
          */
         public init(
             style: RichTextStyle,
-            buttonStyle: Style = .standard,
             context: RichTextContext,
             fillVertically: Bool = false
         ) {
             self.init(
                 style: style,
-                buttonStyle: buttonStyle,
                 value: context.binding(for: style),
                 fillVertically: fillVertically
             )
         }
         
         private let style: RichTextStyle
-        private let buttonStyle: Style
         private let value: Binding<Bool>
         private let fillVertically: Bool
         
@@ -84,7 +77,6 @@ public extension RichTextStyle {
                 style.icon
                     .frame(maxHeight: fillVertically ? .infinity : nil)
             }
-            .tint(tintColor)
             .keyboardShortcut(for: style)
             .accessibilityLabel(style.title)
         }
@@ -93,52 +85,8 @@ public extension RichTextStyle {
 
 private extension RichTextStyle.Toggle {
 
-    var backgroundColor: Color {
-        value.wrappedValue ? buttonStyle.activeColor.opacity(0.2) : .clear
-    }
-}
-
-public extension RichTextStyle.Toggle {
-
-    struct Style {
-
-        /**
-         Create a rich text style button style.
-
-         - Parameters:
-           - inactiveColor: The color to apply when the button is inactive, by default `nil`.
-           - activeColor: The color to apply when the button is active, by default `.blue`.
-         */
-        public init(
-            inactiveColor: Color? = nil,
-            activeColor: Color = .blue
-        ) {
-            self.inactiveColor = inactiveColor
-            self.activeColor = activeColor
-        }
-
-        /// The color to apply when the button is inactive.
-        public var inactiveColor: Color?
-
-        /// The color to apply when the button is active.
-        public var activeColor: Color
-    }
-}
-
-public extension RichTextStyle.Toggle.Style {
-
-    /// The standard ``RichTextStyle/Toggle`` style.
-    static var standard = RichTextStyle.Toggle.Style()
-}
-
-private extension RichTextStyle.Toggle {
-
     var isOn: Bool {
         value.wrappedValue
-    }
-
-    var tintColor: Color? {
-        isOn ? buttonStyle.activeColor : buttonStyle.inactiveColor
     }
 }
 
@@ -157,23 +105,33 @@ struct RichTextStyle_Toggle_Previews: PreviewProvider {
 
         @State
         private var isUnderlinedOn = true
+        
+        @StateObject
+        private var context = RichTextContext()
 
         var body: some View {
             HStack {
+                toggle(for: .bold, $isBoldOn)
+                toggle(for: .italic, $isItalicOn)
+                toggle(for: .strikethrough, $isStrikethroughOn)
+                toggle(for: .underlined, $isUnderlinedOn)
+                Divider()
                 RichTextStyle.Toggle(
                     style: .bold,
-                    value: $isBoldOn)
-                RichTextStyle.Toggle(
-                    style: .italic,
-                    value: $isItalicOn)
-                RichTextStyle.Toggle(
-                    style: .strikethrough,
-                    value: $isStrikethroughOn)
-                RichTextStyle.Toggle(
-                    style: .underlined,
-                    value: $isUnderlinedOn)
+                    context: context,
+                    fillVertically: true
+                )
             }
+            .fixedSize(horizontal: false, vertical: true)
             .padding()
+        }
+        
+        func toggle(for style: RichTextStyle, _ binding: Binding<Bool>) -> some View {
+            RichTextStyle.Toggle(
+                style: style,
+                value: binding,
+                fillVertically: true
+            )
         }
     }
 

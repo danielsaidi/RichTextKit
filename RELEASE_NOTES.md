@@ -23,7 +23,8 @@ This release starts moving types and views that relate to other types into the t
 * All types that implement `RichTextLabelValue` get a `label` that has improved accessibility.
 
 * `RichTextColor` `.adjust` now takes an optional color.
-* `RichTextStyle.Button` no longer uses a style - use `foregroundStyle` and `.accentColor` instead. 
+* `RichTextFormatSheet` no longer hard-codes an accent color.
+* `RichTextStyle` views no longer use a style - use `foregroundStyle`, `tint` and `accentColor` instead. 
 
 ### 🐛 Bug Fixes
 

@@ -79,7 +79,6 @@ public struct RichTextFormatSidebar: View {
             Spacer()
         }
         .padding(8)
-        .prefersFocusable()
         .background(Color.white.opacity(0.05))
     }
 }

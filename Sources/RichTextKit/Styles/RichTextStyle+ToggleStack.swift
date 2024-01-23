@@ -1,5 +1,5 @@
 //
-//  RichTextStyleToggleStack.swift
+//  RichTextStyle+ToggleStack.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-12-08.
@@ -25,23 +25,19 @@ public extension RichTextStyle {
          - Parameters:
            - context: The context to affect.
            - styles: The styles to list, by default ``RichTextStyle/all``.
-           - buttonStyle: The button style to use, by default `.standard`.
            - spacing: The spacing to apply to stack items, by default `5`.
          */
         public init(
             context: RichTextContext,
             styles: [RichTextStyle] = .all,
-            buttonStyle: RichTextStyle.Toggle.Style = .standard,
             spacing: Double = 5
         ) {
             self._context = ObservedObject(wrappedValue: context)
             self.styles = styles
-            self.buttonStyle = buttonStyle
             self.spacing = spacing
         }
         
         private let styles: [RichTextStyle]
-        private let buttonStyle: RichTextStyle.Toggle.Style
         private let spacing: Double
         
         @ObservedObject
@@ -52,12 +48,12 @@ public extension RichTextStyle {
                 ForEach(styles) {
                     RichTextStyle.Toggle(
                         style: $0,
-                        buttonStyle: buttonStyle,
                         context: context,
                         fillVertically: true
                     )
                 }
-            }.fixedSize(horizontal: false, vertical: true)
+            }
+            .fixedSize(horizontal: false, vertical: true)
         }
     }
 }

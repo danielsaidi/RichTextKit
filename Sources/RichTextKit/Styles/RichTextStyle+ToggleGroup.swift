@@ -17,6 +17,10 @@ public extension RichTextStyle {
      
      Since this view uses multiple styles, it binds directly
      to a ``RichTextContext`` instead of individual values.
+     
+     > Important: Since the `ControlGroup` doesn't highlight
+     active buttons in iOS, the view will use a `ToggleStack`
+     on iOS.
      */
     struct ToggleGroup: View {
         
@@ -27,23 +31,19 @@ public extension RichTextStyle {
            - context: The context to affect.
            - styles: The styles to list, by default ``RichTextStyle/all``.
            - greedy: Whether or not the group is horizontally greedy, by default `true`.
-           - buttonStyle: The button style to use, by default ``RichTextStyleToggle/Style/standard``.
          */
         public init(
             context: RichTextContext,
             styles: [RichTextStyle] = .all,
-            greedy: Bool = true,
-            buttonStyle: RichTextStyle.Toggle.Style = .standard
+            greedy: Bool = true
         ) {
             self._context = ObservedObject(wrappedValue: context)
             self.isGreedy = greedy
             self.styles = styles
-            self.buttonStyle = buttonStyle
         }
         
         private let styles: [RichTextStyle]
         private let isGreedy: Bool
-        private let buttonStyle: RichTextStyle.Toggle.Style
         
         private var groupWidth: CGFloat? {
             if isGreedy { return nil }
@@ -59,17 +59,23 @@ public extension RichTextStyle {
         private var context: RichTextContext
         
         public var body: some View {
+            #if os(macOS)
             ControlGroup {
                 ForEach(styles) {
                     RichTextStyle.Toggle(
                         style: $0,
-                        buttonStyle: buttonStyle,
                         context: context,
                         fillVertically: true
                     )
                 }
             }
             .frame(width: groupWidth)
+            #else
+            RichTextStyle.ToggleStack(
+                context: context,
+                styles: styles
+            )
+            #endif
         }
     }
 }

@@ -73,7 +73,6 @@ public struct RichTextFormatSheet: View {
                 }
                 .padding(.vertical, padding)
                 .environment(\.sizeCategory, .medium)
-                .accentColor(.primary)
                 .background(background)
             }
             .withAutomaticToolbarRole()
@@ -134,7 +133,7 @@ private extension RichTextFormatSheet {
 
     @ViewBuilder
     var styleButtons: some View {
-        RichTextStyleToggleGroup(
+        RichTextStyle.ToggleGroup(
             context: context
         )
     }
