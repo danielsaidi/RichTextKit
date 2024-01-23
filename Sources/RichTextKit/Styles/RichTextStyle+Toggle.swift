@@ -71,13 +71,12 @@ public extension RichTextStyle {
             toggle.toggleStyle(.button)
             #endif
         }
-        
+
         private var toggle: some View {
             SwiftUI.Toggle(isOn: value) {
                 style.icon
                     .frame(maxHeight: fillVertically ? .infinity : nil)
             }
-            .foreground(Color(ColorRepresentable.textColor), if: isOn)
             .keyboardShortcut(for: style)
             .accessibilityLabel(style.title)
         }
