@@ -48,19 +48,19 @@ public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
     case undoLatestChange
     
     // Change background color
-    case backgroundColor(ColorRepresentable)
+    case setBackgroundColor(ColorRepresentable)
     
     // Change foreground color
-    case foregroundColor(ColorRepresentable)
+    case setForegroundColor(ColorRepresentable)
     
     // Change underline color
-    case underlineColor(ColorRepresentable)
+    case setUnderlineColor(ColorRepresentable)
     
     // Change strikethrough color
-    case strikethroughColor(ColorRepresentable)
+    case setStrikethroughColor(ColorRepresentable)
     
     // Change stroke color
-    case strokeColor(ColorRepresentable)
+    case setStrokeColor(ColorRepresentable)
     
     // Highlighted renge
     case highlightedRange(NSRange?)
@@ -101,11 +101,11 @@ public extension RichTextAction {
         case .stepSuperscript(let val): .richTextStepSuperscript(val)
         case .toggleStyle(let val): val.icon
         case .undoLatestChange: .richTextActionUndo
-        case .backgroundColor: .richTextColorBackground
-        case .foregroundColor: .richTextColorForeground
-        case .underlineColor: .richTextColorUnderline
-        case .strikethroughColor: .richTextColorStrikethrough
-        case .strokeColor: .richTextColorStroke
+        case .setBackgroundColor: .richTextColorBackground
+        case .setForegroundColor: .richTextColorForeground
+        case .setUnderlineColor: .richTextColorUnderline
+        case .setStrikethroughColor: .richTextColorStrikethrough
+        case .setStrokeColor: .richTextColorStroke
         case .highlightedRange: .richTextAlignmentCenter
         case .highlightingStyle: .richTextAlignmentCenter
         case .pasteImage: .richTextDocuments
@@ -149,11 +149,11 @@ public extension RichTextAction {
         case .stepSuperscript(let steps): .actionStepSuperscript(steps)
         case .toggleStyle(let style): style.titleKey
         case .undoLatestChange: .actionUndoLatestChange
-        case .backgroundColor: .backgroundColor
-        case .foregroundColor: .foregroundColor
-        case .underlineColor: .underlineColor
-        case .strikethroughColor: .strikethroughColor
-        case .strokeColor: .strokeColor
+        case .setBackgroundColor: .backgroundColor
+        case .setForegroundColor: .foregroundColor
+        case .setUnderlineColor: .underlineColor
+        case .setStrikethroughColor: .strikethroughColor
+        case .setStrokeColor: .strokeColor
         case .highlightedRange: .highlightedRange
         case .highlightingStyle: .highlightingStyle
         case .pasteImage: .pasteImage

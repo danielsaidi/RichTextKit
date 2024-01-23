@@ -46,15 +46,15 @@ private extension RichTextCoordinator {
         case .undoLatestChange:
             textView.undoLatestChange()
             syncContextWithTextView()
-        case .backgroundColor(let color):
+        case .setBackgroundColor(let color):
             setColor(color, for: .background)
-        case .foregroundColor(let color):
+        case .setForegroundColor(let color):
             setColor(color, for: .foreground)
-        case .underlineColor(let color):
+        case .setUnderlineColor(let color):
             setColor(color, for: .underline)
-        case .strikethroughColor(let color):
+        case .setStrikethroughColor(let color):
             setColor(color, for: .strikethrough)
-        case .strokeColor(let color):
+        case .setStrokeColor(let color):
             setColor(color, for: .stroke)
         case .highlightedRange(let range):
             setHighlightedRange(to: range)

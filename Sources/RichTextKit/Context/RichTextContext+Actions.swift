@@ -34,11 +34,11 @@ public extension RichTextContext {
         case .stepSuperscript: return false
         case .toggleStyle: return true
         case .undoLatestChange: return canUndoLatestChange
-        case .backgroundColor: return true
-        case .foregroundColor: return true
-        case .underlineColor: return true
-        case .strikethroughColor: return true
-        case .strokeColor: return true
+        case .setBackgroundColor: return true
+        case .setForegroundColor: return true
+        case .setUnderlineColor: return true
+        case .setStrikethroughColor: return true
+        case .setStrokeColor: return true
         case .highlightedRange: return true
         case .highlightingStyle: return true
         case .pasteImage: return true
