@@ -86,7 +86,7 @@ extension View {
         if cond {
             self.foregroundStyle(Color.accentColor)
         } else {
-            self
+            self.foregroundStyle(color)
         }
     }
 }

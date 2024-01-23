@@ -17,7 +17,6 @@ public extension RichTextAction {
      use and configure it as a normal button.
      */
     struct Button: View {
-        
         /**
          Create a rich text action button.
          

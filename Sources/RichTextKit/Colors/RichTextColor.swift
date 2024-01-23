@@ -86,7 +86,12 @@ public extension RichTextColor {
     }
 }
 
-public extension Collection where Element == RichTextColor {
+public extension Collection where Element == RichTextColor {    
+    static var all: [RichTextColor] { Element.allCases - .undefined }
+}
 
-    static var all: [RichTextColor] { Element.allCases }
+extension Array where Element == RichTextColor {
+    static func - (lhs: [RichTextColor], rhs: RichTextColor) -> [RichTextColor] {
+        return lhs.filter { $0 != rhs }
+    }
 }

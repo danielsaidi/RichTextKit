@@ -135,7 +135,6 @@ public extension RichTextViewComponent {
         setRichTextAttributes(attributes)
     }
 
-
     @available(*, deprecated, message: "richTextAlignment")
     var currentTextAlignment: RichTextAlignment? {
         richTextAlignment
