@@ -21,10 +21,10 @@ public extension RichTextContext {
     /// Check whether or not the context has a certain style.
     func hasStyle(_ style: RichTextStyle) -> Bool {
         switch style {
-        case .bold: return isBold
-        case .italic: return isItalic
-        case .underlined: return isUnderlined
-        case .strikethrough: return isStrikethrough
+        case .bold: isBold
+        case .italic: isItalic
+        case .underlined: isUnderlined
+        case .strikethrough: isStrikethrough
         }
     }
 

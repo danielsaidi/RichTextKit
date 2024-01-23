@@ -28,8 +28,8 @@ public extension RichTextImageAttachmentSize {
      */
     func height(in frame: CGRect) -> CGFloat {
         switch self {
-        case .frame: return frame.height
-        case .points(let points): return points
+        case .frame: frame.height
+        case .points(let points): points
         }
     }
 
@@ -38,8 +38,8 @@ public extension RichTextImageAttachmentSize {
      */
     func width(in frame: CGRect) -> CGFloat {
         switch self {
-        case .frame: return frame.width
-        case .points(let points): return points
+        case .frame: frame.width
+        case .points(let points): points
         }
     }
 }

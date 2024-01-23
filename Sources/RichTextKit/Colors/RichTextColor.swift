@@ -38,16 +38,10 @@ public extension RichTextColor {
 
     /// The unique color ID.
     var id: String { rawValue }
-    
+
     /// All relevant cases.
     static var allCases: [RichTextColor] {
-        [
-            .foreground,
-            .background,
-            .strikethrough,
-            .stroke,
-            .underline
-        ]
+        [.foreground, .background, .strikethrough, .stroke, .underline]
     }
 
     /// The corresponding rich text attribute, if any.
@@ -80,18 +74,8 @@ public extension RichTextColor {
         for scheme: ColorScheme
     ) -> Color {
         switch self {
-        case .background: return color ?? .clear
-        default: return color ?? .primary
+        case .background: color ?? .clear
+        default: color ?? .primary
         }
-    }
-}
-
-public extension Collection where Element == RichTextColor {    
-    static var all: [RichTextColor] { Element.allCases - .undefined }
-}
-
-extension Array where Element == RichTextColor {
-    static func - (lhs: [RichTextColor], rhs: RichTextColor) -> [RichTextColor] {
-        return lhs.filter { $0 != rhs }
     }
 }

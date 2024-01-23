@@ -21,12 +21,12 @@ public extension RichTextContext {
     /// Get the value for a certain color.
     func color(for val: RichTextColor) -> ColorRepresentable? {
         switch val {
-        case .foreground: return foregroundColor
-        case .background: return backgroundColor
-        case .strikethrough: return strikethroughColor
-        case .stroke: return strokeColor
-        case .underline: return underlineColor
-        case .undefined: return nil
+        case .foreground: foregroundColor
+        case .background: backgroundColor
+        case .strikethrough: strikethroughColor
+        case .stroke: strokeColor
+        case .underline: underlineColor
+        case .undefined: nil
         }
     }
 
