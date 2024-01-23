@@ -79,3 +79,8 @@ public extension RichTextColor {
         }
     }
 }
+
+public extension Collection where Element == RichTextColor {
+    
+    static var allCases: [RichTextColor] { Element.allCases }
+}
