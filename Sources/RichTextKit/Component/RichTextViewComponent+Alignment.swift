@@ -25,6 +25,10 @@ public extension RichTextViewComponent {
     }
 
     /// Set the rich text alignment at current range.
+    ///
+    /// > Todo: Something's currently off with alignment. It
+    /// spils over to other paragraphs when moving the input
+    /// cursor and inserting new text.
     func setRichTextAlignment(
         _ alignment: RichTextAlignment
     ) {

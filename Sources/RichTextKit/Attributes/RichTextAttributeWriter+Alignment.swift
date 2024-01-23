@@ -19,6 +19,10 @@ import AppKit
 public extension RichTextAttributeWriter {
 
     /// Set the rich text alignment at a certain range.
+    ///
+    /// > Todo: Something's currently off with alignment. It
+    /// spils over to other paragraphs when moving the input
+    /// cursor and inserting new text. 
     func setRichTextAlignment(
         _ alignment: RichTextAlignment,
         at range: NSRange
