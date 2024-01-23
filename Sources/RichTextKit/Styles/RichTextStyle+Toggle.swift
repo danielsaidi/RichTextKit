@@ -9,22 +9,22 @@
 import SwiftUI
 
 public extension RichTextStyle {
-    
+
     /**
      This toggle can be used to toggle a ``RichTextStyle``.
-     
+
      This view renders a plain `Toggle`, which means you can
      use and configure with plain SwiftUI. The one exception
      is the tint color, which is set with a style.
-     
+
      > Note: The view uses a ``RichTextStyleButton`` if it's
      used on iOS 14, macOS 11, tvOS 14 and watchOS 8.
      */
     struct Toggle: View {
-        
+
         /**
          Create a rich text style toggle toggle.
-         
+
          - Parameters:
            - style: The style to toggle.
            - value: The value to bind to.
@@ -39,10 +39,10 @@ public extension RichTextStyle {
             self.value = value
             self.fillVertically = fillVertically
         }
-        
+
         /**
          Create a rich text style toggle.
-         
+
          - Parameters:
            - style: The style to toggle.
            - context: The context to affect.
@@ -59,11 +59,11 @@ public extension RichTextStyle {
                 fillVertically: fillVertically
             )
         }
-        
+
         private let style: RichTextStyle
         private let value: Binding<Bool>
         private let fillVertically: Bool
-        
+
         public var body: some View {
             #if os(tvOS) || os(watchOS)
             toggle
@@ -106,7 +106,7 @@ struct RichTextStyle_Toggle_Previews: PreviewProvider {
 
         @State
         private var isUnderlinedOn = true
-        
+
         @StateObject
         private var context = RichTextContext()
 
@@ -126,7 +126,7 @@ struct RichTextStyle_Toggle_Previews: PreviewProvider {
             .fixedSize(horizontal: false, vertical: true)
             .padding()
         }
-        
+
         func toggle(for style: RichTextStyle, _ binding: Binding<Bool>) -> some View {
             RichTextStyle.Toggle(
                 style: style,

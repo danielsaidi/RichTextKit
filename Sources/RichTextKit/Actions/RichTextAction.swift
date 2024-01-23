@@ -11,7 +11,7 @@ import SwiftUI
 /**
  This enum defines rich text actions that can be executed on
  a rich text editor.
- 
+
  This type also serves as a type namespace for other related
  types and views, like ``RichTextAction/Button``.
  */

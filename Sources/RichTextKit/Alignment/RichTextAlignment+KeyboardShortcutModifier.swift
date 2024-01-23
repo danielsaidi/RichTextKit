@@ -9,22 +9,22 @@
 import SwiftUI
 
 public extension RichTextAlignment {
- 
+
     /**
      This view modifier can apply keyboard shortcuts for any
      ``RichTextAlignment`` to any view.
-     
+
      You can also apply it with the `.keyboardShortcut(for:)`
      view extension.
      */
     struct KeyboardShortcutModifier: ViewModifier {
-        
+
         public init(_ alignment: RichTextAlignment) {
             self.alignment = alignment
         }
-        
+
         private let alignment: RichTextAlignment
-        
+
         public func body(content: Content) -> some View {
             content.keyboardShortcut(for: alignment)
         }

@@ -9,17 +9,17 @@
 import SwiftUI
 
 public extension RichTextAction {
-    
+
     /**
      This button can be used to trigger a ``RichTextAction``.
-     
+
      This renders a plain `Button`, which means that you can
      use and configure it as a normal button.
      */
     struct Button: View {
         /**
          Create a rich text action button.
-         
+
          - Parameters:
            - action: The action to trigger.
            - context: The context to affect.
@@ -34,13 +34,13 @@ public extension RichTextAction {
             self._context = ObservedObject(wrappedValue: context)
             self.fillVertically = fillVertically
         }
-        
+
         private let action: RichTextAction
         private let fillVertically: Bool
-        
+
         @ObservedObject
         private var context: RichTextContext
-        
+
         public var body: some View {
             SwiftUI.Button(action: triggerAction) {
                 action.label
@@ -67,7 +67,7 @@ struct RichTextAction_Button_Previews: PreviewProvider {
 
         @StateObject
         private var context = RichTextContext()
-        
+
         func button(
             for action: RichTextAction
         ) -> some View {

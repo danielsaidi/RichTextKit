@@ -10,18 +10,18 @@
 import SwiftUI
 
 public extension RichTextDataFormat {
-    
+
     /**
      This menu can be used to trigger custom actions for any
      list of ``RichTextDataFormat`` values.
-     
+
      The menu uses customizable actions, which means that it
      can be used in toolbars, menu bar commands etc. It also
      has an optional `pdf` action, which for instance can be
      used when exporting or sharing rich text.
      */
     struct Menu: View {
-        
+
         public init(
             title: String,
             icon: Image,
@@ -35,15 +35,15 @@ public extension RichTextDataFormat {
             self.formatAction = formatAction
             self.pdfAction = pdfAction
         }
-        
+
         public typealias Format = RichTextDataFormat
-        
+
         private let title: String
         private let icon: Image
         private let formats: [Format]
         private let formatAction: (Format) -> Void
         private let pdfAction: (() -> Void)?
-        
+
         public var body: some View {
             SwiftUI.Menu {
                 ForEach(formats) { format in

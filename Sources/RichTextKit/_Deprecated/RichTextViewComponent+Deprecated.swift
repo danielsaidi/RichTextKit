@@ -1,7 +1,7 @@
 import Foundation
 
 public extension RichTextViewComponent {
-    
+
     @available(*, deprecated, message: "Use richTextFont?.fontName instead")
     var richTextFontName: String? {
         richTextFont?.fontName
@@ -11,7 +11,7 @@ public extension RichTextViewComponent {
     var richTextFontSize: CGFloat? {
         richTextFont?.pointSize
     }
-    
+
 
     @available(*, deprecated, renamed: "currentColor(_:)")
     var currentBackgroundColor: ColorRepresentable? {

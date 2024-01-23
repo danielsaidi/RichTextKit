@@ -9,21 +9,21 @@
 import SwiftUI
 
 public extension RichTextColor {
-    
+
     /**
      This picker can be used to select a rich text color.
-     
+
      This picker renders an icon next to the color picker as
      well as an optional list of quick colors.
-     
+
      The quick color list is empty by default. You can add a
      custom set of colors, for instance `.quickPickerColors`.
      */
     struct Picker: View {
-        
+
         /**
          Create a rich text color picker that binds to a color.
-         
+
          - Parameters:
           - type: The type of color to pick, by default `.undefined`.
           - icon: The icon to show, if any, by default the `type` icon.
@@ -41,19 +41,19 @@ public extension RichTextColor {
             self._value = value
             self.quickColors = quickColors
         }
-        
+
         private let type: RichTextColor
         private let icon: Image?
         private let quickColors: [Color]
-        
+
         @Binding
         private var value: Color
-        
+
         private let spacing = 10.0
-        
+
         @Environment(\.colorScheme)
         private var colorScheme
-        
+
         public var body: some View {
             HStack(spacing: 0) {
                 iconView
@@ -161,7 +161,7 @@ private struct ColorButtonStyle: ButtonStyle {
 }
 
 struct RichTextColor_Picker_Previews: PreviewProvider {
-    
+
     private struct Preview: View {
         @State
         private var foregroundColor = Color.black

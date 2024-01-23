@@ -6,14 +6,16 @@ public typealias RichTextStyleButton = RichTextStyle.Button
 @available(*, deprecated, renamed: "RichTextStyle.Toggle")
 public typealias RichTextStyleToggle = RichTextStyle.Toggle
 
+#if iOS || macOS || os(visionOS)
 @available(*, deprecated, renamed: "RichTextStyle.ToggleGroup")
 public typealias RichTextStyleToggleGroup = RichTextStyle.ToggleGroup
+#endif
 
 @available(*, deprecated, renamed: "RichTextStyle.ToggleStack")
 public typealias RichTextStyleToggleStack = RichTextStyle.ToggleStack
 
 public extension RichTextStyle.Button {
-    
+
     @available(*, deprecated, message: "Use foregroundStyle and accentColor instead of style.")
     init(
         style: RichTextStyle,
@@ -27,7 +29,7 @@ public extension RichTextStyle.Button {
             fillVertically: fillVertically
         )
     }
-    
+
     @available(*, deprecated, message: "Use foregroundStyle and accentColor instead of style.")
     init(
         style: RichTextStyle,
@@ -44,7 +46,7 @@ public extension RichTextStyle.Button {
 }
 
 public extension RichTextStyle.Toggle {
-    
+
     @available(*, deprecated, message: "Use foregroundStyle and tint instead of style.")
     init(
         style: RichTextStyle,
@@ -58,7 +60,7 @@ public extension RichTextStyle.Toggle {
             fillVertically: fillVertically
         )
     }
-    
+
     @available(*, deprecated, message: "Use foregroundStyle and tint instead of style.")
     init(
         style: RichTextStyle,
@@ -74,8 +76,9 @@ public extension RichTextStyle.Toggle {
     }
 }
 
+#if iOS || macOS || os(visionOS)
 public extension RichTextStyle.ToggleGroup {
-    
+
     @available(*, deprecated, message: "Use foregroundStyle and tint instead of style.")
     init(
         context: RichTextContext,
@@ -90,9 +93,10 @@ public extension RichTextStyle.ToggleGroup {
         )
     }
 }
+#endif
 
 public extension RichTextStyle.ToggleStack {
-    
+
     @available(*, deprecated, message: "Use foregroundStyle and tint instead of style.")
     init(
         context: RichTextContext,

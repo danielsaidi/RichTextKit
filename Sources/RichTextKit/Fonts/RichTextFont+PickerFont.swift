@@ -17,39 +17,39 @@ import UIKit
 #endif
 
 public extension RichTextFont {
-    
+
     /**
      This struct is used by the various font pickers.
-     
+
      Instead of referring to actual fonts, the struct refers
      to fonts by name, to simplify binding.
-     
+
      You can use ``all`` to get all fonts, and rearrange the
      collection as needed.
-     
+
      Some fonts are special when being listed in a picker or
      displayed elsewhere. One such example is `San Francisco`,
      which must have its name adjusted.
-     
+
      To change the display name of a system font, simply set
-     ``RichTextFontPickerFont/standardSystemFontDisplayName`` 
+     ``RichTextFontPickerFont/standardSystemFontDisplayName``
      to another value.
-     
+
      To change how fonts are detected by the system, use the
      ``systemFontNamePrefix`` to define a font name prefix.
      */
     struct PickerFont: Identifiable, Equatable {
-        
+
         public init(fontName: String) {
             let fontName = fontName.capitalized
             self.fontName = fontName
             self.fontDisplayName = ""
             self.fontDisplayName = displayName
         }
-        
+
         public let fontName: String
         public private(set) var fontDisplayName: String
-        
+
         /**
          Get the unique font id.
          */

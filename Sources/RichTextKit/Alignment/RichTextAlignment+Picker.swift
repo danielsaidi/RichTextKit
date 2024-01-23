@@ -9,7 +9,7 @@
 import SwiftUI
 
 public extension RichTextAlignment {
- 
+
     /**
      This picker can be used to pick a rich text alignment.
 

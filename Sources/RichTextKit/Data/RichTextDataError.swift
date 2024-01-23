@@ -12,7 +12,7 @@ import Foundation
  This enum represents rich text data-related errors.
  */
 enum RichTextDataError: Error {
-    
+
     case invalidArchivedData(in: Data)
     case invalidPlainTextData(in: Data)
     case invalidData(in: String)

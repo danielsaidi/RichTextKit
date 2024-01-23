@@ -9,7 +9,7 @@
 import SwiftUI
 
 public protocol RichTextLabelValue: Hashable {
-    
+
     /// The value icon.
     var icon: Image { get }
 
@@ -18,7 +18,7 @@ public protocol RichTextLabelValue: Hashable {
 }
 
 public extension RichTextLabelValue {
-    
+
     /// The standard label to use for the value.
     var label: some View {
         Label(

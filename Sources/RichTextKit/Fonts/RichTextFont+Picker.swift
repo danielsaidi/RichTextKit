@@ -9,24 +9,24 @@
 import SwiftUI
 
 public extension RichTextFont {
-    
+
     /**
      This font picker can be used to pick a font from a list.
      It uses ``RichTextFontPickerFont/all`` as default fonts.
-     
+
      This view renders a plain `Picker`, which means you can
      use and configure it in all ways supported by SwiftUI.
-     
+
      Note that macOS will render every font correctly, while
      iOS will only do it in a wheel/inline picker. Try using
      ``RichTextFontListPicker``/``RichTextFontForEachPicker``
      on iOS, if you need a proper list.
      */
     struct Picker: View {
-        
+
         /**
          Create a font picker.
-         
+
          - Parameters:
          - selection: The selected font name.
          - fonts: The fonts to display in the list, by default `all`.
@@ -42,17 +42,17 @@ public extension RichTextFont {
             self.itemFontSize = fontSize
             self.selectedFont = fonts.last { $0.matches(selection.wrappedValue) }
         }
-        
+
         public typealias Font = RichTextFont.PickerFont
         public typealias FontName = String
-        
+
         private let fonts: [Font]
         private let itemFontSize: CGFloat
         private let selectedFont: Font?
-        
+
         @Binding
         private var selection: FontName
-        
+
         public var body: some View {
             SwiftUI.Picker(selection: $selection) {
                 ForEach(fonts) { font in
@@ -119,7 +119,7 @@ struct RichTextFont_Picker_Previews: PreviewProvider {
 }
 
 extension View {
-    
+
     func withPreviewPickerStyles() -> some View {
         VStack(spacing: 10) {
             self

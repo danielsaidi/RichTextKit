@@ -44,7 +44,7 @@ public enum RichTextAlignment: String, CaseIterable, Codable, Equatable, Identif
 }
 
 public extension Collection where Element == RichTextAlignment {
-    
+
     static var all: [Element] { RichTextAlignment.allCases }
 }
 

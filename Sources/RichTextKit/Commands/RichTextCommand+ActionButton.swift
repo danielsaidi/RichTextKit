@@ -9,20 +9,20 @@
 import SwiftUI
 
 public extension RichTextCommand {
-    
+
     /**
      This button can be used to trigger any ``RichTextAction``
      from a main menu command item.
-     
+
      This button gets ``RichTextContext`` as a focused value.
      It will be nil if no view has focus, which will disable
      the button altogether.
      */
     struct ActionButton: View {
-        
+
         /**
          Create a command button.
-         
+
          - Parameters:
          - action: The action to trigger.
          */
@@ -31,12 +31,12 @@ public extension RichTextCommand {
         ) {
             self.action = action
         }
-        
+
         private let action: RichTextAction
-        
+
         @FocusedValue(\.richTextContext)
         private var context: RichTextContext?
-        
+
         public var body: some View {
             SwiftUI.Button(action.menuTitle) {
                 context?.handle(action)
@@ -45,7 +45,7 @@ public extension RichTextCommand {
             .keyboardShortcut(for: action)
             .accessibilityLabel(action.title)
         }
-        
+
         private var canHandle: Bool {
             context?.canHandle(action) ?? false
         }

@@ -9,22 +9,22 @@
 import SwiftUI
 
 public extension RichTextAction {
- 
+
     /**
      This view modifier can apply keyboard shortcuts for any
      ``RichTextAction`` to any view.
-     
+
      You can also apply it with the `.keyboardShortcut(for:)`
      view extension.
      */
     struct KeyboardShortcutModifier: ViewModifier {
-        
+
         public init(_ action: RichTextAction) {
             self.action = action
         }
-        
+
         private let action: RichTextAction
-        
+
         public func body(content: Content) -> some View {
             content.keyboardShortcut(for: action)
         }

@@ -11,7 +11,7 @@ import Foundation
 /**
  This type is used as a namespace for command-specific types,
  like views that are to be added to the main menu bar.
- 
+
  > Important: Most rich text commands require that there's a
  focused ``RichTextContext`` value in the view hierarchy. If
  not, they will be disabled.

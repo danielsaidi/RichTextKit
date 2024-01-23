@@ -10,19 +10,19 @@
 import SwiftUI
 
 public extension RichTextCommand {
-    
+
     /**
      This menu can be used to add format-specific options to
      the main menu bar.
      */
     struct FormatMenu: Commands {
-        
+
         /// Create a rich text format command menu.
         public init() {}
-        
+
         @FocusedValue(\.richTextContext)
         private var context: RichTextContext?
-        
+
         public var body: some Commands {
             CommandMenu(RTKL10n.menuFormat.text) {
                 Group {

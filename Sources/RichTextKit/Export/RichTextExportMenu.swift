@@ -38,7 +38,7 @@ public struct RichTextExportMenu: View {
             pdfAction: pdfAction
         )
     }
-    
+
     private let menu: RichTextDataFormat.Menu
 
     public var body: some View {

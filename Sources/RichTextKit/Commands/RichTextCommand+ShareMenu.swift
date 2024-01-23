@@ -10,31 +10,31 @@
 import SwiftUI
 
 public extension RichTextCommand {
-    
+
     /**
      This menu can be used to add sharing-related options to
      the main menu bar.
-     
+
      The menu will try to add options for share, export, and
      print, if applicable to the current platform. Selecting
      an option will trigger a corresponding, provided action.
-     
+
      The macOS exclusive `nsSharing` commands require you to
      return a share url, after which a command takes care of
      the sharing. Also note that the `formatNSSharingAction`
      and `pdfNSSharingAction` will only have effect on macOS,
      where they will add ``RichTextNSSharingMenu`` options.
-     
+
      Note that a pdf action menu will only be included if it
      has a corresponding action. Also note that you must use
      `isEnabled: false` to disable the menu, since you can't
      add `.disabled` to the command menu.
-     
+
      Setting any action to nil removes a corrsponding option
      from the menu.
      */
     struct ShareMenu: Commands {
-        
+
         /**
          Create a rich text share command menu.
          */
@@ -61,16 +61,16 @@ public extension RichTextCommand {
             self.pdfExportAction = pdfExportAction
             self.printAction = printAction
         }
-        
+
         public typealias FormatAction = (RichTextDataFormat) -> Void
         public typealias FormatNSSharingAction = (RichTextDataFormat) -> URL?
         public typealias PdfAction = () -> Void
         public typealias PdfNSSharingAction = () -> URL?
         public typealias PrintAction = () -> Void
-        
+
         private let shareFormats: [RichTextDataFormat]
         private let exportFormats: [RichTextDataFormat]
-        
+
         private let isEnabled: Bool
         private let formatShareAction: FormatAction?
         private let pdfShareAction: PdfAction?
@@ -79,7 +79,7 @@ public extension RichTextCommand {
         private let formatExportAction: FormatAction?
         private let pdfExportAction: PdfAction?
         private let printAction: PrintAction?
-        
+
         public var body: some Commands {
             CommandGroup(replacing: .importExport) {
                 Group {

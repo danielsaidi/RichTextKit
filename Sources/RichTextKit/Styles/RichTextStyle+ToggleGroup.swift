@@ -10,23 +10,23 @@
 import SwiftUI
 
 public extension RichTextStyle {
-    
+
     /**
      This view can list ``RichTextStyle/Toggle``s for a list
      of ``RichTextStyle`` values, in a bordered button group.
-     
+
      Since this view uses multiple styles, it binds directly
      to a ``RichTextContext`` instead of individual values.
-     
+
      > Important: Since the `ControlGroup` doesn't highlight
      active buttons in iOS, the view will use a `ToggleStack`
      on iOS.
      */
     struct ToggleGroup: View {
-        
+
         /**
          Create a rich text style toggle button group.
-         
+
          - Parameters:
            - context: The context to affect.
            - styles: The styles to list, by default ``RichTextStyle/all``.
@@ -41,10 +41,10 @@ public extension RichTextStyle {
             self.isGreedy = greedy
             self.styles = styles
         }
-        
+
         private let styles: [RichTextStyle]
         private let isGreedy: Bool
-        
+
         private var groupWidth: CGFloat? {
             if isGreedy { return nil }
             let count = Double(styles.count)
@@ -54,10 +54,10 @@ public extension RichTextStyle {
             return 50 * count
             #endif
         }
-        
+
         @ObservedObject
         private var context: RichTextContext
-        
+
         public var body: some View {
             #if os(macOS)
             ControlGroup {

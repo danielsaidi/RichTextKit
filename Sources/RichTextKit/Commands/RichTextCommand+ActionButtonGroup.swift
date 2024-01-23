@@ -9,7 +9,7 @@
 import SwiftUI
 
 public extension RichTextCommand {
-    
+
     /**
      This view can be used to render a collection of actions
      as main menu command items.

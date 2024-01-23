@@ -9,14 +9,14 @@
 import SwiftUI
 
 public extension RichTextCommand {
-    
+
     /**
      This view renders ``RichTextStyle`` command options.
      */
     struct StyleOptionsGroup: View {
-        
+
         public init() {}
-        
+
         public var body: some View {
             ActionButtonGroup(
                 actions: RichTextStyle.allCases.map {

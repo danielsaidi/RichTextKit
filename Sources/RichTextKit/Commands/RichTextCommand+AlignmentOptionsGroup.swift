@@ -9,14 +9,14 @@
 import SwiftUI
 
 public extension RichTextCommand {
-    
+
     /**
      This view renders ``RichTextAlignment`` command options.
      */
     struct AlignmentOptionsGroup: View {
-        
+
         public init() {}
-        
+
         public var body: some View {
             ActionButtonGroup(
                 actions: RichTextAlignment.allCases.map {

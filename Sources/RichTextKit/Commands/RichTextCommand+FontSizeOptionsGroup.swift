@@ -9,14 +9,14 @@
 import SwiftUI
 
 public extension RichTextCommand {
-    
+
     /**
      This view renders font size command options.
      */
     struct FontSizeOptionsGroup: View {
-        
+
         public init() {}
-        
+
         public var body: some View {
             ActionButtonGroup(
                 actions: [

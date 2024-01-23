@@ -9,18 +9,18 @@
 import SwiftUI
 
 public extension RichTextAction {
-    
+
     /**
      This view lists ``RichTextAction`` buttons in a stack.
-     
+
      Since this view uses multiple values, it binds directly
      to a ``RichTextContext`` instead of individual values.
      */
     struct ButtonStack: View {
-        
+
         /**
          Create a rich text action button stack.
-         
+
          - Parameters:
            - context: The context to affect.
            - actions: The actions to list, by default all non-size actions.
@@ -35,13 +35,13 @@ public extension RichTextAction {
             self.actions = actions
             self.spacing = spacing
         }
-        
+
         private let actions: [RichTextAction]
         private let spacing: Double
-        
+
         @ObservedObject
         private var context: RichTextContext
-        
+
         public var body: some View {
             HStack(spacing: spacing) {
                 ForEach(actions) {

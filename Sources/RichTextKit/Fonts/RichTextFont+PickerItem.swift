@@ -13,7 +13,7 @@ extension RichTextFont {
      This struct is used within the various font pickers.
      */
     struct PickerItem: View, ListPickerItem {
-        
+
         init(
             font: Item,
             fontSize: CGFloat = 20,
@@ -23,15 +23,15 @@ extension RichTextFont {
             self.fontSize = fontSize
             self.isSelected = isSelected
         }
-        
+
         typealias Item = RichTextFont.PickerFont
-        
+
         let font: Item
         let fontSize: CGFloat
         let isSelected: Bool
-        
+
         var item: Item { font }
-        
+
         var body: some View {
             HStack {
                 Text(font.fontDisplayName)

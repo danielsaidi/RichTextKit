@@ -15,5 +15,7 @@ public typealias RichTextFontPickerFont = RichTextFont.PickerFont
 @available(*, deprecated, renamed: "RichTextFont.SizePicker")
 public typealias RichTextFontSizePicker = RichTextFont.SizePicker
 
+#if iOS || macOS || os(visionOS)
 @available(*, deprecated, renamed: "RichTextFont.SizePickerStack")
 public typealias RichTextFontSizePickerStack = RichTextFont.SizePickerStack
+#endif

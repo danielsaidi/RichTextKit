@@ -10,16 +10,16 @@
 import SwiftUI
 
 public extension RichTextFont {
-    
+
     /**
      This view uses a ``RichTextFont/SizePicker`` and button
      steppers to increment and a decrement the font size.
      */
     struct SizePickerStack: View {
-        
+
         /**
          Create a rich text font size picker stack.
-         
+
          - Parameters:
            - context: The context to affect.
            - values: The sizes to display in the list, by default ``RichTextFontSizePicker/standardFontSizes``.
@@ -31,12 +31,12 @@ public extension RichTextFont {
             self._context = ObservedObject(wrappedValue: context)
             self.values = values
         }
-        
+
         private let values: [CGFloat]
-        
+
         @ObservedObject
         private var context: RichTextContext
-        
+
         public var body: some View {
             #if iOS || os(visionOS)
             HStack(spacing: 2) {

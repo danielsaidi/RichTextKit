@@ -9,18 +9,18 @@
 import SwiftUI
 
 public extension RichTextFont {
-    
+
     /**
      This picker can be used to pick a font size.
-     
+
      The view returns a plain SwiftUI `Picker` view that can
      be styled and configured with plain SwiftUI.
      */
     struct SizePicker: View {
-        
+
         /**
          Create a font size picker.
-         
+
          - Parameters:
            - selection: The selected font size.
            - sizes: The sizes to display in the list, by default ``RichTextFontSizePicker/standardFontSizes``.
@@ -34,12 +34,12 @@ public extension RichTextFont {
                 for: values,
                 selection: selection.wrappedValue)
         }
-        
+
         private let values: [CGFloat]
-        
+
         @Binding
         private var selection: CGFloat
-        
+
         public var body: some View {
             SwiftUI.Picker("", selection: $selection) {
                 ForEach(values, id: \.self) {

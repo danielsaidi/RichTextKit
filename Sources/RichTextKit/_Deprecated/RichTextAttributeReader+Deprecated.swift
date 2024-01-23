@@ -1,14 +1,14 @@
 import Foundation
 
 public extension RichTextAttributeReader {
-    
+
     @available(*, deprecated, message: "Use richTextFont(at:)?.fontName instead")
     func richTextFontName(
         at range: NSRange
     ) -> String? {
         richTextFont(at: range)?.fontName
     }
-    
+
     @available(*, deprecated, message: "Use richTextFont(at:)?.pointSize instead")
     func richTextFontSize(
         at range: NSRange

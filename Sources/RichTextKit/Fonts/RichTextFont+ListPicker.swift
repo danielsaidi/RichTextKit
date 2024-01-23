@@ -9,20 +9,20 @@
 import SwiftUI
 
 public extension RichTextFont {
-    
+
     /**
      This view uses a `List` to list a set of fonts of which
      one can be selected.
-     
+
      Unlike ``RichTextFont/Picker`` the picker renders fonts
      correctly on all platforms. However, unlike the regular
      SwiftUI `Picker`, it must actively be added & presented.
      */
     struct ListPicker: View {
-        
+
         /**
          Create a font picker.
-         
+
          - Parameters:
            - selection: The selected font name.
            - selectionTopmost: Whether or not to place the selected font topmost.
@@ -45,23 +45,23 @@ public extension RichTextFont {
                 self.fonts = self.fonts.moveTopmost(selection.wrappedValue)
             }
         }
-        
+
         public typealias Font = RichTextFont.PickerFont
         public typealias FontName = String
-        
+
         private var fonts: [Font]
         private let fontSize: CGFloat
         private let dismissAfterPick: Bool
-        
+
         @Binding
         private var selection: FontName
-        
+
         public var body: some View {
             let font = Binding(
                 get: { Font(fontName: selection) },
                 set: { selection = $0.fontName }
             )
-            
+
             RichTextKit.ListPicker(
                 items: fonts,
                 selection: font,

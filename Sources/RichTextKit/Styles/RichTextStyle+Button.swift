@@ -9,22 +9,22 @@
 import SwiftUI
 
 public extension RichTextStyle {
-    
+
     /**
      This button can be used to toggle a ``RichTextStyle``.
-     
+
      This view renders a plain `Button`, which means you can
-     use and configure with plain SwiftUI. 
-     
+     use and configure with plain SwiftUI.
+
      You can apply a `foregroundStyle` to the view to define
      the color to use when the style is not active. The view
      will `.accentColor` when the style is active.
      */
     struct Button: View {
-        
+
         /**
          Create a rich text style button.
-         
+
          - Parameters:
            - style: The style to toggle.
            - value: The value to bind to.
@@ -39,10 +39,10 @@ public extension RichTextStyle {
             self.value = value
             self.fillVertically = fillVertically
         }
-        
+
         /**
          Create a rich text style button.
-         
+
          - Parameters:
            - style: The style to toggle.
            - context: The context to affect.
@@ -59,11 +59,11 @@ public extension RichTextStyle {
                 fillVertically: fillVertically
             )
         }
-        
+
         private let style: RichTextStyle
         private let value: Binding<Bool>
         private let fillVertically: Bool
-        
+
         public var body: some View {
             SwiftUI.Button(action: toggle) {
                 style.label
@@ -80,13 +80,13 @@ public extension RichTextStyle {
 }
 
 extension View {
-    
+
     @ViewBuilder
-    func foreground(_ color: Color, if cond: Bool) -> some View {
-        if cond {
-            self.foregroundStyle(Color.accentColor)
-        } else {
+    func foreground(_ color: Color, if isOn: Bool) -> some View {
+        if isOn {
             self.foregroundStyle(color)
+        } else {
+            self
         }
     }
 }
@@ -120,6 +120,8 @@ struct RichTextStyle_Button_Previews: PreviewProvider {
 
         var body: some View {
             HStack {
+                Text(isBoldOn.description)
+                
                 RichTextStyle.Button(
                     style: .bold,
                     value: $isBoldOn)
