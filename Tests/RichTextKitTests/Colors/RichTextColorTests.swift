@@ -10,7 +10,7 @@ import RichTextKit
 import XCTest
 
 final class RichTextColorTests: XCTestCase {
-    
+
     func testAllCasesExcludesUndefined() {
         let colors = RichTextColor.allCases
         let expected: [RichTextColor] = [

@@ -58,7 +58,7 @@ private extension EditorScreen {
             leadingButtons: {},
             trailingButtons: {}
         ) {
-            var sheet = $0
+            let sheet = $0
             // Uncomment this to show all color pickers
             // sheet.colorPickers = .allCases
             return sheet

@@ -22,7 +22,7 @@ public extension RichTextFont {
 
          - Parameters:
            - context: The context to affect.
-           - values: The sizes to display in the list, by default ``RichTextFontSizePicker/standardFontSizes``.
+           - values: The sizes to display in the list, by default ``RichTextFont/SizePicker/standardFontSizes``.
          */
         public init(
             context: RichTextContext,

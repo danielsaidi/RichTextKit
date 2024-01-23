@@ -121,7 +121,7 @@ struct RichTextStyle_Button_Previews: PreviewProvider {
         var body: some View {
             HStack {
                 Text(isBoldOn.description)
-                
+
                 RichTextStyle.Button(
                     style: .bold,
                     value: $isBoldOn)

@@ -32,7 +32,7 @@ public extension RichTextFont {
      which must have its name adjusted.
 
      To change the display name of a system font, simply set
-     ``RichTextFontPickerFont/standardSystemFontDisplayName``
+     ``RichTextFont/PickerFont/standardSystemFontDisplayName``
      to another value.
 
      To change how fonts are detected by the system, use the

@@ -23,7 +23,7 @@ public extension RichTextFont {
 
          - Parameters:
            - selection: The selected font size.
-           - sizes: The sizes to display in the list, by default ``RichTextFontSizePicker/standardFontSizes``.
+           - sizes: The font sizes to display in the list.
          */
         public init(
             selection: Binding<CGFloat>,
