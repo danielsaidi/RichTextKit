@@ -12,9 +12,9 @@ extension ImageRepresentable: Insertable {}
 extension [ImageRepresentable]: Insertable {}
 extension NSAttributedString: Insertable {}
 
-public protocol Insertable {}
+public protocol Insertable: Hashable {}
 
-public struct Insertion<T: Insertable> {
+public struct Insertion<T: Insertable>: Hashable {
     typealias Index = Int
     let content: T
     let at: Index
