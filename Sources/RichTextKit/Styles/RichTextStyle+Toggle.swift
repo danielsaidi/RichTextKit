@@ -77,6 +77,7 @@ public extension RichTextStyle {
                 style.icon
                     .frame(maxHeight: fillVertically ? .infinity : nil)
             }
+            .foreground(Color(ColorRepresentable.textColor), if: isOn)
             .keyboardShortcut(for: style)
             .accessibilityLabel(style.title)
         }

@@ -47,7 +47,6 @@ public extension RichTextAction {
                     .labelStyle(.iconOnly)
                     .frame(maxHeight: fillVertically ? .infinity : nil)
                     .contentShape(Rectangle())
-                    .foregroundColor(.systemSpecificTextColor)
             }
             .keyboardShortcut(for: action)
             .disabled(!context.canHandle(action))

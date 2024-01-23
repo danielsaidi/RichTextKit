@@ -17,7 +17,6 @@ public extension RichTextAlignment {
      be styled and configured with plain SwiftUI.
      */
     struct Picker: View {
-        @Environment(\.colorScheme) var colorScheme
         /**
          Create a rich text alignment picker.
          
