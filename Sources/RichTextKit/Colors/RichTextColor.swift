@@ -38,6 +38,17 @@ public extension RichTextColor {
 
     /// The unique color ID.
     var id: String { rawValue }
+    
+    /// All relevant cases.
+    static var allCases: [RichTextColor] {
+        [
+            .foreground,
+            .background,
+            .strikethrough,
+            .stroke,
+            .underline
+        ]
+    }
 
     /// The corresponding rich text attribute, if any.
     var attribute: NSAttributedString.Key? {
