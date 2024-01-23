@@ -19,7 +19,7 @@ public extension RichTextAlignment {
     struct Picker: View {
         /**
          Create a rich text alignment picker.
-         
+
          - Parameters:
            - selection: The binding to update with the picker.
            - values: The pickable alignments, by default `.allCases`.
@@ -33,10 +33,10 @@ public extension RichTextAlignment {
         }
 
         let values: [RichTextAlignment]
-        
+
         @Binding
         private var selection: RichTextAlignment
-        
+
         public var body: some View {
             SwiftUI.Picker("", selection: $selection) {
                 ForEach(RichTextAlignment.allCases) { value in
