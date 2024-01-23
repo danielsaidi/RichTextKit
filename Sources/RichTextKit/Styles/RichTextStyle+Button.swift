@@ -14,8 +14,11 @@ public extension RichTextStyle {
      This button can be used to toggle a ``RichTextStyle``.
      
      This view renders a plain `Button`, which means you can
-     use and configure with plain SwiftUI. The one exception
-     is the content color, which is set with a style.
+     use and configure with plain SwiftUI. 
+     
+     You can apply a `foregroundStyle` to the view to define
+     the color to use when the style is not active. The view
+     will `.accentColor` when the style is active.
      */
     struct Button: View {
         
@@ -24,18 +27,15 @@ public extension RichTextStyle {
          
          - Parameters:
            - style: The style to toggle.
-           - buttonStyle: The button style to use, by default `.standard`.
            - value: The value to bind to.
            - fillVertically: Whether or not fill up vertical space in a non-greedy way, by default `false`.
          */
         public init(
             style: RichTextStyle,
-            buttonStyle: Style = .standard,
             value: Binding<Bool>,
             fillVertically: Bool = false
         ) {
             self.style = style
-            self.buttonStyle = buttonStyle
             self.value = value
             self.fillVertically = fillVertically
         }
@@ -45,26 +45,22 @@ public extension RichTextStyle {
          
          - Parameters:
            - style: The style to toggle.
-           - buttonStyle: The button style to use, by default `.standard`.
            - context: The context to affect.
            - fillVertically: Whether or not fill up vertical space in a non-greedy way, by default `false`.
          */
         public init(
             style: RichTextStyle,
-            buttonStyle: Style = .standard,
             context: RichTextContext,
             fillVertically: Bool = false
         ) {
             self.init(
                 style: style,
-                buttonStyle: buttonStyle,
                 value: context.binding(for: style),
                 fillVertically: fillVertically
             )
         }
         
         private let style: RichTextStyle
-        private let buttonStyle: Style
         private let value: Binding<Bool>
         private let fillVertically: Bool
         
@@ -73,56 +69,32 @@ public extension RichTextStyle {
                 style.label
                     .labelStyle(.iconOnly)
                     .frame(maxHeight: fillVertically ? .infinity : nil)
-                    .foregroundColor(tintColor)
+                    .foreground(.accentColor, if: isOn)
                     .contentShape(Rectangle())
             }
+            .buttonStyle(.plain)
             .keyboardShortcut(for: style)
             .accessibilityLabel(style.title)
         }
     }
 }
 
-public extension RichTextStyle.Button {
-
-    struct Style {
-
-        /**
-         Create a rich text style button style.
-
-         - Parameters:
-           - inactiveColor: The color to apply when the button is inactive, by default `.primary`.
-           - activeColor: The color to apply when the button is active, by default `.blue`.
-         */
-        public init(
-            inactiveColor: Color = .primary,
-            activeColor: Color = .blue
-        ) {
-            self.inactiveColor = inactiveColor
-            self.activeColor = activeColor
+extension View {
+    
+    @ViewBuilder
+    func foreground(_ color: Color, if cond: Bool) -> some View {
+        if cond {
+            self.foregroundStyle(Color.accentColor)
+        } else {
+            self
         }
-
-        /// The color to apply when the button is inactive.
-        public var inactiveColor: Color
-
-        /// The color to apply when the button is active.
-        public var activeColor: Color
     }
-}
-
-public extension RichTextStyle.Button.Style {
-
-    /// The standard ``RichTextStyle/Button`` style.
-    static var standard = RichTextStyle.Button.Style()
 }
 
 private extension RichTextStyle.Button {
 
     var isOn: Bool {
         value.wrappedValue
-    }
-
-    var tintColor: Color {
-        isOn ? buttonStyle.activeColor : buttonStyle.inactiveColor
     }
 
     func toggle() {
@@ -162,6 +134,7 @@ struct RichTextStyle_Button_Previews: PreviewProvider {
                     value: $isUnderlinedOn)
             }
             .padding()
+            .foregroundColor(.red)
         }
     }
 

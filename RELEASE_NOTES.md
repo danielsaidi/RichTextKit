@@ -22,7 +22,8 @@ This release starts moving types and views that relate to other types into the t
 * Many value types implement `RichTextLabelValue` to get a `label` property.
 * All types that implement `RichTextLabelValue` get a `label` that has improved accessibility.
 
-* `RichTextColor` `.adjust` now takes an optional color. 
+* `RichTextColor` `.adjust` now takes an optional color.
+* `RichTextStyle.Button` no longer uses a style - use `foregroundStyle` and `.accentColor` instead. 
 
 ### 🐛 Bug Fixes
 
