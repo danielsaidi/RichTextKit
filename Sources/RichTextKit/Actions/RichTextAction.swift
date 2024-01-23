@@ -63,7 +63,7 @@ public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
     case setStrokeColor(ColorRepresentable)
     
     // Highlighted renge
-    case highlightedRange(NSRange?)
+    case setHighlightedRange(NSRange?)
     
     // Change highlighting style
     case highlightingStyle(RichTextHighlightingStyle)
@@ -106,7 +106,7 @@ public extension RichTextAction {
         case .setUnderlineColor: .richTextColorUnderline
         case .setStrikethroughColor: .richTextColorStrikethrough
         case .setStrokeColor: .richTextColorStroke
-        case .highlightedRange: .richTextAlignmentCenter
+        case .setHighlightedRange: .richTextAlignmentCenter
         case .highlightingStyle: .richTextAlignmentCenter
         case .pasteImage: .richTextDocuments
         case .pasteImages: .richTextDocuments
@@ -154,7 +154,7 @@ public extension RichTextAction {
         case .setUnderlineColor: .underlineColor
         case .setStrikethroughColor: .strikethroughColor
         case .setStrokeColor: .strokeColor
-        case .highlightedRange: .highlightedRange
+        case .setHighlightedRange: .highlightedRange
         case .highlightingStyle: .highlightingStyle
         case .pasteImage: .pasteImage
         case .pasteImages: .pasteImages

@@ -56,7 +56,7 @@ private extension RichTextCoordinator {
             setColor(color, for: .strikethrough)
         case .setStrokeColor(let color):
             setColor(color, for: .stroke)
-        case .highlightedRange(let range):
+        case .setHighlightedRange(let range):
             setHighlightedRange(to: range)
         case .highlightingStyle(let style):
             textView.highlightingStyle = style

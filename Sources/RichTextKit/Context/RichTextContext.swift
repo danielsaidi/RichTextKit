@@ -159,7 +159,7 @@ public extension RichTextContext {
 
     /// Set ``highlightedRange`` to a new, optional range.
     func highlightRange(_ range: NSRange?) {
-        userActionPublisher.send(.highlightedRange(range))
+        userActionPublisher.send(.setHighlightedRange(range))
         highlightedRange = range
     }
 
