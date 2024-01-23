@@ -30,6 +30,7 @@ This release starts moving types and views that relate to other types into the t
 ### 🐛 Bug Fixes
 
 * `Image.symbol(...)` removes `palette` rendering mode to fix incorrect color scheme behavior.
+* `RichTextAlignment.Picker` now hides its picker label.
 * `RichTextColor.Picker` no longer auto-adjusts black and white to make it possible to actually set those colors.
 
 ### 🗑️ Deprecations 
