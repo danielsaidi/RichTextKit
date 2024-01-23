@@ -20,7 +20,8 @@ import UniformTypeIdentifiers
  can be used elsewhere.
 
  ``archivedData`` uses an `rtk` file extension, as well as a
- `UTType.archivedData` uniform type. You can create a custom ``vendorArchivedData(id:fileExtension:fileFormatText:uniformType:)``
+ `UTType.archivedData` uniform type. You can create a custom 
+ ``vendorArchivedData(id:fileExtension:fileFormatText:uniformType:)``
  value to specify a custom data format.
 
  Remember to configure your app for handling the UTTypes you

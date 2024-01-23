@@ -87,7 +87,8 @@ final class RichTextViewComponent_ColorTests: XCTestCase {
         XCTAssertEqual(textView.richTextColor(.foreground), color)
         assertEqualColor(textView.richTextAttributes[.foregroundColor])
         #endif
-        XCTAssertNotEqual(textView.richTextAttributes(at: selectedRange)[.foregroundColor] as? ColorRepresentable, color)
+        let attributes = textView.richTextAttributes(at: selectedRange)
+        XCTAssertNotEqual(attributes[.foregroundColor] as? ColorRepresentable, color)
         assertEqualColor(textView.typingAttributes[.foregroundColor])
     }
 }

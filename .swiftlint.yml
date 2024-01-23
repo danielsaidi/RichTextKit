@@ -4,7 +4,7 @@ disabled_rules:
   - function_body_length
   - identifier_name
   - large_tuple
-  - line_length
+  - nesting
   - opening_brace
   - todo
   - type_name

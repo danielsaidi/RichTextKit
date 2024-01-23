@@ -29,7 +29,9 @@ public extension RichTextViewComponent {
      - Parameters:
        - image: The image to paste.
        - index: The index to paste at.
-       - moveCursorToPastedContent: Whether or not to move the cursor to the end of the pasted content, by default `false`.
+       - moveCursorToPastedContent: Whether or not the input
+     cursor should be moved to the end of the pasted content,
+     by default `false`.
      */
     func pasteImage(
         _ image: ImageRepresentable,
@@ -52,7 +54,9 @@ public extension RichTextViewComponent {
      - Parameters:
        - images: The images to paste.
        - index: The index to paste at.
-       - moveCursorToPastedContent: Whether or not to move the cursor to the end of the pasted content, by default `false`.
+       - moveCursorToPastedContent: Whether or not the input
+     cursor should be moved to the end of the pasted content,
+     by default `false`.
      */
     func pasteImages(
         _ images: [ImageRepresentable],
@@ -85,7 +89,9 @@ public extension RichTextViewComponent {
      - Parameters:
        - text: The text to paste.
        - index: The text index to paste at.
-       - moveCursorToPastedContent: Whether or not to move the cursor to the end of the pasted content, by default `false`.
+       - moveCursorToPastedContent: Whether or not the input
+     cursor should be moved to the end of the pasted content,
+     by default `false`.
      */
     func pasteText(
         _ text: String,
