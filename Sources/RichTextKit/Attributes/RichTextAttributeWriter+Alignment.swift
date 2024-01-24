@@ -27,12 +27,12 @@ public extension RichTextAttributeWriter {
         _ alignment: RichTextAlignment,
         at range: NSRange
     ) {
-        let text = richText.string
-
-        // Text view has selected text
-        if range.length > 0 {
-            return setAlignment(alignment, at: range)
+        guard range.length == 0 else {
+            setAlignment(alignment, at: range)
+            return
         }
+
+        let text = richText.string
 
         // The cursor is at the beginning of the text
         if range.location == 0 {
@@ -41,7 +41,9 @@ public extension RichTextAttributeWriter {
 
         // The cursor is immediately after a newline
         if let char = text.character(at: range.location - 1), char.isNewLineSeparator {
-            return setAlignment(alignment, atIndex: range.location)
+            // We dont want to set attributed string to previous line,
+            // isNewLineSeparator is unfortunately omitted by API.
+            return
         }
 
         // The cursor is immediately before a newline
@@ -55,6 +57,7 @@ public extension RichTextAttributeWriter {
         let location = UInt(range.location)
         let index = text.findIndexOfCurrentParagraph(from: location)
         return setAlignment(alignment, atIndex: index)
+
     }
 }
 
@@ -85,7 +88,7 @@ private extension RichTextAttributeWriter {
         _ alignment: RichTextAlignment,
         atIndex index: Int
     ) {
-        guard let text = mutableRichText else { return }
+        guard let text = mutableRichText, !text.string.isEmpty else { return }
         let range = NSRange(location: index, length: 1)
         let safeRange = safeRange(for: range, isAttributeOperation: true)
         var attributes = text.attributes(at: safeRange.location, effectiveRange: nil)
