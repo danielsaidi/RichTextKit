@@ -58,7 +58,7 @@ private extension RichTextCoordinator {
             setColor(color, for: .stroke)
         case .setHighlightedRange(let range):
             setHighlightedRange(to: range)
-        case .highlightingStyle(let style):
+        case .setHighlightingStyle(let style):
             textView.highlightingStyle = style
         case .pasteImage(let image):
             pasteImage(image)

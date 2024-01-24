@@ -40,7 +40,7 @@ public extension RichTextContext {
         case .setStrikethroughColor: return true
         case .setStrokeColor: return true
         case .setHighlightedRange: return true
-        case .highlightingStyle: return true
+        case .setHighlightingStyle: return true
         case .pasteImage: return true
         case .pasteImages: return true
         case .pasteText: return true
