@@ -42,5 +42,7 @@ public extension RichTextViewComponent {
         } else {
             setRichTextAlignment(alignment, at: selectedRange)
         }
+        // Workaround to update caret position
+        setSelectedRange(selectedRange)
     }
 }
