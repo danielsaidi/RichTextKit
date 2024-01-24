@@ -59,7 +59,7 @@ public extension String {
      after the newline char, not the newline itself.
      */
 
-    func findIndexOfNextParagraphOrEndofCurrent(from location: UInt) -> UInt {
+    func findIndexOfNextParagraphOrEndOfCurrent(from location: UInt) -> UInt {
         var index = location
         repeat {
             guard let char = character(at: index) else { break }
@@ -80,7 +80,7 @@ public extension String {
     func findLengthOfCurrentParagraph(from location: UInt) -> Int {
         if isEmpty { return 0 }
         let startIndex = findIndexOfCurrentParagraph(from: location)
-        let endIndex = findIndexOfNextParagraphOrEndofCurrent(from: location)
+        let endIndex = findIndexOfNextParagraphOrEndOfCurrent(from: location)
         return Int(endIndex)-Int(startIndex)
     }
 

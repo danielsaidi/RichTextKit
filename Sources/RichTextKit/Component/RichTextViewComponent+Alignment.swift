@@ -33,7 +33,7 @@ public extension RichTextViewComponent {
         _ alignment: RichTextAlignment
     ) {
         if richTextAlignment == alignment { return }
-        if !hasTrimmedText {
+        if !hasTrimmedText || !hasSelectedRange {
             let style = NSMutableParagraphStyle()
             style.alignment = alignment.nativeAlignment
             var attributes = richTextAttributes
