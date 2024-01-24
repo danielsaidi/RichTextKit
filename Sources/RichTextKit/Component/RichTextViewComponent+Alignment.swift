@@ -39,10 +39,9 @@ public extension RichTextViewComponent {
             var attributes = richTextAttributes
             attributes[.paragraphStyle] = style
             typingAttributes = attributes
+            setRichTextAlignment(alignment, at: selectedRange)
         } else {
             setRichTextAlignment(alignment, at: selectedRange)
         }
-        // Workaround to update caret position
-        setSelectedRange(selectedRange)
     }
 }
