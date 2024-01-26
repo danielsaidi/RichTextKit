@@ -216,7 +216,7 @@ private extension RichTextKeyboardToolbar {
 }
 
 private extension RichTextKeyboardToolbar {
-    
+
     var shouldDisplayToolbar: Bool { context.isEditingText || style.alwaysDisplayToolbar }
 }
 
@@ -273,7 +273,7 @@ public struct RichTextKeyboardToolbarStyle {
 
     /// The toolbar's shadow radius.
     public var shadowRadius: Double
-    
+
     /// Should the toolbar always be displayed.
     public var alwaysDisplayToolbar: Bool
 }
