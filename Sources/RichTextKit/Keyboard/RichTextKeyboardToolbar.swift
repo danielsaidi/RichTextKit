@@ -133,9 +133,9 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
                 .overlay(Color.white.opacity(0.2))
                 .shadow(color: style.shadowColor, radius: style.shadowRadius, x: 0, y: 0)
         )
-        .opacity(context.isEditingText ? 1 : 0)
-        .offset(y: context.isEditingText ? 0 : style.toolbarHeight)
-        .frame(height: context.isEditingText ? nil : 0)
+        .opacity(shouldDisplayToolbar ? 1 : 0)
+        .offset(y: shouldDisplayToolbar ? 0 : style.toolbarHeight)
+        .frame(height: shouldDisplayToolbar ? nil : 0)
         .sheet(isPresented: $isFormatSheetPresented) {
             richTextFormatSheet(
                 RichTextFormatSheet(context: context)
@@ -166,6 +166,7 @@ private extension RichTextKeyboardToolbar {
 
     var isCompact: Bool { horizontalSizeClass == .compact }
 }
+
 
 private extension RichTextKeyboardToolbar {
 
@@ -214,6 +215,11 @@ private extension RichTextKeyboardToolbar {
     }
 }
 
+private extension RichTextKeyboardToolbar {
+    
+    var shouldDisplayToolbar: Bool { context.isEditingText || style.alwaysDisplayToolbar }
+}
+
 private extension View {
 
     @ViewBuilder
@@ -240,17 +246,20 @@ public struct RichTextKeyboardToolbarStyle {
        - itemSpacing: The spacing between toolbar items, by default `15`.
        - shadowColor: The toolbar's shadow color, by default transparent black.
        - shadowRadius: The toolbar's shadow radius, by default `3`.
+       - alwaysDisplayToolbar: Should toolbar always be displayed, by default is `false`.
      */
     public init(
         toolbarHeight: Double = 50,
         itemSpacing: Double = 15,
         shadowColor: Color = .black.opacity(0.1),
-        shadowRadius: Double = 3
+        shadowRadius: Double = 3,
+        alwaysDisplayToolbar: Bool = false
     ) {
         self.toolbarHeight = toolbarHeight
         self.itemSpacing = itemSpacing
         self.shadowColor = shadowColor
         self.shadowRadius = shadowRadius
+        self.alwaysDisplayToolbar = alwaysDisplayToolbar
     }
 
     /// The height of the toolbar.
@@ -264,6 +273,9 @@ public struct RichTextKeyboardToolbarStyle {
 
     /// The toolbar's shadow radius.
     public var shadowRadius: Double
+    
+    /// Should the toolbar always be displayed.
+    public var alwaysDisplayToolbar: Bool
 }
 
 public extension RichTextKeyboardToolbarStyle {
