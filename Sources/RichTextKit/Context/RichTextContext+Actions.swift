@@ -42,7 +42,7 @@ public extension RichTextContext {
         case .pasteText: return true
         case .selectRange: return true
         case .setAttributedString: return true
-        case .changeStyle: return true
+        case .setStyle: return true
         }
     }
 }

@@ -62,7 +62,7 @@ private extension RichTextCoordinator {
             setSelectedRange(to: range)
         case .setAttributedString(let attributedString):
             setAttributedString(to: attributedString)
-        case .changeStyle(let style, let newValue):
+        case .setStyle(let style, let newValue):
             setStyle(style, to: newValue)
         }
     }
