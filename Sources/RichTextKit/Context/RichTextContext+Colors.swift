@@ -36,12 +36,14 @@ public extension RichTextContext {
         for val: RichTextColor
     ) {
         guard self.color(for: val) != color else { return }
+        userActionPublisher.send(.setColor(color, val))
+                                 
         switch val {
-        case .foreground: userActionPublisher.send(.setForegroundColor(color)); foregroundColor = color
-        case .background: userActionPublisher.send(.setBackgroundColor(color)); backgroundColor = color
-        case .strikethrough: userActionPublisher.send(.setStrikethroughColor(color)); strikethroughColor = color
-        case .stroke: userActionPublisher.send(.setStrokeColor(color)); strokeColor = color
-        case .underline: userActionPublisher.send(.setUnderlineColor(color)); underlineColor = color
+        case .foreground: foregroundColor = color
+        case .background: backgroundColor = color
+        case .strikethrough: strikethroughColor = color
+        case .stroke: strokeColor = color
+        case .underline: underlineColor = color
         case .undefined: return
         }
     }
