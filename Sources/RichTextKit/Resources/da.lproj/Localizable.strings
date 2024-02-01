@@ -16,6 +16,9 @@
 "color" = "Farve";
 "foregroundColor" = "Tekst";
 "backgroundColor" = "Baggrund";
+"underlineColor" = "Underline Color";
+"strikethroughColor" = "Striketrough Color";
+"strokeColor" = "Stroke Color";
 
 "actionCopy" = "Kopiere";
 "actionDismissKeyboard" = "Luk tastaturet";
@@ -46,7 +49,18 @@
 "menuSaveAs" = "Spare som...";
 "menuShare" = "Del";
 "menuShareAs" = "Del som...";
+"menuSuperscriptIncrease" = "Superscript";
+"menuSuperscriptDecrease" = "Subscript";
 "menuText" = "Tekst";
+
+"highlightedRange" = "Highlight Range";
+"highlightingStyle" = "Highlighting Style";
+
+"pasteImage" = "Paste Image";
+"pasteImages" = "Paste Images";
+"pasteText" = "Paste text";
+"selectRange" = "Select Range";
+"setAttributedString" = "Set attributed String";
 
 "styleBold" = "Fremhævet";
 "styleItalic" = "Kursiv";
