@@ -16,23 +16,33 @@ public extension RichTextContext {
         case .setAlignment(let align): textAlignment = align
         case .stepFontSize(let points): fontSize += CGFloat(points)
         case .toggleStyle(let style): toggle(style)
-        default: triggerAction = action
+        default: break
         }
     }
 
     /// Check if the context can handle a certain action.
     func canHandle(_ action: RichTextAction) -> Bool {
         switch action {
-        case .copy: canCopy
-        case .dismissKeyboard: true
-        case .print: false
-        case .redoLatestChange: canRedoLatestChange
-        case .setAlignment: true
-        case .stepFontSize: true
-        case .stepIndent(let points): points < 0 ? canDecreaseIndent : canIncreaseIndent
-        case .stepSuperscript: false
-        case .toggleStyle: true
-        case .undoLatestChange: canUndoLatestChange
+        case .copy: return canCopy
+        case .dismissKeyboard: return true
+        case .print: return false
+        case .redoLatestChange: return canRedoLatestChange
+        case .setAlignment: return true
+        case .stepFontSize: return true
+        case .stepIndent(let points):
+            return points < 0 ? canDecreaseIndent : canIncreaseIndent
+        case .stepSuperscript: return false
+        case .toggleStyle: return true
+        case .undoLatestChange: return canUndoLatestChange
+        case .setColor: return true
+        case .setHighlightedRange: return true
+        case .setHighlightingStyle: return true
+        case .pasteImage: return true
+        case .pasteImages: return true
+        case .pasteText: return true
+        case .selectRange: return true
+        case .setAttributedString: return true
+        case .setStyle: return true
         }
     }
 }

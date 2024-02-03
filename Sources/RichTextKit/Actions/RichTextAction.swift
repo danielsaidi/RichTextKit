@@ -19,7 +19,6 @@ public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
 
     /// Copy the currently selected text, if any.
     case copy
-
     /// Dismiss any presented software keyboard.
     case dismissKeyboard
 
@@ -46,6 +45,28 @@ public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
 
     /// Undo the latest change.
     case undoLatestChange
+    
+    // Change background color
+    case setColor(ColorRepresentable, RichTextColor)
+    
+    // Highlighted renge
+    case setHighlightedRange(NSRange?)
+    
+    // Change highlighting style
+    case setHighlightingStyle(RichTextHighlightingStyle)
+    
+    case pasteImage(Insertion<ImageRepresentable>)
+    
+    case pasteImages(Insertion<[ImageRepresentable]>)
+    
+    case pasteText(Insertion<String>)
+    
+    case selectRange(NSRange)
+    
+    case setAttributedString(NSAttributedString)
+    
+    // Change style of text (bold, italic, underline, strikethrough
+    case setStyle(RichTextStyle, Bool)
 }
 
 public extension RichTextAction {
@@ -66,6 +87,16 @@ public extension RichTextAction {
         case .stepSuperscript(let val): .richTextStepSuperscript(val)
         case .toggleStyle(let val): val.icon
         case .undoLatestChange: .richTextActionUndo
+        case .setColor(_, let richTextColor): richTextColor.icon ?? .richTextColorBackground
+        case .setHighlightedRange: .richTextAlignmentCenter
+        case .setHighlightingStyle: .richTextAlignmentCenter
+        case .pasteImage: .richTextDocuments
+        case .pasteImages: .richTextDocuments
+        case .pasteText: .richTextStepIndent(1)
+        case .selectRange: .richTextAlignmentCenter
+        case .setAttributedString: .richTextAlignmentCenter
+        case .setStyle:
+            Image.richTextStyleBold
         }
     }
 
@@ -100,6 +131,33 @@ public extension RichTextAction {
         case .stepSuperscript(let steps): .actionStepSuperscript(steps)
         case .toggleStyle(let style): style.titleKey
         case .undoLatestChange: .actionUndoLatestChange
+        case .setColor(_, let richTextColor):
+            switch richTextColor {
+            case .foreground: .foregroundColor
+            case .background: .backgroundColor
+            case .strikethrough: .strikethroughColor
+            case .stroke: .strokeColor
+            case .underline: .underlineColor
+            case .undefined: .strokeColor
+            }
+        case .setHighlightedRange: .highlightedRange
+        case .setHighlightingStyle: .highlightingStyle
+        case .pasteImage: .pasteImage
+        case .pasteImages: .pasteImages
+        case .pasteText: .pasteText
+        case .selectRange: .selectRange
+        case .setAttributedString: .setAttributedString
+        case .setStyle(let style, _):
+            switch style {
+            case .bold:
+                .styleBold
+            case .italic:
+                .styleItalic
+            case .underlined:
+                .styleUnderlined
+            case .strikethrough:
+                .styleStrikethrough
+            }
         }
     }
 }

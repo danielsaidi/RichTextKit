@@ -137,7 +137,7 @@ public extension RichTextViewComponent {
     }
 }
 
-internal extension RichTextViewComponent {
+extension RichTextViewComponent {
 
     /// This can be called to setup the initial font size.
     func setupInitialFontSize() {

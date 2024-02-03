@@ -35,7 +35,9 @@ public extension RichTextContext {
         _ color: ColorRepresentable,
         for val: RichTextColor
     ) {
-        if self.color(for: val) == color { return }
+        guard self.color(for: val) != color else { return }
+        userActionPublisher.send(.setColor(color, val))
+                                 
         switch val {
         case .foreground: foregroundColor = color
         case .background: backgroundColor = color

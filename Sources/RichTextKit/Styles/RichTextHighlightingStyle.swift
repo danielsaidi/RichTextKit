@@ -11,7 +11,7 @@ import SwiftUI
 /**
  This struct can be used to style rich text highlighting.
  */
-public struct RichTextHighlightingStyle: Equatable {
+public struct RichTextHighlightingStyle: Equatable, Hashable {
 
     /**
      Create a style instance.
