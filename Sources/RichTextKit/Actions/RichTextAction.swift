@@ -96,7 +96,7 @@ public extension RichTextAction {
         case .setColor(_, let color): color.icon
         case .setHighlightedRange: .richTextAlignmentCenter
         case .setHighlightingStyle: .richTextAlignmentCenter
-        case .setStyle: .richTextStyleBold
+        case .setStyle(let style, _): style.icon
         case .stepFontSize(let val): .richTextStepFontSize(val)
         case .stepIndent(let val): .richTextStepIndent(val)
         case .stepSuperscript(let val): .richTextStepSuperscript(val)
