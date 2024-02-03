@@ -24,13 +24,13 @@ public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
     case dismissKeyboard
     
     /// Paste a single image.
-    case pasteImage(Insertion<ImageRepresentable>)
+    case pasteImage(RichTextInsertion<ImageRepresentable>)
     
     /// Paste multiple images.
-    case pasteImages(Insertion<[ImageRepresentable]>)
+    case pasteImages(RichTextInsertion<[ImageRepresentable]>)
     
     /// Paste plain text.
-    case pasteText(Insertion<String>)
+    case pasteText(RichTextInsertion<String>)
 
     /// A print command.
     case print

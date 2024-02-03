@@ -109,7 +109,7 @@ private extension RichTextCoordinator {
 
 extension RichTextCoordinator {
 
-    func pasteImage(_ data: Insertion<ImageRepresentable>?) {
+    func pasteImage(_ data: RichTextInsertion<ImageRepresentable>?) {
         guard let data = data else { return }
         textView.pasteImage(
             data.content,
@@ -118,7 +118,7 @@ extension RichTextCoordinator {
         )
     }
     
-    func pasteImages(_ data: Insertion<[ImageRepresentable]>?) {
+    func pasteImages(_ data: RichTextInsertion<[ImageRepresentable]>?) {
         guard let data = data else { return }
         textView.pasteImages(
             data.content,
@@ -127,7 +127,7 @@ extension RichTextCoordinator {
         )
     }
     
-    func pasteText(_ data: Insertion<String>?) {
+    func pasteText(_ data: RichTextInsertion<String>?) {
         guard let data = data else { return }
         textView.pasteText(
             data.content,

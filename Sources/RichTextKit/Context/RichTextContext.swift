@@ -172,7 +172,7 @@ public extension RichTextContext {
         let index = index ?? selectedRange.location
         userActionPublisher.send(
             .pasteImage(
-                Insertion(
+                RichTextInsertion(
                     content: image,
                     at: index,
                     moveCursor: moveCursorToPastedContent
@@ -190,7 +190,7 @@ public extension RichTextContext {
         let index = index ?? selectedRange.location
         userActionPublisher.send(
             .pasteImages(
-                Insertion(
+                RichTextInsertion(
                     content: images,
                     at: index,
                     moveCursor: moveCursorToPastedContent
@@ -208,7 +208,7 @@ public extension RichTextContext {
         let index = index ?? selectedRange.location
         userActionPublisher.send(
             .pasteText(
-                Insertion(
+                RichTextInsertion(
                     content: text,
                     at: index,
                     moveCursor: moveCursorToPastedContent
