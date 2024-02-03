@@ -6,6 +6,16 @@ Until then, minor updates may remove deprecated features and introduce breaking 
 
 
 
+## 0.9.9
+
+This release adds a lot of new `RichTextAction` cases and adjusts the context and coordinator subscription.
+
+### 💡 Adjustments
+
+* `RichTextColor` `icon` is no longer optional. 
+
+
+
 ## 0.9.8
 
 This release starts moving types and views that relate to other types into the type namespaces, to make the surface area of the library smaller.

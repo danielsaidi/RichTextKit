@@ -19,17 +19,45 @@ public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
 
     /// Copy the currently selected text, if any.
     case copy
+    
     /// Dismiss any presented software keyboard.
     case dismissKeyboard
+    
+    /// Paste a single image.
+    case pasteImage(Insertion<ImageRepresentable>)
+    
+    /// Paste multiple images.
+    case pasteImages(Insertion<[ImageRepresentable]>)
+    
+    /// Paste plain text.
+    case pasteText(Insertion<String>)
 
     /// A print command.
     case print
 
     /// Redo the latest undone change.
     case redoLatestChange
-
+    
+    /// Select a range.
+    case selectRange(NSRange)
+    
     /// Set the text alignment.
     case setAlignment(_ alignment: RichTextAlignment)
+    
+    /// Set the entire attributed string.
+    case setAttributedString(NSAttributedString)
+    
+    // Change background color
+    case setColor(ColorRepresentable, RichTextColor)
+    
+    // Highlighted renge
+    case setHighlightedRange(NSRange?)
+    
+    // Change highlighting style
+    case setHighlightingStyle(RichTextHighlightingStyle)
+    
+    /// Set a certain ``RichTextStyle``.
+    case setStyle(RichTextStyle, Bool)
 
     /// Step the font size.
     case stepFontSize(points: Int)
@@ -45,28 +73,6 @@ public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
 
     /// Undo the latest change.
     case undoLatestChange
-    
-    // Change background color
-    case setColor(ColorRepresentable, RichTextColor)
-    
-    // Highlighted renge
-    case setHighlightedRange(NSRange?)
-    
-    // Change highlighting style
-    case setHighlightingStyle(RichTextHighlightingStyle)
-    
-    case pasteImage(Insertion<ImageRepresentable>)
-    
-    case pasteImages(Insertion<[ImageRepresentable]>)
-    
-    case pasteText(Insertion<String>)
-    
-    case selectRange(NSRange)
-    
-    case setAttributedString(NSAttributedString)
-    
-    // Change style of text (bold, italic, underline, strikethrough
-    case setStyle(RichTextStyle, Bool)
 }
 
 public extension RichTextAction {
@@ -79,24 +85,23 @@ public extension RichTextAction {
         switch self {
         case .copy: .richTextActionCopy
         case .dismissKeyboard: .richTextActionDismissKeyboard
+        case .pasteImage: .richTextDocuments
+        case .pasteImages: .richTextDocuments
+        case .pasteText: .richTextStepIndent(1)
         case .print: .richTextActionExport
         case .redoLatestChange: .richTextActionRedo
+        case .selectRange: .richTextAlignmentCenter
         case .setAlignment(let val): val.icon
+        case .setAttributedString: .richTextAlignmentCenter
+        case .setColor(_, let color): color.icon
+        case .setHighlightedRange: .richTextAlignmentCenter
+        case .setHighlightingStyle: .richTextAlignmentCenter
+        case .setStyle: .richTextStyleBold
         case .stepFontSize(let val): .richTextStepFontSize(val)
         case .stepIndent(let val): .richTextStepIndent(val)
         case .stepSuperscript(let val): .richTextStepSuperscript(val)
         case .toggleStyle(let val): val.icon
         case .undoLatestChange: .richTextActionUndo
-        case .setColor(_, let richTextColor): richTextColor.icon ?? .richTextColorBackground
-        case .setHighlightedRange: .richTextAlignmentCenter
-        case .setHighlightingStyle: .richTextAlignmentCenter
-        case .pasteImage: .richTextDocuments
-        case .pasteImages: .richTextDocuments
-        case .pasteText: .richTextStepIndent(1)
-        case .selectRange: .richTextAlignmentCenter
-        case .setAttributedString: .richTextAlignmentCenter
-        case .setStyle:
-            Image.richTextStyleBold
         }
     }
 

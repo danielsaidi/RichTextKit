@@ -56,15 +56,15 @@ public extension RichTextColor {
         }
     }
 
-    /// The standard icon to use for the alignment.
-    var icon: Image? {
+    /// The standard icon to use for the color.
+    var icon: Image {
         switch self {
         case .foreground: .richTextColorForeground
         case .background: .richTextColorBackground
         case .strikethrough: .richTextColorStrikethrough
         case .stroke: .richTextColorStroke
         case .underline: .richTextColorUnderline
-        case .undefined: nil
+        case .undefined: .richTextColorUndefined
         }
     }
 
