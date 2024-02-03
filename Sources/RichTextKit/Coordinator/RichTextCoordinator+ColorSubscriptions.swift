@@ -10,18 +10,16 @@ import Foundation
 
 extension RichTextCoordinator {
     
-    func setColor(_ color: ColorRepresentable, for coloredAttribute: RichTextColor) {
+    func setColor(_ color: RichTextColor, to val: ColorRepresentable) {
         var applyRange: NSRange? = nil
         if textView.hasSelectedRange {
             applyRange = textView.selectedRange
         }
-        
-        guard let attribute = coloredAttribute.attribute else { return }
-        
+        guard let attribute = color.attribute else { return }
         if let applyRange {
-            self.textView.setRichTextColor(coloredAttribute, to: color, at: applyRange)
+            self.textView.setRichTextColor(color, to: val, at: applyRange)
         } else {
-            self.textView.setRichTextAttribute(attribute, to: color)
+            self.textView.setRichTextAttribute(attribute, to: val)
         }
     }
 }

@@ -46,8 +46,8 @@ private extension RichTextCoordinator {
         case .undoLatestChange:
             textView.undoLatestChange()
             syncContextWithTextView()
-        case .setColor(let color, let richTextColor):
-            setColor(color, for: richTextColor)
+        case .setColor(let color, let newValue):
+            setColor(color, to: newValue)
         case .setHighlightedRange(let range):
             setHighlightedRange(to: range)
         case .setHighlightingStyle(let style):

@@ -48,7 +48,7 @@ public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
     case setAttributedString(NSAttributedString)
     
     // Change background color
-    case setColor(ColorRepresentable, RichTextColor)
+    case setColor(RichTextColor, ColorRepresentable)
     
     // Highlighted renge
     case setHighlightedRange(NSRange?)
@@ -93,7 +93,7 @@ public extension RichTextAction {
         case .selectRange: .richTextAlignmentCenter
         case .setAlignment(let val): val.icon
         case .setAttributedString: .richTextAlignmentCenter
-        case .setColor(_, let color): color.icon
+        case .setColor(let color, _): color.icon
         case .setHighlightedRange: .richTextAlignmentCenter
         case .setHighlightingStyle: .richTextAlignmentCenter
         case .setStyle(let style, _): style.icon
@@ -136,7 +136,7 @@ public extension RichTextAction {
         case .stepSuperscript(let steps): .actionStepSuperscript(steps)
         case .toggleStyle(let style): style.titleKey
         case .undoLatestChange: .actionUndoLatestChange
-        case .setColor(_, let color): color.titleKey
+        case .setColor(let color, _): color.titleKey
         case .setHighlightedRange: .highlightedRange
         case .setHighlightingStyle: .highlightingStyle
         case .pasteImage: .pasteImage

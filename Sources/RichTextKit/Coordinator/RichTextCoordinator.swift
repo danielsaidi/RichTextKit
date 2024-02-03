@@ -197,7 +197,7 @@ extension RichTextCoordinator {
 
         RichTextColor.allCases.forEach {
             if let color = textView.richTextColor($0) {
-                richTextContext.setColor(color, for: $0)
+                richTextContext.setColor($0, to: color)
             }
         }
 

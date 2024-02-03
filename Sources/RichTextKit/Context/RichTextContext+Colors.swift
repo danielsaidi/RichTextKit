@@ -11,16 +11,16 @@ import SwiftUI
 public extension RichTextContext {
 
     /// Get a binding for a certain color.
-    func binding(for val: RichTextColor) -> Binding<Color> {
+    func binding(for color: RichTextColor) -> Binding<Color> {
         Binding(
-            get: { Color(self.color(for: val) ?? .clear) },
-            set: { self.setColor(ColorRepresentable($0), for: val) }
+            get: { Color(self.color(for: color) ?? .clear) },
+            set: { self.setColor(color, to: ColorRepresentable($0)) }
         )
     }
 
     /// Get the value for a certain color.
-    func color(for val: RichTextColor) -> ColorRepresentable? {
-        switch val {
+    func color(for color: RichTextColor) -> ColorRepresentable? {
+        switch color {
         case .foreground: foregroundColor
         case .background: backgroundColor
         case .strikethrough: strikethroughColor
@@ -32,18 +32,18 @@ public extension RichTextContext {
 
     /// Set the value for a certain color.
     func setColor(
-        _ color: ColorRepresentable,
-        for val: RichTextColor
+        _ color: RichTextColor,
+        to val: ColorRepresentable
     ) {
-        guard self.color(for: val) != color else { return }
+        guard self.color(for: color) != val else { return }
         userActionPublisher.send(.setColor(color, val))
                                  
-        switch val {
-        case .foreground: foregroundColor = color
-        case .background: backgroundColor = color
-        case .strikethrough: strikethroughColor = color
-        case .stroke: strokeColor = color
-        case .underline: underlineColor = color
+        switch color {
+        case .foreground: foregroundColor = val
+        case .background: backgroundColor = val
+        case .strikethrough: strikethroughColor = val
+        case .stroke: strokeColor = val
+        case .underline: underlineColor = val
         case .undefined: return
         }
     }
