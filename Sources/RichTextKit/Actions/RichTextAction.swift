@@ -136,15 +136,7 @@ public extension RichTextAction {
         case .stepSuperscript(let steps): .actionStepSuperscript(steps)
         case .toggleStyle(let style): style.titleKey
         case .undoLatestChange: .actionUndoLatestChange
-        case .setColor(_, let richTextColor):
-            switch richTextColor {
-            case .foreground: .foregroundColor
-            case .background: .backgroundColor
-            case .strikethrough: .strikethroughColor
-            case .stroke: .strokeColor
-            case .underline: .underlineColor
-            case .undefined: .strokeColor
-            }
+        case .setColor(_, let color): color.titleKey
         case .setHighlightedRange: .highlightedRange
         case .setHighlightingStyle: .highlightingStyle
         case .pasteImage: .pasteImage

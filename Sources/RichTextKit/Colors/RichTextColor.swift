@@ -67,6 +67,18 @@ public extension RichTextColor {
         case .undefined: .richTextColorUndefined
         }
     }
+    
+    /// The localized color title key.
+    var titleKey: RTKL10n {
+        switch self {
+        case .foreground: .foregroundColor
+        case .background: .backgroundColor
+        case .strikethrough: .strikethroughColor
+        case .stroke: .strokeColor
+        case .underline: .underlineColor
+        case .undefined: .strokeColor
+        }
+    }
 
     /// Adjust a `color` for a certain `colorScheme`.
     func adjust(

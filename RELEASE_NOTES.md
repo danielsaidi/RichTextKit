@@ -12,7 +12,8 @@ This release adds a lot of new `RichTextAction` cases and adjusts the context an
 
 ### 💡 Adjustments
 
-* `RichTextColor` `icon` is no longer optional. 
+* `RichTextColor` `icon` is no longer optional.
+* `RichTextColor` has a new `titleKey` property.
 
 
 
