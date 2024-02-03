@@ -90,9 +90,9 @@ public extension RichTextAction {
         case .pasteText: .richTextStepIndent(1)
         case .print: .richTextActionExport
         case .redoLatestChange: .richTextActionRedo
-        case .selectRange: .richTextAlignmentCenter
+        case .selectRange: .richTextSelection
         case .setAlignment(let val): val.icon
-        case .setAttributedString: .richTextAlignmentCenter
+        case .setAttributedString: .richTextDocument
         case .setColor(let color, _): color.icon
         case .setHighlightedRange: .richTextAlignmentCenter
         case .setHighlightingStyle: .richTextAlignmentCenter
@@ -144,17 +144,7 @@ public extension RichTextAction {
         case .pasteText: .pasteText
         case .selectRange: .selectRange
         case .setAttributedString: .setAttributedString
-        case .setStyle(let style, _):
-            switch style {
-            case .bold:
-                .styleBold
-            case .italic:
-                .styleItalic
-            case .underlined:
-                .styleUnderlined
-            case .strikethrough:
-                .styleStrikethrough
-            }
+        case .setStyle(let style, _): style.titleKey
         }
     }
 }

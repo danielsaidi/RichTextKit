@@ -29,15 +29,32 @@ private extension RichTextCoordinator {
     func handle(_ action: RichTextAction?) {
         guard let action else { return }
         switch action {
-        case .copy:
-            textView.copySelection()
+        case .copy: textView.copySelection()
         case .dismissKeyboard:
             textView.resignFirstResponder()
+        case .pasteImage(let image):
+            pasteImage(image)
+        case .pasteImages(let images):
+            pasteImages(images)
+        case .pasteText(let text):
+            pasteText(text)
         case .print: break
         case .redoLatestChange:
             textView.redoLatestChange()
             syncContextWithTextView()
+        case .selectRange(let range):
+            setSelectedRange(to: range)
         case .setAlignment: break
+        case .setAttributedString(let string):
+            setAttributedString(to: string)
+        case .setColor(let color, let newValue):
+            setColor(color, to: newValue)
+        case .setHighlightedRange(let range):
+            setHighlightedRange(to: range)
+        case .setHighlightingStyle(let style):
+            textView.highlightingStyle = style
+        case .setStyle(let style, let newValue):
+            setStyle(style, to: newValue)
         case .stepFontSize: break
         case .stepIndent(let points):
             textView.stepRichTextIndent(points: points)
@@ -46,24 +63,6 @@ private extension RichTextCoordinator {
         case .undoLatestChange:
             textView.undoLatestChange()
             syncContextWithTextView()
-        case .setColor(let color, let newValue):
-            setColor(color, to: newValue)
-        case .setHighlightedRange(let range):
-            setHighlightedRange(to: range)
-        case .setHighlightingStyle(let style):
-            textView.highlightingStyle = style
-        case .pasteImage(let image):
-            pasteImage(image)
-        case .pasteImages(let images):
-            pasteImages(images)
-        case .pasteText(let text):
-            pasteText(text)
-        case .selectRange(let range):
-            setSelectedRange(to: range)
-        case .setAttributedString(let attributedString):
-            setAttributedString(to: attributedString)
-        case .setStyle(let style, let newValue):
-            setStyle(style, to: newValue)
         }
     }
 
