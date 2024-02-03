@@ -12,11 +12,14 @@ import Combine
 /**
  This observable context can be used to affect and observe a
  ``RichTextEditor`` and its content.
+ 
+ Use ``handle(_:)`` to trigger a change, e.g. to change font,
+ text style, alignment, select a range, etc. You can observe
+ the various published properties to keep your UI updated as
+ the context changes.
 
  The SwiftUI ``RichTextEditor`` uses this context as well as
- a ``RichTextCoordinator`` to keep itself updated when state
- changes. The context also has properties and functions that
- are used to set context state via the coordinator.
+ a ``RichTextCoordinator`` to keep itself updated.
  */
 public class RichTextContext: ObservableObject {
 
@@ -30,28 +33,16 @@ public class RichTextContext: ObservableObject {
 
      Note that the property is read-only and not `@Published`
      to avoid redrawing the editor when it changes, which is
-     done constantly as the user types. We should find a way
-     to observe this property without this happening.
-
-     The best way to observe this property is to use the raw
-     `text` binding that you pass into your text editor. The
-     editor will however not redraw if you change this value
-     from the outside, since it aims to avoid costly redraws.
+     done as the user types. We should find a way to observe
+     it without this happening. The best way to observe this property is to use the raw `text` binding that you pass
+     into the text editor. The editor will not redraw if you
+     change this value from the outside.
 
      Until then, use `setAttributedString(to:)` to change it.
      */
     public internal(set) var attributedString = NSAttributedString()
 
-    /**
-     The currently selected range, if any.
-
-     Note that the property is read-only and not `@Published`
-     to avoid redrawing the editor when it changes, which is
-     done constantly as the user types. We should find a way
-     to observe this property without this happening.
-
-     Until then, use ``selectRange(_:)`` to change the value.
-     */
+    /// The currently selected range, if any.
     public internal(set) var selectedRange = NSRange()
 
 
@@ -83,63 +74,63 @@ public class RichTextContext: ObservableObject {
     
     /// The current background color, if any.
     @Published
-    var backgroundColor: ColorRepresentable?
+    public internal(set) var backgroundColor: ColorRepresentable?
 
     /// Whether or not the current rich text can be copied.
     @Published
-    var canCopy = false
+    public internal(set) var canCopy = false
 
     /// Whether or not the latest undone change can be redone.
     @Published
-    var canRedoLatestChange = false
+    public internal(set) var canRedoLatestChange = false
 
     /// Whether or not the latest change can be undone.
     @Published
-    var canUndoLatestChange = false
+    public internal(set) var canUndoLatestChange = false
 
     /// Whether or not the indent level can be decreased.
     @Published
-    var canDecreaseIndent = true
+    public internal(set) var canDecreaseIndent = true
 
     /// Whether or not the indent level can be increased.
     @Published
-    var canIncreaseIndent = true
+    public internal(set) var canIncreaseIndent = true
     
     /// The current foreground color, if any.
     @Published
-    var foregroundColor: ColorRepresentable?
+    public internal(set) var foregroundColor: ColorRepresentable?
 
     /// The style to apply when highlighting a range.
     @Published
-    var highlightingStyle = RichTextHighlightingStyle.standard
+    public internal(set) var highlightingStyle = RichTextHighlightingStyle.standard
 
     /// Whether or not the current text is bold.
     @Published
-    var isBold = false
+    public internal(set) var isBold = false
 
     /// Whether or not the current text is italic.
     @Published
-    var isItalic = false
+    public internal(set) var isItalic = false
 
     /// Whether or not the current text is striked through.
     @Published
-    var isStrikethrough = false
+    public internal(set) var isStrikethrough = false
 
     /// Whether or not the current text is underlined.
     @Published
-    var isUnderlined = false
+    public internal(set) var isUnderlined = false
 
     /// The current strikethrough color, if any.
     @Published
-    var strikethroughColor: ColorRepresentable?
+    public internal(set) var strikethroughColor: ColorRepresentable?
 
     /// The current stroke color, if any.
     @Published
-    var strokeColor: ColorRepresentable?
+    public internal(set) var strokeColor: ColorRepresentable?
 
     /// The current underline color, if any.
     @Published
-    var underlineColor: ColorRepresentable?
+    public internal(set) var underlineColor: ColorRepresentable?
 }
 
 public extension RichTextContext {
