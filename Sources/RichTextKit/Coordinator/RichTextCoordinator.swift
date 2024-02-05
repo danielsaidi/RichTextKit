@@ -99,6 +99,7 @@ open class RichTextCoordinator: NSObject {
     }
 
     open func textViewDidEndEditing(_ textView: UITextView) {
+        syncWithTextView()
         richTextContext.isEditingText = false
     }
     #endif
