@@ -12,7 +12,7 @@ import Combine
 /**
  This observable context can be used to affect and observe a
  ``RichTextEditor`` and its content.
- 
+
  Use ``handle(_:)`` to trigger a change, e.g. to change font,
  text style, alignment, select a range, etc. You can observe
  the various published properties to keep your UI updated as
@@ -51,27 +51,27 @@ public class RichTextContext: ObservableObject {
     /// Whether or not the text is currently being edited.
     @Published
     public var isEditingText = false
-    
+
     /// The current text alignment, if any.
     @Published
     public var textAlignment: RichTextAlignment = .left
-    
+
     /// The current font name.
     @Published
     public var fontName = ""
-    
+
     /// The current font size.
     @Published
     public var fontSize = CGFloat.standardRichTextFontSize
-    
+
     /// The currently highlighted range, if any.
     public var highlightedRange: NSRange?
-    
+
     /// Use this Publisher to emit any attribute changes to textView.
     public let userActionPublisher: PassthroughSubject<RichTextAction, Never> = .init()
-    
+
     // MARK: - Internal properties
-    
+
     /// The current background color, if any.
     @Published
     public internal(set) var backgroundColor: ColorRepresentable?
@@ -95,7 +95,7 @@ public class RichTextContext: ObservableObject {
     /// Whether or not the indent level can be increased.
     @Published
     public internal(set) var canIncreaseIndent = true
-    
+
     /// The current foreground color, if any.
     @Published
     public internal(set) var foregroundColor: ColorRepresentable?

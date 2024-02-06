@@ -44,7 +44,7 @@ public extension Image {
 
     static let richTextIndentDecrease = symbol("decrease.indent")
     static let richTextIndentIncrease = symbol("increase.indent")
-    
+
     static let richTextSelection = symbol("123.rectangle.fill")
 
     static let richTextStyleBold = symbol("bold")

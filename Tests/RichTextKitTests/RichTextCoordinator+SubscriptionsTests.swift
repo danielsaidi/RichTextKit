@@ -119,7 +119,7 @@ final class RichTextCoordinator_SubscriptionsTests: XCTestCase {
         textContext.userActionPublisher.send(.setStyle(.underlined, true))
         XCTAssertTrue(textView.richTextStyles.hasStyle(.underlined))
     }
-    
+
     func testIsStrikeThroughUpdatesTextView() {
         XCTAssertFalse(textView.richTextStyles.hasStyle(.strikethrough))
         textContext.userActionPublisher.send(.setStyle(.strikethrough, true))

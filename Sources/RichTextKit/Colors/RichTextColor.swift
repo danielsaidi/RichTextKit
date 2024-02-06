@@ -67,7 +67,7 @@ public extension RichTextColor {
         case .undefined: .richTextColorUndefined
         }
     }
-    
+
     /// The localized color title key.
     var titleKey: RTKL10n {
         switch self {
