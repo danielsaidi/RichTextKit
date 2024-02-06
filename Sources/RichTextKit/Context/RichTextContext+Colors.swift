@@ -37,7 +37,7 @@ public extension RichTextContext {
     ) {
         guard self.color(for: color) != val else { return }
         userActionPublisher.send(.setColor(color, val))
-                                 
+
         switch color {
         case .foreground: foregroundColor = val
         case .background: backgroundColor = val

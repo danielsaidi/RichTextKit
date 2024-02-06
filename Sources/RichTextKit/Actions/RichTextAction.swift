@@ -19,16 +19,16 @@ public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
 
     /// Copy the currently selected text, if any.
     case copy
-    
+
     /// Dismiss any presented software keyboard.
     case dismissKeyboard
-    
+
     /// Paste a single image.
     case pasteImage(RichTextInsertion<ImageRepresentable>)
-    
+
     /// Paste multiple images.
     case pasteImages(RichTextInsertion<[ImageRepresentable]>)
-    
+
     /// Paste plain text.
     case pasteText(RichTextInsertion<String>)
 
@@ -37,25 +37,25 @@ public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
 
     /// Redo the latest undone change.
     case redoLatestChange
-    
+
     /// Select a range.
     case selectRange(NSRange)
-    
+
     /// Set the text alignment.
     case setAlignment(_ alignment: RichTextAlignment)
-    
+
     /// Set the entire attributed string.
     case setAttributedString(NSAttributedString)
-    
+
     // Change background color
     case setColor(RichTextColor, ColorRepresentable)
-    
+
     // Highlighted renge
     case setHighlightedRange(NSRange?)
-    
+
     // Change highlighting style
     case setHighlightingStyle(RichTextHighlightingStyle)
-    
+
     /// Set a certain ``RichTextStyle``.
     case setStyle(RichTextStyle, Bool)
 
@@ -148,7 +148,6 @@ public extension RichTextAction {
         }
     }
 }
-
 
 // MARK: - Aliases
 

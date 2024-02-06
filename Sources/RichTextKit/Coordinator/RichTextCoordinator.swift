@@ -48,7 +48,6 @@ open class RichTextCoordinator: NSObject {
         subscribeToUserActions()
     }
 
-
     // MARK: - Properties
 
     /// The rich text context to coordinate with.
@@ -66,7 +65,6 @@ open class RichTextCoordinator: NSObject {
     /// This flag is used to avoid delaying context sync.
     var shouldDelaySyncContextWithTextView = true
 
-
     // MARK: - Internal Properties
 
     /**
@@ -80,7 +78,6 @@ open class RichTextCoordinator: NSObject {
      highlighted range was set.
      */
      var highlightedRangeOriginalForegroundColor: ColorRepresentable?
-
 
     #if canImport(UIKit)
 
@@ -102,7 +99,6 @@ open class RichTextCoordinator: NSObject {
         richTextContext.isEditingText = false
     }
     #endif
-
 
     #if canImport(AppKit) && !targetEnvironment(macCatalyst)
 
@@ -126,7 +122,6 @@ open class RichTextCoordinator: NSObject {
     #endif
 }
 
-
 #if iOS || os(tvOS) || os(visionOS)
 import UIKit
 
@@ -137,7 +132,6 @@ import AppKit
 
 extension RichTextCoordinator: NSTextViewDelegate {}
 #endif
-
 
 // MARK: - Public Extensions
 
@@ -154,7 +148,6 @@ public extension RichTextCoordinator {
         textView.setRichTextColor(.foreground, to: foreground, at: range)
     }
 }
-
 
 // MARK: - Internal Extensions
 

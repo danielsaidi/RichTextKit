@@ -42,7 +42,6 @@ final class RichTextViewComponentTests: XCTestCase {
         XCTAssertEqual(view.richText.string, "foo bar baz")
     }
 
-
     func testSettingUpWithEmptyTextWorks() {
         let string = NSAttributedString(string: "")
         view.setup(with: string, format: .rtf)

@@ -16,7 +16,7 @@ extension RichTextCoordinator {
             self?.handle(action)
         }
         .store(in: &cancellables)
-        
+
         subscribeToAlignment()
         subscribeToFontName()
         subscribeToFontSize()
@@ -117,7 +117,7 @@ extension RichTextCoordinator {
             moveCursorToPastedContent: data.moveCursor
         )
     }
-    
+
     func pasteImages(_ data: RichTextInsertion<[ImageRepresentable]>?) {
         guard let data = data else { return }
         textView.pasteImages(
@@ -126,7 +126,7 @@ extension RichTextCoordinator {
             moveCursorToPastedContent: data.moveCursor
         )
     }
-    
+
     func pasteText(_ data: RichTextInsertion<String>?) {
         guard let data = data else { return }
         textView.pasteText(

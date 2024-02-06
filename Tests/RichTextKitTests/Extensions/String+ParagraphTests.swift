@@ -38,7 +38,6 @@ final class String_ParagraphTests: XCTestCase {
         XCTAssertEqual(currentResult(for: multi, from: 10), 8)
     }
 
-
     func testIndexOfNextParagraphIsCorrectForEmptyString() {
         XCTAssertEqual(nextResult(for: "", from: 0), 0)
         XCTAssertEqual(nextResult(for: "", from: 20), 0)

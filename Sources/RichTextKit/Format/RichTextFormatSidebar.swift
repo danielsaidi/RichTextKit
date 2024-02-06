@@ -83,7 +83,6 @@ public struct RichTextFormatSidebar: View {
     }
 }
 
-
 private struct SidebarSection<Content: View>: View {
 
     let title: String?

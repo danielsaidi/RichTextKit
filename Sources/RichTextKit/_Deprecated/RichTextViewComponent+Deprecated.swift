@@ -12,7 +12,6 @@ public extension RichTextViewComponent {
         richTextFont?.pointSize
     }
 
-
     @available(*, deprecated, renamed: "currentColor(_:)")
     var currentBackgroundColor: ColorRepresentable? {
         currentColor(.background)
@@ -145,7 +144,6 @@ public extension RichTextViewComponent {
         setRichTextAlignment(alignment)
     }
 
-
     @available(*, deprecated, message: "richTextColor(_:)")
     func currentColor(_ color: RichTextColor) -> ColorRepresentable? {
         richTextColor(color)
@@ -157,7 +155,6 @@ public extension RichTextViewComponent {
         guard let attribute = color.attribute else { return }
         setRichTextAttribute(attribute, to: val)
     }
-
 
     @available(*, deprecated, message: "richTextFont")
     var currentFont: FontRepresentable? {
@@ -194,7 +191,6 @@ public extension RichTextViewComponent {
         stepRichTextFontSize(points: points)
     }
 
-
     @available(*, deprecated, message: "richTextIndent")
     var currentIndent: CGFloat? {
         richTextIndent
@@ -206,7 +202,6 @@ public extension RichTextViewComponent {
     ) {
         stepRichTextIndent(points: points)
     }
-
 
     @available(*, deprecated, message: "richTextStyles")
     var currentRichTextStyles: [RichTextStyle] {

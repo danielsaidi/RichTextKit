@@ -35,14 +35,12 @@ final class RichTextPresenterTests: XCTestCase {
         XCTAssertEqual(result, expected)
     }
 
-
     func testTextRangeAfterCursorReturnsRangeBeforeSelectionStart() {
         presenter.selectedRange = NSRange(location: 4, length: 3)
         let result = presenter.rangeAfterInputCursor
         let expected = NSRange(location: 4, length: 7)
         XCTAssertEqual(result, expected)
     }
-
 
     func testRichTextAtRangeUsesAttributedString() {
         let range = NSRange(location: 4, length: 3)

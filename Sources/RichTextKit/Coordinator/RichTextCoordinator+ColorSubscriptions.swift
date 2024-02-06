@@ -9,7 +9,7 @@
 import Foundation
 
 extension RichTextCoordinator {
-    
+
     func setColor(_ color: RichTextColor, to val: ColorRepresentable) {
         var applyRange: NSRange? = nil
         if textView.hasSelectedRange {
