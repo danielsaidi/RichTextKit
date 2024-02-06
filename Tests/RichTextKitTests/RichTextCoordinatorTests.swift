@@ -75,7 +75,6 @@ final class RichTextCoordinatorTests: XCTestCase {
         #endif
     }
 
-
     #if iOS || os(tvOS)
 
     func testTextViewDelegateHandlesTextViewDidBeginEditing() {

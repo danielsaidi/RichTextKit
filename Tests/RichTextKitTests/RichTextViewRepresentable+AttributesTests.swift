@@ -60,7 +60,6 @@ final class RichTextViewComponent_AttributesTests: XCTestCase {
         assertEqualAttributes(textView.typingAttributes)
     }
 
-
     func testTextAttributeValueForKeyIsValidForSelectedRange() {
         textView.setSelectedRange(selectedRange)
         textView.setRichTextAttribute(.font, to: font)

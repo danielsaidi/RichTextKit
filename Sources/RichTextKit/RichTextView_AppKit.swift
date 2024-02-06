@@ -36,7 +36,6 @@ open class RichTextView: NSTextView, RichTextViewComponent {
     /// The image configuration to use by the rich text view.
     public var imageConfiguration: RichTextImageConfiguration = .disabled
 
-
     // MARK: - Overrides
 
     /// Paste the current pasteboard content into the view.
@@ -93,7 +92,6 @@ open class RichTextView: NSTextView, RichTextViewComponent {
             .scrollWheel(with: event)
     }
 
-
     // MARK: - Setup
 
     /**
@@ -121,7 +119,6 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         layoutManager?.defaultAttachmentScaling = NSImageScaling.scaleProportionallyDown
         setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
     }
-
 
     // MARK: - Open Functionality
 
@@ -172,7 +169,6 @@ open class RichTextView: NSTextView, RichTextViewComponent {
     }
 }
 
-
 // MARK: - Public Extensions
 
 public extension RichTextView {
@@ -189,7 +185,6 @@ public extension RichTextView {
     }
 }
 
-
 // MARK: - RichTextProvider
 
 public extension RichTextView {
@@ -205,7 +200,6 @@ public extension RichTextView {
         window?.firstResponder == self
     }
 }
-
 
 // MARK: - RichTextWriter
 

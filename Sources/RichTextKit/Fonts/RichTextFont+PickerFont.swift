@@ -59,7 +59,6 @@ public extension RichTextFont {
     }
 }
 
-
 // MARK: - Static Properties
 
 public extension RichTextFont.PickerFont {
@@ -92,7 +91,6 @@ public extension RichTextFont.PickerFont {
     }
 }
 
-
 // MARK: - Public Properties
 
 public extension RichTextFont.PickerFont {
@@ -112,7 +110,6 @@ public extension RichTextFont.PickerFont {
         return name.uppercased().hasPrefix(systemPrefix)
     }
 }
-
 
 // MARK: - Collection Extensions
 
@@ -134,7 +131,6 @@ public extension Collection where Element == RichTextFont.PickerFont {
         return filtered
     }
 }
-
 
 // MARK: - System Fonts
 

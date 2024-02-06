@@ -45,7 +45,6 @@ public class RichTextContext: ObservableObject {
     /// The currently selected range, if any.
     public internal(set) var selectedRange = NSRange()
 
-
     // MARK: - Public properies
 
     /// Whether or not the text is currently being edited.

@@ -55,7 +55,6 @@ final class RichTextViewComponent_AlignmentTests: XCTestCase {
         XCTAssertNotEqual(align, alignment)
     }
 
-
     func testRichTextAlignmentWorksForSelectedRange() {
         textView.setSelectedRange(selectedRange)
         textView.setRichTextAlignment(alignment)

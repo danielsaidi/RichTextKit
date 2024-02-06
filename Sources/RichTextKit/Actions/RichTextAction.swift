@@ -149,7 +149,6 @@ public extension RichTextAction {
     }
 }
 
-
 // MARK: - Aliases
 
 public extension RichTextAction {

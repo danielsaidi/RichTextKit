@@ -147,14 +147,12 @@ open class RichTextImageAttachment: NSTextAttachment {
         super.init(coder: coder)
     }
 
-
     /**
      Whether or not the attachment supports secure coding.
 
      This attachment type supports secure coding by default.
      */
     public override class var supportsSecureCoding: Bool { true }
-
 
     #if iOS || os(tvOS) || os(visionOS)
     /**

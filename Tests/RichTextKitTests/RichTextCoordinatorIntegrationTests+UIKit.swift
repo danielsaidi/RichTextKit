@@ -26,7 +26,6 @@ final class RichTextCoordinatorIntegrationTests: XCTestCase {
         return text
     }()
 
-
     override func setUp() {
         super.setUp()
 

@@ -38,7 +38,6 @@ final class RichTextReaderTests: XCTestCase {
         XCTAssertEqual(result, "baz")
     }
 
-
     func testSafeRangeIsValidForEmptyRangeInEmptyString() {
         let range = NSRange(location: 0, length: 0)
         let string = NSAttributedString(string: "")
