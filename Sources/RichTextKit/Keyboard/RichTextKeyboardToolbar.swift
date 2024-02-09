@@ -259,8 +259,7 @@ public struct RichTextKeyboardToolbarStyle {
         toolbarHeight: Double = 50,
         itemSpacing: Double = 15,
         shadowColor: Color = .black.opacity(0.1),
-        shadowRadius: Double = 3,
-        alwaysDisplayToolbar: Bool = false
+        shadowRadius: Double = 3
     ) {
         self.toolbarHeight = toolbarHeight
         self.itemSpacing = itemSpacing
