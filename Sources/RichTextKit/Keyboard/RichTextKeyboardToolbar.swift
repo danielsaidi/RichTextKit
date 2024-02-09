@@ -302,7 +302,7 @@ public struct RichTextKeyboardToolbarConfiguration {
     ) {
         self.alwaysDisplayToolbar = alwaysDisplayToolbar
     }
-    
+
     /// Should the toolbar always be displayed.
     public var alwaysDisplayToolbar: Bool
 }
