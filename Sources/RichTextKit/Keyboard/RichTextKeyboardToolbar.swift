@@ -43,7 +43,7 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
      - Parameters:
        - context: The context to affect.
        - style: The toolbar style to apply, by default ``RichTextKeyboardToolbarStyle/standard``.
-       - configuration: The toolbar style to apply, by default ``RichTextKeyboardToolbarConfiguration/standard``.
+       - configuration: The toolbar configuration to apply, by default ``RichTextKeyboardToolbarConfiguration/standard``.
        - leadingActions: The leading actions, by default `.undo`, `.redo` and `.copy`.
        - trailingActions: The trailing actions, by default `.dismissKeyboard`.
        - leadingButtons: The leading buttons to place after the leading actions.
@@ -309,7 +309,7 @@ public struct RichTextKeyboardToolbarConfiguration {
 
 public extension RichTextKeyboardToolbarConfiguration {
 
-    /// This standard style is used by default.
+    /// This standard configuration is used by default.
     static var standard = RichTextKeyboardToolbarConfiguration()
 }
 
