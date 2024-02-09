@@ -56,15 +56,27 @@ public extension RichTextColor {
         }
     }
 
-    /// The standard icon to use for the alignment.
-    var icon: Image? {
+    /// The standard icon to use for the color.
+    var icon: Image {
         switch self {
         case .foreground: .richTextColorForeground
         case .background: .richTextColorBackground
         case .strikethrough: .richTextColorStrikethrough
         case .stroke: .richTextColorStroke
         case .underline: .richTextColorUnderline
-        case .undefined: nil
+        case .undefined: .richTextColorUndefined
+        }
+    }
+
+    /// The localized color title key.
+    var titleKey: RTKL10n {
+        switch self {
+        case .foreground: .foregroundColor
+        case .background: .backgroundColor
+        case .strikethrough: .strikethroughColor
+        case .stroke: .strokeColor
+        case .underline: .underlineColor
+        case .undefined: .strokeColor
         }
     }
 

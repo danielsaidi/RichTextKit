@@ -16,6 +16,9 @@
 "color" = "Färg";
 "foregroundColor" = "Text";
 "backgroundColor" = "Bakgrund";
+"underlineColor" = "Underline Color";
+"strikethroughColor" = "Striketrough Color";
+"strokeColor" = "Stroke Color";
 
 "actionCopy" = "Kopiera";
 "actionDismissKeyboard" = "Stäng tangentbordet";
@@ -49,6 +52,15 @@
 "menuSuperscriptIncrease" = "Superscript";
 "menuSuperscriptDecrease" = "Subscript";
 "menuText" = "Text";
+
+"highlightedRange" = "Highlight Range";
+"highlightingStyle" = "Highlighting Style";
+
+"pasteImage" = "Paste Image";
+"pasteImages" = "Paste Images";
+"pasteText" = "Paste text";
+"selectRange" = "Select Range";
+"setAttributedString" = "Set attributed String";
 
 "styleBold" = "Fet";
 "styleItalic" = "Kursiv";

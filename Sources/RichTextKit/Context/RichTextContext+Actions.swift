@@ -16,7 +16,7 @@ public extension RichTextContext {
         case .setAlignment(let align): textAlignment = align
         case .stepFontSize(let points): fontSize += CGFloat(points)
         case .toggleStyle(let style): toggle(style)
-        default: triggerAction = action
+        default: break
         }
     }
 
@@ -25,11 +25,21 @@ public extension RichTextContext {
         switch action {
         case .copy: canCopy
         case .dismissKeyboard: true
+        case .pasteImage: true
+        case .pasteImages: true
+        case .pasteText: true
         case .print: false
         case .redoLatestChange: canRedoLatestChange
+        case .selectRange: true
         case .setAlignment: true
+        case .setAttributedString: true
+        case .setColor: true
+        case .setHighlightedRange: true
+        case .setHighlightingStyle: true
+        case .setStyle: true
         case .stepFontSize: true
-        case .stepIndent(let points): points < 0 ? canDecreaseIndent : canIncreaseIndent
+        case .stepIndent(let points):
+            points < 0 ? canDecreaseIndent : canIncreaseIndent
         case .stepSuperscript: false
         case .toggleStyle: true
         case .undoLatestChange: canUndoLatestChange

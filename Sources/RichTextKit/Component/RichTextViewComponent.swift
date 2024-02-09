@@ -53,7 +53,6 @@ public protocol RichTextViewComponent: AnyObject,
     /// The text view current typing attributes.
     var typingAttributes: RichTextAttributes { get set }
 
-
     // MARK: - Setup
 
     /// Setup the view with a text and data format.
@@ -61,7 +60,6 @@ public protocol RichTextViewComponent: AnyObject,
         with text: NSAttributedString,
         format: RichTextDataFormat
     )
-
 
     // MARK: - Functions
 
@@ -86,7 +84,6 @@ public protocol RichTextViewComponent: AnyObject,
     /// Undo the latest change.
     func undoLatestChange()
 }
-
 
 // MARK: - Public Extension
 
@@ -137,7 +134,7 @@ public extension RichTextViewComponent {
     }
 }
 
-internal extension RichTextViewComponent {
+extension RichTextViewComponent {
 
     /// This can be called to setup the initial font size.
     func setupInitialFontSize() {

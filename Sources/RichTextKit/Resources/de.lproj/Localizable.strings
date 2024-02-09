@@ -16,6 +16,9 @@
 "color" = "Farbe";
 "foregroundColor" = "Text";
 "backgroundColor" = "Hintergrund";
+"underlineColor" = "Underline Color";
+"strikethroughColor" = "Striketrough Color";
+"strokeColor" = "Stroke Color";
 
 "actionCopy" = "Kopieren";
 "actionDismissKeyboard" = "Tastatur schließen";
@@ -49,6 +52,15 @@
 "menuSuperscriptIncrease" = "Superscript";
 "menuSuperscriptDecrease" = "Subscript";
 "menuText" = "Text";
+
+"highlightedRange" = "Highlight Range";
+"highlightingStyle" = "Highlighting Style";
+
+"pasteImage" = "Paste Image";
+"pasteImages" = "Paste Images";
+"pasteText" = "Paste text";
+"selectRange" = "Select Range";
+"setAttributedString" = "Set attributed String";
 
 "styleBold" = "Fetter";
 "styleItalic" = "Kursiv";

@@ -30,6 +30,7 @@ public extension Image {
     static let richTextColorStroke = symbol("a.square")
     static let richTextColorStrikethrough = symbol("strikethrough")
     static let richTextColorUnderline = symbol("underline")
+    static let richTextColorUndefined = symbol("questionmark.app")
 
     static let richTextDocument = symbol("doc.text")
     static let richTextDocuments = symbol("doc.on.doc")
@@ -43,6 +44,8 @@ public extension Image {
 
     static let richTextIndentDecrease = symbol("decrease.indent")
     static let richTextIndentIncrease = symbol("increase.indent")
+
+    static let richTextSelection = symbol("123.rectangle.fill")
 
     static let richTextStyleBold = symbol("bold")
     static let richTextStyleItalic = symbol("italic")

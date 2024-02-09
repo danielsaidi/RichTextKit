@@ -106,6 +106,7 @@ struct RichTextStyle_Button_Previews: PreviewProvider {
 
     struct Preview: View {
 
+        private let context = RichTextContext()
         @State
         private var isBoldOn = false
 

@@ -89,7 +89,6 @@ public struct RichTextEditor: ViewRepresentable {
     }
     #endif
 
-
     public func makeCoordinator() -> RichTextCoordinator {
         RichTextCoordinator(
             text: text,
@@ -97,7 +96,6 @@ public struct RichTextEditor: ViewRepresentable {
             richTextContext: context
         )
     }
-
 
     #if iOS || os(tvOS) || os(visionOS)
     public func makeUIView(context: Context) -> some UIView {
@@ -122,7 +120,6 @@ public struct RichTextEditor: ViewRepresentable {
     #endif
 }
 
-
 // MARK: RichTextPresenter
 
 public extension RichTextEditor {
@@ -133,7 +130,6 @@ public extension RichTextEditor {
     }
 }
 
-
 // MARK: RichTextReader
 
 public extension RichTextEditor {
@@ -143,7 +139,6 @@ public extension RichTextEditor {
         text.wrappedValue
     }
 }
-
 
 // MARK: RichTextWriter
 

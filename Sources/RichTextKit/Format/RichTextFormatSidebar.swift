@@ -83,18 +83,6 @@ public struct RichTextFormatSidebar: View {
     }
 }
 
-private extension View {
-
-    @ViewBuilder
-    func prefersFocusable() -> some View {
-        if #available(iOS 17.0, macOS 14.0, *) {
-            self.focusable()
-        } else {
-            self
-        }
-    }
-}
-
 private struct SidebarSection<Content: View>: View {
 
     let title: String?

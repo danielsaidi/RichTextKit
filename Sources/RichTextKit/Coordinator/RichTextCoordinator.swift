@@ -45,9 +45,8 @@ open class RichTextCoordinator: NSObject {
         self.richTextContext = richTextContext
         super.init()
         self.textView.delegate = self
-        subscribeToContextChanges()
+        subscribeToUserActions()
     }
-
 
     // MARK: - Properties
 
@@ -64,8 +63,7 @@ open class RichTextCoordinator: NSObject {
     public var cancellables = Set<AnyCancellable>()
 
     /// This flag is used to avoid delaying context sync.
-    internal var shouldDelaySyncContextWithTextView = true
-
+    var shouldDelaySyncContextWithTextView = true
 
     // MARK: - Internal Properties
 
@@ -73,14 +71,13 @@ open class RichTextCoordinator: NSObject {
      The background color that was used before the currently
      highlighted range was set.
      */
-    internal var highlightedRangeOriginalBackgroundColor: ColorRepresentable?
+    var highlightedRangeOriginalBackgroundColor: ColorRepresentable?
 
     /**
      The foreground color that was used before the currently
      highlighted range was set.
      */
-    internal var highlightedRangeOriginalForegroundColor: ColorRepresentable?
-
+     var highlightedRangeOriginalForegroundColor: ColorRepresentable?
 
     #if canImport(UIKit)
 
@@ -102,7 +99,6 @@ open class RichTextCoordinator: NSObject {
         richTextContext.isEditingText = false
     }
     #endif
-
 
     #if canImport(AppKit) && !targetEnvironment(macCatalyst)
 
@@ -126,7 +122,6 @@ open class RichTextCoordinator: NSObject {
     #endif
 }
 
-
 #if iOS || os(tvOS) || os(visionOS)
 import UIKit
 
@@ -137,7 +132,6 @@ import AppKit
 
 extension RichTextCoordinator: NSTextViewDelegate {}
 #endif
-
 
 // MARK: - Public Extensions
 
@@ -154,7 +148,6 @@ public extension RichTextCoordinator {
         textView.setRichTextColor(.foreground, to: foreground, at: range)
     }
 }
-
 
 // MARK: - Internal Extensions
 
@@ -197,7 +190,7 @@ extension RichTextCoordinator {
 
         RichTextColor.allCases.forEach {
             if let color = textView.richTextColor($0) {
-                richTextContext.setColor(color, for: $0)
+                richTextContext.setColor($0, to: color)
             }
         }
 

@@ -26,7 +26,6 @@ extension RichTextView: UIDropInteractionDelegate {}
  */
 open class RichTextView: UITextView, RichTextViewComponent {
 
-
     // MARK: - Initializers
 
     public convenience init(
@@ -44,7 +43,6 @@ open class RichTextView: UITextView, RichTextViewComponent {
         self.init()
         self.setup(with: string, format: format)
     }
-
 
     // MARK: - Properties
 
@@ -74,7 +72,6 @@ open class RichTextView: UITextView, RichTextViewComponent {
         }
     }
 
-
     #if iOS || os(visionOS)
 
     /// The image drop interaction to use.
@@ -89,13 +86,11 @@ open class RichTextView: UITextView, RichTextViewComponent {
 
     #endif
 
-
     /// Keeps track of the first time a valid frame is set.
     private var isInitialFrameSetupNeeded = true
 
     /// Keeps track of the data format used by the view.
     private var richTextDataFormat: RichTextDataFormat = .archivedData
-
 
     // MARK: - Overrides
 
@@ -144,7 +139,6 @@ open class RichTextView: UITextView, RichTextViewComponent {
     }
     #endif
 
-
     // MARK: - Setup
 
     /**
@@ -174,7 +168,6 @@ open class RichTextView: UITextView, RichTextViewComponent {
         }
         setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
     }
-
 
     // MARK: - Open Functionality
 
@@ -245,7 +238,6 @@ open class RichTextView: UITextView, RichTextViewComponent {
         undoManager?.undo()
     }
 
-
     #if iOS || os(visionOS)
 
     // MARK: - UIDropInteractionDelegate
@@ -295,7 +287,6 @@ open class RichTextView: UITextView, RichTextViewComponent {
         performImageDrop(with: session, at: range)
         performTextDrop(with: session, at: range)
     }
-
 
     // MARK: - Drop Interaction Support
 
@@ -357,7 +348,6 @@ private extension UIDropSession {
 }
 #endif
 
-
 // MARK: - Public Extensions
 
 public extension RichTextView {
@@ -385,7 +375,6 @@ public extension RichTextView {
     }
 }
 
-
 // MARK: - RichTextProvider
 
 public extension RichTextView {
@@ -396,7 +385,6 @@ public extension RichTextView {
         set { attributedText = newValue }
     }
 }
-
 
 // MARK: - RichTextWriter
 
