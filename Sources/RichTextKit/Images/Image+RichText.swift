@@ -53,6 +53,7 @@ public extension Image {
     static let richTextStyleItalic = symbol("italic")
     static let richTextStyleStrikethrough = symbol("strikethrough")
     static let richTextStyleUnderline = symbol("underline")
+    static let richTextKindLink = symbol("link")
 
     static let richTextSuperscriptDecrease = symbol("textformat.subscript")
     static let richTextSuperscriptIncrease = symbol("textformat.superscript")

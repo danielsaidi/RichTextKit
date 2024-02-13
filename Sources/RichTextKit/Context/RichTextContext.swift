@@ -147,6 +147,8 @@ public class RichTextContext: ObservableObject {
 
     @Published
     public internal(set) var styles = [RichTextStyle: Bool]()
+    @Published
+    public var link: URL?
 }
 
 public extension RichTextContext {

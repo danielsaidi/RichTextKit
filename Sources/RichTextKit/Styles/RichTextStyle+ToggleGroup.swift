@@ -41,6 +41,9 @@ public extension RichTextStyle {
             self.styles = styles
         }
 
+        @State private var urlString = ""
+        @State private var isAlertPresented = false
+        
         private let styles: [RichTextStyle]
         private let isGreedy: Bool
 
@@ -58,23 +61,55 @@ public extension RichTextStyle {
         private var context: RichTextContext
 
         public var body: some View {
-            #if macOS
-            ControlGroup {
-                ForEach(styles) {
-                    RichTextStyle.Toggle(
-                        style: $0,
+            ZStack {
+                #if macOS
+                ControlGroup {
+                    ForEach(styles) {
+                        RichTextStyle.Toggle(
+                            style: $0,
+                            context: context,
+                            fillVertically: true
+                        )
+                    }
+                    RichTextLinkButton(
                         context: context,
-                        fillVertically: true
+                        isAlertPresented: $isAlertPresented
                     )
                 }
+                .frame(width: groupWidth)
+                #else
+                HStack {
+                    RichTextStyle.ToggleStack(
+                        context: context,
+                        styles: styles
+                    )
+                    RichTextLinkButton(
+                        context: context,
+                        isAlertPresented: $isAlertPresented
+                    )
+                }
+                #endif
             }
-            .frame(width: groupWidth)
-            #else
-            RichTextStyle.ToggleStack(
-                context: context,
-                styles: styles
-            )
-            #endif
+            .presentationContainer(
+                style: .sheet,
+                data: context.binding(for: context.link),
+                isPresented: $isAlertPresented) { url in
+                    VStack(spacing: 8) {
+                        TextField("", text: $urlString)
+                            .textFieldStyle(.roundedBorder)
+                            .autocorrectionDisabled(true)
+                        // .textInputAutocapitalization(.never)
+                        SwiftUI.Button(
+                            action: {
+                                context.userActionPublisher.send(.link(url: URL(string:urlString)))
+                                context.setLink(URL(string: urlString))
+                                isAlertPresented = false
+                            },
+                            label: { Text("Set link") }
+                        )
+                    }
+                    .padding(.horizontal, 8)
+                }
         }
     }
 }

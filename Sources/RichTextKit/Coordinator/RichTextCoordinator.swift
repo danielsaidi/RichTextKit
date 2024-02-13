@@ -42,6 +42,7 @@ open class RichTextCoordinator: NSObject {
         self.text = text
         self.textView = textView
         self.context = richTextContext
+        self.richTextLinkSetter = RichTextLinkSetter(textView: textView)
         super.init()
         self.textView.delegate = self
         subscribeToUserActions()
@@ -52,6 +53,9 @@ open class RichTextCoordinator: NSObject {
     /// The rich text context to coordinate with.
     public let context: RichTextContext
 
+    /// Object responsible for setting links at given range
+    public let richTextLinkSetter: RichTextLinkSetter
+    
     /// The rich text to edit.
     public var text: Binding<NSAttributedString>
 
@@ -199,6 +203,22 @@ extension RichTextCoordinator {
         RichTextStyle.all.forEach {
             let style = styles.hasStyle($0)
             context.setStyleInternal($0, to: style)
+
+        // IMPORTANT:
+        // When we set custom RichTextAttributes, those are available only for parsing.
+        // That means when UITextView renders the attributed text, it automatically removes
+        // all undocumented attributes from itself and keeps only the documented ones
+        // (In customLinks case - `.link` and `.foregroundColor`
+        // This is probably hack because it intervenes with other links (mentions implementation in future)
+        if let linkString = textView.richTextAttributes[.link] as? String,
+           let color = textView.richTextAttributes[.foregroundColor] as? ColorRepresentable,
+           color == ColorRepresentable.green {
+            richTextContext.setLink(URL(string: linkString))
+        } else {
+            richTextContext.setLink(nil)
+            // TODO: Set attribute to nil
+//            textView.setRichTextAttribute(.richTextLink, to: nil)
+//            textView.setRichTextAttribute(.link, to: nil)
         }
 
         updateTextViewAttributesIfNeeded()

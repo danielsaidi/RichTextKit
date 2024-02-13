@@ -134,6 +134,20 @@ open class RichTextView: NSTextView, RichTextViewComponent {
 
     // MARK: - Open Functionality
 
+    open func renderLinks(in characterRange: NSRange, at origin: CGPoint) {
+        let safeRange = safeRange(for: characterRange)
+        textStorage?.enumerateAttribute(
+            .richTextLink,
+            in: safeRange,
+            using: { [weak textStorage] value, range, _ in
+                if let value = value as? CustomLinkAttributes, let link = value.link {
+                    textStorage?.addAttribute(.link, value: link, range: range)
+                    textStorage?.addAttribute(.foregroundColor, value: value.color, range: range)
+                }
+            }
+        )
+    }
+    
     /**
      Alert a certain title and message.
 
