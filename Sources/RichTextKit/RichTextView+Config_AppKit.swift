@@ -15,6 +15,10 @@ public extension RichTextView {
      */
     struct Configuration {
         
+        /// Create a custom configuration
+        /// - Parameters:
+        ///   - isScrollingEnabled: Whether or not the editor should scroll, by default `true`.
+        ///   - isContinuousSpellCheckingEnabled: Whether the editor spell-checks in realtime. Defaults to `true`.
         public init(
             isScrollingEnabled: Bool = true,
             isContinuousSpellCheckingEnabled: Bool = true
@@ -25,6 +29,7 @@ public extension RichTextView {
         
         /// Whether or not the editor should scroll.
         public var isScrollingEnabled: Bool
+        /// Whether the editor spell-checks in realtime.
         public var isContinuousSpellCheckingEnabled: Bool
     }
 }
