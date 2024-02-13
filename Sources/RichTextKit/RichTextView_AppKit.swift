@@ -147,7 +147,7 @@ open class RichTextView: NSTextView, RichTextViewComponent {
             }
         )
     }
-    
+
     /**
      Alert a certain title and message.
 

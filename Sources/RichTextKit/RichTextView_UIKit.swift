@@ -196,7 +196,7 @@ open class RichTextView: UITextView, RichTextViewComponent {
             }
         )
     }
-    
+
     /// Alert a certain title and message.
     open func alert(title: String, message: String, buttonTitle: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)

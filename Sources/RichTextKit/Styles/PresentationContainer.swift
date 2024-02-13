@@ -16,16 +16,16 @@ private struct PresentationContainer<Value, SheetContent: View>: ViewModifier {
     let style: PresentationStyle
     let sheetContent: (Value?) -> SheetContent
     let isPresented: Binding<Bool>
-    
+
     private struct SheetContentContainer: View {
         @Binding var data: Value?
         let sheetContent: (Value?) -> SheetContent
-        
+
         var body: some View {
             sheetContent(data)
         }
     }
-    
+
     func body(content: Content) -> some View {
         switch style {
         case .sheet:
@@ -34,9 +34,9 @@ private struct PresentationContainer<Value, SheetContent: View>: ViewModifier {
             content.alert(
                 "",
                 isPresented: isPresented,
-                actions: {  SheetContentContainer(data: $data, sheetContent: sheetContent) }
+                actions: { SheetContentContainer(data: $data, sheetContent: sheetContent) }
             )
-            
+
         }
     }
 }

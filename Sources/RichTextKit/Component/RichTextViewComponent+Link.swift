@@ -27,13 +27,13 @@ public extension RichTextViewComponent {
                 string.addAttribute(.foregroundColor, value: ColorRepresentable.textColor, range: range)
                 string.fixAttributes(in: range)
             }
-            
+
             string.endEditing()
         }
         self.typingAttributes = [.font: FontRepresentable.standardRichTextFont, .foregroundColor: ColorRepresentable.textColor]
         setRichTextFont(.standardRichTextFont)
     }
-    
+
     /// Set the current value of a certain rich text style.
     func setCurrentRichTextLink(_ link: URL?) {
         let shouldAdd = link != nil

@@ -12,11 +12,10 @@ import AppKit
 import UIKit
 #endif
 
-
 public class RichTextLinkSetter {
 #if macOS
     let textView: NSTextView
-    
+
     /// - param textView: The text view which should be observed and highlighted.
     /// - param notificationCenter: The notification center to subscribe in.
     ///   A testing seam. Defaults to `NotificationCenter.default`.
@@ -48,11 +47,9 @@ public class RichTextLinkSetter {
         )
     }
 #endif
-    
-    
+
     private var subscription: NSObjectProtocol!
-    
-    
+
 #if macOS
     func textViewDidChange(_ notification: Notification) {
         textView.textStorage?.beginEditing()
@@ -66,5 +63,5 @@ public class RichTextLinkSetter {
         textView.textStorage.endEditing()
     }
 #endif
-    
+
     }

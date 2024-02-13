@@ -77,7 +77,7 @@ public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
 
     /// Undo the latest change.
     case undoLatestChange
-    
+
     case link(url: URL?)
 }
 

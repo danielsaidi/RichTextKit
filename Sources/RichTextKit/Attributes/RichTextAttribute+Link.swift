@@ -21,7 +21,7 @@ public struct CustomLinkAttributes {
         self.link = link
         self.color = color
     }
-    
+
     let link: String
     let color: ColorRepresentable
 }

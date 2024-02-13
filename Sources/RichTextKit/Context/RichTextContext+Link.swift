@@ -8,7 +8,7 @@
 import SwiftUI
 
 public extension RichTextContext {
-    
+
     /// Get a binding for a certain color.
     func binding(for link: URL?) -> Binding<URL?> {
         Binding(
@@ -16,7 +16,7 @@ public extension RichTextContext {
             set: { self.setLink($0) }
         )
     }
-    
+
     /// Set the link to context
     func setLink(_ url: URL?) {
         self.link = url

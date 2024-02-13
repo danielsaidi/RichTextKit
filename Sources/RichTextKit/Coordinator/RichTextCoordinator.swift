@@ -55,7 +55,7 @@ open class RichTextCoordinator: NSObject {
 
     /// Object responsible for setting links at given range
     public let richTextLinkSetter: RichTextLinkSetter
-    
+
     /// The rich text to edit.
     public var text: Binding<NSAttributedString>
 

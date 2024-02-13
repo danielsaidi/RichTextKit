@@ -43,7 +43,7 @@ public extension RichTextStyle {
 
         @State private var urlString = ""
         @State private var isAlertPresented = false
-        
+
         private let styles: [RichTextStyle]
         private let isGreedy: Bool
 
