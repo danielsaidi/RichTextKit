@@ -30,6 +30,9 @@ open class RichTextView: NSTextView, RichTextViewComponent {
     /// The configuration to use by the rich text view.
     public var configuration: Configuration = .standard
 
+    /// The theme for coloring and setting style to text view.
+    public var theme: Theme = .standard
+
     /// The style to use when highlighting text in the view.
     public var highlightingStyle: RichTextHighlightingStyle = .standard
 
@@ -107,24 +110,26 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         format: RichTextDataFormat
     ) {
         attributedString = .empty
-        setupInitialFontSize()
         attributedString = text
         allowsImageEditing = true
         allowsUndo = true
-        backgroundColor = .clear
-        trySetupInitialTextColor(for: text) {
-            textColor = .textColor
-        }
         imageConfiguration = standardImageConfiguration(for: format)
         layoutManager?.defaultAttachmentScaling = NSImageScaling.scaleProportionallyDown
         setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         setupConfiguration()
+        setupTheme()
     }
 
     // MARK: - Internal
 
     func setupConfiguration() {
         isContinuousSpellCheckingEnabled = configuration.isContinuousSpellCheckingEnabled
+    }
+
+    func setupTheme() {
+        font = theme.font
+        textColor = theme.fontColor
+        backgroundColor = theme.backgroundColor
     }
 
     // MARK: - Open Functionality
