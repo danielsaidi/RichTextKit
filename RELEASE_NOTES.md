@@ -10,10 +10,20 @@ Until then, minor updates may remove deprecated features and introduce breaking 
 
 This release adds a lot of new `RichTextAction` cases and adjusts the context and coordinator subscription.
 
+### ✨ Features
+
+* `RichTextKeyboardToolbar` has a new configuration to always be shown.
+* `RichTextView` has a new theme concept that lets you define its style.
+
 ### 💡 Adjustments
 
 * `RichTextColor` `icon` is no longer optional.
 * `RichTextColor` has a new `titleKey` property.
+* `RichTextCoordinator` now syncs an extra time when text view ends editing.
+
+### 🐛 Bug Fixes
+
+* The library once again builds on visionOS.
 
 
 

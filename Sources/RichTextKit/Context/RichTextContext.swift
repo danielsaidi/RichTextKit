@@ -34,7 +34,8 @@ public class RichTextContext: ObservableObject {
      Note that the property is read-only and not `@Published`
      to avoid redrawing the editor when it changes, which is
      done as the user types. We should find a way to observe
-     it without this happening. The best way to observe this property is to use the raw `text` binding that you pass
+     it without this happening. The best way to observe this
+     property is to use the raw `text` binding that you pass
      into the text editor. The editor will not redraw if you
      change this value from the outside.
 

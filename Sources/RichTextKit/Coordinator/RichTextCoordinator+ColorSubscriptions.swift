@@ -5,7 +5,7 @@
 //  Created by Dominik Bucher on 18.01.2024.
 //
 
-#if iOS || macOS || os(tvOS)
+#if iOS || macOS || os(tvOS) || os(visionOS)
 import Foundation
 
 extension RichTextCoordinator {
