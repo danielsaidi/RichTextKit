@@ -41,18 +41,31 @@ public struct RichTextLinkButton: View {
     }
     
     public var body: some View {
-        HStack {
-            SwiftUI.Toggle(isOn: hasLink()) {
+        Button(
+            action: toggle,
+            label: {
                 Image.richTextKindLink
-                    .frame(maxHeight: fillVertically ? .infinity : nil)
+//                    .frame(maxHeight: fillVertically ? .infinity : nil)
+                    .foregroundStyle(.blue)
+                    .padding(8)
             }
-            .toggleStyle(.button)
-        }
-        .onTapGesture {
-            toggle()
-        }
+        )
+        .buttonStyle(ToggleButtonStyle(isToggled: isOn))
     }
 }
+
+struct ToggleButtonStyle: ButtonStyle {
+    var isToggled: Bool
+    
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .background(isToggled ? Color.blue.opacity(0.2) : Color.clear)
+            .cornerRadius(8)
+            .padding()
+            .contentShape(Rectangle())
+    }
+}
+
 
 extension RichTextLinkButton {
     private var isOn: Bool {

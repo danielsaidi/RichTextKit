@@ -98,7 +98,7 @@ public extension RichTextStyle {
                         TextField("", text: $urlString)
                             .textFieldStyle(.roundedBorder)
                             .autocorrectionDisabled(true)
-                        // .textInputAutocapitalization(.never)
+                            .textInputAutocapitalization(.never)
                         SwiftUI.Button(
                             action: {
                                 context.userActionPublisher.send(.link(url: URL(string:urlString)))
