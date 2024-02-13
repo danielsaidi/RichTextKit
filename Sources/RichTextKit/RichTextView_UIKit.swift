@@ -55,12 +55,6 @@ open class RichTextView: UITextView, RichTextViewComponent {
             spellCheckingType = configuration.spellCheckingType
         }
     }
-    
-    public var theme: Theme = .standard {
-        didSet {
-            setupTheme()
-        }
-    }
 
     /// The style to use when highlighting text in the view.
     public var highlightingStyle: RichTextHighlightingStyle = .standard
@@ -172,17 +166,8 @@ open class RichTextView: UITextView, RichTextViewComponent {
             textColor = .label
         }
         setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        setupTheme()
     }
-    
-    // MARK: - Internal
-    
-    func setupTheme() {
-        font = theme.font
-        textColor = theme.fontColor
-        backgroundColor = theme.backgroundColor
-    }
-    
+
     // MARK: - Open Functionality
 
     /// Alert a certain title and message.
