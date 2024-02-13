@@ -65,6 +65,7 @@ final class RichTextViewComponentTests: XCTestCase {
         let string = NSAttributedString(string: "foo bar baz")
         view.setup(with: string, format: .rtf)
         view.configuration = .standard
+        view.theme = .standard
         XCTAssertEqual(view.richText.string, "foo bar baz")
         #if iOS || os(tvOS)
         XCTAssertTrue(view.allowsEditingTextAttributes)
@@ -74,9 +75,9 @@ final class RichTextViewComponentTests: XCTestCase {
         XCTAssertEqual(view.contentCompressionResistancePriority(for: .horizontal), .defaultLow)
         #if iOS || os(tvOS)
         XCTAssertEqual(view.spellCheckingType, .no)
-        XCTAssertEqual(view.textColor, .textColor)
+        XCTAssertEqual(view.textColor, nil)
         #elseif macOS
-        XCTAssertEqual(view.textColor, .textColor)
+        XCTAssertEqual(view.textColor, nil)
         #endif
     }
 }
