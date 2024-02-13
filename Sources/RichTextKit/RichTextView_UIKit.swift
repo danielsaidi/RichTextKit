@@ -50,6 +50,15 @@ open class RichTextView: UITextView, RichTextViewComponent {
     public var configuration: Configuration = .standard {
         didSet {
             isScrollEnabled = configuration.isScrollingEnabled
+            allowsEditingTextAttributes = configuration.allowsEditingTextAttributes
+            autocapitalizationType = configuration.autocapitalizationType
+            spellCheckingType = configuration.spellCheckingType
+        }
+    }
+    
+    public var theme: Theme = .standard {
+        didSet {
+            setupTheme()
         }
     }
 
@@ -158,17 +167,22 @@ open class RichTextView: UITextView, RichTextViewComponent {
         imageConfiguration = standardImageConfiguration(for: format)
         text.autosizeImageAttachments(maxSize: imageAttachmentMaxSize)
         attributedString = text
-        allowsEditingTextAttributes = false
-        autocapitalizationType = .sentences
-        backgroundColor = .clear
         richTextDataFormat = format
-        spellCheckingType = .no
         trySetupInitialTextColor(for: text) {
             textColor = .label
         }
         setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        setupTheme()
     }
-
+    
+    // MARK: - Internal
+    
+    func setupTheme() {
+        font = theme.font
+        textColor = theme.fontColor
+        backgroundColor = theme.backgroundColor
+    }
+    
     // MARK: - Open Functionality
 
     /// Alert a certain title and message.

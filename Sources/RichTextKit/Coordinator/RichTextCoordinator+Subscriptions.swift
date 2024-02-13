@@ -191,7 +191,7 @@ extension RichTextCoordinator {
 extension ColorRepresentable {
 
     #if iOS || os(tvOS) || os(visionOS)
-    static var textColor: ColorRepresentable { .label }
+    public static var textColor: ColorRepresentable { .label }
     #endif
 }
 #endif

@@ -29,6 +29,13 @@ open class RichTextView: NSTextView, RichTextViewComponent {
 
     /// The configuration to use by the rich text view.
     public var configuration: Configuration = .standard
+    
+    /// Theme for rich text view.
+    public var theme: Theme = .standard {
+        didSet {
+            setupTheme()
+        }
+    }
 
     /// The style to use when highlighting text in the view.
     public var highlightingStyle: RichTextHighlightingStyle = .standard
@@ -118,6 +125,20 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         imageConfiguration = standardImageConfiguration(for: format)
         layoutManager?.defaultAttachmentScaling = NSImageScaling.scaleProportionallyDown
         setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        setupTheme()
+        setupConfiguration()
+    }
+    
+    // MARK: - Internal
+    
+    func setupTheme() {
+        font = theme.font
+        textColor = theme.fontColor
+        backgroundColor = theme.backgroundColor
+    }
+    
+    func setupConfiguration() {
+        isContinuousSpellCheckingEnabled = configuration.isContinuousSpellCheckingEnabled
     }
 
     // MARK: - Open Functionality
