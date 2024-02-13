@@ -133,22 +133,3 @@ public extension RichTextViewComponent {
         format.supportsImages ? .enabled : .disabled
     }
 }
-
-extension RichTextViewComponent {
-
-    /// This can be called to setup the initial font size.
-    func setupInitialFontSize() {
-        let font = FontRepresentable.standardRichTextFont
-        let size = font.pointSize
-        setRichTextFontSize(size)
-    }
-
-    /// This can be called to setup an initial text color.
-    func trySetupInitialTextColor(
-        for text: NSAttributedString,
-        _ action: () -> Void
-    ) {
-        guard text.string.isEmpty else { return }
-        action()
-    }
-}

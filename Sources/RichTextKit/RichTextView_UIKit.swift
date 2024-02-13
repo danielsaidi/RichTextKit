@@ -56,6 +56,12 @@ open class RichTextView: UITextView, RichTextViewComponent {
         }
     }
 
+    public var theme: Theme = .standard {
+        didSet {
+            setupTheme()
+        }
+    }
+
     /// The style to use when highlighting text in the view.
     public var highlightingStyle: RichTextHighlightingStyle = .standard
 
@@ -157,16 +163,22 @@ open class RichTextView: UITextView, RichTextViewComponent {
         format: RichTextDataFormat
     ) {
         attributedString = .empty
-        setupInitialFontSize()
         imageConfiguration = standardImageConfiguration(for: format)
         text.autosizeImageAttachments(maxSize: imageAttachmentMaxSize)
         attributedString = text
         richTextDataFormat = format
-        backgroundColor = .clear
-        trySetupInitialTextColor(for: text) {
-            textColor = .label
-        }
         setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        setupTheme()
+    }
+
+    // MARK: - Internal functionality
+
+    func setupTheme() {
+        if text.isEmpty {
+            font = theme.font
+            textColor = theme.fontColor
+        }
+        backgroundColor = theme.backgroundColor
     }
 
     // MARK: - Open Functionality
