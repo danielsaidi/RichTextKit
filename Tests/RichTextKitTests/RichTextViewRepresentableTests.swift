@@ -45,9 +45,10 @@ final class RichTextViewComponentTests: XCTestCase {
     func testSettingUpWithEmptyTextWorks() {
         let string = NSAttributedString(string: "")
         view.setup(with: string, format: .rtf)
+        view.configuration = .standard
         XCTAssertEqual(view.richText.string, "")
         #if iOS || os(tvOS)
-        XCTAssertFalse(view.allowsEditingTextAttributes)
+        XCTAssertTrue(view.allowsEditingTextAttributes)
         XCTAssertEqual(view.autocapitalizationType, .sentences)
         #endif
         XCTAssertEqual(view.backgroundColor, .clear)
@@ -63,9 +64,11 @@ final class RichTextViewComponentTests: XCTestCase {
     func testSettingUpWithNonEmptyTextWorks() {
         let string = NSAttributedString(string: "foo bar baz")
         view.setup(with: string, format: .rtf)
+        view.configuration = .standard
+        view.theme = .standard
         XCTAssertEqual(view.richText.string, "foo bar baz")
         #if iOS || os(tvOS)
-        XCTAssertFalse(view.allowsEditingTextAttributes)
+        XCTAssertTrue(view.allowsEditingTextAttributes)
         XCTAssertEqual(view.autocapitalizationType, .sentences)
         #endif
         XCTAssertEqual(view.backgroundColor, .clear)
