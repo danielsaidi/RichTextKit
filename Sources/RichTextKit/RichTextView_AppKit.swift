@@ -29,7 +29,7 @@ open class RichTextView: NSTextView, RichTextViewComponent {
 
     /// The configuration to use by the rich text view.
     public var configuration: Configuration = .standard
-    
+
     /// The style to use when highlighting text in the view.
     public var highlightingStyle: RichTextHighlightingStyle = .standard
 
@@ -120,9 +120,9 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         setupConfiguration()
     }
-    
+
     // MARK: - Internal
-    
+
     func setupConfiguration() {
         isContinuousSpellCheckingEnabled = configuration.isContinuousSpellCheckingEnabled
     }

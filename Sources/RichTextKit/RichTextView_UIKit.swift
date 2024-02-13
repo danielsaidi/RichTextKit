@@ -162,6 +162,7 @@ open class RichTextView: UITextView, RichTextViewComponent {
         text.autosizeImageAttachments(maxSize: imageAttachmentMaxSize)
         attributedString = text
         richTextDataFormat = format
+        backgroundColor = .clear
         trySetupInitialTextColor(for: text) {
             textColor = .label
         }

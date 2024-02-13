@@ -23,14 +23,13 @@ public extension RichTextView {
            - isScrollingEnabled: Whether or not the editor should scroll, by default `true`.
            - allowsEditingTextAttributes: If editor allows editing text attributes, by default `true`.
            - autocapitalizationType: Type of Auto capitalization, default is to `.sentences`.
-           - spellCheckingType: Whether textView spell-Checks, default is `.default`.
+           - spellCheckingType: Whether textView spell-Checks, default is `.no`.
          */
         public init(
             isScrollingEnabled: Bool = true,
             allowsEditingTextAttributes: Bool = true,
             autocapitalizationType: UITextAutocapitalizationType = .sentences,
-            spellCheckingType: UITextSpellCheckingType = .default
-          
+            spellCheckingType: UITextSpellCheckingType = .no
         ) {
             self.isScrollingEnabled = isScrollingEnabled
             self.allowsEditingTextAttributes = allowsEditingTextAttributes
