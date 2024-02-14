@@ -62,8 +62,8 @@ private extension RichTextCoordinator {
             textView.highlightingStyle = style
         case .setStyle(let style, let newValue):
             setStyle(style, to: newValue)
-        case .stepFontSize: 
-            break
+        case .stepFontSize(let points):
+            textView.stepRichTextFontSize(points: points)
         case .stepIndent(let points):
             textView.stepRichTextIndent(points: points)
         case .stepSuperscript: 
