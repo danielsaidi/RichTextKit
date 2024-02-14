@@ -11,6 +11,11 @@ import SwiftUI
 
 extension RichTextCoordinator {
 
+    /// Subscribe to observable context state changes.
+    ///
+    /// The coordinator subscribes to both actions triggered
+    /// by various buttons via the context, but also to some
+    /// context value that are changed through view bindings.
     func subscribeToUserActions() {
         richTextContext.userActionPublisher.sink { [weak self] action in
             self?.handle(action)
@@ -38,13 +43,15 @@ private extension RichTextCoordinator {
             pasteImages(images)
         case .pasteText(let text):
             pasteText(text)
-        case .print: break
+        case .print: 
+            break
         case .redoLatestChange:
             textView.redoLatestChange()
             syncContextWithTextView()
         case .selectRange(let range):
             setSelectedRange(to: range)
-        case .setAlignment: break
+        case .setAlignment(let alignment):
+            textView.setRichTextAlignment(alignment)
         case .setAttributedString(let string):
             setAttributedString(to: string)
         case .setColor(let color, let newValue):
@@ -55,54 +62,49 @@ private extension RichTextCoordinator {
             textView.highlightingStyle = style
         case .setStyle(let style, let newValue):
             setStyle(style, to: newValue)
-        case .stepFontSize: break
+        case .stepFontSize: 
+            break
         case .stepIndent(let points):
             textView.stepRichTextIndent(points: points)
-        case .stepSuperscript: break
-        case .toggleStyle: break
+        case .stepSuperscript: 
+            break
+        case .toggleStyle: 
+            break
         case .undoLatestChange:
             textView.undoLatestChange()
             syncContextWithTextView()
         }
     }
-
+    
     func subscribeToAlignment() {
         richTextContext.$textAlignment
-            .sink(
-                receiveValue: { [weak self] in
-                    self?.textView.setRichTextAlignment($0)
-                }
-            )
+            .sink { [weak self] in
+                self?.handle(.setAlignment($0))
+            }
             .store(in: &cancellables)
     }
-
+    
     func subscribeToFontName() {
         richTextContext.$fontName
-            .sink(
-                receiveValue: { [weak self] in
-                    self?.textView.setRichTextFontName($0)
-                }
-            )
+            .sink { [weak self] in
+                self?.textView.setRichTextFontName($0)
+            }
             .store(in: &cancellables)
     }
-
+    
     func subscribeToFontSize() {
         richTextContext.$fontSize
-            .sink(
-                receiveValue: { [weak self] in
-                    self?.textView.setRichTextFontSize($0)
-                }
-            )
+            .sink { [weak self] in
+                self?.textView.setRichTextFontSize($0)
+            }
             .store(in: &cancellables)
     }
 
     func subscribeToIsEditingText() {
         richTextContext.$isEditingText
-            .sink(
-                receiveValue: { [weak self] in
-                    self?.setIsEditing(to: $0)
-                }
-            )
+            .sink { [weak self] in
+                self?.setIsEditing(to: $0)
+            }
             .store(in: &cancellables)
     }
 }

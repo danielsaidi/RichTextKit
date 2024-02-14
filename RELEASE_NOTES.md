@@ -19,7 +19,8 @@ This release adds a lot of new `RichTextAction` cases and adjusts the context an
 
 * `RichTextColor` `icon` is no longer optional.
 * `RichTextColor` has a new `titleKey` property.
-* `RichTextCoordinator` now syncs an extra time when text view ends editing.
+* `RichTextContext` makes coordinator handle alignment.
+* `RichTextCoordinator` now syncs an extra time at ends editing.
 
 ### 🐛 Bug Fixes
 
