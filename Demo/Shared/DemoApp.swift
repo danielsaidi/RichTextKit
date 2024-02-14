@@ -15,10 +15,11 @@ struct DemoApp: App {
         WindowGroup {
             ContentView()
         }.commands {
-            #if macOS
+            #if os(macOS)
             AboutCommand()
-            RichTextFormatCommandMenu()
-            RichTextShareCommandMenu(
+            #endif
+            RichTextCommand.FormatMenu()
+            RichTextCommand.ShareMenu(
                 isEnabled: true,
                 shareFormats: .libraryFormats,
                 exportFormats: RichTextDataFormat.archivedData.convertibleFormats,
@@ -37,7 +38,6 @@ struct DemoApp: App {
                 printAction: { print("TODO: Export document") }
             )
             SidebarCommands()
-            #endif
         }
     }
 }
