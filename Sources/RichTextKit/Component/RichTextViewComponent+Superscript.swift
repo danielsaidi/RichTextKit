@@ -6,19 +6,26 @@
 //  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
 //
 
-#if os(macOS)
 import Foundation
 
 public extension RichTextViewComponent {
 
     /// Get the rich text superscript level at current range.
     var richTextSuperscriptLevel: Int? {
+        #if macOS
         richTextAttribute(.superscript)
+        #else
+        nil
+        #endif
     }
 
     /// Set the rich text superscript level at current range.
     func setRichTextSuperscriptLevel(to val: Int) {
+        #if macOS
         setRichTextAttribute(.superscript, to: val)
+        #else
+        print("Unsupported platform")
+        #endif
     }
     
     /// Step the rich text font size at current range.
@@ -28,4 +35,3 @@ public extension RichTextViewComponent {
         setRichTextSuperscriptLevel(to: newSize)
     }
 }
-#endif

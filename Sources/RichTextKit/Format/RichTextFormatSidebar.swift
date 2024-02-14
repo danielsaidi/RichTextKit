@@ -56,10 +56,21 @@ public struct RichTextFormatSidebar: View {
             SidebarSection(title: nil) {
                 RichTextAlignment.Picker(selection: $context.textAlignment)
                     .pickerStyle(.segmented)
-                RichTextAction.ButtonGroup(
-                    context: context,
-                    actions: [.decreaseIndent(), .increaseIndent()]
-                )
+                HStack {
+                    RichTextAction.ButtonGroup(
+                        context: context,
+                        actions: [.decreaseIndent(), .increaseIndent()]
+                    )
+                    if hasSuperscriptSupport {
+                        RichTextAction.ButtonGroup(
+                            context: context,
+                            actions: [
+                                .increaseSuperscript(),
+                                .decreaseSuperscript()
+                            ]
+                        )
+                    }
+                }
             }
 
             SidebarSection(title: nil) {
@@ -80,6 +91,17 @@ public struct RichTextFormatSidebar: View {
         }
         .padding(8)
         .background(Color.white.opacity(0.05))
+    }
+}
+
+private extension RichTextFormatSidebar {
+    
+    var hasSuperscriptSupport: Bool {
+        #if macOS
+        return true
+        #else
+        return false
+        #endif
     }
 }
 
