@@ -125,9 +125,7 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
     public var body: some View {
         VStack(spacing: 0) {
             HStack(spacing: style.itemSpacing) {
-                leadingViews
-                Spacer()
-                trailingViews
+                content
             }
             .padding(10)
         }
@@ -174,11 +172,18 @@ private extension RichTextKeyboardToolbar {
     var isCompact: Bool { horizontalSizeClass == .compact }
 }
 
-
 private extension RichTextKeyboardToolbar {
+    
+    @ViewBuilder
+    var content: some View {
+        leadingViews
+        Spacer()
+        trailingViews
+    }
 
     var divider: some View {
-        Divider().frame(height: 25)
+        Divider()
+            .frame(height: 25)
     }
 
     @ViewBuilder

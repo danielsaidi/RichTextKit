@@ -38,7 +38,7 @@ public extension RichTextCommand {
         private var context: RichTextContext?
 
         public var body: some View {
-            SwiftUI.Button(action.menuTitle) {
+            Button(action.menuTitle) {
                 context?.handle(action)
             }
             .disabled(!canHandle)

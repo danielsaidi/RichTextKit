@@ -24,6 +24,9 @@ public extension RichTextViewComponent {
     
     /// Set the rich text alignment at current range.
     ///
+    /// This function does not use ``RichTextAttributeWriter``
+    /// since the text views require affecting text storage.
+    ///
     /// > Important: This function will affect the next line
     /// of text if we grab `richTextParagraphStyle` and make
     /// the alignment change to it, instead of creating this

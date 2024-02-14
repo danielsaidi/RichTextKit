@@ -139,10 +139,8 @@ public extension RichTextAttributeWriter {
         let increase = indent == .increase
         let change: CGFloat = 30.0
         let points = increase ? change : -change
-        return stepRichTextIndent(
-            points: points,
-            at: range
-        )
+        stepRichTextIndent(points: points, at: range)
+        return richTextAttributes(at: range)
     }
 
     @available(*, deprecated, renamed: "stepRichTextFontSize(points:at:)")
