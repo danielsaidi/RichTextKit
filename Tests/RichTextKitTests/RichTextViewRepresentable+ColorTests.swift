@@ -56,7 +56,9 @@ final class RichTextViewComponent_ColorTests: XCTestCase {
         XCTAssertEqual(textView.richTextColor(.background), color)
         assertEqualColor(textView.richTextAttributes[.backgroundColor])
         assertEqualColor(textView.richTextAttributes(at: selectedRange)[.backgroundColor])
+        #if iOS || os(tvOS)
         assertEqualColor(textView.typingAttributes[.backgroundColor])
+        #endif
     }
 
     func testRichTextBackgroundColorWorksForNoSelectedRange() {
@@ -76,7 +78,9 @@ final class RichTextViewComponent_ColorTests: XCTestCase {
         XCTAssertEqual(textView.richTextColor(.foreground), color)
         assertEqualColor(textView.richTextAttributes[.foregroundColor])
         assertEqualColor(textView.richTextAttributes(at: selectedRange)[.foregroundColor])
+        #if iOS || os(tvOS)
         assertEqualColor(textView.typingAttributes[.foregroundColor])
+        #endif
     }
 
     func testRichTextForegroundColorWorksForNoSelectedRange() {

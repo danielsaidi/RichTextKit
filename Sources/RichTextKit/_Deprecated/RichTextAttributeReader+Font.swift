@@ -8,6 +8,7 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Use RichTextViewComponent instead.")
 public extension RichTextAttributeReader {
 
     /// Get the rich text font at a certain range.

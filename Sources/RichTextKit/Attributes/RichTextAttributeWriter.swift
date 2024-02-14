@@ -3,7 +3,7 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-05-27.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 import Foundation
@@ -17,12 +17,9 @@ import Foundation
  
  Note that this protocol used to have a lot of functionality
  for setting various attributes, styles, etc. However, since
- ``RichTextViewComponent`` needs to perform changes in other
- ways, we ended up with duplicated code where the writer had
- functions that may have worked, but weren't used within the
- library. As such, the ``RichTextViewComponent`` will be the
- primary component for modifying rich text, while the writer
- functionality is removed. This will help to avoid confusion.
+ ``RichTextViewComponent`` needs more capabilities, we ended
+ up with duplicated code where the writer had functions that
+ weren't even used within the library.
  */
 public protocol RichTextAttributeWriter: RichTextWriter, RichTextAttributeReader {}
 

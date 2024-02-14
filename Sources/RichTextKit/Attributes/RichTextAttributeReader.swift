@@ -3,7 +3,7 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-05-27.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 import Foundation
@@ -14,6 +14,12 @@ import Foundation
 
  The protocol is implemented by `NSAttributedString` as well
  as other types in the library.
+ 
+ Note that this protocol used to have a lot of functionality
+ for getting various attributes, styles, etc. However, since
+ ``RichTextViewComponent`` needs more capabilities, we ended
+ up with duplicated code where the reader had functions that
+ weren't even used within the library.
  */
 public protocol RichTextAttributeReader: RichTextReader {}
 

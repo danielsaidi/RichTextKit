@@ -17,6 +17,15 @@ public extension RichTextViewComponent {
         guard let attribute = color.attribute else { return nil }
         return richTextAttribute(attribute)
     }
+    
+    /// Get a certain rich text color at a certain range.
+    func richTextColor(
+        _ color: RichTextColor,
+        at range: NSRange
+    ) -> ColorRepresentable? {
+        guard let attribute = color.attribute else { return nil }
+        return richTextAttribute(attribute, at: range)
+    }
 
     /// Set a certain rich text color at current range.
     func setRichTextColor(

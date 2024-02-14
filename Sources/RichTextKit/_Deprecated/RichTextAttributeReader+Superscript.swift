@@ -9,6 +9,7 @@
 #if macOS
 import Foundation
 
+@available(*, deprecated, message: "Use RichTextViewComponent instead.")
 public extension RichTextAttributeReader {
 
     /// Get the superscript level at a certain range.

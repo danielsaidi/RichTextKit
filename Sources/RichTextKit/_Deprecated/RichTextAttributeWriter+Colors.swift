@@ -12,13 +12,13 @@ import Foundation
 public extension RichTextAttributeWriter {
 
     /// Set a certain rich text color at a certain range.
-    func setRichTextColor(
+    func setRichTextColorOld(
         _ color: RichTextColor,
         to val: ColorRepresentable,
         at range: NSRange
     ) {
         guard let attribute = color.attribute else { return }
-        if richTextColor(color, at: range) == val { return }
+        if richTextColorOld(color, at: range) == val { return }
         setRichTextAttribute(attribute, to: val, at: range)
     }
 }

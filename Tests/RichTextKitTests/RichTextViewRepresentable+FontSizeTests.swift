@@ -51,7 +51,9 @@ final class RichTextViewComponent_FontSizeTests: XCTestCase {
         XCTAssertEqual(textView.richTextFont?.fontName, font.fontName)
         assertEqualFont(textView.richTextAttribute(.font))
         assertEqualFont(textView.richTextAttributes(at: selectedRange)[.font])
+        #if iOS || os(tvOS)
         assertEqualFont(textView.typingAttributes[.font])
+        #endif
     }
 
     func testRichTextFontWorksForNoSelectedRange() {

@@ -47,7 +47,9 @@ final class RichTextViewComponent_AttributesTests: XCTestCase {
         textView.setRichTextAttribute(.font, to: font)
         assertEqualAttributes(textView.richTextAttributes)
         assertEqualAttributes(textView.richTextAttributes(at: selectedRange))
+        #if iOS
         assertEqualAttributes(textView.typingAttributes)
+        #endif
     }
 
     func testTextAttributesIsValidForNoSelectedRange() {
@@ -65,7 +67,9 @@ final class RichTextViewComponent_AttributesTests: XCTestCase {
         textView.setRichTextAttribute(.font, to: font)
         assertEqualAttribute(textView.richTextAttribute(.font))
         assertEqualAttribute(textView.richTextAttribute(.font, at: selectedRange))
+        #if iOS
         assertEqualAttribute(textView.typingAttributes[.font])
+        #endif
     }
 
     func testTextAttributeValueForKeyIsValidForNoSelectedRange() {

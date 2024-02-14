@@ -10,11 +10,11 @@ Until then, minor updates may remove deprecated features and introduce breaking 
 
 This release adds a lot of new `RichTextAction` cases and adjusts the context and coordinator subscription.
 
-This release also deprecates `RichTextAttributeReader` and `RichTextAttributeWriter` functionality that are not used by the library, in favor of `RichTextViewComponent`. This is done to reduce the complexity of the library. 
+This release also deprecates `RichTextAttributeReader` and `RichTextAttributeWriter` functionality that are not used by the library, in favor of `RichTextViewComponent`, to reduce the complexity of the library. 
 
-Until now, the functions mostly did the same things, but sometimes the `RichTextViewComponent` have to use its text storage or layout manager, or update the typing attributes. Since these are not present in the reader and writer protocols, the code diverged and mostly identical copies had to co-exist. And since the reader and writer versions are not used by the library, they may not work as well as intended.
+Until now, these functions mostly did the same thing, but sometimes the `RichTextViewComponent` have to use its text storage or layout manager, or update the typing attributes. This caused the code to diverge and mostly identical copies had co-exist, where the reader and writer versions were not even used by the library.
 
-This change will hopefully make it possible to simplify the library in the 1.0 release, and focus more on unifying the different TextView platform implementations (`UITextView` in iOS and `NSTextView` in macOS), rather than providing a low level string handling interface.
+By deprecating these functions, we can simplify the library in 1.0, and focus more on unifying the different `RichTextViewComponent` implementations (`UITextView` in iOS and `NSTextView` in macOS), rather than providing a low level string handling interface.
 
 ### ✨ Features
 
@@ -39,10 +39,10 @@ This change will hopefully make it possible to simplify the library in the 1.0 r
 * `RichTextAlignment` now behaves better.
 * `RichTextCoordinator` now handles indentation changes.
 
-
 ### 🗑️ Deprecations 
 
-* `RichTextAttributeWriter` deprecates many functions in favor of `RichTextViewComponent`.
+* `RichTextAttributeReader` has deprecated a lot of functions.
+* `RichTextAttributeWriter` has deprecated a lot of functions.
 * `RichTextCoordinator` functions that simply triggered `handle(_:)` have been deprecated.
 
 

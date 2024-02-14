@@ -8,6 +8,7 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Use RichTextViewComponent instead")
 public extension RichTextAttributeReader {
 
     /// Get the rich text indent at a certain range.

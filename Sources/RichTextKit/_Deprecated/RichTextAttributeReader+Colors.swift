@@ -8,10 +8,11 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Use RichTextViewComponent instead")
 public extension RichTextAttributeReader {
 
     /// Get a certain rich text color at a certain range.
-    func richTextColor(
+    func richTextColorOld(
         _ color: RichTextColor,
         at range: NSRange
     ) -> ColorRepresentable? {

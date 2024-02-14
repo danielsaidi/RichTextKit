@@ -73,11 +73,14 @@ final class RichTextViewComponentTests: XCTestCase {
         #endif
         XCTAssertEqual(view.backgroundColor, .clear)
         XCTAssertEqual(view.contentCompressionResistancePriority(for: .horizontal), .defaultLow)
-        #if iOS || os(tvOS)
+        #if iOS
         XCTAssertEqual(view.spellCheckingType, .no)
-        XCTAssertEqual(view.textColor, nil)
+        XCTAssertNil(view.textColor)
+        #elseif os(tvOS)
+        XCTAssertEqual(view.spellCheckingType, .no)
+        XCTAssertNotNil(view.textColor)
         #elseif macOS
-        XCTAssertEqual(view.textColor, nil)
+        XCTAssertNotNil(view.textColor)
         #endif
     }
 }

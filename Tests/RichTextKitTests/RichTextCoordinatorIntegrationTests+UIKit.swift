@@ -72,7 +72,7 @@ final class RichTextCoordinatorIntegrationTests: XCTestCase {
         XCTAssertEqual(textView.richTextAttributes[.font] as? FontRepresentable, FontRepresentable.systemFont(ofSize: 16))
         XCTAssertEqual(textView.richTextAttributes[.foregroundColor] as? ColorRepresentable, ColorRepresentable.red)
 
-        textView.setRichTextStyle(.strikethrough, to: true, at: textView.selectedRange)
+        textView.setRichTextStyle(.strikethrough, to: true)
         XCTAssertEqual(textView.richTextAttributes[.strikethroughStyle] as? Int, 1)
     }
 }
