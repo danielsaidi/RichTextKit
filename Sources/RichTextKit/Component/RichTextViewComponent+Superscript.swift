@@ -20,5 +20,12 @@ public extension RichTextViewComponent {
     func setRichTextSuperscriptLevel(to val: Int) {
         setRichTextAttribute(.superscript, to: val)
     }
+    
+    /// Step the rich text font size at current range.
+    func stepRichTextSuperscriptLevel(points: Int) {
+        let currentSize = richTextSuperscriptLevel ?? 0
+        let newSize = currentSize + points
+        setRichTextSuperscriptLevel(to: newSize)
+    }
 }
 #endif

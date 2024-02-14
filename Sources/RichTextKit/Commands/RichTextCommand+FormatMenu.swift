@@ -37,6 +37,9 @@ public extension RichTextCommand {
                     Menu(RTKL10n.menuIndent.text) {
                         IndentOptionsGroup()
                     }
+                    Menu(RTKL10n.menuSuperscript.text) {
+                        SuperscriptOptionsGroup()
+                    }
                 }
                 .disabled(context == nil)
             }

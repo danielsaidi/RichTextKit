@@ -49,8 +49,9 @@
 "menuSaveAs" = "Spara som...";
 "menuShare" = "Dela";
 "menuShareAs" = "Dela som...";
-"menuSuperscriptIncrease" = "Superscript";
-"menuSuperscriptDecrease" = "Subscript";
+"menuSuperscript" = "Baslinje";
+"menuSuperscriptIncrease" = "Öka";
+"menuSuperscriptDecrease" = "Minska";
 "menuText" = "Text";
 
 "highlightedRange" = "Highlight Range";

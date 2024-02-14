@@ -49,8 +49,9 @@
 "menuSaveAs" = "Save as...";
 "menuShare" = "Share";
 "menuShareAs" = "Share as...";
-"menuSuperscriptIncrease" = "Superscript";
-"menuSuperscriptDecrease" = "Subscript";
+"menuSuperscript" = "Superscript";
+"menuSuperscriptIncrease" = "Increase";
+"menuSuperscriptDecrease" = "Decrease";
 "menuText" = "Text";
 
 "highlightedRange" = "Highlight Range";

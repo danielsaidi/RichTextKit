@@ -54,6 +54,9 @@ public enum RTKL10n: String, CaseIterable, Identifiable {
     menuSaveAs,
     menuShare,
     menuShareAs,
+    menuSuperscript,
+    menuSuperscriptIncrease,
+    menuSuperscriptDecrease,
     menuText,
 
     highlightedRange,
