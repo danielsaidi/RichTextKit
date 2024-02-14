@@ -25,6 +25,14 @@ This release adds a lot of new `RichTextAction` cases and adjusts the context an
 
 * The library once again builds on visionOS.
 
+* `RichTextAlignment` now behaves better.
+* `RichTextCoordinator` now handles indentation changes.
+
+
+### 🗑️ Deprecations 
+
+* `RichTextCoordinator` functions that just trigger `handle(_:)` have been deprecated.
+
 
 
 ## 0.9.8

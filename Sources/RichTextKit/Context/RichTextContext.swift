@@ -154,60 +154,6 @@ public extension RichTextContext {
         highlightedRange = range
     }
 
-    /// Paste an image into the editor, at a certain index.
-    func pasteImage(
-        _ image: ImageRepresentable,
-        at index: Int? = nil,
-        moveCursorToPastedContent: Bool = false
-    ) {
-        let index = index ?? selectedRange.location
-        userActionPublisher.send(
-            .pasteImage(
-                RichTextInsertion(
-                    content: image,
-                    at: index,
-                    moveCursor: moveCursorToPastedContent
-                )
-            )
-        )
-    }
-
-    /// Paste images into the editor, at a certain index.
-    func pasteImages(
-        _ images: [ImageRepresentable],
-        at index: Int? = nil,
-        moveCursorToPastedContent: Bool = false
-    ) {
-        let index = index ?? selectedRange.location
-        userActionPublisher.send(
-            .pasteImages(
-                RichTextInsertion(
-                    content: images,
-                    at: index,
-                    moveCursor: moveCursorToPastedContent
-                )
-            )
-        )
-    }
-
-    /// Paste text into the editor, at a certain index.
-    func pasteText(
-        _ text: String,
-        at index: Int? = nil,
-        moveCursorToPastedContent: Bool = false
-    ) {
-        let index = index ?? selectedRange.location
-        userActionPublisher.send(
-            .pasteText(
-                RichTextInsertion(
-                    content: text,
-                    at: index,
-                    moveCursor: moveCursorToPastedContent
-                )
-            )
-        )
-    }
-
     /// Reset the attributed string.
     func resetAttributedString() {
         setAttributedString(to: "")
