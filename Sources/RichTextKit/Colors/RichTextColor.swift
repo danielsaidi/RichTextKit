@@ -3,7 +3,7 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-05-28.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
@@ -29,20 +29,12 @@ public enum RichTextColor: String, CaseIterable, Codable, Equatable, Identifiabl
 
     /// Underline color.
     case underline
-
-    /// An undefined color type.
-    case undefined
 }
 
 public extension RichTextColor {
 
     /// The unique color ID.
     var id: String { rawValue }
-
-    /// All relevant cases.
-    static var allCases: [RichTextColor] {
-        [.foreground, .background, .strikethrough, .stroke, .underline]
-    }
 
     /// The corresponding rich text attribute, if any.
     var attribute: NSAttributedString.Key? {
@@ -52,7 +44,6 @@ public extension RichTextColor {
         case .strikethrough: .strikethroughColor
         case .stroke: .strokeColor
         case .underline: .underlineColor
-        case .undefined: nil
         }
     }
 
@@ -64,7 +55,6 @@ public extension RichTextColor {
         case .strikethrough: .richTextColorStrikethrough
         case .stroke: .richTextColorStroke
         case .underline: .richTextColorUnderline
-        case .undefined: .richTextColorUndefined
         }
     }
 
@@ -76,7 +66,6 @@ public extension RichTextColor {
         case .strikethrough: .strikethroughColor
         case .stroke: .strokeColor
         case .underline: .underlineColor
-        case .undefined: .strokeColor
         }
     }
 

@@ -25,13 +25,13 @@ public extension RichTextColor {
          Create a rich text color picker that binds to a color.
 
          - Parameters:
-          - type: The type of color to pick, by default `.undefined`.
+          - type: The type of color to pick.
           - icon: The icon to show, if any, by default the `type` icon.
           - value: The value to bind to.
           - quickColors: Colors to show in the trailing list, by default no colors.
          */
         public init(
-            type: RichTextColor = .undefined,
+            type: RichTextColor,
             icon: Image? = nil,
             value: Binding<Color>,
             quickColors: [Color] = []

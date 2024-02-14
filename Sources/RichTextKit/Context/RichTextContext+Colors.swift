@@ -26,7 +26,6 @@ public extension RichTextContext {
         case .strikethrough: strikethroughColor
         case .stroke: strokeColor
         case .underline: underlineColor
-        case .undefined: nil
         }
     }
 
@@ -44,7 +43,6 @@ public extension RichTextContext {
         case .strikethrough: strikethroughColor = val
         case .stroke: strokeColor = val
         case .underline: underlineColor = val
-        case .undefined: return
         }
     }
 }

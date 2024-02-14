@@ -14,6 +14,7 @@ public extension RichTextColor.Picker {
         quickColors: [Color] = []
     ) {
         self.init(
+            type: .foreground,
             icon: showIcon ? color.icon : nil,
             value: value,
             quickColors: quickColors

@@ -46,6 +46,10 @@ By deprecating these functions, we can simplify the library in 1.0, and focus mo
 * `RichTextCoordinator` functions that simply triggered `handle(_:)` have been deprecated.
 * `RTKL10n.bundle` has been deprecated, since we can just use the `.module` bundle from now.
 
+### 💥 Breaking Changes
+
+* `RichTextColor.undefined` was no longer used and has been removed.
+
 
 
 ## 0.9.8
