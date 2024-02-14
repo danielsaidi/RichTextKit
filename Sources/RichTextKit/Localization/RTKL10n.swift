@@ -116,17 +116,6 @@ public extension RTKL10n {
 
 public extension RTKL10n {
 
-    /**
-     The bundle to use to retrieve localized strings.
-
-     You should only override this value when the entire set
-     of localized texts should be loaded from another bundle.
-     */
-    static var bundle: Bundle = .richTextKit
-}
-
-public extension RTKL10n {
-
     /// The item's unique identifier.
     var id: String { rawValue }
 
@@ -140,7 +129,7 @@ public extension RTKL10n {
 
     /// Get the localized text for a certain `Locale`.
     func text(for locale: Locale) -> String {
-        guard let bundle = Bundle.richTextKit.bundle(for: locale) else { return "" }
+        guard let bundle = Bundle.module.bundle(for: locale) else { return "" }
         return NSLocalizedString(key, bundle: bundle, comment: "")
     }
 }
@@ -167,11 +156,15 @@ struct RTKL10n_Previews: PreviewProvider {
                             ForEach(Array(locales.enumerated()), id: \.offset) {
                                 Text("\($0.element.identifier): \(item.text(for: $0.element))")
                             }
-                        }.font(.footnote)
-                    }.padding(.vertical, 4)
+                        }
+                        .font(.footnote)
+                    }
+                    .padding(.vertical, 4)
                 }
-            }.navigationBarTitle("Translations")
-        }.navigationViewStyle(.stack)
+            }
+            .navigationBarTitle("Translations")
+        }
+        .navigationViewStyle(.stack)
     }
 }
 #endif
