@@ -70,7 +70,6 @@ final class RichTextViewComponent_ColorTests: XCTestCase {
         assertEqualColor(textView.typingAttributes[.backgroundColor])
     }
 
-
     func testRichTextForegroundColorWorksForSelectedRange() {
         textView.setSelectedRange(selectedRange)
         textView.setRichTextColor(.foreground, to: color)

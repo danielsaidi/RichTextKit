@@ -22,6 +22,9 @@ public enum RTKL10n: String, CaseIterable, Identifiable {
     color,
     foregroundColor,
     backgroundColor,
+    underlineColor,
+    strikethroughColor,
+    strokeColor,
 
     actionCopy,
     actionDismissKeyboard,
@@ -52,6 +55,16 @@ public enum RTKL10n: String, CaseIterable, Identifiable {
     menuShare,
     menuShareAs,
     menuText,
+
+    highlightedRange,
+    highlightingStyle,
+
+    pasteImage,
+    pasteImages,
+    pasteText,
+    selectRange,
+
+    setAttributedString,
 
     styleBold,
     styleItalic,

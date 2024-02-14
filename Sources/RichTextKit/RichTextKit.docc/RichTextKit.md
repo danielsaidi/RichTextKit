@@ -67,6 +67,8 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 ### Actions
 
 - ``RichTextAction``
+- ``RichTextInsertable``
+- ``RichTextInsertion``
 
 ### Alignment
 
@@ -161,6 +163,10 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 
 - ``RichTextHighlightingStyle``
 - ``RichTextStyle``
+
+### Views
+
+- ``RichTextLabelValue``
 
 
 

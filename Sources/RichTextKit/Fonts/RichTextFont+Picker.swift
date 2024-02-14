@@ -12,7 +12,7 @@ public extension RichTextFont {
 
     /**
      This font picker can be used to pick a font from a list.
-     
+
      This picker uses ``RichTextFont/PickerFont/all`` as the
      default fonts.
 

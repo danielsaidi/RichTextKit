@@ -48,7 +48,6 @@ final class RichTextCoordinator_SubscriptionsTests: XCTestCase {
         XCTAssertNotNil(coordinator)
     }
 
-
     func testFontNameChangesUpdatesTextView() {
         XCTAssertNotEqual(textView.richTextFont?.fontName, "Arial")
         textContext.fontName = ""
@@ -62,13 +61,11 @@ final class RichTextCoordinator_SubscriptionsTests: XCTestCase {
         }
     }
 
-
     func testFontSizeChangesUpdatesTextView() {
         XCTAssertNotEqual(textView.richTextFont?.pointSize, 666)
         textContext.fontSize = 666
         XCTAssertEqual(textView.richTextFont?.pointSize, 666)
     }
-
 
     func testFontSizeDecrementUpdatesTextView() {
         textView.setRichTextFontSize(666)
@@ -77,14 +74,12 @@ final class RichTextCoordinator_SubscriptionsTests: XCTestCase {
         // XCTAssertEqual(textView.richTextFont?.pointSize, 665)
     }
 
-
     func testFontSizeIncrementUpdatesTextView() {
         textView.setRichTextFontSize(666)
         XCTAssertEqual(textView.richTextFont?.pointSize, 666)
         textContext.handle(.stepFontSize(points: 1))
         // XCTAssertEqual(textView.richTextFont?.pointSize, 667)    TODO: Why is incorrect?
     }
-
 
     func testHighlightedRangeUpdatesTextView() {
         textView.highlightingStyle = RichTextHighlightingStyle(
@@ -99,34 +94,35 @@ final class RichTextCoordinator_SubscriptionsTests: XCTestCase {
         XCTAssertEqual(fore, ColorRepresentable(textView.highlightingStyle.foregroundColor))
     }
 
-
     func testIsBoldUpdatesTextView() {
         XCTAssertFalse(textView.richTextStyles.hasStyle(.bold))
-        textContext.isBold = true
+        textContext.userActionPublisher.send(.setStyle(.bold, true))
         XCTAssertTrue(textView.richTextStyles.hasStyle(.bold))
     }
 
-
     func testIsItalicUpdatesTextView() {
         XCTAssertFalse(textView.richTextStyles.hasStyle(.italic))
-        textContext.isItalic = true
+        textContext.userActionPublisher.send(.setStyle(.italic, true))
         XCTAssertTrue(textView.richTextStyles.hasStyle(.italic))
     }
 
-
     func testIsUnderlinedUpdatesTextView() {
         XCTAssertFalse(textView.richTextStyles.hasStyle(.underlined))
-        textContext.isUnderlined = true
+        textContext.userActionPublisher.send(.setStyle(.underlined, true))
         XCTAssertTrue(textView.richTextStyles.hasStyle(.underlined))
     }
 
+    func testIsStrikeThroughUpdatesTextView() {
+        XCTAssertFalse(textView.richTextStyles.hasStyle(.strikethrough))
+        textContext.userActionPublisher.send(.setStyle(.strikethrough, true))
+        XCTAssertTrue(textView.richTextStyles.hasStyle(.strikethrough))
+    }
 
     func testSelectedRangeChangeUpdatesTextView() {
         let range = NSRange(location: 4, length: 3)
         textContext.selectRange(range)
         XCTAssertEqual(textView.selectedRange, range)
     }
-
 
     func testTextAlignmentUpdatesTextView() {
         textView.setRichTextAlignment(.left)
