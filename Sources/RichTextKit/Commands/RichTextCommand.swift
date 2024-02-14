@@ -13,7 +13,6 @@ import Foundation
  like views that are to be added to the main menu bar.
 
  > Important: Most rich text commands require that there's a
- focused ``RichTextContext`` value in the view hierarchy. If
- not, they will be disabled.
+ focused ``RichTextContext`` value in the view hierarchy.
  */
 public struct RichTextCommand {}

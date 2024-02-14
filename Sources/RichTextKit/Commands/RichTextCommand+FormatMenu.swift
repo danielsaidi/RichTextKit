@@ -12,8 +12,11 @@ import SwiftUI
 public extension RichTextCommand {
 
     /**
-     This menu can be used to add format-specific options to
-     the main menu bar.
+     This menu view can add a list of text format options to
+     the main menu.
+     
+     This view requires that a ``RichTextContext`` is set as
+     a focused value, otherwise it will be disabled.
      */
     struct FormatMenu: Commands {
 

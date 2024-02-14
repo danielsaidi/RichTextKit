@@ -12,8 +12,8 @@ import SwiftUI
 public extension RichTextCommand {
 
     /**
-     This menu can be used to add sharing-related options to
-     the main menu bar.
+     This menu view can add a list of sharing options to the
+     main menu.
 
      The menu will try to add options for share, export, and
      print, if applicable to the current platform. Selecting
@@ -23,14 +23,14 @@ public extension RichTextCommand {
      return a share url, after which a command takes care of
      the sharing. Also note that the `formatNSSharingAction`
      and `pdfNSSharingAction` will only have effect on macOS,
-     where they will add ``RichTextNSSharingMenu`` options.
+     where they add ``RichTextNSSharingMenu`` options.
 
      Note that a pdf action menu will only be included if it
      has a corresponding action. Also note that you must use
      `isEnabled: false` to disable the menu, since you can't
      add `.disabled` to the command menu.
 
-     Setting any action to nil removes a corrsponding option
+     Setting actions to `nil` removes a corresponding option
      from the menu.
      */
     struct ShareMenu: Commands {
@@ -118,7 +118,8 @@ private extension RichTextCommand.ShareMenu {
         if let action = printAction {
             Button(action: action) {
                 Label(RTKL10n.menuPrint.text, .richTextActionPrint)
-            }.keyboardShortcut(for: .print)
+            }
+            .keyboardShortcut(for: .print)
         }
     }
 

@@ -11,7 +11,11 @@ import SwiftUI
 public extension RichTextCommand {
 
     /**
-     This view renders font size command options.
+     This view can add list of font size options to the main
+     menu, using an ``RichTextCommand/ActionButtonGroup``.
+     
+     This view requires that a ``RichTextContext`` is set as
+     a focused value, otherwise it will be disabled.
      */
     struct FontSizeOptionsGroup: View {
 
