@@ -9,6 +9,13 @@
 import CoreGraphics
 import Foundation
 
+#if canImport(UIKit)
+import UIKit
+#elseif canImport(AppKit) && !targetEnvironment(macCatalyst)
+import AppKit
+#endif
+
+
 /**
  This protocol defines a platform-agnostic api that's shared
  by the UIKit and AppKit ``RichTextView`` components.
@@ -43,15 +50,28 @@ public protocol RichTextViewComponent: AnyObject,
 
     /// Whether or not the text view is the first responder.
     var isFirstResponder: Bool { get }
+    
+    /// The text view's layout manager, if any.
+    ///
+    /// This is optional and renamed since UIKit will have a
+    /// non-otional manager and AppKit an optional one.
+    var layoutManagerWrapper: NSLayoutManager? { get }
 
     /// The text view's mutable attributed string, if any.
     var mutableAttributedString: NSMutableAttributedString? { get }
 
     /// The spacing between the text view's edge and its text.
     var textContentInset: CGSize { get set }
+    
+    /// The text view's text storage, if any.
+    ///
+    /// This is optional and renamed since UIKit will have a
+    /// non-otional storage and AppKit an optional one.
+    var textStorageWrapper: NSTextStorage? { get }
 
     /// The text view current typing attributes.
     var typingAttributes: RichTextAttributes { get set }
+    
 
     // MARK: - Setup
 

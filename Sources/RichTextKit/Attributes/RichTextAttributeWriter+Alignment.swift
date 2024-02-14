@@ -41,8 +41,8 @@ public extension RichTextAttributeWriter {
         #if os(macOS)
         mutableRichText?.setAlignment(alignment, range: safeRange)
         #else
-        let paragraph = richTextParagraphStyle(at: safeRange)
-        paragraph?.alignment = alignment
+        let paragraph = richTextParagraphStyle(at: safeRange) ?? .init()
+        paragraph.alignment = alignment
         setRichTextAttribute(
             .paragraphStyle,
             to: paragraph,

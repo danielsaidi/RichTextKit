@@ -202,7 +202,7 @@ private extension RichTextKeyboardToolbar {
             .keyboardShortcutsOnly(if: isCompact)
 
         RichTextFont.SizePickerStack(context: context)
-            .keyboardShortcutsOnly(if: true)
+            .keyboardShortcutsOnly()
     }
 
     @ViewBuilder
@@ -230,7 +230,9 @@ private extension RichTextKeyboardToolbar {
 private extension View {
 
     @ViewBuilder
-    func keyboardShortcutsOnly(if condition: Bool) -> some View {
+    func keyboardShortcutsOnly(
+        if condition: Bool = true
+    ) -> some View {
         if condition {
             self.hidden()
                 .frame(width: 0)

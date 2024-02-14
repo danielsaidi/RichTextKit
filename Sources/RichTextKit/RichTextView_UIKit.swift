@@ -101,6 +101,7 @@ open class RichTextView: UITextView, RichTextViewComponent {
     /// Keeps track of the data format used by the view.
     private var richTextDataFormat: RichTextDataFormat = .archivedData
 
+    
     // MARK: - Overrides
 
     /**
@@ -148,6 +149,7 @@ open class RichTextView: UITextView, RichTextViewComponent {
     }
     #endif
 
+    
     // MARK: - Setup
 
     /**
@@ -339,7 +341,6 @@ open class RichTextView: UITextView, RichTextViewComponent {
             addInteraction(imageDropInteraction)
         }
     }
-
     #endif
 }
 
@@ -363,27 +364,32 @@ private extension UIDropSession {
 // MARK: - Public Extensions
 
 public extension RichTextView {
+    
+    /// The text view's layout manager, if any.
+    var layoutManagerWrapper: NSLayoutManager? {
+        layoutManager
+    }
 
-    /**
-     The spacing between the text view's edge and its text.
-
-     The reason why this only supports setting a `CGSize` is
-     that AppKit only supports a `CGSize`. You can still use
-     the `textContainerInset` of the underlying `UITextView`
-     if you want more control.
-     */
+    /// The spacing between the text view edges and its text.
     var textContentInset: CGSize {
         get {
             CGSize(
                 width: textContainerInset.left,
-                height: textContainerInset.top)
+                height: textContainerInset.top
+            )
         } set {
             textContainerInset = UIEdgeInsets(
                 top: newValue.height,
                 left: newValue.width,
                 bottom: newValue.height,
-                right: newValue.width)
+                right: newValue.width
+            )
         }
+    }
+    
+    /// The text view's text storage, if any.
+    var textStorageWrapper: NSTextStorage? {
+        textStorage
     }
 }
 
