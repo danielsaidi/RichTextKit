@@ -17,7 +17,7 @@ public extension RichTextViewComponent {
     }
 
     /// Set the rich text superscript level at current range.
-    func setSuperscript(to val: Int) {
+    func setRichTextSuperscriptLevel(to val: Int) {
         setRichTextAttribute(.superscript, to: val)
     }
 }

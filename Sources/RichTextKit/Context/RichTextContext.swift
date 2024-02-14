@@ -15,8 +15,7 @@ import Combine
 
  Use ``handle(_:)`` to trigger a change, e.g. to change font,
  text style, alignment, select a range, etc. You can observe
- the various published properties to keep your UI updated as
- the context changes.
+ the various published properties to keep your UI updated.
 
  The SwiftUI ``RichTextEditor`` uses this context as well as
  a ``RichTextCoordinator`` to keep itself updated.
@@ -26,6 +25,7 @@ public class RichTextContext: ObservableObject {
     /// Create a new rich text context instance.
     public init() {}
 
+    
     // MARK: - Not yet observable properties
 
     /**
@@ -46,7 +46,8 @@ public class RichTextContext: ObservableObject {
     /// The currently selected range, if any.
     public internal(set) var selectedRange = NSRange()
 
-    // MARK: - Public properies
+    
+    // MARK: - Bindable Properies
 
     /// Whether or not the text is currently being edited.
     @Published
@@ -67,10 +68,11 @@ public class RichTextContext: ObservableObject {
     /// The currently highlighted range, if any.
     public var highlightedRange: NSRange?
 
-    /// Use this Publisher to emit any attribute changes to textView.
+    /// This publisher can emit actions to the coordinator.
     public let userActionPublisher: PassthroughSubject<RichTextAction, Never> = .init()
 
-    // MARK: - Internal properties
+    
+    // MARK: - Observable Properties
 
     /// The current background color, if any.
     @Published

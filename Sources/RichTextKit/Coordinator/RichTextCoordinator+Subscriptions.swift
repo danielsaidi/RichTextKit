@@ -17,7 +17,7 @@ extension RichTextCoordinator {
     /// by various buttons via the context, but also to some
     /// context value that are changed through view bindings.
     func subscribeToUserActions() {
-        richTextContext.userActionPublisher.sink { [weak self] action in
+        context.userActionPublisher.sink { [weak self] action in
             self?.handle(action)
         }
         .store(in: &cancellables)
@@ -77,7 +77,7 @@ private extension RichTextCoordinator {
     }
     
     func subscribeToAlignment() {
-        richTextContext.$textAlignment
+        context.$textAlignment
             .sink { [weak self] in
                 self?.handle(.setAlignment($0))
             }
@@ -85,7 +85,7 @@ private extension RichTextCoordinator {
     }
     
     func subscribeToFontName() {
-        richTextContext.$fontName
+        context.$fontName
             .sink { [weak self] in
                 self?.textView.setRichTextFontName($0)
             }
@@ -93,7 +93,7 @@ private extension RichTextCoordinator {
     }
     
     func subscribeToFontSize() {
-        richTextContext.$fontSize
+        context.$fontSize
             .sink { [weak self] in
                 self?.textView.setRichTextFontSize($0)
             }
@@ -101,7 +101,7 @@ private extension RichTextCoordinator {
     }
 
     func subscribeToIsEditingText() {
-        richTextContext.$isEditingText
+        context.$isEditingText
             .sink { [weak self] in
                 self?.setIsEditing(to: $0)
             }
