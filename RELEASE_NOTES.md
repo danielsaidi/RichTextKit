@@ -12,8 +12,10 @@ This release adds a lot of new `RichTextAction` cases and adjusts the context an
 
 ### ✨ Features
 
-* `RichTextKeyboardToolbar` has a new configuration to always be shown.
-* `RichTextView` has a new theme concept that lets you define its style.
+* `RichTextKeyboardToolbar` has a new config to always be shown.
+* `RichTextView` has a new theme that lets you define its style.
+* `RichTextViewComponent` has a new `hasRichTextStyle` function.
+* `RichTextViewComponent` has a new `toggleRichTextStyle` function. 
 
 ### 💡 Adjustments
 

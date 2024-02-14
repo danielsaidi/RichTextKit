@@ -68,8 +68,8 @@ private extension RichTextCoordinator {
             textView.stepRichTextIndent(points: points)
         case .stepSuperscript: 
             break
-        case .toggleStyle: 
-            break
+        case .toggleStyle(let style):
+            textView.toggleRichTextStyle(style)
         case .undoLatestChange:
             textView.undoLatestChange()
             syncContextWithTextView()

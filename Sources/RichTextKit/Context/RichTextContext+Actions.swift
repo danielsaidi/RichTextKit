@@ -13,7 +13,6 @@ public extension RichTextContext {
     /// Handle a certain rich text action.
     func handle(_ action: RichTextAction) {
         switch action {
-        case .toggleStyle(let style): toggle(style)
         default: userActionPublisher.send(action)
         }
     }
