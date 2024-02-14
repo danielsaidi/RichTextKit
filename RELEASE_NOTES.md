@@ -10,8 +10,15 @@ Until then, minor updates may remove deprecated features and introduce breaking 
 
 This release adds a lot of new `RichTextAction` cases and adjusts the context and coordinator subscription.
 
+This release also deprecates `RichTextAttributeReader` and `RichTextAttributeWriter` functionality that are not used by the library, in favor of `RichTextViewComponent`. This is done to reduce the complexity of the library. 
+
+Until now, the functions mostly did the same things, but sometimes the `RichTextViewComponent` have to use its text storage or layout manager, or update the typing attributes. Since these are not present in the reader and writer protocols, the code diverged and mostly identical copies had to co-exist. And since the reader and writer versions are not used by the library, they may not work as well as intended.
+
+This change will hopefully make it possible to simplify the library in the 1.0 release, and focus more on unifying the different TextView platform implementations (`UITextView` in iOS and `NSTextView` in macOS), rather than providing a low level string handling interface.
+
 ### ✨ Features
 
+* `FontRepresentable` has new extensions.
 * `RichTextKeyboardToolbar` has a new config to always be shown.
 * `RichTextView` has a new theme that lets you define its style.
 * `RichTextViewComponent` has a new `hasRichTextStyle` function.
@@ -35,7 +42,8 @@ This release adds a lot of new `RichTextAction` cases and adjusts the context an
 
 ### 🗑️ Deprecations 
 
-* `RichTextCoordinator` functions that just trigger `handle(_:)` have been deprecated.
+* `RichTextAttributeWriter` deprecates many functions in favor of `RichTextViewComponent`.
+* `RichTextCoordinator` functions that simply triggered `handle(_:)` have been deprecated.
 
 
 

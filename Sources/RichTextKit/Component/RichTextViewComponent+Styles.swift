@@ -34,9 +34,9 @@ public extension RichTextViewComponent {
         switch style {
         case .bold, .italic:
             let styles = richTextStyles
-            guard shouldAddOrRemove(style, newValue, given: styles) else { return }
+            guard styles.shouldAddOrRemove(style, newValue) else { return }
             guard let font = richTextFont else { return }
-            guard let newFont = newFont(for: font, byToggling: style) else { return }
+            guard let newFont = font.toggling(style) else { return }
             setRichTextFont(newFont)
         case .underlined:
             setRichTextAttribute(.underlineStyle, to: value)

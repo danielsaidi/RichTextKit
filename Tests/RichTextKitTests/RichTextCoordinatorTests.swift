@@ -57,7 +57,7 @@ final class RichTextCoordinatorTests: XCTestCase {
         let range = NSRange(location: 4, length: 3)
         view.selectedRange = range
         XCTAssertEqual(coordinator.text.wrappedValue.string, "foo bar baz")
-        XCTAssertEqual(coordinator.richTextContext.selectedRange, range)
+        XCTAssertEqual(coordinator.context.selectedRange, range)
     }
 
     func assertIsSyncedWithContext(macOSAlignment: RichTextAlignment = .left) {
@@ -126,7 +126,7 @@ final class RichTextCoordinatorTests: XCTestCase {
 
     func testResetingHighlightedRangeAppearanceResetsToInternalValues() {
         let range = NSRange(location: 4, length: 3)
-        coordinator.richTextContext.highlightedRange = range
+        coordinator.context.highlightedRange = range
         coordinator.highlightedRangeOriginalBackgroundColor = .blue
         coordinator.highlightedRangeOriginalForegroundColor = .yellow
         coordinator.resetHighlightedRangeAppearance()

@@ -16,6 +16,7 @@ import UIKit
 import AppKit
 #endif
 
+@available(*, deprecated, message: "Use RichTextViewComponent instead.")
 public extension RichTextAttributeWriter {
     
     /// Set the rich text indent at a certain range.
@@ -88,9 +89,6 @@ private extension RichTextAttributeWriter {
             atIndex: Int(index)
         )
     }
-}
-
-extension RichTextAttributeWriter {
 
     /// Step the text indent at a certain range.
     func stepIndentInternal(

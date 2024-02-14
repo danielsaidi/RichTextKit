@@ -1,5 +1,5 @@
 //
-//  RichTextViewComponent+Color.swift
+//  RichTextViewComponent+Colors.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-05-30.
@@ -26,5 +26,16 @@ public extension RichTextViewComponent {
         if richTextColor(color) == val { return }
         guard let attribute = color.attribute else { return }
         setRichTextAttribute(attribute, to: val)
+    }
+    
+    /// Set a certain rich text color at a certain range.
+    func setRichTextColor(
+        _ color: RichTextColor,
+        to val: ColorRepresentable,
+        at range: NSRange
+    ) {
+        guard let attribute = color.attribute else { return }
+        if richTextColor(color, at: range) == val { return }
+        setRichTextAttribute(attribute, to: val, at: range)
     }
 }

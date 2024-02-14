@@ -8,6 +8,7 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Use RichTextViewComponent instead")
 public extension RichTextAttributeWriter {
 
     /// Set a rich text style at a certain range.
@@ -21,37 +22,14 @@ public extension RichTextAttributeWriter {
         switch style {
         case .bold, .italic:
             let styles = richTextStyles(at: range)
-            guard shouldAddOrRemove(style, newValue, given: styles) else { return }
+            guard styles.shouldAddOrRemove(style, newValue) else { return }
             guard let font = richTextFont(at: range) else { return }
-            guard let newFont = newFont(for: font, byToggling: style) else { return }
+            guard let newFont = font.toggling(style) else { return }
             setRichTextFont(newFont, at: range)
         case .strikethrough:
             setRichTextAttribute(.strikethroughStyle, to: value, at: range)
         case .underlined:
             setRichTextAttribute(.underlineStyle, to: value, at: range)
         }
-    }
-}
-
-extension RichTextAttributeWriter {
-
-    func newFont(
-        for font: FontRepresentable,
-        byToggling style: RichTextStyle
-    ) -> FontRepresentable? {
-        FontRepresentable(
-            descriptor: font.fontDescriptor.byTogglingStyle(style),
-            size: font.pointSize
-        )
-    }
-
-    func shouldAddOrRemove(
-        _ style: RichTextStyle,
-        _ newValue: Bool,
-        given styles: [RichTextStyle]
-    ) -> Bool {
-        let shouldAdd = newValue && !styles.hasStyle(style)
-        let shouldRemove = !newValue && styles.hasStyle(style)
-        return shouldAdd || shouldRemove
     }
 }

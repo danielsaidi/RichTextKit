@@ -16,6 +16,7 @@ import UIKit
 import AppKit
 #endif
 
+@available(*, deprecated, message: "Use RichTextViewComponent instead.")
 public extension RichTextAttributeWriter {
 
     /// Set the rich text paragraph style at a certain range.

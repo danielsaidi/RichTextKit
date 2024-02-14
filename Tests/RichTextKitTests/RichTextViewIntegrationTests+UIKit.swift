@@ -74,14 +74,14 @@ final class RichTextViewIntegrationTests: XCTestCase {
         XCTAssertEqual(textView.richTextAttributes[.font] as? FontRepresentable, FontRepresentable.systemFont(ofSize: 16))
         XCTAssertEqual(textView.richTextAttributes[.foregroundColor] as? ColorRepresentable, ColorRepresentable.label)
 
-        textView.setRichTextStyle(.bold, to: true, at: textView.richTextRange)
-        textView.setRichTextStyle(.italic, to: true, at: textView.richTextRange)
+        textView.setRichTextStyle(.bold, to: true)
+        textView.setRichTextStyle(.italic, to: true)
 
         XCTAssertTrue(try XCTUnwrap(textView.richTextFont?.fontDescriptor.symbolicTraits.contains(.traitBold)))
         XCTAssertTrue(try XCTUnwrap(textView.richTextFont?.fontDescriptor.symbolicTraits.contains(.traitItalic)))
 
-        textView.setRichTextStyle(.bold, to: false, at: textView.richTextRange)
-        textView.setRichTextStyle(.italic, to: false, at: textView.richTextRange)
+        textView.setRichTextStyle(.bold, to: false)
+        textView.setRichTextStyle(.italic, to: false)
         XCTAssertFalse(try XCTUnwrap(textView.richTextFont?.fontDescriptor.symbolicTraits.contains(.traitBold)))
         XCTAssertFalse(try XCTUnwrap(textView.richTextFont?.fontDescriptor.symbolicTraits.contains(.traitItalic)))
     }
@@ -92,7 +92,7 @@ final class RichTextViewIntegrationTests: XCTestCase {
         textContext.selectRange(NSRange(location: stringWithoutAttributes.count , length: otherStringToAppend.count))
         let selectedRange = textView.selectedRange
         XCTAssertFalse(try XCTUnwrap(textView.richTextFont?.fontDescriptor.symbolicTraits.contains(.traitBold)))
-        textView.setRichTextStyle(.strikethrough, to: true, at: selectedRange)
+        textView.setRichTextStyle(.strikethrough, to: true)
 
         XCTAssertEqual(textView.richTextAttributes[.strikethroughStyle] as? Int, 1)
         XCTAssertEqual(textView.richTextAttributes(at: selectedRange)[.strikethroughStyle] as? Int, 1)

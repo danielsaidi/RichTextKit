@@ -88,14 +88,19 @@ public extension RichTextStyle {
 
 public extension Collection where Element == RichTextStyle {
 
-    /**
-     Whether or not the collection contains a certain style.
-
-     - Parameters:
-       - style: The style to look for.
-     */
+    /// Check if the collection contains a certain style.
     func hasStyle(_ style: RichTextStyle) -> Bool {
         contains(style)
+    }
+    
+    /// Check if a certain style change should be applied.
+    func shouldAddOrRemove(
+        _ style: RichTextStyle,
+        _ newValue: Bool
+    ) -> Bool {
+        let shouldAdd = newValue && !hasStyle(style)
+        let shouldRemove = !newValue && hasStyle(style)
+        return shouldAdd || shouldRemove
     }
 }
 
