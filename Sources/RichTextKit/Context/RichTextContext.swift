@@ -13,12 +13,12 @@ import Combine
  This observable context can be used to affect and observe a
  ``RichTextEditor`` and its content.
 
- Use ``handle(_:)`` to trigger a change, e.g. to change font,
- text style, alignment, select a range, etc. You can observe
- the various published properties to keep your UI updated.
-
- The SwiftUI ``RichTextEditor`` uses this context as well as
- a ``RichTextCoordinator`` to keep itself updated.
+ Use ``handle(_:)`` to trigger actions, e.g. to change fonts,
+ text styles, text alignments, select a text range, etc. 
+ 
+ You can observe the various published properties to keep an
+ app up to date with the current state. The ``RichTextEditor``
+ uses this with a ``RichTextCoordinator`` to keep it updated.
  */
 public class RichTextContext: ObservableObject {
 
@@ -70,19 +70,38 @@ public class RichTextContext: ObservableObject {
 
     /// This publisher can emit actions to the coordinator.
     public let userActionPublisher: PassthroughSubject<RichTextAction, Never> = .init()
+    
+    
+    // MARK: - Soft Deprecations (to avoid library warnings)
+    
+    @Published
+    @available(*, deprecated, renamed: "colors")
+    public internal(set) var backgroundColor: ColorRepresentable?
+    
+    @Published
+    @available(*, deprecated, renamed: "colors")
+    public internal(set) var foregroundColor: ColorRepresentable?
+    
+    @Published
+    @available(*, deprecated, renamed: "colors")
+    public internal(set) var strikethroughColor: ColorRepresentable?
+
+    @Published
+    @available(*, deprecated, renamed: "colors")
+    public internal(set) var strokeColor: ColorRepresentable?
+
+    @Published
+    @available(*, deprecated, renamed: "colors")
+    public internal(set) var underlineColor: ColorRepresentable?
 
     
     // MARK: - Observable Properties
-
-    /// The current background color, if any.
-    @Published
-    public internal(set) var backgroundColor: ColorRepresentable?
 
     /// Whether or not the current rich text can be copied.
     @Published
     public internal(set) var canCopy = false
 
-    /// Whether or not the latest undone change can be redone.
+    /// Whether or not the latest undo can be redone.
     @Published
     public internal(set) var canRedoLatestChange = false
 
@@ -97,10 +116,9 @@ public class RichTextContext: ObservableObject {
     /// Whether or not the indent level can be increased.
     @Published
     public internal(set) var canIncreaseIndent = true
-
-    /// The current foreground color, if any.
+    
     @Published
-    public internal(set) var foregroundColor: ColorRepresentable?
+    public internal(set) var colors = [RichTextColor: ColorRepresentable]()
 
     /// The style to apply when highlighting a range.
     @Published
@@ -121,18 +139,6 @@ public class RichTextContext: ObservableObject {
     /// Whether or not the current text is underlined.
     @Published
     public internal(set) var isUnderlined = false
-
-    /// The current strikethrough color, if any.
-    @Published
-    public internal(set) var strikethroughColor: ColorRepresentable?
-
-    /// The current stroke color, if any.
-    @Published
-    public internal(set) var strokeColor: ColorRepresentable?
-
-    /// The current underline color, if any.
-    @Published
-    public internal(set) var underlineColor: ColorRepresentable?
 }
 
 public extension RichTextContext {

@@ -196,29 +196,19 @@ extension RichTextCoordinator {
         }
 
         let foreground = textView.richTextColor(.foreground)
-        if context.foregroundColor != foreground {
-            context.foregroundColor = foreground
-        }
+        context.setColorInternal(.foreground, to: foreground)
 
         let background = textView.richTextColor(.background)
-        if context.backgroundColor != background {
-            context.backgroundColor = background
-        }
+        context.setColorInternal(.background, to: background)
 
         let stroke = textView.richTextColor(.stroke)
-        if context.strokeColor != stroke {
-            context.strokeColor = stroke
-        }
+        context.setColorInternal(.stroke, to: stroke)
 
         let strikethrough = textView.richTextColor(.strikethrough)
-        if context.strikethroughColor != strikethrough {
-            context.strikethroughColor = strikethrough
-        }
-
+        context.setColorInternal(.strikethrough, to: strikethrough)
+        
         let underline = textView.richTextColor(.underline)
-        if context.underlineColor != underline {
-            context.underlineColor = underline
-        }
+        context.setColorInternal(.underline, to: underline)
 
         let hasRange = textView.hasSelectedRange
         if context.canCopy != hasRange {
