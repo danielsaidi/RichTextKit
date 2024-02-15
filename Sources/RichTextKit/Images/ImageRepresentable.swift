@@ -14,6 +14,21 @@ import AppKit
  multi-platform support.
  */
 public typealias ImageRepresentable = NSImage
+
+public extension ImageRepresentable {
+
+    /// Try to get a CoreGraphic image from the AppKit image.
+    var cgImage: CGImage? {
+        cgImage(forProposedRect: nil, context: nil, hints: nil)
+    }
+    
+    /// Try to get JPEG compressed data for the AppKit image.
+    func jpegData(compressionQuality: CGFloat) -> Data? {
+        guard let image = cgImage else { return nil }
+        let bitmap = NSBitmapImageRep(cgImage: image)
+        return bitmap.representation(using: .jpeg, properties: [.compressionFactor: compressionQuality])
+    }
+}
 #endif
 
 #if canImport(UIKit)

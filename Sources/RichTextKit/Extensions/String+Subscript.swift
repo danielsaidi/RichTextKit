@@ -3,17 +3,14 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-05-29.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
+//
+//  Original:
+//  https://stackoverflow.com/questions/24092884/get-nth-character-of-a-string-in-swift-programming-language
 //
 
 import Foundation
 
-/**
- This extension makes it possible to fetch characters from a
- string, as discussed here:
-
- https://stackoverflow.com/questions/24092884/get-nth-character-of-a-string-in-swift-programming-language
- */
 public extension StringProtocol {
 
     func character(at index: Int) -> String.Element? {

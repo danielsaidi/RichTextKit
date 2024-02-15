@@ -107,7 +107,12 @@ public extension RichTextAction {
         case .undoLatestChange: .richTextActionUndo
         }
     }
-
+    
+    /// The localized label to use for the action.
+    var label: some View {
+        icon.label(title)
+    }
+    
     /// The localized title to use in the main menu.
     var menuTitle: String {
         menuTitleKey.text
@@ -203,4 +208,16 @@ public extension RichTextAction {
 
     /// A name alias for `.undoLatestChange`.
     static var undo: RichTextAction { .undoLatestChange }
+}
+
+public extension CGFloat {
+
+    /// The default rich text indent step size.
+    static var defaultRichTextIntentStepSize: CGFloat = 30.0
+}
+
+public extension UInt {
+
+    /// The default rich text indent step size.
+    static var defaultRichTextIntentStepSize: UInt = 30
 }

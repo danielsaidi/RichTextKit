@@ -61,7 +61,7 @@ public struct RichTextNSSharingMenu: View {
                 )
             }
         } label: {
-            Label(title, icon)
+            icon.label(title)
         }
     }
     #else
@@ -93,7 +93,7 @@ private extension RichTextNSSharingMenu {
                 }
             }
         } label: {
-            Label(title, icon)
+            icon.label(title)
         }
     }
 

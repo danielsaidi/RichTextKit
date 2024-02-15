@@ -19,6 +19,7 @@ By deprecating these functions, we can simplify the library in 1.0, and focus mo
 ### ✨ Features
 
 * `FontRepresentable` has new extensions.
+* `RichTextAction` has a new `label` property.
 * `RichTextCommand.ActionButtonGroup` has many new initializers.
 * `RichTextCommand.FormatMenu` is more configurable than before.
 * `RichTextKeyboardToolbar` has a new config to always be shown.

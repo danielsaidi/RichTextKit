@@ -50,16 +50,16 @@ public extension RichTextDataFormat {
                     Button {
                         formatAction(format)
                     } label: {
-                        Label(format.fileFormatText, icon)
+                        icon.label(format.fileFormatText)
                     }
                 }
                 if let action = pdfAction {
                     Button(action: action) {
-                        Label(RTKL10n.fileFormatPdf.text, icon)
+                        icon.label(RTKL10n.fileFormatPdf.text)
                     }
                 }
             } label: {
-                Label(title, icon)
+                icon.label(title)
             }
         }
     }
