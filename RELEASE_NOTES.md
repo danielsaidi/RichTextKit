@@ -23,12 +23,17 @@ By deprecating these functions, we can simplify the library in 1.0, and focus mo
 * `RichTextCommand.ActionButtonGroup` has new inits.
 * `RichTextCommand.FormatMenu` is a lot more configurable.
 * `RichTextFormatToolbar` is now available on all platforms.
-* `RichTextFormatToolbar` now has a custom configuration type.
+* `RichTextFormatToolbar` has new configuration and style type.
 * `RichTextKeyboardToolbar` has a new config to always be shown.
 * `RichTextView` has a new theme that lets you define its style.
 * `RichTextViewComponent` has a new `hasRichTextStyle` function.
 * `RichTextViewComponent` has a new `toggleRichTextStyle` function.
 * `RichTextViewComponent` now handles superscript changes properly. 
+
+### 🚨 Important
+
+* `RichTextFormatToolbar` is no longer navigation wrapped by default.
+* `RichTextFormatToolbar` has a new `asSheet()` function that does this.
 
 ### 💡 Adjustments
 
