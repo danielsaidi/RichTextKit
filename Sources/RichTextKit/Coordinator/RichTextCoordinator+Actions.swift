@@ -112,17 +112,17 @@ extension RichTextCoordinator {
     func setIsEditing(to newValue: Bool) {
         if newValue == textView.isFirstResponder { return }
         if newValue {
-#if iOS || os(visionOS)
+            #if iOS || os(visionOS)
             textView.becomeFirstResponder()
-#else
+            #else
             print("macOS currently doesn't resign first responder.")
-#endif
+            #endif
         } else {
-#if iOS || os(visionOS)
+            #if iOS || os(visionOS)
             textView.resignFirstResponder()
-#else
+            #else
             print("macOS currently doesn't resign first responder.")
-#endif
+            #endif
         }
     }
 

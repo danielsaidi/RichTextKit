@@ -3,7 +3,7 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-06-02.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 import Foundation
@@ -12,9 +12,9 @@ import Foundation
  This export service can be used to export rich text content
  to files with a certain format.
 
- Exported files are by default written to the app's document
- folder, since the intent should be to export rich text with
- another data format.
+ Files are by default written to the app document folder. It
+ can be changed by providing another searchpath directory in
+ the initializer.
  */
 public class StandardRichTextExportService: RichTextExportService {
 

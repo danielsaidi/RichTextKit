@@ -32,15 +32,7 @@ public extension NSAttributedString {
 
 private extension NSAttributedString {
 
-    /**
-     Try to parse ``RichTextDataFormat/archivedData`` data.
-
-     The data must have been generated with `NSKeyedArchiver`
-     and will be unarchived with a `NSKeyedUnarchiver`.
-
-     - Parameters:
-       - data: The data to initialize the string with.
-     */
+    /// Try to parse ``RichTextDataFormat/archivedData``.
     convenience init(archivedData data: Data) throws {
         let unarchived = try NSKeyedUnarchiver.unarchivedObject(
             ofClass: NSAttributedString.self,
@@ -51,12 +43,7 @@ private extension NSAttributedString {
         self.init(attributedString: string)
     }
 
-    /**
-     Try to parse ``RichTextDataFormat/plainText`` data.
-
-     - Parameters:
-       - data: The data to initialize the string with.
-     */
+    /// Try to parse ``RichTextDataFormat/plainText`` data.
     convenience init(plainTextData data: Data) throws {
         let decoded = String(data: data, encoding: .utf8)
         guard let string = decoded else {
@@ -66,9 +53,7 @@ private extension NSAttributedString {
         self.init(attributedString: attributed)
     }
 
-    /**
-     Try to parse ``RichTextDataFormat/rtf`` data.
-     */
+    /// Try to parse ``RichTextDataFormat/rtf`` data.
     convenience init(rtfData data: Data) throws {
         var attributes = Self.rtfDataAttributes as NSDictionary?
         try self.init(
@@ -78,9 +63,7 @@ private extension NSAttributedString {
         )
     }
 
-    /**
-     Try to parse ``RichTextDataFormat/rtfd`` data.
-     */
+    /// Try to parse ``RichTextDataFormat/rtfd`` data.
     convenience init(rtfdData data: Data) throws {
         var attributes = Self.rtfdDataAttributes as NSDictionary?
         try self.init(
@@ -91,9 +74,7 @@ private extension NSAttributedString {
     }
 
     #if macOS
-    /**
-     Try to parse ``RichTextDataFormat/word`` data.
-     */
+    /// Try to parse ``RichTextDataFormat/word`` data.
     convenience init(wordData data: Data) throws {
         var attributes = Self.wordDataAttributes as NSDictionary?
         try self.init(

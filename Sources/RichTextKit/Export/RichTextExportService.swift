@@ -3,18 +3,14 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-06-02.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 import Foundation
 
 /**
  This protocol can be implemented by any classes that can be
- used to export rich text files.
-
- Exporting a file can be used to convert a rich text between
- various formats. To share or print the text, consider using
- a ``RichTextShareService`` instead.
+ used to export rich text to files.
  */
 public protocol RichTextExportService: AnyObject {
 

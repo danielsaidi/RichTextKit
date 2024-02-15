@@ -3,7 +3,7 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-05-22.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 #if iOS || macOS || os(tvOS) || os(visionOS)
@@ -13,14 +13,13 @@ import SwiftUI
 /**
  This coordinator is used to keep a ``RichTextView`` in sync
  with a ``RichTextContext``.
+ 
+ This is used by ``RichTextEditor`` to coordinate changes in
+ its context and the underlying text view.
 
- The coordinator sets itself as the text view's delegate and
- updates the context when things change in the text view. It
- also subscribes to context observable changes and keeps the
- text view in sync with these changes.
-
- You can inherit this class to customize the coordinator for
- your own use cases.
+ The coordinator sets itself as the text view's delegate. It
+ updates the context when things change in the text view and
+ syncs to context changes to the text view.
  */
 open class RichTextCoordinator: NSObject {
 
@@ -171,11 +170,7 @@ extension RichTextCoordinator {
         }
     }
 
-    /**
-     Sync the rich text context with the text view after the
-     dispatch queue delay above. The delay will silence some
-     purple alert warnings about how state is updated.
-     */
+    /// Sync the rich text context with the text view.
     func syncContextWithTextViewAfterDelay() {
         let styles = textView.richTextStyles
 

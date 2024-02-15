@@ -3,7 +3,7 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-12-19.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 #if iOS || macOS || os(visionOS)
@@ -14,12 +14,7 @@ import SwiftUI
  a list of ``RichTextDataFormat`` values.
 
  This menu uses a ``RichTextDataFormat/Menu`` configured for
- exporting. It has customizable actions, to make it possible
- to use it in any custom way.
-
- You can use a custom ``RichTextDataFormat`` you can use its
- `convertibleFormats` as `formats` init parameter, to get an
- export menu for all other formats.
+ exporting, with customizable actions and data formats.
  */
 public struct RichTextExportMenu: View {
 

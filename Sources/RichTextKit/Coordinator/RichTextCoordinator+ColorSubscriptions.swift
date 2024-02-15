@@ -17,9 +17,9 @@ extension RichTextCoordinator {
         }
         guard let attribute = color.attribute else { return }
         if let applyRange {
-            self.textView.setRichTextColor(color, to: val, at: applyRange)
+            textView.setRichTextColor(color, to: val, at: applyRange)
         } else {
-            self.textView.setRichTextAttribute(attribute, to: val)
+            textView.setRichTextAttribute(attribute, to: val)
         }
     }
 }

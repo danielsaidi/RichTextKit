@@ -3,14 +3,14 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-06-02.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 import Foundation
 
 /**
- This enum defines errors that can be thrown when a file
- manager fails to perform export operations.
+ This enum defines errors that can be thrown when failing to
+ export rich text.
  */
 public enum RichTextExportError: Error {
 
