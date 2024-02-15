@@ -27,7 +27,6 @@ public extension RichTextViewComponent {
     ///
     /// Unlike some other attributes, this attribute applies
     /// to the entire paragraph, not just the selected range.
-    /// It therefore needs special treatment.
     func stepRichTextIndent(
         points: CGFloat
     ) {

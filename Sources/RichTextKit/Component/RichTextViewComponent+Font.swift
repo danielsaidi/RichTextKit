@@ -7,7 +7,8 @@
 //
 
 /// These functions may seem complicated, but it is the only
-/// way that seems to work correctly, so far.
+/// way that seems to work correctly, so far. Perhaps it can
+/// be simplified in 1.0, after removing all deprecated code.
 ///
 /// I previously grabbed the `typingAttributes` and took the
 /// `.font` attribute from it, then took its `fontDescriptor`

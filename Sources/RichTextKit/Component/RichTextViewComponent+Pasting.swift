@@ -3,7 +3,7 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-06-05.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 import Foundation
@@ -19,12 +19,13 @@ import AppKit
 public extension RichTextViewComponent {
 
     /**
-     Paste an image into the text view, at a certain index.
+     Paste an image into the rich text, at a certain index.
 
-     For now, pasting will automatically insert the image as
-     a compressed jpeg. We should expand this to allow us to
-     define format, compression etc. For now, it's hardcoded
-     and a future TODO.
+     Pasting images only works on iOS, tvOS and macOS. Other
+     platform will trigger an assertion failure.
+     
+     > Todo: This automatically inserts images as compressed
+     jpeg. We should make it more configurable.
 
      - Parameters:
        - image: The image to paste.
@@ -47,9 +48,12 @@ public extension RichTextViewComponent {
 
     /**
      Paste images into the text view, at a certain index.
+     
+     This will automatically insert an image as a compressed
+     jpeg. We should make it more configurable.
 
-     Pasting images only works on iOS, tvOS and macOS. Other
-     platform will trigger an assertion failure.
+     > Todo: This automatically inserts images as compressed
+     jpeg. We should make it more configurable.
 
      - Parameters:
        - images: The images to paste.

@@ -3,7 +3,7 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-06-05.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 import Foundation
@@ -18,7 +18,7 @@ import AppKit
 
 public extension RichTextViewComponent {
 
-    /// Get the attachment max size for a certain image.
+    /// Get the max image attachment size.
     var imageAttachmentMaxSize: CGSize {
         let maxSize = imageConfiguration.maxImageSize
         let insetX = 2 * textContentInset.width
@@ -40,7 +40,9 @@ public extension RichTextViewComponent {
     }
 
     /// Get the attachment size for a certain image.
-    func attachmentSize(for image: ImageRepresentable) -> CGSize {
+    func attachmentSize(
+        for image: ImageRepresentable
+    ) -> CGSize {
         attributedString.attachmentSize(
             for: image,
             maxSize: imageAttachmentMaxSize

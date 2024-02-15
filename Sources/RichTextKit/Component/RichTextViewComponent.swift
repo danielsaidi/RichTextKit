@@ -3,7 +3,7 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-05-22.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 import CoreGraphics
@@ -17,18 +17,18 @@ import AppKit
 
 
 /**
- This protocol defines a platform-agnostic api that's shared
- by the UIKit and AppKit ``RichTextView`` components.
+ This protocol provides a common interface for the UIKit and
+ AppKit ``RichTextView`` components.
 
- By implementing and using this protocol in the library, the
- library doesn't have to do a bunch of `#if` checks.
+ By implementing this protocol, the library does not have to
+ do a bunch of `#if` platform checks within the code.
+ 
+ This component can read and write many different attributes
+ from and to its rich text, using the underlying features of
+ ``RichTextAttributeReader`` and ``RichTextAttributeWriter``.
 
  The protocol implements and extends many other protocols to
  provide more features for components with more capabilities.
-
- The protocol for instance extends ``RichTextAttributeReader``
- and ``RichTextAttributeWriter`` and adds new functions that
- don't require a `range`, since it can use the current range.
  */
 public protocol RichTextViewComponent: AnyObject,
     RichTextPresenter,
@@ -52,9 +52,6 @@ public protocol RichTextViewComponent: AnyObject,
     var isFirstResponder: Bool { get }
     
     /// The text view's layout manager, if any.
-    ///
-    /// This is optional and renamed since UIKit will have a
-    /// non-otional manager and AppKit an optional one.
     var layoutManagerWrapper: NSLayoutManager? { get }
 
     /// The text view's mutable attributed string, if any.
@@ -64,9 +61,6 @@ public protocol RichTextViewComponent: AnyObject,
     var textContentInset: CGSize { get set }
     
     /// The text view's text storage, if any.
-    ///
-    /// This is optional and renamed since UIKit will have a
-    /// non-otional storage and AppKit an optional one.
     var textStorageWrapper: NSTextStorage? { get }
 
     /// The text view current typing attributes.
@@ -81,6 +75,7 @@ public protocol RichTextViewComponent: AnyObject,
         format: RichTextDataFormat
     )
 
+    
     // MARK: - Functions
 
     /// Show an alert with a title, message and button text.
@@ -104,6 +99,7 @@ public protocol RichTextViewComponent: AnyObject,
     /// Undo the latest change.
     func undoLatestChange()
 }
+
 
 // MARK: - Public Extension
 

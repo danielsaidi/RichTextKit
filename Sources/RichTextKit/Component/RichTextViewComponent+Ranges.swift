@@ -2,7 +2,7 @@
 //  RichTextViewComponent+Ranges.swift
 //  RichTextKit
 //
-//  Created by Daniel Saidi on 2024-02-14.
+//  Created by Dominik Bucher
 //
 
 import Foundation

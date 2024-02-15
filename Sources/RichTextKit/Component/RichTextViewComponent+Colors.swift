@@ -3,14 +3,14 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-05-30.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 import Foundation
 
 public extension RichTextViewComponent {
 
-    /// Get a certain rich text color at current range.
+    /// Get a certain color at the current range.
     func richTextColor(
         _ color: RichTextColor
     ) -> ColorRepresentable? {
@@ -18,7 +18,7 @@ public extension RichTextViewComponent {
         return richTextAttribute(attribute)
     }
     
-    /// Get a certain rich text color at a certain range.
+    /// Get a certain color at a certain range.
     func richTextColor(
         _ color: RichTextColor,
         at range: NSRange
@@ -27,7 +27,7 @@ public extension RichTextViewComponent {
         return richTextAttribute(attribute, at: range)
     }
 
-    /// Set a certain rich text color at current range.
+    /// Set a certain color at the current range.
     func setRichTextColor(
         _ color: RichTextColor,
         to val: ColorRepresentable
@@ -37,7 +37,7 @@ public extension RichTextViewComponent {
         setRichTextAttribute(attribute, to: val)
     }
     
-    /// Set a certain rich text color at a certain range.
+    /// Set a certain colors at a certain range.
     func setRichTextColor(
         _ color: RichTextColor,
         to val: ColorRepresentable,

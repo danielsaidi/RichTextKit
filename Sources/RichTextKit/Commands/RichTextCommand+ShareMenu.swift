@@ -95,9 +95,13 @@ public extension RichTextCommand {
 
 private extension RichTextCommand.ShareMenu {
 
-    var hasExportFormats: Bool { !exportFormats.isEmpty }
+    var hasExportFormats: Bool {
+        !exportFormats.isEmpty
+    }
 
-    var hasShareFormats: Bool { !shareFormats.isEmpty }
+    var hasShareFormats: Bool {
+        !shareFormats.isEmpty
+    }
 }
 
 private extension RichTextCommand.ShareMenu {

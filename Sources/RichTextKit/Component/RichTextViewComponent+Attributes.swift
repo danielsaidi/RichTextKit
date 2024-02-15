@@ -3,14 +3,14 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-05-29.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 import Foundation
 
 public extension RichTextViewComponent {
 
-    /// Get all rich text attributes at current range.
+    /// Get all attributes at the current range.
     var richTextAttributes: RichTextAttributes {
         if hasSelectedRange {
             return richTextAttributes(at: selectedRange)
@@ -25,14 +25,14 @@ public extension RichTextViewComponent {
         #endif
     }
 
-    /// Get a certain rich text attribute at current range.
+    /// Get a certain attribute at the current range.
     func richTextAttribute<Value>(
         _ attribute: RichTextAttribute
     ) -> Value? {
         richTextAttributes[attribute] as? Value
     }
 
-    /// Set a certain rich text attribute at current range.
+    /// Set a certain attribute at the current range.
     func setRichTextAttribute(
         _ attribute: RichTextAttribute,
         to value: Any
@@ -44,8 +44,10 @@ public extension RichTextViewComponent {
         }
     }
 
-    /// Set certain attributes at current range.
-    func setRichTextAttributes(_ attributes: RichTextAttributes) {
+    /// Set certain attributes at the current range.
+    func setRichTextAttributes(
+        _ attributes: RichTextAttributes
+    ) {
         attributes.forEach { attribute, value in
             setRichTextAttribute(attribute, to: value)
         }

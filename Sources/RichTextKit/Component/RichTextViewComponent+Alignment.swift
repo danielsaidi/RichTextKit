@@ -3,7 +3,7 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-05-29.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 import Foundation
@@ -16,21 +16,17 @@ import AppKit
 
 public extension RichTextViewComponent {
     
-    /// Get the rich text alignment at current range.
+    /// Get the text alignment at the current range.
     var richTextAlignment: RichTextAlignment? {
         guard let style = richTextParagraphStyle else { return nil }
         return RichTextAlignment(style.alignment)
     }
     
-    /// Set the rich text alignment at current range.
-    ///
-    /// This function does not use ``RichTextAttributeWriter``
-    /// since the text views require affecting text storage.
+    /// Set the text alignment at the current range.
     ///
     /// > Important: This function will affect the next line
-    /// of text if we grab `richTextParagraphStyle` and make
-    /// the alignment change to it, instead of creating this
-    /// brand new paragraph style.
+    /// if it changes the `richTextParagraphStyle` value, so
+    /// it instead creates a brand new paragraph style.
     func setRichTextAlignment(
         _ alignment: RichTextAlignment
     ) {

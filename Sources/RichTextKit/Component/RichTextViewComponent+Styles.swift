@@ -3,14 +3,14 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-05-29.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 import Foundation
 
 public extension RichTextViewComponent {
     
-    /// Get all rich text styles at current range.
+    /// Get all styles at the current range.
     var richTextStyles: [RichTextStyle] {
         let attributes = richTextAttributes
         let traits = richTextFont?.fontDescriptor.symbolicTraits
@@ -25,7 +25,7 @@ public extension RichTextViewComponent {
         richTextStyles.contains(style)
     }
     
-    /// Set a certain rich text style at current range.
+    /// Set a certain style at the current range.
     func setRichTextStyle(
         _ style: RichTextStyle,
         to newValue: Bool
@@ -45,7 +45,7 @@ public extension RichTextViewComponent {
         }
     }
     
-    /// Set a certain rich text style at current range.
+    /// Toggle a certain style at the current range.
     func toggleRichTextStyle(
         _ style: RichTextStyle
     ) {

@@ -2,15 +2,15 @@
 //  RichTextViewComponent+Color.swift
 //  RichTextKit
 //
-//  Created by Daniel Saidi on 2022-05-30.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Created by Daniel Saidi on 2024-02-14.
+//  Copyright © 2024 Daniel Saidi. All rights reserved.
 //
 
 import Foundation
 
 public extension RichTextViewComponent {
 
-    /// Get the rich text superscript level at current range.
+    /// Get the superscript level at the current range.
     var richTextSuperscriptLevel: Int? {
         #if macOS
         richTextAttribute(.superscript)
@@ -19,7 +19,7 @@ public extension RichTextViewComponent {
         #endif
     }
 
-    /// Set the rich text superscript level at current range.
+    /// Set the superscript level at the current range.
     func setRichTextSuperscriptLevel(to val: Int) {
         #if macOS
         setRichTextAttribute(.superscript, to: val)
@@ -28,7 +28,7 @@ public extension RichTextViewComponent {
         #endif
     }
     
-    /// Step the rich text font size at current range.
+    /// Step the superscript level at the current range.
     func stepRichTextSuperscriptLevel(points: Int) {
         let currentSize = richTextSuperscriptLevel ?? 0
         let newSize = currentSize + points
