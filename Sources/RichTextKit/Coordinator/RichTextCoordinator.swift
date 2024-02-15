@@ -237,24 +237,16 @@ extension RichTextCoordinator {
         }
 
         let isBold = styles.hasStyle(.bold)
-        if context.isBold != isBold {
-            context.isBold = isBold
-        }
+        context.setStyleInternal(.bold, to: isBold)
 
         let isItalic = styles.hasStyle(.italic)
-        if context.isItalic != isItalic {
-            context.isItalic = isItalic
-        }
-
+        context.setStyleInternal(.italic, to: isItalic)
+        
         let isStrikethrough = styles.hasStyle(.strikethrough)
-        if context.isStrikethrough != isStrikethrough {
-            context.isStrikethrough = isStrikethrough
-        }
-
+        context.setStyleInternal(.strikethrough, to: isStrikethrough)
+        
         let isUnderlined = styles.hasStyle(.underlined)
-        if context.isUnderlined != isUnderlined {
-            context.isUnderlined = isUnderlined
-        }
+        context.setStyleInternal(.underlined, to: isUnderlined)
 
         let isEditingText = textView.isFirstResponder
         if context.isEditingText != isEditingText {

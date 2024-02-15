@@ -16,7 +16,10 @@ struct AboutCommand: Commands {
     var body: some Commands {
         CommandGroup(replacing: .appInfo) {
             Button("About RichTextKit") {
-                NSApplication.shared.orderFrontStandardAboutPanel(options: .richTextKit)
+                NSApplication.shared
+                    .orderFrontStandardAboutPanel(
+                        options: .richTextKit
+                    )
             }
         }
     }

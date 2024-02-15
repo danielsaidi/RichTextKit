@@ -89,4 +89,14 @@ public extension RichTextContext {
             )
         )
     }
+    
+    @available(*, deprecated, renamed: "setStyle")
+    func set(_ style: RichTextStyle, to val: Bool) {
+        setStyle(style, to: val)
+    }
+    
+    @available(*, deprecated, renamed: "toggleStyle")
+    func toggle(_ style: RichTextStyle) {
+        toggleStyle(style)
+    }
 }

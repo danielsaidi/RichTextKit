@@ -14,35 +14,39 @@ public extension RichTextContext {
     func binding(for style: RichTextStyle) -> Binding<Bool> {
         Binding(
             get: { Bool(self.hasStyle(style)) },
-            set: { self.set(style, to: $0) }
+            set: { self.setStyle(style, to: $0) }
         )
     }
 
     /// Check whether or not the context has a certain style.
     func hasStyle(_ style: RichTextStyle) -> Bool {
-        switch style {
-        case .bold: isBold
-        case .italic: isItalic
-        case .underlined: isUnderlined
-        case .strikethrough: isStrikethrough
-        }
+        styles[style] == true
     }
 
     /// Set whether or not the context has a certain style.
-    func set(
+    func setStyle(
         _ style: RichTextStyle,
         to val: Bool
     ) {
-        switch style {
-        case .bold: actionPublisher.send(.setStyle(.bold, val)); isBold = val
-        case .italic: actionPublisher.send(.setStyle(.italic, val)); isItalic = val
-        case .underlined: actionPublisher.send(.setStyle(.underlined, val)); isUnderlined = val
-        case .strikethrough: actionPublisher.send(.setStyle(.strikethrough, val)); isStrikethrough = val
-        }
+        guard styles[style] != val else { return }
+        actionPublisher.send(.setStyle(style, val))
+        setStyleInternal(style, to: val)
     }
 
     /// Toggle a certain style for the context.
-    func toggle(_ style: RichTextStyle) {
-        set(style, to: !hasStyle(style))
+    func toggleStyle(_ style: RichTextStyle) {
+        setStyle(style, to: !hasStyle(style))
+    }
+}
+
+extension RichTextContext {
+
+    /// Set the value for a certain color, or remove it.
+    func setStyleInternal(
+        _ style: RichTextStyle,
+        to val: Bool?
+    ) {
+        guard let val else { return styles[style] = nil }
+        styles[style] = val
     }
 }

@@ -75,27 +75,47 @@ public class RichTextContext: ObservableObject {
     public var highlightedRange: NSRange?
     
     
-    // MARK: - Deprecations (to avoid library warnings)
+    // MARK: - Deprecated Colors
     
-    @Published
     @available(*, deprecated, renamed: "colors")
-    public internal(set) var backgroundColor: ColorRepresentable?
+    public var backgroundColor: ColorRepresentable? {
+        colors[.background]
+    }
     
-    @Published
     @available(*, deprecated, renamed: "colors")
-    public internal(set) var foregroundColor: ColorRepresentable?
+    public var foregroundColor: ColorRepresentable? {
+        colors[.foreground]
+    }
     
-    @Published
     @available(*, deprecated, renamed: "colors")
-    public internal(set) var strikethroughColor: ColorRepresentable?
+    public var strikethroughColor: ColorRepresentable? {
+        colors[.strikethrough]
+    }
 
-    @Published
     @available(*, deprecated, renamed: "colors")
-    public internal(set) var strokeColor: ColorRepresentable?
+    public var strokeColor: ColorRepresentable? {
+        colors[.stroke]
+    }
 
-    @Published
     @available(*, deprecated, renamed: "colors")
-    public internal(set) var underlineColor: ColorRepresentable?
+    public var underlineColor: ColorRepresentable? {
+        colors[.underline]
+    }
+    
+    
+    // MARK: - Deprecated Styles
+    
+    @available(*, deprecated, renamed: "styles")
+    public var isBold: Bool { hasStyle(.bold) }
+
+    @available(*, deprecated, renamed: "styles")
+    public var isItalic: Bool { hasStyle(.italic) }
+
+    @available(*, deprecated, renamed: "styles")
+    public var isStrikethrough: Bool { hasStyle(.strikethrough) }
+
+    @available(*, deprecated, renamed: "styles")
+    public var isUnderlined: Bool { hasStyle(.underlined) }
 
     
     // MARK: - Observable Properties
@@ -126,22 +146,9 @@ public class RichTextContext: ObservableObject {
     /// The style to apply when highlighting a range.
     @Published
     public internal(set) var highlightingStyle = RichTextHighlightingStyle.standard
-
-    /// Whether or not the current text is bold.
+    
     @Published
-    public internal(set) var isBold = false
-
-    /// Whether or not the current text is italic.
-    @Published
-    public internal(set) var isItalic = false
-
-    /// Whether or not the current text is striked through.
-    @Published
-    public internal(set) var isStrikethrough = false
-
-    /// Whether or not the current text is underlined.
-    @Published
-    public internal(set) var isUnderlined = false
+    public internal(set) var styles = [RichTextStyle: Bool]()
 }
 
 public extension RichTextContext {
