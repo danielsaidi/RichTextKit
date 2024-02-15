@@ -34,12 +34,7 @@ extension RichTextView: StandardFontSizeProvider {}
 
 public extension StandardFontSizeProvider {
 
-    /**
-     The standard font size to use for rich text.
-
-     You can change this value to affect all types that make
-     use of this value.
-     */
+    /// The standard font size to use for rich text.
     static var standardRichTextFontSize: CGFloat {
         get { StandardFontSizeProviderStorage.standardRichTextFontSize }
         set { StandardFontSizeProviderStorage.standardRichTextFontSize = newValue }

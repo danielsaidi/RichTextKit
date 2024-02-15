@@ -3,14 +3,15 @@
 //  SwiftUIKit
 //
 //  Created by Daniel Saidi on 2022-06-01.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
 
 extension RichTextFont {
+    
     /**
-     This struct is used within the various font pickers.
+     This struct is used by the various library font pickers.
      */
     struct PickerItem: View, ListPickerItem {
 

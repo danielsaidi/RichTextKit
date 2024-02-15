@@ -3,32 +3,20 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-05-22.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 #if canImport(AppKit) && !targetEnvironment(macCatalyst)
 import AppKit
 
-/**
- This typealias bridges platform-specific symbolic traits to
- simplify multi-platform support.
-
- The typealias also defines additional functionality as type
- extensions for the platform-specific types.
- */
+/// This typealias bridges platform-specific font traits.
 public typealias FontTraitsRepresentable = NSFontDescriptor.SymbolicTraits
 #endif
 
 #if canImport(UIKit)
 import UIKit
 
-/**
- This typealias bridges platform-specific symbolic traits to
- simplify multi-platform support.
-
- The typealias also defines additional functionality as type
- extensions for the platform-specific types.
- */
+/// This typealias bridges platform-specific font traits.
 public typealias FontTraitsRepresentable = UIFontDescriptor.SymbolicTraits
 #endif
 

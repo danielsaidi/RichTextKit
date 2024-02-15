@@ -10,7 +10,7 @@
 import AppKit
 
 /**
- This typealias bridges platform-specific fonts, to simplify
+ This typealias bridges platform-specific images to simplify
  multi-platform support.
  */
 public typealias ImageRepresentable = NSImage

@@ -3,18 +3,13 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-05-22.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 #if canImport(AppKit) && !targetEnvironment(macCatalyst)
 import AppKit
 
-/**
- This typealias bridges platform-specific font descriptors.
-
- The typealias also defines additional functionality as type
- extensions for the platform-specific types.
- */
+/// This typealias bridges platform-specific font descriptors.
 public typealias FontDescriptorRepresentable = NSFontDescriptor
 
 public extension FontDescriptorRepresentable {
@@ -34,12 +29,7 @@ public extension FontDescriptorRepresentable {
 #if canImport(UIKit)
 import UIKit
 
-/**
- This typealias bridges platform-specific font descriptors.
-
- The typealias also defines additional functionality as type
- extensions for the platform-specific types.
- */
+/// This typealias bridges platform-specific font descriptors.
 public typealias FontDescriptorRepresentable = UIFontDescriptor
 
 public extension FontDescriptorRepresentable {

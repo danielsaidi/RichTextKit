@@ -3,7 +3,7 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-06-02.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
@@ -54,7 +54,7 @@ public extension RichTextFont {
 
 public extension RichTextFont.SizePicker {
 
-    /// The default font sizes to list in a font size picker.
+    /// The standard font size picker sizes.
     static var standardFontSizes: [CGFloat] {
         [10, 12, 14, 18, 20, 22, 24, 28, 36, 48, 64, 72, 96, 144]
     }

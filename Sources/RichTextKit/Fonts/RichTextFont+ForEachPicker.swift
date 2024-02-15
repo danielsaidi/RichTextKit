@@ -3,7 +3,7 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-06-01.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
@@ -14,9 +14,8 @@ public extension RichTextFont {
      This view uses a plain `ForEach` to list a set of fonts,
      of which one can be selected.
 
-     Unlike ``RichTextFont/Picker`` the picker renders fonts
-     correctly on all platforms. However, unlike the regular
-     SwiftUI `Picker`, it must actively be added & presented.
+     Unlike ``RichTextFont/Picker`` this view displays fonts
+     on all platforms. It must be actively added & presented.
      */
     struct ForEachPicker: View {
 

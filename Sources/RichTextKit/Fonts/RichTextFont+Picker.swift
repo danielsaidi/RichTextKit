@@ -3,7 +3,7 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-06-01.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
@@ -11,16 +11,13 @@ import SwiftUI
 public extension RichTextFont {
 
     /**
-     This font picker can be used to pick a font from a list.
+     This font picker can be used to pick a font from a list,
+     using ``RichTextFont/PickerFont/all`` as default fonts.
 
-     This picker uses ``RichTextFont/PickerFont/all`` as the
-     default fonts.
-
-     This view renders a plain `Picker`, which means you can
-     use and configure it in all ways supported by SwiftUI.
-
-     Note that macOS will render every font correctly, while
-     iOS will only do it in a wheel/inline picker.
+     This view uses a plain `Picker`, which renders fonts on
+     macOS, but not on iOS. To render fonts correctly on all
+     platforms, you can use a ``RichTextFont/ListPicker`` or
+     a ``RichTextFont/ForEachPicker``.
      */
     struct Picker: View {
 
@@ -74,9 +71,8 @@ private extension RichTextFont.PickerFont {
 
     /**
      A system font has a font name that may be resolved to a
-     different font name when it's picked. We must therefore
-     do our best to pattern match the available fonts to the
-     currently selected font name.
+     different name when picked. We must thus try to pattern
+     match, using the currently selected font name.
      */
     func matches(_ selectedFontName: String) -> Bool {
         let system = Self.systemFontNamePrefix.lowercased()

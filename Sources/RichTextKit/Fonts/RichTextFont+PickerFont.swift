@@ -3,7 +3,7 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-06-01.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 import Foundation
@@ -19,24 +19,21 @@ import UIKit
 public extension RichTextFont {
 
     /**
-     This struct is used by the various font pickers.
+     This struct defines picker-specific fonts that are used
+     by the various font pickers.
 
      Instead of referring to actual fonts, the struct refers
-     to fonts by name, to simplify binding.
-
-     You can use ``all`` to get all fonts, and rearrange the
-     collection as needed.
+     to font names. You can use ``all`` to get all fonts and
+     rearrange the collection as needed.
 
      Some fonts are special when being listed in a picker or
-     displayed elsewhere. One such example is `San Francisco`,
-     which must have its name adjusted.
+     displayed elsewhere. For instance, `San Francisco` must
+     have its name adjusted to work properly.
 
      To change the display name of a system font, simply set
      ``RichTextFont/PickerFont/standardSystemFontDisplayName``
-     to another value.
-
-     To change how fonts are detected by the system, use the
-     ``systemFontNamePrefix`` to define a font name prefix.
+     to another value. To edit how fonts are detected by the
+     system, use the ``systemFontNamePrefix``.
      */
     struct PickerFont: Identifiable, Equatable {
 
@@ -50,9 +47,7 @@ public extension RichTextFont {
         public let fontName: String
         public private(set) var fontDisplayName: String
 
-        /**
-         Get the unique font id.
-         */
+        /// Get the unique font id.
         public var id: String {
             fontName.lowercased()
         }
