@@ -24,15 +24,11 @@ struct AboutCommand: Commands {
 
 extension Dictionary where Key == NSApplication.AboutPanelOptionKey, Value == Any {
 
-    /**
-     This dictionary has Oribi Writer-specific info that can
-     be used in an AppKit about panel.
-     */
     static var richTextKit: [NSApplication.AboutPanelOptionKey: Any] {
         [
             .applicationName: "RichTextKit",
             .credits: NSAttributedString(
-                string: "RichTextKit is developed by Daniel Saidi.",
+                string: "RichTextKit is an open-source tool for building rich text editor.",
                 attributes: [
                     .font: NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
                 ]

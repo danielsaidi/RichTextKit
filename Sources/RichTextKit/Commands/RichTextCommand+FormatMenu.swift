@@ -24,7 +24,16 @@ public extension RichTextCommand {
     struct FormatMenu: Commands {
 
         /// Create a rich text format command menu.
-        public init() {}
+        public init(
+            submenus: [SubMenu] = SubMenu.allCases,
+            additionalActions: [RichTextAction] = []
+        ) {
+            self.submenus = submenus
+            self.additionalActions = additionalActions
+        }
+        
+        private let submenus: [SubMenu]
+        private let additionalActions: [RichTextAction]
 
         @FocusedValue(\.richTextContext)
         private var context: RichTextContext?
@@ -32,22 +41,51 @@ public extension RichTextCommand {
         public var body: some Commands {
             CommandMenu(RTKL10n.menuFormat.text) {
                 Group {
-                    Menu(RTKL10n.menuFont.text) {
-                        ActionButtonGroup(styles: .all)
-                        Divider()
-                        ActionButtonGroup(fontSize: true)
-                    }
-                    Menu(RTKL10n.menuText.text) {
-                        ActionButtonGroup(alignments: .all)
-                    }
-                    Menu(RTKL10n.menuIndent.text) {
-                        ActionButtonGroup(indent: true)
-                    }
-                    Menu(RTKL10n.menuSuperscript.text) {
-                        ActionButtonGroup(superscript: true)
-                    }
+                    ForEach(submenus) { $0 }
                 }
                 .disabled(context == nil)
+                
+                if !additionalActions.isEmpty {
+                    Divider()
+                    ForEach(additionalActions) {
+                        ActionButton(action: $0)
+                    }
+                }
+            }
+        }
+    }
+}
+
+public extension RichTextCommand.FormatMenu {
+    
+    /// This enum defines various format sub-menus
+    enum SubMenu: String, CaseIterable, Identifiable, View {
+        case font, text, indent, superscript
+        
+        public var id: String { rawValue }
+        
+        typealias Group = RichTextCommand.ActionButtonGroup
+        
+        public var body: some View {
+            switch self {
+            case .font:
+                Menu(RTKL10n.menuFont.text) {
+                    Group(styles: .all)
+                    Divider()
+                    Group(fontSize: true)
+                }
+            case .text:
+                Menu(RTKL10n.menuText.text) {
+                    Group(alignments: .all)
+                }
+            case .indent:
+                Menu(RTKL10n.menuIndent.text) {
+                    Group(indent: true)
+                }
+            case .superscript:
+                Menu(RTKL10n.menuSuperscript.text) {
+                    Group(superscript: true)
+                }
             }
         }
     }

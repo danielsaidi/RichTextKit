@@ -20,6 +20,7 @@ By deprecating these functions, we can simplify the library in 1.0, and focus mo
 
 * `FontRepresentable` has new extensions.
 * `RichTextCommand.ActionButtonGroup` has many new initializers.
+* `RichTextCommand.FormatMenu` is more configurable than before.
 * `RichTextKeyboardToolbar` has a new config to always be shown.
 * `RichTextView` has a new theme that lets you define its style.
 * `RichTextViewComponent` has a new `hasRichTextStyle` function.
@@ -67,7 +68,7 @@ This release starts moving types and views that relate to other types into the t
 * `RichTextAlignment.Picker` has a new style parameter.
 * `RichTextCommand` is a new namespace for command-related views.
 * `RichTextColor.Picker` now shows a quick button to reset the color. 
-* `RichTextLabelValue` is a new protocol to harmonize label-compatible label values.
+* `RichTextLabelValue` is a new protocol that harmonizes label values.
 
 ### 💡 Adjustments
 
