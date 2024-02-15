@@ -30,8 +30,7 @@ public extension RichTextCommand {
      `isEnabled: false` to disable the menu, since you can't
      add `.disabled` to the command menu.
 
-     Setting actions to `nil` removes a corresponding option
-     from the menu.
+     Setting actions to `nil` removes the related menu items.
      */
     struct ShareMenu: Commands {
 
@@ -87,7 +86,8 @@ public extension RichTextCommand {
                     shareMenu
                     exportMenu
                     printButton
-                }.disabled(!isEnabled)
+                }
+                .disabled(!isEnabled)
             }
         }
     }

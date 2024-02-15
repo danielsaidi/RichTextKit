@@ -20,7 +20,7 @@ public extension RichTextCommand {
     struct ActionButtonGroup: View {
 
         /**
-         Create a command button group.
+         Create a custom action button group.
 
          - Parameters:
            - actions: The actions to trigger.
@@ -38,5 +38,61 @@ public extension RichTextCommand {
                 ActionButton(action: $0)
             }
         }
+    }
+}
+
+public extension RichTextCommand.ActionButtonGroup {
+    
+    /// Create a button group with alignments.
+    init(
+        alignments: [RichTextAlignment],
+        additionalActions: [RichTextAction] = []
+    ) {
+        self.actions = RichTextAlignment.allCases.map {
+            .setAlignment($0)
+        } + additionalActions
+    }
+    
+    /// Create a button group with font size steppers.
+    init(
+        fontSize: Bool,
+        additionalActions: [RichTextAction] = []
+    ) {
+        self.actions = [
+            .increaseFontSize(),
+            .decreaseFontSize()
+        ] + additionalActions
+    }
+    
+    /// Create a button group with indent steppers.
+    init(
+        indent: Bool,
+        additionalActions: [RichTextAction] = []
+    ) {
+        self.actions = [
+            .increaseIndent(),
+            .decreaseIndent()
+        ] + additionalActions
+    }
+    
+    /// Create a button group with style toggles.
+    init(
+        styles: [RichTextAlignment],
+        additionalActions: [RichTextAction] = []
+    ) {
+        self.actions = RichTextStyle.allCases.map {
+            .toggleStyle($0)
+        } + additionalActions
+    }
+    
+    /// Create a button group with superscript steppers.
+    init(
+        superscript: Bool,
+        additionalActions: [RichTextAction] = []
+    ) {
+        self.actions = [
+            .increaseSuperscript(),
+            .decreaseSuperscript()
+        ] + additionalActions
     }
 }

@@ -10,13 +10,7 @@ import SwiftUI
 
 public extension RichTextCommand {
 
-    /**
-     This group can add a list of text indent options to the
-     main menu, using an ``RichTextCommand/ActionButtonGroup``.
-     
-     This view requires that a ``RichTextContext`` is set as
-     a focused value, otherwise it will be disabled.
-     */
+    @available(*, deprecated, message: "Use RichTextCommand.ActionButtonGroup indent initializer instead.")
     struct IndentOptionsGroup: View {
 
         public var body: some View {

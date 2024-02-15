@@ -12,10 +12,13 @@ import SwiftUI
 public extension RichTextCommand {
 
     /**
-     This menu view can add a list of text format options to
-     the main menu.
+     This menu adds standard rich text format options to the
+     main menu, using `CommandGroup`.
      
-     This view requires that a ``RichTextContext`` is set as
+     You can apply this to a `WindowGroup` or `DocumentGroup`
+     to make it appear in the app's main menu.
+     
+     This menu requires that a ``RichTextContext`` is set as
      a focused value, otherwise it will be disabled.
      */
     struct FormatMenu: Commands {
@@ -30,18 +33,18 @@ public extension RichTextCommand {
             CommandMenu(RTKL10n.menuFormat.text) {
                 Group {
                     Menu(RTKL10n.menuFont.text) {
-                        StyleOptionsGroup()
+                        ActionButtonGroup(styles: .all)
                         Divider()
-                        FontSizeOptionsGroup()
+                        ActionButtonGroup(fontSize: true)
                     }
                     Menu(RTKL10n.menuText.text) {
-                        AlignmentOptionsGroup()
+                        ActionButtonGroup(alignments: .all)
                     }
                     Menu(RTKL10n.menuIndent.text) {
-                        IndentOptionsGroup()
+                        ActionButtonGroup(indent: true)
                     }
                     Menu(RTKL10n.menuSuperscript.text) {
-                        SuperscriptOptionsGroup()
+                        ActionButtonGroup(superscript: true)
                     }
                 }
                 .disabled(context == nil)

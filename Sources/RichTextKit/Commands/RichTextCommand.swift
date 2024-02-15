@@ -10,9 +10,9 @@ import Foundation
 
 /**
  This type is used as a namespace for command-specific types,
- like views that are to be added to the main menu bar.
+ like command menus and buttons.
 
  > Important: Most rich text commands require that there's a
- focused ``RichTextContext`` value in the view hierarchy.
+ ``RichTextContext`` set as a focused value.
  */
 public struct RichTextCommand {}
