@@ -20,8 +20,10 @@ By deprecating these functions, we can simplify the library in 1.0, and focus mo
 
 * `FontRepresentable` has new extensions.
 * `RichTextAction` has a new `label` property.
-* `RichTextCommand.ActionButtonGroup` has many new initializers.
-* `RichTextCommand.FormatMenu` is more configurable than before.
+* `RichTextCommand.ActionButtonGroup` has new inits.
+* `RichTextCommand.FormatMenu` is a lot more configurable.
+* `RichTextFormatToolbar` is now available on all platforms.
+* `RichTextFormatToolbar` now has a custom configuration type.
 * `RichTextKeyboardToolbar` has a new config to always be shown.
 * `RichTextView` has a new theme that lets you define its style.
 * `RichTextViewComponent` has a new `hasRichTextStyle` function.
@@ -55,6 +57,7 @@ By deprecating these functions, we can simplify the library in 1.0, and focus mo
 * `RichTextContext` replaces individual styles with a single `styles`.
 * `RichTextContext` `userActionPublisher` is renamed to `actionPublisher`.
 * `RichTextCoordinator` functions calling `handle(_:)` have been deprecated.
+* `RichTextFormatSheet` has been renamed to `RichTextFormatToolbar`.
 * `RTKL10n.bundle` has been deprecated since we can use the `.module` bundle.
 
 ### 💥 Breaking Changes

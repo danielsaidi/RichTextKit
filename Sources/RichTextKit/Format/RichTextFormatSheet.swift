@@ -3,34 +3,37 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-12-13.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
-#if iOS || os(visionOS)
 import SwiftUI
 
 /**
- This sheet view provides different text format options, and
- is meant to be used on iOS, where space is limited.
-
- The font picker will take up as much height as it can after
- the other rows have allocated their height.
+ This toolbar provides different text format options, and is
+ meant to be used on iOS, where space is limited.
+ 
+ Consider presenting this view from the bottom in a way that
+ doesn't cause the underlying text view to dim.
+ 
+ You can provide a custom configuration to adjust the format
+ options that are presented. When presented, the font picker
+ will take up the available vertical height.
  */
-public struct RichTextFormatSheet: View {
+public struct RichTextFormatToolbar: View {
 
     /**
      Create a rich text format sheet.
 
      - Parameters:
        - context: The context to apply changes to.
-       - colorPickers: The color pickers to use, by default `.foreground` and `.background`.
+       - config: The configuration to use, by default `.standard`.
      */
     public init(
         context: RichTextContext,
-        colorPickers: [RichTextColor] = [.foreground, .background]
+        config: Configuration = .standard
     ) {
         self._context = ObservedObject(wrappedValue: context)
-        self.colorPickers = colorPickers
+        self.config = config
     }
 
     @ObservedObject
@@ -45,16 +48,13 @@ public struct RichTextFormatSheet: View {
     /// The sheet top offset.
     public var topOffset = -35.0
 
-    /// The color pickers to use.
-    public var colorPickers: [RichTextColor]
+    /// The configuration to use.
+    private let config: Configuration
 
     public var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-                RichTextFont.ListPicker(selection: $context.fontName)
-                    .offset(y: topOffset)
-                    .padding(.bottom, topOffset)
-                Divider()
+                fontPicker
                 VStack(spacing: padding) {
                     VStack {
                         fontRow
@@ -62,7 +62,7 @@ public struct RichTextFormatSheet: View {
                         Divider()
                     }.padding(.horizontal, padding)
                     VStack(spacing: padding) {
-                        ForEach(colorPickers) {
+                        ForEach(config.colorPickers) {
                             RichTextColor.Picker(
                                 type: $0,
                                 value: context.binding(for: $0),
@@ -88,11 +88,53 @@ public struct RichTextFormatSheet: View {
             }
             .navigationTitle("")
             .navigationBarTitleDisplayMode(.inline)
-        }.navigationViewStyle(.stack)
+        }
+        .navigationViewStyle(.stack)
     }
 }
 
-private extension RichTextFormatSheet {
+public extension RichTextFormatToolbar {
+    
+    /// This struct can be used to configure a format sheet.
+    struct Configuration {
+        
+        public init(
+            colorPickers: [RichTextColor] = [.foreground],
+            fontPicker: Bool = true
+        ) {
+            self.colorPickers = colorPickers
+            self.fontPicker = fontPicker
+        }
+        
+        public var colorPickers: [RichTextColor]
+        public var fontPicker: Bool
+    }
+}
+
+public extension RichTextFormatToolbar.Configuration {
+    
+    /// The standard rich text format toolbar configuration.
+    static var standard = Self.init()
+}
+
+private extension RichTextFormatToolbar {
+    
+    var background: some View {
+        Color.clear
+            .overlay(Color.primary.opacity(0.1))
+            .shadow(color: .black.opacity(0.1), radius: 5)
+            .edgesIgnoringSafeArea(.all)
+    }
+    
+    @ViewBuilder
+    var fontPicker: some View {
+        if config.fontPicker {
+            RichTextFont.ListPicker(selection: $context.fontName)
+                .offset(y: topOffset)
+                .padding(.bottom, topOffset)
+            Divider()
+        }
+    }
 
     var fontRow: some View {
         HStack {
@@ -101,6 +143,15 @@ private extension RichTextFormatSheet {
             RichTextFont.SizePickerStack(context: context)
                 .buttonStyle(.bordered)
         }
+    }
+    
+    @ViewBuilder
+    var indentButtons: some View {
+        RichTextAction.ButtonGroup(
+            context: context,
+            actions: [.decreaseIndent(), .increaseIndent()],
+            greedy: false
+        )
     }
 
     var paragraphRow: some View {
@@ -111,26 +162,7 @@ private extension RichTextFormatSheet {
             indentButtons
         }
     }
-}
-
-private extension RichTextFormatSheet {
-
-    var background: some View {
-        Color.clear
-            .overlay(Color.primary.opacity(0.1))
-            .shadow(color: .black.opacity(0.1), radius: 5)
-            .edgesIgnoringSafeArea(.all)
-    }
-
-    @ViewBuilder
-    var indentButtons: some View {
-        RichTextAction.ButtonGroup(
-            context: context,
-            actions: [.decreaseIndent(), .increaseIndent()],
-            greedy: false
-        )
-    }
-
+    
     @ViewBuilder
     var styleButtons: some View {
         RichTextStyle.ToggleGroup(
@@ -151,7 +183,7 @@ private extension View {
     }
 }
 
-struct RichTextFormatSheet_Previews: PreviewProvider {
+struct RichTextFormatToolbar_Previews: PreviewProvider {
 
     struct Preview: View {
 
@@ -159,7 +191,13 @@ struct RichTextFormatSheet_Previews: PreviewProvider {
         private var context = RichTextContext()
 
         var body: some View {
-            RichTextFormatSheet(context: context)
+            RichTextFormatToolbar(
+                context: context,
+                config: .init(
+                    colorPickers: [.foreground],
+                    fontPicker: false
+                )
+            )
         }
     }
 
@@ -167,4 +205,3 @@ struct RichTextFormatSheet_Previews: PreviewProvider {
         Preview()
     }
 }
-#endif
