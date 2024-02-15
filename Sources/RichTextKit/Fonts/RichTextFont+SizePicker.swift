@@ -47,6 +47,7 @@ public extension RichTextFont {
                         .tag($0)
                 }
             }
+            .labelsHidden()
             .accessibilityLabel(RTKL10n.fontSize.text)
         }
     }

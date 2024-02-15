@@ -49,7 +49,8 @@ public extension RichTextFont {
             HStack(spacing: 3) {
                 picker
                 stepper
-            }.overlay(macShortcutOverlay)
+            }
+            .overlay(macShortcutOverlay)
             #endif
         }
     }

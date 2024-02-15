@@ -40,7 +40,7 @@ public extension RichTextAlignment {
 
         public var body: some View {
             SwiftUI.Picker("", selection: $selection) {
-                ForEach(RichTextAlignment.allCases) { value in
+                ForEach(values) { value in
                     value.label
                         .labelStyle(.iconOnly)
                 }

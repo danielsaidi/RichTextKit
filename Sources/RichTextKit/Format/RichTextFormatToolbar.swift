@@ -1,5 +1,5 @@
 //
-//  RichTextFormatSheet.swift
+//  RichTextFormatToolbar.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-12-13.
@@ -44,6 +44,9 @@ public struct RichTextFormatToolbar: View {
     
     @Environment(\.richTextFormatToolbarStyle)
     private var style
+    
+    @Environment(\.horizontalSizeClass)
+    private var horizontalSizeClass
 
     /// The configuration to use.
     private let config: Configuration
@@ -56,27 +59,8 @@ public struct RichTextFormatToolbar: View {
     }
 }
 
-public extension RichTextFormatToolbar {
-    
-    /// Convert the toolbar to a sheet, with a close button.
-    func asSheet(
-        dismiss: @escaping () -> Void
-    ) -> some View {
-        NavigationView {
-            self
-                .padding(.top, -35)
-                .withAutomaticToolbarRole()
-                .toolbar {
-                    ToolbarItem(placement: .confirmationAction) {
-                        Button(RTKL10n.done.text, action: dismiss)
-                    }
-                }
-                .navigationTitle("")
-                .navigationBarTitleDisplayMode(.inline)
-        }
-        .navigationViewStyle(.stack)
-    }
-}
+
+// MARK: - Configuration
 
 public extension RichTextFormatToolbar {
     
@@ -84,15 +68,34 @@ public extension RichTextFormatToolbar {
     struct Configuration {
         
         public init(
+            alignments: [RichTextAlignment] = .all,
             colorPickers: [RichTextColor] = [.foreground],
-            fontPicker: Bool = true
+            fontPicker: Bool = true,
+            fontSizePicker: Bool = true,
+            indentButtons: Bool = true,
+            styles: [RichTextStyle] = .all,
+            superscriptButtons: Bool = true
         ) {
+            self.alignments = alignments
             self.colorPickers = colorPickers
             self.fontPicker = fontPicker
+            self.fontSizePicker = fontSizePicker
+            self.indentButtons = indentButtons
+            self.styles = styles
+            #if macOS
+            self.superscriptButtons = superscriptButtons
+            #else
+            self.superscriptButtons = false
+            #endif
         }
         
+        public var alignments: [RichTextAlignment]
         public var colorPickers: [RichTextColor]
         public var fontPicker: Bool
+        public var fontSizePicker: Bool
+        public var indentButtons: Bool
+        public var styles: [RichTextStyle]
+        public var superscriptButtons: Bool
     }
 }
 
@@ -102,19 +105,29 @@ public extension RichTextFormatToolbar.Configuration {
     static var standard = Self.init()
 }
 
+
+// MARK: - Style
+
 public extension RichTextFormatToolbar {
     
     /// This struct can be used to style a format sheet.
+    ///
+    /// Don't specify a font picker height if the toolbar is
+    /// presented in a sheet. In those cases, use detents to
+    /// limit its height.
     struct Style {
         
         public init(
+            fontPickerHeight: CGFloat? = nil,
             padding: Double = 10,
             spacing: Double = 10
         ) {
+            self.fontPickerHeight = fontPickerHeight
             self.padding = padding
             self.spacing = spacing
         }
         
+        public var fontPickerHeight: CGFloat?
         public var padding: Double
         public var spacing: Double
     }
@@ -145,12 +158,42 @@ public extension EnvironmentValues {
     }
 }
 
+
+#if iOS
+// MARK: - Sheet
+
+public extension RichTextFormatToolbar {
+    
+    /// Convert the toolbar to a sheet, with a close button.
+    func asSheet(
+        dismiss: @escaping () -> Void
+    ) -> some View {
+        NavigationView {
+            self
+                .padding(.top, -35)
+                .toolbar {
+                    ToolbarItem(placement: .confirmationAction) {
+                        Button(RTKL10n.done.text, action: dismiss)
+                    }
+                }
+                .navigationTitle("")
+                .navigationBarTitleDisplayMode(.inline)
+        }
+        .navigationViewStyle(.stack)
+    }
+}
+#endif
+
+
+// MARK: - Views
+
 private extension RichTextFormatToolbar {
     
     @ViewBuilder
     var fontPicker: some View {
         if config.fontPicker {
             RichTextFont.ListPicker(selection: $context.fontName)
+                .frame(height: style.fontPickerHeight)
             Divider()
         }
     }
@@ -164,9 +207,28 @@ private extension RichTextFormatToolbar {
         .environment(\.sizeCategory, .medium)
         .background(background)
     }
+    
+    var useSingleLine: Bool {
+        #if macOS
+        true
+        #else
+        horizontalSizeClass == .regular
+        #endif
+    }
 }
 
 private extension RichTextFormatToolbar {
+    
+    @ViewBuilder
+    var alignmentPicker: some View {
+        if !config.alignments.isEmpty {
+            RichTextAlignment.Picker(
+                selection: $context.textAlignment,
+                values: config.alignments
+            )
+            .pickerStyle(.segmented)
+        }
+    }
     
     var background: some View {
         Color.clear
@@ -175,12 +237,35 @@ private extension RichTextFormatToolbar {
             .edgesIgnoringSafeArea(.all)
     }
     
+    @ViewBuilder
     var controls: some View {
-        VStack(spacing: style.spacing) {
-            fontRow
-            paragraphRow
+        if useSingleLine {
+            HStack {
+                controlsContent
+            }
+            .padding(.horizontal, style.padding)
+        } else {
+            VStack(spacing: style.spacing) {
+                controlsContent
+            }
+            .padding(.horizontal, style.padding)
         }
-        .padding(.horizontal, style.padding)
+    }
+    
+    @ViewBuilder
+    var controlsContent: some View {
+        HStack {
+            styleButtons
+            fontSizePicker
+            if horizontalSizeClass == .regular {
+                Spacer()
+            }
+        }
+        HStack {
+            alignmentPicker
+            superscriptButtons
+            indentButtons
+        }
     }
     
     @ViewBuilder
@@ -200,10 +285,9 @@ private extension RichTextFormatToolbar {
         }
     }
     
-    var fontRow: some View {
-        HStack {
-            styleButtons
-            Spacer()
+    @ViewBuilder
+    var fontSizePicker: some View {
+        if config.fontSizePicker {
             RichTextFont.SizePickerStack(context: context)
                 .buttonStyle(.bordered)
         }
@@ -211,38 +295,36 @@ private extension RichTextFormatToolbar {
     
     @ViewBuilder
     var indentButtons: some View {
-        RichTextAction.ButtonGroup(
-            context: context,
-            actions: [.decreaseIndent(), .increaseIndent()],
-            greedy: false
-        )
-    }
-
-    var paragraphRow: some View {
-        HStack {
-            RichTextAlignment.Picker(selection: $context.textAlignment)
-                .pickerStyle(.segmented)
-            Spacer()
-            indentButtons
+        if config.indentButtons {
+            RichTextAction.ButtonGroup(
+                context: context,
+                actions: [.decreaseIndent(), .increaseIndent()],
+                greedy: false
+            )
         }
     }
     
     @ViewBuilder
     var styleButtons: some View {
-        RichTextStyle.ToggleGroup(
-            context: context
-        )
+        if !config.styles.isEmpty {
+            RichTextStyle.ToggleGroup(
+                context: context,
+                styles: config.styles
+            )
+            if !useSingleLine {
+                Spacer()
+            }
+        }
     }
-}
-
-private extension View {
-
+    
     @ViewBuilder
-    func withAutomaticToolbarRole() -> some View {
-        if #available(iOS 16.0, *) {
-            self.toolbarRole(.automatic)
-        } else {
-            self
+    var superscriptButtons: some View {
+        if config.superscriptButtons {
+            RichTextAction.ButtonGroup(
+                context: context,
+                actions: [.decreaseSuperscript(), .increaseSuperscript()],
+                greedy: false
+            )
         }
     }
 }
@@ -256,25 +338,43 @@ struct RichTextFormatToolbar_Previews: PreviewProvider {
 
         @State
         private var isSheetPresented = false
-
+        
+        var toolbar: RichTextFormatToolbar {
+            .init(
+                context: context,
+                config: .init(
+                    alignments: .all,
+                    // colorPickers: [.foreground],
+                    fontPicker: false,
+                    fontSizePicker: true,
+                    indentButtons: true,
+                    styles: .all
+                )
+            )
+        }
+        
         var body: some View {
-            Button("Toggle sheet") {
-                isSheetPresented.toggle()
+            VStack(spacing: 0) {
+                Color.red
+                Button("Toggle sheet") {
+                    isSheetPresented.toggle()
+                }
+                toolbar
             }
             .sheet(isPresented: $isSheetPresented) {
-                RichTextFormatToolbar(
-                    context: context,
-                    config: .init(
-                        colorPickers: [.foreground],
-                        fontPicker: true
-                    )
-                )
-                .asSheet { isSheetPresented = false }
-                .richTextFormatToolbarStyle(.init(
-                    padding: 10,
-                    spacing: 10
-                ))
+                toolbar
+                    #if iOS
+                    .asSheet { isSheetPresented = false }
+                    #endif
+                    .richTextFormatToolbarStyle(.init(
+                        fontPickerHeight: nil
+                    ))
             }
+            .richTextFormatToolbarStyle(.init(
+                fontPickerHeight: 100,
+                padding: 10,
+                spacing: 10
+            ))
         }
     }
 

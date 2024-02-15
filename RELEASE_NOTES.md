@@ -47,6 +47,7 @@ By deprecating these functions, we can simplify the library in 1.0, and focus mo
 * The library once again builds on visionOS.
 
 * `RichTextAlignment` now behaves better.
+* `RichTextAlignment.Picker` now uses provided values.
 * `RichTextCoordinator` now handles indentation changes.
 
 ### 🗑️ Deprecations 

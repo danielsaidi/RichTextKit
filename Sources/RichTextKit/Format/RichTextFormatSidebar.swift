@@ -45,7 +45,7 @@ public struct RichTextFormatSidebar: View {
 
     public var body: some View {
         VStack(alignment: .leading, spacing: spacing) {
-            SidebarSection(title: RTKL10n.font.text) {
+            SidebarSection {
                 RichTextFont.Picker(selection: $context.fontName, fontSize: 12)
                 HStack {
                     RichTextStyle.ToggleGroup(context: context)
@@ -53,7 +53,7 @@ public struct RichTextFormatSidebar: View {
                 }
             }
 
-            SidebarSection(title: nil) {
+            SidebarSection {
                 RichTextAlignment.Picker(selection: $context.textAlignment)
                     .pickerStyle(.segmented)
                 HStack {
@@ -73,7 +73,7 @@ public struct RichTextFormatSidebar: View {
                 }
             }
 
-            SidebarSection(title: nil) {
+            SidebarSection {
                 VStack(spacing: 4) {
                     ForEach(colorPickers) {
                         RichTextColor.Picker(
@@ -107,16 +107,11 @@ private extension RichTextFormatSidebar {
 
 private struct SidebarSection<Content: View>: View {
 
-    let title: String?
-
     @ViewBuilder
     let content: () -> Content
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            if let title {
-                Text(title).font(.headline)
-            }
             content()
             Divider()
         }
@@ -137,7 +132,7 @@ struct RichTextFormatSidebar_Previews: PreviewProvider {
 
     static var previews: some View {
         Preview()
-            .frame(width: 250)
+            .frame(width: 350)
     }
 }
 #endif
