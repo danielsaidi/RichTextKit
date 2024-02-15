@@ -34,10 +34,10 @@ public extension RichTextContext {
         to val: Bool
     ) {
         switch style {
-        case .bold: userActionPublisher.send(.setStyle(.bold, val)); isBold = val
-        case .italic: userActionPublisher.send(.setStyle(.italic, val)); isItalic = val
-        case .underlined: userActionPublisher.send(.setStyle(.underlined, val)); isUnderlined = val
-        case .strikethrough: userActionPublisher.send(.setStyle(.strikethrough, val)); isStrikethrough = val
+        case .bold: actionPublisher.send(.setStyle(.bold, val)); isBold = val
+        case .italic: actionPublisher.send(.setStyle(.italic, val)); isItalic = val
+        case .underlined: actionPublisher.send(.setStyle(.underlined, val)); isUnderlined = val
+        case .strikethrough: actionPublisher.send(.setStyle(.strikethrough, val)); isStrikethrough = val
         }
     }
 

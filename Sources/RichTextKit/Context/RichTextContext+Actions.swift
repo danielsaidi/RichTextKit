@@ -3,7 +3,7 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-12-08.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
@@ -13,7 +13,7 @@ public extension RichTextContext {
     /// Handle a certain rich text action.
     func handle(_ action: RichTextAction) {
         switch action {
-        default: userActionPublisher.send(action)
+        default: actionPublisher.send(action)
         }
     }
 

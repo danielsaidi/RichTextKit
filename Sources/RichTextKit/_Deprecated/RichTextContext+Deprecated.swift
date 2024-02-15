@@ -1,6 +1,10 @@
 import SwiftUI
+import Combine
 
 public extension RichTextContext {
+    
+    @available(*, deprecated, renamed: "actionPublisher")
+    var userActionPublisher: PassthroughSubject<RichTextAction, Never> { actionPublisher }
 
     @available(*, deprecated, message: "Use handle(_:) instead")
     func decrementFontSize(points: UInt = 1) {
@@ -39,7 +43,7 @@ public extension RichTextContext {
         moveCursorToPastedContent: Bool = false
     ) {
         let index = index ?? selectedRange.location
-        userActionPublisher.send(
+        actionPublisher.send(
             .pasteImage(
                 RichTextInsertion(
                     content: image,
@@ -57,7 +61,7 @@ public extension RichTextContext {
         moveCursorToPastedContent: Bool = false
     ) {
         let index = index ?? selectedRange.location
-        userActionPublisher.send(
+        actionPublisher.send(
             .pasteImages(
                 RichTextInsertion(
                     content: images,
@@ -75,7 +79,7 @@ public extension RichTextContext {
         moveCursorToPastedContent: Bool = false
     ) {
         let index = index ?? selectedRange.location
-        userActionPublisher.send(
+        actionPublisher.send(
             .pasteText(
                 RichTextInsertion(
                     content: text,

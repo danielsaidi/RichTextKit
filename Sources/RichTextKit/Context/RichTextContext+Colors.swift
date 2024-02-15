@@ -14,7 +14,7 @@ public extension RichTextContext {
     func binding(for color: RichTextColor) -> Binding<Color> {
         Binding(
             get: { Color(self.color(for: color) ?? .clear) },
-            set: { self.setColor(color, to: ColorRepresentable($0)) }
+            set: { self.setColor(color, to: .init($0)) }
         )
     }
 
@@ -29,7 +29,7 @@ public extension RichTextContext {
         to val: ColorRepresentable
     ) {
         guard self.color(for: color) != val else { return }
-        userActionPublisher.send(.setColor(color, val))
+        actionPublisher.send(.setColor(color, val))
         setColorInternal(color, to: val)
     }
 }

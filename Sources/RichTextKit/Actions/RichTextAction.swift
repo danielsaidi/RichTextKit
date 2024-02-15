@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Combine
 
 /**
  This enum defines rich text actions that can be executed on
@@ -76,6 +77,8 @@ public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
 }
 
 public extension RichTextAction {
+    
+    typealias Publisher = PassthroughSubject<Self, Never>
 
     /// The action's unique identifier.
     var id: String { title }

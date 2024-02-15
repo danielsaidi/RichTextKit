@@ -17,7 +17,7 @@ extension RichTextCoordinator {
     /// by various buttons via the context, but also to some
     /// context value that are changed through view bindings.
     func subscribeToUserActions() {
-        context.userActionPublisher.sink { [weak self] action in
+        context.actionPublisher.sink { [weak self] action in
             self?.handle(action)
         }
         .store(in: &cancellables)

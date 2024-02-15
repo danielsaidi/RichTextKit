@@ -51,8 +51,9 @@ By deprecating these functions, we can simplify the library in 1.0, and focus mo
 * `RichTextCommand.StyleOptionsGroup` has been deprecated.
 * `RichTextCommand.SuperscriptOptionsGroup` has been deprecated.
 * `RichTextContext` replaces individual colors with a single `colors`.
-* `RichTextCoordinator` functions that call `handle(_:)` have been deprecated.
-* `RTKL10n.bundle` has been deprecated since we can just use `.module` from now.
+* `RichTextContext` `userActionPublisher` is renamed to `actionPublisher`.
+* `RichTextCoordinator` functions calling `handle(_:)` have been deprecated.
+* `RTKL10n.bundle` has been deprecated since we can use the `.module` bundle.
 
 ### 💥 Breaking Changes
 

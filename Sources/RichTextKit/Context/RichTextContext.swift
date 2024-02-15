@@ -64,15 +64,18 @@ public class RichTextContext: ObservableObject {
     /// The current font size.
     @Published
     public var fontSize = CGFloat.standardRichTextFontSize
+    
+    
+    // MARK: - Properties
+    
+    /// This publisher can emit actions to the coordinator.
+    public let actionPublisher = RichTextAction.Publisher()
 
     /// The currently highlighted range, if any.
     public var highlightedRange: NSRange?
-
-    /// This publisher can emit actions to the coordinator.
-    public let userActionPublisher: PassthroughSubject<RichTextAction, Never> = .init()
     
     
-    // MARK: - Soft Deprecations (to avoid library warnings)
+    // MARK: - Deprecations (to avoid library warnings)
     
     @Published
     @available(*, deprecated, renamed: "colors")
@@ -158,7 +161,7 @@ public extension RichTextContext {
 
     /// Set ``highlightedRange`` to a new, optional range.
     func highlightRange(_ range: NSRange?) {
-        userActionPublisher.send(.setHighlightedRange(range))
+        actionPublisher.send(.setHighlightedRange(range))
         highlightedRange = range
     }
 
@@ -181,7 +184,7 @@ public extension RichTextContext {
     /// Set a new range and start editing.
     func selectRange(_ range: NSRange) {
         isEditingText = true
-        userActionPublisher.send(.selectRange(range))
+        actionPublisher.send(.selectRange(range))
     }
 
     /// Set the attributed string to a new plain text.
@@ -192,7 +195,7 @@ public extension RichTextContext {
     /// Set the attributed string to a new rich text.
     func setAttributedString(to string: NSAttributedString) {
         let mutable = NSMutableAttributedString(attributedString: string)
-        userActionPublisher.send(.setAttributedString(mutable))
+        actionPublisher.send(.setAttributedString(mutable))
     }
 
     /// Set ``isEditingText`` to `false`.
