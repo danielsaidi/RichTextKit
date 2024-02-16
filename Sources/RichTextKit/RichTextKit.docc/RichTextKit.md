@@ -119,8 +119,8 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 
 ### Format
 
-- ``RichTextFormatSheet``
 - ``RichTextFormatSidebar``
+- ``RichTextFormatToolbar``
 
 ### Images
 
@@ -134,6 +134,7 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 ### Keyboard
 
 - ``RichTextKeyboardToolbar``
+- ``RichTextKeyboardToolbarConfiguration``
 - ``RichTextKeyboardToolbarMenu``
 - ``RichTextKeyboardToolbarStyle``
 

@@ -3,7 +3,7 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-12-13.
-//  Copyright © 2022 Dnaiel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Dnaiel Saidi. All rights reserved.
 //
 
 #if iOS || os(visionOS)

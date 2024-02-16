@@ -3,7 +3,7 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-05-27.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 import Foundation
@@ -32,8 +32,7 @@ extension NSMutableAttributedString: RichTextWriter {
 public extension RichTextWriter {
 
     /**
-     Get the writable rich text provided by the implementing
-     type.
+     Get the writable rich text from the implementing type.
 
      This is an alias for ``mutableAttributedString`` and is
      used to get a property that uses the rich text naming.

@@ -3,7 +3,7 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-06-05.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 #if iOS || os(tvOS) || os(visionOS)
@@ -27,29 +27,24 @@ import UniformTypeIdentifiers
  overrides `image` on iOS and `attachmentCell` on macOS.
 
  This is probably the wrong way to solve this problem, but I
- haven't been able to find another way. If we set the `image`
- property of a plain `NSTextAttachment`, it works to add and
- load the attachment on the same platform, but trying to use
- the attachment on other platforms will fail.
+ haven't been able to find another way. If we set `image` on
+ a plain `NSTextAttachment`, it can add and load attachments
+ on the same platform, but fails on other platforms.
 
  Another problem with `NSTextAttachment`, is that it results
  in large files, since it by default doesn't specify uniform
  type identifier or compression, which makes it handle image
- attachments as (potentially) huge png data. This attachment
- allows you to easily use jpg with a custom compression rate
- instead, which results in much smaller files.
+ attachments as huge png data. This attachment allows you to
+ easily use jpg with a custom compression rate instead.
 
  # WARNING
 
  If we use ``RichTextDataFormat/archivedData`` to persist an
- image attachment in a string, we'll use an `NSKeyedArchiver`
- to archive the data and an `NSKeyedUnarchiver` to unarchive
- it. This requires that the attachment types that are stored
- into the archive data exist when the data is unarchived. If
- any type is missing, this unarchiving will fail. This means
- that if you later decide to use another library to handle a
- file that contains an ``RichTextImageAttachment``, you must
- setup a custom class in the unarchiver, for instance:
+ image attachment, we'll use `NSKeyedArchiver` to archive it
+ and `NSKeyedUnarchiver` to unarchive it. This requires that
+ the types within the archive data still exist when the data
+ is unarchived. If any type is missing, you must register an
+ unarchiver class replacement like this:
 
  ```
  let unarchiver = NSKeyedUnarchiver()
@@ -57,7 +52,7 @@ import UniformTypeIdentifiers
  ```
 
  You'll see the name of the missing class in the unarchiving
- error, so just pop that name in as the class name.
+ error, so just use that name as the class name.
  */
 open class RichTextImageAttachment: NSTextAttachment {
 

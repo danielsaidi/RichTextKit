@@ -6,6 +6,7 @@
 //  Copyright © 2024 Daniel Saidi. All rights reserved.
 //
 
+#if iOS || macOS || os(visionOS)
 import SwiftUI
 
 public extension RichTextFormatToolbar {
@@ -53,3 +54,4 @@ public extension RichTextFormatToolbar.Configuration {
     /// The standard rich text format toolbar configuration.
     static var standard = Self.init()
 }
+#endif

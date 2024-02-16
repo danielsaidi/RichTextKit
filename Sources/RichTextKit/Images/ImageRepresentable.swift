@@ -3,16 +3,13 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-05-28.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 #if canImport(AppKit) && !targetEnvironment(macCatalyst)
 import AppKit
 
-/**
- This typealias bridges platform-specific images to simplify
- multi-platform support.
- */
+/// This typealias bridges platform-specific image types.
 public typealias ImageRepresentable = NSImage
 
 public extension ImageRepresentable {
@@ -34,9 +31,6 @@ public extension ImageRepresentable {
 #if canImport(UIKit)
 import UIKit
 
-/**
- This typealias bridges platform-specific fonts, to simplify
- multi-platform support.
- */
+/// This typealias bridges platform-specific image types.
 public typealias ImageRepresentable = UIImage
 #endif

@@ -6,6 +6,7 @@
 //  Copyright © 2024 Daniel Saidi. All rights reserved.
 //
 
+#if iOS || macOS || os(visionOS)
 import SwiftUI
 
 public extension RichTextFormatToolbar {
@@ -56,3 +57,4 @@ public extension EnvironmentValues {
         set { self [RichTextFormatToolbar.StyleKey.self] = newValue }
     }
 }
+#endif

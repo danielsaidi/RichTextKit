@@ -3,7 +3,7 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2023-06-01.
-//  Copyright © 2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2023-2024 Daniel Saidi. All rights reserved.
 //
 
 #if iOS || macOS || os(visionOS)
@@ -19,8 +19,7 @@ public extension RichTextStyle {
      to a ``RichTextContext`` instead of individual values.
 
      > Important: Since the `ControlGroup` doesn't highlight
-     active buttons in iOS, the view will use a `ToggleStack`
-     on iOS.
+     buttons in iOS, we use a `ToggleStack` for iOS.
      */
     struct ToggleGroup: View {
 
@@ -59,7 +58,7 @@ public extension RichTextStyle {
         private var context: RichTextContext
 
         public var body: some View {
-            #if os(macOS)
+            #if macOS
             ControlGroup {
                 ForEach(styles) {
                     RichTextStyle.Toggle(
@@ -98,6 +97,7 @@ struct RichTextStyle_ToggleGroup_Previews: PreviewProvider {
             VStack {
                 group(greedy: true)
                 group(greedy: false)
+                    .tint(.red)
             }
             .padding()
         }

@@ -3,7 +3,7 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-06-02.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 import Foundation
@@ -14,8 +14,7 @@ import Foundation
 
  The configuration is needed, since ``RichTextDataFormat/rtf``
  and ``RichTextDataFormat/plainText`` doesn't support images
- and a text view does not know the format of the string that
- it contains.
+ and a text view doesn't know about the data format.
  */
 public enum RichTextImageInsertConfiguration: Equatable {
 

@@ -3,7 +3,7 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-05-21.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
@@ -40,9 +40,7 @@ public extension RichTextStyle {
 
     var id: String { rawValue }
 
-    /**
-     The standard icon to use for the trait.
-     */
+    /// The standard icon to use for the trait.
     var icon: Image {
         switch self {
         case .bold: .richTextStyleBold

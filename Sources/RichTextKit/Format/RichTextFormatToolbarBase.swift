@@ -6,6 +6,7 @@
 //  Copyright © 2024 Daniel Saidi. All rights reserved.
 //
 
+#if iOS || macOS || os(visionOS)
 import SwiftUI
 
 /// This internal protocol is used to share code between the
@@ -167,3 +168,4 @@ extension RichTextFormatToolbarBase {
         }
     }
 }
+#endif

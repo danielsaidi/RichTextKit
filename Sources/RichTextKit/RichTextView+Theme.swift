@@ -19,9 +19,9 @@ public extension RichTextView {
          Create a custom configuration.
 
          - Parameters:
-         - font: default `.systemFont` of point size `16` (this differs on iOS and macOS).
-         - fontColor: default `.textColor`.
-         - backgroundColor: Color of whole textView default `.clear`.
+           - font: default `.systemFont` of point size `16` (this differs on iOS and macOS).
+           - fontColor: default `.textColor`.
+           - backgroundColor: Color of whole textView default `.clear`.
          */
         public init(
             font: FontRepresentable = .systemFont(ofSize: 16),

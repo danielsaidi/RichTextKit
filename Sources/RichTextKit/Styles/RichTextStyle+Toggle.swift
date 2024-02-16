@@ -3,7 +3,7 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-12-08.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
@@ -16,9 +16,6 @@ public extension RichTextStyle {
      This view renders a plain `Toggle`, which means you can
      use and configure with plain SwiftUI. The one exception
      is the tint color, which is set with a style.
-
-     > Note: The view uses a ``RichTextStyleButton`` if it's
-     used on iOS 14, macOS 11, tvOS 14 and watchOS 8.
      */
     struct Toggle: View {
 

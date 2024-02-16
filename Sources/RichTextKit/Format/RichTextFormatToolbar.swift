@@ -6,6 +6,7 @@
 //  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
+#if iOS || macOS || os(visionOS)
 import SwiftUI
 
 /**
@@ -208,3 +209,4 @@ struct RichTextFormatToolbar_Previews: PreviewProvider {
         Preview()
     }
 }
+#endif

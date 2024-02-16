@@ -26,6 +26,7 @@ By deprecating these functions, we can simplify the library in 1.0, and focus mo
 * `RichTextFormatToolbar` has new configuration and style types.
 * `RichTextFormatSidebar` has new configuration and style types.
 * `RichTextKeyboardToolbar` has a new config to always be shown.
+* `RichTextStyle.Button` now supports using custom button styles.
 * `RichTextView` has a new theme that lets you define its style.
 * `RichTextViewComponent` has a new `hasRichTextStyle` function.
 * `RichTextViewComponent` has a new `toggleRichTextStyle` function.

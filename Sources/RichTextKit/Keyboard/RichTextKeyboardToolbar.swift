@@ -3,10 +3,10 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-12-14.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
-#if iOS || os(visionOS)
+#if iOS || macOS || os(visionOS)
 import SwiftUI
 
 /**
@@ -47,7 +47,7 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
        - leadingActions: The leading actions, by default `.undo`, `.redo` and `.copy`.
        - trailingActions: The trailing actions, by default `.dismissKeyboard`.
        - leadingButtons: The leading buttons to place after the leading actions.
-       - trailingButtons: The trailing buttons to place after the trailing actions.
+       - trailingButtons: The trailing buttons to place before the trailing actions.
        - richTextFormatSheet: The rich text format sheet to use, given the default ``RichTextFormatToolbar``.
      */
     public init(
@@ -124,10 +124,7 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
 
     public var body: some View {
         VStack(spacing: 0) {
-            HStack(spacing: style.itemSpacing) {
-                content
-            }
-            .padding(10)
+            content
         }
         .environment(\.sizeCategory, .medium)
         .frame(height: style.toolbarHeight)
@@ -149,21 +146,19 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
     }
 }
 
-extension UIApplication {
-    func endEditing() {
-        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-    }
-}
-
 private extension View {
 
     @ViewBuilder
     func prefersMediumSize() -> some View {
+        #if macOS
+        self
+        #else
         if #available(iOS 16, *) {
             self.presentationDetents([.medium])
         } else {
             self
         }
+        #endif
     }
 }
 
@@ -176,9 +171,12 @@ private extension RichTextKeyboardToolbar {
     
     @ViewBuilder
     var content: some View {
-        leadingViews
-        Spacer()
-        trailingViews
+        HStack(spacing: style.itemSpacing) {
+            leadingViews
+            Spacer()
+            trailingViews
+        }
+        .padding(10)
     }
 
     var divider: some View {

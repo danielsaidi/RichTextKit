@@ -1,3 +1,4 @@
+#if iOS || macOS || os(visionOS)
 import SwiftUI
 
 @available(*, deprecated, renamed: "RichTextFormatToolbar")
@@ -30,3 +31,4 @@ public extension RichTextFormatSidebar {
         )
     }
 }
+#endif

@@ -3,7 +3,7 @@
 //  SwiftUIKit
 //
 //  Created by Daniel Saidi on 2022-03-17.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
@@ -20,7 +20,8 @@ struct ForEachPicker<Item: Identifiable, ItemView: View>: View {
         selection: Binding<Item>,
         animatedSelection: Bool = false,
         dismissAfterPick: Bool = false,
-        listItem: @escaping ItemViewBuilder) {
+        listItem: @escaping ItemViewBuilder
+    ) {
         self.items = items
         self.selection = selection
         self.animatedSelection = animatedSelection
@@ -36,13 +37,17 @@ struct ForEachPicker<Item: Identifiable, ItemView: View>: View {
 
     typealias ItemViewBuilder = (_ item: Item, _ isSelected: Bool) -> ItemView
 
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss)
+    var dismiss
 
     var body: some View {
         ForEach(items) { item in
-            Button(action: { select(item) }, label: {
+            Button {
+                select(item)
+            } label: {
                 listItem(item, isSelected(item))
-            }).buttonStyle(.plain)
+            }
+            .buttonStyle(.plain)
         }
     }
 }
@@ -55,10 +60,6 @@ private extension ForEachPicker {
 }
 
 private extension ForEachPicker {
-
-    func dismiss() {
-        presentationMode.wrappedValue.dismiss()
-    }
 
     func isSelected(_ item: Item) -> Bool {
         selectedId == item.id

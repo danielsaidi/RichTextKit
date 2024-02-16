@@ -3,14 +3,13 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-06-02.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 import CoreGraphics
 
 /**
- This enum defines various ways to size images when they are
- used in a rich text.
+ This enum defines various ways to size images in rich text.
  */
 public enum RichTextImageAttachmentSize {
 
@@ -23,9 +22,7 @@ public enum RichTextImageAttachmentSize {
 
 public extension RichTextImageAttachmentSize {
 
-    /**
-     The image's resulting height in a certain frame.
-     */
+    /// The image's resulting height in a certain frame.
     func height(in frame: CGRect) -> CGFloat {
         switch self {
         case .frame: frame.height
@@ -33,9 +30,7 @@ public extension RichTextImageAttachmentSize {
         }
     }
 
-    /**
-     The image's resulting width in a certain frame.
-     */
+    /// The image's resulting width in a certain frame.
     func width(in frame: CGRect) -> CGFloat {
         switch self {
         case .frame: frame.width

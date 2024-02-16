@@ -3,7 +3,7 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-06-04.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
@@ -15,10 +15,6 @@ public extension RichTextStyle {
 
      This view renders a plain `Button`, which means you can
      use and configure with plain SwiftUI.
-
-     You can apply a `foregroundStyle` to the view to define
-     the color to use when the style is not active. The view
-     will `.accentColor` when the style is active.
      */
     struct Button: View {
 
@@ -69,10 +65,10 @@ public extension RichTextStyle {
                 style.label
                     .labelStyle(.iconOnly)
                     .frame(maxHeight: fillVertically ? .infinity : nil)
-                    .foreground(.accentColor, if: isOn)
                     .contentShape(Rectangle())
             }
-            .buttonStyle(.plain)
+            .tint(.accentColor, if: isOn)
+            .foreground(.accentColor, if: isOn)
             .keyboardShortcut(for: style)
             .accessibilityLabel(style.title)
         }
@@ -80,11 +76,20 @@ public extension RichTextStyle {
 }
 
 extension View {
-
+    
     @ViewBuilder
     func foreground(_ color: Color, if isOn: Bool) -> some View {
         if isOn {
             self.foregroundStyle(color)
+        } else {
+            self
+        }
+    }
+    
+    @ViewBuilder
+    func tint(_ color: Color, if isOn: Bool) -> some View {
+        if isOn {
+            self.tint(color)
         } else {
             self
         }
@@ -125,16 +130,21 @@ struct RichTextStyle_Button_Previews: PreviewProvider {
 
                 RichTextStyle.Button(
                     style: .bold,
-                    value: $isBoldOn)
+                    value: $isBoldOn
+                )
                 RichTextStyle.Button(
                     style: .italic,
-                    value: $isItalicOn)
+                    value: $isItalicOn
+                )
                 RichTextStyle.Button(
                     style: .strikethrough,
-                    value: $isStrikethroughOn)
+                    value: $isStrikethroughOn
+                )
                 RichTextStyle.Button(
                     style: .underlined,
-                    value: $isUnderlinedOn)
+                    value: $isUnderlinedOn
+                )
+                .buttonStyle(.bordered)
             }
             .padding()
             .foregroundColor(.red)

@@ -8,9 +8,7 @@
 
 import CoreGraphics
 
-/**
- This struct defines a page configuration for a PDF document.
- */
+/// This error can be thrown when creating PDF data.
 public struct PdfPageConfiguration: Equatable {
 
     /**

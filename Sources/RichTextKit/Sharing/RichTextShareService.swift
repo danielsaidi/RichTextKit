@@ -3,19 +3,19 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-06-04.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 import Foundation
 
 /**
- This protocol can be implemented by any classes that can be
- used to share documents.
+ This protocol can be implemented by any type that can share
+ files and documents.
 
- Sharing should be used when you want to share the rich text
- to other apps, users etc. or send the file for printing. If
- you want to create a file copy using another rich text data
- format, should use a ``RichTextExportService`` instead.
+ Sharing should be used to share the rich text to other apps,
+ users etc. or send it for printing. If you want to create a
+ file copy using another rich text data format, should use a
+ ``RichTextExportService`` instead.
  */
 public protocol RichTextShareService: AnyObject {
 

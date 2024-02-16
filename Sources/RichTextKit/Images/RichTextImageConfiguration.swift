@@ -3,7 +3,7 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-06-02.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 import Foundation
@@ -14,7 +14,7 @@ import Foundation
 
  The paste and drop configurations should be `.disabled` for
  rich text formats that don't support inserting images, like
- .txt and .rtf (where images must be added to a sub-folder).
+ `.txt` and `.rtf`.
  */
 public struct RichTextImageConfiguration {
 
@@ -29,7 +29,10 @@ public struct RichTextImageConfiguration {
     public init(
         pasteConfiguration: RichTextImageInsertConfiguration,
         dropConfiguration: RichTextImageInsertConfiguration,
-        maxImageSize: (width: RichTextImageAttachmentSize, height: RichTextImageAttachmentSize)
+        maxImageSize: (
+            width: RichTextImageAttachmentSize,
+            height: RichTextImageAttachmentSize
+        )
     ) {
         self.pasteConfiguration = pasteConfiguration
         self.dropConfiguration = dropConfiguration
@@ -40,7 +43,10 @@ public struct RichTextImageConfiguration {
     public var dropConfiguration: RichTextImageInsertConfiguration
 
     /// The max size to limit images in the text view to.
-    public var maxImageSize: (width: RichTextImageAttachmentSize, height: RichTextImageAttachmentSize)
+    public var maxImageSize: (
+        width: RichTextImageAttachmentSize,
+        height: RichTextImageAttachmentSize
+    )
 
     /// The image configuration to use when pasting images.
     public var pasteConfiguration: RichTextImageInsertConfiguration
