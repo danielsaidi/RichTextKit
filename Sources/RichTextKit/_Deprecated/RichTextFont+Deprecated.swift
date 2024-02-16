@@ -19,3 +19,19 @@ public typealias RichTextFontSizePicker = RichTextFont.SizePicker
 @available(*, deprecated, renamed: "RichTextFont.SizePickerStack")
 public typealias RichTextFontSizePickerStack = RichTextFont.SizePickerStack
 #endif
+
+public extension RichTextFont.SizePicker {
+    
+    @available(*, deprecated, renamed: "standardValues")
+    static var standardFontSizes: [CGFloat] {
+        standardValues
+    }
+    
+    @available(*, deprecated, renamed: "values(for:selection:)")
+    static func fontSizePickerSizes(
+        for sizes: [CGFloat],
+        selection: CGFloat
+    ) -> [CGFloat] {
+        values(for: sizes, selection: selection)
+    }
+}

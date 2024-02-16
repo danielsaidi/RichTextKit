@@ -60,7 +60,7 @@ public extension RichTextCommand.FormatMenu {
     
     /// This enum defines various format sub-menus
     enum SubMenu: String, CaseIterable, Identifiable, View {
-        case font, text, indent, superscript
+        case font, text, indent, lineSpacing, superscript
         
         public var id: String { rawValue }
         
@@ -81,6 +81,10 @@ public extension RichTextCommand.FormatMenu {
             case .indent:
                 Menu(RTKL10n.menuIndent.text) {
                     Group(indent: true)
+                }
+            case .lineSpacing:
+                Menu(RTKL10n.menuLineSpacing.text) {
+                    Group(lineSpacing: true)
                 }
             case .superscript:
                 Menu(RTKL10n.menuSuperscript.text) {

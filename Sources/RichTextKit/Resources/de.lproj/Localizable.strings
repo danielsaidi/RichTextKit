@@ -27,8 +27,12 @@
 "actionFontSizeDecrease" = "Schriftgröße verkleinern";
 "actionIndentIncrease" = "Indent vergrößern";
 "actionIndentDecrease" = "Indent verkleinern";
+"actionLineSpacingIncrease" = "Zeilenabstand vergrößern";
+"actionLineSpacingDecrease" = "Zeilenabstand verkleinern";
 "actionPrint" = "Drucken";
 "actionRedoLatestChange" = "Rückgängig";
+"actionSuperscriptIncrease" = "Increase Superscript";
+"actionSuperscriptDecrease" = "Decrease Superscript";
 "actionUndoLatestChange" = "Wiederholen";
 
 "fileFormatRtk" = "Rich Text Kit (.rtk)";
@@ -45,6 +49,9 @@
 "menuIndent" = "Indent";
 "menuIndentIncrease" = "Vergrößern";
 "menuIndentDecrease" = "Verkleinern";
+"menuLineSpacing" = "Zeilenabstand";
+"menuLineSpacingIncrease" = "Vergrößern";
+"menuLineSpacingDecrease" = "Verkleinern";
 "menuPrint" = "Drucken...";
 "menuSave" = "Speichern";
 "menuSaveAs" = "Speichern als...";

@@ -46,6 +46,8 @@ extension RichTextCoordinator {
             textView.stepRichTextFontSize(points: points)
         case .stepIndent(let points):
             textView.stepRichTextIndent(points: points)
+        case .stepLineSpacing(let points):
+            textView.stepRichTextLineSpacing(points: points)
         case .stepSuperscript(let points):
             textView.stepRichTextSuperscriptLevel(points: points)
         case .toggleStyle(let style):

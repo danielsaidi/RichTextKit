@@ -26,6 +26,7 @@ extension RichTextCoordinator {
         subscribeToFontName()
         subscribeToFontSize()
         subscribeToIsEditingText()
+        subscribeToLineSpacing()
     }
 }
 
@@ -59,6 +60,14 @@ private extension RichTextCoordinator {
         context.$isEditingText
             .sink { [weak self] in
                 self?.setIsEditing(to: $0)
+            }
+            .store(in: &cancellables)
+    }
+    
+    func subscribeToLineSpacing() {
+        context.$lineSpacing
+            .sink { [weak self] in
+                self?.textView.setRichTextLineSpacing($0)
             }
             .store(in: &cancellables)
     }

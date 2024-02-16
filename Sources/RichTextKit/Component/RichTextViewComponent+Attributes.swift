@@ -10,7 +10,7 @@ import Foundation
 
 public extension RichTextViewComponent {
 
-    /// Get all attributes at the current range.
+    /// Get all attributes.
     var richTextAttributes: RichTextAttributes {
         if hasSelectedRange {
             return richTextAttributes(at: selectedRange)
@@ -25,14 +25,14 @@ public extension RichTextViewComponent {
         #endif
     }
 
-    /// Get a certain attribute at the current range.
+    /// Get a certain attribute.
     func richTextAttribute<Value>(
         _ attribute: RichTextAttribute
     ) -> Value? {
         richTextAttributes[attribute] as? Value
     }
 
-    /// Set a certain attribute at the current range.
+    /// Set a certain attribute.
     func setRichTextAttribute(
         _ attribute: RichTextAttribute,
         to value: Any
@@ -44,7 +44,7 @@ public extension RichTextViewComponent {
         }
     }
 
-    /// Set certain attributes at the current range.
+    /// Set certain attributes.
     func setRichTextAttributes(
         _ attributes: RichTextAttributes
     ) {

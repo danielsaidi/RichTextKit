@@ -190,21 +190,6 @@ extension RichTextCoordinator {
             }
         }
 
-        let foreground = textView.richTextColor(.foreground)
-        context.setColorInternal(.foreground, to: foreground)
-
-        let background = textView.richTextColor(.background)
-        context.setColorInternal(.background, to: background)
-
-        let stroke = textView.richTextColor(.stroke)
-        context.setColorInternal(.stroke, to: stroke)
-
-        let strikethrough = textView.richTextColor(.strikethrough)
-        context.setColorInternal(.strikethrough, to: strikethrough)
-        
-        let underline = textView.richTextColor(.underline)
-        context.setColorInternal(.underline, to: underline)
-
         let hasRange = textView.hasSelectedRange
         if context.canCopy != hasRange {
             context.canCopy = hasRange
@@ -231,26 +216,24 @@ extension RichTextCoordinator {
             context.fontSize = fontSize
         }
 
-        let isBold = styles.hasStyle(.bold)
-        context.setStyleInternal(.bold, to: isBold)
-
-        let isItalic = styles.hasStyle(.italic)
-        context.setStyleInternal(.italic, to: isItalic)
-        
-        let isStrikethrough = styles.hasStyle(.strikethrough)
-        context.setStyleInternal(.strikethrough, to: isStrikethrough)
-        
-        let isUnderlined = styles.hasStyle(.underlined)
-        context.setStyleInternal(.underlined, to: isUnderlined)
+        RichTextStyle.all.forEach {
+            let style = styles.hasStyle($0)
+            context.setStyleInternal($0, to: style)
+        }
 
         let isEditingText = textView.isFirstResponder
         if context.isEditingText != isEditingText {
             context.isEditingText = isEditingText
         }
+        
+        let lineSpacing = textView.richTextLineSpacing ?? 10.0
+        if context.lineSpacing != lineSpacing {
+            context.lineSpacing = lineSpacing
+        }
 
-        if let alignment = textView.richTextAlignment,
-            context.textAlignment != alignment {
-            context.textAlignment = alignment
+        if let textAlignment = textView.richTextAlignment,
+            context.textAlignment != textAlignment {
+            context.textAlignment = textAlignment
         }
 
         updateTextViewAttributesIfNeeded()

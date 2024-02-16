@@ -10,7 +10,7 @@ import Foundation
 
 public extension RichTextViewComponent {
 
-    /// Get the superscript level at the current range.
+    /// Get the superscript level.
     var richTextSuperscriptLevel: Int? {
         #if macOS
         richTextAttribute(.superscript)
@@ -19,7 +19,7 @@ public extension RichTextViewComponent {
         #endif
     }
 
-    /// Set the superscript level at the current range.
+    /// Set the superscript level.
     func setRichTextSuperscriptLevel(to val: Int) {
         #if macOS
         setRichTextAttribute(.superscript, to: val)
@@ -28,7 +28,7 @@ public extension RichTextViewComponent {
         #endif
     }
     
-    /// Step the superscript level at the current range.
+    /// Step the superscript level.
     func stepRichTextSuperscriptLevel(points: Int) {
         let currentSize = richTextSuperscriptLevel ?? 0
         let newSize = currentSize + points

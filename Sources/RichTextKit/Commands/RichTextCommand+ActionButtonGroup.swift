@@ -32,6 +32,8 @@ public extension RichTextCommand {
         }
 
         private let actions: [RichTextAction]
+        
+        private let step = 1
 
         public var body: some View {
             ForEach(actions) {
@@ -59,8 +61,8 @@ public extension RichTextCommand.ActionButtonGroup {
         additionalActions: [RichTextAction] = []
     ) {
         self.actions = [
-            .increaseFontSize(),
-            .decreaseFontSize()
+            .stepFontSize(points: 1),
+            .stepFontSize(points: -1)
         ] + additionalActions
     }
     
@@ -70,8 +72,19 @@ public extension RichTextCommand.ActionButtonGroup {
         additionalActions: [RichTextAction] = []
     ) {
         self.actions = [
-            .increaseIndent(),
-            .decreaseIndent()
+            .stepIndent(points: 1),
+            .stepIndent(points: -1)
+        ] + additionalActions
+    }
+    
+    /// Create a button group with line spacing steppers.
+    init(
+        lineSpacing: Bool,
+        additionalActions: [RichTextAction] = []
+    ) {
+        self.actions = [
+            .stepLineSpacing(points: 1),
+            .stepLineSpacing(points: -1)
         ] + additionalActions
     }
     
@@ -91,8 +104,8 @@ public extension RichTextCommand.ActionButtonGroup {
         additionalActions: [RichTextAction] = []
     ) {
         self.actions = [
-            .increaseSuperscript(),
-            .decreaseSuperscript()
+            .stepSuperscript(steps: -1),
+            .stepSuperscript(steps: 1)
         ] + additionalActions
     }
 }

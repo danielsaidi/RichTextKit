@@ -27,8 +27,12 @@
 "actionFontSizeDecrease" = "Smaller Text";
 "actionIndentIncrease" = "Increase Indent";
 "actionIndentDecrease" = "Decrease Indent";
+"actionLineSpacingIncrease" = "Increase Line Spacing";
+"actionLineSpacingDecrease" = "Decrease Line Spacing";
 "actionPrint" = "Print";
 "actionRedoLatestChange" = "Redo";
+"actionSuperscriptIncrease" = "Increase Superscript";
+"actionSuperscriptDecrease" = "Decrease Superscript";
 "actionUndoLatestChange" = "Undo";
 
 "fileFormatRtk" = "Rich Text Kit (.rtk)";
@@ -45,6 +49,9 @@
 "menuIndent" = "Indent";
 "menuIndentIncrease" = "Increase";
 "menuIndentDecrease" = "Decrease";
+"menuLineSpacing" = "LineSpacing";
+"menuLineSpacingIncrease" = "Increase";
+"menuLineSpacingDecrease" = "Decrease";
 "menuPrint" = "Print...";
 "menuSave" = "Save";
 "menuSaveAs" = "Save as...";

@@ -21,6 +21,7 @@ public extension RichTextFormatToolbar {
             fontPicker: Bool = true,
             fontSizePicker: Bool = true,
             indentButtons: Bool = true,
+            lineSpacingPicker: Bool = false,
             styles: [RichTextStyle] = .all,
             superscriptButtons: Bool = true
         ) {
@@ -30,6 +31,7 @@ public extension RichTextFormatToolbar {
             self.fontPicker = fontPicker
             self.fontSizePicker = fontSizePicker
             self.indentButtons = indentButtons
+            self.lineSpacingPicker = lineSpacingPicker
             self.styles = styles
             #if macOS
             self.superscriptButtons = superscriptButtons
@@ -44,6 +46,7 @@ public extension RichTextFormatToolbar {
         public var fontPicker: Bool
         public var fontSizePicker: Bool
         public var indentButtons: Bool
+        public var lineSpacingPicker: Bool
         public var styles: [RichTextStyle]
         public var superscriptButtons: Bool
     }

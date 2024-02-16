@@ -56,7 +56,6 @@ extension RichTextFormatToolbarBase {
                     context: context
                 )
             }
-            .padding(.leading, style.padding)
         }
     }
     
@@ -135,9 +134,19 @@ extension RichTextFormatToolbarBase {
         if config.indentButtons {
             RichTextAction.ButtonGroup(
                 context: context,
-                actions: [.decreaseIndent(), .increaseIndent()],
+                actions: [.stepIndent(points: -1), .stepIndent(points: 1)],
                 greedy: greedy
             )
+        }
+    }
+    
+    @ViewBuilder
+    func lineSpacingPicker(
+        for context: RichTextContext
+    ) -> some View {
+        if config.lineSpacingPicker {
+            RichTextLine.SpacingPickerStack(context: context)
+                .buttonStyle(.bordered)
         }
     }
     
@@ -161,7 +170,7 @@ extension RichTextFormatToolbarBase {
         if config.superscriptButtons {
             RichTextAction.ButtonGroup(
                 context: context,
-                actions: [.decreaseSuperscript(), .increaseSuperscript()],
+                actions: [.stepSuperscript(steps: -1), .stepSuperscript(steps: 1)],
                 greedy: greedy
             )
         }

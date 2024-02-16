@@ -60,10 +60,14 @@ public class RichTextContext: ObservableObject {
     /// The current font name.
     @Published
     public var fontName = ""
-
+    
     /// The current font size.
     @Published
     public var fontSize = CGFloat.standardRichTextFontSize
+    
+    /// The current line spacing.
+    @Published
+    public var lineSpacing: CGFloat = 10.0
     
     
     // MARK: - Properties

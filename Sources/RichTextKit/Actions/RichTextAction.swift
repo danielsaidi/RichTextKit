@@ -59,12 +59,15 @@ public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
 
     /// Set a certain ``RichTextStyle``.
     case setStyle(RichTextStyle, Bool)
-
+    
     /// Step the font size.
     case stepFontSize(points: Int)
 
     /// Step the indent level.
     case stepIndent(points: CGFloat)
+    
+    /// Step the line spacing.
+    case stepLineSpacing(points: CGFloat)
 
     /// Step the superscript level.
     case stepSuperscript(steps: Int)
@@ -102,6 +105,7 @@ public extension RichTextAction {
         case .setStyle(let style, _): style.icon
         case .stepFontSize(let val): .richTextStepFontSize(val)
         case .stepIndent(let val): .richTextStepIndent(val)
+        case .stepLineSpacing: .richTextLineSpacing
         case .stepSuperscript(let val): .richTextStepSuperscript(val)
         case .toggleStyle(let val): val.icon
         case .undoLatestChange: .richTextActionUndo
@@ -136,23 +140,24 @@ public extension RichTextAction {
         switch self {
         case .copy: .actionCopy
         case .dismissKeyboard: .actionDismissKeyboard
-        case .print: .actionPrint
-        case .redoLatestChange: .actionRedoLatestChange
-        case .setAlignment(let alignment): alignment.titleKey
-        case .stepFontSize(let points): .actionStepFontSize(points)
-        case .stepIndent(let points): .actionStepIndent(points)
-        case .stepSuperscript(let steps): .actionStepSuperscript(steps)
-        case .toggleStyle(let style): style.titleKey
-        case .undoLatestChange: .actionUndoLatestChange
-        case .setColor(let color, _): color.titleKey
-        case .setHighlightedRange: .highlightedRange
-        case .setHighlightingStyle: .highlightingStyle
         case .pasteImage: .pasteImage
         case .pasteImages: .pasteImages
         case .pasteText: .pasteText
+        case .print: .actionPrint
+        case .redoLatestChange: .actionRedoLatestChange
         case .selectRange: .selectRange
+        case .setAlignment(let alignment): alignment.titleKey
         case .setAttributedString: .setAttributedString
+        case .setColor(let color, _): color.titleKey
+        case .setHighlightedRange: .highlightedRange
+        case .setHighlightingStyle: .highlightingStyle
         case .setStyle(let style, _): style.titleKey
+        case .stepFontSize(let points): .actionStepFontSize(points)
+        case .stepIndent(let points): .actionStepIndent(points)
+        case .stepLineSpacing(let points): .actionStepLineSpacing(points)
+        case .stepSuperscript(let steps): .actionStepSuperscript(steps)
+        case .toggleStyle(let style): style.titleKey
+        case .undoLatestChange: .actionUndoLatestChange
         }
     }
 }
@@ -161,42 +166,42 @@ public extension RichTextAction {
 
 public extension RichTextAction {
 
-    /// A name alias for `.stepFontSize`.
+    @available(*, deprecated, message: "Use stepFontSize directly")
     static func increaseFontSize(
         points: UInt = 1
     ) -> RichTextAction {
         stepFontSize(points: Int(points))
     }
 
-    /// A name alias for `.stepFontSize(points: -1)`.
+    @available(*, deprecated, message: "Use stepFontSize directly")
     static func decreaseFontSize(
         points: UInt = 1
     ) -> RichTextAction {
         stepFontSize(points: -Int(points))
     }
 
-    /// A name alias for `.stepIndent`.
+    @available(*, deprecated, message: "Use stepIndent directly")
     static func increaseIndent(
         points: UInt = .defaultRichTextIntentStepSize
     ) -> RichTextAction {
         stepIndent(points: CGFloat(points))
     }
 
-    /// A name alias for `.stepIndent(points: -1)`.
+    @available(*, deprecated, message: "Use stepIndent directly")
     static func decreaseIndent(
         points: UInt = .defaultRichTextIntentStepSize
     ) -> RichTextAction {
         stepIndent(points: -CGFloat(points))
     }
 
-    /// A name alias for `.stepSuperscript`.
+    @available(*, deprecated, message: "Use stepSuperscript directly")
     static func increaseSuperscript(
         steps: UInt = 1
     ) -> RichTextAction {
         stepSuperscript(steps: Int(steps))
     }
 
-    /// A name alias for `.stepSuperscript(steps: -1)`.
+    @available(*, deprecated, message: "Use stepSuperscript directly")
     static func decreaseSuperscript(
         steps: UInt = 1
     ) -> RichTextAction {

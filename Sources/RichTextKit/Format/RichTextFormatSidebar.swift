@@ -64,8 +64,11 @@ public struct RichTextFormatSidebar: RichTextFormatToolbarBase {
             SidebarSection {
                 alignmentPicker(value: $context.textAlignment)
                 HStack {
-                    superscriptButtons(for: context, greedy: true)
+                    lineSpacingPicker(for: context)
+                }
+                HStack {
                     indentButtons(for: context, greedy: true)
+                    superscriptButtons(for: context, greedy: true)
                 }
             }
             

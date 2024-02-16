@@ -27,8 +27,12 @@
 "actionFontSizeDecrease" = "Mindske skriftstørrelsen";
 "actionIndentIncrease" = "Øge indrag";
 "actionIndentDecrease" = "Mindske indrag";
+"actionLineSpacingIncrease" = "Øge linjeafstand";
+"actionLineSpacingDecrease" = "Mindske linjeafstand";
 "actionPrint" = "Udskriv";
 "actionRedoLatestChange" = "Lave om";
+"actionSuperscriptIncrease" = "Increase Superscript";
+"actionSuperscriptDecrease" = "Decrease Superscript";
 "actionUndoLatestChange" = "Fortryd";
 
 "fileFormatRtk" = "Rich Text Kit (.rtk)";
@@ -45,6 +49,9 @@
 "menuIndent" = "Indrag";
 "menuIndentIncrease" = "Øge";
 "menuIndentDecrease" = "Mindske";
+"menuLineSpacing" = "Linjeafstand";
+"menuLineSpacingIncrease" = "Increase";
+"menuLineSpacingDecrease" = "Decrease";
 "menuPrint" = "Udskriv...";
 "menuSave" = "Spare";
 "menuSaveAs" = "Spare som...";

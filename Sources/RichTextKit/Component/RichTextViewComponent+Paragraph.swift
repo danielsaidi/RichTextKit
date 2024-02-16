@@ -18,7 +18,7 @@ import AppKit
 
 public extension RichTextViewComponent {
 
-    /// Get the paragraph style at the current range.
+    /// Get the paragraph style.
     var richTextParagraphStyle: NSMutableParagraphStyle? {
         richTextAttribute(.paragraphStyle)
     }

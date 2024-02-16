@@ -10,7 +10,7 @@ import Foundation
 
 public extension RichTextViewComponent {
 
-    /// Get a certain color at the current range.
+    /// Get a certain color.
     func richTextColor(
         _ color: RichTextColor
     ) -> ColorRepresentable? {
@@ -27,7 +27,7 @@ public extension RichTextViewComponent {
         return richTextAttribute(attribute, at: range)
     }
 
-    /// Set a certain color at the current range.
+    /// Set a certain color.
     func setRichTextColor(
         _ color: RichTextColor,
         to val: ColorRepresentable

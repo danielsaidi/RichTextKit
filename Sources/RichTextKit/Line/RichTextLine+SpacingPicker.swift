@@ -1,14 +1,14 @@
 //
-//  RichTextFont+SizePicker.swift
+//  RichTextLine+SpacingPicker.swift
 //  RichTextKit
 //
-//  Created by Daniel Saidi on 2022-06-02.
-//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
+//  Created by Daniel Saidi on 2024-02-16.
+//  Copyright © 2024 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
 
-public extension RichTextFont {
+public extension RichTextLine {
 
     /**
      This picker can be used to pick a font size.
@@ -16,7 +16,7 @@ public extension RichTextFont {
      The view returns a plain SwiftUI `Picker` view that can
      be styled and configured with plain SwiftUI.
      */
-    struct SizePicker: View {
+    struct SpacingPicker: View {
 
         /**
          Create a font size picker.
@@ -54,13 +54,13 @@ public extension RichTextFont {
     }
 }
 
-public extension RichTextFont.SizePicker {
+public extension RichTextLine.SpacingPicker {
 
     /// The standard picker values.
     static var standardValues: [CGFloat] {
-        [10, 12, 14, 18, 20, 22, 24, 28, 36, 48, 64, 72, 96, 144]
+        [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     }
-
+    
     /// Get a list of values for a certain selection.
     static func values(
         for values: [CGFloat],
@@ -71,27 +71,27 @@ public extension RichTextFont.SizePicker {
     }
 }
 
-private extension RichTextFont.SizePicker {
+private extension RichTextLine.SpacingPicker {
 
     func text(
         for fontSize: CGFloat
     ) -> some View {
-        Text("\(Int(fontSize))")
+        Text(String(format: "%.1f", fontSize))
             .fixedSize(horizontal: true, vertical: false)
     }
 }
 
-struct RichTextFont_SizePicker_Previews: PreviewProvider {
+struct RichTextFont_SpacingPicker_Previews: PreviewProvider {
 
     struct Preview: View {
 
         @State
-        private var selection: CGFloat = 36.0
+        private var selection: CGFloat = 3.0
 
         var body: some View {
             List {
                 HStack {
-                    RichTextFont.SizePicker(
+                    RichTextLine.SpacingPicker(
                         selection: $selection
                     )
                 }

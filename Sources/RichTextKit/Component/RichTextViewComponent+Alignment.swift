@@ -16,33 +16,23 @@ import AppKit
 
 public extension RichTextViewComponent {
     
-    /// Get the text alignment at the current range.
+    /// Get the text alignment.
     var richTextAlignment: RichTextAlignment? {
         guard let style = richTextParagraphStyle else { return nil }
         return RichTextAlignment(style.alignment)
     }
     
-    /// Set the text alignment at the current range.
+    /// Set the text alignment.
     ///
     /// > Important: This function will affect the next line
     /// if it changes the `richTextParagraphStyle` value, so
     /// it instead creates a brand new paragraph style.
-    func setRichTextAlignment(
-        _ alignment: RichTextAlignment
-    ) {
+    func setRichTextAlignment(_ alignment: RichTextAlignment) {
         if richTextAlignment == alignment { return }
         guard let storage = textStorageWrapper else { return }
         let range = lineRange(for: selectedRange)
         guard range.length > 0 else { return }
-        let style = NSMutableParagraphStyle(alignment)
+        let style = NSMutableParagraphStyle(alignment: alignment)
         storage.addAttribute(.paragraphStyle, value: style, range: range)
-    }
-}
-
-private extension NSMutableParagraphStyle {
-    
-    convenience init(_ alignment: RichTextAlignment) {
-        self.init()
-        self.alignment = alignment.nativeAlignment
     }
 }

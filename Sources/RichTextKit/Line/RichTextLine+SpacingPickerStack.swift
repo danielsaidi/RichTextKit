@@ -1,32 +1,32 @@
 //
-//  RichTextFontSizePickerStack.swift
+//  RichTextLine+SpacingPickerStack.swift
 //  RichTextKit
 //
-//  Created by Daniel Saidi on 2022-06-02.
-//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
+//  Created by Daniel Saidi on 2024-02-16.
+//  Copyright © 2024 Daniel Saidi. All rights reserved.
 //
 
 #if iOS || macOS || os(visionOS)
 import SwiftUI
 
-public extension RichTextFont {
+public extension RichTextLine {
 
     /**
-     This view uses a ``RichTextFont/SizePicker`` and button
-     steppers to increment and a decrement the font size.
+     This view uses a ``RichTextLine/SpacingPicker`` and two
+     steppers to increment and a decrement the value.
      */
-    struct SizePickerStack: View {
+    struct SpacingPickerStack: View {
 
         /**
-         Create a rich text font size picker stack.
+         Create a rich text line spacing picker stack.
 
          - Parameters:
            - context: The context to affect.
-           - values: The values to display, by default ``RichTextFont/SizePicker/standardValues``.
+           - values: The values to display, by default ``RichTextLine/SpacingPicker/standardValues``.
          */
         public init(
             context: RichTextContext,
-            values: [CGFloat] = RichTextFont.SizePicker.standardValues
+            values: [CGFloat] = RichTextLine.SpacingPicker.standardValues
         ) {
             self._context = ObservedObject(wrappedValue: context)
             self.values = values
@@ -34,7 +34,7 @@ public extension RichTextFont {
 
         private let values: [CGFloat]
         
-        private let step = 1
+        private let step = 1.0
 
         @ObservedObject
         private var context: RichTextContext
@@ -54,8 +54,8 @@ public extension RichTextFont {
     }
 }
 
-private extension RichTextFont.SizePickerStack {
-
+private extension RichTextLine.SpacingPickerStack {
+    
     var macShortcutOverlay: some View {
         stack
             .opacity(0)
@@ -69,18 +69,18 @@ private extension RichTextFont.SizePickerStack {
             stepButton(step)
         }
     }
-    
-    func stepButton(_ points: Int) -> some View {
+
+    func stepButton(_ points: CGFloat) -> some View {
         RichTextAction.Button(
-            action: .stepFontSize(points: points),
+            action: .stepLineSpacing(points: points),
             context: context,
             fillVertically: true
         )
     }
 
     var picker: some View {
-        RichTextFont.SizePicker(
-            selection: $context.fontSize,
+        RichTextLine.SpacingPicker(
+            selection: $context.lineSpacing,
             values: values
         )
     }
@@ -91,15 +91,15 @@ private extension RichTextFont.SizePickerStack {
     }
 
     func decrement() {
-        context.fontSize -= CGFloat(step)
+        context.lineSpacing -= step
     }
 
     func increment() {
-        context.fontSize += CGFloat(step)
+        context.lineSpacing += step
     }
 }
 
-struct RichTextFont_SizePickerStack_Previews: PreviewProvider {
+struct RichTextLine_SpacingPickerStack_Previews: PreviewProvider {
 
     struct Preview: View {
 
@@ -108,8 +108,8 @@ struct RichTextFont_SizePickerStack_Previews: PreviewProvider {
 
         var body: some View {
             VStack {
-                Text("Size: \(context.fontSize)")
-                RichTextFont.SizePickerStack(context: context)
+                Text("Spacing: \(context.lineSpacing)")
+                RichTextLine.SpacingPickerStack(context: context)
             }
             .buttonStyle(.bordered)
             .padding()

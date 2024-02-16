@@ -27,8 +27,12 @@
 "actionFontSizeDecrease" = "Minska teckenstorlek";
 "actionIndentIncrease" = "Öka indrag";
 "actionIndentDecrease" = "Minska indrag";
+"actionLineSpacingIncrease" = "Öka linjeavstånd";
+"actionLineSpacingDecrease" = "Minska linjeavstånd";
 "actionPrint" = "Skriv ut";
 "actionRedoLatestChange" = "Gör om";
+"actionSuperscriptIncrease" = "Öka baslinje";
+"actionSuperscriptDecrease" = "Minska baslinje";
 "actionUndoLatestChange" = "Ångra";
 
 "fileFormatRtk" = "Rich Text Kit (.rtk)";
@@ -45,6 +49,9 @@
 "menuIndent" = "Indrag";
 "menuIndentIncrease" = "Öka";
 "menuIndentDecrease" = "Minska";
+"menuLineSpacing" = "Radavstånd";
+"menuLineSpacingIncrease" = "Öka";
+"menuLineSpacingDecrease" = "Minska";
 "menuPrint" = "Skriv ut...";
 "menuSave" = "Spara";
 "menuSaveAs" = "Spara som...";
