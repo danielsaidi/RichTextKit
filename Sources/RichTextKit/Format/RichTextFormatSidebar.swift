@@ -12,6 +12,10 @@ import SwiftUI
 /**
  This sidebar view provides various text format options, and
  is meant to be used on macOS, in a trailing sidebar.
+ 
+ You can provide custom configurations to adjust the toolbar
+ and style it by applying a `.richTextFormatToolbarStyle` to
+ the view hierarchy.
 
  > Note: The sidebar is currently designed for macOS, but it
  should also be made to look good on iPadOS in landscape, to

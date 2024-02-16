@@ -104,7 +104,6 @@ extension RichTextFormatToolbarBase {
     ) -> some View {
         if config.fontPicker {
             RichTextFont.ListPicker(selection: value)
-                .frame(height: style.fontPickerHeight)
             Divider()
         }
     }

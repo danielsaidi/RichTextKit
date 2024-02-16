@@ -1,10 +1,7 @@
 #if iOS || macOS || os(visionOS)
 import SwiftUI
 
-@available(*, deprecated, renamed: "RichTextFormatToolbar")
-public typealias RichTextFormatSheet = RichTextFormatToolbar
-
-public extension RichTextFormatToolbar {
+public extension RichTextFormatSheet {
 
     @available(*, deprecated, message: "Use the config initializer instead.")
     init(

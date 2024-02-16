@@ -16,11 +16,9 @@ import SwiftUI
  class. The control row will be split in two in compact size,
  while macOS and regular sizes get a single row.
  
- You can provide a custom configuration to adjust the format
- options. The font picker will take up all available height.
- 
- You can style this view by applying a style anywhere in the
- view hierarchy, using `.richTextFormatToolbarStyle`.
+ You can provide custom configurations to adjust the toolbar
+ and style it by applying a `.richTextFormatToolbarStyle` to
+ the view hierarchy.
  */
 public struct RichTextFormatToolbar: RichTextFormatToolbarBase {
 
@@ -51,45 +49,6 @@ public struct RichTextFormatToolbar: RichTextFormatToolbarBase {
     private var horizontalSizeClass
 
     public var body: some View {
-        VStack(spacing: 0) {
-            fontListPicker(value: $context.fontName)
-            toolbar
-        }
-    }
-}
-
-
-#if iOS
-// MARK: - Sheet
-
-public extension RichTextFormatToolbar {
-    
-    /// Convert the toolbar to a sheet, with a close button.
-    func asSheet(
-        dismiss: @escaping () -> Void
-    ) -> some View {
-        NavigationView {
-            self
-                .padding(.top, -35)
-                .toolbar {
-                    ToolbarItem(placement: .confirmationAction) {
-                        Button(RTKL10n.done.text, action: dismiss)
-                    }
-                }
-                .navigationTitle("")
-                .navigationBarTitleDisplayMode(.inline)
-        }
-        .navigationViewStyle(.stack)
-    }
-}
-#endif
-
-
-// MARK: - Views
-
-private extension RichTextFormatToolbar {
-    
-    var toolbar: some View {
         VStack(spacing: style.spacing) {
             controls
             if hasColorPickers {
@@ -100,7 +59,16 @@ private extension RichTextFormatToolbar {
         .padding(.vertical, style.padding)
         .environment(\.sizeCategory, .medium)
         .background(background)
+        #if macOS
+        .frame(minWidth: 650)
+        #endif
     }
+}
+
+
+// MARK: - Views
+
+private extension RichTextFormatToolbar {
     
     var useSingleLine: Bool {
         #if macOS
@@ -138,6 +106,9 @@ private extension RichTextFormatToolbar {
     @ViewBuilder
     var controlsContent: some View {
         HStack {
+            #if macOS
+            fontPicker(value: $context.fontName)
+            #endif
             styleToggleGroup(for: context)
             if !useSingleLine {
                 Spacer()
@@ -161,9 +132,6 @@ struct RichTextFormatToolbar_Previews: PreviewProvider {
         
         @StateObject
         private var context = RichTextContext()
-
-        @State
-        private var isSheetPresented = false
         
         var toolbar: RichTextFormatToolbar {
             .init(
@@ -183,22 +151,9 @@ struct RichTextFormatToolbar_Previews: PreviewProvider {
         var body: some View {
             VStack(spacing: 0) {
                 Color.red
-                Button("Toggle sheet") {
-                    isSheetPresented.toggle()
-                }
                 toolbar
-            }
-            .sheet(isPresented: $isSheetPresented) {
-                toolbar
-                    #if iOS
-                    .asSheet { isSheetPresented = false }
-                    #endif
-                    .richTextFormatToolbarStyle(.init(
-                        fontPickerHeight: nil
-                    ))
             }
             .richTextFormatToolbarStyle(.init(
-                fontPickerHeight: 100,
                 padding: 10,
                 spacing: 10
             ))

@@ -12,22 +12,16 @@ import SwiftUI
 public extension RichTextFormatToolbar {
     
     /// This struct can be used to style a format sheet.
-    ///
-    /// Don't specify a font picker height if the toolbar is
-    /// used in a sheet. Use detents to the toolbar's height.
     struct Style {
         
         public init(
-            fontPickerHeight: CGFloat? = nil,
             padding: Double = 10,
             spacing: Double = 10
         ) {
-            self.fontPickerHeight = fontPickerHeight
             self.padding = padding
             self.spacing = spacing
         }
         
-        public var fontPickerHeight: CGFloat?
         public var padding: Double
         public var spacing: Double
     }

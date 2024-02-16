@@ -22,9 +22,10 @@ By deprecating these functions, we can simplify the library in 1.0, and focus mo
 * `RichTextAction` has a new `label` property.
 * `RichTextCommand.ActionButtonGroup` has new inits.
 * `RichTextCommand.FormatMenu` is a lot more configurable.
-* `RichTextFormatToolbar` is now available on all platforms.
-* `RichTextFormatToolbar` has new configuration and style types.
+* `RichTextFormatSheet` is now available on all platforms.
+* `RichTextFormatSheet` has new configuration and style types.
 * `RichTextFormatSidebar` has new configuration and style types.
+* `RichTextFormatToolbar` is a new rich text formatting toolbar.
 * `RichTextKeyboardToolbar` has a new config to always be shown.
 * `RichTextStyle.Button` now supports using custom button styles.
 * `RichTextView` has a new theme that lets you define its style.

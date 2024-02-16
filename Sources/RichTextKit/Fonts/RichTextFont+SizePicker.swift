@@ -32,7 +32,8 @@ public extension RichTextFont {
             self._selection = selection
             self.values = Self.fontSizePickerSizes(
                 for: values,
-                selection: selection.wrappedValue)
+                selection: selection.wrappedValue
+            )
         }
 
         private let values: [CGFloat]
