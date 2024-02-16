@@ -12,13 +12,13 @@ import SwiftUI
 /// This internal protocol is used to share code between the
 /// two toolbars, which should eventually become one.
 protocol RichTextFormatToolbarBase: View {
-    
+
     var config: RichTextFormatToolbar.Configuration { get }
     var style: RichTextFormatToolbar.Style { get }
 }
 
 extension RichTextFormatToolbarBase {
-    
+
     var hasColorPickers: Bool {
         let colors = config.colorPickers
         let disclosed = config.colorPickersDisclosed
@@ -27,7 +27,7 @@ extension RichTextFormatToolbarBase {
 }
 
 extension RichTextFormatToolbarBase {
-    
+
     @ViewBuilder
     func alignmentPicker(
         value: Binding<RichTextAlignment>
@@ -40,7 +40,7 @@ extension RichTextFormatToolbarBase {
             .pickerStyle(.segmented)
         }
     }
-    
+
     @ViewBuilder
     func colorPickers(
         for context: RichTextContext
@@ -58,7 +58,7 @@ extension RichTextFormatToolbarBase {
             }
         }
     }
-    
+
     @ViewBuilder
     func colorPickers(
         for colors: [RichTextColor],
@@ -70,7 +70,7 @@ extension RichTextFormatToolbarBase {
             }
         }
     }
-    
+
     @ViewBuilder
     func colorPickersDisclosureGroup(
         for colors: [RichTextColor],
@@ -85,7 +85,7 @@ extension RichTextFormatToolbarBase {
             }
         }
     }
-    
+
     func colorPicker(
         for color: RichTextColor,
         context: RichTextContext
@@ -96,7 +96,7 @@ extension RichTextFormatToolbarBase {
             quickColors: .quickPickerColors
         )
     }
-    
+
     @ViewBuilder
     func fontListPicker(
         value: Binding<String>
@@ -106,7 +106,7 @@ extension RichTextFormatToolbarBase {
             Divider()
         }
     }
-    
+
     @ViewBuilder
     func fontPicker(
         value: Binding<String>
@@ -115,7 +115,7 @@ extension RichTextFormatToolbarBase {
             RichTextFont.Picker(selection: value, fontSize: 12)
         }
     }
-    
+
     @ViewBuilder
     func fontSizePicker(
         for context: RichTextContext
@@ -125,7 +125,7 @@ extension RichTextFormatToolbarBase {
                 .buttonStyle(.bordered)
         }
     }
-    
+
     @ViewBuilder
     func indentButtons(
         for context: RichTextContext,
@@ -139,7 +139,7 @@ extension RichTextFormatToolbarBase {
             )
         }
     }
-    
+
     @ViewBuilder
     func lineSpacingPicker(
         for context: RichTextContext
@@ -149,7 +149,7 @@ extension RichTextFormatToolbarBase {
                 .buttonStyle(.bordered)
         }
     }
-    
+
     @ViewBuilder
     func styleToggleGroup(
         for context: RichTextContext
@@ -161,7 +161,7 @@ extension RichTextFormatToolbarBase {
             )
         }
     }
-    
+
     @ViewBuilder
     func superscriptButtons(
         for context: RichTextContext,

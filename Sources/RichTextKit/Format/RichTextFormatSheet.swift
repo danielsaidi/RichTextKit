@@ -11,10 +11,10 @@ import SwiftUI
 
 /**
  This sheet contains a font list picker and a bottom toolbar.
- 
+
  You can inject a custom toolbar configuration to adjust the
  toolbar. The font picker will take up all available height.
- 
+
  You can style this view by applying a style anywhere in the
  view hierarchy, using `.richTextFormatToolbarStyle`.
  */
@@ -34,20 +34,20 @@ public struct RichTextFormatSheet: RichTextFormatToolbarBase {
         self._context = ObservedObject(wrappedValue: context)
         self.config = config
     }
-    
+
     public typealias Configuration = RichTextFormatToolbar.Configuration
 
     @ObservedObject
     private var context: RichTextContext
-    
+
     let config: Configuration
-    
+
     @Environment(\.richTextFormatToolbarStyle)
     var style
-    
+
     @Environment(\.dismiss)
     private var dismiss
-    
+
     @Environment(\.horizontalSizeClass)
     private var horizontalSizeClass
 
@@ -82,13 +82,13 @@ public struct RichTextFormatSheet: RichTextFormatToolbarBase {
 struct RichTextFormatSheet_Previews: PreviewProvider {
 
     struct Preview: View {
-        
+
         @StateObject
         private var context = RichTextContext()
 
         @State
         private var isSheetPresented = false
-        
+
         var body: some View {
             VStack(spacing: 0) {
                 Color.red

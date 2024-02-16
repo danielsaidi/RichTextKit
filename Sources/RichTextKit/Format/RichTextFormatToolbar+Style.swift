@@ -10,10 +10,10 @@
 import SwiftUI
 
 public extension RichTextFormatToolbar {
-    
+
     /// This struct can be used to style a format sheet.
     struct Style {
-        
+
         public init(
             padding: Double = 10,
             spacing: Double = 10
@@ -21,20 +21,20 @@ public extension RichTextFormatToolbar {
             self.padding = padding
             self.spacing = spacing
         }
-        
+
         public var padding: Double
         public var spacing: Double
     }
-    
+
     /// This environment key defines a format toolbar style.
     struct StyleKey: EnvironmentKey {
-        
+
         public static let defaultValue = RichTextFormatToolbar.Style()
     }
 }
 
 public extension View {
-    
+
     /// Apply a rich text format toolbar style.
     func richTextFormatToolbarStyle(
         _ style: RichTextFormatToolbar.Style
@@ -44,7 +44,7 @@ public extension View {
 }
 
 public extension EnvironmentValues {
-    
+
     /// This environment value defines format toolbar styles.
     var richTextFormatToolbarStyle: RichTextFormatToolbar.Style {
         get { self [RichTextFormatToolbar.StyleKey.self] }

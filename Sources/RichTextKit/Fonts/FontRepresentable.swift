@@ -24,7 +24,7 @@ public extension FontRepresentable {
 
     /// The standard font to use for rich text.
     static var standardRichTextFont = systemFont(ofSize: .standardRichTextFontSize)
-    
+
     /// Create a new font by toggling a certain style.
     func toggling(
         _ style: RichTextStyle

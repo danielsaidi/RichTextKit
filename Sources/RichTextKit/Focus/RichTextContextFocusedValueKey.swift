@@ -35,7 +35,7 @@ public extension FocusedValues {
      @FocusedValue(\.richTextContext)
      var richTextContext: RichTextContext?
      ```
-     
+
      This is needed for e.g. main menu commands to determine
      which context to affect, if any.
      */

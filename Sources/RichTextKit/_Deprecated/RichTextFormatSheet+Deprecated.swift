@@ -16,7 +16,7 @@ public extension RichTextFormatSheet {
 }
 
 public extension RichTextFormatSidebar {
-    
+
     @available(*, deprecated, message: "Use the config initializer instead.")
     init(
         context: RichTextContext,

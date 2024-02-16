@@ -15,13 +15,13 @@ import AppKit
 #endif
 
 public extension RichTextViewComponent {
-    
+
     /// Get the text alignment.
     var richTextAlignment: RichTextAlignment? {
         guard let style = richTextParagraphStyle else { return nil }
         return RichTextAlignment(style.alignment)
     }
-    
+
     /// Set the text alignment.
     ///
     /// > Important: This function will affect the next line

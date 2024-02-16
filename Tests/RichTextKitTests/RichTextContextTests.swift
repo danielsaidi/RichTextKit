@@ -10,7 +10,7 @@ import RichTextKit
 import XCTest
 
 final class RichTextContextTests: XCTestCase {
-    
+
     func testInitializerSetsDefaultValues() {
         let context = RichTextContext()
         XCTAssertEqual(context.fontName, "")
@@ -25,14 +25,14 @@ final class RichTextContextTests: XCTestCase {
         XCTAssertEqual(context.selectedRange.length, 0)
         XCTAssertEqual(context.textAlignment, .left)
     }
-    
+
     func testHighlightingRangeSetsHighlightedRange() {
         let context = RichTextContext()
         let range = NSRange(location: 1, length: 2)
         context.highlightRange(range)
         XCTAssertEqual(context.highlightedRange, range)
     }
-    
+
     func testResetingHighlightResetsHighlightedRange() {
         let context = RichTextContext()
         let range = NSRange(location: 1, length: 2)
@@ -40,7 +40,7 @@ final class RichTextContextTests: XCTestCase {
         context.resetHighlightedRange()
         XCTAssertNil(context.highlightedRange)
     }
-    
+
     func testStopEditingTextSetsPropertyToFalse() {
         let context = RichTextContext()
         context.isEditingText = true

@@ -18,7 +18,7 @@ import AppKit
 
 @available(*, deprecated, message: "Use RichTextViewComponent instead.")
 public extension RichTextAttributeWriter {
-    
+
     /// Set the rich text indent at a certain range.
     ///
     /// Unlike some other attributes, this attribute applies
@@ -28,24 +28,24 @@ public extension RichTextAttributeWriter {
         at range: NSRange
     ) -> RichTextAttributes? {
         let text = richText.string
-        
+
         // Text view has selected text
         if range.length > 0 {
             return stepIndentInternal(points: points, at: range)
         }
-        
+
         // The cursor is at the beginning of the text
         if range.location == 0 {
             return stepRichTextIndent(points: points, atIndex: 0)
         }
-        
+
         // The cursor is immediately before a newline
         if let char = text.character(at: range.location), char.isNewLineSeparator {
             let location = UInt(range.location)
             let index = text.findIndexOfCurrentParagraph(from: location)
             return stepRichTextIndent(points: points, atIndex: index)
         }
-        
+
         // The cursor is somewhere within a paragraph
         let location = UInt(range.location)
         let index = text.findIndexOfCurrentParagraph(from: location)

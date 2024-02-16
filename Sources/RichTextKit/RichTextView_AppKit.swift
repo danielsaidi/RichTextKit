@@ -184,7 +184,7 @@ open class RichTextView: NSTextView, RichTextViewComponent {
 // MARK: - Public Extensions
 
 public extension RichTextView {
-    
+
     /// The text view's layout manager, if any.
     var layoutManagerWrapper: NSLayoutManager? {
         layoutManager
@@ -195,7 +195,7 @@ public extension RichTextView {
         get { textContainerInset }
         set { textContainerInset = newValue }
     }
-    
+
     /// The text view's text storage, if any.
     var textStorageWrapper: NSTextStorage? {
         textStorage

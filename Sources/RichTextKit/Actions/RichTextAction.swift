@@ -59,13 +59,13 @@ public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
 
     /// Set a certain ``RichTextStyle``.
     case setStyle(RichTextStyle, Bool)
-    
+
     /// Step the font size.
     case stepFontSize(points: Int)
 
     /// Step the indent level.
     case stepIndent(points: CGFloat)
-    
+
     /// Step the line spacing.
     case stepLineSpacing(points: CGFloat)
 
@@ -80,7 +80,7 @@ public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
 }
 
 public extension RichTextAction {
-    
+
     typealias Publisher = PassthroughSubject<Self, Never>
 
     /// The action's unique identifier.
@@ -111,12 +111,12 @@ public extension RichTextAction {
         case .undoLatestChange: .richTextActionUndo
         }
     }
-    
+
     /// The localized label to use for the action.
     var label: some View {
         icon.label(title)
     }
-    
+
     /// The localized title to use in the main menu.
     var menuTitle: String {
         menuTitleKey.text

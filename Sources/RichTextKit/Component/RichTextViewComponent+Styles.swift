@@ -9,7 +9,7 @@
 import Foundation
 
 public extension RichTextViewComponent {
-    
+
     /// Get all styles.
     var richTextStyles: [RichTextStyle] {
         let attributes = richTextAttributes
@@ -19,12 +19,12 @@ public extension RichTextViewComponent {
         if attributes.isUnderlined { styles.append(.underlined) }
         return styles
     }
-    
+
     /// Whether or not the current range has a certain style.
     func hasRichTextStyle(_ style: RichTextStyle) -> Bool {
         richTextStyles.contains(style)
     }
-    
+
     /// Set a certain style.
     func setRichTextStyle(
         _ style: RichTextStyle,
@@ -44,7 +44,7 @@ public extension RichTextViewComponent {
             setRichTextAttribute(.strikethroughStyle, to: value)
         }
     }
-    
+
     /// Toggle a certain style.
     func toggleRichTextStyle(
         _ style: RichTextStyle

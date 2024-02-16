@@ -13,7 +13,7 @@ import SwiftUI
 /**
  This coordinator is used to keep a ``RichTextView`` in sync
  with a ``RichTextContext``.
- 
+
  This is used by ``RichTextEditor`` to coordinate changes in
  its context and the underlying text view.
 
@@ -225,7 +225,7 @@ extension RichTextCoordinator {
         if context.isEditingText != isEditingText {
             context.isEditingText = isEditingText
         }
-        
+
         let lineSpacing = textView.richTextLineSpacing ?? 10.0
         if context.lineSpacing != lineSpacing {
             context.lineSpacing = lineSpacing

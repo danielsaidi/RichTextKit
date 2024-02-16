@@ -10,10 +10,10 @@
 import SwiftUI
 
 public extension RichTextFormatToolbar {
-    
+
     /// This struct can be used to configure a format sheet.
     struct Configuration {
-        
+
         public init(
             alignments: [RichTextAlignment] = .all,
             colorPickers: [RichTextColor] = [.foreground],
@@ -39,7 +39,7 @@ public extension RichTextFormatToolbar {
             self.superscriptButtons = false
             #endif
         }
-        
+
         public var alignments: [RichTextAlignment]
         public var colorPickers: [RichTextColor]
         public var colorPickersDisclosed: [RichTextColor]
@@ -53,7 +53,7 @@ public extension RichTextFormatToolbar {
 }
 
 public extension RichTextFormatToolbar.Configuration {
-    
+
     /// The standard rich text format toolbar configuration.
     static var standard = Self.init()
 }

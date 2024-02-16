@@ -9,7 +9,7 @@
 import SwiftUI
 
 extension RichTextFont {
-    
+
     /**
      This struct is used by the various library font pickers.
      */

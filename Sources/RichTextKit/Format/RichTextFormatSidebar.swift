@@ -12,7 +12,7 @@ import SwiftUI
 /**
  This sidebar view provides various text format options, and
  is meant to be used on macOS, in a trailing sidebar.
- 
+
  You can provide custom configurations to adjust the toolbar
  and style it by applying a `.richTextFormatToolbarStyle` to
  the view hierarchy.
@@ -37,12 +37,12 @@ public struct RichTextFormatSidebar: RichTextFormatToolbarBase {
         self._context = ObservedObject(wrappedValue: context)
         self.config = config
     }
-    
+
     public typealias Configuration = RichTextFormatToolbar.Configuration
 
     @ObservedObject
     private var context: RichTextContext
-    
+
     let config: Configuration
 
     @Environment(\.richTextFormatToolbarStyle)
@@ -58,7 +58,7 @@ public struct RichTextFormatSidebar: RichTextFormatToolbarBase {
                     fontSizePicker(for: context)
                 }
             }
-            
+
             Divider()
 
             SidebarSection {
@@ -71,7 +71,7 @@ public struct RichTextFormatSidebar: RichTextFormatToolbarBase {
                     superscriptButtons(for: context, greedy: true)
                 }
             }
-            
+
             Divider()
 
             if hasColorPickers {
@@ -96,7 +96,7 @@ private struct SidebarSection<Content: View>: View {
 
     @Environment(\.richTextFormatToolbarStyle)
     var style
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: style.spacing) {
             content()

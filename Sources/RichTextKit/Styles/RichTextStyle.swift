@@ -90,7 +90,7 @@ public extension Collection where Element == RichTextStyle {
     func hasStyle(_ style: RichTextStyle) -> Bool {
         contains(style)
     }
-    
+
     /// Check if a certain style change should be applied.
     func shouldAddOrRemove(
         _ style: RichTextStyle,

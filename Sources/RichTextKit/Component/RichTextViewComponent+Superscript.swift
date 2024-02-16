@@ -27,7 +27,7 @@ public extension RichTextViewComponent {
         print("Unsupported platform")
         #endif
     }
-    
+
     /// Step the superscript level.
     func stepRichTextSuperscriptLevel(points: Int) {
         let currentSize = richTextSuperscriptLevel ?? 0

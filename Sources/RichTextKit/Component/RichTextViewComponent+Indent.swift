@@ -54,38 +54,37 @@ private extension RichTextViewComponent {
         attributes[.paragraphStyle] = mutableStyle
         typingAttributes = attributes
     }
-    
+
     /// Set the rich text indent at a certain range.
     func stepIndent(
         points: CGFloat,
         at range: NSRange
     ) -> RichTextAttributes? {
         let text = richText.string
-        
+
         // Text view has selected text
         if range.length > 0 {
             return stepIndentInternal(points: points, at: range)
         }
-        
+
         // The cursor is at the beginning of the text
         if range.location == 0 {
             return stepIndent(points: points, atIndex: 0)
         }
-        
+
         // The cursor is immediately before a newline
         if let char = text.character(at: range.location), char.isNewLineSeparator {
             let location = UInt(range.location)
             let index = text.findIndexOfCurrentParagraph(from: location)
             return stepIndent(points: points, atIndex: index)
         }
-        
+
         // The cursor is somewhere within a paragraph
         let location = UInt(range.location)
         let index = text.findIndexOfCurrentParagraph(from: location)
         return stepIndent(points: points, atIndex: index)
     }
 }
-
 
 private extension RichTextAttributeWriter {
 

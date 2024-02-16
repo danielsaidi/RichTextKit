@@ -33,7 +33,7 @@ public extension RichTextFont {
         }
 
         private let values: [CGFloat]
-        
+
         private let step = 1
 
         @ObservedObject
@@ -61,7 +61,7 @@ private extension RichTextFont.SizePickerStack {
             .opacity(0)
             .allowsHitTesting(false)
     }
-    
+
     var stack: some View {
         HStack(spacing: 2) {
             stepButton(-step)
@@ -69,7 +69,7 @@ private extension RichTextFont.SizePickerStack {
             stepButton(step)
         }
     }
-    
+
     func stepButton(_ points: Int) -> some View {
         RichTextAction.Button(
             action: .stepFontSize(points: points),

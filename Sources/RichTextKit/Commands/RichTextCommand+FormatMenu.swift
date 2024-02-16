@@ -14,10 +14,10 @@ public extension RichTextCommand {
     /**
      This menu adds standard rich text format options to the
      main menu, using `CommandGroup`.
-     
+
      You can apply this to a `WindowGroup` or `DocumentGroup`
      to make it appear in the app's main menu.
-     
+
      This menu requires that a ``RichTextContext`` is set as
      a focused value, otherwise it will be disabled.
      */
@@ -31,7 +31,7 @@ public extension RichTextCommand {
             self.submenus = submenus
             self.additionalActions = additionalActions
         }
-        
+
         private let submenus: [SubMenu]
         private let additionalActions: [RichTextAction]
 
@@ -44,7 +44,7 @@ public extension RichTextCommand {
                     ForEach(submenus) { $0 }
                 }
                 .disabled(context == nil)
-                
+
                 if !additionalActions.isEmpty {
                     Divider()
                     ForEach(additionalActions) {
@@ -57,15 +57,15 @@ public extension RichTextCommand {
 }
 
 public extension RichTextCommand.FormatMenu {
-    
+
     /// This enum defines various format sub-menus
     enum SubMenu: String, CaseIterable, Identifiable, View {
         case font, text, indent, lineSpacing, superscript
-        
+
         public var id: String { rawValue }
-        
+
         typealias Group = RichTextCommand.ActionButtonGroup
-        
+
         public var body: some View {
             switch self {
             case .font:

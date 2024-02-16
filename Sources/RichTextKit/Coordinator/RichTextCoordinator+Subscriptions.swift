@@ -31,7 +31,7 @@ extension RichTextCoordinator {
 }
 
 private extension RichTextCoordinator {
-    
+
     func subscribeToAlignment() {
         context.$textAlignment
             .sink { [weak self] in
@@ -39,7 +39,7 @@ private extension RichTextCoordinator {
             }
             .store(in: &cancellables)
     }
-    
+
     func subscribeToFontName() {
         context.$fontName
             .sink { [weak self] in
@@ -47,7 +47,7 @@ private extension RichTextCoordinator {
             }
             .store(in: &cancellables)
     }
-    
+
     func subscribeToFontSize() {
         context.$fontSize
             .sink { [weak self] in
@@ -63,7 +63,7 @@ private extension RichTextCoordinator {
             }
             .store(in: &cancellables)
     }
-    
+
     func subscribeToLineSpacing() {
         context.$lineSpacing
             .sink { [weak self] in

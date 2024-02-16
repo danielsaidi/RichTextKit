@@ -15,14 +15,13 @@ import UIKit
 import AppKit
 #endif
 
-
 /**
  This protocol provides a common interface for the UIKit and
  AppKit ``RichTextView`` components.
 
  By implementing this protocol, the library does not have to
  do a bunch of `#if` platform checks within the code.
- 
+
  This component can read and write many different attributes
  from and to its rich text, using the underlying features of
  ``RichTextAttributeReader`` and ``RichTextAttributeWriter``.
@@ -50,7 +49,7 @@ public protocol RichTextViewComponent: AnyObject,
 
     /// Whether or not the text view is the first responder.
     var isFirstResponder: Bool { get }
-    
+
     /// The text view's layout manager, if any.
     var layoutManagerWrapper: NSLayoutManager? { get }
 
@@ -59,13 +58,12 @@ public protocol RichTextViewComponent: AnyObject,
 
     /// The spacing between the text view's edge and its text.
     var textContentInset: CGSize { get set }
-    
+
     /// The text view's text storage, if any.
     var textStorageWrapper: NSTextStorage? { get }
 
     /// The text view current typing attributes.
     var typingAttributes: RichTextAttributes { get set }
-    
 
     // MARK: - Setup
 
@@ -75,7 +73,6 @@ public protocol RichTextViewComponent: AnyObject,
         format: RichTextDataFormat
     )
 
-    
     // MARK: - Functions
 
     /// Show an alert with a title, message and button text.
@@ -99,7 +96,6 @@ public protocol RichTextViewComponent: AnyObject,
     /// Undo the latest change.
     func undoLatestChange()
 }
-
 
 // MARK: - Public Extension
 

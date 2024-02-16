@@ -50,7 +50,7 @@ public extension RichTextAttributeReader {
     func font(at range: NSRange) -> FontRepresentable? {
         richTextFont(at: range)
     }
-    
+
     @available(*, deprecated, renamed: "richTextAttribute(_:at:)")
     func richTextFont(
         at range: NSRange

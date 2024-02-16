@@ -23,7 +23,7 @@ public extension RichTextViewComponent {
 
      Pasting images only works on iOS, tvOS and macOS. Other
      platform will trigger an assertion failure.
-     
+
      > Todo: This automatically inserts images as compressed
      jpeg. We should make it more configurable.
 
@@ -48,7 +48,7 @@ public extension RichTextViewComponent {
 
     /**
      Paste images into the text view, at a certain index.
-     
+
      This will automatically insert an image as a compressed
      jpeg. We should make it more configurable.
 

@@ -23,7 +23,7 @@ extension RichTextCoordinator {
             pasteImages(images)
         case .pasteText(let text):
             pasteText(text)
-        case .print: 
+        case .print:
             break
         case .redoLatestChange:
             textView.redoLatestChange()

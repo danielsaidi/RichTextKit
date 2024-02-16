@@ -103,7 +103,7 @@ public extension RTKL10n {
             .actionIndentDecrease :
             .actionIndentIncrease
     }
-    
+
     static func actionStepLineSpacing(
         _ points: CGFloat
     ) -> RTKL10n {

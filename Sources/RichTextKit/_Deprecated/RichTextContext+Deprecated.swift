@@ -2,7 +2,7 @@ import SwiftUI
 import Combine
 
 public extension RichTextContext {
-    
+
     @available(*, deprecated, renamed: "actionPublisher")
     var userActionPublisher: PassthroughSubject<RichTextAction, Never> { actionPublisher }
 
@@ -35,7 +35,7 @@ public extension RichTextContext {
     func decreaseIndent(points: UInt = 1) {
         handle(.decreaseIndent(points: points))
     }
-    
+
     @available(*, deprecated, message: "Use handle(_:) with the .pasteImage action")
     func pasteImage(
         _ image: ImageRepresentable,
@@ -89,12 +89,12 @@ public extension RichTextContext {
             )
         )
     }
-    
+
     @available(*, deprecated, renamed: "setStyle")
     func set(_ style: RichTextStyle, to val: Bool) {
         setStyle(style, to: val)
     }
-    
+
     @available(*, deprecated, renamed: "toggleStyle")
     func toggle(_ style: RichTextStyle) {
         toggleStyle(style)

@@ -9,7 +9,7 @@ import Foundation
 
 #if iOS || macOS || os(tvOS) || os(visionOS)
 public extension RichTextView.Configuration {
-    
+
     /// Get a standard rich text editor configuration.
     static var standard: Self { .init() }
 }

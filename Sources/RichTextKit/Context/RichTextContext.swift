@@ -14,8 +14,8 @@ import Combine
  ``RichTextEditor`` and its content.
 
  Use ``handle(_:)`` to trigger actions, e.g. to change fonts,
- text styles, text alignments, select a text range, etc. 
- 
+ text styles, text alignments, select a text range, etc.
+
  You can observe the various published properties to keep an
  app up to date with the current state. The ``RichTextEditor``
  uses this with a ``RichTextCoordinator`` to keep it updated.
@@ -25,7 +25,6 @@ public class RichTextContext: ObservableObject {
     /// Create a new rich text context instance.
     public init() {}
 
-    
     // MARK: - Not yet observable properties
 
     /**
@@ -46,7 +45,6 @@ public class RichTextContext: ObservableObject {
     /// The currently selected range, if any.
     public internal(set) var selectedRange = NSRange()
 
-    
     // MARK: - Bindable Properies
 
     /// Whether or not the text is currently being edited.
@@ -60,37 +58,35 @@ public class RichTextContext: ObservableObject {
     /// The current font name.
     @Published
     public var fontName = ""
-    
+
     /// The current font size.
     @Published
     public var fontSize = CGFloat.standardRichTextFontSize
-    
+
     /// The current line spacing.
     @Published
     public var lineSpacing: CGFloat = 10.0
-    
-    
+
     // MARK: - Properties
-    
+
     /// This publisher can emit actions to the coordinator.
     public let actionPublisher = RichTextAction.Publisher()
 
     /// The currently highlighted range, if any.
     public var highlightedRange: NSRange?
-    
-    
+
     // MARK: - Deprecated Colors
-    
+
     @available(*, deprecated, renamed: "colors")
     public var backgroundColor: ColorRepresentable? {
         colors[.background]
     }
-    
+
     @available(*, deprecated, renamed: "colors")
     public var foregroundColor: ColorRepresentable? {
         colors[.foreground]
     }
-    
+
     @available(*, deprecated, renamed: "colors")
     public var strikethroughColor: ColorRepresentable? {
         colors[.strikethrough]
@@ -105,10 +101,9 @@ public class RichTextContext: ObservableObject {
     public var underlineColor: ColorRepresentable? {
         colors[.underline]
     }
-    
-    
+
     // MARK: - Deprecated Styles
-    
+
     @available(*, deprecated, renamed: "styles")
     public var isBold: Bool { hasStyle(.bold) }
 
@@ -121,7 +116,6 @@ public class RichTextContext: ObservableObject {
     @available(*, deprecated, renamed: "styles")
     public var isUnderlined: Bool { hasStyle(.underlined) }
 
-    
     // MARK: - Observable Properties
 
     /// Whether or not the current rich text can be copied.
@@ -143,14 +137,14 @@ public class RichTextContext: ObservableObject {
     /// Whether or not the indent level can be increased.
     @Published
     public internal(set) var canIncreaseIndent = true
-    
+
     @Published
     public internal(set) var colors = [RichTextColor: ColorRepresentable]()
 
     /// The style to apply when highlighting a range.
     @Published
     public internal(set) var highlightingStyle = RichTextHighlightingStyle.standard
-    
+
     @Published
     public internal(set) var styles = [RichTextStyle: Bool]()
 }

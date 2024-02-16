@@ -11,11 +11,11 @@ import SwiftUI
 
 /**
  This horizontal toolbar provides text format controls.
- 
+
  This toolbar adapts the layout based on the horizontal size
  class. The control row will be split in two in compact size,
  while macOS and regular sizes get a single row.
- 
+
  You can provide custom configurations to adjust the toolbar
  and style it by applying a `.richTextFormatToolbarStyle` to
  the view hierarchy.
@@ -39,12 +39,12 @@ public struct RichTextFormatToolbar: RichTextFormatToolbarBase {
 
     @ObservedObject
     private var context: RichTextContext
-    
+
     let config: Configuration
-    
+
     @Environment(\.richTextFormatToolbarStyle)
     var style
-    
+
     @Environment(\.horizontalSizeClass)
     private var horizontalSizeClass
 
@@ -65,11 +65,10 @@ public struct RichTextFormatToolbar: RichTextFormatToolbarBase {
     }
 }
 
-
 // MARK: - Views
 
 private extension RichTextFormatToolbar {
-    
+
     var useSingleLine: Bool {
         #if macOS
         true
@@ -80,14 +79,14 @@ private extension RichTextFormatToolbar {
 }
 
 private extension RichTextFormatToolbar {
-    
+
     var background: some View {
         Color.clear
             .overlay(Color.primary.opacity(0.1))
             .shadow(color: .black.opacity(0.1), radius: 5)
             .edgesIgnoringSafeArea(.all)
     }
-    
+
     @ViewBuilder
     var controls: some View {
         if useSingleLine {
@@ -102,7 +101,7 @@ private extension RichTextFormatToolbar {
             .padding(.horizontal, style.padding)
         }
     }
-    
+
     @ViewBuilder
     var controlsContent: some View {
         HStack {
@@ -129,10 +128,10 @@ private extension RichTextFormatToolbar {
 struct RichTextFormatToolbar_Previews: PreviewProvider {
 
     struct Preview: View {
-        
+
         @StateObject
         private var context = RichTextContext()
-        
+
         var toolbar: RichTextFormatToolbar {
             .init(
                 context: context,
@@ -147,7 +146,7 @@ struct RichTextFormatToolbar_Previews: PreviewProvider {
                 )
             )
         }
-        
+
         var body: some View {
             VStack(spacing: 0) {
                 Color.red

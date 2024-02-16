@@ -60,7 +60,7 @@ public extension RichTextLine.SpacingPicker {
     static var standardValues: [CGFloat] {
         [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     }
-    
+
     /// Get a list of values for a certain selection.
     static func values(
         for values: [CGFloat],

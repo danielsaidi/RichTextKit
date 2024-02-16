@@ -168,7 +168,7 @@ private extension RichTextKeyboardToolbar {
 }
 
 private extension RichTextKeyboardToolbar {
-    
+
     @ViewBuilder
     var content: some View {
         HStack(spacing: style.itemSpacing) {
@@ -258,7 +258,7 @@ public struct RichTextKeyboardToolbarStyle {
        - itemSpacing: The spacing between toolbar items, by default `15`.
        - shadowColor: The toolbar's shadow color, by default transparent black.
        - shadowRadius: The toolbar's shadow radius, by default `3`.
-       
+
      */
     public init(
         toolbarHeight: Double = 50,
@@ -290,7 +290,6 @@ public extension RichTextKeyboardToolbarStyle {
     /// This standard style is used by default.
     static var standard = RichTextKeyboardToolbarStyle()
 }
-
 
 /**
  This can be used to configure a ``RichTextKeyboardToolbar``.

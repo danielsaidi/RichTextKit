@@ -13,7 +13,7 @@ public extension RichTextCommand {
     /**
      This view can add list of ``RichTextAction`` buttons to
      the main menu.
-     
+
      This view requires that a ``RichTextContext`` is set as
      a focused value, otherwise it will be disabled.
      */
@@ -32,7 +32,7 @@ public extension RichTextCommand {
         }
 
         private let actions: [RichTextAction]
-        
+
         private let step = 1
 
         public var body: some View {
@@ -44,7 +44,7 @@ public extension RichTextCommand {
 }
 
 public extension RichTextCommand.ActionButtonGroup {
-    
+
     /// Create a button group with alignments.
     init(
         alignments: [RichTextAlignment],
@@ -54,7 +54,7 @@ public extension RichTextCommand.ActionButtonGroup {
             .setAlignment($0)
         } + additionalActions
     }
-    
+
     /// Create a button group with font size steppers.
     init(
         fontSize: Bool,
@@ -65,7 +65,7 @@ public extension RichTextCommand.ActionButtonGroup {
             .stepFontSize(points: -1)
         ] + additionalActions
     }
-    
+
     /// Create a button group with indent steppers.
     init(
         indent: Bool,
@@ -76,7 +76,7 @@ public extension RichTextCommand.ActionButtonGroup {
             .stepIndent(points: -1)
         ] + additionalActions
     }
-    
+
     /// Create a button group with line spacing steppers.
     init(
         lineSpacing: Bool,
@@ -87,7 +87,7 @@ public extension RichTextCommand.ActionButtonGroup {
             .stepLineSpacing(points: -1)
         ] + additionalActions
     }
-    
+
     /// Create a button group with style toggles.
     init(
         styles: [RichTextAlignment],
@@ -97,7 +97,7 @@ public extension RichTextCommand.ActionButtonGroup {
             .toggleStyle($0)
         } + additionalActions
     }
-    
+
     /// Create a button group with superscript steppers.
     init(
         superscript: Bool,

@@ -28,7 +28,7 @@ public extension RichTextView {
 
         /// Whether or not the editor should scroll.
         public var isScrollingEnabled: Bool
-        
+
         /// Whether the editor spell-checks in realtime.
         public var isContinuousSpellCheckingEnabled: Bool
     }

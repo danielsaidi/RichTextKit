@@ -18,7 +18,7 @@ public extension ImageRepresentable {
     var cgImage: CGImage? {
         cgImage(forProposedRect: nil, context: nil, hints: nil)
     }
-    
+
     /// Try to get JPEG compressed data for the AppKit image.
     func jpegData(compressionQuality: CGFloat) -> Data? {
         guard let image = cgImage else { return nil }

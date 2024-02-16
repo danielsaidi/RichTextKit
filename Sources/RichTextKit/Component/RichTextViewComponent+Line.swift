@@ -15,12 +15,12 @@ import AppKit
 #endif
 
 public extension RichTextViewComponent {
-    
+
     /// Get the line spacing.
     var richTextLineSpacing: CGFloat? {
         richTextParagraphStyle?.lineSpacing
     }
-    
+
     /// Set the line spacing.
     func setRichTextLineSpacing(_ spacing: CGFloat) {
         if richTextLineSpacing == spacing { return }
@@ -33,7 +33,7 @@ public extension RichTextViewComponent {
         style.lineSpacing = spacing
         storage.addAttribute(.paragraphStyle, value: style, range: range)
     }
-    
+
     /// Step the line spacing.
     func stepRichTextLineSpacing(points: CGFloat) {
         let currentSize = richTextLineSpacing ?? 0

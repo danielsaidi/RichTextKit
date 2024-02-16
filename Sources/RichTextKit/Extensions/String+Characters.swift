@@ -21,7 +21,7 @@ public extension String.Element {
 
     /// A ` ` space string element.
     static var space: String.Element { " " }
-    
+
     /// If the string element is a new line separator.
     var isNewLineSeparator: Bool {
         self == .newLine || self == .carriageReturn

@@ -76,7 +76,7 @@ public extension RichTextStyle {
 }
 
 extension View {
-    
+
     @ViewBuilder
     func foreground(_ color: Color, if isOn: Bool) -> some View {
         if isOn {
@@ -85,7 +85,7 @@ extension View {
             self
         }
     }
-    
+
     @ViewBuilder
     func tint(_ color: Color, if isOn: Bool) -> some View {
         if isOn {

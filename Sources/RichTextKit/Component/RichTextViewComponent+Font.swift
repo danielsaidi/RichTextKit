@@ -91,7 +91,7 @@ private extension RichTextViewComponent {
         attributes[.font] = newFont
         typingAttributes = attributes
     }
-    
+
     /// Set the font name at a certain range.
     func setFontName(_ name: String, at range: NSRange) {
         guard let text = mutableRichText else { return }

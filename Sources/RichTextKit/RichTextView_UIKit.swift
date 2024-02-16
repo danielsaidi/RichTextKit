@@ -364,7 +364,7 @@ private extension UIDropSession {
 // MARK: - Public Extensions
 
 public extension RichTextView {
-    
+
     /// The text view's layout manager, if any.
     var layoutManagerWrapper: NSLayoutManager? {
         layoutManager
@@ -386,7 +386,7 @@ public extension RichTextView {
             )
         }
     }
-    
+
     /// The text view's text storage, if any.
     var textStorageWrapper: NSTextStorage? {
         textStorage

@@ -33,7 +33,7 @@ public extension RichTextLine {
         }
 
         private let values: [CGFloat]
-        
+
         private let step = 1.0
 
         @ObservedObject
@@ -55,13 +55,13 @@ public extension RichTextLine {
 }
 
 private extension RichTextLine.SpacingPickerStack {
-    
+
     var macShortcutOverlay: some View {
         stack
             .opacity(0)
             .allowsHitTesting(false)
     }
-    
+
     var stack: some View {
         HStack(spacing: 2) {
             stepButton(-step)

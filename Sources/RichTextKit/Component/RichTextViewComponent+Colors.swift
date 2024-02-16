@@ -17,7 +17,7 @@ public extension RichTextViewComponent {
         guard let attribute = color.attribute else { return nil }
         return richTextAttribute(attribute)
     }
-    
+
     /// Get a certain color at a certain range.
     func richTextColor(
         _ color: RichTextColor,
@@ -36,7 +36,7 @@ public extension RichTextViewComponent {
         guard let attribute = color.attribute else { return }
         setRichTextAttribute(attribute, to: val)
     }
-    
+
     /// Set a certain colors at a certain range.
     func setRichTextColor(
         _ color: RichTextColor,

@@ -14,7 +14,7 @@ import Foundation
 
  This protocol is implemented by `NSMutableAttributedString`,
  as well as other types in the library.
- 
+
  Note that this protocol used to have a lot of functionality
  for setting various attributes, styles, etc. However, since
  ``RichTextViewComponent`` needs more capabilities, we ended
