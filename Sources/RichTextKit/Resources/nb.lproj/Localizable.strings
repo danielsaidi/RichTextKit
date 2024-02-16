@@ -9,6 +9,7 @@
 "locale" = "nb";
 
 "done" = "Færdig";
+"more" = "Mer";
 
 "font" = "Skrifttype";
 "fontSize" = "Skriftstørrelse";

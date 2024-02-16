@@ -3,7 +3,7 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-12-13.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 #if iOS || macOS || os(visionOS)
@@ -17,91 +17,68 @@ import SwiftUI
  should also be made to look good on iPadOS in landscape, to
  let us use it instead of the ``RichTextFormatSheet``.
  */
-public struct RichTextFormatSidebar: View {
+public struct RichTextFormatSidebar: RichTextFormatToolbarBase {
 
     /**
      Create a rich text format sheet.
 
      - Parameters:
        - context: The context to apply changes to.
-       - colorPickers: The color pickers to use, by default `.foreground` and `.background`.
+       - config: The configuration to use, by default `.standard`.
      */
     public init(
         context: RichTextContext,
-        colorPickers: [RichTextColor] = [.foreground, .background]
+        config: Configuration = .standard
     ) {
         self._context = ObservedObject(wrappedValue: context)
-        self.colorPickers = colorPickers
+        self.config = config
     }
+    
+    public typealias Configuration = RichTextFormatToolbar.Configuration
 
     @ObservedObject
     private var context: RichTextContext
+    
+    let config: Configuration
 
-    /// The sidebar spacing.
-    public var spacing = 10.0
-
-    /// The color pickers to use.
-    public var colorPickers: [RichTextColor]
+    @Environment(\.richTextFormatToolbarStyle)
+    var style
 
     public var body: some View {
-        VStack(alignment: .leading, spacing: spacing) {
+        VStack(alignment: .leading, spacing: style.spacing) {
             SidebarSection {
-                RichTextFont.Picker(selection: $context.fontName, fontSize: 12)
+                fontPicker(value: $context.fontName)
                 HStack {
-                    RichTextStyle.ToggleGroup(context: context)
-                    RichTextFont.SizePickerStack(context: context)
+                    styleToggleGroup(for: context)
+                    Spacer()
+                    fontSizePicker(for: context)
                 }
             }
+            
+            Divider()
 
             SidebarSection {
-                RichTextAlignment.Picker(selection: $context.textAlignment)
-                    .pickerStyle(.segmented)
+                alignmentPicker(value: $context.textAlignment)
                 HStack {
-                    RichTextAction.ButtonGroup(
-                        context: context,
-                        actions: [.decreaseIndent(), .increaseIndent()]
-                    )
-                    if hasSuperscriptSupport {
-                        RichTextAction.ButtonGroup(
-                            context: context,
-                            actions: [
-                                .increaseSuperscript(),
-                                .decreaseSuperscript()
-                            ]
-                        )
-                    }
+                    superscriptButtons(for: context, greedy: true)
+                    indentButtons(for: context, greedy: true)
                 }
             }
+            
+            Divider()
 
-            SidebarSection {
-                VStack(spacing: 4) {
-                    ForEach(colorPickers) {
-                        RichTextColor.Picker(
-                            type: $0,
-                            value: context.binding(for: $0),
-                            quickColors: .quickPickerColors
-                        )
-                    }
+            if hasColorPickers {
+                SidebarSection {
+                    colorPickers(for: context)
                 }
+                .padding(.trailing, -8)
+                Divider()
             }
-            .font(.callout)
-            .padding(.trailing, -8)
 
             Spacer()
         }
-        .padding(8)
+        .padding(style.padding - 2)
         .background(Color.white.opacity(0.05))
-    }
-}
-
-private extension RichTextFormatSidebar {
-    
-    var hasSuperscriptSupport: Bool {
-        #if macOS
-        return true
-        #else
-        return false
-        #endif
     }
 }
 
@@ -110,10 +87,12 @@ private struct SidebarSection<Content: View>: View {
     @ViewBuilder
     let content: () -> Content
 
+    @Environment(\.richTextFormatToolbarStyle)
+    var style
+    
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: style.spacing) {
             content()
-            Divider()
         }
     }
 }
@@ -126,13 +105,25 @@ struct RichTextFormatSidebar_Previews: PreviewProvider {
         private var context = RichTextContext()
 
         var body: some View {
-            RichTextFormatSidebar(context: context)
+            RichTextFormatSidebar(
+                context: context,
+                config: .init(
+                    alignments: [.left, .right],
+                    colorPickers: [.foreground],
+                    colorPickersDisclosed: [],
+                    fontPicker: true,
+                    fontSizePicker: true,
+                    indentButtons: true,
+                    styles: .all,
+                    superscriptButtons: true
+                )
+            )
         }
     }
 
     static var previews: some View {
         Preview()
-            .frame(width: 350)
+            .frame(minWidth: 350)
     }
 }
 #endif

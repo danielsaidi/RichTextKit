@@ -9,6 +9,7 @@
 "locale" = "sv";
 
 "done" = "Klar";
+"more" = "Mer";
 
 "font" = "Typsnitt";
 "fontSize" = "Teckenstorlek";

@@ -9,20 +9,19 @@
 import SwiftUI
 
 /**
- This toolbar provides different text format options, and is
- meant to be used on iOS, where space is limited.
+ This horizontal toolbar provides text format controls.
  
- Consider presenting this view from the bottom in a way that
- doesn't cause the underlying text view to dim.
+ This toolbar adapts the layout based on the horizontal size
+ class. The control row will be split in two in compact size,
+ while macOS and regular sizes get a single row.
  
  You can provide a custom configuration to adjust the format
- options that are presented. When presented, the font picker
- will take up the available vertical height.
+ options. The font picker will take up all available height.
  
  You can style this view by applying a style anywhere in the
  view hierarchy, using `.richTextFormatToolbarStyle`.
  */
-public struct RichTextFormatToolbar: View {
+public struct RichTextFormatToolbar: RichTextFormatToolbarBase {
 
     /**
      Create a rich text format sheet.
@@ -42,119 +41,19 @@ public struct RichTextFormatToolbar: View {
     @ObservedObject
     private var context: RichTextContext
     
+    let config: Configuration
+    
     @Environment(\.richTextFormatToolbarStyle)
-    private var style
+    var style
     
     @Environment(\.horizontalSizeClass)
     private var horizontalSizeClass
 
-    /// The configuration to use.
-    private let config: Configuration
-
     public var body: some View {
         VStack(spacing: 0) {
-            fontPicker
+            fontListPicker(value: $context.fontName)
             toolbar
         }
-    }
-}
-
-
-// MARK: - Configuration
-
-public extension RichTextFormatToolbar {
-    
-    /// This struct can be used to configure a format sheet.
-    struct Configuration {
-        
-        public init(
-            alignments: [RichTextAlignment] = .all,
-            colorPickers: [RichTextColor] = [.foreground],
-            fontPicker: Bool = true,
-            fontSizePicker: Bool = true,
-            indentButtons: Bool = true,
-            styles: [RichTextStyle] = .all,
-            superscriptButtons: Bool = true
-        ) {
-            self.alignments = alignments
-            self.colorPickers = colorPickers
-            self.fontPicker = fontPicker
-            self.fontSizePicker = fontSizePicker
-            self.indentButtons = indentButtons
-            self.styles = styles
-            #if macOS
-            self.superscriptButtons = superscriptButtons
-            #else
-            self.superscriptButtons = false
-            #endif
-        }
-        
-        public var alignments: [RichTextAlignment]
-        public var colorPickers: [RichTextColor]
-        public var fontPicker: Bool
-        public var fontSizePicker: Bool
-        public var indentButtons: Bool
-        public var styles: [RichTextStyle]
-        public var superscriptButtons: Bool
-    }
-}
-
-public extension RichTextFormatToolbar.Configuration {
-    
-    /// The standard rich text format toolbar configuration.
-    static var standard = Self.init()
-}
-
-
-// MARK: - Style
-
-public extension RichTextFormatToolbar {
-    
-    /// This struct can be used to style a format sheet.
-    ///
-    /// Don't specify a font picker height if the toolbar is
-    /// presented in a sheet. In those cases, use detents to
-    /// limit its height.
-    struct Style {
-        
-        public init(
-            fontPickerHeight: CGFloat? = nil,
-            padding: Double = 10,
-            spacing: Double = 10
-        ) {
-            self.fontPickerHeight = fontPickerHeight
-            self.padding = padding
-            self.spacing = spacing
-        }
-        
-        public var fontPickerHeight: CGFloat?
-        public var padding: Double
-        public var spacing: Double
-    }
-    
-    /// This environment key defines a format toolbar style.
-    struct StyleKey: EnvironmentKey {
-        
-        public static let defaultValue = RichTextFormatToolbar.Style()
-    }
-}
-
-public extension View {
-    
-    /// Apply a rich text format toolbar style.
-    func richTextFormatToolbarStyle(
-        _ style: RichTextFormatToolbar.Style
-    ) -> some View {
-        self.environment(\.richTextFormatToolbarStyle, style)
-    }
-}
-
-public extension EnvironmentValues {
-    
-    /// This environment value defines format toolbar styles.
-    var richTextFormatToolbarStyle: RichTextFormatToolbar.Style {
-        get { self [RichTextFormatToolbar.StyleKey.self] }
-        set { self [RichTextFormatToolbar.StyleKey.self] = newValue }
     }
 }
 
@@ -189,19 +88,13 @@ public extension RichTextFormatToolbar {
 
 private extension RichTextFormatToolbar {
     
-    @ViewBuilder
-    var fontPicker: some View {
-        if config.fontPicker {
-            RichTextFont.ListPicker(selection: $context.fontName)
-                .frame(height: style.fontPickerHeight)
-            Divider()
-        }
-    }
-    
     var toolbar: some View {
         VStack(spacing: style.spacing) {
             controls
-            colorPickers
+            if hasColorPickers {
+                Divider()
+                colorPickers(for: context)
+            }
         }
         .padding(.vertical, style.padding)
         .environment(\.sizeCategory, .medium)
@@ -218,17 +111,6 @@ private extension RichTextFormatToolbar {
 }
 
 private extension RichTextFormatToolbar {
-    
-    @ViewBuilder
-    var alignmentPicker: some View {
-        if !config.alignments.isEmpty {
-            RichTextAlignment.Picker(
-                selection: $context.textAlignment,
-                values: config.alignments
-            )
-            .pickerStyle(.segmented)
-        }
-    }
     
     var background: some View {
         Color.clear
@@ -255,76 +137,19 @@ private extension RichTextFormatToolbar {
     @ViewBuilder
     var controlsContent: some View {
         HStack {
-            styleButtons
-            fontSizePicker
+            styleToggleGroup(for: context)
+            if !useSingleLine {
+                Spacer()
+            }
+            fontSizePicker(for: context)
             if horizontalSizeClass == .regular {
                 Spacer()
             }
         }
         HStack {
-            alignmentPicker
-            superscriptButtons
-            indentButtons
-        }
-    }
-    
-    @ViewBuilder
-    var colorPickers: some View {
-        if !config.colorPickers.isEmpty {
-            VStack(spacing: style.spacing) {
-                Divider()
-                ForEach(config.colorPickers) {
-                    RichTextColor.Picker(
-                        type: $0,
-                        value: context.binding(for: $0),
-                        quickColors: .quickPickerColors
-                    )
-                }
-            }
-            .padding(.leading, style.padding)
-        }
-    }
-    
-    @ViewBuilder
-    var fontSizePicker: some View {
-        if config.fontSizePicker {
-            RichTextFont.SizePickerStack(context: context)
-                .buttonStyle(.bordered)
-        }
-    }
-    
-    @ViewBuilder
-    var indentButtons: some View {
-        if config.indentButtons {
-            RichTextAction.ButtonGroup(
-                context: context,
-                actions: [.decreaseIndent(), .increaseIndent()],
-                greedy: false
-            )
-        }
-    }
-    
-    @ViewBuilder
-    var styleButtons: some View {
-        if !config.styles.isEmpty {
-            RichTextStyle.ToggleGroup(
-                context: context,
-                styles: config.styles
-            )
-            if !useSingleLine {
-                Spacer()
-            }
-        }
-    }
-    
-    @ViewBuilder
-    var superscriptButtons: some View {
-        if config.superscriptButtons {
-            RichTextAction.ButtonGroup(
-                context: context,
-                actions: [.decreaseSuperscript(), .increaseSuperscript()],
-                greedy: false
-            )
+            alignmentPicker(value: $context.textAlignment)
+            superscriptButtons(for: context, greedy: false)
+            indentButtons(for: context, greedy: false)
         }
     }
 }
@@ -344,8 +169,9 @@ struct RichTextFormatToolbar_Previews: PreviewProvider {
                 context: context,
                 config: .init(
                     alignments: .all,
-                    // colorPickers: [.foreground],
-                    fontPicker: false,
+                    colorPickers: [.foreground, .background],
+                    colorPickersDisclosed: [.stroke],
+                    fontPicker: true,
                     fontSizePicker: true,
                     indentButtons: true,
                     styles: .all

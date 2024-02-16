@@ -15,6 +15,7 @@ public enum RTKL10n: String, CaseIterable, Identifiable {
 
     case
     done,
+    more,
 
     font,
     fontSize,
