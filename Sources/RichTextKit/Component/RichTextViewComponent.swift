@@ -50,17 +50,19 @@ public protocol RichTextViewComponent: AnyObject,
     /// Whether or not the text view is the first responder.
     var isFirstResponder: Bool { get }
 
+    #if iOS || macOS || os(tvOS) || os(visionOS)
     /// The text view's layout manager, if any.
     var layoutManagerWrapper: NSLayoutManager? { get }
+
+    /// The text view's text storage, if any.
+    var textStorageWrapper: NSTextStorage? { get }
+    #endif
 
     /// The text view's mutable attributed string, if any.
     var mutableAttributedString: NSMutableAttributedString? { get }
 
     /// The spacing between the text view's edge and its text.
     var textContentInset: CGSize { get set }
-
-    /// The text view's text storage, if any.
-    var textStorageWrapper: NSTextStorage? { get }
 
     /// The text view current typing attributes.
     var typingAttributes: RichTextAttributes { get set }

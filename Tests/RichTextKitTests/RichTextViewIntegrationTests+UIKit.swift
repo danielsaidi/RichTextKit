@@ -66,7 +66,7 @@ final class RichTextViewIntegrationTests: XCTestCase {
         // After that we append more text, asserting that this text carries same attributes as the one
         // before and we change it.
         assertSecondTextPart()
-        // Finally, we set typingAttributes before we append last text and check if those typingAttributes 
+        // Finally, we set typingAttributes before we append last text and check if those typingAttributes
         // are set to our new text.
         assertFinalTextPart()
     }

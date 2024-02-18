@@ -1,3 +1,4 @@
+#if iOS || macOS || os(tvOS) || os(visionOS)
 import SwiftUI
 
 public extension RichTextCoordinator {
@@ -7,3 +8,4 @@ public extension RichTextCoordinator {
         context
     }
 }
+#endif
