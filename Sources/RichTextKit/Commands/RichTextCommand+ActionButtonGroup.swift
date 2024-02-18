@@ -72,8 +72,8 @@ public extension RichTextCommand.ActionButtonGroup {
         additionalActions: [RichTextAction] = []
     ) {
         self.actions = [
-            .stepIndent(points: 1),
-            .stepIndent(points: -1)
+            .stepIndent(points: 30),
+            .stepIndent(points: -30)
         ] + additionalActions
     }
 

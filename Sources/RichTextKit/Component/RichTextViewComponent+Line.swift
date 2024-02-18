@@ -22,16 +22,17 @@ public extension RichTextViewComponent {
     }
 
     /// Set the line spacing.
+    ///
+    /// > Todo: The function currently can't handle multiple
+    /// selected paragraphs. If many paragraphs are selected,
+    /// it will only affect the first one. 
     func setRichTextLineSpacing(_ spacing: CGFloat) {
         if richTextLineSpacing == spacing { return }
-        guard let storage = textStorageWrapper else { return }
-        let range = lineRange(for: selectedRange)
         let style = NSMutableParagraphStyle(
             from: richTextParagraphStyle,
             lineSpacing: spacing
         )
-        style.lineSpacing = spacing
-        storage.addAttribute(.paragraphStyle, value: style, range: range)
+        setRichTextParagraphStyle(style)
     }
 
     /// Step the line spacing.

@@ -124,7 +124,7 @@ extension RichTextFormatToolbarBase {
         if config.indentButtons {
             RichTextAction.ButtonGroup(
                 context: context,
-                actions: [.stepIndent(points: -1), .stepIndent(points: 1)],
+                actions: [.stepIndent(points: -30), .stepIndent(points: 30)],
                 greedy: greedy
             )
         }

@@ -93,7 +93,7 @@ public extension RichTextAction {
         case .dismissKeyboard: .richTextActionDismissKeyboard
         case .pasteImage: .richTextDocuments
         case .pasteImages: .richTextDocuments
-        case .pasteText: .richTextStepIndent(1)
+        case .pasteText: .richTextDocuments
         case .print: .richTextActionExport
         case .redoLatestChange: .richTextActionRedo
         case .selectRange: .richTextSelection
