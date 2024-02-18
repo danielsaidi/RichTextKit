@@ -31,45 +31,45 @@ extension RichTextCoordinator {
 }
 
 private extension RichTextCoordinator {
+    
+    func subscribe<T>(
+        to publisher: Published<T>.Publisher,
+        action: @escaping (T) -> Void
+    ) {
+        publisher
+            .sink(receiveValue: action)
+            .store(in: &cancellables)
+    }
 
     func subscribeToAlignment() {
-        context.$textAlignment
-            .sink { [weak self] in
-                self?.handle(.setAlignment($0))
-            }
-            .store(in: &cancellables)
+        subscribe(to: context.$textAlignment) { [weak self] in
+            self?.handle(.setAlignment($0))
+        }
     }
 
     func subscribeToFontName() {
-        context.$fontName
-            .sink { [weak self] in
-                self?.textView.setRichTextFontName($0)
-            }
-            .store(in: &cancellables)
+        subscribe(to: context.$fontName) { [weak self] in
+            self?.textView.setRichTextFontName($0)
+        }
     }
 
     func subscribeToFontSize() {
-        context.$fontSize
-            .sink { [weak self] in
-                self?.textView.setRichTextFontSize($0)
-            }
-            .store(in: &cancellables)
+        subscribe(to: context.$fontSize) { [weak self] in
+            self?.textView.setRichTextFontSize($0)
+        }
     }
 
     func subscribeToIsEditingText() {
-        context.$isEditingText
-            .sink { [weak self] in
-                self?.setIsEditing(to: $0)
-            }
-            .store(in: &cancellables)
+        subscribe(to: context.$isEditingText) { [weak self] in
+            self?.setIsEditing(to: $0)
+        }
     }
 
+    // TODO: Not done yet
     func subscribeToLineSpacing() {
-        context.$lineSpacing
-            .sink { [weak self] in
-                self?.textView.setRichTextLineSpacing($0)
-            }
-            .store(in: &cancellables)
+        // subscribe(to: context.$lineSpacing) { [weak self] in
+        //     self?.textView.setRichTextLineSpacing($0)
+        // }
     }
 }
 #endif

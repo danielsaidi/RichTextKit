@@ -59,6 +59,36 @@ final class RichTextCoordinatorTests: XCTestCase {
         XCTAssertEqual(coordinator.text.wrappedValue.string, "foo bar baz")
         XCTAssertEqual(coordinator.context.selectedRange, range)
     }
+    
+    func testChangingSomeViewPropertiesUpdatesContextAutomatically() {
+        view.attributedString = .init(string: "foo bar")
+        view.selectedRange = .init(location: 0, length: 0)
+        
+        XCTAssertFalse(context.hasSelectedRange)
+        XCTAssertFalse(context.canCopy)
+        XCTAssertFalse(context.canRedoLatestChange)
+        
+        view.typingAttributes[.font] = FontRepresentable.systemFont(ofSize: 10)
+        view.attributedString = .init(string: "foo bar")
+        view.selectedRange = .init(location: 1, length: 2)
+        
+        XCTAssertEqual(context.attributedString, view.attributedString)
+        XCTAssertEqual(context.attributedString.string, "foo bar")
+        XCTAssertEqual(context.selectedRange, view.selectedRange)
+        XCTAssertTrue(context.hasSelectedRange)
+        XCTAssertTrue(context.canCopy)
+        XCTAssertEqual(context.canRedoLatestChange, view.undoManager?.canRedo ?? false)
+        XCTAssertEqual(context.canUndoLatestChange, view.undoManager?.canUndo ?? false)
+        XCTAssertEqual(context.fontName, view.richTextFont?.fontName)
+        XCTAssertEqual(context.fontSize, view.richTextFont?.pointSize)
+        XCTAssertEqual(context.isEditingText, view.isFirstResponder)
+        // XCTAssertEqual(context.lineSpacing, view.richTextLineSpacing) TODO: Not done yet
+        XCTAssertEqual(context.textAlignment, view.richTextAlignment)
+    }
+    
+    func testChangingOtherViewPropertiesUpdatesContextAfterExplicitUpdate() {
+        
+    }
 
     func assertIsSyncedWithContext(macOSAlignment: RichTextAlignment = .left) {
         let styles = view.richTextStyles

@@ -169,20 +169,25 @@ extension RichTextCoordinator {
             syncContextWithTextViewAfterDelay()
         }
     }
+    
+    func sync<T: Equatable>(_ prop: inout T, with value: T) {
+        if prop == value { return }
+        prop = value
+    }
 
     /// Sync the rich text context with the text view.
     func syncContextWithTextViewAfterDelay() {
-        let styles = textView.richTextStyles
-
-        let string = textView.attributedString
-        if context.attributedString != string {
-            context.attributedString = string
-        }
-
-        let range = textView.selectedRange
-        if context.selectedRange != range {
-            context.selectedRange = range
-        }
+        let font = textView.richTextFont ?? .standardRichTextFont
+        sync(&context.attributedString, with: textView.attributedString)
+        sync(&context.selectedRange, with: textView.selectedRange)
+        sync(&context.canCopy, with: textView.hasSelectedRange)
+        sync(&context.canRedoLatestChange, with: textView.undoManager?.canRedo ?? false)
+        sync(&context.canUndoLatestChange, with: textView.undoManager?.canUndo ?? false)
+        sync(&context.fontName, with: font.fontName)
+        sync(&context.fontSize, with: font.pointSize)
+        sync(&context.isEditingText, with: textView.isFirstResponder)
+        // sync(&context.lineSpacing, with: textView.richTextLineSpacing ?? 10.0)   TODO: Not done yet
+        sync(&context.textAlignment, with: textView.richTextAlignment ?? .left)
 
         RichTextColor.allCases.forEach {
             if let color = textView.richTextColor($0) {
@@ -190,50 +195,10 @@ extension RichTextCoordinator {
             }
         }
 
-        let hasRange = textView.hasSelectedRange
-        if context.canCopy != hasRange {
-            context.canCopy = hasRange
-        }
-
-        let canRedo = textView.undoManager?.canRedo ?? false
-        if context.canRedoLatestChange != canRedo {
-            context.canRedoLatestChange = canRedo
-        }
-
-        let canUndo = textView.undoManager?.canUndo ?? false
-        if context.canUndoLatestChange != canUndo {
-            context.canUndoLatestChange = canUndo
-        }
-
-        if let fontName = textView.richTextFont?.fontName,
-            !fontName.isEmpty,
-            context.fontName != fontName {
-            context.fontName = fontName
-        }
-
-        let fontSize = textView.richTextFont?.pointSize ?? .standardRichTextFontSize
-        if context.fontSize != fontSize {
-            context.fontSize = fontSize
-        }
-
+        let styles = textView.richTextStyles
         RichTextStyle.all.forEach {
             let style = styles.hasStyle($0)
             context.setStyleInternal($0, to: style)
-        }
-
-        let isEditingText = textView.isFirstResponder
-        if context.isEditingText != isEditingText {
-            context.isEditingText = isEditingText
-        }
-
-        let lineSpacing = textView.richTextLineSpacing ?? 10.0
-        if context.lineSpacing != lineSpacing {
-            context.lineSpacing = lineSpacing
-        }
-
-        if let textAlignment = textView.richTextAlignment,
-            context.textAlignment != textAlignment {
-            context.textAlignment = textAlignment
         }
 
         updateTextViewAttributesIfNeeded()
