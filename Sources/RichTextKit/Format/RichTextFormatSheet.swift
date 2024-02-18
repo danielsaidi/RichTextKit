@@ -54,7 +54,10 @@ public struct RichTextFormatSheet: RichTextFormatToolbarBase {
     public var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-                fontListPicker(value: $context.fontName)
+                RichTextFont.ListPicker(
+                    selection: $context.fontName
+                )
+                Divider()
                 RichTextFormatToolbar(
                     context: context,
                     config: config

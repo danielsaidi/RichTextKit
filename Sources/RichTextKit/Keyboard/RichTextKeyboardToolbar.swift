@@ -48,7 +48,7 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
        - trailingActions: The trailing actions, by default `.dismissKeyboard`.
        - leadingButtons: The leading buttons to place after the leading actions.
        - trailingButtons: The trailing buttons to place before the trailing actions.
-       - richTextFormatSheet: The rich text format sheet to use, given the default ``RichTextFormatToolbar``.
+       - richTextFormatSheet: The rich text format sheet to use, given the default ``RichTextFormatSheet``.
      */
     public init(
         context: RichTextContext,
@@ -58,7 +58,7 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
         trailingActions: [RichTextAction] = [.dismissKeyboard],
         @ViewBuilder leadingButtons: @escaping () -> LeadingButtons,
         @ViewBuilder trailingButtons: @escaping () -> TrailingButtons,
-        @ViewBuilder richTextFormatSheet: @escaping (RichTextFormatToolbar) -> FormatSheet
+        @ViewBuilder richTextFormatSheet: @escaping (RichTextFormatSheet) -> FormatSheet
     ) {
         self._context = ObservedObject(wrappedValue: context)
         self.leadingActions = leadingActions
@@ -81,7 +81,7 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
        - trailingActions: The trailing actions, by default `.dismissKeyboard`.
        - leadingButtons: The leading buttons to place after the leading actions.
        - trailingButtons: The trailing buttons to place after the trailing actions.
-       - richTextFormatSheet: The rich text format sheet to use, given the default ``RichTextFormatToolbar``.
+       - richTextFormatSheet: The rich text format sheet to use, given the default ``RichTextFormatSheet``.
      */
     public init(
         context: RichTextContext,
@@ -91,7 +91,7 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
         trailingActions: [RichTextAction] = [.dismissKeyboard],
         @ViewBuilder leadingButtons: @escaping () -> LeadingButtons,
         @ViewBuilder trailingButtons: @escaping () -> TrailingButtons
-    ) where FormatSheet == RichTextFormatToolbar {
+    ) where FormatSheet == RichTextFormatSheet {
         self.init(
             context: context,
             style: style,
@@ -111,7 +111,7 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
 
     private let leadingButtons: () -> LeadingButtons
     private let trailingButtons: () -> TrailingButtons
-    private let richTextFormatSheet: (RichTextFormatToolbar) -> FormatSheet
+    private let richTextFormatSheet: (RichTextFormatSheet) -> FormatSheet
 
     @ObservedObject
     private var context: RichTextContext
@@ -124,7 +124,12 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
 
     public var body: some View {
         VStack(spacing: 0) {
-            content
+            HStack(spacing: style.itemSpacing) {
+                leadingViews
+                Spacer()
+                trailingViews
+            }
+            .padding(10)
         }
         .environment(\.sizeCategory, .medium)
         .frame(height: style.toolbarHeight)
@@ -140,7 +145,7 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
         .frame(height: shouldDisplayToolbar ? nil : 0)
         .sheet(isPresented: $isFormatSheetPresented) {
             richTextFormatSheet(
-                RichTextFormatToolbar(context: context)
+                RichTextFormatSheet(context: context)
             ).prefersMediumSize()
         }
     }
@@ -164,20 +169,12 @@ private extension View {
 
 private extension RichTextKeyboardToolbar {
 
-    var isCompact: Bool { horizontalSizeClass == .compact }
+    var isCompact: Bool {
+        horizontalSizeClass == .compact
+    }
 }
 
 private extension RichTextKeyboardToolbar {
-
-    @ViewBuilder
-    var content: some View {
-        HStack(spacing: style.itemSpacing) {
-            leadingViews
-            Spacer()
-            trailingViews
-        }
-        .padding(10)
-    }
 
     var divider: some View {
         Divider()

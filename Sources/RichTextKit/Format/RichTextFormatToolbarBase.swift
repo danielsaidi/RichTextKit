@@ -98,16 +98,6 @@ extension RichTextFormatToolbarBase {
     }
 
     @ViewBuilder
-    func fontListPicker(
-        value: Binding<String>
-    ) -> some View {
-        if config.fontPicker {
-            RichTextFont.ListPicker(selection: value)
-            Divider()
-        }
-    }
-
-    @ViewBuilder
     func fontPicker(
         value: Binding<String>
     ) -> some View {
