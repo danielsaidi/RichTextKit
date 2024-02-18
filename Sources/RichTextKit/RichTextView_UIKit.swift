@@ -101,7 +101,6 @@ open class RichTextView: UITextView, RichTextViewComponent {
     /// Keeps track of the data format used by the view.
     private var richTextDataFormat: RichTextDataFormat = .archivedData
 
-    
     // MARK: - Overrides
 
     /**
@@ -149,7 +148,6 @@ open class RichTextView: UITextView, RichTextViewComponent {
     }
     #endif
 
-    
     // MARK: - Setup
 
     /**

@@ -31,7 +31,7 @@ extension RichTextCoordinator {
 }
 
 private extension RichTextCoordinator {
-    
+
     func subscribe<T>(
         to publisher: Published<T>.Publisher,
         action: @escaping (T) -> Void

@@ -25,7 +25,7 @@ public extension RichTextViewComponent {
     ///
     /// > Todo: The function currently can't handle multiple
     /// selected paragraphs. If many paragraphs are selected,
-    /// it will only affect the first one. 
+    /// it will only affect the first one.
     func setRichTextLineSpacing(_ spacing: CGFloat) {
         if richTextLineSpacing == spacing { return }
         let style = NSMutableParagraphStyle(

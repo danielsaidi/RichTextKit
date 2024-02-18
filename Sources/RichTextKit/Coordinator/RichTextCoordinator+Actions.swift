@@ -92,10 +92,10 @@ extension RichTextCoordinator {
         guard let newValue else { return }
         textView.setRichText(newValue)
     }
-    
+
     // TODO: This code should be handled by the component
     func setColor(_ color: RichTextColor, to val: ColorRepresentable) {
-        var applyRange: NSRange? = nil
+        var applyRange: NSRange?
         if textView.hasSelectedRange {
             applyRange = textView.selectedRange
         }

@@ -22,7 +22,7 @@ public extension RichTextViewComponent {
     var richTextIndent: CGFloat? {
         richTextParagraphStyle?.headIndent
     }
-    
+
     /// Set the rich text indent.
     func setRichTextIndent(to val: CGFloat) {
         let style = NSMutableParagraphStyle(

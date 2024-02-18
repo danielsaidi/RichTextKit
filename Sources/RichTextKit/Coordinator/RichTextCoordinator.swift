@@ -169,7 +169,7 @@ extension RichTextCoordinator {
             syncContextWithTextViewAfterDelay()
         }
     }
-    
+
     func sync<T: Equatable>(_ prop: inout T, with value: T) {
         if prop == value { return }
         prop = value

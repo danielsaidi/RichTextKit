@@ -22,7 +22,7 @@ public extension RichTextViewComponent {
     var richTextParagraphStyle: NSMutableParagraphStyle? {
         richTextAttribute(.paragraphStyle)
     }
-    
+
     /// Set the paragraph style.
     ///
     /// > Todo: The function currently can't handle multiple
