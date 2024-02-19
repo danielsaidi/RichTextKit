@@ -39,6 +39,9 @@ struct EditorScreen: View {
             }
         }
         .viewDebug()
+        .onChange(of: context.selectedRange) { _ in
+            print(text.string)
+        }
     }
 }
 
