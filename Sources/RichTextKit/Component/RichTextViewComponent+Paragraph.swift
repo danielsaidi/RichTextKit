@@ -30,7 +30,13 @@ public extension RichTextViewComponent {
     /// it will only affect the first one.
     func setRichTextParagraphStyle(_ style: NSParagraphStyle) {
         defer { richTextAlignment = RichTextAlignment(style.alignment)  }
-        let range = lineRange(for: selectedRange)
+        
+        let range: NSRange
+        if multipleSelectedLines() {
+            range = safeRange(for: selectedRange)
+        } else {
+            range = lineRange(for: selectedRange)
+        }
         guard range.length > 0 else {
             setRichTextAttribute(.paragraphStyle, to: style)
             return
@@ -40,6 +46,12 @@ public extension RichTextViewComponent {
         #else
         textStorageWrapper?.addAttribute(.paragraphStyle, value: style, range: range)
         #endif
+    }
+    
+    private func multipleSelectedLines() -> Bool {
+        guard let selectedText = textStorageWrapper?.attributedSubstring(from: selectedRange) else { return false }
+        let selectedLines = selectedText.string.components(separatedBy: .newlines)
         
+        return selectedLines.count > 1
     }
 }
