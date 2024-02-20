@@ -29,12 +29,17 @@ public extension RichTextViewComponent {
     /// selected paragraphs. If many paragraphs are selected,
     /// it will only affect the first one.
     func setRichTextParagraphStyle(_ style: NSParagraphStyle) {
+        defer { richTextAlignment = RichTextAlignment(style.alignment)  }
         let range = lineRange(for: selectedRange)
-        guard range.length > 0 else { return }
+        guard range.length > 0 else {
+            setRichTextAttribute(.paragraphStyle, to: style)
+            return
+        }
         #if os(watchOS)
         setRichTextAttribute(.paragraphStyle, to: style, at: range)
         #else
         textStorageWrapper?.addAttribute(.paragraphStyle, value: style, range: range)
         #endif
+        
     }
 }

@@ -101,6 +101,12 @@ open class RichTextView: UITextView, RichTextViewComponent {
     /// Keeps track of the data format used by the view.
     private var richTextDataFormat: RichTextDataFormat = .archivedData
 
+    /// Get the text alignment.
+    public var richTextAlignment: RichTextAlignment?
+    //    {
+    //        guard let style = richTextParagraphStyle else { return nil }
+    //        return RichTextAlignment(style.alignment)
+    //    }
     // MARK: - Overrides
 
     /**
