@@ -204,24 +204,25 @@ extension RichTextCoordinator {
             let style = styles.hasStyle($0)
             context.setStyleInternal($0, to: style)
 
-        // IMPORTANT:
-        // When we set custom RichTextAttributes, those are available only for parsing.
-        // That means when UITextView renders the attributed text, it automatically removes
-        // all undocumented attributes from itself and keeps only the documented ones
-        // (In customLinks case - `.link` and `.foregroundColor`
-        // This is probably hack because it intervenes with other links (mentions implementation in future)
-        if let linkString = textView.richTextAttributes[.link] as? String,
-           let color = textView.richTextAttributes[.foregroundColor] as? ColorRepresentable,
-           color == ColorRepresentable.green {
-            richTextContext.setLink(URL(string: linkString))
-        } else {
-            richTextContext.setLink(nil)
-            // TODO: Set attribute to nil
-//            textView.setRichTextAttribute(.richTextLink, to: nil)
-//            textView.setRichTextAttribute(.link, to: nil)
-        }
+            // IMPORTANT:
+            // When we set custom RichTextAttributes, those are available only for parsing.
+            // That means when UITextView renders the attributed text, it automatically removes
+            // all undocumented attributes from itself and keeps only the documented ones
+            // (In customLinks case - `.link` and `.foregroundColor`
+            // This is probably hack because it intervenes with other links (mentions implementation in future)
+            if let linkString = textView.richTextAttributes[.link] as? String,
+               let color = textView.richTextAttributes[.foregroundColor] as? ColorRepresentable,
+               color == ColorRepresentable.green {
+                richTextContext.setLink(URL(string: linkString))
+            } else {
+                richTextContext.setLink(nil)
+                // TODO: Set attribute to nil
+                //            textView.setRichTextAttribute(.richTextLink, to: nil)
+                //            textView.setRichTextAttribute(.link, to: nil)
+            }
 
-        updateTextViewAttributesIfNeeded()
+            updateTextViewAttributesIfNeeded()
+        }
     }
 
     /// Sync the text binding with the text view.
