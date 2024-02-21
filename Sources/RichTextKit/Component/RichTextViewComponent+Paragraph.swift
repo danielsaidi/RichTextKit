@@ -29,8 +29,8 @@ public extension RichTextViewComponent {
     /// selected paragraphs. If many paragraphs are selected,
     /// it will only affect the first one.
     func setRichTextParagraphStyle(_ style: NSParagraphStyle) {
-        defer { richTextAlignment = RichTextAlignment(style.alignment)  }
-        
+        defer { richTextAlignment = RichTextAlignment(style.alignment) }
+
         let range: NSRange
         if multipleSelectedLines() {
             range = safeRange(for: selectedRange)
@@ -47,11 +47,11 @@ public extension RichTextViewComponent {
         textStorageWrapper?.addAttribute(.paragraphStyle, value: style, range: range)
         #endif
     }
-    
+
     private func multipleSelectedLines() -> Bool {
         guard let selectedText = textStorageWrapper?.attributedSubstring(from: selectedRange) else { return false }
         let selectedLines = selectedText.string.components(separatedBy: .newlines)
-        
+
         return selectedLines.count > 1
     }
 }

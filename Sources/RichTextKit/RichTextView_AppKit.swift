@@ -41,7 +41,7 @@ open class RichTextView: NSTextView, RichTextViewComponent {
 
     /// Get the text alignment.
     public var richTextAlignment: RichTextAlignment?
-    
+
     // MARK: - Overrides
 
     /// Paste the current pasteboard content into the view.

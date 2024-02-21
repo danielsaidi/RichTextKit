@@ -187,7 +187,7 @@ extension RichTextCoordinator {
         sync(&context.fontSize, with: font.pointSize)
         sync(&context.isEditingText, with: textView.isFirstResponder)
         // sync(&context.lineSpacing, with: textView.richTextLineSpacing ?? 10.0)   TODO: Not done yet
-        sync(&context.textAlignment, with: textView.richTextAlignment ?? .left)
+        sync(&context.textAlignment, with: fetchAttributeAlignment() ?? .left)
 
         RichTextColor.allCases.forEach {
             if let color = textView.richTextColor($0) {
@@ -231,6 +231,11 @@ extension RichTextCoordinator {
         let attributes = textView.richTextAttributes
         textView.setRichTextAttributes(attributes)
         #endif
+    }
+
+    private func fetchAttributeAlignment() -> RichTextAlignment? {
+        guard let style = textView.richTextParagraphStyle else { return nil }
+        return RichTextAlignment(style.alignment)
     }
 }
 #endif

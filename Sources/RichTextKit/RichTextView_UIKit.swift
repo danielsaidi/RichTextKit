@@ -103,10 +103,7 @@ open class RichTextView: UITextView, RichTextViewComponent {
 
     /// Get the text alignment.
     public var richTextAlignment: RichTextAlignment?
-    //    {
-    //        guard let style = richTextParagraphStyle else { return nil }
-    //        return RichTextAlignment(style.alignment)
-    //    }
+
     // MARK: - Overrides
 
     /**
