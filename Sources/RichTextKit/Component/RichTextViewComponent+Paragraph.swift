@@ -19,8 +19,11 @@ import AppKit
 public extension RichTextViewComponent {
 
     /// Get the paragraph style.
-    var richTextParagraphStyle: NSMutableParagraphStyle? {
-        richTextAttribute(.paragraphStyle)
+    /// We need to get paragraph style from text storage because attributed string
+    /// doesn't inherit those attributes from storage. It simply doesnt mirror.
+    /// Appears like a bug on Apples side.
+    public var richTextParagraphStyle: NSMutableParagraphStyle? {
+        textStorageWrapper?.richTextParagraphStyle(at: selectedRange)
     }
 
     /// Set the paragraph style.
@@ -29,8 +32,6 @@ public extension RichTextViewComponent {
     /// selected paragraphs. If many paragraphs are selected,
     /// it will only affect the first one.
     func setRichTextParagraphStyle(_ style: NSParagraphStyle) {
-        defer { richTextAlignment = RichTextAlignment(style.alignment) }
-
         let range: NSRange
         if multipleSelectedLines() {
             range = safeRange(for: selectedRange)

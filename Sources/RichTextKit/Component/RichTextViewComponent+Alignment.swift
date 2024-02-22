@@ -15,7 +15,11 @@ import AppKit
 #endif
 
 public extension RichTextViewComponent {
-
+    public var richTextAlignment: RichTextAlignment? {
+        guard let style = richTextParagraphStyle else { return nil }
+        return RichTextAlignment(style.alignment)
+    }
+    
     /// Set the text alignment.
     func setRichTextAlignment(_ alignment: RichTextAlignment) {
         if richTextAlignment == alignment { return }

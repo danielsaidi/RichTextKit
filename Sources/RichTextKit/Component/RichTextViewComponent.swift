@@ -62,7 +62,7 @@ public protocol RichTextViewComponent: AnyObject,
     var mutableAttributedString: NSMutableAttributedString? { get }
 
     /// Get the text alignment.
-    var richTextAlignment: RichTextAlignment? { get set }
+    var richTextAlignment: RichTextAlignment? { get }
 
     /// The spacing between the text view's edge and its text.
     var textContentInset: CGSize { get set }

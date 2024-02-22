@@ -101,9 +101,6 @@ open class RichTextView: UITextView, RichTextViewComponent {
     /// Keeps track of the data format used by the view.
     private var richTextDataFormat: RichTextDataFormat = .archivedData
 
-    /// Get the text alignment.
-    public var richTextAlignment: RichTextAlignment?
-
     // MARK: - Overrides
 
     /**

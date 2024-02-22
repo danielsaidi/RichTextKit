@@ -39,9 +39,6 @@ open class RichTextView: NSTextView, RichTextViewComponent {
     /// The image configuration to use by the rich text view.
     public var imageConfiguration: RichTextImageConfiguration = .disabled
 
-    /// Get the text alignment.
-    public var richTextAlignment: RichTextAlignment?
-
     // MARK: - Overrides
 
     /// Paste the current pasteboard content into the view.
