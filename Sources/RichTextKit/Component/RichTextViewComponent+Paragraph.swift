@@ -38,13 +38,11 @@ public extension RichTextViewComponent {
         } else {
             range = lineRange(for: selectedRange)
         }
-        guard range.length > 0 else {
-            setRichTextAttribute(.paragraphStyle, to: style)
-            return
-        }
+
         #if os(watchOS)
         setRichTextAttribute(.paragraphStyle, to: style, at: range)
         #else
+        setRichTextAttribute(.paragraphStyle, to: style)
         textStorageWrapper?.addAttribute(.paragraphStyle, value: style, range: range)
         #endif
     }
