@@ -234,8 +234,15 @@ extension RichTextCoordinator {
     }
 
     private func fetchAttributeAlignment() -> RichTextAlignment? {
+        #if macOS
         guard let style = textView.richTextParagraphStyle else { return nil }
         return RichTextAlignment(style.alignment)
+        #else
+        // For iOS, this is 100% behavior.
+        if let typingAttributes = textView.typingAttributes[.paragraphStyle] as? NSParagraphStyle {
+            return RichTextAlignment(typingAttributes.alignment)
+        }
+        #endif
     }
 }
 #endif
