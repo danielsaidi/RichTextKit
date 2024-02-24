@@ -35,14 +35,13 @@ import SwiftUI
  this custom toolbar instead, which by default will show and
  hide itself as you begin and end editing the text.
  */
-
 public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: View, FormatSheet: View>: View {
 
     /**
      Create a rich text keyboard toolbar.
 
      - Parameters:
-       - context: The context to affect.=
+       - context: The context to affect.
        - leadingActions: The leading actions, by default `.undo`, `.redo` and `.copy`.
        - trailingActions: The trailing actions, by default `.dismissKeyboard`.
        - leadingButtons: The leading buttons to place after the leading actions.
