@@ -62,6 +62,10 @@ private extension EditorScreen {
             // sheet.colorPickers = .allCases
             return sheet
         }
+        // Uncomment to change keyboard configuration
+        // .richTextKeyboardToolbarConfiguration(.init())
+        // Uncomment to change keyboard style
+        // .richTextKeyboardToolbarStyle(.init())
     }
 }
 
