@@ -1,14 +1,12 @@
 //
-//  File.swift
-//  
+//  RichTextKeyboardToolbar+Configuration.swift
+//  RichTextKit
 //
-//  Created by Ryan Jarvis on 2/23/24.
+//  Created by Ryan Jarvis on 2024-02-24.
 //
-
-import Foundation
-import SwiftUI
 
 #if iOS || macOS || os(visionOS)
+import SwiftUI
 
 /// This struct can be used to configure a `RichTextKeyboardToolbar`.
 public struct RichTextKeyboardToolbarConfiguration {
