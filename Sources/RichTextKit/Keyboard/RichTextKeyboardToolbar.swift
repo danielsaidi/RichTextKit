@@ -35,15 +35,14 @@ import SwiftUI
  this custom toolbar instead, which by default will show and
  hide itself as you begin and end editing the text.
  */
+
 public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: View, FormatSheet: View>: View {
 
     /**
      Create a rich text keyboard toolbar.
 
      - Parameters:
-       - context: The context to affect.
-       - style: The toolbar style to apply, by default ``RichTextKeyboardToolbarStyle/standard``.
-       - configuration: The view configuration, by default ``RichTextKeyboardToolbarConfiguration/standard``.
+       - context: The context to affect.=
        - leadingActions: The leading actions, by default `.undo`, `.redo` and `.copy`.
        - trailingActions: The trailing actions, by default `.dismissKeyboard`.
        - leadingButtons: The leading buttons to place after the leading actions.
@@ -52,8 +51,6 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
      */
     public init(
         context: RichTextContext,
-        style: RichTextKeyboardToolbarStyle = .standard,
-        configuration: RichTextKeyboardToolbarConfiguration = .standard,
         leadingActions: [RichTextAction] = [.undo, .redo, .copy],
         trailingActions: [RichTextAction] = [.dismissKeyboard],
         @ViewBuilder leadingButtons: @escaping () -> LeadingButtons,
@@ -63,8 +60,6 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
         self._context = ObservedObject(wrappedValue: context)
         self.leadingActions = leadingActions
         self.trailingActions = trailingActions
-        self.style = style
-        self.configuration = configuration
         self.leadingButtons = leadingButtons
         self.trailingButtons = trailingButtons
         self.richTextFormatSheet = richTextFormatSheet
@@ -75,8 +70,6 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
 
      - Parameters:
        - context: The context to affect.
-       - style: The toolbar style to apply, by default ``RichTextKeyboardToolbarStyle/standard``.
-       - configuration: The view configuration, by default ``RichTextKeyboardToolbarConfiguration/standard``.
        - leadingActions: The leading actions, by default `.undo`, `.redo` and `.copy`.
        - trailingActions: The trailing actions, by default `.dismissKeyboard`.
        - leadingButtons: The leading buttons to place after the leading actions.
@@ -85,8 +78,6 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
      */
     public init(
         context: RichTextContext,
-        style: RichTextKeyboardToolbarStyle = .standard,
-        configuration: RichTextKeyboardToolbarConfiguration = .standard,
         leadingActions: [RichTextAction] = [.undo, .redo, .copy],
         trailingActions: [RichTextAction] = [.dismissKeyboard],
         @ViewBuilder leadingButtons: @escaping () -> LeadingButtons,
@@ -94,8 +85,6 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
     ) where FormatSheet == RichTextFormatSheet {
         self.init(
             context: context,
-            style: style,
-            configuration: configuration,
             leadingActions: leadingActions,
             trailingActions: trailingActions,
             leadingButtons: leadingButtons,
@@ -106,8 +95,6 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
 
     private let leadingActions: [RichTextAction]
     private let trailingActions: [RichTextAction]
-    private let style: RichTextKeyboardToolbarStyle
-    private let configuration: RichTextKeyboardToolbarConfiguration
 
     private let leadingButtons: () -> LeadingButtons
     private let trailingButtons: () -> TrailingButtons
@@ -121,6 +108,12 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
 
     @Environment(\.horizontalSizeClass)
     private var horizontalSizeClass
+
+    @Environment(\.richTextKeyboardToolbarConfiguration)
+    var configuration
+
+    @Environment(\.richTextKeyboardToolbarStyle)
+    var style
 
     public var body: some View {
         VStack(spacing: 0) {
@@ -222,11 +215,6 @@ private extension RichTextKeyboardToolbar {
     }
 }
 
-private extension RichTextKeyboardToolbar {
-
-    var shouldDisplayToolbar: Bool { context.isEditingText || configuration.alwaysDisplayToolbar }
-}
-
 private extension View {
 
     @ViewBuilder
@@ -242,76 +230,9 @@ private extension View {
     }
 }
 
-/**
- This can be used to style a ``RichTextKeyboardToolbar``.
- */
-public struct RichTextKeyboardToolbarStyle {
+private extension RichTextKeyboardToolbar {
 
-    /**
-     Create a custom toolbar style.
-
-     - Parameters:
-       - toolbarHeight: The height of the toolbar, by default `50`.
-       - itemSpacing: The spacing between toolbar items, by default `15`.
-       - shadowColor: The toolbar's shadow color, by default transparent black.
-       - shadowRadius: The toolbar's shadow radius, by default `3`.
-
-     */
-    public init(
-        toolbarHeight: Double = 50,
-        itemSpacing: Double = 15,
-        shadowColor: Color = .black.opacity(0.1),
-        shadowRadius: Double = 3
-    ) {
-        self.toolbarHeight = toolbarHeight
-        self.itemSpacing = itemSpacing
-        self.shadowColor = shadowColor
-        self.shadowRadius = shadowRadius
-    }
-
-    /// The height of the toolbar.
-    public var toolbarHeight: Double
-
-    /// The spacing between toolbar items.
-    public var itemSpacing: Double
-
-    /// The toolbar's shadow color.
-    public var shadowColor: Color
-
-    /// The toolbar's shadow radius.
-    public var shadowRadius: Double
-}
-
-public extension RichTextKeyboardToolbarStyle {
-
-    /// This standard style is used by default.
-    static var standard = RichTextKeyboardToolbarStyle()
-}
-
-/**
- This can be used to configure a ``RichTextKeyboardToolbar``.
- */
-public struct RichTextKeyboardToolbarConfiguration {
-    /**
-     Create a custom toolbar configuration.
-
-     - Parameters:
-       - alwaysDisplayToolbar: Should toolbar always be displayed, by default is `false`.
-     */
-    public init(
-        alwaysDisplayToolbar: Bool = false
-    ) {
-        self.alwaysDisplayToolbar = alwaysDisplayToolbar
-    }
-
-    /// Should the toolbar always be displayed.
-    public var alwaysDisplayToolbar: Bool
-}
-
-public extension RichTextKeyboardToolbarConfiguration {
-
-    /// This standard configuration is used by default.
-    static var standard = RichTextKeyboardToolbarConfiguration()
+    var shouldDisplayToolbar: Bool { context.isEditingText || configuration.alwaysDisplayToolbar }
 }
 
 private extension RichTextKeyboardToolbar {
