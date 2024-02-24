@@ -29,7 +29,7 @@ public struct RichTextKeyboardToolbarConfiguration {
 }
 
 /// This environment key defines a `RichTextKeyboardToolbar` configuration.
-struct RichTextKeyboardToolbarConfigurationKey: EnvironmentKey {
+private struct RichTextKeyboardToolbarConfigurationKey: EnvironmentKey {
     public static var defaultValue: RichTextKeyboardToolbarConfiguration = .standard
 }
 

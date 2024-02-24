@@ -48,7 +48,7 @@ public struct RichTextKeyboardToolbarStyle {
 }
 
 /// This environment key defines a `RichTextKeyboardToolbar` style.
-struct RichTextKeyboardToolbarStyleKey: EnvironmentKey {
+private struct RichTextKeyboardToolbarStyleKey: EnvironmentKey {
     public static var defaultValue: RichTextKeyboardToolbarStyle = .standard
 }
 
