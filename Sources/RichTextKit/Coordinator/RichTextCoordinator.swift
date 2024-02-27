@@ -242,6 +242,7 @@ extension RichTextCoordinator {
         if let typingAttributes = textView.typingAttributes[.paragraphStyle] as? NSParagraphStyle {
             return RichTextAlignment(typingAttributes.alignment)
         }
+        return nil
         #endif
     }
 }
