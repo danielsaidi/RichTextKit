@@ -35,7 +35,34 @@ import SwiftUI
  this custom toolbar instead, which by default will show and
  hide itself as you begin and end editing the text.
  */
-public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: View, FormatSheet: View>: View {
+public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: View, FormatSheet: View, ToolbarView: View>: View {
+    
+    /**
+     Create a rich text keyboard toolbar.
+
+     - Parameters:
+       - context: The context to affect.
+       - content: The toolbar content
+     */
+    public init(
+        context: RichTextContext,
+        style: RichTextKeyboardToolbarStyle = .standard,
+        configuration: RichTextKeyboardToolbarConfiguration = .standard,
+        actions: [RichTextAction] = [.undo, .redo, .copy],
+        @ViewBuilder toolbarView: @escaping (() -> RichTextAction.ButtonStack, () -> any View) -> ToolbarView
+    ) where FormatSheet == RichTextFormatSheet, LeadingButtons == EmptyView, TrailingButtons == EmptyView {
+        self.context = context
+        self.leadingActions = actions
+        self.trailingActions = []
+        self.style = style
+        self.configuration = configuration
+        self.leadingButtons = { EmptyView() }
+        self.trailingButtons = { EmptyView() }
+        self.richTextFormatSheet = { $0 }
+        self.toolbarView = toolbarView
+    }
+    
+    
 
     /**
      Create a rich text keyboard toolbar.
@@ -59,7 +86,7 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
         @ViewBuilder leadingButtons: @escaping () -> LeadingButtons,
         @ViewBuilder trailingButtons: @escaping () -> TrailingButtons,
         @ViewBuilder richTextFormatSheet: @escaping (RichTextFormatSheet) -> FormatSheet
-    ) {
+    ) where ToolbarView == EmptyView {
         self._context = ObservedObject(wrappedValue: context)
         self.leadingActions = leadingActions
         self.trailingActions = trailingActions
@@ -68,6 +95,7 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
         self.leadingButtons = leadingButtons
         self.trailingButtons = trailingButtons
         self.richTextFormatSheet = richTextFormatSheet
+        self.toolbarView = { _, _ in .init() }
     }
 
     /**
@@ -91,7 +119,7 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
         trailingActions: [RichTextAction] = [.dismissKeyboard],
         @ViewBuilder leadingButtons: @escaping () -> LeadingButtons,
         @ViewBuilder trailingButtons: @escaping () -> TrailingButtons
-    ) where FormatSheet == RichTextFormatSheet {
+    ) where FormatSheet == RichTextFormatSheet, ToolbarView == EmptyView {
         self.init(
             context: context,
             style: style,
@@ -112,6 +140,8 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
     private let leadingButtons: () -> LeadingButtons
     private let trailingButtons: () -> TrailingButtons
     private let richTextFormatSheet: (RichTextFormatSheet) -> FormatSheet
+    
+    private let toolbarView: (() -> RichTextAction.ButtonStack, () -> any View) -> ToolbarView
 
     @ObservedObject
     private var context: RichTextContext
@@ -124,12 +154,7 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
 
     public var body: some View {
         VStack(spacing: 0) {
-            HStack(spacing: style.itemSpacing) {
-                leadingViews
-                Spacer()
-                trailingViews
-            }
-            .padding(10)
+            toolbar
         }
         .environment(\.sizeCategory, .medium)
         .frame(height: style.toolbarHeight)
@@ -148,6 +173,30 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
                 RichTextFormatSheet(context: context)
             ).prefersMediumSize()
         }
+    }
+}
+
+extension RichTextKeyboardToolbar where ToolbarView == EmptyView {
+    @ViewBuilder
+    private var toolbar: some View {
+        HStack(spacing: style.itemSpacing) {
+            leadingViews
+            Spacer()
+            trailingViews
+        }
+        .padding(10)
+    }
+}
+
+extension RichTextKeyboardToolbar {
+    @ViewBuilder
+    private var toolbar: some View {
+        toolbarView(
+            leadingActionsButtonStack,
+            richTextButton
+        )
+        .frame(maxWidth: .infinity)
+        .padding(10)
     }
 }
 
@@ -180,23 +229,33 @@ private extension RichTextKeyboardToolbar {
         Divider()
             .frame(height: 25)
     }
-
+    
     @ViewBuilder
-    var leadingViews: some View {
+    func richTextButton() -> some View {
+        Button(action: presentFormatSheet) {
+            Image.richTextFormat
+                .contentShape(Rectangle())
+        }
+    }
+    
+    @ViewBuilder
+    func leadingActionsButtonStack() -> RichTextAction.ButtonStack {
         RichTextAction.ButtonStack(
             context: context,
             actions: leadingActions,
             spacing: style.itemSpacing
         )
+    }
+
+    @ViewBuilder
+    var leadingViews: some View {
+        leadingActionsButtonStack()
 
         leadingButtons()
 
         divider
 
-        Button(action: presentFormatSheet) {
-            Image.richTextFormat
-                .contentShape(Rectangle())
-        }
+        richTextButton()
 
         RichTextStyle.ToggleStack(context: context)
             .keyboardShortcutsOnly(if: isCompact)
@@ -339,10 +398,28 @@ struct RichTextKeyboardToolbar_Previews: PreviewProvider {
                     .padding()
                     .background(Color.gray.ignoresSafeArea())
                 RichTextKeyboardToolbar(
-                    context: context,
-                    leadingButtons: {},
-                    trailingButtons: {}
-                )
+                    context: context
+                ) { richTextActions, richTextButton in
+                    HStack {
+                        richTextActions()
+                            .frame(maxWidth: .infinity)
+                        
+                        Divider()
+                        
+                        Text("A")
+                            .frame(maxWidth: .infinity)
+                        
+                        Divider()
+                        
+                        Text("B")
+                            .frame(maxWidth: .infinity)
+                        
+                        Divider()
+                        
+                        AnyView(erasing: richTextButton())
+                            .frame(maxWidth: .infinity)
+                    }
+                }
             }
         }
     }
