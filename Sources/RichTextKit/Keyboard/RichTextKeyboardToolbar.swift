@@ -49,7 +49,7 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
         style: RichTextKeyboardToolbarStyle = .standard,
         configuration: RichTextKeyboardToolbarConfiguration = .standard,
         actions: [RichTextAction] = [.undo, .redo, .copy],
-        @ViewBuilder toolbarView: @escaping (() -> RichTextAction.ButtonStack, () -> any View) -> ToolbarView
+        @ViewBuilder toolbarView: @escaping (([RichTextAction], RichTextKeyboardToolbarStyle) -> RichTextAction.ButtonStack, RichTextKeyboardToolbarStyle, () -> AnyView) -> ToolbarView
     ) where FormatSheet == RichTextFormatSheet, LeadingButtons == EmptyView, TrailingButtons == EmptyView {
         self.context = context
         self.leadingActions = actions
@@ -95,7 +95,7 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
         self.leadingButtons = leadingButtons
         self.trailingButtons = trailingButtons
         self.richTextFormatSheet = richTextFormatSheet
-        self.toolbarView = { _, _ in .init() }
+        self.toolbarView = { _, _, _ in .init() }
     }
 
     /**
@@ -141,7 +141,7 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
     private let trailingButtons: () -> TrailingButtons
     private let richTextFormatSheet: (RichTextFormatSheet) -> FormatSheet
     
-    private let toolbarView: (() -> RichTextAction.ButtonStack, () -> any View) -> ToolbarView
+    private let toolbarView: (([RichTextAction], RichTextKeyboardToolbarStyle) -> RichTextAction.ButtonStack, RichTextKeyboardToolbarStyle, () -> AnyView) -> ToolbarView
 
     @ObservedObject
     private var context: RichTextContext
@@ -155,6 +155,7 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
     public var body: some View {
         VStack(spacing: 0) {
             toolbar
+                .padding(10)
         }
         .environment(\.sizeCategory, .medium)
         .frame(height: style.toolbarHeight)
@@ -184,7 +185,6 @@ extension RichTextKeyboardToolbar where ToolbarView == EmptyView {
             Spacer()
             trailingViews
         }
-        .padding(10)
     }
 }
 
@@ -192,11 +192,11 @@ extension RichTextKeyboardToolbar {
     @ViewBuilder
     private var toolbar: some View {
         toolbarView(
-            leadingActionsButtonStack,
-            richTextButton
+            actionsButtonStack,
+            style,
+            { AnyView(erasing: richTextButton()) }
         )
         .frame(maxWidth: .infinity)
-        .padding(10)
     }
 }
 
@@ -239,17 +239,23 @@ private extension RichTextKeyboardToolbar {
     }
     
     @ViewBuilder
-    func leadingActionsButtonStack() -> RichTextAction.ButtonStack {
+    func actionsButtonStack(
+        actions: [RichTextAction],
+        style: RichTextKeyboardToolbarStyle
+    ) -> RichTextAction.ButtonStack {
         RichTextAction.ButtonStack(
             context: context,
-            actions: leadingActions,
+            actions: actions,
             spacing: style.itemSpacing
         )
     }
 
     @ViewBuilder
     var leadingViews: some View {
-        leadingActionsButtonStack()
+        actionsButtonStack(
+            actions: leadingActions,
+            style: style
+        )
 
         leadingButtons()
 
@@ -381,8 +387,32 @@ private extension RichTextKeyboardToolbar {
 }
 
 struct RichTextKeyboardToolbar_Previews: PreviewProvider {
+    
+    struct LeadingAndTrailingPreview: View {
 
-    struct Preview: View {
+        @State
+        private var text = NSAttributedString(string: "")
+
+        @StateObject
+        private var context = RichTextContext()
+
+        var body: some View {
+            VStack(spacing: 0) {
+                RichTextEditor(text: $text, context: context)
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    .padding()
+                    .background(Color.gray.ignoresSafeArea())
+                RichTextKeyboardToolbar(
+                    context: context,
+                    leadingButtons: {},
+                    trailingButtons: {}
+                )
+            }
+        }
+    }
+
+    struct FlexbileToolbar: View {
 
         @State
         private var text = NSAttributedString(string: "")
@@ -399,24 +429,21 @@ struct RichTextKeyboardToolbar_Previews: PreviewProvider {
                     .background(Color.gray.ignoresSafeArea())
                 RichTextKeyboardToolbar(
                     context: context
-                ) { richTextActions, richTextButton in
+                ) { actionsButtonStack, style, richTextButton in
                     HStack {
-                        richTextActions()
+                        actionsButtonStack(
+                            [
+                                .toggleStyle(.bold),
+                                .toggleStyle(.italic),
+                                .toggleStyle(.underlined)
+                            ],
+                            style
+                        )
                             .frame(maxWidth: .infinity)
                         
                         Divider()
                         
-                        Text("A")
-                            .frame(maxWidth: .infinity)
-                        
-                        Divider()
-                        
-                        Text("B")
-                            .frame(maxWidth: .infinity)
-                        
-                        Divider()
-                        
-                        AnyView(erasing: richTextButton())
+                        richTextButton()
                             .frame(maxWidth: .infinity)
                     }
                 }
@@ -425,7 +452,13 @@ struct RichTextKeyboardToolbar_Previews: PreviewProvider {
     }
 
     static var previews: some View {
-        Preview()
+        Group {
+            LeadingAndTrailingPreview()
+                .previewDisplayName("Leading and Trailing")
+            
+            FlexbileToolbar()
+                .previewDisplayName("Flexible")
+        }
     }
 }
 #endif
