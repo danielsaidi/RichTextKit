@@ -63,6 +63,7 @@ public extension RichTextFormat {
                     colorPickers(for: context)
                 }
             }
+            .labelsHidden()
             .padding(.vertical, style.padding)
             .environment(\.sizeCategory, .medium)
             .background(background)

@@ -45,12 +45,12 @@ public extension RichTextFont {
         ) {
             self._selection = selection
             self.selectedFont = nil
-            self.selectedFont = config.fonts.last { $0.matches(selection.wrappedValue) }
         }
 
         public typealias Font = RichTextFont.PickerFont
         public typealias FontName = String
 
+        @State
         private var selectedFont: Font?
 
         @Binding
@@ -71,6 +71,12 @@ public extension RichTextFont {
                 }
             } label: {
                 EmptyView()
+            }
+            .onAppear {
+                let match = config.fonts.last {
+                    $0.matches(selection)
+                }
+                selectedFont = match ?? RichTextFont.PickerFont.all.first
             }
         }
     }

@@ -92,6 +92,7 @@ public extension RichTextFormat {
                 
                 Spacer()
             }
+            .labelsHidden()
             .padding(style.padding - 2)
             .background(Color.white.opacity(0.05))
         }
