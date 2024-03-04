@@ -12,11 +12,16 @@ import SwiftUI
 /**
  This sheet contains a font list picker and a bottom toolbar.
 
- You can inject a custom toolbar configuration to adjust the
- toolbar. The font picker will take up all available height.
-
- You can style this view by applying a style anywhere in the
- view hierarchy, using `.richTextFormatToolbarStyle`.
+ You can configure and style the view by applying its config
+ and style view modifiers to your view hierarchy:
+ 
+ ```swift
+ VStack {
+    ...
+ }
+ .richTextFormatSheetStyle(...)
+ .richTextFormatSheetConfig(...)
+ ```
  */
 public struct RichTextFormatSheet: RichTextFormatToolbarBase {
 
@@ -25,24 +30,23 @@ public struct RichTextFormatSheet: RichTextFormatToolbarBase {
 
      - Parameters:
        - context: The context to apply changes to.
-       - config: The configuration to use, by default `.standard`.
      */
     public init(
-        context: RichTextContext,
-        config: Configuration = .standard
+        context: RichTextContext
     ) {
         self._context = ObservedObject(wrappedValue: context)
-        self.config = config
     }
 
-    public typealias Configuration = RichTextFormatToolbar.Configuration
+    public typealias Config = RichTextFormatToolbar.Config
+    public typealias Style = RichTextFormatToolbar.Style
 
     @ObservedObject
     private var context: RichTextContext
 
-    let config: Configuration
-
-    @Environment(\.richTextFormatToolbarStyle)
+    @Environment(\.richTextFormatSheetConfig)
+    var config
+    
+    @Environment(\.richTextFormatSheetStyle)
     var style
 
     @Environment(\.dismiss)
@@ -59,9 +63,9 @@ public struct RichTextFormatSheet: RichTextFormatToolbarBase {
                 )
                 Divider()
                 RichTextFormatToolbar(
-                    context: context,
-                    config: config
+                    context: context
                 )
+                .richTextFormatToolbarConfig(config)
             }
             .padding(.top, -35)
             .toolbar {
@@ -79,6 +83,54 @@ public struct RichTextFormatSheet: RichTextFormatToolbarBase {
         #if iOS
         .navigationViewStyle(.stack)
         #endif
+    }
+}
+
+public extension View {
+    
+    /// Apply a rich text format sheet config.
+    func richTextFormatSheetConfig(
+        _ value: RichTextFormatSheet.Config
+    ) -> some View {
+        self.environment(\.richTextFormatSheetConfig, value)
+    }
+    
+    /// Apply a rich text format sheet style.
+    func richTextFormatSheetStyle(
+        _ value: RichTextFormatSheet.Style
+    ) -> some View {
+        self.environment(\.richTextFormatSheetStyle, value)
+    }
+}
+
+private extension RichTextFormatSheet.Config {
+
+    struct Key: EnvironmentKey {
+
+        static let defaultValue = RichTextFormatSheet.Config()
+    }
+}
+
+private extension RichTextFormatSheet.Style {
+
+    struct Key: EnvironmentKey {
+
+        static let defaultValue = RichTextFormatSheet.Style()
+    }
+}
+
+public extension EnvironmentValues {
+    
+    /// This value can bind to a format sheet config.
+    var richTextFormatSheetConfig: RichTextFormatSheet.Config {
+        get { self [RichTextFormatSheet.Config.Key.self] }
+        set { self [RichTextFormatSheet.Config.Key.self] = newValue }
+    }
+    
+    /// This value can bind to a format sheet style.
+    var richTextFormatSheetStyle: RichTextFormatSheet.Style {
+        get { self [RichTextFormatSheet.Style.Key.self] }
+        set { self [RichTextFormatSheet.Style.Key.self] = newValue }
     }
 }
 
@@ -101,17 +153,17 @@ struct RichTextFormatSheet_Previews: PreviewProvider {
             }
             .sheet(isPresented: $isSheetPresented) {
                 RichTextFormatSheet(
-                    context: context,
-                    config: .init(
-                        alignments: .all,
-                        colorPickers: [.foreground, .background],
-                        colorPickersDisclosed: [.stroke],
-                        fontPicker: true,
-                        fontSizePicker: true,
-                        indentButtons: true,
-                        styles: .all
-                    )
+                    context: context
                 )
+                .richTextFormatSheetConfig(.init(
+                    alignments: .all,
+                    colorPickers: [.foreground, .background],
+                    colorPickersDisclosed: [.stroke],
+                    fontPicker: true,
+                    fontSizePicker: false,
+                    indentButtons: true,
+                    styles: .all
+                ))
             }
             .richTextFormatToolbarStyle(.init(
                 padding: 10,

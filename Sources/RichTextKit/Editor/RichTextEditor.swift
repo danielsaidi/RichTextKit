@@ -51,8 +51,6 @@ import SwiftUI
  
  For more information, see ``RichTextKeyboardToolbarConfig``
  and ``RichTextKeyboardToolbarStyle``.
- 
- 
  */
 public struct RichTextEditor: ViewRepresentable {
 

@@ -15,6 +15,17 @@ import SwiftUI
  This toolbar adapts the layout based on the horizontal size
  class. The control row will be split in two in compact size,
  while macOS and regular sizes get a single row.
+ 
+ You can configure and style the view by applying its config
+ and style view modifiers to your view hierarchy:
+ 
+ ```swift
+ VStack {
+    ...
+ }
+ .richTextFormatToolbarStyle(...)
+ .richTextFormatToolbarConfig(...)
+ ```
 
  You can provide custom configurations to adjust the toolbar
  and style it by applying a `.richTextFormatToolbarStyle` to
@@ -27,20 +38,18 @@ public struct RichTextFormatToolbar: RichTextFormatToolbarBase {
 
      - Parameters:
        - context: The context to apply changes to.
-       - config: The configuration to use, by default `.standard`.
      */
     public init(
-        context: RichTextContext,
-        config: Configuration = .standard
+        context: RichTextContext
     ) {
         self._context = ObservedObject(wrappedValue: context)
-        self.config = config
     }
 
     @ObservedObject
     private var context: RichTextContext
 
-    let config: Configuration
+    @Environment(\.richTextFormatToolbarConfig)
+    var config
 
     @Environment(\.richTextFormatToolbarStyle)
     var style
@@ -132,19 +141,20 @@ struct RichTextFormatToolbar_Previews: PreviewProvider {
         @StateObject
         private var context = RichTextContext()
 
-        var toolbar: RichTextFormatToolbar {
-            .init(
-                context: context,
-                config: .init(
-                    alignments: .all,
-                    colorPickers: [.foreground, .background],
-                    colorPickersDisclosed: [.stroke],
-                    fontPicker: true,
-                    fontSizePicker: true,
-                    indentButtons: true,
-                    styles: .all
-                )
+        var toolbar: some View {
+            RichTextFormatToolbar(
+                context: context
             )
+            .richTextFormatToolbarConfig(.init(
+                alignments: [.left, .right],
+                colorPickers: [.foreground],
+                colorPickersDisclosed: [],
+                fontPicker: false,
+                fontSizePicker: true,
+                indentButtons: true,
+                styles: .all,
+                superscriptButtons: true
+            ))
         }
 
         var body: some View {

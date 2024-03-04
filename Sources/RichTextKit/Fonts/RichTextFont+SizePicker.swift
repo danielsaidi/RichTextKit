@@ -39,14 +39,7 @@ public extension RichTextFont {
             selection: Binding<CGFloat>
         ) {
             self._selection = selection
-            self.values = []
-            self.values = Self.values(
-                for: config.values,
-                selection: selection.wrappedValue
-            )
         }
-
-        private var values: [CGFloat]
 
         @Binding
         private var selection: CGFloat
@@ -56,7 +49,10 @@ public extension RichTextFont {
 
         public var body: some View {
             SwiftUI.Picker(RTKL10n.fontSize.text, selection: $selection) {
-                ForEach(values, id: \.self) {
+                ForEach(values(
+                    for: config.values,
+                    selection: selection
+                ), id: \.self) {
                     text(for: $0)
                         .tag($0)
                 }
@@ -68,7 +64,7 @@ public extension RichTextFont {
 public extension RichTextFont.SizePicker {
 
     /// Get a list of values for a certain selection.
-    static func values(
+    func values(
         for values: [CGFloat],
         selection: CGFloat
     ) -> [CGFloat] {
@@ -92,13 +88,14 @@ struct RichTextFont_SizePicker_Previews: PreviewProvider {
     struct Preview: View {
 
         @State
-        private var selection: CGFloat = 36.0
+        private var selection: CGFloat = 2.0
 
         var body: some View {
             RichTextFont.SizePicker(
                 selection: $selection
             )
             .withPreviewPickerStyles()
+            .richTextFontSizePickerConfig(.init(values: [1, 2, 3]))
         }
     }
 

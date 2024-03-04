@@ -1,5 +1,5 @@
 //
-//  RichTextFormatToolbar+Configuration.swift
+//  RichTextFormatToolbar+Config.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2024-02-16.
@@ -12,7 +12,7 @@ import SwiftUI
 public extension RichTextFormatToolbar {
 
     /// This struct can be used to configure a format sheet.
-    struct Configuration {
+    struct Config {
 
         public init(
             alignments: [RichTextAlignment] = .all,
@@ -52,11 +52,38 @@ public extension RichTextFormatToolbar {
     }
 }
 
-public extension RichTextFormatToolbar.Configuration {
+public extension RichTextFormatToolbar.Config {
 
     /// The standard rich text format toolbar configuration.
     ///
     /// You can set a new value to change the global default.
     static var standard = Self()
+}
+
+public extension View {
+
+    /// Apply a rich text format toolbar style.
+    func richTextFormatToolbarConfig(
+        _ value: RichTextFormatToolbar.Config
+    ) -> some View {
+        self.environment(\.richTextFormatToolbarConfig, value)
+    }
+}
+
+private extension RichTextFormatToolbar.Config {
+
+    struct Key: EnvironmentKey {
+
+        public static let defaultValue = RichTextFormatToolbar.Config()
+    }
+}
+
+public extension EnvironmentValues {
+
+    /// This value can bind to a format toolbar config.
+    var richTextFormatToolbarConfig: RichTextFormatToolbar.Config {
+        get { self [RichTextFormatToolbar.Config.Key.self] }
+        set { self [RichTextFormatToolbar.Config.Key.self] = newValue }
+    }
 }
 #endif

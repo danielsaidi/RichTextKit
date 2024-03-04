@@ -14,6 +14,17 @@ public extension RichTextLine {
     /**
      This view uses a ``RichTextLine/SpacingPicker`` and two
      steppers to increment and a decrement the value.
+     
+     You can configure this picker by applying a config view
+     modifier to your view hierarchy:
+     
+     ```swift
+     VStack {
+     RichTextLine.SpacingPickerStack(...)
+        ...
+     }
+     .richTextLineSpacingPickerConfig(...)
+     ```
      */
     struct SpacingPickerStack: View {
 
@@ -22,17 +33,12 @@ public extension RichTextLine {
 
          - Parameters:
            - context: The context to affect.
-           - values: The values to display, by default ``RichTextLine/SpacingPicker/standardValues``.
          */
         public init(
-            context: RichTextContext,
-            values: [CGFloat] = RichTextLine.SpacingPicker.standardValues
+            context: RichTextContext
         ) {
             self._context = ObservedObject(wrappedValue: context)
-            self.values = values
         }
-
-        private let values: [CGFloat]
 
         private let step = 1.0
 
@@ -80,8 +86,7 @@ private extension RichTextLine.SpacingPickerStack {
 
     var picker: some View {
         RichTextLine.SpacingPicker(
-            selection: $context.lineSpacing,
-            values: values
+            selection: $context.lineSpacing
         )
     }
 

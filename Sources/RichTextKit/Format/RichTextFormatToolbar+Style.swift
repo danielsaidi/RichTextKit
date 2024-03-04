@@ -25,12 +25,6 @@ public extension RichTextFormatToolbar {
         public var padding: Double
         public var spacing: Double
     }
-
-    /// This environment key defines a format toolbar style.
-    struct StyleKey: EnvironmentKey {
-
-        public static let defaultValue = RichTextFormatToolbar.Style()
-    }
 }
 
 public extension View {
@@ -43,12 +37,20 @@ public extension View {
     }
 }
 
+private extension RichTextFormatToolbar.Style {
+
+    struct Key: EnvironmentKey {
+
+        public static let defaultValue = RichTextFormatToolbar.Style()
+    }
+}
+
 public extension EnvironmentValues {
 
     /// This value can bind to a format toolbar style.
     var richTextFormatToolbarStyle: RichTextFormatToolbar.Style {
-        get { self [RichTextFormatToolbar.StyleKey.self] }
-        set { self [RichTextFormatToolbar.StyleKey.self] = newValue }
+        get { self [RichTextFormatToolbar.Style.Key.self] }
+        set { self [RichTextFormatToolbar.Style.Key.self] = newValue }
     }
 }
 #endif

@@ -13,7 +13,7 @@ import SwiftUI
 /// two toolbars, which should eventually become one.
 protocol RichTextFormatToolbarBase: View {
 
-    var config: RichTextFormatToolbar.Configuration { get }
+    var config: RichTextFormatToolbar.Config { get }
     var style: RichTextFormatToolbar.Style { get }
 }
 

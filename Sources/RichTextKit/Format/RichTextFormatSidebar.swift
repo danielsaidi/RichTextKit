@@ -12,10 +12,17 @@ import SwiftUI
 /**
  This sidebar view provides various text format options, and
  is meant to be used on macOS, in a trailing sidebar.
-
- You can provide custom configurations to adjust the toolbar
- and style it by applying a `.richTextFormatToolbarStyle` to
- the view hierarchy.
+ 
+ You can configure and style the view by applying its config
+ and style view modifiers to your view hierarchy:
+ 
+ ```swift
+ VStack {
+    ...
+ }
+ .richTextFormatSidebarStyle(...)
+ .richTextFormatSidebarConfig(...)
+ ```
 
  > Note: The sidebar is currently designed for macOS, but it
  should also be made to look good on iPadOS in landscape, to
@@ -28,24 +35,23 @@ public struct RichTextFormatSidebar: RichTextFormatToolbarBase {
 
      - Parameters:
        - context: The context to apply changes to.
-       - config: The configuration to use, by default `.standard`.
      */
     public init(
-        context: RichTextContext,
-        config: Configuration = .standard
+        context: RichTextContext
     ) {
         self._context = ObservedObject(wrappedValue: context)
-        self.config = config
     }
 
-    public typealias Configuration = RichTextFormatToolbar.Configuration
+    public typealias Config = RichTextFormatToolbar.Config
+    public typealias Style = RichTextFormatToolbar.Style
 
     @ObservedObject
     private var context: RichTextContext
-
-    let config: Configuration
-
-    @Environment(\.richTextFormatToolbarStyle)
+    
+    @Environment(\.richTextFormatSidebarConfig)
+    var config
+    
+    @Environment(\.richTextFormatSidebarStyle)
     var style
 
     public var body: some View {
@@ -104,6 +110,54 @@ private struct SidebarSection<Content: View>: View {
     }
 }
 
+public extension View {
+    
+    /// Apply a rich text format sidebar config.
+    func richTextFormatSidebarConfig(
+        _ value: RichTextFormatSidebar.Config
+    ) -> some View {
+        self.environment(\.richTextFormatSidebarConfig, value)
+    }
+    
+    /// Apply a rich text format sidebar style.
+    func richTextFormatSidebarStyle(
+        _ value: RichTextFormatSidebar.Style
+    ) -> some View {
+        self.environment(\.richTextFormatSidebarStyle, value)
+    }
+}
+
+private extension RichTextFormatSidebar.Config {
+
+    struct Key: EnvironmentKey {
+
+        static let defaultValue = RichTextFormatSidebar.Config()
+    }
+}
+
+private extension RichTextFormatSidebar.Style {
+
+    struct Key: EnvironmentKey {
+
+        static let defaultValue = RichTextFormatSidebar.Style()
+    }
+}
+
+public extension EnvironmentValues {
+    
+    /// This value can bind to a format sidebar config.
+    var richTextFormatSidebarConfig: RichTextFormatSidebar.Config {
+        get { self [RichTextFormatSidebar.Config.Key.self] }
+        set { self [RichTextFormatSidebar.Config.Key.self] = newValue }
+    }
+    
+    /// This value can bind to a format sidebar style.
+    var richTextFormatSidebarStyle: RichTextFormatSidebar.Style {
+        get { self [RichTextFormatSidebar.Style.Key.self] }
+        set { self [RichTextFormatSidebar.Style.Key.self] = newValue }
+    }
+}
+
 struct RichTextFormatSidebar_Previews: PreviewProvider {
 
     struct Preview: View {
@@ -113,18 +167,18 @@ struct RichTextFormatSidebar_Previews: PreviewProvider {
 
         var body: some View {
             RichTextFormatSidebar(
-                context: context,
-                config: .init(
-                    alignments: [.left, .right],
-                    colorPickers: [.foreground],
-                    colorPickersDisclosed: [],
-                    fontPicker: true,
-                    fontSizePicker: true,
-                    indentButtons: true,
-                    styles: .all,
-                    superscriptButtons: true
-                )
+                context: context
             )
+            .richTextFormatSidebarConfig(.init(
+                alignments: [.left, .right],
+                colorPickers: [.foreground],
+                colorPickersDisclosed: [],
+                fontPicker: false,
+                fontSizePicker: true,
+                indentButtons: true,
+                styles: .all,
+                superscriptButtons: true
+            ))
         }
     }
 

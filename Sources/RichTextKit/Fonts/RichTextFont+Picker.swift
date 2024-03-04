@@ -115,6 +115,7 @@ struct RichTextFont_Picker_Previews: PreviewProvider {
                 selection: $selection
             )
             .withPreviewPickerStyles()
+            .richTextFontPickerConfig(.init(fonts: Array(RichTextFont.PickerFont.all.dropFirst())))
         }
     }
 

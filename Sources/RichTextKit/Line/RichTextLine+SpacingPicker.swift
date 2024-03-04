@@ -15,54 +15,56 @@ public extension RichTextLine {
 
      The view returns a plain SwiftUI `Picker` view that can
      be styled and configured with plain SwiftUI.
+     
+     You can configure this picker by applying a config view
+     modifier to your view hierarchy:
+     
+     ```swift
+     VStack {
+        RichTextLine.SpacingPicker(...)
+        ...
+     }
+     .richTextLineSpacingPickerConfig(...)
+     ```
      */
     struct SpacingPicker: View {
 
         /**
-         Create a font size picker.
+         Create a line spacing picker.
 
          - Parameters:
            - selection: The selected font size.
-           - values: The values to display in the list.
          */
         public init(
-            selection: Binding<CGFloat>,
-            values: [CGFloat] = standardValues
+            selection: Binding<CGFloat>
         ) {
             self._selection = selection
-            self.values = Self.values(
-                for: values,
-                selection: selection.wrappedValue
-            )
         }
-
-        private let values: [CGFloat]
 
         @Binding
         private var selection: CGFloat
+        
+        @Environment(\.richTextLineSpacingPickerConfig)
+        private var config
 
         public var body: some View {
             SwiftUI.Picker(RTKL10n.lineSpacing.text, selection: $selection) {
-                ForEach(values, id: \.self) {
+                ForEach(values(
+                    for: config.values,
+                    selection: selection
+                ), id: \.self) {
                     text(for: $0)
                         .tag($0)
                 }
             }
-            .labelsHidden()
-            .accessibilityLabel(RTKL10n.fontSize.text)
         }
     }
 }
 
 public extension RichTextLine.SpacingPicker {
 
-    /// The standard picker values.
-    static var standardValues: [CGFloat] {
-        [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    }
-
     /// Get a list of values for a certain selection.
-    static func values(
+    func values(
         for values: [CGFloat],
         selection: CGFloat
     ) -> [CGFloat] {
@@ -86,13 +88,14 @@ struct RichTextFont_SpacingPicker_Previews: PreviewProvider {
     struct Preview: View {
 
         @State
-        private var selection: CGFloat = 3.0
+        private var selection: CGFloat = 2.0
 
         var body: some View {
             RichTextLine.SpacingPicker(
                 selection: $selection
             )
             .withPreviewPickerStyles()
+            .richTextLineSpacingPickerConfig(.init(values: [1, 2, 3]))
         }
     }
 
