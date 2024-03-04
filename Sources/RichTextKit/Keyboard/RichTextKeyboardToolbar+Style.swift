@@ -3,8 +3,8 @@
 //  RichTextKit
 //
 //  Created by Ryan Jarvis on 2024-02-24.
+//  Copyright © 2023-2024 Daniel Saidi. All rights reserved.
 //
-
 
 #if iOS || macOS || os(visionOS)
 import SwiftUI

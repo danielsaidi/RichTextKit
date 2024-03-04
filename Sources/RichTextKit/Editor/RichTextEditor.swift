@@ -10,11 +10,11 @@
 import SwiftUI
 
 /**
- This SwiftUI editor can be used to view and edit rich text.
+ This view can be used to view and edit rich text in SwiftUI.
 
  The view uses a platform-specific ``RichTextView`` together
  with a ``RichTextContext`` and a ``RichTextCoordinator`` to
- make view and context changes sync correctly.
+ keep the view and context in sync.
 
  You can use the provided context to trigger and observe any
  changes to the text editor. Note that changing the value of
@@ -34,12 +34,25 @@ import SwiftUI
      }
  ```
 
- This code will not show anything when you start to edit the
- text. To work around this use a ``RichTextKeyboardToolbar``.
+ This will not show anything. To work around this limitation,
+ use a ``RichTextKeyboardToolbar`` instead.
 
- You may have noticed that `updateUIView/updateNSView` don't
- contain any code. This is because having updates there will
- update this view, which in turn makes typing very slow.
+ You can configure and style the view by applying config and
+ style view extensions to your view hierarchy:
+ 
+ ```swift
+ VStack {
+    RichTextEditor(...)
+    ...
+ }
+ .richTextEditorStyle(...)
+ .richTextEditorConfig(...)
+ ```
+ 
+ For more information, see ``RichTextKeyboardToolbarConfig``
+ and ``RichTextKeyboardToolbarStyle``.
+ 
+ 
  */
 public struct RichTextEditor: ViewRepresentable {
 
@@ -56,14 +69,10 @@ public struct RichTextEditor: ViewRepresentable {
     public init(
         text: Binding<NSAttributedString>,
         context: RichTextContext,
-        config: RichTextView.Configuration = .standard,
-        theme: RichTextView.Theme = .standard,
         format: RichTextDataFormat = .archivedData,
         viewConfiguration: @escaping ViewConfiguration = { _ in }
     ) {
         self.text = text
-        self.config = config
-        self.theme = theme
         self._context = ObservedObject(wrappedValue: context)
         self.format = format
         self.viewConfiguration = viewConfiguration
@@ -75,10 +84,14 @@ public struct RichTextEditor: ViewRepresentable {
     private var context: RichTextContext
 
     private var text: Binding<NSAttributedString>
-    private let config: RichTextView.Configuration
-    private let theme: RichTextView.Theme
     private var format: RichTextDataFormat
     private var viewConfiguration: ViewConfiguration
+    
+    @Environment(\.richTextEditorConfig)
+    private var config
+
+    @Environment(\.richTextEditorStyle)
+    private var style
 
     #if iOS || os(tvOS) || os(visionOS)
     public let textView = RichTextView()
@@ -104,7 +117,7 @@ public struct RichTextEditor: ViewRepresentable {
     public func makeUIView(context: Context) -> some UIView {
         textView.setup(with: text.wrappedValue, format: format)
         textView.configuration = config
-        textView.theme = theme
+        textView.theme = style
         viewConfiguration(textView)
         return textView
     }
@@ -116,7 +129,7 @@ public struct RichTextEditor: ViewRepresentable {
     public func makeNSView(context: Context) -> some NSView {
         textView.setup(with: text.wrappedValue, format: format)
         textView.configuration = config
-        textView.theme = theme
+        textView.theme = style
         viewConfiguration(textView)
         return scrollView
     }
@@ -154,5 +167,4 @@ public extension RichTextEditor {
         textView.mutableAttributedString
     }
 }
-
 #endif

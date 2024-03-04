@@ -8,18 +8,19 @@ Until then, minor updates may remove deprecated features and introduce breaking 
 
 ## 1.0
 
-This release removes all deprecated code and cleans up the library somewhat.
+This release removes all deprecated code and cleans up the library.
 
 ### ✨ Features
 
-* The new `richTextKeyboardToolbarConfig` view extension can be used to configure the `RichTextKeyboardToolbar`.
-* The new `richTextKeyboardToolbarStyle` view extension can be used to style the `RichTextKeyboardToolbar`.
+* There are new `richTextEditor` config and style view extensions.
+* There are new `richTextKeyboardToolbar` config and style view extensions.
 
 ### 💥 Breaking Changes
 
 * All previously deprecated code has been deleted. 
 
-* `RichTextKeyboardToolbar` is now configured with view extensions instead of with the initializer.
+* `RichTextEditor` is configured with view extensions instead of the initializer.
+* `RichTextKeyboardToolbar` is configured with view extensions instead of the initializer.
 
 
 
