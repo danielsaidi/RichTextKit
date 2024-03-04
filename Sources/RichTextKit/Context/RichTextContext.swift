@@ -44,6 +44,7 @@ public class RichTextContext: ObservableObject {
     /// The currently selected range, if any.
     public internal(set) var selectedRange = NSRange()
 
+    
     // MARK: - Bindable Properies
 
     /// Whether or not the text is currently being edited.
@@ -66,6 +67,7 @@ public class RichTextContext: ObservableObject {
     @Published
     public var lineSpacing: CGFloat = 10.0
 
+    
     // MARK: - Properties
 
     /// This publisher can emit actions to the coordinator.
@@ -73,48 +75,8 @@ public class RichTextContext: ObservableObject {
 
     /// The currently highlighted range, if any.
     public var highlightedRange: NSRange?
-
-    // MARK: - Deprecated Colors
-
-    @available(*, deprecated, renamed: "colors")
-    public var backgroundColor: ColorRepresentable? {
-        colors[.background]
-    }
-
-    @available(*, deprecated, renamed: "colors")
-    public var foregroundColor: ColorRepresentable? {
-        colors[.foreground]
-    }
-
-    @available(*, deprecated, renamed: "colors")
-    public var strikethroughColor: ColorRepresentable? {
-        colors[.strikethrough]
-    }
-
-    @available(*, deprecated, renamed: "colors")
-    public var strokeColor: ColorRepresentable? {
-        colors[.stroke]
-    }
-
-    @available(*, deprecated, renamed: "colors")
-    public var underlineColor: ColorRepresentable? {
-        colors[.underline]
-    }
-
-    // MARK: - Deprecated Styles
-
-    @available(*, deprecated, renamed: "styles")
-    public var isBold: Bool { hasStyle(.bold) }
-
-    @available(*, deprecated, renamed: "styles")
-    public var isItalic: Bool { hasStyle(.italic) }
-
-    @available(*, deprecated, renamed: "styles")
-    public var isStrikethrough: Bool { hasStyle(.strikethrough) }
-
-    @available(*, deprecated, renamed: "styles")
-    public var isUnderlined: Bool { hasStyle(.underlined) }
-
+    
+    
     // MARK: - Observable Properties
 
     /// Whether or not the current rich text can be copied.
