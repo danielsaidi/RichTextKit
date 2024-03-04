@@ -55,6 +55,8 @@ extension RichTextCoordinator {
         case .undoLatestChange:
             textView.undoLatestChange()
             syncContextWithTextView()
+        case .link(let url):
+            textView.setCurrentRichTextLink(url)
         }
     }
 }
