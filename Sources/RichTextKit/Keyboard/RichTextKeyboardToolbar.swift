@@ -46,50 +46,22 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
        - trailingActions: The trailing actions, by default `.dismissKeyboard`.
        - leadingButtons: The leading buttons to place after the leading actions.
        - trailingButtons: The trailing buttons to place before the trailing actions.
-       - richTextFormatSheet: The rich text format sheet to use, given the default ``RichTextFormatSheet``.
+       - formatSheet: The rich text format sheet to use, given the default ``RichTextFormatSheet``.
      */
     public init(
         context: RichTextContext,
-        leadingActions: [RichTextAction] = [.undo, .redo, .copy],
+        leadingActions: [RichTextAction] = [.undo, .redo],
         trailingActions: [RichTextAction] = [.dismissKeyboard],
         @ViewBuilder leadingButtons: @escaping () -> LeadingButtons,
         @ViewBuilder trailingButtons: @escaping () -> TrailingButtons,
-        @ViewBuilder richTextFormatSheet: @escaping (RichTextFormatSheet) -> FormatSheet
+        @ViewBuilder formatSheet: @escaping (RichTextFormatSheet) -> FormatSheet
     ) {
         self._context = ObservedObject(wrappedValue: context)
         self.leadingActions = leadingActions
         self.trailingActions = trailingActions
         self.leadingButtons = leadingButtons
         self.trailingButtons = trailingButtons
-        self.richTextFormatSheet = richTextFormatSheet
-    }
-
-    /**
-     Create a rich text keyboard toolbar.
-
-     - Parameters:
-       - context: The context to affect.
-       - leadingActions: The leading actions, by default `.undo`, `.redo` and `.copy`.
-       - trailingActions: The trailing actions, by default `.dismissKeyboard`.
-       - leadingButtons: The leading buttons to place after the leading actions.
-       - trailingButtons: The trailing buttons to place after the trailing actions.
-       - richTextFormatSheet: The rich text format sheet to use, given the default ``RichTextFormatSheet``.
-     */
-    public init(
-        context: RichTextContext,
-        leadingActions: [RichTextAction] = [.undo, .redo, .copy],
-        trailingActions: [RichTextAction] = [.dismissKeyboard],
-        @ViewBuilder leadingButtons: @escaping () -> LeadingButtons,
-        @ViewBuilder trailingButtons: @escaping () -> TrailingButtons
-    ) where FormatSheet == RichTextFormatSheet {
-        self.init(
-            context: context,
-            leadingActions: leadingActions,
-            trailingActions: trailingActions,
-            leadingButtons: leadingButtons,
-            trailingButtons: trailingButtons,
-            richTextFormatSheet: { $0 }
-        )
+        self.formatSheet = formatSheet
     }
 
     private let leadingActions: [RichTextAction]
@@ -97,7 +69,7 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
 
     private let leadingButtons: () -> LeadingButtons
     private let trailingButtons: () -> TrailingButtons
-    private let richTextFormatSheet: (RichTextFormatSheet) -> FormatSheet
+    private let formatSheet: (RichTextFormatSheet) -> FormatSheet
 
     @ObservedObject
     private var context: RichTextContext
@@ -136,7 +108,7 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
         .offset(y: shouldDisplayToolbar ? 0 : style.toolbarHeight)
         .frame(height: shouldDisplayToolbar ? nil : 0)
         .sheet(isPresented: $isFormatSheetPresented) {
-            richTextFormatSheet(
+            formatSheet(
                 RichTextFormatSheet(context: context)
             ).prefersMediumSize()
         }
@@ -261,7 +233,8 @@ struct RichTextKeyboardToolbar_Previews: PreviewProvider {
                 RichTextKeyboardToolbar(
                     context: context,
                     leadingButtons: {},
-                    trailingButtons: {}
+                    trailingButtons: {},
+                    formatSheet: { $0 }
                 )
             }
         }

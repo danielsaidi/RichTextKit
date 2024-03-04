@@ -9,16 +9,16 @@
 #if iOS || macOS || os(visionOS)
 import SwiftUI
 
-/// This struct can be used to style a `RichTextKeyboardToolbar`.
+/// This struct can style a ``RichTextKeyboardToolbar``.
 public struct RichTextKeyboardToolbarStyle {
 
-    /**
-     - Parameters:
-       - toolbarHeight: The height of the toolbar, by default `50`.
-       - itemSpacing: The spacing between toolbar items, by default `15`.
-       - shadowColor: The toolbar's shadow color, by default transparent black.
-       - shadowRadius: The toolbar's shadow radius, by default `3`.
-     */
+    /// Create a custom toolbar style
+    ///
+    /// - Parameters:
+    ///   - toolbarHeight: The height of the toolbar, by default `50`.
+    ///   - itemSpacing: The spacing between toolbar items, by default `15`.
+    ///   - shadowColor: The toolbar's shadow color, by default transparent black.
+    ///   - shadowRadius: The toolbar's shadow radius, by default `3`.
     public init(
         toolbarHeight: Double = 50,
         itemSpacing: Double = 15,
@@ -42,19 +42,19 @@ public struct RichTextKeyboardToolbarStyle {
 
     /// The toolbar's shadow radius.
     public var shadowRadius: Double
-
-    /// Default value
-    static var standard: RichTextKeyboardToolbarStyle = .init()
 }
 
-/// This environment key defines a `RichTextKeyboardToolbar` style.
-private struct RichTextKeyboardToolbarStyleKey: EnvironmentKey {
-    public static var defaultValue: RichTextKeyboardToolbarStyle = .standard
+public extension RichTextKeyboardToolbarStyle {
+    
+    /// A standard rich text keyboard toolbar style.
+    ///
+    /// You can override this to change the global default.
+    static var standard = RichTextKeyboardToolbarStyle()
 }
 
 public extension View {
 
-    /// Apply a `RichTextKeyboardToolbar` style.
+    /// Apply a ``RichTextKeyboardToolbar`` style.
     func richTextKeyboardToolbarStyle(
         _ style: RichTextKeyboardToolbarStyle
     ) -> some View {
@@ -62,12 +62,19 @@ public extension View {
     }
 }
 
+extension RichTextKeyboardToolbarStyle {
+    
+    struct Key: EnvironmentKey {
+        
+        static var defaultValue: RichTextKeyboardToolbarStyle = .standard
+    }
+}
+
 public extension EnvironmentValues {
 
-    /// This environment value defines `RichTextKeyboardToolbar` styles.
     var richTextKeyboardToolbarStyle: RichTextKeyboardToolbarStyle {
-        get { self [RichTextKeyboardToolbarStyleKey.self] }
-        set { self [RichTextKeyboardToolbarStyleKey.self] = newValue }
+        get { self [RichTextKeyboardToolbarStyle.Key.self] }
+        set { self [RichTextKeyboardToolbarStyle.Key.self] = newValue }
     }
 }
 

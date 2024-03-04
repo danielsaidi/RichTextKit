@@ -8,34 +8,34 @@
 #if iOS || macOS || os(visionOS)
 import SwiftUI
 
-/// This struct can be used to configure a `RichTextKeyboardToolbar`.
+/// This struct can configure a ``RichTextKeyboardToolbar``.
 public struct RichTextKeyboardToolbarConfiguration {
 
-    /**
-     - Parameters:
-       - alwaysDisplayToolbar: Should the toolbar always be shown, by default `false`.
-     */
+    /// Create a custom toolbar configuration.
+    ///
+    /// - Parameters:
+    ///   - alwaysDisplayToolbar: Whether or not to always show the toolbar, by default `false`.
     public init(
         alwaysDisplayToolbar: Bool = false
     ) {
         self.alwaysDisplayToolbar = alwaysDisplayToolbar
     }
 
-    /// Should the toolbar always be shown.
-    var alwaysDisplayToolbar: Bool
-
-    /// Default value
-    static var standard: RichTextKeyboardToolbarConfiguration = .init()
+    /// Whether or not to always show the toolbar
+    public var alwaysDisplayToolbar: Bool
 }
 
-/// This environment key defines a `RichTextKeyboardToolbar` configuration.
-private struct RichTextKeyboardToolbarConfigurationKey: EnvironmentKey {
-    public static var defaultValue: RichTextKeyboardToolbarConfiguration = .standard
+public extension RichTextKeyboardToolbarConfiguration {
+    
+    /// A standard rich text keyboard toolbar configuration.
+    ///
+    /// You can override this to change the global default.
+    static var standard = RichTextKeyboardToolbarConfiguration()
 }
 
 public extension View {
 
-    /// Apply a `RichTextKeyboardToolbar` configuration.
+    /// Apply a ``RichTextKeyboardToolbar`` configuration.
     func richTextKeyboardToolbarConfiguration(
         _ configuration: RichTextKeyboardToolbarConfiguration
     ) -> some View {
@@ -43,12 +43,19 @@ public extension View {
     }
 }
 
+extension RichTextKeyboardToolbarConfiguration {
+    
+    struct Key: EnvironmentKey {
+        
+        public static var defaultValue: RichTextKeyboardToolbarConfiguration = .standard
+    }
+}
+
 public extension EnvironmentValues {
 
-    /// This environment value defines `RichTextKeyboardToolbar` configurations.
     var richTextKeyboardToolbarConfiguration: RichTextKeyboardToolbarConfiguration {
-        get { self [RichTextKeyboardToolbarConfigurationKey.self] }
-        set { self [RichTextKeyboardToolbarConfigurationKey.self] = newValue }
+        get { self [RichTextKeyboardToolbarConfiguration.Key.self] }
+        set { self [RichTextKeyboardToolbarConfiguration.Key.self] = newValue }
     }
 }
 #endif

@@ -6,6 +6,24 @@ Until then, minor updates may remove deprecated features and introduce breaking 
 
 
 
+## 1.0
+
+This release removes all deprecated code and cleans up the library somewhat.
+
+### ✨ Features
+
+* The new `richTextKeyboardToolbarConfig` view extension can be used to configure a `RichTextKeyboardToolbar`.
+* The new `richTextKeyboardToolbarStyle` view extension can be used to style a `RichTextKeyboardToolbar`.
+
+### 💥 Breaking Changes
+
+* All previously deprecated code has been deleted. 
+
+* `RichTextKeyboardToolbar`'s `style` and `config` is now applied with view extensions instead of with the initializer.
+* `RichTextKeyboardToolbar`'s `leadingActions` and `trailingActions` are now specified with the configuration instead of the initializer.
+
+
+
 ## 0.9.9
 
 This release adds a lot of new `RichTextAction` cases and adjusts the context and coordinator subscription.
