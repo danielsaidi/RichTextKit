@@ -124,6 +124,11 @@ extension RichTextCoordinator {
         textView.setRichTextColor(.background, to: background, at: range)
         textView.setRichTextColor(.foreground, to: foreground, at: range)
     }
+    
+    func setIsEditable(to newValue: Bool) {
+        if newValue == textView.isEditable { return }
+        textView.isEditable = newValue
+    }
 
     func setIsEditing(to newValue: Bool) {
         if newValue == textView.isFirstResponder { return }

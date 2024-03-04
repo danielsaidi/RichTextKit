@@ -25,6 +25,7 @@ extension RichTextCoordinator {
         subscribeToAlignment()
         subscribeToFontName()
         subscribeToFontSize()
+        subscribeToIsEditable()
         subscribeToIsEditingText()
         subscribeToLineSpacing()
     }
@@ -58,7 +59,13 @@ private extension RichTextCoordinator {
             self?.textView.setRichTextFontSize($0)
         }
     }
-
+    
+    func subscribeToIsEditable() {
+        subscribe(to: context.$isEditable) { [weak self] in
+            self?.setIsEditable(to: $0)
+        }
+    }
+    
     func subscribeToIsEditingText() {
         subscribe(to: context.$isEditingText) { [weak self] in
             self?.setIsEditing(to: $0)

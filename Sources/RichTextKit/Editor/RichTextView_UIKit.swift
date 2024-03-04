@@ -57,9 +57,7 @@ open class RichTextView: UITextView, RichTextViewComponent {
     }
 
     public var theme: Theme = .standard {
-        didSet {
-            setupTheme()
-        }
+        didSet { setup(theme) }
     }
 
     /// The style to use when highlighting text in the view.

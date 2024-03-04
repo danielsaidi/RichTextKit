@@ -16,12 +16,16 @@ This release removes all deprecated code and cleans up the library.
 * There are new `richTextKeyboardToolbar` config and style view modifiers.
 * There is a new `RichTextFormat` namespace that groups format types and views.
 
+### 🐛 Bug Fixes
+
+* `RichTextView` no longer resets font and styles when setting up the macOS text view.
+
 ### 💥 Breaking Changes
 
 * All previously deprecated code has been deleted. 
 * Many localization keys have been renamed to be easier to use.
 
-* `RichTextContextFocusedValueKey` has been renamed to `RichTextContext.FocusedValueKey`.
+* `RichTextContextFocusedValueKey` is renamed to `RichTextContext.FocusedValueKey`.
 * `RichTextEditor` is now configured and styled with modifiers instead of the init.
 * `RichTextFont` pickers are now configured with a shared modifier instead of the init.
 * `RichTextFont` size picker is now configured with a shared modifier instead of the init.

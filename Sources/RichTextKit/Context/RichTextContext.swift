@@ -46,6 +46,10 @@ public class RichTextContext: ObservableObject {
 
     
     // MARK: - Bindable Properies
+    
+    /// Whether or not the rich text editor is editable.
+    @Published
+    public var isEditable = true
 
     /// Whether or not the text is currently being edited.
     @Published
@@ -99,6 +103,7 @@ public class RichTextContext: ObservableObject {
     @Published
     public internal(set) var canIncreaseIndent = true
 
+    /// The current color values.
     @Published
     public internal(set) var colors = [RichTextColor: ColorRepresentable]()
 
@@ -106,6 +111,7 @@ public class RichTextContext: ObservableObject {
     @Published
     public internal(set) var highlightingStyle = RichTextHighlightingStyle.standard
 
+    /// The current rich text styles.
     @Published
     public internal(set) var styles = [RichTextStyle: Bool]()
 }

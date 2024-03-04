@@ -31,7 +31,9 @@ open class RichTextView: NSTextView, RichTextViewComponent {
     public var configuration: Configuration = .standard
 
     /// The theme for coloring and setting style to text view.
-    public var theme: Theme = .standard
+    public var theme: Theme = .standard {
+        didSet { setup(theme) }
+    }
 
     /// The style to use when highlighting text in the view.
     public var highlightingStyle: RichTextHighlightingStyle = .standard
