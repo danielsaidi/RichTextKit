@@ -15,6 +15,17 @@ public extension RichTextFont {
 
      The view returns a plain SwiftUI `Picker` view that can
      be styled and configured with plain SwiftUI.
+     
+     You can configure this picker by applying a config view
+     modifier to your view hierarchy:
+     
+     ```swift
+     VStack {
+        RichTextFont.SizePicker(...)
+        ...
+     }
+     .richTextFontSizePickerConfig(...)
+     ```
      */
     struct SizePicker: View {
 
@@ -23,23 +34,25 @@ public extension RichTextFont {
 
          - Parameters:
            - selection: The selected font size.
-           - values: The values to display in the list.
          */
         public init(
-            selection: Binding<CGFloat>,
-            values: [CGFloat] = standardValues
+            selection: Binding<CGFloat>
         ) {
             self._selection = selection
+            self.values = []
             self.values = Self.values(
-                for: values,
+                for: config.values,
                 selection: selection.wrappedValue
             )
         }
 
-        private let values: [CGFloat]
+        private var values: [CGFloat]
 
         @Binding
         private var selection: CGFloat
+        
+        @Environment(\.richTextFontSizePickerConfig)
+        private var config
 
         public var body: some View {
             SwiftUI.Picker(RTKL10n.fontSize.text, selection: $selection) {
@@ -53,11 +66,6 @@ public extension RichTextFont {
 }
 
 public extension RichTextFont.SizePicker {
-
-    /// The standard picker values.
-    static var standardValues: [CGFloat] {
-        [10, 12, 14, 18, 20, 22, 24, 28, 36, 48, 64, 72, 96, 144]
-    }
 
     /// Get a list of values for a certain selection.
     static func values(

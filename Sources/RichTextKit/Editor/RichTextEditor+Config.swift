@@ -32,6 +32,7 @@ private extension RichTextEditorConfig {
 
 public extension EnvironmentValues {
 
+    /// This value can bind to a rich text editor config.
     var richTextEditorConfig: RichTextEditorConfig {
         get { self [RichTextEditorConfig.Key.self] }
         set { self [RichTextEditorConfig.Key.self] = newValue }

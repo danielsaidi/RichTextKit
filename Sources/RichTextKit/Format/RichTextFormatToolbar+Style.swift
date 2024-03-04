@@ -45,7 +45,7 @@ public extension View {
 
 public extension EnvironmentValues {
 
-    /// This environment value defines format toolbar styles.
+    /// This value can bind to a format toolbar style.
     var richTextFormatToolbarStyle: RichTextFormatToolbar.Style {
         get { self [RichTextFormatToolbar.StyleKey.self] }
         set { self [RichTextFormatToolbar.StyleKey.self] = newValue }

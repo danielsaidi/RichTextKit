@@ -40,6 +40,10 @@
 "fileFormatRtf" = "Rich Text (.rtf)";
 "fileFormatTxt" = "Plain Text (.txt)";
 
+"lineSpacing" = "Line Spacing";
+"lineSpacingIncrease" = "Increase";
+"lineSpacingDecrease" = "Decrease";
+
 "menuExport" = "Export";
 "menuExportAs" = "Export as...";
 "menuFont" = "Font";
@@ -49,9 +53,6 @@
 "menuIndent" = "Indent";
 "menuIndentIncrease" = "Increase";
 "menuIndentDecrease" = "Decrease";
-"menuLineSpacing" = "LineSpacing";
-"menuLineSpacingIncrease" = "Increase";
-"menuLineSpacingDecrease" = "Decrease";
 "menuPrint" = "Print...";
 "menuSave" = "Save";
 "menuSaveAs" = "Save as...";

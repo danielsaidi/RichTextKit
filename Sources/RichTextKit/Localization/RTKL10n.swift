@@ -43,6 +43,10 @@ public enum RTKL10n: String, CaseIterable, Identifiable {
     fileFormatPdf,
     fileFormatRtf,
     fileFormatTxt,
+    
+    lineSpacing,
+    lineSpacingIncrease,
+    lineSpacingDecrease,
 
     menuExport,
     menuExportAs,
@@ -51,9 +55,6 @@ public enum RTKL10n: String, CaseIterable, Identifiable {
     menuIndent,
     menuIndentIncrease,
     menuIndentDecrease,
-    menuLineSpacing,
-    menuLineSpacingIncrease,
-    menuLineSpacingDecrease,
     menuPrint,
     menuSave,
     menuSaveAs,

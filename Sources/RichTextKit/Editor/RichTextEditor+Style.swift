@@ -32,6 +32,7 @@ private extension RichTextEditorStyle {
 
 public extension EnvironmentValues {
 
+    /// This value can bind to a rich text editor style.
     var richTextEditorStyle: RichTextEditorStyle {
         get { self [RichTextEditorStyle.Key.self] }
         set { self [RichTextEditorStyle.Key.self] = newValue }

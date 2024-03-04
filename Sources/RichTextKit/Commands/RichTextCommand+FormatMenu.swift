@@ -83,7 +83,7 @@ public extension RichTextCommand.FormatMenu {
                     Group(indent: true)
                 }
             case .lineSpacing:
-                Menu(RTKL10n.menuLineSpacing.text) {
+                Menu(RTKL10n.lineSpacing.text) {
                     Group(lineSpacing: true)
                 }
             case .superscript:

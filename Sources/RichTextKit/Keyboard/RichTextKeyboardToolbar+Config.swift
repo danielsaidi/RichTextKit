@@ -66,6 +66,7 @@ private extension RichTextKeyboardToolbarConfig {
 
 public extension EnvironmentValues {
 
+    /// This value can bind to a keyboard toolbar config.
     var richTextKeyboardToolbarConfig: RichTextKeyboardToolbarConfig {
         get { self [RichTextKeyboardToolbarConfig.Key.self] }
         set { self [RichTextKeyboardToolbarConfig.Key.self] = newValue }

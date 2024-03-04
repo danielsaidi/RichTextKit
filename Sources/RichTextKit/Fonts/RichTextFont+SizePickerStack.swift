@@ -14,6 +14,17 @@ public extension RichTextFont {
     /**
      This view uses a ``RichTextFont/SizePicker`` and button
      steppers to increment and a decrement the font size.
+     
+     You can configure this picker by applying a config view
+     modifier to your view hierarchy:
+     
+     ```swift
+     VStack {
+        RichTextFont.SizePickerStack(...)
+        ...
+     }
+     .richTextFontSizePickerConfig(...)
+     ```
      */
     struct SizePickerStack: View {
 
@@ -22,17 +33,12 @@ public extension RichTextFont {
 
          - Parameters:
            - context: The context to affect.
-           - values: The values to display, by default ``RichTextFont/SizePicker/standardValues``.
          */
         public init(
-            context: RichTextContext,
-            values: [CGFloat] = RichTextFont.SizePicker.standardValues
+            context: RichTextContext
         ) {
             self._context = ObservedObject(wrappedValue: context)
-            self.values = values
         }
-
-        private let values: [CGFloat]
 
         private let step = 1
 
@@ -80,14 +86,16 @@ private extension RichTextFont.SizePickerStack {
 
     var picker: some View {
         RichTextFont.SizePicker(
-            selection: $context.fontSize,
-            values: values
+            selection: $context.fontSize
         )
     }
 
     var stepper: some View {
-        Stepper("", onIncrement: increment, onDecrement: decrement)
-            .labelsHidden()
+        Stepper(
+            RTKL10n.fontSize.text,
+            onIncrement: increment,
+            onDecrement: decrement
+        )
     }
 
     func decrement() {

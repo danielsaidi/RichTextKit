@@ -42,7 +42,7 @@ public extension RichTextLine {
         private var selection: CGFloat
 
         public var body: some View {
-            SwiftUI.Picker("", selection: $selection) {
+            SwiftUI.Picker(RTKL10n.lineSpacing.text, selection: $selection) {
                 ForEach(values, id: \.self) {
                     text(for: $0)
                         .tag($0)
@@ -89,13 +89,10 @@ struct RichTextFont_SpacingPicker_Previews: PreviewProvider {
         private var selection: CGFloat = 3.0
 
         var body: some View {
-            List {
-                HStack {
-                    RichTextLine.SpacingPicker(
-                        selection: $selection
-                    )
-                }
-            }
+            RichTextLine.SpacingPicker(
+                selection: $selection
+            )
+            .withPreviewPickerStyles()
         }
     }
 

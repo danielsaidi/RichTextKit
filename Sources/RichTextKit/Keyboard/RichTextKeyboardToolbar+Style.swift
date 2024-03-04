@@ -72,6 +72,7 @@ private extension RichTextKeyboardToolbarStyle {
 
 public extension EnvironmentValues {
 
+    /// This value can bind to a keyboard toolbar style.
     var richTextKeyboardToolbarStyle: RichTextKeyboardToolbarStyle {
         get { self [RichTextKeyboardToolbarStyle.Key.self] }
         set { self [RichTextKeyboardToolbarStyle.Key.self] = newValue }

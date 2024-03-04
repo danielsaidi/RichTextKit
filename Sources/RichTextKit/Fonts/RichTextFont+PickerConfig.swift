@@ -10,14 +10,14 @@ import SwiftUI
 
 public extension RichTextFont {
     
-    /// This struct can configure a ``RichTextFont/Picker``.
+    /// This type can configure a ``RichTextFont/Picker``.
     ///
     /// This configuration contains configuration properties
     /// for many different font pickers types. Some of these
     /// properties are not used in some pickers.
     struct PickerConfig {
 
-        /// Create a custom rich text font picker config.
+        /// Create a custom font picker config.
         ///
         /// - Parameters:
         ///   - fonts: The fonts to display in the list, by default `all`.
@@ -52,7 +52,7 @@ public extension RichTextFont {
 
 public extension RichTextFont.PickerConfig {
     
-    /// The standard rich text font picker configuration.
+    /// The standard font picker configuration.
     ///
     /// You can set a new value to change the global default.
     static var standard = Self()
@@ -78,6 +78,7 @@ private extension RichTextFont.PickerConfig {
 
 public extension EnvironmentValues {
 
+    /// This value can bind to a font picker config.
     var richTextFontPickerConfig: RichTextFont.PickerConfig {
         get { self [RichTextFont.PickerConfig.Key.self] }
         set { self [RichTextFont.PickerConfig.Key.self] = newValue }

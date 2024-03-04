@@ -40,6 +40,10 @@
 "fileFormatRtf" = "Formatert tekst (.rtf)";
 "fileFormatTxt" = "Ren tekst (.txt)";
 
+"lineSpacing" = "Linjeavstand";
+"lineSpacingIncrease" = "Øk";
+"lineSpacingDecrease" = "Reduser";
+
 "menuExport" = "Eksporterer";
 "menuExportAs" = "Eksporterer som...";
 "menuFont" = "Skrifttype";
@@ -49,9 +53,6 @@
 "menuIndent" = "Indrag";
 "menuIndentIncrease" = "Øk";
 "menuIndentDecrease" = "Reduser";
-"menuLineSpacing" = "Linjeavstand";
-"menuLineSpacingIncrease" = "Increase";
-"menuLineSpacingDecrease" = "Decrease";
 "menuPrint" = "Skrive ut...";
 "menuSave" = "Lagre";
 "menuSaveAs" = "Lagre som...";
