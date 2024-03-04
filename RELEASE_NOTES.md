@@ -21,12 +21,14 @@ This release removes all deprecated code and cleans up the library.
 * Many localization keys have been renamed to be easier to use.
 
 * `RichTextContextFocusedValueKey` has been renamed to `RichTextContext.FocusedValueKey`.
-* `RichTextEditor` is now configured and styled with modifiers instead of the initializer.
-* `RichTextFont` pickers are now configured with a shared modifier instead of the initializer.
-* `RichTextFont` size picker is now configured with a shared modifier instead of the initializer.
-* `RichTextFormat` components arre now configured with a shared modifier instead of the initializer.
-* `RichTextLine` spacing picker is now configured with a shared modifier instead of the initializer.
-* `RichTextKeyboardToolbar` is now configured and styled with two modifiers instead of the initializer.
+* `RichTextEditor` is now configured and styled with modifiers instead of the init.
+* `RichTextFont` pickers are now configured with a shared modifier instead of the init.
+* `RichTextFont` size picker is now configured with a shared modifier instead of the init.
+* `RichTextFormat` components are now configured with a shared modifier instead of the init.
+* `RichTextFormatSheet` has been renamed to `RichTextFormat.Sheet` to trim SDK surface area.
+* `RichTextFormatSidebar` has been renamed to `RichTextFormat.Sidebar` to trim SDK surface area.
+* `RichTextLine.SpacingPicker` is now configured with a shared view modifier instead of the init.
+* `RichTextKeyboardToolbar` is now configured and styled with two view modifiers instead of the init.
 
 
 

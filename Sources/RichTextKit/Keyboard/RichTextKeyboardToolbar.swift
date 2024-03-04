@@ -88,7 +88,7 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
     
     public typealias StandardLeadingButtons = EmptyView
     public typealias StandardTrailingButtons = EmptyView
-    public typealias StandardFormatSheet = RichTextFormatSheet
+    public typealias StandardFormatSheet = RichTextFormat.Sheet
 
     private let leadingButtons: (StandardLeadingButtons) -> LeadingButtons
     private let trailingButtons: (StandardTrailingButtons) -> TrailingButtons
@@ -132,7 +132,7 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
         .frame(height: shouldDisplayToolbar ? nil : 0)
         .sheet(isPresented: $isFormatSheetPresented) {
             formatSheet(
-                RichTextFormatSheet(context: context)
+                .init(context: context)
             )
             .prefersMediumSize()
         }
