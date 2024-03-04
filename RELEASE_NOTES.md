@@ -12,15 +12,16 @@ This release removes all deprecated code and cleans up the library.
 
 ### ✨ Features
 
-* There are new `richTextEditor` config and style view extensions.
-* There are new `richTextKeyboardToolbar` config and style view extensions.
+* There are new `richTextEditor` config and style view modifiers.
+* There are new `richTextKeyboardToolbar` config and style view modifiers.
 
 ### 💥 Breaking Changes
 
 * All previously deprecated code has been deleted. 
 
-* `RichTextEditor` is configured with view extensions instead of the initializer.
-* `RichTextKeyboardToolbar` is configured with view extensions instead of the initializer.
+* `RichTextContextFocusedValueKey` is renamed to `RichTextContext.FocusedValueKey`
+* `RichTextEditor` is configured with view modifiers instead of the initializer.
+* `RichTextKeyboardToolbar` is configured with view modifiers instead of the initializer.
 
 
 

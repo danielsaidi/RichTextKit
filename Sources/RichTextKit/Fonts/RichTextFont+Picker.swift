@@ -117,14 +117,42 @@ struct RichTextFont_Picker_Previews: PreviewProvider {
 extension View {
 
     func withPreviewPickerStyles() -> some View {
-        VStack(spacing: 10) {
+        NavigationView {
+            VStack(spacing: 10) {
+                self.label("Default")
+                self.pickerStyle(.automatic).label(".automatic")
+                self.pickerStyle(.inline).label(".inline")
+                #if iOS || macOS
+                self.pickerStyle(.menu).label(".menu")
+                #endif
+                if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
+                    pickerStyle(.navigationLink).label(".navigationLink")
+                }
+                #if iOS || macOS
+                if #available(iOS 17.0, macOS 14.0, watchOS 10.0, *) {
+                    pickerStyle(.palette).label(".palette")
+                }
+                #endif
+                #if iOS || macOS || os(tvOS) || os(visionOS)
+                self.pickerStyle(.segmented).label(".segmented")
+                #endif
+                #if iOS || macOS
+                pickerStyle(.wheel).label(".wheel")
+                #endif
+            }
+        }
+    }
+}
+
+private extension View {
+    
+    func label(_ title: String) -> some View {
+        VStack {
+            Text(title)
+                .font(.footnote)
+                .foregroundStyle(.secondary)
             self
-            self.pickerStyle(.inline)
-            #if iOS || macOS
-            self.pickerStyle(.menu)
-            #elseif iOS || macOS || os(tvOS) || os(visionOS)
-            self.pickerStyle(.segmented)
-            #endif
+            Divider()
         }
     }
 }

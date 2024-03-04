@@ -11,14 +11,13 @@ import Combine
 
 /**
  This observable context can be used to affect and observe a
- ``RichTextEditor`` and its content.
+ ``RichTextEditor`` and its native text view.
 
  Use ``handle(_:)`` to trigger actions, e.g. to change fonts,
  text styles, text alignments, select a text range, etc.
-
- You can observe the various published properties to keep an
- app up to date with the current state. The ``RichTextEditor``
- uses this with a ``RichTextCoordinator`` to keep it updated.
+ 
+ You can use ``RichTextContext/FocusedValueKey`` to handle a
+ context with focus in a multi-windowed app.
  */
 public class RichTextContext: ObservableObject {
 

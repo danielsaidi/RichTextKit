@@ -15,7 +15,7 @@ public extension RichTextAlignment {
      ``RichTextAlignment`` to any view.
 
      You can also apply it with the `.keyboardShortcut(for:)`
-     view extension.
+     view modifier.
      */
     struct KeyboardShortcutModifier: ViewModifier {
 

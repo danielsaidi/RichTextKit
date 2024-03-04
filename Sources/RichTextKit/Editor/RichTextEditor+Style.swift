@@ -6,7 +6,7 @@
 //
 
 
-#if iOS || macOS || os(visionOS)
+#if iOS || macOS || os(tvOS) || os(visionOS)
 import SwiftUI
 
 /// This struct can be used to style a ``RichTextEditor``.
@@ -37,5 +37,4 @@ public extension EnvironmentValues {
         set { self [RichTextEditorStyle.Key.self] = newValue }
     }
 }
-
 #endif

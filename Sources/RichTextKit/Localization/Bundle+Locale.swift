@@ -1,5 +1,5 @@
 //
-//  Bundle+RichTextKit.swift
+//  Bundle+Locale.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-08-21.

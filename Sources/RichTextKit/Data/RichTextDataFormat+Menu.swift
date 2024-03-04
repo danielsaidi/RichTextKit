@@ -68,14 +68,12 @@ public extension RichTextDataFormat {
 struct RichTextData_FormatMenu_Previews: PreviewProvider {
 
     static var previews: some View {
-        VStack {
-            RichTextDataFormat.Menu(
-                title: "Export...",
-                icon: .richTextExport,
-                formatAction: { _ in },
-                pdfAction: {}
-            )
-        }
+        RichTextDataFormat.Menu(
+            title: "Export...",
+            icon: .richTextExport,
+            formatAction: { _ in },
+            pdfAction: {}
+        )
     }
 }
 #endif

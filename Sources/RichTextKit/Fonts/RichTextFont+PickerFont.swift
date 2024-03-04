@@ -37,7 +37,9 @@ public extension RichTextFont {
      */
     struct PickerFont: Identifiable, Equatable {
 
-        public init(fontName: String) {
+        public init(
+            fontName: String
+        ) {
             let fontName = fontName.capitalized
             self.fontName = fontName
             self.fontDisplayName = ""

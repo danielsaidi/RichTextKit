@@ -1,7 +1,9 @@
 //
 //  RichTextView+Config_AppKit.swift
+//  RichTextKit
 //
-//  Created by Dominik Bucher on 13.02.2024.
+//  Created by Daniel Saidi on 2024-01-16.
+//  Copyright © 2024 Daniel Saidi. All rights reserved.
 //
 
 #if macOS

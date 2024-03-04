@@ -37,8 +37,8 @@ import SwiftUI
  This will not show anything. To work around this limitation,
  use a ``RichTextKeyboardToolbar`` instead.
 
- You can configure and style the view by applying config and
- style view extensions to your view hierarchy:
+ You can configure and style the view by applying its config
+ and style view modifiers to your view hierarchy:
  
  ```swift
  VStack {

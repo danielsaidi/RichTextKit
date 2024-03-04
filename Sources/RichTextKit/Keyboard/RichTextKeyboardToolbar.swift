@@ -48,8 +48,8 @@ import SwiftUI
  `$0` to use these standard views, or return any custom view
  that you want to use instead.
  
- You can configure and style the view by applying config and
- style view extensions to your view hierarchy:
+ You can configure and style the view by applying its config
+ and style view modifiers to your view hierarchy:
  
  ```swift
  VStack {
