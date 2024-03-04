@@ -29,11 +29,19 @@ public extension RichTextViewComponent {
     /// selected paragraphs. If many paragraphs are selected,
     /// it will only affect the first one.
     func setRichTextParagraphStyle(_ style: NSParagraphStyle) {
-        let range = lineRange(for: selectedRange)
+        let range: NSRange?
+        if let multipleLines = layoutManagerWrapper?.areMultipleLinesSelected(for: selectedRange),
+            multipleLines {
+            range = safeRange(for: selectedRange)
+        } else {
+            range = layoutManagerWrapper?.lineRange(for: selectedRange)
+        }
+        guard let range = range else { return }
         guard range.length > 0 else { return }
         #if os(watchOS)
         setRichTextAttribute(.paragraphStyle, to: style, at: range)
         #else
+        setRichTextAttribute(.paragraphStyle, to: style)
         textStorageWrapper?.addAttribute(.paragraphStyle, value: style, range: range)
         #endif
     }

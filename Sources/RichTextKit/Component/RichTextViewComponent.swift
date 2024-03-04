@@ -52,7 +52,9 @@ public protocol RichTextViewComponent: AnyObject,
 
     #if iOS || macOS || os(tvOS) || os(visionOS)
     /// The text view's layout manager, if any.
-    var layoutManagerWrapper: NSLayoutManager? { get }
+    /// This wraps TextKit2 and TextKit1 Layout managers
+    /// in order to support TextKit1 and use nice APIs with that.
+    var layoutManagerWrapper: RichTextLayoutManager? { get }
 
     /// The text view's text storage, if any.
     var textStorageWrapper: NSTextStorage? { get }
