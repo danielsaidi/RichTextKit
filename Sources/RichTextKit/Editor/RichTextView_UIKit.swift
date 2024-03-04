@@ -43,21 +43,21 @@ open class RichTextView: UITextView, RichTextViewComponent {
         self.init()
         self.setup(with: string, format: format)
     }
-    
+
     override public init(frame: CGRect, textContainer: NSTextContainer?) {
         let textLayoutManager = NSTextLayoutManager()
         let textkit2Container = NSTextContainer()
         textLayoutManager.textContainer = textkit2Container
         let textContentStorage = NSTextContentStorage()
         textContentStorage.addTextLayoutManager(textLayoutManager)
-        
+
         super.init(frame: frame, textContainer: textkit2Container)
     }
-    
+
     required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     // MARK: - Properties
 
     /// The configuration to use by the rich text view.
@@ -359,7 +359,6 @@ private extension UIDropSession {
 #endif
 
 // MARK: - Public Extensions
-
 
 public extension RichTextView {
 
