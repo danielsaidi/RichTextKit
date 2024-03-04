@@ -55,10 +55,10 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 - ``RichTextEditor``
 - ``RichTextView``
 - ``RichTextContext``
+- ``RichTextCoordinator``
 
 ### Foundation
 
-- ``RichTextCoordinator``
 - ``RichTextPresenter``
 - ``RichTextReader``
 - ``RichTextWriter``
@@ -120,9 +120,7 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 
 ### Format
 
-- ``RichTextFormatSheet``
-- ``RichTextFormatSidebar``
-- ``RichTextFormatToolbar``
+- ``RichTextFormat``
 
 ### Images
 

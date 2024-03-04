@@ -39,8 +39,8 @@ public extension RichTextFormat {
             self._context = ObservedObject(wrappedValue: context)
         }
         
-        public typealias Config = RichTextFormatToolbar.Config
-        public typealias Style = RichTextFormatToolbar.Style
+        public typealias Config = RichTextFormat.ToolbarConfig
+        public typealias Style = RichTextFormat.ToolbarStyle
         
         @ObservedObject
         private var context: RichTextContext
@@ -64,7 +64,7 @@ public extension RichTextFormat {
                         selection: $context.fontName
                     )
                     Divider()
-                    RichTextFormatToolbar(
+                    RichTextFormat.Toolbar(
                         context: context
                     )
                     .richTextFormatToolbarConfig(config)

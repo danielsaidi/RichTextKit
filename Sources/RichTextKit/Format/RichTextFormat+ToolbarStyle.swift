@@ -1,5 +1,5 @@
 //
-//  RichTextFormatToolbar+Style.swift
+//  RichTextFormat+ToolbarStyle.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2024-02-16.
@@ -9,10 +9,10 @@
 #if iOS || macOS || os(visionOS)
 import SwiftUI
 
-public extension RichTextFormatToolbar {
+public extension RichTextFormat {
 
-    /// This struct can be used to style a format sheet.
-    struct Style {
+    /// This type can be used to style a format toolbar.
+    struct ToolbarStyle {
 
         public init(
             padding: Double = 10,
@@ -31,26 +31,26 @@ public extension View {
 
     /// Apply a rich text format toolbar style.
     func richTextFormatToolbarStyle(
-        _ style: RichTextFormatToolbar.Style
+        _ style: RichTextFormat.ToolbarStyle
     ) -> some View {
         self.environment(\.richTextFormatToolbarStyle, style)
     }
 }
 
-private extension RichTextFormatToolbar.Style {
+private extension RichTextFormat.ToolbarStyle {
 
     struct Key: EnvironmentKey {
 
-        public static let defaultValue = RichTextFormatToolbar.Style()
+        public static let defaultValue = RichTextFormat.ToolbarStyle()
     }
 }
 
 public extension EnvironmentValues {
 
     /// This value can bind to a format toolbar style.
-    var richTextFormatToolbarStyle: RichTextFormatToolbar.Style {
-        get { self [RichTextFormatToolbar.Style.Key.self] }
-        set { self [RichTextFormatToolbar.Style.Key.self] = newValue }
+    var richTextFormatToolbarStyle: RichTextFormat.ToolbarStyle {
+        get { self [RichTextFormat.ToolbarStyle.Key.self] }
+        set { self [RichTextFormat.ToolbarStyle.Key.self] = newValue }
     }
 }
 #endif

@@ -14,6 +14,7 @@ This release removes all deprecated code and cleans up the library.
 
 * There are new `richTextEditor` config and style view modifiers.
 * There are new `richTextKeyboardToolbar` config and style view modifiers.
+* There is a new `RichTextFormat` namespace that groups format types and views.
 
 ### 💥 Breaking Changes
 
@@ -27,6 +28,7 @@ This release removes all deprecated code and cleans up the library.
 * `RichTextFormat` components are now configured with a shared modifier instead of the init.
 * `RichTextFormatSheet` has been renamed to `RichTextFormat.Sheet` to trim SDK surface area.
 * `RichTextFormatSidebar` has been renamed to `RichTextFormat.Sidebar` to trim SDK surface area.
+* `RichTextFormatToolbar` has been renamed to `RichTextFormat.Toolbar` to trim SDK surface area.
 * `RichTextLine.SpacingPicker` is now configured with a shared view modifier instead of the init.
 * `RichTextKeyboardToolbar` is now configured and styled with two view modifiers instead of the init.
 
