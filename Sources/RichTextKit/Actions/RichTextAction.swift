@@ -166,48 +166,6 @@ public extension RichTextAction {
 
 public extension RichTextAction {
 
-    @available(*, deprecated, message: "Use stepFontSize directly")
-    static func increaseFontSize(
-        points: UInt = 1
-    ) -> RichTextAction {
-        stepFontSize(points: Int(points))
-    }
-
-    @available(*, deprecated, message: "Use stepFontSize directly")
-    static func decreaseFontSize(
-        points: UInt = 1
-    ) -> RichTextAction {
-        stepFontSize(points: -Int(points))
-    }
-
-    @available(*, deprecated, message: "Use stepIndent directly")
-    static func increaseIndent(
-        points: UInt = .defaultRichTextIntentStepSize
-    ) -> RichTextAction {
-        stepIndent(points: CGFloat(points))
-    }
-
-    @available(*, deprecated, message: "Use stepIndent directly")
-    static func decreaseIndent(
-        points: UInt = .defaultRichTextIntentStepSize
-    ) -> RichTextAction {
-        stepIndent(points: -CGFloat(points))
-    }
-
-    @available(*, deprecated, message: "Use stepSuperscript directly")
-    static func increaseSuperscript(
-        steps: UInt = 1
-    ) -> RichTextAction {
-        stepSuperscript(steps: Int(steps))
-    }
-
-    @available(*, deprecated, message: "Use stepSuperscript directly")
-    static func decreaseSuperscript(
-        steps: UInt = 1
-    ) -> RichTextAction {
-        stepSuperscript(steps: -Int(steps))
-    }
-
     /// A name alias for `.redoLatestChange`.
     static var redo: RichTextAction { .redoLatestChange }
 

@@ -3,26 +3,22 @@
 //  Demo
 //
 //  Created by Daniel Saidi on 2022-12-15.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
 
-final class ViewDebug {
+public final class ViewDebug {
 
-    /**
-     Make any view draw a random background color every time
-     it's redrawn.
-     */
-    static var isEnabled = false
+    /// Enable this to make all views that use this function
+    /// draw a random background every time they redraw.
+    public static var isEnabled = false
 }
 
 public extension View {
 
-    /**
-     Make the view draw a random background color every time
-     it's redrawn, but only if `ViewDebug.isEnabled` is true.
-     */
+    /// Make the view draw a random background every time it
+    /// redraws, if ``ViewDebug/isEnabled`` is `true`.
     @ViewBuilder
     func viewDebug() -> some View {
         if ViewDebug.isEnabled {

@@ -54,16 +54,14 @@ import SwiftUI
  */
 public struct RichTextEditor: ViewRepresentable {
 
-    /**
-     Create a rich text editor with a certain text that uses
-     a certain rich text data format.
-
-     - Parameters:
-       - text: The rich text to edit.
-       - context: The rich text context to use.
-       - config: The rich text configuration to use, by deafult `.standard`.
-       - format: The rich text data format, by default `.archivedData`.
-     */
+    /// Create a rich text editor with a rich text value and
+    /// a certain rich text data format.
+    ///
+    /// - Parameters:
+    ///   - text: The rich text to edit.
+    ///   - context: The rich text context to use.
+    ///   - format: The rich text data format, by default `.archivedData`.
+    ///   - viewConfiguration: A platform-specific view configuration, if any.
     public init(
         text: Binding<NSAttributedString>,
         context: RichTextContext,

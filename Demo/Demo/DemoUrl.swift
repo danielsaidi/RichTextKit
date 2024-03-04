@@ -3,7 +3,7 @@
 //  Demo
 //
 //  Created by Daniel Saidi on 2022-06-05.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
@@ -18,18 +18,9 @@ extension DemoUrl {
 
     var id: String { rawValue }
 
-    var icon: Image {
-        switch self {
-        case .github: return .safari
-        case .documentation: return .documentation
-        }
-    }
-
-    var label: some View {
-        Label {
+    var link: some View {
+        Link(destination: url) {
             Text(title)
-        } icon: {
-            icon
         }
     }
 
