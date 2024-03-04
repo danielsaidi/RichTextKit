@@ -19,12 +19,11 @@ This release removes all deprecated code and cleans up the library.
 
 * All previously deprecated code has been deleted. 
 
-* `RichTextContextFocusedValueKey` has been renamed to `RichTextContext.FocusedValueKey`
+* `RichTextContextFocusedValueKey` has been renamed to `RichTextContext.FocusedValueKey`.
 * `RichTextEditor` is now configured and styled with view modifiers instead of with the initializer.
 * `RichTextFont` pickers are now configured with a shared view modifier instead of with the initializer.
 * `RichTextKeyboardToolbar` is now configured and styled with view modifiers instead of with the initializer.
-
-
+* `RTKL10n` has renamed many localization keys.
 
 
 

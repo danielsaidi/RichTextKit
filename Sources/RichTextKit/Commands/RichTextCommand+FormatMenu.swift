@@ -69,7 +69,7 @@ public extension RichTextCommand.FormatMenu {
         public var body: some View {
             switch self {
             case .font:
-                Menu(RTKL10n.menuFont.text) {
+                Menu(RTKL10n.font.text) {
                     Group(styles: .all)
                     Divider()
                     Group(fontSize: true)
@@ -79,7 +79,7 @@ public extension RichTextCommand.FormatMenu {
                     Group(alignments: .all)
                 }
             case .indent:
-                Menu(RTKL10n.menuIndent.text) {
+                Menu(RTKL10n.indent.text) {
                     Group(indent: true)
                 }
             case .lineSpacing:
@@ -87,7 +87,7 @@ public extension RichTextCommand.FormatMenu {
                     Group(lineSpacing: true)
                 }
             case .superscript:
-                Menu(RTKL10n.menuSuperscript.text) {
+                Menu(RTKL10n.superscript.text) {
                     Group(superscript: true)
                 }
             }

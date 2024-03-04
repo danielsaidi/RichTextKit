@@ -17,6 +17,10 @@ public enum RTKL10n: String, CaseIterable, Identifiable {
 
     font,
     fontSize,
+    fontSizeIncrease,
+    fontSizeIncreaseDescription,
+    fontSizeDecrease,
+    fontSizeDecreaseDescription,
 
     color,
     foregroundColor,
@@ -27,16 +31,8 @@ public enum RTKL10n: String, CaseIterable, Identifiable {
 
     actionCopy,
     actionDismissKeyboard,
-    actionFontSizeIncrease,
-    actionFontSizeDecrease,
-    actionIndentIncrease,
-    actionIndentDecrease,
-    actionLineSpacingIncrease,
-    actionLineSpacingDecrease,
     actionPrint,
     actionRedoLatestChange,
-    actionSuperscriptIncrease,
-    actionSuperscriptDecrease,
     actionUndoLatestChange,
 
     fileFormatRtk,
@@ -44,25 +40,26 @@ public enum RTKL10n: String, CaseIterable, Identifiable {
     fileFormatRtf,
     fileFormatTxt,
     
+    indent,
+    indentIncrease,
+    indentIncreaseDescription,
+    indentDecrease,
+    indentDecreaseDescription,
+    
     lineSpacing,
     lineSpacingIncrease,
+    lineSpacingIncreaseDescription,
     lineSpacingDecrease,
-
+    lineSpacingDecreaseDescription,
+    
     menuExport,
     menuExportAs,
-    menuFont,
     menuFormat,
-    menuIndent,
-    menuIndentIncrease,
-    menuIndentDecrease,
     menuPrint,
     menuSave,
     menuSaveAs,
     menuShare,
     menuShareAs,
-    menuSuperscript,
-    menuSuperscriptIncrease,
-    menuSuperscriptDecrease,
     menuText,
 
     highlightedRange,
@@ -79,6 +76,12 @@ public enum RTKL10n: String, CaseIterable, Identifiable {
     styleItalic,
     styleStrikethrough,
     styleUnderlined,
+    
+    superscript,
+    superscriptIncrease,
+    superscriptIncreaseDescription,
+    superscriptDecrease,
+    superscriptDecreaseDescription,
 
     textAlignment,
     textAlignmentLeft,
@@ -93,38 +96,38 @@ public extension RTKL10n {
         _ points: Int
     ) -> RTKL10n {
         points < 0 ?
-            .actionFontSizeDecrease :
-            .actionFontSizeIncrease
+            .fontSizeDecreaseDescription :
+            .fontSizeIncreaseDescription
     }
 
     static func actionStepIndent(
         _ points: Double
     ) -> RTKL10n {
         points < 0 ?
-            .actionIndentDecrease :
-            .actionIndentIncrease
+            .indentDecreaseDescription :
+            .indentIncreaseDescription
     }
 
     static func actionStepLineSpacing(
         _ points: CGFloat
     ) -> RTKL10n {
         points < 0 ?
-            .actionLineSpacingDecrease :
-            .actionLineSpacingIncrease
+            .lineSpacingDecreaseDescription :
+            .lineSpacingIncreaseDescription
     }
 
     static func actionStepSuperscript(
         _ steps: Int
     ) -> RTKL10n {
         steps < 0 ?
-            .actionSuperscriptDecrease :
-            .actionSuperscriptIncrease
+            .superscriptDecreaseDescription :
+            .superscriptIncreaseDescription
     }
 
     static func menuIndent(_ points: Double) -> RTKL10n {
         points < 0 ?
-            .menuIndentDecrease :
-            .menuIndentIncrease
+            .indentDecrease :
+            .indentIncrease
     }
 }
 

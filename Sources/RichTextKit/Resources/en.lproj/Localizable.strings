@@ -13,6 +13,10 @@
 
 "font" = "Font";
 "fontSize" = "Font Size";
+"fontSizeIncrease" = "Larger";
+"fontSizeIncreaseDescription" = "Larger Text";
+"fontSizeDecrease" = "Smaller";
+"fontSizeDecreaseDescription" = "Smaller Text";
 
 "color" = "Color";
 "foregroundColor" = "Text Color";
@@ -23,16 +27,8 @@
 
 "actionCopy" = "Copy";
 "actionDismissKeyboard" = "Dismiss Keyboard";
-"actionFontSizeIncrease" = "Larger Text";
-"actionFontSizeDecrease" = "Smaller Text";
-"actionIndentIncrease" = "Increase Indent";
-"actionIndentDecrease" = "Decrease Indent";
-"actionLineSpacingIncrease" = "Increase Line Spacing";
-"actionLineSpacingDecrease" = "Decrease Line Spacing";
 "actionPrint" = "Print";
 "actionRedoLatestChange" = "Redo";
-"actionSuperscriptIncrease" = "Increase Superscript";
-"actionSuperscriptDecrease" = "Decrease Superscript";
 "actionUndoLatestChange" = "Undo";
 
 "fileFormatRtk" = "Rich Text Kit (.rtk)";
@@ -40,27 +36,26 @@
 "fileFormatRtf" = "Rich Text (.rtf)";
 "fileFormatTxt" = "Plain Text (.txt)";
 
+"indent" = "Indent";
+"indentIncrease" = "Increase";
+"indentIncreaseDescription" = "Increase Indent";
+"indentDecrease" = "Decrease";
+"indentDecreaseDescription" = "Decrease Indent";
+
 "lineSpacing" = "Line Spacing";
 "lineSpacingIncrease" = "Increase";
+"lineSpacingIncreaseDescription" = "Increase Line Spacing";
 "lineSpacingDecrease" = "Decrease";
+"lineSpacingDecreaseDescription" = "Decrease Line Spacing";
 
 "menuExport" = "Export";
 "menuExportAs" = "Export as...";
-"menuFont" = "Font";
-"menuFontSizeIncrease" = "Larger";
-"menuFontSizeDecrease" = "Smaller";
 "menuFormat" = "Format";
-"menuIndent" = "Indent";
-"menuIndentIncrease" = "Increase";
-"menuIndentDecrease" = "Decrease";
 "menuPrint" = "Print...";
 "menuSave" = "Save";
 "menuSaveAs" = "Save as...";
 "menuShare" = "Share";
 "menuShareAs" = "Share as...";
-"menuSuperscript" = "Superscript";
-"menuSuperscriptIncrease" = "Increase";
-"menuSuperscriptDecrease" = "Decrease";
 "menuText" = "Text";
 
 "highlightedRange" = "Highlight Range";
@@ -76,6 +71,12 @@
 "styleItalic" = "Italic";
 "styleStrikethrough" = "Strikethrough";
 "styleUnderlined" = "Underline";
+
+"superscript" = "Superscript";
+"superscriptIncrease" = "Increase";
+"superscriptIncreaseDescription" = "Increase Superscript";
+"superscriptDecrease" = "Decrease";
+"superscriptDecreaseDescription" = "Decrease Superscript";
 
 "textAlignment" = "Text Alignment";
 "textAlignmentLeft" = "Left";

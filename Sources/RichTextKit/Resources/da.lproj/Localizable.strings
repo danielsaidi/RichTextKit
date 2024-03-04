@@ -13,6 +13,10 @@
 
 "font" = "Skrifttype";
 "fontSize" = "Skriftstørrelse";
+"fontSizeIncrease" = "Større";
+"fontSizeIncreaseDescription" = "Øge skriftstørrelsen";
+"fontSizeDecrease" = "Mindre";
+"fontSizeDecreaseDescription" = "Mindske skriftstørrelsen";
 
 "color" = "Farve";
 "foregroundColor" = "Tekst";
@@ -23,16 +27,8 @@
 
 "actionCopy" = "Kopiere";
 "actionDismissKeyboard" = "Luk tastaturet";
-"actionFontSizeIncrease" = "Øge skriftstørrelsen";
-"actionFontSizeDecrease" = "Mindske skriftstørrelsen";
-"actionIndentIncrease" = "Øge indrag";
-"actionIndentDecrease" = "Mindske indrag";
-"actionLineSpacingIncrease" = "Øge linjeafstand";
-"actionLineSpacingDecrease" = "Mindske linjeafstand";
 "actionPrint" = "Udskriv";
 "actionRedoLatestChange" = "Lave om";
-"actionSuperscriptIncrease" = "Increase Superscript";
-"actionSuperscriptDecrease" = "Decrease Superscript";
 "actionUndoLatestChange" = "Fortryd";
 
 "fileFormatRtk" = "Rich Text Kit (.rtk)";
@@ -40,27 +36,26 @@
 "fileFormatRtf" = "Formateret tekst (.rtf)";
 "fileFormatTxt" = "Ren tekst (.txt)";
 
+"indent" = "Indrag";
+"indentIncrease" = "Øge";
+"indentIncreaseDescription" = "Øge indrag";
+"indentDecrease" = "Mindske";
+"indentDecreaseDescription" = "Mindske indrag";
+
 "lineSpacing" = "Linjeafstand";
 "lineSpacingIncrease" = "Increase";
+"lineSpacingIncreaseDescription" = "Øge linjeafstand";
 "lineSpacingDecrease" = "Decrease";
+"lineSpacingDecreaseDescription" = "Mindske linjeafstand";
 
 "menuExport" = "Eksportere";
 "menuExportAs" = "Eksportere som...";
-"menuFont" = "Skrifttype";
-"menuFontSizeIncrease" = "Større";
-"menuFontSizeDecrease" = "Mindre";
 "menuFormat" = "Format";
-"menuIndent" = "Indrag";
-"menuIndentIncrease" = "Øge";
-"menuIndentDecrease" = "Mindske";
 "menuPrint" = "Udskriv...";
 "menuSave" = "Spare";
 "menuSaveAs" = "Spare som...";
 "menuShare" = "Del";
 "menuShareAs" = "Del som...";
-"menuSuperscript" = "Baslinje";
-"menuSuperscriptIncrease" = "Øge";
-"menuSuperscriptDecrease" = "Mindske";
 "menuText" = "Tekst";
 
 "highlightedRange" = "Highlight Range";
@@ -76,6 +71,13 @@
 "styleItalic" = "Kursiv";
 "styleStrikethrough" = "Gennemstreget";
 "styleUnderlined" = "Understregning";
+
+"superscript" = "Baslinje";
+"superscriptIncrease" = "Øge";
+"superscriptIncreaseDescription" = "Øge Baslinje";
+"superscriptDecrease" = "Mindske";
+"superscriptDecreaseDescription" = "Mindske Baslinje";
+
 
 "textAlignment" = "Tekstjustering";
 "textAlignmentLeft" = "Venstrejusteret";

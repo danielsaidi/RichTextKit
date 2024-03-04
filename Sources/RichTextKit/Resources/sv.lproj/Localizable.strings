@@ -13,6 +13,11 @@
 
 "font" = "Typsnitt";
 "fontSize" = "Teckenstorlek";
+"fontSizeIncrease" = "Större";
+"fontSizeIncreaseDescription" = "Öka teckenstorlek";
+"fontSizeDecrease" = "Mindre";
+"fontSizeDecreaseDescription" = "Minska teckenstorlek";
+
 
 "color" = "Färg";
 "foregroundColor" = "Text";
@@ -23,16 +28,8 @@
 
 "actionCopy" = "Kopiera";
 "actionDismissKeyboard" = "Stäng tangentbordet";
-"actionFontSizeIncrease" = "Öka teckenstorlek";
-"actionFontSizeDecrease" = "Minska teckenstorlek";
-"actionIndentIncrease" = "Öka indrag";
-"actionIndentDecrease" = "Minska indrag";
-"actionLineSpacingIncrease" = "Öka linjeavstånd";
-"actionLineSpacingDecrease" = "Minska linjeavstånd";
 "actionPrint" = "Skriv ut";
 "actionRedoLatestChange" = "Gör om";
-"actionSuperscriptIncrease" = "Öka baslinje";
-"actionSuperscriptDecrease" = "Minska baslinje";
 "actionUndoLatestChange" = "Ångra";
 
 "fileFormatRtk" = "Rich Text Kit (.rtk)";
@@ -40,27 +37,26 @@
 "fileFormatRtf" = "Formaterad Text (.rtf)";
 "fileFormatTxt" = "Ren Text (.txt)";
 
+"indent" = "Indrag";
+"indentIncrease" = "Öka";
+"indentIncreaseDescription" = "Öka indrag";
+"indentDecrease" = "Minska";
+"indentDecreaseDescription" = "Minska indrag";
+
 "lineSpacing" = "Radavstånd";
 "lineSpacingIncrease" = "Öka";
+"lineSpacingIncreaseDescription" = "Öka linjeavstånd";
 "lineSpacingDecrease" = "Minska";
+"lineSpacingDecreaseDescription" = "Minska linjeavstånd";
 
 "menuExport" = "Exportera";
 "menuExportAs" = "Exportera som...";
-"menuFont" = "Typsnitt";
-"menuFontSizeIncrease" = "Större";
-"menuFontSizeDecrease" = "Mindre";
 "menuFormat" = "Format";
-"menuIndent" = "Indrag";
-"menuIndentIncrease" = "Öka";
-"menuIndentDecrease" = "Minska";
 "menuPrint" = "Skriv ut...";
 "menuSave" = "Spara";
 "menuSaveAs" = "Spara som...";
 "menuShare" = "Dela";
 "menuShareAs" = "Dela som...";
-"menuSuperscript" = "Baslinje";
-"menuSuperscriptIncrease" = "Öka";
-"menuSuperscriptDecrease" = "Minska";
 "menuText" = "Text";
 
 "highlightedRange" = "Highlight Range";
@@ -76,6 +72,12 @@
 "styleItalic" = "Kursiv";
 "styleStrikethrough" = "Genomstrykning";
 "styleUnderlined" = "Understrykning";
+
+"superscript" = "Baslinje";
+"superscriptIncrease" = "Öka";
+"superscriptIncreaseDescription" = "Öka baslinje";
+"superscriptDecrease" = "Minska";
+"superscriptDecreaseDescription" = "Minska baslinje";
 
 "textAlignment" = "Textjustering";
 "textAlignmentLeft" = "Vänsterjustera";
