@@ -20,7 +20,7 @@ public struct RichTextExportMenu: View {
 
     public init(
         title: String = RTKL10n.menuExportAs.text,
-        icon: Image = .richTextActionExport,
+        icon: Image = .richTextExport,
         formats: [RichTextDataFormat] = RichTextDataFormat.libraryFormats,
         formatAction: @escaping (RichTextDataFormat) -> Void,
         pdfAction: (() -> Void)? = nil

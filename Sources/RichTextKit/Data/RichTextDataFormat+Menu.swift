@@ -71,7 +71,7 @@ struct RichTextData_FormatMenu_Previews: PreviewProvider {
         VStack {
             RichTextDataFormat.Menu(
                 title: "Export...",
-                icon: .richTextActionExport,
+                icon: .richTextExport,
                 formatAction: { _ in },
                 pdfAction: {}
             )

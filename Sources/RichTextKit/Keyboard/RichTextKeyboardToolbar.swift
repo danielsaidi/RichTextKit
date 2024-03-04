@@ -10,16 +10,11 @@
 import SwiftUI
 
 /**
- This toolbar can be added above the iOS keyboard to make it
- easy to provide rich text formatting in a very compact form.
+ This toolbar can be added above an iOS keyboard, to provide
+ rich text formatting in a compact form.
 
- This view has customizable actions and also supports adding
- custom leading and trailing buttons. It shows more views if
- the horizontal size class is regular.
-
- This custom toolbar is needed since ``RichTextEditor`` will
- wrap a native `UIKit` text view, which means that using the
- `toolbar` modifier with a `keyboard` placement doesn't work:
+ This toolbar is needed since the ``RichTextEditor`` can not
+ use a `toolbar` modifier with `.keyboard` placement:
 
  ```swift
  RichTextEditor(text: $text, context: context)
@@ -29,11 +24,44 @@ import SwiftUI
          }
      }
  ```
-
- The above code will simply not show anything when you start
- to edit text. To work around this limitation, you can use a
- this custom toolbar instead, which by default will show and
- hide itself as you begin and end editing the text.
+ 
+ Instead, add this toolbar below a ``RichTextEditor`` to let
+ it automatically show when the text editor is edited in iOS.
+ 
+ You can inject additional leading and trailing buttons, and
+ customize the format sheet that is presented when users tap
+ format button:
+ 
+ ```swift
+ VStack {
+    RichTextEditor(...)
+    RichTextKeyboardToolbar(
+        context: context,
+        leadingButtons: {},
+        trailingButtons: {},
+        formatSheet: { $0 }
+    )
+ }
+ ```
+ 
+ These view builders provide you with standard views. Return
+ `$0` to use these standard views, or return any custom view
+ that you want to use instead.
+ 
+ You can configure and style the view by applying config and
+ style view extensions to your view hierarchy:
+ 
+ ```swift
+ VStack {
+    RichTextEditor(...)
+    RichTextKeyboardToolbar(...)
+ }
+ .richTextKeyboardToolbarStyle(...)
+ .richTextKeyboardToolbarConfig(...)
+ ```
+ 
+ For more information, see ``RichTextKeyboardToolbarConfig``
+ and ``RichTextKeyboardToolbarStyle``.
  */
 public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: View, FormatSheet: View>: View {
 
@@ -42,34 +70,29 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
 
      - Parameters:
        - context: The context to affect.
-       - leadingActions: The leading actions, by default `.undo`, `.redo` and `.copy`.
-       - trailingActions: The trailing actions, by default `.dismissKeyboard`.
        - leadingButtons: The leading buttons to place after the leading actions.
        - trailingButtons: The trailing buttons to place before the trailing actions.
        - formatSheet: The rich text format sheet to use, given the default ``RichTextFormatSheet``.
      */
     public init(
         context: RichTextContext,
-        leadingActions: [RichTextAction] = [.undo, .redo],
-        trailingActions: [RichTextAction] = [.dismissKeyboard],
-        @ViewBuilder leadingButtons: @escaping () -> LeadingButtons,
-        @ViewBuilder trailingButtons: @escaping () -> TrailingButtons,
-        @ViewBuilder formatSheet: @escaping (RichTextFormatSheet) -> FormatSheet
+        @ViewBuilder leadingButtons: @escaping (StandardLeadingButtons) -> LeadingButtons,
+        @ViewBuilder trailingButtons: @escaping (StandardTrailingButtons) -> TrailingButtons,
+        @ViewBuilder formatSheet: @escaping (StandardFormatSheet) -> FormatSheet
     ) {
         self._context = ObservedObject(wrappedValue: context)
-        self.leadingActions = leadingActions
-        self.trailingActions = trailingActions
         self.leadingButtons = leadingButtons
         self.trailingButtons = trailingButtons
         self.formatSheet = formatSheet
     }
+    
+    public typealias StandardLeadingButtons = EmptyView
+    public typealias StandardTrailingButtons = EmptyView
+    public typealias StandardFormatSheet = RichTextFormatSheet
 
-    private let leadingActions: [RichTextAction]
-    private let trailingActions: [RichTextAction]
-
-    private let leadingButtons: () -> LeadingButtons
-    private let trailingButtons: () -> TrailingButtons
-    private let formatSheet: (RichTextFormatSheet) -> FormatSheet
+    private let leadingButtons: (StandardLeadingButtons) -> LeadingButtons
+    private let trailingButtons: (StandardTrailingButtons) -> TrailingButtons
+    private let formatSheet: (StandardFormatSheet) -> FormatSheet
 
     @ObservedObject
     private var context: RichTextContext
@@ -80,11 +103,11 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
     @Environment(\.horizontalSizeClass)
     private var horizontalSizeClass
 
-    @Environment(\.richTextKeyboardToolbarConfiguration)
-    var configuration
+    @Environment(\.richTextKeyboardToolbarConfig)
+    private var config
 
     @Environment(\.richTextKeyboardToolbarStyle)
-    var style
+    private var style
 
     public var body: some View {
         VStack(spacing: 0) {
@@ -110,7 +133,8 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
         .sheet(isPresented: $isFormatSheetPresented) {
             formatSheet(
                 RichTextFormatSheet(context: context)
-            ).prefersMediumSize()
+            )
+            .prefersMediumSize()
         }
     }
 }
@@ -149,11 +173,11 @@ private extension RichTextKeyboardToolbar {
     var leadingViews: some View {
         RichTextAction.ButtonStack(
             context: context,
-            actions: leadingActions,
+            actions: config.leadingActions,
             spacing: style.itemSpacing
         )
 
-        leadingButtons()
+        leadingButtons(StandardLeadingButtons())
 
         divider
 
@@ -176,11 +200,11 @@ private extension RichTextKeyboardToolbar {
             .frame(maxWidth: 200)
             .keyboardShortcutsOnly(if: isCompact)
 
-        trailingButtons()
+        trailingButtons(StandardTrailingButtons())
 
         RichTextAction.ButtonStack(
             context: context,
-            actions: trailingActions,
+            actions: config.trailingActions,
             spacing: style.itemSpacing
         )
     }
@@ -203,7 +227,7 @@ private extension View {
 
 private extension RichTextKeyboardToolbar {
 
-    var shouldDisplayToolbar: Bool { context.isEditingText || configuration.alwaysDisplayToolbar }
+    var shouldDisplayToolbar: Bool { context.isEditingText || config.alwaysDisplayToolbar }
 }
 
 private extension RichTextKeyboardToolbar {
@@ -232,11 +256,16 @@ struct RichTextKeyboardToolbar_Previews: PreviewProvider {
                     .background(Color.gray.ignoresSafeArea())
                 RichTextKeyboardToolbar(
                     context: context,
-                    leadingButtons: {},
-                    trailingButtons: {},
+                    leadingButtons: { _ in Color.red },
+                    trailingButtons: { _ in Color.green},
                     formatSheet: { $0 }
                 )
             }
+            .richTextKeyboardToolbarConfig(.init(
+                alwaysDisplayToolbar: true,
+                leadingActions: [.print],
+                trailingActions: [.print]
+            ))
         }
     }
 

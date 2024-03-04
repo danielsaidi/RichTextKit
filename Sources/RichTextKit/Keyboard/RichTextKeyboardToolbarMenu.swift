@@ -3,25 +3,22 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-12-13.
-//  Copyright © 2022-2024 Dnaiel Saidi. All rights reserved.
+//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 #if iOS || os(visionOS)
 import SwiftUI
 
 /**
- This keyboard toolbar menu can be used to solve a UI glitch
- that can appear when adding a `Menu` to a keyboard toolbar.
+ This menu can be used to fix a UI glitch that can appear in
+ a `Menu` when presented in a keyboard toolbar.
 
- The glitch is that the menu label can be incorrectly offset
- vertically, beyond the bounds of the menu. If that happens,
- use this view to ensure that it's correctly positioned.
+ The menu label can be incorrectly offset vertically, beyond
+ the menu bounds. This view fixes that problem.
  */
 public struct RichTextKeyboardToolbarMenu<Label: View, Content: View>: View {
 
-    /**
-     Create a keyboard toolbar menu.
-     */
+    /// Create a keyboard toolbar menu.
     public init(
         @ViewBuilder content: @escaping () -> Content,
         @ViewBuilder label: @escaping () -> Label

@@ -89,13 +89,13 @@ public extension RichTextAction {
     /// The action's standard icon.
     var icon: Image {
         switch self {
-        case .copy: .richTextActionCopy
-        case .dismissKeyboard: .richTextActionDismissKeyboard
+        case .copy: .richTextCopy
+        case .dismissKeyboard: .richTextDismissKeyboard
         case .pasteImage: .richTextDocuments
         case .pasteImages: .richTextDocuments
         case .pasteText: .richTextDocuments
-        case .print: .richTextActionExport
-        case .redoLatestChange: .richTextActionRedo
+        case .print: .richTextPrint
+        case .redoLatestChange: .richTextRedo
         case .selectRange: .richTextSelection
         case .setAlignment(let val): val.icon
         case .setAttributedString: .richTextDocument
@@ -108,7 +108,7 @@ public extension RichTextAction {
         case .stepLineSpacing: .richTextLineSpacing
         case .stepSuperscript(let val): .richTextStepSuperscript(val)
         case .toggleStyle(let val): val.icon
-        case .undoLatestChange: .richTextActionUndo
+        case .undoLatestChange: .richTextUndo
         }
     }
 

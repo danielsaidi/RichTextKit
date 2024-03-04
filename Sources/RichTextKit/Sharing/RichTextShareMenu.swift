@@ -23,7 +23,7 @@ public struct RichTextShareMenu: View {
 
     public init(
         title: String = RTKL10n.menuShareAs.text,
-        icon: Image = .richTextActionShare,
+        icon: Image = .richTextShare,
         formats: [RichTextDataFormat] = RichTextDataFormat.libraryFormats,
         formatAction: @escaping (RichTextDataFormat) -> Void,
         pdfAction: (() -> Void)? = nil

@@ -10,14 +10,14 @@ import SwiftUI
 
 public extension Image {
 
-    static let richTextActionCopy = symbol("doc.on.clipboard")
-    static let richTextActionDismissKeyboard = symbol("keyboard.chevron.compact.down")
-    static let richTextActionEdit = symbol("square.and.pencil")
-    static let richTextActionExport = symbol("square.and.arrow.up.on.square")
-    static let richTextActionPrint = symbol("printer")
-    static let richTextActionRedo = symbol("arrow.uturn.forward")
-    static let richTextActionShare = symbol("square.and.arrow.up")
-    static let richTextActionUndo = symbol("arrow.uturn.backward")
+    static let richTextCopy = symbol("doc.on.clipboard")
+    static let richTextDismissKeyboard = symbol("keyboard.chevron.compact.down")
+    static let richTextEdit = symbol("square.and.pencil")
+    static let richTextExport = symbol("square.and.arrow.up.on.square")
+    static let richTextPrint = symbol("printer")
+    static let richTextRedo = symbol("arrow.uturn.forward")
+    static let richTextShare = symbol("square.and.arrow.up")
+    static let richTextUndo = symbol("arrow.uturn.backward")
 
     static let richTextAlignmentCenter = symbol("text.aligncenter")
     static let richTextAlignmentJustified = symbol("text.justify")
