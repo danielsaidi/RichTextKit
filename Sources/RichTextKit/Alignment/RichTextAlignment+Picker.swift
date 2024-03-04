@@ -39,14 +39,12 @@ public extension RichTextAlignment {
         private var selection: RichTextAlignment
 
         public var body: some View {
-            SwiftUI.Picker("", selection: $selection) {
+            SwiftUI.Picker(RTKL10n.textAlignment.text, selection: $selection) {
                 ForEach(values) { value in
                     value.label
                         .labelStyle(.iconOnly)
                 }
             }
-            .labelsHidden()
-            .accessibilityLabel(RTKL10n.textAlignment.text)
         }
     }
 }

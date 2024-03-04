@@ -25,7 +25,7 @@ public struct RichTextNSSharingMenu: View {
     #if macOS
     public init(
         title: String = RTKL10n.menuShareAs.text,
-        icon: Image = .richTextActionShare,
+        icon: Image = .richTextShare,
         formats: [RichTextDataFormat] = RichTextDataFormat.libraryFormats,
         formatAction: @escaping (RichTextDataFormat) -> URL?,
         pdfAction: (() -> URL?)? = nil

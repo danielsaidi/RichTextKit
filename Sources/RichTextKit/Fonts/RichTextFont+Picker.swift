@@ -118,27 +118,34 @@ extension View {
 
     func withPreviewPickerStyles() -> some View {
         NavigationView {
-            VStack(spacing: 10) {
-                self.label("Default")
-                self.pickerStyle(.automatic).label(".automatic")
-                self.pickerStyle(.inline).label(".inline")
-                #if iOS || macOS
-                self.pickerStyle(.menu).label(".menu")
-                #endif
-                if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
-                    pickerStyle(.navigationLink).label(".navigationLink")
+            #if macOS
+            Color.clear
+            #endif
+            ScrollView {
+                VStack(spacing: 10) {
+                    self.label("Default")
+                    self.pickerStyle(.automatic).label(".automatic")
+                    self.pickerStyle(.inline).label(".inline")
+                    #if iOS || macOS
+                    self.pickerStyle(.menu).label(".menu")
+                    #endif
+                    #if iOS
+                    if #available(iOS 16.0, *) {
+                        pickerStyle(.navigationLink).label(".navigationLink")
+                    }
+                    #endif
+                    #if iOS || macOS
+                    if #available(iOS 17.0, macOS 14.0, watchOS 10.0, *) {
+                        pickerStyle(.palette).label(".palette")
+                    }
+                    #endif
+                    #if iOS || macOS || os(tvOS) || os(visionOS)
+                    self.pickerStyle(.segmented).label(".segmented")
+                    #endif
+                    #if iOS
+                    pickerStyle(.wheel).label(".wheel")
+                    #endif
                 }
-                #if iOS || macOS
-                if #available(iOS 17.0, macOS 14.0, watchOS 10.0, *) {
-                    pickerStyle(.palette).label(".palette")
-                }
-                #endif
-                #if iOS || macOS || os(tvOS) || os(visionOS)
-                self.pickerStyle(.segmented).label(".segmented")
-                #endif
-                #if iOS || macOS
-                pickerStyle(.wheel).label(".wheel")
-                #endif
             }
         }
     }

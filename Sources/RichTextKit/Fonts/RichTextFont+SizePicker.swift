@@ -42,14 +42,12 @@ public extension RichTextFont {
         private var selection: CGFloat
 
         public var body: some View {
-            SwiftUI.Picker("", selection: $selection) {
+            SwiftUI.Picker(RTKL10n.fontSize.text, selection: $selection) {
                 ForEach(values, id: \.self) {
                     text(for: $0)
                         .tag($0)
                 }
             }
-            .labelsHidden()
-            .accessibilityLabel(RTKL10n.fontSize.text)
         }
     }
 }
@@ -89,13 +87,10 @@ struct RichTextFont_SizePicker_Previews: PreviewProvider {
         private var selection: CGFloat = 36.0
 
         var body: some View {
-            List {
-                HStack {
-                    RichTextFont.SizePicker(
-                        selection: $selection
-                    )
-                }
-            }
+            RichTextFont.SizePicker(
+                selection: $selection
+            )
+            .withPreviewPickerStyles()
         }
     }
 
