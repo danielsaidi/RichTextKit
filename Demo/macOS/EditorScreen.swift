@@ -50,21 +50,21 @@ private extension EditorScreen {
     var editor: some View {
         RichTextEditor(
             text: $text,
-            context: context,
-            config: .init(isScrollingEnabled: true)
+            context: context
         ) {
             $0.textContentInset = CGSize(width: 10, height: 20)
         }
         .frame(minWidth: 400)
         .focusedValue(\.richTextContext, context)
+        .richTextEditorConfig(.init(isScrollingEnabled: true))
     }
 
     var toolbar: some View {
-        RichTextFormatSidebar(
-            context: context,
-            config: .init(colorPickers: [.foreground])
+        RichTextFormat.Sidebar(
+            context: context
         )
         .frame(width: 250)
+        .richTextFormatSidebarConfig(.init(colorPickers: [.foreground]))
     }
 }
 
