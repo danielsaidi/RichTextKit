@@ -162,23 +162,10 @@ open class RichTextView: UITextView, RichTextViewComponent {
         with text: NSAttributedString,
         format: RichTextDataFormat
     ) {
-        attributedString = .empty
-        imageConfiguration = standardImageConfiguration(for: format)
         text.autosizeImageAttachments(maxSize: imageAttachmentMaxSize)
-        attributedString = text
+        setupSharedBehavior(with: text, format)
         richTextDataFormat = format
-        setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        setupTheme()
-    }
-
-    // MARK: - Internal functionality
-
-    func setupTheme() {
-        if text.isEmpty {
-            font = theme.font
-            textColor = theme.fontColor
-        }
-        backgroundColor = theme.backgroundColor
+        setup(theme)
     }
 
     // MARK: - Open Functionality

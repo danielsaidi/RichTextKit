@@ -109,27 +109,12 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         with text: NSAttributedString,
         format: RichTextDataFormat
     ) {
-        attributedString = .empty
-        attributedString = text
+        setupSharedBehavior(with: text, format)
         allowsImageEditing = true
         allowsUndo = true
-        imageConfiguration = standardImageConfiguration(for: format)
         layoutManager?.defaultAttachmentScaling = NSImageScaling.scaleProportionallyDown
-        setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        setupConfiguration()
-        setupTheme()
-    }
-
-    // MARK: - Internal
-
-    func setupConfiguration() {
         isContinuousSpellCheckingEnabled = configuration.isContinuousSpellCheckingEnabled
-    }
-
-    func setupTheme() {
-        font = theme.font
-        textColor = theme.fontColor
-        backgroundColor = theme.backgroundColor
+        setup(theme)
     }
 
     // MARK: - Open Functionality
