@@ -22,7 +22,7 @@ public extension View {
     }
 }
 
-extension RichTextEditorConfig {
+private extension RichTextEditorConfig {
     
     struct Key: EnvironmentKey {
         

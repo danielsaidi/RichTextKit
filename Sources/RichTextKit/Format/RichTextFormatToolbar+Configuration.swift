@@ -55,6 +55,8 @@ public extension RichTextFormatToolbar {
 public extension RichTextFormatToolbar.Configuration {
 
     /// The standard rich text format toolbar configuration.
-    static var standard = Self.init()
+    ///
+    /// You can set a new value to change the global default.
+    static var standard = Self()
 }
 #endif

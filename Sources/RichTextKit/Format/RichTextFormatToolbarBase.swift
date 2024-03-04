@@ -102,7 +102,10 @@ extension RichTextFormatToolbarBase {
         value: Binding<String>
     ) -> some View {
         if config.fontPicker {
-            RichTextFont.Picker(selection: value, fontSize: 12)
+            RichTextFont.Picker(
+                selection: value
+            )
+            .richTextFontPickerConfig(.init(fontSize: 12))
         }
     }
 

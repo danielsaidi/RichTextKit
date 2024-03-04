@@ -34,12 +34,10 @@ public struct PdfPageConfiguration: Equatable {
 
 public extension PdfPageConfiguration {
 
-    /**
-     The standard PDF page configuration.
-
-     You can override this value to change the global config.
-     */
-    static var standard = PdfPageConfiguration()
+    /// The standard PDF page configuration.
+    ///
+    /// You can override this to change the global default.
+    static var standard = Self()
 }
 
 public extension PdfPageConfiguration {

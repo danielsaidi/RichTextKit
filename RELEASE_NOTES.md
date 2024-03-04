@@ -19,9 +19,12 @@ This release removes all deprecated code and cleans up the library.
 
 * All previously deprecated code has been deleted. 
 
-* `RichTextContextFocusedValueKey` is renamed to `RichTextContext.FocusedValueKey`
-* `RichTextEditor` is configured with view modifiers instead of the initializer.
-* `RichTextKeyboardToolbar` is configured with view modifiers instead of the initializer.
+* `RichTextContextFocusedValueKey` has been renamed to `RichTextContext.FocusedValueKey`
+* `RichTextEditor` is now configured and styled with view modifiers instead of with the initializer.
+* `RichTextFont` pickers are now configured with a shared view modifier instead of with the initializer.
+* `RichTextKeyboardToolbar` is now configured and styled with view modifiers instead of with the initializer.
+
+
 
 
 

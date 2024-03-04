@@ -13,21 +13,29 @@ public extension RichTextFont {
     /**
      This view uses a `List` to list a set of fonts of which
      one can be selected.
-
-     Unlike ``RichTextFont/Picker`` this view displays fonts
-     on all platforms. It must be actively added & presented.
+     
+     Unlike ``RichTextFont/Picker`` this picker presents all
+     pickers with proper previews on all platforms. You must
+     therefore add it ina  way that gives it space.
+     
+     You can configure this picker by applying a config view
+     modifier to your view hierarchy:
+     
+     ```swift
+     VStack {
+        RichTextFont.ListPicker(...)
+        ...
+     }
+     .richTextFontPickerConfig(...)
+     ```
      */
     struct ListPicker: View {
 
         /**
-         Create a font picker.
+         Create a font list picker.
 
          - Parameters:
            - selection: The selected font name.
-           - selectionTopmost: Whether or not to place the selected font topmost.
-           - fonts: The fonts to display in the list, by default `all`.
-           - fontSize: The font size to use in the list items.
-           - dismissAfterPick: Whether or not to dismiss the picker after a font has been selected, by default `true`.
          */
         public init(
             selection: Binding<FontName>,
@@ -37,11 +45,10 @@ public extension RichTextFont {
             dismissAfterPick: Bool = true
         ) {
             self._selection = selection
-            self.fonts = fonts ?? .all
-            self.fontSize = fontSize
-            self.dismissAfterPick = dismissAfterPick
-            if selectionTopmost {
-                self.fonts = self.fonts.moveTopmost(selection.wrappedValue)
+            self.fonts = .all
+            self.fonts = config.fonts
+            if config.moveSelectionTopmost {
+                self.fonts = config.fonts.moveTopmost(selection.wrappedValue)
             }
         }
 
@@ -49,11 +56,12 @@ public extension RichTextFont {
         public typealias FontName = String
 
         private var fonts: [Font]
-        private let fontSize: CGFloat
-        private let dismissAfterPick: Bool
 
         @Binding
         private var selection: FontName
+        
+        @Environment(\.richTextFontPickerConfig)
+        private var config
 
         public var body: some View {
             let font = Binding(
@@ -64,11 +72,11 @@ public extension RichTextFont {
             RichTextKit.ListPicker(
                 items: fonts,
                 selection: font,
-                dismissAfterPick: dismissAfterPick
+                dismissAfterPick: config.dismissAfterPick
             ) { font, isSelected in
                 RichTextFont.PickerItem(
                     font: font,
-                    fontSize: fontSize,
+                    fontSize: config.fontSize,
                     isSelected: isSelected
                 )
             }

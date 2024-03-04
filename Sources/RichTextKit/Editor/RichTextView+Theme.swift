@@ -40,8 +40,10 @@ public extension RichTextView {
 }
 
 public extension RichTextView.Theme {
-
-    /// Get a standard rich text editor configuration.
-    static var standard: Self { .init() }
+    
+    /// The standard rich text view theme.
+    ///
+    /// You can set a new value to change the global default.
+    static var standard = Self()
 }
 #endif

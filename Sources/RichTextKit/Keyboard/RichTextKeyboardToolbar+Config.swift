@@ -40,7 +40,7 @@ public struct RichTextKeyboardToolbarConfig {
 
 public extension RichTextKeyboardToolbarConfig {
     
-    /// A standard rich text keyboard toolbar configuration.
+    /// The standard rich text keyboard toolbar config.
     ///
     /// You can override this to change the global default.
     static var standard = RichTextKeyboardToolbarConfig()
@@ -56,7 +56,7 @@ public extension View {
     }
 }
 
-extension RichTextKeyboardToolbarConfig {
+private extension RichTextKeyboardToolbarConfig {
     
     struct Key: EnvironmentKey {
         

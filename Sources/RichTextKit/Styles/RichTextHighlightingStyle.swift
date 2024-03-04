@@ -37,11 +37,8 @@ public struct RichTextHighlightingStyle: Equatable, Hashable {
 
 public extension RichTextHighlightingStyle {
 
-    /**
-     The standard rich text highlighting style, which uses a
-     clear background color and an accent foreground color.
-
-     You can override this value to change the global style.
-     */
-    static var standard = RichTextHighlightingStyle()
+    /// The standard rich text highlighting style.
+    ///
+    /// You can set a new value to change the global default.
+    static var standard = Self()
 }

@@ -18,6 +18,19 @@ public extension RichTextFont {
      macOS, but not on iOS. To render fonts correctly on all
      platforms, you can use a ``RichTextFont/ListPicker`` or
      a ``RichTextFont/ForEachPicker``.
+     
+     You can configure this picker by applying a config view
+     modifier to your view hierarchy:
+     
+     ```swift
+     VStack {
+        RichTextFont.Picker(...)
+        ...
+     }
+     .richTextFontPickerConfig(...)
+     ```
+     
+     Note that this picker will not apply all configurations.
      */
     struct Picker: View {
 
@@ -26,36 +39,32 @@ public extension RichTextFont {
 
          - Parameters:
            - selection: The selected font name.
-           - fonts: The fonts to display in the list, by default `all`.
-           - fontSize: The font size to use in the list items.
          */
         public init(
-            selection: Binding<FontName>,
-            fonts: [Font] = .all,
-            fontSize: CGFloat = 20
+            selection: Binding<FontName>
         ) {
             self._selection = selection
-            self.fonts = fonts
-            self.itemFontSize = fontSize
-            self.selectedFont = fonts.last { $0.matches(selection.wrappedValue) }
+            self.selectedFont = nil
+            self.selectedFont = config.fonts.last { $0.matches(selection.wrappedValue) }
         }
 
         public typealias Font = RichTextFont.PickerFont
         public typealias FontName = String
 
-        private let fonts: [Font]
-        private let itemFontSize: CGFloat
-        private let selectedFont: Font?
+        private var selectedFont: Font?
 
         @Binding
         private var selection: FontName
+        
+        @Environment(\.richTextFontPickerConfig)
+        private var config
 
         public var body: some View {
             SwiftUI.Picker(selection: $selection) {
-                ForEach(fonts) { font in
+                ForEach(config.fonts) { font in
                     RichTextFont.PickerItem(
                         font: font,
-                        fontSize: itemFontSize,
+                        fontSize: config.fontSize,
                         isSelected: false
                     )
                     .tag(font.tag(for: selectedFont, selectedName: selection))
