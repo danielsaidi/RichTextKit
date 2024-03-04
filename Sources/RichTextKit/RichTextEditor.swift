@@ -57,11 +57,13 @@ public struct RichTextEditor: ViewRepresentable {
         text: Binding<NSAttributedString>,
         context: RichTextContext,
         config: RichTextView.Configuration = .standard,
+        theme: RichTextView.Theme = .standard,
         format: RichTextDataFormat = .archivedData,
         viewConfiguration: @escaping ViewConfiguration = { _ in }
     ) {
         self.text = text
         self.config = config
+        self.theme = theme
         self._context = ObservedObject(wrappedValue: context)
         self.format = format
         self.viewConfiguration = viewConfiguration
@@ -74,6 +76,7 @@ public struct RichTextEditor: ViewRepresentable {
 
     private var text: Binding<NSAttributedString>
     private let config: RichTextView.Configuration
+    private let theme: RichTextView.Theme
     private var format: RichTextDataFormat
     private var viewConfiguration: ViewConfiguration
 
@@ -101,6 +104,7 @@ public struct RichTextEditor: ViewRepresentable {
     public func makeUIView(context: Context) -> some UIView {
         textView.setup(with: text.wrappedValue, format: format)
         textView.configuration = config
+        textView.theme = theme
         viewConfiguration(textView)
         return textView
     }
@@ -112,6 +116,7 @@ public struct RichTextEditor: ViewRepresentable {
     public func makeNSView(context: Context) -> some NSView {
         textView.setup(with: text.wrappedValue, format: format)
         textView.configuration = config
+        textView.theme = theme
         viewConfiguration(textView)
         return scrollView
     }
