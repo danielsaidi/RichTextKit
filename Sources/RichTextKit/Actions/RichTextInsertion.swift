@@ -48,6 +48,23 @@ public struct RichTextInsertion<T: RichTextInsertable>: Hashable, Equatable {
 
 public extension RichTextInsertion {
     
+    /// The corresponding rich text action.
+    var action: RichTextAction? {
+        if let insertion = self as? RichTextInsertion<ImageRepresentable> {
+            return .pasteImage(insertion)
+        }
+        if let insertion = self as? RichTextInsertion<[ImageRepresentable]> {
+            return .pasteImages(insertion)
+        }
+        if let insertion = self as? RichTextInsertion<String> {
+            return .pasteText(insertion)
+        }
+        return nil
+    }
+}
+
+public extension RichTextInsertion {
+    
     /// This is a shorthand for creating an image insertion.
     static func image(
         _ image: ImageRepresentable,

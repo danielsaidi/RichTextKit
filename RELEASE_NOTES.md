@@ -16,6 +16,7 @@ This release removes all deprecated code and cleans up the library.
 
 * `RichTextFormat` is a new namespace with format types and views.
 * `RichTextInsertion` has new static convenience insertion builders.
+* `RichTextContext` has more intuitive ways to paste rich text content.
 
 ### 🐛 Bug Fixes
 
