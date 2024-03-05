@@ -10,11 +10,11 @@ import RichTextKit
 import SwiftUI
 
 struct DemoEditor: View {
-    
+
     @Binding var document: DemoDocument
-    
+
     @State private var isInspectorPresented = false
-    
+
     @StateObject var context = RichTextContext()
 
     var body: some View {
@@ -68,7 +68,7 @@ struct DemoEditor: View {
 }
 
 private extension DemoEditor {
-    
+
     var isMac: Bool {
         #if os(macOS)
         true
@@ -76,11 +76,11 @@ private extension DemoEditor {
         false
         #endif
     }
-    
+
     var colorPickers: [RichTextColor] {
         [.foreground, .background]
     }
-    
+
     var formatToolbarEdge: VerticalEdge {
         isMac ? .top : .bottom
     }

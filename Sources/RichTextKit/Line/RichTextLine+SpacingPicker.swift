@@ -15,10 +15,10 @@ public extension RichTextLine {
 
      The view returns a plain SwiftUI `Picker` view that can
      be styled and configured with plain SwiftUI.
-     
+
      You can configure this picker by applying a config view
      modifier to your view hierarchy:
-     
+
      ```swift
      VStack {
         RichTextLine.SpacingPicker(...)
@@ -43,7 +43,7 @@ public extension RichTextLine {
 
         @Binding
         private var selection: CGFloat
-        
+
         @Environment(\.richTextLineSpacingPickerConfig)
         private var config
 

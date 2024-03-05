@@ -9,11 +9,11 @@
 import SwiftUI
 
 public extension RichTextContext {
-    
+
     /// This key can be used to keep track of a context in a
     /// multi-windowed app.
     struct FocusedValueKey: SwiftUI.FocusedValueKey {
-        
+
         public typealias Value = RichTextContext
     }
 }

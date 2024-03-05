@@ -61,7 +61,7 @@ extension RichTextCoordinator {
 }
 
 extension RichTextCoordinator {
-    
+
     func paste<T: RichTextInsertable>(_ data: RichTextInsertion<T>) {
         if let data = data as? RichTextInsertion<ImageRepresentable> {
             pasteImage(data)
@@ -134,10 +134,12 @@ extension RichTextCoordinator {
         textView.setRichTextColor(.background, to: background, at: range)
         textView.setRichTextColor(.foreground, to: foreground, at: range)
     }
-    
+
     func setIsEditable(to newValue: Bool) {
+        #if iOS || macOS || os(visionOS)
         if newValue == textView.isEditable { return }
         textView.isEditable = newValue
+        #endif
     }
 
     func setIsEditing(to newValue: Bool) {

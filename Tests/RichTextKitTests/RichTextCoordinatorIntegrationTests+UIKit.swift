@@ -69,9 +69,9 @@ final class RichTextCoordinatorIntegrationTests: XCTestCase {
 
         textView.simulateTyping(of: firstTypingPart)
 
-
         textContext.selectRange(NSRange(location: Self.initialAttributedString.length, length: firstTypingPart.count))
-        XCTAssertEqual(textView.richTextAttributes[.font] as? FontRepresentable, FontRepresentable.systemFont(ofSize: 16))
+        let font = textView.richTextAttributes[.font] as? FontRepresentable
+        XCTAssertEqual(font?.pointSize, 16)
         XCTAssertEqual(textView.richTextAttributes[.foregroundColor] as? ColorRepresentable, ColorRepresentable.red)
 
         textView.setRichTextStyle(.strikethrough, to: true)

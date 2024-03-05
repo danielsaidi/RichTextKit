@@ -11,11 +11,11 @@ import RichTextKit
 import UniformTypeIdentifiers
 
 struct DemoDocument: FileDocument {
-    
+
     init(text: NSAttributedString = .empty) {
         self.text = text
     }
-    
+
     var text: NSAttributedString
 
     static var readableContentTypes: [UTType] { [.archivedData] }
@@ -23,7 +23,7 @@ struct DemoDocument: FileDocument {
     init(
         configuration: ReadConfiguration
     ) throws {
-        guard 
+        guard
             let data = configuration.file.regularFileContents
         else {
             throw CocoaError(.fileReadCorruptFile)
@@ -31,7 +31,7 @@ struct DemoDocument: FileDocument {
         let text = try NSAttributedString(data: data, format: .archivedData)
         self.text = text
     }
-    
+
     func fileWrapper(
         configuration: WriteConfiguration
     ) throws -> FileWrapper {

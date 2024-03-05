@@ -69,7 +69,7 @@ public extension Image {
             .richTextFontSizeDecrease :
             .richTextFontSizeIncrease
     }
-    
+
     static func richTextStepIndent(
         _ points: Double
     ) -> Image {
@@ -77,7 +77,7 @@ public extension Image {
             .richTextIndentDecrease :
             .richTextIndentIncrease
     }
-    
+
     static func richTextStepLineSpacing(
         _ points: Double
     ) -> Image {

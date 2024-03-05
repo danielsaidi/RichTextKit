@@ -15,7 +15,7 @@ import Combine
 
  Use ``handle(_:)`` to trigger actions, e.g. to change fonts,
  text styles, text alignments, select a text range, etc.
- 
+
  You can use ``RichTextContext/FocusedValueKey`` to handle a
  context with focus in a multi-windowed app.
  */
@@ -43,10 +43,9 @@ public class RichTextContext: ObservableObject {
 
     /// The currently selected range, if any.
     public internal(set) var selectedRange = NSRange()
-    
-    
+
     // MARK: - Bindable & Settable Properies
-    
+
     /// Whether or not the rich text editor is editable.
     @Published
     public var isEditable = true
@@ -70,8 +69,7 @@ public class RichTextContext: ObservableObject {
     /// The current line spacing.
     @Published
     public var lineSpacing: CGFloat = 10.0
-    
-    
+
     // MARK: - Observable Properties
 
     /// Whether or not the current rich text can be copied.
@@ -89,11 +87,11 @@ public class RichTextContext: ObservableObject {
     /// The current color values.
     @Published
     public internal(set) var colors = [RichTextColor: ColorRepresentable]()
-    
+
     /// The style to apply when highlighting a range.
     @Published
     public internal(set) var highlightingStyle = RichTextHighlightingStyle.standard
-    
+
     /// The current paragraph style.
     @Published
     public internal(set) var paragraphStyle = NSParagraphStyle.default
@@ -102,7 +100,6 @@ public class RichTextContext: ObservableObject {
     @Published
     public internal(set) var styles = [RichTextStyle: Bool]()
 
-    
     // MARK: - Properties
 
     /// This publisher can emit actions to the coordinator.

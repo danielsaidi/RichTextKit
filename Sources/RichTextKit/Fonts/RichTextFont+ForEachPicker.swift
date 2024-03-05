@@ -17,10 +17,10 @@ public extension RichTextFont {
      Unlike ``RichTextFont/Picker`` this picker presents all
      pickers with proper previews on all platforms. You must
      therefore add it ina  way that gives it space.
-     
+
      You can configure this picker by applying a config view
      modifier to your view hierarchy:
-     
+
      ```swift
      VStack {
         RichTextFont.ForEachPicker(...)
@@ -49,7 +49,7 @@ public extension RichTextFont {
 
         @Binding
         private var selection: FontName
-        
+
         @Environment(\.richTextFontPickerConfig)
         private var config
 

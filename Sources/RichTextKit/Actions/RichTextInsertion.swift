@@ -19,7 +19,7 @@ extension NSAttributedString: RichTextInsertable {}
 /// This struct represents something that should be inserted
 /// into a rich text attributed string.
 public struct RichTextInsertion<T: RichTextInsertable>: Hashable, Equatable {
-    
+
     /// Create a rich text insertion.
     ///
     /// - Parameters:
@@ -35,19 +35,19 @@ public struct RichTextInsertion<T: RichTextInsertable>: Hashable, Equatable {
         self.index = index
         self.moveCursor = moveCursor
     }
-    
+
     /// The content to insert.
     public let content: T
-    
+
     /// The index at where to insert.
     public let index: Int
-    
+
     /// Whether or not to move the cursor to the insertion point.
     public let moveCursor: Bool
 }
 
 public extension RichTextInsertion {
-    
+
     /// The corresponding rich text action.
     var action: RichTextAction? {
         if let insertion = self as? RichTextInsertion<ImageRepresentable> {
@@ -64,7 +64,7 @@ public extension RichTextInsertion {
 }
 
 public extension RichTextInsertion {
-    
+
     /// This is a shorthand for creating an image insertion.
     static func image(
         _ image: ImageRepresentable,
@@ -73,7 +73,7 @@ public extension RichTextInsertion {
     ) -> RichTextInsertion<ImageRepresentable> {
         .init(content: image, index: index, moveCursor: moveCursor)
     }
-    
+
     /// This is a shorthand for creating an image insertion.
     static func images(
         _ images: [ImageRepresentable],
@@ -82,7 +82,7 @@ public extension RichTextInsertion {
     ) -> RichTextInsertion<[ImageRepresentable]> {
         .init(content: images, index: index, moveCursor: moveCursor)
     }
-    
+
     /// This is a shorthand for creating a text insertion.
     static func text(
         _ text: String,

@@ -11,9 +11,9 @@ import SwiftUI
 
 @main
 struct DemoApp: App {
-    
+
     var body: some Scene {
-        
+
         DocumentGroup(newDocument: DemoDocument()) { file in
             DemoEditor(
                 document: file.$document
@@ -25,7 +25,7 @@ struct DemoApp: App {
             AboutCommand()
             #endif
             RichTextCommand.FormatMenu()
-            
+
             CommandMenu("RichTextKit") {
                 DemoUrl.github.link
                 DemoUrl.documentation.link

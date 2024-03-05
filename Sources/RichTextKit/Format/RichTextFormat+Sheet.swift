@@ -10,13 +10,13 @@
 import SwiftUI
 
 public extension RichTextFormat {
-    
+
     /**
      This sheet contains a font picker and a bottom toolbar.
-     
+
      You can configure and style the view by applying config
      and style view modifiers to your view hierarchy:
-     
+
      ```swift
      VStack {
      ...
@@ -26,10 +26,10 @@ public extension RichTextFormat {
      ```
      */
     struct Sheet: RichTextFormatToolbarBase {
-        
+
         /**
          Create a rich text format sheet.
-         
+
          - Parameters:
          - context: The context to apply changes to.
          */
@@ -38,25 +38,25 @@ public extension RichTextFormat {
         ) {
             self._context = ObservedObject(wrappedValue: context)
         }
-        
+
         public typealias Config = RichTextFormat.ToolbarConfig
         public typealias Style = RichTextFormat.ToolbarStyle
-        
+
         @ObservedObject
         private var context: RichTextContext
-        
+
         @Environment(\.richTextFormatSheetConfig)
         var config
-        
+
         @Environment(\.richTextFormatSheetStyle)
         var style
-        
+
         @Environment(\.dismiss)
         private var dismiss
-        
+
         @Environment(\.horizontalSizeClass)
         private var horizontalSizeClass
-        
+
         public var body: some View {
             NavigationView {
                 VStack(spacing: 0) {
@@ -90,14 +90,14 @@ public extension RichTextFormat {
 }
 
 public extension View {
-    
+
     /// Apply a rich text format sheet config.
     func richTextFormatSheetConfig(
         _ value: RichTextFormat.Sheet.Config
     ) -> some View {
         self.environment(\.richTextFormatSheetConfig, value)
     }
-    
+
     /// Apply a rich text format sheet style.
     func richTextFormatSheetStyle(
         _ value: RichTextFormat.Sheet.Style
@@ -123,13 +123,13 @@ private extension RichTextFormat.Sheet.Style {
 }
 
 public extension EnvironmentValues {
-    
+
     /// This value can bind to a format sheet config.
     var richTextFormatSheetConfig: RichTextFormat.Sheet.Config {
         get { self [RichTextFormat.Sheet.Config.Key.self] }
         set { self [RichTextFormat.Sheet.Config.Key.self] = newValue }
     }
-    
+
     /// This value can bind to a format sheet style.
     var richTextFormatSheetStyle: RichTextFormat.Sheet.Style {
         get { self [RichTextFormat.Sheet.Style.Key.self] }

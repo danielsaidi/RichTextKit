@@ -23,9 +23,9 @@ public extension View {
 }
 
 private extension RichTextEditorConfig {
-    
+
     struct Key: EnvironmentKey {
-        
+
         public static var defaultValue: RichTextEditorConfig = .standard
     }
 }

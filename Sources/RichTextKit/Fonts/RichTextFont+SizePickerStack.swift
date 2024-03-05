@@ -14,10 +14,10 @@ public extension RichTextFont {
     /**
      This view uses a ``RichTextFont/SizePicker`` and button
      steppers to increment and a decrement the font size.
-     
+
      You can configure this picker by applying a config view
      modifier to your view hierarchy:
-     
+
      ```swift
      VStack {
         RichTextFont.SizePickerStack(...)
@@ -123,7 +123,7 @@ private extension RichTextFont.SizePickerStack {
             .padding()
         }
     }
-    
+
     return Preview()
 }
 #endif

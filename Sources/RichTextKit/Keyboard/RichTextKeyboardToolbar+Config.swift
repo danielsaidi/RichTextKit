@@ -30,16 +30,16 @@ public struct RichTextKeyboardToolbarConfig {
 
     /// Whether or not to always show the toolbar.
     public var alwaysDisplayToolbar: Bool
-    
+
     /// The leading toolbar actions.
     public var leadingActions: [RichTextAction]
-    
+
     /// The trailing toolbar actions.
     public var trailingActions: [RichTextAction]
 }
 
 public extension RichTextKeyboardToolbarConfig {
-    
+
     /// The standard rich text keyboard toolbar config.
     ///
     /// You can override this to change the global default.
@@ -57,9 +57,9 @@ public extension View {
 }
 
 private extension RichTextKeyboardToolbarConfig {
-    
+
     struct Key: EnvironmentKey {
-        
+
         public static var defaultValue: RichTextKeyboardToolbarConfig = .standard
     }
 }

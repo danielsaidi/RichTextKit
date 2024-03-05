@@ -15,10 +15,10 @@ public extension RichTextFont {
 
      The view returns a plain SwiftUI `Picker` view that can
      be styled and configured with plain SwiftUI.
-     
+
      You can configure this picker by applying a config view
      modifier to your view hierarchy:
-     
+
      ```swift
      VStack {
         RichTextFont.SizePicker(...)
@@ -43,7 +43,7 @@ public extension RichTextFont {
 
         @Binding
         private var selection: CGFloat
-        
+
         @Environment(\.richTextFontSizePickerConfig)
         private var config
 

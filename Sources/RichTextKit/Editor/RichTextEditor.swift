@@ -39,7 +39,7 @@ import SwiftUI
 
  You can configure and style the view by applying its config
  and style view modifiers to your view hierarchy:
- 
+
  ```swift
  VStack {
     RichTextEditor(...)
@@ -48,7 +48,7 @@ import SwiftUI
  .richTextEditorStyle(...)
  .richTextEditorConfig(...)
  ```
- 
+
  For more information, see ``RichTextKeyboardToolbarConfig``
  and ``RichTextKeyboardToolbarStyle``.
  */
@@ -82,7 +82,7 @@ public struct RichTextEditor: ViewRepresentable {
     private var text: Binding<NSAttributedString>
     private var format: RichTextDataFormat
     private var viewConfiguration: ViewConfiguration
-    
+
     @Environment(\.richTextEditorConfig)
     private var config
 

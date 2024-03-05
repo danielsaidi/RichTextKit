@@ -9,7 +9,7 @@
 import SwiftUI
 
 public extension RichTextFont {
-    
+
     /// This type can configure a ``RichTextFont/Picker``.
     ///
     /// This configuration contains configuration properties
@@ -35,26 +35,26 @@ public extension RichTextFont {
             self.dismissAfterPick = dismissAfterPick
             self.moveSelectionTopmost = moveSelectionTopmost
         }
-        
+
         public typealias Font = RichTextFont.PickerFont
         public typealias FontName = String
 
         /// The fonts to display in the list.
         public var fonts: [RichTextFont.PickerFont]
-        
+
         /// The font size to use in the list items.
         public var fontSize: CGFloat
-        
+
         /// Whether or not to dismiss the picker after a font is selected.
         public var dismissAfterPick: Bool
-        
+
         /// Whether or not to move the selected font topmost
         public var moveSelectionTopmost: Bool
     }
 }
 
 public extension RichTextFont.PickerConfig {
-    
+
     /// The standard font picker configuration.
     ///
     /// You can set a new value to change the global default.
@@ -62,7 +62,7 @@ public extension RichTextFont.PickerConfig {
 }
 
 public extension RichTextFont.PickerConfig {
-    
+
     /// The fonts to list for a given selection.
     func fontsToList(for selection: FontName) -> [Font] {
         if moveSelectionTopmost {
@@ -84,9 +84,9 @@ public extension View {
 }
 
 private extension RichTextFont.PickerConfig {
-    
+
     struct Key: EnvironmentKey {
-        
+
         public static var defaultValue: RichTextFont.PickerConfig = .standard
     }
 }

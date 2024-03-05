@@ -9,7 +9,7 @@
 import SwiftUI
 
 public extension RichTextLine {
-    
+
     /// This can be used with a ``RichTextLine/SpacingPicker``.
     struct SpacingPickerConfig {
 
@@ -29,7 +29,7 @@ public extension RichTextLine {
 }
 
 public extension RichTextLine.SpacingPickerConfig {
-    
+
     /// The standard line spacing picker configuration.
     ///
     /// You can set a new value to change the global default.
@@ -47,9 +47,9 @@ public extension View {
 }
 
 private extension RichTextLine.SpacingPickerConfig {
-    
+
     struct Key: EnvironmentKey {
-        
+
         public static var defaultValue: RichTextLine.SpacingPickerConfig = .standard
     }
 }

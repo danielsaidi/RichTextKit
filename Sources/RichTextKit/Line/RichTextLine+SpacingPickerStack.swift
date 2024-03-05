@@ -14,10 +14,10 @@ public extension RichTextLine {
     /**
      This view uses a ``RichTextLine/SpacingPicker`` and two
      steppers to increment and a decrement the value.
-     
+
      You can configure this picker by applying a config view
      modifier to your view hierarchy:
-     
+
      ```swift
      VStack {
      RichTextLine.SpacingPickerStack(...)
@@ -25,7 +25,7 @@ public extension RichTextLine {
      }
      .richTextLineSpacingPickerConfig(...)
      ```
-     
+
      > Important: This doesn't work yet, since the rich text
      context doesn't sync with the coordinator.
      */

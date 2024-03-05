@@ -10,14 +10,14 @@
 import SwiftUI
 
 public extension RichTextFormat {
-    
+
     /**
      This sidebar view provides various text format options, and
      is meant to be used on macOS, in a trailing sidebar.
-     
+
      You can configure and style the view by applying its config
      and style view modifiers to your view hierarchy:
-     
+
      ```swift
      VStack {
      ...
@@ -25,16 +25,16 @@ public extension RichTextFormat {
      .richTextFormatSidebarStyle(...)
      .richTextFormatSidebarConfig(...)
      ```
-     
+
      > Note: The sidebar is currently designed for macOS, but it
      should also be made to look good on iPadOS in landscape, to
      let us use it instead of the ``RichTextFormat/Sheet``.
      */
     struct Sidebar: RichTextFormatToolbarBase {
-        
+
         /**
          Create a rich text format sheet.
-         
+
          - Parameters:
          - context: The context to apply changes to.
          */
@@ -43,19 +43,19 @@ public extension RichTextFormat {
         ) {
             self._context = ObservedObject(wrappedValue: context)
         }
-        
+
         public typealias Config = RichTextFormat.ToolbarConfig
         public typealias Style = RichTextFormat.ToolbarStyle
-        
+
         @ObservedObject
         private var context: RichTextContext
-        
+
         @Environment(\.richTextFormatSidebarConfig)
         var config
-        
+
         @Environment(\.richTextFormatSidebarStyle)
         var style
-        
+
         public var body: some View {
             VStack(alignment: .leading, spacing: style.spacing) {
                 SidebarSection {
@@ -66,9 +66,9 @@ public extension RichTextFormat {
                         fontSizePicker(for: context)
                     }
                 }
-                
+
                 Divider()
-                
+
                 SidebarSection {
                     alignmentPicker(value: $context.textAlignment)
                     HStack {
@@ -79,9 +79,9 @@ public extension RichTextFormat {
                         superscriptButtons(for: context, greedy: true)
                     }
                 }
-                
+
                 Divider()
-                
+
                 if hasColorPickers {
                     SidebarSection {
                         colorPickers(for: context)
@@ -89,7 +89,7 @@ public extension RichTextFormat {
                     .padding(.trailing, -8)
                     Divider()
                 }
-                
+
                 Spacer()
             }
             .labelsHidden()
@@ -115,14 +115,14 @@ private struct SidebarSection<Content: View>: View {
 }
 
 public extension View {
-    
+
     /// Apply a rich text format sidebar config.
     func richTextFormatSidebarConfig(
         _ value: RichTextFormat.Sidebar.Config
     ) -> some View {
         self.environment(\.richTextFormatSidebarConfig, value)
     }
-    
+
     /// Apply a rich text format sidebar style.
     func richTextFormatSidebarStyle(
         _ value: RichTextFormat.Sidebar.Style
@@ -148,13 +148,13 @@ private extension RichTextFormat.Sidebar.Style {
 }
 
 public extension EnvironmentValues {
-    
+
     /// This value can bind to a format sidebar config.
     var richTextFormatSidebarConfig: RichTextFormat.Sidebar.Config {
         get { self [RichTextFormat.Sidebar.Config.Key.self] }
         set { self [RichTextFormat.Sidebar.Config.Key.self] = newValue }
     }
-    
+
     /// This value can bind to a format sidebar style.
     var richTextFormatSidebarStyle: RichTextFormat.Sidebar.Style {
         get { self [RichTextFormat.Sidebar.Style.Key.self] }

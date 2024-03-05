@@ -18,10 +18,10 @@ public extension RichTextFont {
      macOS, but not on iOS. To render fonts correctly on all
      platforms, you can use a ``RichTextFont/ListPicker`` or
      a ``RichTextFont/ForEachPicker``.
-     
+
      You can configure this picker by applying a config view
      modifier to your view hierarchy:
-     
+
      ```swift
      VStack {
         RichTextFont.Picker(...)
@@ -29,7 +29,7 @@ public extension RichTextFont {
      }
      .richTextFontPickerConfig(...)
      ```
-     
+
      Note that this picker will not apply all configurations.
      */
     struct Picker: View {
@@ -56,7 +56,7 @@ public extension RichTextFont {
 
         @Binding
         private var selection: FontName
-        
+
         @Environment(\.richTextFontPickerConfig)
         private var config
 
@@ -159,7 +159,7 @@ extension View {
 }
 
 private extension View {
-    
+
     func label(_ title: String) -> some View {
         VStack {
             Text(title)

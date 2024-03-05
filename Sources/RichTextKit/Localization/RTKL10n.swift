@@ -39,19 +39,19 @@ public enum RTKL10n: String, CaseIterable, Identifiable {
     fileFormatPdf,
     fileFormatRtf,
     fileFormatTxt,
-    
+
     indent,
     indentIncrease,
     indentIncreaseDescription,
     indentDecrease,
     indentDecreaseDescription,
-    
+
     lineSpacing,
     lineSpacingIncrease,
     lineSpacingIncreaseDescription,
     lineSpacingDecrease,
     lineSpacingDecreaseDescription,
-    
+
     menuExport,
     menuExportAs,
     menuFormat,
@@ -76,7 +76,7 @@ public enum RTKL10n: String, CaseIterable, Identifiable {
     styleItalic,
     styleStrikethrough,
     styleUnderlined,
-    
+
     superscript,
     superscriptIncrease,
     superscriptIncreaseDescription,
@@ -153,7 +153,7 @@ public extension RTKL10n {
 
 #if iOS || os(tvOS) || os(visionOS)
 #Preview {
-    
+
     let locales: [Locale] = [
         .init(identifier: "en"),
         .init(identifier: "da"),
@@ -161,7 +161,7 @@ public extension RTKL10n {
         .init(identifier: "nb"),
         .init(identifier: "sv")
     ]
-    
+
     return NavigationView {
         List {
             ForEach(RTKL10n.allCases) { item in

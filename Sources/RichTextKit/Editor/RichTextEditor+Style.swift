@@ -5,7 +5,6 @@
 //  Created by Ryan Jarvis on 2024-02-24.
 //
 
-
 #if iOS || macOS || os(tvOS) || os(visionOS)
 import SwiftUI
 
@@ -23,9 +22,9 @@ public extension View {
 }
 
 private extension RichTextEditorStyle {
-    
+
     struct Key: EnvironmentKey {
-        
+
         static var defaultValue: RichTextEditorStyle = .standard
     }
 }

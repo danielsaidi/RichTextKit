@@ -13,14 +13,14 @@ public extension RichTextFont {
     /**
      This view uses a `List` to list a set of fonts of which
      one can be selected.
-     
+
      Unlike ``RichTextFont/Picker`` this picker presents all
      pickers with proper previews on all platforms. You must
      therefore add it ina  way that gives it space.
-     
+
      You can configure this picker by applying a config view
      modifier to your view hierarchy:
-     
+
      ```swift
      VStack {
         RichTextFont.ListPicker(...)
@@ -49,7 +49,7 @@ public extension RichTextFont {
 
         @Binding
         private var selection: FontName
-        
+
         @Environment(\.richTextFontPickerConfig)
         private var config
 

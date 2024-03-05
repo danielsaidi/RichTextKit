@@ -6,10 +6,11 @@
 //  Copyright © 2024 Daniel Saidi. All rights reserved.
 //
 
+#if iOS || macOS || os(tvOS) || os(visionOS)
 import SwiftUI
 
 extension RichTextView {
-    
+
     func setupSharedBehavior(
         with text: NSAttributedString,
         _ format: RichTextDataFormat
@@ -19,7 +20,7 @@ extension RichTextView {
         attributedString = text
         setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
     }
-    
+
     func setup(_ theme: RichTextView.Theme) {
         guard richText.string.isEmpty else { return }
         font = theme.font
@@ -27,3 +28,4 @@ extension RichTextView {
         backgroundColor = theme.backgroundColor
     }
 }
+#endif

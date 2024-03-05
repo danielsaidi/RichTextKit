@@ -24,14 +24,14 @@ import SwiftUI
          }
      }
  ```
- 
+
  Instead, add this toolbar below a ``RichTextEditor`` to let
  it automatically show when the text editor is edited in iOS.
- 
+
  You can inject additional leading and trailing buttons, and
  customize the format sheet that is presented when users tap
  format button:
- 
+
  ```swift
  VStack {
     RichTextEditor(...)
@@ -43,14 +43,14 @@ import SwiftUI
     )
  }
  ```
- 
+
  These view builders provide you with standard views. Return
  `$0` to use these standard views, or return any custom view
  that you want to use instead.
- 
+
  You can configure and style the view by applying its config
  and style view modifiers to your view hierarchy:
- 
+
  ```swift
  VStack {
     RichTextEditor(...)
@@ -59,7 +59,7 @@ import SwiftUI
  .richTextKeyboardToolbarStyle(...)
  .richTextKeyboardToolbarConfig(...)
  ```
- 
+
  For more information, see ``RichTextKeyboardToolbarConfig``
  and ``RichTextKeyboardToolbarStyle``.
  */
@@ -85,7 +85,7 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
         self.trailingButtons = trailingButtons
         self.formatSheet = formatSheet
     }
-    
+
     public typealias StandardLeadingButtons = EmptyView
     public typealias StandardTrailingButtons = EmptyView
     public typealias StandardFormatSheet = RichTextFormat.Sheet
