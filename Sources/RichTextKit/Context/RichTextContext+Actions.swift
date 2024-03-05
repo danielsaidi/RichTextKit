@@ -43,4 +43,9 @@ public extension RichTextContext {
         case .undoLatestChange: canUndoLatestChange
         }
     }
+    
+    /// Trigger a certain rich text action.
+    func trigger(_ action: RichTextAction) {
+        handle(action)
+    }
 }

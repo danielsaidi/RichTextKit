@@ -154,7 +154,7 @@ public extension RTKL10n {
 #if iOS || os(tvOS) || os(visionOS)
 #Preview {
     
-    var locales: [Locale] = [
+    let locales: [Locale] = [
         .init(identifier: "en"),
         .init(identifier: "da"),
         .init(identifier: "de"),

@@ -28,7 +28,7 @@ public extension RichTextFormat {
      
      > Note: The sidebar is currently designed for macOS, but it
      should also be made to look good on iPadOS in landscape, to
-     let us use it instead of the ``RichTextFormatSheet``.
+     let us use it instead of the ``RichTextFormat/Sheet``.
      */
     struct Sidebar: RichTextFormatToolbarBase {
         

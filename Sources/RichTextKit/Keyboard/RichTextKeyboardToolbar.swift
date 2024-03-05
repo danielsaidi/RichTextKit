@@ -72,7 +72,7 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
        - context: The context to affect.
        - leadingButtons: The leading buttons to place after the leading actions.
        - trailingButtons: The trailing buttons to place before the trailing actions.
-       - formatSheet: The rich text format sheet to use, given the default ``RichTextFormatSheet``.
+       - formatSheet: The rich text format sheet to use, by default ``RichTextFormat/Sheet``.
      */
     public init(
         context: RichTextContext,
