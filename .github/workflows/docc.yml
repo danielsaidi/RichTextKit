@@ -7,10 +7,6 @@ name: DocC Runner
 on:
   push:
     branches: ["main"]
-    
-env:
-  LIB_NAME: RichTextKit
-  DOC_PATH: richtextkit
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -43,14 +39,14 @@ jobs:
         run: |
           swift package resolve;
           
-          xcodebuild docbuild -scheme $LIB_NAME -derivedDataPath /tmp/docbuild -destination 'generic/platform=iOS';
+          xcodebuild docbuild -scheme RichTextKit -derivedDataPath /tmp/docbuild -destination 'generic/platform=iOS';
           
           $(xcrun --find docc) process-archive \
-            transform-for-static-hosting /tmp/docbuild/Build/Products/Debug-iphoneos/$LIB_NAME.doccarchive \
+            transform-for-static-hosting /tmp/docbuild/Build/Products/Debug-iphoneos/RichTextKit.doccarchive \
             --output-path docs \
-            --hosting-base-path '$LIB_NAME';
+            --hosting-base-path 'RichTextKit';
             
-          echo "<script>window.location.href += \"/documentation/$DOC_PATH\"</script>" > docs/index.html;
+          echo "<script>window.location.href += \"/documentation/richtextkit\"</script>" > docs/index.html;
           
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
