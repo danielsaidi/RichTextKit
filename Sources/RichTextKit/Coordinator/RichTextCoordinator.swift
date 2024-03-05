@@ -187,6 +187,7 @@ extension RichTextCoordinator {
         sync(&context.fontSize, with: font.pointSize)
         sync(&context.isEditingText, with: textView.isFirstResponder)
         // sync(&context.lineSpacing, with: textView.richTextLineSpacing ?? 10.0)   TODO: Not done yet
+        sync(&context.paragraphStyle, with: textView.richTextParagraphStyle ?? .default)
         sync(&context.textAlignment, with: textView.richTextAlignment ?? .left)
 
         RichTextColor.allCases.forEach {

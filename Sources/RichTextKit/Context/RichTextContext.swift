@@ -43,9 +43,9 @@ public class RichTextContext: ObservableObject {
 
     /// The currently selected range, if any.
     public internal(set) var selectedRange = NSRange()
-
     
-    // MARK: - Bindable Properies
+    
+    // MARK: - Bindable & Settable Properies
     
     /// Whether or not the rich text editor is editable.
     @Published
@@ -70,15 +70,6 @@ public class RichTextContext: ObservableObject {
     /// The current line spacing.
     @Published
     public var lineSpacing: CGFloat = 10.0
-
-    
-    // MARK: - Properties
-
-    /// This publisher can emit actions to the coordinator.
-    public let actionPublisher = RichTextAction.Publisher()
-
-    /// The currently highlighted range, if any.
-    public var highlightedRange: NSRange?
     
     
     // MARK: - Observable Properties
@@ -95,25 +86,30 @@ public class RichTextContext: ObservableObject {
     @Published
     public internal(set) var canUndoLatestChange = false
 
-    /// Whether or not the indent level can be decreased.
-    @Published
-    public internal(set) var canDecreaseIndent = true
-
-    /// Whether or not the indent level can be increased.
-    @Published
-    public internal(set) var canIncreaseIndent = true
-
     /// The current color values.
     @Published
     public internal(set) var colors = [RichTextColor: ColorRepresentable]()
-
+    
     /// The style to apply when highlighting a range.
     @Published
     public internal(set) var highlightingStyle = RichTextHighlightingStyle.standard
+    
+    /// The current paragraph style.
+    @Published
+    public internal(set) var paragraphStyle = NSParagraphStyle.default
 
     /// The current rich text styles.
     @Published
     public internal(set) var styles = [RichTextStyle: Bool]()
+
+    
+    // MARK: - Properties
+
+    /// This publisher can emit actions to the coordinator.
+    public let actionPublisher = RichTextAction.Publisher()
+
+    /// The currently highlighted range, if any.
+    public var highlightedRange: NSRange?
 }
 
 public extension RichTextContext {

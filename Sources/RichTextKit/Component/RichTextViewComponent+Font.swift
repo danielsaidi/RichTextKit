@@ -64,9 +64,9 @@ public extension RichTextViewComponent {
 
     /// Step the rich text font size at current range.
     func stepRichTextFontSize(points: Int) {
-        let currentSize = richTextFont?.pointSize ?? .standardRichTextFontSize
-        let newSize = currentSize + CGFloat(points)
-        setRichTextFontSize(newSize)
+        let old = richTextFont?.pointSize ?? .standardRichTextFontSize
+        let new = max(0, old + CGFloat(points))
+        setRichTextFontSize(new)
     }
 }
 

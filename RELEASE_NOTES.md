@@ -15,8 +15,9 @@ This release removes all deprecated code and cleans up the library.
 * There are new view style and config modifiers for components.
 
 * `RichTextFormat` is a new namespace with format types and views.
+* `RichTextContext` has more intuitive ways to paste text content.
+* `RichTextContext` has a new observable `paragraphStyle` property.
 * `RichTextInsertion` has new static convenience insertion builders.
-* `RichTextContext` has more intuitive ways to paste rich text content.
 
 ### 🐛 Bug Fixes
 

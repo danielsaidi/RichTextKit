@@ -35,8 +35,7 @@ public extension RichTextContext {
         case .setHighlightingStyle: true
         case .setStyle: true
         case .stepFontSize: true
-        case .stepIndent(let points):
-            points < 0 ? canDecreaseIndent : canIncreaseIndent
+        case .stepIndent: true
         case .stepLineSpacing: true
         case .stepSuperscript: true
         case .toggleStyle: true

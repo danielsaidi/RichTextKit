@@ -35,7 +35,7 @@ public extension RichTextViewComponent {
     /// Step the rich text indent.
     func stepRichTextIndent(points: CGFloat) {
         let old = richTextParagraphStyle?.headIndent ?? 0
-        let indent = max(0, old + points)
-        setRichTextIndent(to: indent)
+        let new = max(0, old + points)
+        setRichTextIndent(to: new)
     }
 }

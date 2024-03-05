@@ -30,8 +30,8 @@ public extension RichTextViewComponent {
 
     /// Step the superscript level.
     func stepRichTextSuperscriptLevel(points: Int) {
-        let currentSize = richTextSuperscriptLevel ?? 0
-        let newSize = currentSize + points
-        setRichTextSuperscriptLevel(to: newSize)
+        let old = richTextSuperscriptLevel ?? 0
+        let new = old + points
+        setRichTextSuperscriptLevel(to: new)
     }
 }
