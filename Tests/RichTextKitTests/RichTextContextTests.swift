@@ -13,7 +13,9 @@ final class RichTextContextTests: XCTestCase {
 
     func testInitializerSetsDefaultValues() {
         let context = RichTextContext()
-        XCTAssertEqual(context.fontName, "")
+        let iosFontName = context.fontName == ".SFUI"
+        let macFontName = context.fontName == ".AppleSystemUIFont"
+        XCTAssertTrue(iosFontName || macFontName)
         XCTAssertEqual(context.fontSize, 16)
         XCTAssertFalse(context.hasStyle(.bold))
         XCTAssertFalse(context.hasStyle(.italic))

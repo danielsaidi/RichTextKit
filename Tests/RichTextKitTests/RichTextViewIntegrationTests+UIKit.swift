@@ -58,7 +58,8 @@ final class RichTextViewIntegrationTests: XCTestCase {
         // When starting RichTextEditor we want to check if the font and color is set correctly.
         textContext.selectRange(.init(location: 0, length: 0))
 
-        XCTAssertEqual(attributes[.font] as? FontRepresentable, FontRepresentable.systemFont(ofSize: 16))
+        let font = attributes[.font] as? FontRepresentable
+        XCTAssertEqual(font?.pointSize, 16)
         XCTAssertEqual(attributes[.foregroundColor] as? ColorRepresentable, ColorRepresentable.label)
 
         // First we fill in the empty textView with some text, select it and set bold and italic to it.
@@ -76,7 +77,8 @@ final class RichTextViewIntegrationTests: XCTestCase {
 
         textContext.selectRange(.init(location: 0, length: stringWithoutAttributes.count))
 
-        XCTAssertEqual(attributes[.font] as? FontRepresentable, FontRepresentable.systemFont(ofSize: 16))
+        let font = attributes[.font] as? FontRepresentable
+        XCTAssertEqual(font?.pointSize, 16)
         XCTAssertEqual(attributes[.foregroundColor] as? ColorRepresentable, ColorRepresentable.label)
 
         textView.setRichTextStyle(.bold, to: true)

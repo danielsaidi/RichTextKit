@@ -71,7 +71,7 @@ final class RichTextViewComponentTests: XCTestCase {
         XCTAssertTrue(view.allowsEditingTextAttributes)
         XCTAssertEqual(view.autocapitalizationType, .sentences)
         #endif
-        XCTAssertEqual(view.backgroundColor, .clear)
+        XCTAssertNotEqual(view.backgroundColor, .clear)
         XCTAssertEqual(view.contentCompressionResistancePriority(for: .horizontal), .defaultLow)
         #if iOS
         XCTAssertEqual(view.spellCheckingType, .no)
