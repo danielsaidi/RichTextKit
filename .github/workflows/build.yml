@@ -18,8 +18,12 @@ jobs:
         with:
           xcode-version: '15.1.0'
       - name: Build iOS
-        run: xcodebuild -project Demo/Demo.xcodeproj build -sdk iphoneos -allowProvisioningUpdates -scheme 'Demo' -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.2'
+        run: xcodebuild -scheme RichTextKit -derivedDataPath .build -destination 'generic/platform=iOS';
+      - name: Build macOS
+        run: xcodebuild -scheme RichTextKit -derivedDataPath .build -destination 'generic/platform=OS X';
+      - name: Build tvOS
+        run: xcodebuild -scheme RichTextKit -derivedDataPath .build -destination 'generic/platform=tvOS';
+      - name: Build watchOS
+        run: xcodebuild -scheme RichTextKit -derivedDataPath .build -destination 'generic/platform=watchOS';
       - name: Test iOS
-        run: xcodebuild -project Demo/Demo.xcodeproj test -sdk iphoneos -allowProvisioningUpdates -scheme 'DemoTests' -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.2' -enableCodeCoverage YES
-
-          
+        run: xcodebuild test -scheme RichTextKit -derivedDataPath .build -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.2' -enableCodeCoverage YES;
