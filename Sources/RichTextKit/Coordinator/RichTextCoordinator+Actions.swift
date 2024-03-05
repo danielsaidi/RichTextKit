@@ -60,30 +60,39 @@ extension RichTextCoordinator {
 }
 
 extension RichTextCoordinator {
+    
+    func paste<T: RichTextInsertable>(_ data: RichTextInsertion<T>) {
+        if let data = data as? RichTextInsertion<ImageRepresentable> {
+            pasteImage(data)
+        } else if let data = data as? RichTextInsertion<[ImageRepresentable]> {
+            pasteImages(data)
+        } else if let data = data as? RichTextInsertion<String> {
+            pasteText(data)
+        } else {
+            print("Unsupported media type")
+        }
+    }
 
-    func pasteImage(_ data: RichTextInsertion<ImageRepresentable>?) {
-        guard let data = data else { return }
+    func pasteImage(_ data: RichTextInsertion<ImageRepresentable>) {
         textView.pasteImage(
             data.content,
-            at: data.at,
+            at: data.index,
             moveCursorToPastedContent: data.moveCursor
         )
     }
 
-    func pasteImages(_ data: RichTextInsertion<[ImageRepresentable]>?) {
-        guard let data = data else { return }
+    func pasteImages(_ data: RichTextInsertion<[ImageRepresentable]>) {
         textView.pasteImages(
             data.content,
-            at: data.at,
+            at: data.index,
             moveCursorToPastedContent: data.moveCursor
         )
     }
 
-    func pasteText(_ data: RichTextInsertion<String>?) {
-        guard let data = data else { return }
+    func pasteText(_ data: RichTextInsertion<String>) {
         textView.pasteText(
             data.content,
-            at: data.at,
+            at: data.index,
             moveCursorToPastedContent: data.moveCursor
         )
     }

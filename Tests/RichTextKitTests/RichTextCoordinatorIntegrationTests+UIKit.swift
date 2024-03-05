@@ -62,7 +62,8 @@ final class RichTextCoordinatorIntegrationTests: XCTestCase {
         textContext.selectRange(.init(location: 0, length: Self.initialAttributedString.length))
 
         // Only ArchivedData textView format support images...
-        coordinator.pasteImage(.init(content: imageToPaste, at: textView.richText.length, moveCursor: true))
+        let index = textView.richText.length
+        coordinator.pasteImage(.image(imageToPaste, at: index, moveCursor: true))
 
         XCTAssertTrue(textView.richText.containsAttachments(in: textView.richTextRange))
 

@@ -23,7 +23,7 @@ public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
 
     /// Dismiss any presented software keyboard.
     case dismissKeyboard
-
+    
     /// Paste a single image.
     case pasteImage(RichTextInsertion<ImageRepresentable>)
 

@@ -12,9 +12,10 @@ This release removes all deprecated code and cleans up the library.
 
 ### ✨ Features
 
-* There are new `richTextEditor` config and style view modifiers.
-* There are new `richTextKeyboardToolbar` config and style view modifiers.
-* There is a new `RichTextFormat` namespace that groups format types and views.
+* There are new view style and config modifiers for components.
+
+* `RichTextFormat` is a new namespace with format types and views.
+* `RichTextInsertion` has new static convenience insertion builders.
 
 ### 🐛 Bug Fixes
 
