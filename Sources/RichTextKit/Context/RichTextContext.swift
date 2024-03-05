@@ -61,7 +61,7 @@ public class RichTextContext: ObservableObject {
 
     /// The current font name.
     @Published
-    public var fontName = ""
+    public var fontName = RichTextFont.PickerFont.all.first?.fontName ?? ""
 
     /// The current font size.
     @Published

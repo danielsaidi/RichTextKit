@@ -40,7 +40,6 @@ public extension RichTextFont {
         public init(
             fontName: String
         ) {
-            let fontName = fontName.capitalized
             self.fontName = fontName
             self.fontDisplayName = ""
             self.fontDisplayName = displayName
@@ -63,9 +62,11 @@ public extension RichTextFont.PickerFont {
     /// Get all available system fonts.
     static var all: [Self] {
         let all = systemFonts
-        let systemFont = Self.init(fontName: "")
+        let system = Self.init(
+            fontName: Self.systemFontNamePrefix
+        )
         var sorted = all.sorted { $0.fontDisplayName < $1.fontDisplayName }
-        sorted.insert(systemFont, at: 0)
+        sorted.insert(system, at: 0)
         return sorted
     }
 
@@ -102,9 +103,8 @@ public extension RichTextFont.PickerFont {
     ///  Check if the a font name represents the system font.
     var isStandardSystemFont: Bool {
         let name = fontName.trimmingCharacters(in: .whitespaces)
-        if name.isEmpty { return true }
-        let systemPrefix = Self.systemFontNamePrefix
-        return name.uppercased().hasPrefix(systemPrefix)
+        let prefix = Self.systemFontNamePrefix
+        return name.hasPrefix(prefix)
     }
 }
 

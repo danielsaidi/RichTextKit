@@ -39,7 +39,9 @@ struct DemoEditor: View {
         }
         .inspector(isPresented: $isInspectorPresented) {
             RichTextFormat.Sidebar(context: context)
+                #if os(macOS)
                 .inspectorColumnWidth(min: 200, ideal: 200, max: 315)
+                #endif
         }
         .toolbar {
             ToolbarItem(placement: .automatic) {
@@ -54,7 +56,12 @@ struct DemoEditor: View {
         .focusedValue(\.richTextContext, context)
         .toolbarRole(.automatic)
         .richTextFormatSheetConfig(.init(colorPickers: colorPickers))
-        .richTextFormatSidebarConfig(.init(colorPickers: colorPickers))
+        .richTextFormatSidebarConfig(
+            .init(
+                colorPickers: colorPickers,
+                fontPicker: isMac
+            )
+        )
         .richTextFormatToolbarConfig(.init(colorPickers: []))
         .viewDebug()
     }
@@ -62,16 +69,20 @@ struct DemoEditor: View {
 
 private extension DemoEditor {
     
+    var isMac: Bool {
+        #if os(macOS)
+        true
+        #else
+        false
+        #endif
+    }
+    
     var colorPickers: [RichTextColor] {
         [.foreground, .background]
     }
     
     var formatToolbarEdge: VerticalEdge {
-        #if os(macOS)
-        .top
-        #else
-        .bottom
-        #endif
+        isMac ? .top : .bottom
     }
 }
 

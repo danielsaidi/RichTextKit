@@ -44,7 +44,7 @@ public extension RichTextFont {
             selection: Binding<FontName>
         ) {
             self._selection = selection
-            self.selectedFont = nil
+            self.selectedFont = Config.Font.all.first
         }
 
         public typealias Config = RichTextFont.PickerConfig
@@ -68,16 +68,10 @@ public extension RichTextFont {
                         fontSize: config.fontSize,
                         isSelected: false
                     )
-                    .tag(font.tag(for: selectedFont, selectedName: selection))
+                    .tag(font.fontName)
                 }
             } label: {
                 EmptyView()
-            }
-            .onAppear {
-                let match = config.fonts.last {
-                    $0.matches(selection)
-                }
-                selectedFont = match ?? RichTextFont.PickerFont.all.first
             }
         }
     }
@@ -90,14 +84,12 @@ private extension RichTextFont.PickerFont {
      different name when picked. We must thus try to pattern
      match, using the currently selected font name.
      */
-    func matches(_ selectedFontName: String) -> Bool {
-        let system = Self.systemFontNamePrefix.lowercased()
-        let selected = selectedFontName.lowercased()
+    func matches(_ fontName: String) -> Bool {
+        let compare = fontName.lowercased()
         let fontName = self.fontName.lowercased()
-        if fontName.isEmpty { return system == selected }
-        if fontName == selected { return true }
-        if selected.hasPrefix(fontName.replacingOccurrences(of: " ", with: "")) { return true }
-        if selected.hasPrefix(fontName.replacingOccurrences(of: " ", with: "-")) { return true }
+        if fontName == compare { return true }
+        if compare.hasPrefix(fontName.replacingOccurrences(of: " ", with: "")) { return true }
+        if compare.hasPrefix(fontName.replacingOccurrences(of: " ", with: "-")) { return true }
         return false
     }
 
