@@ -44,15 +44,13 @@ public struct RichTextShareMenu: View {
     }
 }
 
-struct RichTextShareMenu_Previews: PreviewProvider {
+#Preview {
 
-    static var previews: some View {
-        VStack {
-            RichTextShareMenu(
-                formatAction: { _ in },
-                pdfAction: {}
-            )
-        }
+    VStack {
+        RichTextShareMenu(
+            formatAction: { _ in },
+            pdfAction: {}
+        )
     }
 }
 #endif

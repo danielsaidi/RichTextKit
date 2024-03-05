@@ -237,7 +237,7 @@ private extension RichTextKeyboardToolbar {
     }
 }
 
-struct RichTextKeyboardToolbar_Previews: PreviewProvider {
+#Preview {
 
     struct Preview: View {
 
@@ -262,15 +262,13 @@ struct RichTextKeyboardToolbar_Previews: PreviewProvider {
                 )
             }
             .richTextKeyboardToolbarConfig(.init(
-                alwaysDisplayToolbar: true,
+                alwaysDisplayToolbar: false,
                 leadingActions: [.print],
                 trailingActions: [.print]
             ))
         }
     }
 
-    static var previews: some View {
-        Preview()
-    }
+    return Preview()
 }
 #endif

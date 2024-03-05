@@ -58,7 +58,7 @@ public extension RichTextAction {
     }
 }
 
-struct RichTextAction_ButtonStack_Previews: PreviewProvider {
+#Preview {
 
     struct Preview: View {
 
@@ -75,7 +75,5 @@ struct RichTextAction_ButtonStack_Previews: PreviewProvider {
         }
     }
 
-    static var previews: some View {
-        Preview()
-    }
+    return Preview()
 }

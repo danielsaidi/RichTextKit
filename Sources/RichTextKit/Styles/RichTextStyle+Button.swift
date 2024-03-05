@@ -107,7 +107,7 @@ private extension RichTextStyle.Button {
     }
 }
 
-struct RichTextStyle_Button_Previews: PreviewProvider {
+#Preview {
 
     struct Preview: View {
 
@@ -151,7 +151,5 @@ struct RichTextStyle_Button_Previews: PreviewProvider {
         }
     }
 
-    static var previews: some View {
-        Preview()
-    }
+    return Preview()
 }

@@ -112,15 +112,13 @@ private extension RichTextNSSharingMenu {
     }
 }
 
-struct RichTextNSSharingMenu_Previews: PreviewProvider {
+#Preview {
 
-    static var previews: some View {
-        VStack {
-            RichTextNSSharingMenu(
-                formatAction: { _ in nil },
-                pdfAction: { nil }
-            )
-        }
+    VStack {
+        RichTextNSSharingMenu(
+            formatAction: { _ in nil },
+            pdfAction: { nil }
+        )
     }
 }
 #endif

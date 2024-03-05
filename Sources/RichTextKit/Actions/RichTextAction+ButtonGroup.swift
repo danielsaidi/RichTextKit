@@ -71,7 +71,7 @@ private extension RichTextAction.ButtonGroup {
     }
 }
 
-struct RichTextAction_ButtonGroup_Previews: PreviewProvider {
+#Preview {
 
     struct Preview: View {
 
@@ -95,8 +95,6 @@ struct RichTextAction_ButtonGroup_Previews: PreviewProvider {
         }
     }
 
-    static var previews: some View {
-        Preview()
-    }
+    return Preview()
 }
 #endif

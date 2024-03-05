@@ -47,8 +47,9 @@ public extension RichTextFont {
             self.selectedFont = nil
         }
 
-        public typealias Font = RichTextFont.PickerFont
-        public typealias FontName = String
+        public typealias Config = RichTextFont.PickerConfig
+        public typealias Font = Config.Font
+        public typealias FontName = Config.FontName
 
         @State
         private var selectedFont: Font?
@@ -109,7 +110,7 @@ private extension RichTextFont.PickerFont {
     }
 }
 
-struct RichTextFont_Picker_Previews: PreviewProvider {
+#Preview {
 
     struct Preview: View {
 
@@ -125,9 +126,7 @@ struct RichTextFont_Picker_Previews: PreviewProvider {
         }
     }
 
-    static var previews: some View {
-        Preview()
-    }
+    return Preview()
 }
 
 extension View {

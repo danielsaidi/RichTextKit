@@ -31,7 +31,7 @@ public extension RichTextLabelValue {
     }
 }
 
-struct RichTextLabelValue_Previews: PreviewProvider {
+#Preview {
 
     struct Preview: View {
 
@@ -40,7 +40,7 @@ struct RichTextLabelValue_Previews: PreviewProvider {
 
         var body: some View {
             List {
-                Section("RichTextAlignment") {
+                Section("Rich Text Alignment") {
                     ForEach(RichTextAlignment.allCases) {
                         $0.label
                     }
@@ -49,7 +49,5 @@ struct RichTextLabelValue_Previews: PreviewProvider {
         }
     }
 
-    static var previews: some View {
-        Preview()
-    }
+    return Preview()
 }

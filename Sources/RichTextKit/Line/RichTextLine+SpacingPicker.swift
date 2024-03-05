@@ -83,7 +83,7 @@ private extension RichTextLine.SpacingPicker {
     }
 }
 
-struct RichTextFont_SpacingPicker_Previews: PreviewProvider {
+#Preview {
 
     struct Preview: View {
 
@@ -99,7 +99,5 @@ struct RichTextFont_SpacingPicker_Previews: PreviewProvider {
         }
     }
 
-    static var previews: some View {
-        Preview()
-    }
+    return Preview()
 }

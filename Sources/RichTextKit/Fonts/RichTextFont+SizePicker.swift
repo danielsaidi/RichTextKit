@@ -83,7 +83,7 @@ private extension RichTextFont.SizePicker {
     }
 }
 
-struct RichTextFont_SizePicker_Previews: PreviewProvider {
+#Preview {
 
     struct Preview: View {
 
@@ -99,7 +99,5 @@ struct RichTextFont_SizePicker_Previews: PreviewProvider {
         }
     }
 
-    static var previews: some View {
-        Preview()
-    }
+    return Preview()
 }

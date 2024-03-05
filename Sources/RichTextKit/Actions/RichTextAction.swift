@@ -105,7 +105,7 @@ public extension RichTextAction {
         case .setStyle(let style, _): style.icon
         case .stepFontSize(let val): .richTextStepFontSize(val)
         case .stepIndent(let val): .richTextStepIndent(val)
-        case .stepLineSpacing: .richTextLineSpacing
+        case .stepLineSpacing(let val): .richTextStepLineSpacing(val)
         case .stepSuperscript(let val): .richTextStepSuperscript(val)
         case .toggleStyle(let val): val.icon
         case .undoLatestChange: .richTextUndo

@@ -35,6 +35,9 @@ public extension RichTextFont {
             self.dismissAfterPick = dismissAfterPick
             self.moveSelectionTopmost = moveSelectionTopmost
         }
+        
+        public typealias Font = RichTextFont.PickerFont
+        public typealias FontName = String
 
         /// The fonts to display in the list.
         public var fonts: [RichTextFont.PickerFont]
@@ -56,6 +59,18 @@ public extension RichTextFont.PickerConfig {
     ///
     /// You can set a new value to change the global default.
     static var standard = Self()
+}
+
+public extension RichTextFont.PickerConfig {
+    
+    /// The fonts to list for a given selection.
+    func fontsToList(for selection: FontName) -> [Font] {
+        if moveSelectionTopmost {
+            return fonts.moveTopmost(selection)
+        } else {
+            return fonts
+        }
+    }
 }
 
 public extension View {

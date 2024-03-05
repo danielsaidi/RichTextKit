@@ -41,15 +41,13 @@ public struct RichTextExportMenu: View {
     }
 }
 
-struct RichTextExportMenu_Previews: PreviewProvider {
+#Preview {
 
-    static var previews: some View {
-        VStack {
-            RichTextExportMenu(
-                formatAction: { _ in },
-                pdfAction: {}
-            )
-        }
+    VStack {
+        RichTextExportMenu(
+            formatAction: { _ in },
+            pdfAction: {}
+        )
     }
 }
 #endif

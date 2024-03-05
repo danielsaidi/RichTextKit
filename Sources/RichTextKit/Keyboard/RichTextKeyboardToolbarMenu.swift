@@ -53,28 +53,26 @@ private extension Menu {
     }
 }
 
-struct RichTextKeyboardToolbarMenu_Previews: PreviewProvider {
+#Preview {
 
     @ViewBuilder
-    static var buttons: some View {
+    func buttons() -> some View {
         Button("1") {}
         Button("2") {}
         Button("3") {}
     }
 
-    static var previews: some View {
-        RichTextKeyboardToolbarMenu {
-            Section("Title") {
-                buttons
-            }
-            Section {
-                ControlGroup {
-                    buttons
-                }
-            }
-        } label: {
-            Label("Menu", systemImage: "ellipsis.circle")
+    return RichTextKeyboardToolbarMenu {
+        Section("Title") {
+            buttons()
         }
+        Section {
+            ControlGroup {
+                buttons()
+            }
+        }
+    } label: {
+        Label("Menu", systemImage: "ellipsis.circle")
     }
 }
 #endif

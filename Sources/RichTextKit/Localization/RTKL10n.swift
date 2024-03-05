@@ -152,36 +152,34 @@ public extension RTKL10n {
 }
 
 #if iOS || os(tvOS) || os(visionOS)
-struct RTKL10n_Previews: PreviewProvider {
-
-    static var locales: [Locale] = [
+#Preview {
+    
+    var locales: [Locale] = [
         .init(identifier: "en"),
         .init(identifier: "da"),
         .init(identifier: "de"),
         .init(identifier: "nb"),
         .init(identifier: "sv")
     ]
-
-    static var previews: some View {
-        NavigationView {
-            List {
-                ForEach(RTKL10n.allCases) { item in
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text("\(item.key)")
-                        VStack(alignment: .leading) {
-                            Text("default: \(item.text)")
-                            ForEach(Array(locales.enumerated()), id: \.offset) {
-                                Text("\($0.element.identifier): \(item.text(for: $0.element))")
-                            }
+    
+    return NavigationView {
+        List {
+            ForEach(RTKL10n.allCases) { item in
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("\(item.key)")
+                    VStack(alignment: .leading) {
+                        Text("default: \(item.text)")
+                        ForEach(Array(locales.enumerated()), id: \.offset) {
+                            Text("\($0.element.identifier): \(item.text(for: $0.element))")
                         }
-                        .font(.footnote)
                     }
-                    .padding(.vertical, 4)
+                    .font(.footnote)
                 }
+                .padding(.vertical, 4)
             }
-            .navigationBarTitle("Translations")
         }
-        .navigationViewStyle(.stack)
+        .navigationBarTitle("Translations")
     }
+    .navigationViewStyle(.stack)
 }
 #endif

@@ -77,11 +77,17 @@ extension RichTextFormatToolbarBase {
         context: RichTextContext
     ) -> some View {
         if !colors.isEmpty {
-            DisclosureGroup(RTKL10n.more.text) {
+            DisclosureGroup {
                 colorPickers(
                     for: config.colorPickersDisclosed,
                     context: context
                 )
+            } label: {
+                Image
+                    .symbol("chevron.down")
+                    .label(RTKL10n.more.text)
+                    .labelStyle(.iconOnly)
+                    .frame(minWidth: 30)
             }
         }
     }

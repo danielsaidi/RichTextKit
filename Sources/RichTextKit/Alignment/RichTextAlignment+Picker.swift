@@ -49,7 +49,7 @@ public extension RichTextAlignment {
     }
 }
 
-struct RichTextAlignment_Picker_Previews: PreviewProvider {
+#Preview {
 
     struct Preview: View {
 
@@ -65,7 +65,5 @@ struct RichTextAlignment_Picker_Previews: PreviewProvider {
         }
     }
 
-    static var previews: some View {
-        Preview()
-    }
+    return Preview()
 }

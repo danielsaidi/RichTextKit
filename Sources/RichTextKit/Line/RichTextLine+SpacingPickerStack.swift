@@ -25,6 +25,9 @@ public extension RichTextLine {
      }
      .richTextLineSpacingPickerConfig(...)
      ```
+     
+     > Important: This doesn't work yet, since the rich text
+     context doesn't sync with the coordinator.
      */
     struct SpacingPickerStack: View {
 
@@ -104,7 +107,7 @@ private extension RichTextLine.SpacingPickerStack {
     }
 }
 
-struct RichTextLine_SpacingPickerStack_Previews: PreviewProvider {
+#Preview {
 
     struct Preview: View {
 
@@ -121,8 +124,6 @@ struct RichTextLine_SpacingPickerStack_Previews: PreviewProvider {
         }
     }
 
-    static var previews: some View {
-        Preview()
-    }
+    return Preview()
 }
 #endif

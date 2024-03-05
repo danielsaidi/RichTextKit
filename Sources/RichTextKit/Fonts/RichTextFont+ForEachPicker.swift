@@ -41,17 +41,11 @@ public extension RichTextFont {
             selection: Binding<FontName>
         ) {
             self._selection = selection
-            self.fonts = .all
-            self.fonts = config.fonts
-            if config.moveSelectionTopmost {
-                self.fonts = config.fonts.moveTopmost(selection.wrappedValue)
-            }
         }
 
-        public typealias Font = RichTextFont.PickerFont
-        public typealias FontName = String
-
-        private var fonts: [Font]
+        public typealias Config = RichTextFont.PickerConfig
+        public typealias Font = Config.Font
+        public typealias FontName = Config.FontName
 
         @Binding
         private var selection: FontName
@@ -66,7 +60,7 @@ public extension RichTextFont {
             )
 
             RichTextKit.ForEachPicker(
-                items: fonts,
+                items: config.fontsToList(for: selection),
                 selection: font,
                 dismissAfterPick: config.dismissAfterPick
             ) { font, isSelected in
@@ -80,7 +74,7 @@ public extension RichTextFont {
     }
 }
 
-struct RichTextFont_ForEachPicker_Previews: PreviewProvider {
+#Preview {
 
     struct Preview: View {
 
@@ -89,30 +83,19 @@ struct RichTextFont_ForEachPicker_Previews: PreviewProvider {
 
         var body: some View {
             NavigationView {
+                #if macOS
+                Color.clear
+                #endif
                 List {
                     RichTextFont.ForEachPicker(
                         selection: $selection
                     )
                 }
-                .withTitle("Pick a font")
+                .navigationTitle("Pick a font")
             }
             .richTextFontPickerConfig(.init(moveSelectionTopmost: true))
         }
     }
 
-    static var previews: some View {
-        Preview()
-    }
-}
-
-private extension View {
-
-    @ViewBuilder
-    func withTitle(_ title: String) -> some View {
-        #if iOS || os(tvOS) || os(watchOS) || os(visionOS)
-        self.navigationBarTitle(title)
-        #else
-        self
-        #endif
-    }
+    return Preview()
 }

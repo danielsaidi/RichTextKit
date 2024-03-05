@@ -46,6 +46,8 @@ public extension Image {
     static let richTextIndentIncrease = symbol("increase.indent")
 
     static let richTextLineSpacing = symbol("arrow.up.and.down.text.horizontal")
+    static let richTextLineSpacingDecrease = symbol("minus")
+    static let richTextLineSpacingIncrease = symbol("plus")
 
     static let richTextSelection = symbol("123.rectangle.fill")
 
@@ -67,13 +69,21 @@ public extension Image {
             .richTextFontSizeDecrease :
             .richTextFontSizeIncrease
     }
-
+    
     static func richTextStepIndent(
         _ points: Double
     ) -> Image {
         points < 0 ?
             .richTextIndentDecrease :
             .richTextIndentIncrease
+    }
+    
+    static func richTextStepLineSpacing(
+        _ points: Double
+    ) -> Image {
+        points < 0 ?
+            .richTextLineSpacingDecrease :
+            .richTextLineSpacingIncrease
     }
 
     static func richTextStepSuperscript(

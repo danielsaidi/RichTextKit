@@ -134,7 +134,7 @@ private extension RichTextFormat.Toolbar {
     }
 }
 
-struct RichTextFormat_Toolbar_Previews: PreviewProvider {
+#Preview {
 
     struct Preview: View {
 
@@ -148,7 +148,7 @@ struct RichTextFormat_Toolbar_Previews: PreviewProvider {
             .richTextFormatToolbarConfig(.init(
                 alignments: [.left, .right],
                 colorPickers: [.foreground],
-                colorPickersDisclosed: [],
+                colorPickersDisclosed: [.background],
                 fontPicker: false,
                 fontSizePicker: true,
                 indentButtons: true,
@@ -169,8 +169,6 @@ struct RichTextFormat_Toolbar_Previews: PreviewProvider {
         }
     }
 
-    static var previews: some View {
-        Preview()
-    }
+    return Preview()
 }
 #endif

@@ -107,7 +107,7 @@ private extension RichTextFont.SizePickerStack {
     }
 }
 
-struct RichTextFont_SizePickerStack_Previews: PreviewProvider {
+#Preview {
 
     struct Preview: View {
 
@@ -123,9 +123,7 @@ struct RichTextFont_SizePickerStack_Previews: PreviewProvider {
             .padding()
         }
     }
-
-    static var previews: some View {
-        Preview()
-    }
+    
+    return Preview()
 }
 #endif

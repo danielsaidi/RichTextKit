@@ -137,7 +137,7 @@ public extension EnvironmentValues {
     }
 }
 
-struct RichTextFormat_Sheet_Previews: PreviewProvider {
+#Preview {
 
     struct Preview: View {
 
@@ -175,8 +175,6 @@ struct RichTextFormat_Sheet_Previews: PreviewProvider {
         }
     }
 
-    static var previews: some View {
-        Preview()
-    }
+    return Preview()
 }
 #endif

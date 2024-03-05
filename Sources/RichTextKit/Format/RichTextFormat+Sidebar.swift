@@ -162,7 +162,7 @@ public extension EnvironmentValues {
     }
 }
 
-struct RichTextFormat_Sidebar_Previews: PreviewProvider {
+#Preview {
 
     struct Preview: View {
 
@@ -176,7 +176,7 @@ struct RichTextFormat_Sidebar_Previews: PreviewProvider {
             .richTextFormatSidebarConfig(.init(
                 alignments: [.left, .right],
                 colorPickers: [.foreground],
-                colorPickersDisclosed: [],
+                colorPickersDisclosed: [.background],
                 fontPicker: false,
                 fontSizePicker: true,
                 indentButtons: true,
@@ -186,9 +186,6 @@ struct RichTextFormat_Sidebar_Previews: PreviewProvider {
         }
     }
 
-    static var previews: some View {
-        Preview()
-            .frame(minWidth: 350)
-    }
+    return Preview()
 }
 #endif
