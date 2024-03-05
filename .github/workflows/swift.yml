@@ -21,8 +21,8 @@ jobs:
         with:
           xcode-version: '15.1.0'
       - name: Build iOS
-        run: xcodebuild -project Demo/Demo.xcodeproj build -sdk iphoneos -scheme 'Demo'
+        run: xcodebuild -project Demo/Demo.xcodeproj build -sdk iphoneos -allowProvisioningUpdates -scheme 'Demo'
       - name: Test iOS
-        run: xcodebuild -project Demo/Demo.xcodeproj test -sdk iphoneos -scheme 'DemoTests' -destination 'platform=iOS Simulator,name=iPhone 15 Pro,OS=17.2' -enableCodeCoverage YES 
+        run: xcodebuild -project Demo/Demo.xcodeproj test -sdk iphoneos -allowProvisioningUpdates -scheme 'DemoTests' -destination 'platform=iOS Simulator,name=iPhone 15 Pro,OS=17.2' -enableCodeCoverage YES
 
           
