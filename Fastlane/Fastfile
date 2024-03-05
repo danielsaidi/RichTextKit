@@ -4,8 +4,23 @@ default_platform :ios
 
 platform :ios do
 
-  library_name = "RichTextKit"
+  name = "RichTextKit"
   main_branch = "main"
+
+
+  # Build ==================
+  
+  lane :build do |options|
+    platform = options[:platform]
+    sh("cd .. && xcodebuild -scheme " + name + " -derivedDataPath .build -destination 'generic/platform=" + platform + "';")
+  end
+
+
+  # Test ==================
+  
+  lane :test_ios do
+    sh("cd .. && xcodebuild test -scheme " + name + " -derivedDataPath .build -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.2' -enableCodeCoverage YES;")
+  end
 
 
   # Version ================
@@ -14,11 +29,8 @@ platform :ios do
   lane :version do |options|
     version_validate
 
-    bump_type = options[:type]
-    version = version_bump_podspec(
-      path: 'Version',
-      bump_type: bump_type)
-
+    type = options[:type]
+    version = version_bump_podspec(path: 'Version', bump_type: type)
     git_commit(path: "*", message: "Bump to #{version}")
     add_git_tag(tag: version)
     push_git_tags()
@@ -30,12 +42,11 @@ platform :ios do
     ensure_git_status_clean
     ensure_git_branch(branch: main_branch)
     swiftlint(strict: true)
-    
-    sh("xcodebuild -scheme " + library_name + " -derivedDataPath .build -destination 'generic/platform=iOS';")
-    sh("xcodebuild -scheme " + library_name + " -derivedDataPath .build -destination 'generic/platform=OS X';")
-    sh("xcodebuild -scheme " + library_name + " -derivedDataPath .build -destination 'generic/platform=tvOS';")
-    sh("xcodebuild -scheme " + library_name + " -derivedDataPath .build -destination 'generic/platform=watchOS';")
-    sh("xcodebuild test -scheme " + library_name + " -derivedDataPath .build -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.2' -enableCodeCoverage YES;")
+    build(platform: "iOS")
+    build(platform: "OS X")
+    build(platform: "tvOS")
+    build(platform: "watchOS")
+    test_ios
   end
 
 end
