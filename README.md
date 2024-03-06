@@ -14,7 +14,7 @@
 
 ## About RichTextKit
 
-RichTextKit is an SDK that helps you work with rich text in `Swift` and `SwiftUI`. It has a multi-platform SwiftUI `RichTextEditor` that can be added to any app:
+RichTextKit is a Swift SDK that helps you use rich text in `Swift` and `SwiftUI`. It has a multi-platform SwiftUI `RichTextEditor` that can be added to any app:
 
 <p align="center">
     <img src ="Resources/Demo.jpg" />
@@ -78,9 +78,11 @@ The demo app lets you explore the library on iOS and macOS. To try it out, just 
 
 
 
-## Support my work
+## Sponsor my work
 
 You can [sponsor me][Sponsors] on GitHub Sponsors or [reach out][Email] for paid support, to help support my [open-source projects][GitHub].
+
+Your support makes it possible for me to put more work into the many SDKs that I provide for free, and to make them the very best they can be.
 
 
 
