@@ -82,7 +82,7 @@ The demo app lets you explore the library on iOS and macOS. To try it out, just 
 
 You can [sponsor me][Sponsors] on GitHub Sponsors or [reach out][Email] for paid support, to help support my [open-source projects][OpenSource].
 
-Your support makes it possible for me to put more work into the many SDKs that I provide for free, and to make them the very best they can be.
+Your support makes it possible for me to put more work into these projects and make them the best they can be.
 
 
 
