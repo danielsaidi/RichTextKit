@@ -82,8 +82,8 @@ struct MyView: View {
 }
 ```
 
-You can also call other context functions. For instance ``RichTextContext/paste(_:)`` is a shorthand to avoid having to call the ``RichTextContext/trigger(_:)`` function with ``RichTextAction/pasteText(_:)`` or the other longer named actions.
+You can also call other context functions. For instance ``RichTextContext/paste(_:)`` is a shorthand to not have to call the ``RichTextContext/trigger(_:)`` function with ``RichTextAction/pasteText(_:)`` or the other paste actions.
 
-However, most rich text operations in RichTextKit can be triggered with a ``RichTextAction``, which means that the trigger function can be used to perform most operations. Actions can also be easily bound to buttons, and define texts, icons, labels, etc.    
+However, most rich text operations in RichTextKit can be triggered with a ``RichTextAction``, which means that ``RichTextContext/trigger(_:)`` can be used to perform most (but not all) operations.    
 
 Have a look at the context documentation for more information.

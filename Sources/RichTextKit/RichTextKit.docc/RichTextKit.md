@@ -2,18 +2,14 @@
 
 RichTextKit helps you view and edit rich text in SwiftUI, UIKit and AppKit.
 
-@Metadata {
-    
-    
-}
-
-
 
 ## Overview
 
 ![RichTextKit logo](Logo.png)
 
-RichTextKit has a multi-platform SwiftUI ``RichTextEditor`` that can be added to any app. It supports vieweing and editing rich text, including styles (bold, italic, underline, etc.), fonts, font sizes, colors, text alignments, image attachments, etc.
+RichTextKit helps you view and edit rich text in SwiftUI, UIKit and AppKit. It has a has a multi-platform ``RichTextEditor`` that can be added to any SwiftUI app, and many other utilities. 
+
+RichTextKit supports styles (bold, italic, underline, etc.), fonts, font sizes, colors, text alignments, image attachments, and much more.
 
 
 
@@ -25,47 +21,38 @@ RichTextKit can be installed with the Swift Package Manager:
 https://github.com/danielsaidi/RichTextKit.git
 ```
 
-If you prefer to not have external dependencies, you can also just copy the source code into your app.
 
 
+## Getting Started
 
-## Getting started
-
-The <doc:Getting-Started> article helps you getting started with RichTextKit.
-
-
-
-## Repository
-
-For more information, source code, etc., visit the [project repository][Repository].
-
-
-
-## License
-
-RichTextKit is available under the MIT license. See the [LICENSE][License] file for more info.
-
-
-
-## Featured Articles
+RichTextKit is easy to get started with.
 
 @Links(visualStyle: detailedGrid) {
     
-    - <doc:Getting-Started>
+    - <doc:Getting-Started-Article>
     - <doc:Demo-Article>
 }
 
 
 
+## Repository
+
+For more information, source code, etc., visit the [project repository](https://github.com/danielsaidi/RichTextKit).
+
+
+
+## License
+
+RichTextKit is available under the MIT license.
+
+
+
 ## Topics
-
-### Getting Started
-
-- <doc:Getting-Started>
-- <doc:Demo-Article>
 
 ### Articles
 
+- <doc:Getting-Started>
+- <doc:Demo-Article>
 - <doc:Context-Article>
 - <doc:Format-Article>
 - <doc:Views-Article>
