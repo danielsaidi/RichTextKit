@@ -1,6 +1,6 @@
 # Getting Started
 
-This article describes how to get started using RichTextKit.
+This article describes how to get started with RichTextKit.
 
 @Metadata {
     
