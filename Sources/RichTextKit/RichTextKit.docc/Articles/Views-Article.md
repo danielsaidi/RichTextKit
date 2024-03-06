@@ -7,7 +7,7 @@ This article describes the RichTextKit view library.
     @PageImage(
         purpose: card,
         source: "Page",
-        alt: "RichTextKit page icon"
+        alt: "Page icon"
     )
     
     @PageColor(blue)

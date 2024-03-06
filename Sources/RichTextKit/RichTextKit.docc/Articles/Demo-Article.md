@@ -1,6 +1,6 @@
 # Demo App
 
-This article describes the RichTextKit demo app & where to find it.
+This article describes how to try the RichTextKit demo app.
 
 @Metadata {
     
@@ -11,7 +11,7 @@ This article describes the RichTextKit demo app & where to find it.
     @PageImage(
         purpose: card,
         source: "Page",
-        alt: "RichTextKit page icon"
+        alt: "Page icon"
     )
 }
 

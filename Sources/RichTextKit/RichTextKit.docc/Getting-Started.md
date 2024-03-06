@@ -75,14 +75,13 @@ When using RichTextKit in SwiftUI, you should however only have to care about th
 
 
 
-
-## RichTextContext
+## Context
 
 The ``RichTextContext`` is at the heart of the ``RichTextEditor``. See the <doc:Context-Article> article for more information on how to use it to observe and change any rich text properties in your text editor.
 
 
 
-## RichTextDataFormat
+## Data Formats
 
 In RichTextKit, a ``RichTextDataFormat`` determines how rich text content is handled and persisted. See the <doc:Format-Article> article for more information on how to use different data formats.
 
@@ -94,7 +93,7 @@ There are many different SwiftUI views within the library besides the ``RichText
 
 
 
-## Read More
+## Further Reading
 
 @Links(visualStyle: detailedGrid) {
     

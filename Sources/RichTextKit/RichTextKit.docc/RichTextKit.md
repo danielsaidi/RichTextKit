@@ -25,13 +25,11 @@ https://github.com/danielsaidi/RichTextKit.git
 
 
 
-## Getting Started
-
-RichTextKit is easy to get started with.
+## Getting started
 
 @Links(visualStyle: detailedGrid) {
     
-    - <doc:Getting-Started-Article>
+    - <doc:Getting-Started>
     - <doc:Demo-Article>
 }
 
@@ -51,9 +49,12 @@ RichTextKit is available under the MIT license.
 
 ## Topics
 
-### Articles
+### Getting Started
 
 - <doc:Getting-Started>
+
+### Articles
+
 - <doc:Demo-Article>
 - <doc:Context-Article>
 - <doc:Format-Article>

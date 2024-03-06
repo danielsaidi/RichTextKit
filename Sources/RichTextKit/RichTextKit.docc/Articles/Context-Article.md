@@ -7,7 +7,7 @@ This article describes how to use the ``RichTextContext`` to observe and modify 
     @PageImage(
         purpose: card,
         source: "Page",
-        alt: "RichTextKit page icon"
+        alt: "Page icon"
     )
     
     @PageColor(blue)

@@ -7,7 +7,7 @@ This article describes the various ``RichTextDataFormat``s that are supported by
     @PageImage(
         purpose: card,
         source: "Page",
-        alt: "RichTextKit page icon"
+        alt: "Page icon"
     )
     
     @PageColor(blue)
