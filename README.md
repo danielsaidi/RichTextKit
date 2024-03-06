@@ -80,7 +80,7 @@ The demo app lets you explore the library on iOS and macOS. To try it out, just 
 
 ## Sponsor my work
 
-You can [sponsor me][Sponsors] on GitHub Sponsors or [reach out][Email] for paid support, to help support my [open-source projects][GitHub].
+You can [sponsor me][Sponsors] on GitHub Sponsors or [reach out][Email] for paid support, to help support my [open-source projects][OpenSource].
 
 Your support makes it possible for me to put more work into the many SDKs that I provide for free, and to make them the very best they can be.
 
@@ -109,6 +109,7 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 [Twitter]: https://www.twitter.com/danielsaidi
 [Mastodon]: https://mastodon.social/@danielsaidi
 [Sponsors]: https://github.com/sponsors/danielsaidi
+[OpenSource]: https://www.danielsaidi.com/opensource
 
 [Documentation]: https://danielsaidi.github.io/RichTextKit/documentation/richtextkit/
 [Getting-Started]: https://danielsaidi.github.io/RichTextKit/documentation/richtextkit/getting-started
