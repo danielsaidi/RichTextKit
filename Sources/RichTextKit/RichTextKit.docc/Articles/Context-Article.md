@@ -16,6 +16,7 @@ This article describes how to use the ``RichTextContext`` to observe and modify 
 The ``RichTextContext`` is at the heart of the ``RichTextEditor``. It can be used to observe and modify the rich text in the editor and to trigger rich text-specific ``RichTextAction``s and other functions.
 
 
+
 ## How to observe context changes
 
 When you move the text cursor around in a ``RichTextEditor``, its ``RichTextCoordinator`` will sync the ``RichTextContext`` with the current state of the editor.

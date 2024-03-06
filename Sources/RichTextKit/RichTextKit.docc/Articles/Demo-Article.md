@@ -20,6 +20,7 @@ RichTextKit has a multi-platform demo app that show how to use the library on mu
 The demo app can be explored from the [GitHub repository][GitHub]. It's a document-based app that runs on both macOS, iOS, and iPadOS and persists rich text files on disc.
 
 
+
 ## How to run the demo on device
 
 The demo app has disabled code signing, to simplify its setup. 

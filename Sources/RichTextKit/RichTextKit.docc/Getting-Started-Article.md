@@ -16,6 +16,7 @@ This article describes how to get started using RichTextKit.
 RichTextKit is a Swift-based library that lets you work with rich text in UIKit, AppKit and SwiftUI. This article describes how to get started using RichTextKit in both SwiftUI, UIKit and AppKit.
 
 
+
 ## Getting started with SwiftUI
 
 RichTextKit has a multi-platform SwiftUI ``RichTextEditor`` that can be added to any app:

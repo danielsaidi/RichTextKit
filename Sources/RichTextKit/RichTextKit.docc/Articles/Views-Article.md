@@ -20,6 +20,7 @@ For instance, the ``RichTextAction``-specific ``RichTextAction/Button``, ``RichT
 There are also type-specific views, like the ``RichTextAlignment``-specific ``RichTextAlignment/Picker``, which can be used to pick a rich text alignment.
 
 
+
 ## Available views
 
 Below is a list of available views, grouped by purpose and listed by namespace.
@@ -155,6 +156,7 @@ Below is a list of available views, grouped by purpose and listed by namespace.
         }
     }
 }
+
 
 
 ## Styling & Configuration
