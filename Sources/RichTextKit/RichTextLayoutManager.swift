@@ -50,11 +50,11 @@ extension NSTextLayoutManager: RichTextLayoutManager {
             return true
         }
         
-        let final = lineRanges.first {
+        let rangeForWholeLine = lineRanges.first {
             $0.location <= range.location && NSMaxRange($0) >= NSMaxRange(range)
         }
         
-        return final ?? NSRange()
+        return rangeForWholeLine ?? NSRange()
     }
 
     public func areMultipleLinesSelected(for range: NSRange) -> Bool {
