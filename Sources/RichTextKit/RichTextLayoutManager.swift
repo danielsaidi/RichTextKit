@@ -5,8 +5,13 @@
 //  Created by Dominik Bucher on 01.03.2024.
 //
 
-import Foundation
+#if canImport(UIKit)
 import UIKit
+#endif
+
+#if macOS
+import AppKit
+#endif
 
 public protocol RichTextLayoutManager {
     func lineRange(for range: NSRange) -> NSRange
