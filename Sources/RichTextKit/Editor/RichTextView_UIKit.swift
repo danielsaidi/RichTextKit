@@ -44,6 +44,20 @@ open class RichTextView: UITextView, RichTextViewComponent {
         self.setup(with: string, format: format)
     }
 
+    override public init(frame: CGRect, textContainer: NSTextContainer?) {
+        let textLayoutManager = NSTextLayoutManager()
+        let textkit2Container = NSTextContainer()
+        textLayoutManager.textContainer = textkit2Container
+        let textContentStorage = NSTextContentStorage()
+        textContentStorage.addTextLayoutManager(textLayoutManager)
+
+        super.init(frame: frame, textContainer: textkit2Container)
+    }
+
+    required public init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     // MARK: - Properties
 
     /// The configuration to use by the rich text view.
@@ -349,8 +363,12 @@ private extension UIDropSession {
 public extension RichTextView {
 
     /// The text view's layout manager, if any.
-    var layoutManagerWrapper: NSLayoutManager? {
-        layoutManager
+    var layoutManagerWrapper: RichTextLayoutManager? {
+        if #available(iOS 16.0, *) {
+            textLayoutManager
+        } else {
+            layoutManager
+        }
     }
 
     /// The spacing between the text view edges and its text.
