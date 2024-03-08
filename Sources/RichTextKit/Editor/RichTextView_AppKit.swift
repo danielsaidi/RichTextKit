@@ -52,6 +52,30 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         super.paste(sender)
     }
 
+    override public convenience init(frame: CGRect) {
+        let textLayoutManager = NSTextLayoutManager()
+        let textkit2Container = NSTextContainer()
+        textLayoutManager.textContainer = textkit2Container
+        let textContentStorage = NSTextContentStorage()
+        textContentStorage.addTextLayoutManager(textLayoutManager)
+        
+        self.init(frame: frame, textContainer: textkit2Container)
+    }
+    
+    override public init(frame: CGRect, textContainer: NSTextContainer?) {
+        let textLayoutManager = NSTextLayoutManager()
+        let textkit2Container = NSTextContainer()
+        textLayoutManager.textContainer = textkit2Container
+        let textContentStorage = NSTextContentStorage()
+        textContentStorage.addTextLayoutManager(textLayoutManager)
+        
+        super.init(frame: frame, textContainer: textkit2Container)
+    }
+    
+    required public init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     /**
      Try to perform a certain drag operation, which will get
      and paste images from the drag info into the text.
