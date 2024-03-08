@@ -37,7 +37,6 @@ public extension RichTextViewComponent {
             range = layoutManagerWrapper?.lineRange(for: selectedRange)
         }
         guard let range = range else { return }
-        guard range.length > 0 else { return }
         #if os(watchOS)
         setRichTextAttribute(.paragraphStyle, to: style, at: range)
         #else

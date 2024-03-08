@@ -25,24 +25,36 @@ extension NSLayoutManager: RichTextLayoutManager {
         return selectedLines.count > 1
     }
 }
+
 extension NSTextLayoutManager: RichTextLayoutManager {
     public func lineRange(for range: NSRange) -> NSRange {
-        var ranges: [NSTextRange] = []
-        enumerateTextLayoutFragments(from: documentRange.location, options: [.ensuresLayout]) { fragment in
-            ranges.append(fragment.rangeInElement)
+        var lineRanges: [NSRange] = []
+        var accumulatedLength = 0
+        
+        enumerateTextLayoutFragments(from: documentRange.location, options: [.ensuresLayout, .ensuresExtraLineFragment]) { fragment in
+            for line in fragment.textLineFragments {
+                let adjustedLength: Int
+                // Line is actually ending with newline :D
+                // So we need to ensure it is not counted on the line.
+                if line.attributedString.string.contains("\n") {
+                    adjustedLength = max(0, line.characterRange.length - 1)
+                } else {
+                    adjustedLength = line.characterRange.length
+                }
+                let adjustedLocation = accumulatedLength + line.characterRange.location
+                let lineRange = NSRange(location: adjustedLocation, length: adjustedLength)
+                
+                lineRanges.append(lineRange)
+                accumulatedLength += lineRange.length + 1 // Start of new line.
+            }
             return true
         }
-
-        var finalRange: NSRange?
-        for containingRange in ranges {
-            guard let start = Int(containingRange.location.description),
-                  let end = Int(containingRange.endLocation.description)
-            else { finalRange = NSRange(); break }
-            if (start...end).contains(range.location) {
-                finalRange = NSRange(location: start, length: end - start)
-            }
+        
+        let final = lineRanges.first {
+            $0.location <= range.location && NSMaxRange($0) >= NSMaxRange(range)
         }
-        return finalRange ?? NSRange()
+        
+        return final ?? NSRange()
     }
 
     public func areMultipleLinesSelected(for range: NSRange) -> Bool {
@@ -53,8 +65,8 @@ extension NSTextLayoutManager: RichTextLayoutManager {
             guard let location = Int(fragment.rangeInElement.location.description),
                   let endLocation = Int(fragment.rangeInElement.endLocation.description)
             else { return false }
-            let lenght = endLocation - location
-            let fragmentRange = NSRange(location: location, length: lenght)
+            let length = endLocation - location
+            let fragmentRange = NSRange(location: location, length: length)
 
             if NSIntersectionRange(range, fragmentRange).length > 0 {
                 ranges.append(fragment.rangeInElement)
@@ -66,17 +78,7 @@ extension NSTextLayoutManager: RichTextLayoutManager {
     }
 }
 
-// Utility extension to convert NSRange to Range<String.Index> for NSTextStorage
-extension NSRange {
-    func toRange(in textStorage: NSTextStorage) -> Range<String.Index>? {
-        guard location != NSNotFound else { return nil }
-        let startIndex = textStorage.string.index(textStorage.string.startIndex, offsetBy: location)
-        let endIndex = textStorage.string.index(startIndex, offsetBy: length)
-        return startIndex..<endIndex
-    }
-}
-
-extension NSLayoutManager {
+private extension NSLayoutManager {
     /// Get the line range at a certain text location.
     func lineRange(at location: Int) -> NSRange {
 
