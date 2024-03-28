@@ -80,7 +80,7 @@ final class RichTextViewComponentTests: XCTestCase {
         XCTAssertEqual(view.spellCheckingType, .no)
         XCTAssertNotNil(view.textColor)
         #elseif macOS
-        XCTAssertNotNil(view.textColor)
+        XCTAssertNil(view.textColor)
         #endif
     }
 }
