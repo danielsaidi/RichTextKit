@@ -15,7 +15,7 @@ struct DemoApp: App {
     var body: some Scene {
 
         DocumentGroup(newDocument: DemoDocument()) { file in
-            DemoEditor(
+            DemoEditorScreen(
                 document: file.$document
             )
         }

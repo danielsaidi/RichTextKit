@@ -40,7 +40,24 @@ struct MyView: View {
 
 The editor takes a text binding and a ``RichTextContext``, then uses an underlying ``RichTextCoordinator`` to sync changes between the context, the editor and the platform-specific text view that it wraps. 
 
-You can use the ``RichTextContext`` to modify the text binding and its font, font size, colors, alignment etc. You can also observe the context properties, which change when you move the text input cursor.
+You can use the ``RichTextContext`` to modify the text binding and its font, font size, colors, alignment etc. You can also observe the context properties, which change when you move the text input cursor. 
+
+If you just want to view rich text, you can use the ``RichTextViewer``, which just takes a text:
+
+```swift
+struct MyView: View {
+
+    private var text = NSAttributedString(...)
+
+    var body: some View {
+        RichTextViewer(text: text)
+    }
+}
+```
+
+This view just wraps a ``RichTextEditor`` and disables editing. You can still select text.
+
+RichTextKit comes with a bunch of UI components, keyboard shortcuts & menu commands that make it easy to build a rich text editor.
 
 
 

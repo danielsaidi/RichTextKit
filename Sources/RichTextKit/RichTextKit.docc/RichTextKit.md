@@ -62,17 +62,18 @@ RichTextKit is available under the MIT license.
 
 ### Essentials
 
+These are the top-level types you should start looking at.
+
 - ``RichTextEditor``
 - ``RichTextView``
 - ``RichTextContext``
-- ``RichTextCoordinator``
 
 ### Foundation
 
+- ``RichTextCoordinator``
 - ``RichTextPresenter``
 - ``RichTextReader``
 - ``RichTextWriter``
-- ``RichTextViewComponent``
 
 ### Actions
 
@@ -90,6 +91,11 @@ RichTextKit is available under the MIT license.
 - ``RichTextAttributes``
 - ``RichTextAttributeReader``
 - ``RichTextAttributeWriter``
+
+### Colors
+
+- ``ColorRepresentable``
+- ``RichTextColor``
 
 ### Colors
 

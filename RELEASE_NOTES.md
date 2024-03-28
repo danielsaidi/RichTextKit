@@ -18,6 +18,7 @@ This release removes all deprecated code and cleans up the library.
 * `RichTextContext` has more intuitive ways to paste text content.
 * `RichTextContext` has a new observable `paragraphStyle` property.
 * `RichTextInsertion` has new static convenience insertion builders.
+* `RichTextViewer` is a new SwiftUI view that can be used to view rich text.
 
 ### 🐛 Bug Fixes
 

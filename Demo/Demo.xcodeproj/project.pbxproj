@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		A983955A2B964EC200727A30 /* DemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98395592B964EC200727A30 /* DemoApp.swift */; };
 		A983955C2B964EC200727A30 /* DemoDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = A983955B2B964EC200727A30 /* DemoDocument.swift */; };
-		A983955E2B964EC200727A30 /* DemoEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A983955D2B964EC200727A30 /* DemoEditor.swift */; };
+		A983955E2B964EC200727A30 /* DemoEditorScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A983955D2B964EC200727A30 /* DemoEditorScreen.swift */; };
 		A98395602B964EC300727A30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A983955F2B964EC300727A30 /* Assets.xcassets */; };
 		A98395652B964EC300727A30 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A98395642B964EC300727A30 /* Preview Assets.xcassets */; };
 		A983956D2B964EF300727A30 /* RichTextKit in Frameworks */ = {isa = PBXBuildFile; productRef = A983956C2B964EF300727A30 /* RichTextKit */; };
@@ -67,7 +67,7 @@
 		A98395562B964EC200727A30 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A98395592B964EC200727A30 /* DemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoApp.swift; sourceTree = "<group>"; };
 		A983955B2B964EC200727A30 /* DemoDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoDocument.swift; sourceTree = "<group>"; };
-		A983955D2B964EC200727A30 /* DemoEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoEditor.swift; sourceTree = "<group>"; };
+		A983955D2B964EC200727A30 /* DemoEditorScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoEditorScreen.swift; sourceTree = "<group>"; };
 		A983955F2B964EC300727A30 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A98395612B964EC300727A30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A98395622B964EC300727A30 /* Demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Demo.entitlements; sourceTree = "<group>"; };
@@ -153,16 +153,16 @@
 		A98395582B964EC200727A30 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
-				A98395732B96684500727A30 /* AboutCommand.swift */,
+				A9D8C48F2BB5C41100F77A36 /* Commands */,
+				A98395632B964EC300727A30 /* Preview Content */,
+				A98395722B96573700727A30 /* Supporting Files */,
+				A9D8C48E2BB5C40400F77A36 /* Utils */,
 				A98395592B964EC200727A30 /* DemoApp.swift */,
 				A983955B2B964EC200727A30 /* DemoDocument.swift */,
+				A983955D2B964EC200727A30 /* DemoEditorScreen.swift */,
 				A98395702B96571100727A30 /* DemoMenu.swift */,
-				A983955D2B964EC200727A30 /* DemoEditor.swift */,
 				A98395772B966B6000727A30 /* DemoUrl.swift */,
-				A98395752B9669CB00727A30 /* ViewDebug.swift */,
 				A983955F2B964EC300727A30 /* Assets.xcassets */,
-				A98395722B96573700727A30 /* Supporting Files */,
-				A98395632B964EC300727A30 /* Preview Content */,
 			);
 			path = Demo;
 			sourceTree = "<group>";
@@ -297,6 +297,22 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
+		A9D8C48E2BB5C40400F77A36 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				A98395752B9669CB00727A30 /* ViewDebug.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		A9D8C48F2BB5C41100F77A36 /* Commands */ = {
+			isa = PBXGroup;
+			children = (
+				A98395732B96684500727A30 /* AboutCommand.swift */,
+			);
+			path = Commands;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -412,7 +428,7 @@
 				A98395782B966B6100727A30 /* DemoUrl.swift in Sources */,
 				A983955A2B964EC200727A30 /* DemoApp.swift in Sources */,
 				A983955C2B964EC200727A30 /* DemoDocument.swift in Sources */,
-				A983955E2B964EC200727A30 /* DemoEditor.swift in Sources */,
+				A983955E2B964EC200727A30 /* DemoEditorScreen.swift in Sources */,
 				A98395712B96571100727A30 /* DemoMenu.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

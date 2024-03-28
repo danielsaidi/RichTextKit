@@ -1,5 +1,5 @@
 //
-//  DemoEditor.swift
+//  DemoEditorScreen.swift
 //  Demo
 //
 //  Created by Daniel Saidi on 2024-03-04.
@@ -9,7 +9,7 @@
 import RichTextKit
 import SwiftUI
 
-struct DemoEditor: View {
+struct DemoEditorScreen: View {
 
     @Binding var document: DemoDocument
 
@@ -28,6 +28,8 @@ struct DemoEditor: View {
             ) {
                 $0.textContentInset = CGSize(width: 30, height: 30)
             }
+            // Use this to just view the text:
+            // RichTextViewer(document.text)
             #if os(iOS)
             RichTextKeyboardToolbar(
                 context: context,
@@ -67,7 +69,7 @@ struct DemoEditor: View {
     }
 }
 
-private extension DemoEditor {
+private extension DemoEditorScreen {
 
     var isMac: Bool {
         #if os(macOS)
@@ -87,7 +89,7 @@ private extension DemoEditor {
 }
 
 #Preview {
-    DemoEditor(
+    DemoEditorScreen(
         document: .constant(DemoDocument()),
         context: .init()
     )

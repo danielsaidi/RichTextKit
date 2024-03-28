@@ -35,7 +35,8 @@ Below is a list of available views, grouped by purpose and listed by namespace.
             }
             @Column(size: 3) {
                 * ``RichTextEditor``
-                * ``RichTextViewComponent``
+                * ``RichTextView``
+                * ``RichTextViewer``
             }
         }
     }
