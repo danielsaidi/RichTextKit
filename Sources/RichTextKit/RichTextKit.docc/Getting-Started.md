@@ -13,19 +13,20 @@ This article describes how to get started with RichTextKit.
     @PageColor(blue)
 }
 
-RichTextKit is a Swift-based library that lets you work with rich text in UIKit, AppKit and SwiftUI. This article describes how to get started using RichTextKit in both SwiftUI, UIKit and AppKit.
+RichTextKit is a Swift-based library that lets you work with rich text in UIKit, AppKit and SwiftUI. This article describes how to get started.
 
 
 
 ## Getting started with SwiftUI
 
-RichTextKit has a multi-platform SwiftUI ``RichTextEditor`` that can be added to any app:
+RichTextKit has a multi-platform SwiftUI ``RichTextEditor`` that can be used to edit rich text:
 
 ```swift
 struct MyView: View {
 
     @State
-    private var text = NSAttributedString(string: "Type here...")
+    private var text = NSAttributedString(string: "Type text here...")
+    // You can also load attributed strings from data, documents, etc. 
     
     @StateObject
     var context = RichTextContext()
@@ -38,11 +39,9 @@ struct MyView: View {
 }
 ```
 
-The editor takes a text binding and a ``RichTextContext``, then uses an underlying ``RichTextCoordinator`` to sync changes between the context, the editor and the platform-specific text view that it wraps. 
+The ``RichTextEditor`` takes a text binding and a ``RichTextContext`` (which can be used to edit the text), then wraps a ``RichTextView`` (described further down) and uses a ``RichTextCoordinator`` to sync changes between the context, editor and view.
 
-You can use the ``RichTextContext`` to modify the text binding and its font, font size, colors, alignment etc. You can also observe the context properties, which change when you move the text input cursor. 
-
-If you just want to view rich text, you can use the ``RichTextViewer``, which just takes a text:
+If you just want to view a text, you can use a ``RichTextViewer`` instead. It just presents the text in an read-only ``RichTextEditor``:
 
 ```swift
 struct MyView: View {
@@ -55,40 +54,36 @@ struct MyView: View {
 }
 ```
 
-This view just wraps a ``RichTextEditor`` and disables editing. You can still select text.
-
 RichTextKit comes with a bunch of UI components, keyboard shortcuts & menu commands that make it easy to build a rich text editor.
 
 
 
 ## Getting started with UIKit & AppKit
 
-RichTextKit is a SwiftUI focused SDK, but it builds upon the extended rich text support that it brings to both UIKit and AppKit, which you can use as standalone features as well.
+RichTextKit is a SwiftUI-focused SDK, but builds upon the extended rich text support it brings to both UIKit and AppKit (which you can use as standalone features as well).
 
-RichTextKit defines a platform-specific RichTextView component, that inherits `UITextView` in UIKit and `NSTextView` in AppKit:
+RichTextKit defines a platform-specific ``RichTextView`` component that inherits `UITextView` in UIKit and `NSTextView` in AppKit:
 
 ```swift
 RichTextView(data: myData, format: .archivedData)  // Using data
 RichTextView(string: myString, format: .plainText) // Using a string
 ```
 
-These platform-specific views implement the ``RichTextViewComponent`` protocol to provide a lot more functionality than the native text views and bridge the platform-specific APIs to make the views behave more alike across platforms.
-
-Although there are more UIKit and AppKit-specific functionality and tools in the library, the rest of this documentation will describe how it's used together with SwiftUI. 
+Both views implement the ``RichTextViewComponent`` protocol to get a lot more functionality and bridge the platform-specific APIs. 
 
 
 
 ## Fundamentals
 
-RichTextKit use native terminology as much as possible, but has a couple of custom name conventions that may require explanation.
+RichTextKit use native terminology as much as possible, but has some custom name conventions that may require explanation.
 
-For instance, a ``RichTextReader`` lets you access an ``RichTextReader/attributedString`` (or its alias ``RichTextReader/richText``) while a ``RichTextWriter`` lets you access a mutable ``RichTextWriter/mutableAttributedString`` (or its alias ``RichTextWriter/mutableRichText``) that can be modified.
+For instance, a ``RichTextReader`` lets you access an ``RichTextReader/attributedString`` (or its alias ``RichTextReader/richText``) while a ``RichTextWriter`` lets you access a mutable ``RichTextWriter/mutableAttributedString`` (or its alias ``RichTextWriter/mutableRichText``).
 
-These protocols are specialized by more specific ones, like the ``RichTextAttributeReader`` and ``RichTextAttributeWriter``, which let you read and write attributes from and to the current rich text.
+These protocols are specialized by more specific ones, like the ``RichTextAttributeReader`` and ``RichTextAttributeWriter``, which let you read and write attributes in a rich text value.
 
-All these reader and writer protocols are implemented by various types. For instance `NSAttributedString` implements many reader protocols, while `NSMutableAttributedString` implements many writer protocols.
+These reader and writer protocols are already implemented by various types. For instance ``Foundation/NSAttributedString`` implements many reader protocols, while ``Foundation/NSMutableAttributedString`` implements many writer protocols.
 
-When using RichTextKit in SwiftUI, you should however only have to care about the ``RichTextEditor``, the ``RichTextContext`` and the many different <doc:Views-Article> that simplify building a great rich text-based app.  
+When using RichTextKit in SwiftUI, you should however mainly focus on the ``RichTextEditor``, the ``RichTextContext`` and all the various <doc:Views-Article> that simplify building a great rich text-based app.  
 
 
 
@@ -104,7 +99,7 @@ In RichTextKit, a ``RichTextDataFormat`` determines how rich text content is han
 
 
 
-## Views
+## Views & Components
 
 There are many different SwiftUI views within the library besides the ``RichTextEditor``. See the <doc:Views-Article> article for more information.
 

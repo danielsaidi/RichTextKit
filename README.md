@@ -76,8 +76,6 @@ struct MyView: View {
 }
 ```
 
-This view just wraps a ``RichTextEditor`` and disables editing. You can still select text.
-
 RichTextKit comes with a bunch of UI components, keyboard shortcuts & menu commands that make it easy to build a rich text editor.
 
 For more information, please see the [getting started guide][Getting-Started].
