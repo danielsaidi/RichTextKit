@@ -4,7 +4,7 @@ This article describes how to try the RichTextKit demo app.
 
 @Metadata {
     
-    @CallToAction(purpose: link, url: https://github.com/danielsaidi/RichTextKit)
+    @CallToAction(purpose: link, url: "https://github.com/danielsaidi/RichTextKit")
     
     @PageKind(sampleCode)
     

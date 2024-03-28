@@ -103,6 +103,7 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 
 
 [Email]: mailto:daniel.saidi@gmail.com
+
 [Website]: https://www.danielsaidi.com
 [GitHub]: https://www.github.com/danielsaidi
 [Twitter]: https://www.twitter.com/danielsaidi
