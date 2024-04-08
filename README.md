@@ -96,9 +96,9 @@ The demo app lets you explore the library on iOS and macOS. To try it out, just 
 
 ## Sponsor my work
 
-You can [sponsor me][Sponsors] on GitHub Sponsors or [reach out][Email] for paid support, to help support my [open-source projects][OpenSource].
+If you find RichTextKit and my other [open-source projects][OpenSource] helpful, please consider supporting my work.
 
-Your support makes it possible for me to put more work into these projects and make them the best they can be.
+You can [sponsor me][Sponsors] on GitHub Sponsors or [reach out][Email] for paid support, to help support [my open-source work][OpenSource].
 
 
 
@@ -110,6 +110,16 @@ Feel free to reach out if you have questions or want to contribute in any way:
 * Mastodon: [@danielsaidi@mastodon.social][Mastodon]
 * Twitter: [@danielsaidi][Twitter]
 * E-mail: [daniel.saidi@gmail.com][Email]
+
+
+
+## Used in
+
+RichTextKit is used in the following apps, so make sure to check them out for inspiration:
+
+<a href="https://oribi.se/en" title="Oribi Writer"><img src="Resources/apps/oribiwriter.png" width=100 style="border-radius: 30px;}" /></a>
+
+Feel free to reach out if you are using RichTextKit and want to add your app to this list.
 
 
 
