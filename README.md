@@ -15,17 +15,15 @@
 
 ## About RichTextKit
 
-RichTextKit is a Swift SDK that helps you use rich text in `Swift` and `SwiftUI`. It has a multi-platform SwiftUI `RichTextEditor` that can be added to any app:
+RichTextKit is a Swift SDK that lets you edit rich text in `Swift` & `SwiftUI` with a multi-platform `RichTextEditor`:
 
 <p align="center">
     <img src ="Resources/Demo.jpg" />
 </p>
 
-This editor supports text styles (bold, italic, underline, etc.), fonts, font sizes, colors, text alignments, image attachments, and much more. 
+The `RichTextEditor` supports text styles (bold, italic, underline, etc.), fonts, font sizes, colors, text alignments, image attachments, and much more. It's powered by a `RichTextView` that bridges `UITextView` & `NSTextView` and adds additional, platform-agnostic APIs that make the two views behave more alike.
 
-The `RichTextEditor` is powered by a multi-platform `RichTextView` that bridges `UITextView` and `NSTextView` and adds APIs to make them work more alike on all platforms.
-
-If you just want to view rich text, you can use the `RichTextViewer` SwiftUI view.
+If you just want to view rich text connte, you can use the `RichTextViewer` SwiftUI view, which wraps the editor and applies a read-only configuration to it.
 
 
 
@@ -76,7 +74,7 @@ struct MyView: View {
 }
 ```
 
-RichTextKit comes with a bunch of UI components, keyboard shortcuts & menu commands that make it easy to build a rich text editor.
+RichTextKit provides UI components, keyboard shortcuts & menu commands that can be used in a rich text editor.
 
 For more information, please see the [getting started guide][Getting-Started].
 
@@ -117,7 +115,7 @@ Feel free to reach out if you have questions or want to contribute in any way:
 
 RichTextKit is used in the following apps, so make sure to check them out for inspiration:
 
-<a title="Chunk" href="https://www.curioussoftware.io"><img src="Resources/apps/chunk.png" width=100 /></a>
+<a title="Chunk" href="https://www.curioussoftware.io"><img src="Resources/apps/chunk.png" width=100 /></a> 
 <a title="Oribi Writer" href="https://oribi.se/en"><img src="Resources/apps/oribiwriter.png" width=100 /></a>
 
 Feel free to reach out if you are using RichTextKit and want to add your app to this list.
