@@ -86,17 +86,24 @@ The [online documentation][Documentation] has more information, articles, code e
 
 
 
-## Demo Application
+## Demo App & Inspiration
 
-The demo app lets you explore the library on iOS and macOS. To try it out, just open and run the `Demo` project.
+The RichTextKit demo lets you explore the library on iOS & macOS. To try it out, just open and run the `Demo` app.
+
+RichTextKit is also used in the following apps, so make sure to check them out for inspiration:
+
+<a title="Chunk" href="https://www.curioussoftware.io"><img src="Resources/apps/chunk.png" width=100 /></a> 
+<a title="Oribi Writer" href="https://oribi.se/en"><img src="Resources/apps/oribiwriter.png" width=100 /></a>
+
+Don't hesitate to reach out if you are using RichTextKit, and want to add your app to this list. I'd love to feature it.
 
 
 
 ## Sponsor my work
 
-Please consider supporting my work if you find this and my other [open-source projects][OpenSource] helpful.
+Please consider supporting my work if you find this and my other [open-source projects][OpenSource] helpful. I manage them on my spare time, and any help to keep them going is greatly appreciated.
 
-You can [sponsor me][Sponsors] on GitHub Sponsors or [reach out][Email] for paid support, or hire me for [freelance work][Website].
+You can [sponsor me][Sponsors] on GitHub Sponsors, [reach out][Email] for paid support, or hire me for [freelance work][Website].
 
 
 
@@ -108,17 +115,6 @@ Feel free to reach out if you have questions or want to contribute in any way:
 * Mastodon: [@danielsaidi@mastodon.social][Mastodon]
 * Twitter: [@danielsaidi][Twitter]
 * E-mail: [daniel.saidi@gmail.com][Email]
-
-
-
-## Used in
-
-RichTextKit is used in the following apps, so make sure to check them out for inspiration:
-
-<a title="Chunk" href="https://www.curioussoftware.io"><img src="Resources/apps/chunk.png" width=100 /></a> 
-<a title="Oribi Writer" href="https://oribi.se/en"><img src="Resources/apps/oribiwriter.png" width=100 /></a>
-
-Feel free to reach out if you are using RichTextKit and want to add your app to this list.
 
 
 
