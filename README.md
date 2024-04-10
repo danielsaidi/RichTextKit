@@ -92,7 +92,7 @@ The RichTextKit demo lets you explore the library on iOS & macOS. To try it out,
 
 RichTextKit is also used in the following apps, so make sure to check them out for inspiration:
 
-<a title="Chunk" href="https://www.curioussoftware.io"><img src="Resources/apps/chunk.png" width=100 /></a> 
+<a title="Chunk" href="https://www.chunkapp.com"><img src="Resources/apps/chunk.png" width=100 /></a> 
 <a title="Oribi Writer" href="https://oribi.se/en"><img src="Resources/apps/oribiwriter.png" width=100 /></a>
 
 Don't hesitate to reach out if you are using RichTextKit, and want to add your app to this list. I'd love to feature it.
