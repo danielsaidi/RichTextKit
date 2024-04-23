@@ -15,6 +15,7 @@ extension String: RichTextInsertable {}
 extension ImageRepresentable: RichTextInsertable {}
 extension [ImageRepresentable]: RichTextInsertable {}
 extension NSAttributedString: RichTextInsertable {}
+extension WebImage:RichTextInsertable {}
 
 /// This struct represents something that should be inserted
 /// into a rich text attributed string.
@@ -90,5 +91,13 @@ public extension RichTextInsertion {
         moveCursor: Bool
     ) -> RichTextInsertion<String> {
         .init(content: text, index: index, moveCursor: moveCursor)
+    }
+    
+    static func webImage(
+        _ webImage: WebImage,
+        at index: Int,
+        moveCursor: Bool
+    ) -> RichTextInsertion<WebImage> {
+        .init(content: webImage, index: index, moveCursor: moveCursor)
     }
 }

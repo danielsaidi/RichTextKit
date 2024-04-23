@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Kingfisher
 
 #if canImport(UIKit)
 import UIKit
@@ -86,6 +87,37 @@ public extension RichTextViewComponent {
         }
         #endif
     }
+    
+    func pasteWebImage(
+        _ image: WebImage,
+        at index: Int,
+        moveCursor: Bool = true
+    ) {
+        #if os(watchOS)
+        assertionFailure("Image pasting is not supported on this platform")
+        #else
+        guard validateImageInsertion(for: imagePasteConfiguration) else { return }
+        let insertRange = NSRange(location: index, length: 0)
+        let safeInsertRange = safeRange(for: insertRange)
+        let isSelectedRange = (index == selectedRange.location)
+        if isSelectedRange { deleteCharacters(in: selectedRange) }
+        if moveCursor {
+            moveInputCursor(to: index)
+        }
+        
+        self.performPasteWebImage(image, at: index)
+        
+        if moveCursor {
+            moveInputCursor(to: safeInsertRange.location + 2)
+        }
+        
+        if moveCursor || isSelectedRange {
+            DispatchQueue.main.async {
+                self.moveInputCursor(to: self.selectedRange.location)
+            }
+        }
+        #endif
+    }
 
     /**
      Paste text into the text view, at a certain index.
@@ -148,6 +180,35 @@ private extension RichTextViewComponent {
         insertString.addAttributes(richTextAttributes, range: insertString.richTextRange)
         content.insert(insertString, at: index)
 
+        setRichText(content)
+    }
+    
+    func performPasteWebImage(
+        _ image: WebImage,
+        at index: Int
+    ) {
+        let newLine = NSAttributedString(string: "\n", attributes: richTextAttributes)
+        let content = NSMutableAttributedString(attributedString: richText)
+        
+        //make image attachment
+        let textAttachment = NSTextAttachment()
+        textAttachment.bounds = attachmentBounds(for: image.image)
+        
+        content.replaceCharacters(
+            in: NSRange(
+                location: index,
+                length: 0
+            ),
+            with: NSAttributedString(
+                attachment: textAttachment
+            ))
+        
+        KF.url(URL(string: image.url))
+            .set(
+                to: textAttachment,
+                attributedView: self.holdingView
+            )
+        
         setRichText(content)
     }
 }

@@ -66,6 +66,8 @@ public protocol RichTextViewComponent: AnyObject,
 
     /// The text view current typing attributes.
     var typingAttributes: RichTextAttributes { get set }
+    
+    var holdingView: UIView { get }
 
     // MARK: - Setup
 

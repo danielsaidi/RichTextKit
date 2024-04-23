@@ -34,3 +34,13 @@ import UIKit
 /// This typealias bridges platform-specific image types.
 public typealias ImageRepresentable = UIImage
 #endif
+
+public struct WebImage: Hashable, Equatable {
+    let image: ImageRepresentable
+    let url: String
+    
+    public init(image: ImageRepresentable, url: String) {
+        self.image = image
+        self.url = url
+    }
+}

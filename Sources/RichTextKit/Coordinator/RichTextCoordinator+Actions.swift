@@ -56,6 +56,8 @@ extension RichTextCoordinator {
         case .undoLatestChange:
             textView.undoLatestChange()
             syncContextWithTextView()
+        case .paseWebImage(let webImage):
+            pasteWebImage(webImage)
         }
     }
 }
@@ -87,6 +89,14 @@ extension RichTextCoordinator {
             data.content,
             at: data.index,
             moveCursorToPastedContent: data.moveCursor
+        )
+    }
+    
+    func pasteWebImage(_ data: RichTextInsertion<WebImage>) {
+        textView.pasteWebImage(
+            data.content,
+            at: data.index,
+            moveCursor: data.moveCursor
         )
     }
 

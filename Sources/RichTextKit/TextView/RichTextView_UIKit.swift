@@ -25,7 +25,10 @@ extension RichTextView: UIDropInteractionDelegate {}
  protocol that is used within this library.
  */
 open class RichTextView: UITextView, RichTextViewComponent {
-
+    public var holdingView: UIView {
+        return self
+    }
+    
     // MARK: - Initializers
 
     public convenience init(
