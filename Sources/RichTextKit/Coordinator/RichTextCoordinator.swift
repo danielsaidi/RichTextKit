@@ -36,12 +36,14 @@ open class RichTextCoordinator: NSObject {
     public init(
         text: Binding<NSAttributedString>,
         textView: RichTextView,
-        richTextContext: RichTextContext
+        richTextContext: RichTextContext,
+        textViewSouldChangeTextInRange: @escaping RichTextEditor.TextViewSouldChangeTextInRange = { (_, _) in return true }
     ) {
         textView.attributedString = text.wrappedValue
         self.text = text
         self.textView = textView
         self.context = richTextContext
+        self.textViewSouldChangeTextInRange = textViewSouldChangeTextInRange
         super.init()
         self.textView.delegate = self
         subscribeToUserActions()
@@ -58,6 +60,9 @@ open class RichTextCoordinator: NSObject {
     /// The text view for which the coordinator is used.
     public private(set) var textView: RichTextView
 
+    /// Allows for observing text changes
+    private var textViewSouldChangeTextInRange: RichTextEditor.TextViewSouldChangeTextInRange
+    
     /// This set is used to store context observations.
     public var cancellables = Set<AnyCancellable>()
 
@@ -81,7 +86,13 @@ open class RichTextCoordinator: NSObject {
     #if canImport(UIKit)
 
     // MARK: - UITextViewDelegate
-
+    
+    open func textView(_ textView: UITextView, 
+                       shouldChangeTextIn range: NSRange,
+                       replacementText text: String) -> Bool {
+        return textViewSouldChangeTextInRange(range, text)
+    }
+    
     open func textViewDidBeginEditing(_ textView: UITextView) {
         context.isEditingText = true
     }
@@ -104,6 +115,12 @@ open class RichTextCoordinator: NSObject {
 
     // MARK: - NSTextViewDelegate
 
+    open func textView(_ textView: NSTextView,
+                       shouldChangeTextIn affectedCharRange: NSRange,
+                       replacementString: String?) -> Bool {
+        return textViewSouldChangeTextInRange(affectedCharRange, replacementString)
+    }
+    
     open func textDidBeginEditing(_ notification: Notification) {
         context.isEditingText = true
     }
@@ -119,6 +136,7 @@ open class RichTextCoordinator: NSObject {
     open func textDidEndEditing(_ notification: Notification) {
         context.isEditingText = false
     }
+    
     #endif
 }
 
