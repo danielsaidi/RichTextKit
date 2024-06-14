@@ -65,8 +65,9 @@ RichTextKit is available under the MIT license.
 These are the top-level types you should start looking at.
 
 - ``RichTextEditor``
-- ``RichTextView``
 - ``RichTextContext``
+- ``RichTextView``
+- ``RichTextViewer``
 
 ### Foundation
 
