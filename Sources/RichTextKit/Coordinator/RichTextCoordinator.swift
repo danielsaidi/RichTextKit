@@ -37,13 +37,15 @@ open class RichTextCoordinator: NSObject {
         text: Binding<NSAttributedString>,
         textView: RichTextView,
         richTextContext: RichTextContext,
-        textViewSouldChangeTextInRange: @escaping RichTextEditor.TextViewSouldChangeTextInRange = { (_, _) in return true }
+        textViewSouldChangeTextInRange: @escaping RichTextEditor.TextViewSouldChangeTextInRange = { (_, _) in return true },
+        textViewDidChangeSelection: @escaping RichTextEditor.TextViewDidChangeSelection = { }
     ) {
         textView.attributedString = text.wrappedValue
         self.text = text
         self.textView = textView
         self.context = richTextContext
         self.textViewSouldChangeTextInRange = textViewSouldChangeTextInRange
+        self.textViewDidChangeSelection = textViewDidChangeSelection
         super.init()
         self.textView.delegate = self
         subscribeToUserActions()
@@ -62,6 +64,7 @@ open class RichTextCoordinator: NSObject {
 
     /// Allows for observing text changes
     private var textViewSouldChangeTextInRange: RichTextEditor.TextViewSouldChangeTextInRange
+    private var textViewDidChangeSelection: RichTextEditor.TextViewDidChangeSelection
     
     /// This set is used to store context observations.
     public var cancellables = Set<AnyCancellable>()
@@ -103,6 +106,7 @@ open class RichTextCoordinator: NSObject {
 
     open func textViewDidChangeSelection(_ textView: UITextView) {
         syncWithTextView()
+        textViewDidChangeSelection()
     }
 
     open func textViewDidEndEditing(_ textView: UITextView) {
@@ -131,6 +135,7 @@ open class RichTextCoordinator: NSObject {
 
     open func textViewDidChangeSelection(_ notification: Notification) {
         syncWithTextView()
+        textViewDidChangeSelection()
     }
 
     open func textDidEndEditing(_ notification: Notification) {

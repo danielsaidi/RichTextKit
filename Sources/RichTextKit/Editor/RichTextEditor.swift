@@ -67,17 +67,20 @@ public struct RichTextEditor: ViewRepresentable {
         context: RichTextContext,
         format: RichTextDataFormat = .archivedData,
         viewConfiguration: @escaping ViewConfiguration = { _ in },
-        textViewSouldChangeTextInRange: @escaping TextViewSouldChangeTextInRange = { (_, _) in return true }
+        textViewSouldChangeTextInRange: @escaping TextViewSouldChangeTextInRange = { (_, _) in return true },
+        textViewDidChangeSelection: @escaping TextViewDidChangeSelection = { }
     ) {
         self.text = text
         self._context = ObservedObject(wrappedValue: context)
         self.format = format
         self.viewConfiguration = viewConfiguration
         self.textViewSouldChangeTextInRange = textViewSouldChangeTextInRange
+        self.textViewDidChangeSelection = textViewDidChangeSelection
     }
 
     public typealias ViewConfiguration = (RichTextViewComponent) -> Void
     public typealias TextViewSouldChangeTextInRange = (NSRange, String?) -> Bool
+    public typealias TextViewDidChangeSelection = () -> Void
 
     @ObservedObject
     private var context: RichTextContext
@@ -86,6 +89,7 @@ public struct RichTextEditor: ViewRepresentable {
     private var format: RichTextDataFormat
     private var viewConfiguration: ViewConfiguration
     private var textViewSouldChangeTextInRange: TextViewSouldChangeTextInRange
+    private var textViewDidChangeSelection: TextViewDidChangeSelection
 
     @Environment(\.richTextEditorConfig)
     private var config
@@ -110,7 +114,8 @@ public struct RichTextEditor: ViewRepresentable {
             text: text,
             textView: textView,
             richTextContext: context,
-            textViewSouldChangeTextInRange: textViewSouldChangeTextInRange
+            textViewSouldChangeTextInRange: textViewSouldChangeTextInRange,
+            textViewDidChangeSelection: textViewDidChangeSelection
         )
     }
 
