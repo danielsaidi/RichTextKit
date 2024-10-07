@@ -27,6 +27,12 @@ public extension RichTextFormat {
     }
 }
 
+public extension RichTextFormat.ToolbarStyle {
+
+    /// The standard rich text format toolbar style.
+    static var standard: Self { .init() }
+}
+
 public extension View {
 
     /// Apply a rich text format toolbar style.
@@ -41,7 +47,9 @@ private extension RichTextFormat.ToolbarStyle {
 
     struct Key: EnvironmentKey {
 
-        public static let defaultValue = RichTextFormat.ToolbarStyle()
+        public static var defaultValue: RichTextFormat.ToolbarStyle {
+            .standard
+        }
     }
 }
 

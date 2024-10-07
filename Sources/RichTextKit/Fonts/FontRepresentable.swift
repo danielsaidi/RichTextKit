@@ -23,7 +23,9 @@ public typealias FontRepresentable = NSFont
 public extension FontRepresentable {
 
     /// The standard font to use for rich text.
-    static var standardRichTextFont = systemFont(ofSize: .standardRichTextFontSize)
+    static var standardRichTextFont: FontRepresentable {
+        .systemFont(ofSize: .standardRichTextFontSize)
+    }
 
     /// Create a new font by toggling a certain style.
     func toggling(

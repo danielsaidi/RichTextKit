@@ -56,9 +56,7 @@ public extension RichTextFont {
 public extension RichTextFont.PickerConfig {
 
     /// The standard font picker configuration.
-    ///
-    /// You can set a new value to change the global default.
-    static var standard = Self()
+    static var standard: Self { .init() }
 }
 
 public extension RichTextFont.PickerConfig {
@@ -87,7 +85,9 @@ private extension RichTextFont.PickerConfig {
 
     struct Key: EnvironmentKey {
 
-        public static var defaultValue: RichTextFont.PickerConfig = .standard
+        public static var defaultValue: RichTextFont.PickerConfig {
+            .standard
+        }
     }
 }
 

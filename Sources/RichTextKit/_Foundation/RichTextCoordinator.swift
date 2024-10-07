@@ -21,6 +21,7 @@ import SwiftUI
  updates the context when things change in the text view and
  syncs to context changes to the text view.
  */
+@preconcurrency @MainActor
 open class RichTextCoordinator: NSObject {
 
     // MARK: - Initialization

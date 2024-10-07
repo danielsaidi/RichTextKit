@@ -11,6 +11,7 @@ import SwiftUI
 public extension RichTextContext {
 
     /// Get a binding for a certain style.
+    @preconcurrency @MainActor
     func binding(for style: RichTextStyle) -> Binding<Bool> {
         Binding(
             get: { Bool(self.hasStyle(style)) },

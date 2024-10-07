@@ -12,6 +12,7 @@ import Foundation
  This protocol can be implemented by any classes that can be
  used to export rich text to files.
  */
+@preconcurrency @MainActor
 public protocol RichTextExportService: AnyObject {
 
     /**

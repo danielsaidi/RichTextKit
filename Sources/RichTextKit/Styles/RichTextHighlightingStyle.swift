@@ -38,7 +38,5 @@ public struct RichTextHighlightingStyle: Equatable, Hashable {
 public extension RichTextHighlightingStyle {
 
     /// The standard rich text highlighting style.
-    ///
-    /// You can set a new value to change the global default.
-    static var standard = Self()
+    static var standard: Self { .init() }
 }

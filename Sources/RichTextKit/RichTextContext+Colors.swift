@@ -11,6 +11,7 @@ import SwiftUI
 public extension RichTextContext {
 
     /// Get a binding for a certain color.
+    @preconcurrency @MainActor
     func binding(for color: RichTextColor) -> Binding<Color> {
         Binding(
             get: { Color(self.color(for: color) ?? .clear) },

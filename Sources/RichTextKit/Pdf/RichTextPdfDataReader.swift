@@ -15,6 +15,7 @@ import Foundation
  The protocol is implemented by `NSAttributedString` as well
  as other types in the library.
  */
+@preconcurrency @MainActor
 public protocol RichTextPdfDataReader: RichTextReader {}
 
 extension NSAttributedString: RichTextPdfDataReader {}
@@ -42,6 +43,7 @@ public extension RichTextPdfDataReader {
 #if macOS
 import AppKit
 
+@MainActor
 private extension NSAttributedString {
 
     func macosPdfData(for configuration: PdfPageConfiguration) throws -> Data {
@@ -103,6 +105,7 @@ private extension NSAttributedString {
 #if iOS || os(visionOS)
 import UIKit
 
+@MainActor
 private extension NSAttributedString {
 
     func iosPdfData(for configuration: PdfPageConfiguration) throws -> Data {

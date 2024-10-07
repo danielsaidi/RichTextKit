@@ -31,9 +31,7 @@ public extension RichTextFont {
 public extension RichTextFont.SizePickerConfig {
 
     /// The standard font size picker configuration.
-    ///
-    /// You can set a new value to change the global default.
-    static var standard = Self()
+    static var standard: Self { .init() }
 }
 
 public extension View {
@@ -50,7 +48,9 @@ private extension RichTextFont.SizePickerConfig {
 
     struct Key: EnvironmentKey {
 
-        public static var defaultValue: RichTextFont.SizePickerConfig = .standard
+        public static var defaultValue: RichTextFont.SizePickerConfig {
+            .standard
+        }
     }
 }
 

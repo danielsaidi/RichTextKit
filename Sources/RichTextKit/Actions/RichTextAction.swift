@@ -176,11 +176,15 @@ public extension RichTextAction {
 public extension CGFloat {
 
     /// The default rich text indent step size.
-    static var defaultRichTextIntentStepSize: CGFloat = 30.0
+    static var defaultRichTextIntentStepSize: CGFloat {
+        30.0
+    }
 }
 
 public extension UInt {
 
     /// The default rich text indent step size.
-    static var defaultRichTextIntentStepSize: UInt = 30
+    static var defaultRichTextIntentStepSize: UInt {
+        30
+    }
 }

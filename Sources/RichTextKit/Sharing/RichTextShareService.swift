@@ -17,6 +17,7 @@ import Foundation
  file copy using another rich text data format, should use a
  ``RichTextExportService`` instead.
  */
+@preconcurrency @MainActor
 public protocol RichTextShareService: AnyObject {
 
     /**

@@ -31,9 +31,7 @@ public extension RichTextLine {
 public extension RichTextLine.SpacingPickerConfig {
 
     /// The standard line spacing picker configuration.
-    ///
-    /// You can set a new value to change the global default.
-    static var standard = Self()
+    static var standard: Self { .init() }
 }
 
 public extension View {
@@ -50,7 +48,9 @@ private extension RichTextLine.SpacingPickerConfig {
 
     struct Key: EnvironmentKey {
 
-        public static var defaultValue: RichTextLine.SpacingPickerConfig = .standard
+        public static var defaultValue: RichTextLine.SpacingPickerConfig {
+            .standard
+        }
     }
 }
 

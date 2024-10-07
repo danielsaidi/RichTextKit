@@ -135,7 +135,9 @@ private extension RichTextFormat.Sidebar.Config {
 
     struct Key: EnvironmentKey {
 
-        static let defaultValue = RichTextFormat.Sidebar.Config()
+        static var defaultValue: RichTextFormat.Sidebar.Config {
+            .standard
+        }
     }
 }
 
@@ -143,7 +145,9 @@ private extension RichTextFormat.Sidebar.Style {
 
     struct Key: EnvironmentKey {
 
-        static let defaultValue = RichTextFormat.Sidebar.Style()
+        static var defaultValue: RichTextFormat.Sidebar.Style {
+            .standard
+        }
     }
 }
 

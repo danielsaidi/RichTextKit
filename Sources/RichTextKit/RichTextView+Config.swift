@@ -11,8 +11,6 @@ import Foundation
 public extension RichTextView.Configuration {
 
     /// The standard rich text view configuration.
-    ///
-    /// You can set a new value to change the global default.
-    static var standard = Self()
+    static var standard: Self { .init() }
 }
 #endif

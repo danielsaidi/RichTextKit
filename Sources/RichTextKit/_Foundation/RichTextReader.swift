@@ -15,6 +15,7 @@ import Foundation
  The protocol is implemented by `NSAttributedString` as well
  as other types in the library.
  */
+@preconcurrency @MainActor
 public protocol RichTextReader {
 
     /// The attributed string to use as rich text.

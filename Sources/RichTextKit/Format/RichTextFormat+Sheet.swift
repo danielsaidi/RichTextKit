@@ -110,7 +110,9 @@ private extension RichTextFormat.Sheet.Config {
 
     struct Key: EnvironmentKey {
 
-        static let defaultValue = RichTextFormat.Sheet.Config()
+        static var defaultValue: RichTextFormat.Sheet.Config {
+            .standard
+        }
     }
 }
 
@@ -118,7 +120,9 @@ private extension RichTextFormat.Sheet.Style {
 
     struct Key: EnvironmentKey {
 
-        static let defaultValue = RichTextFormat.Sheet.Style()
+        static var defaultValue: RichTextFormat.Sheet.Style {
+            .standard
+        }
     }
 }
 

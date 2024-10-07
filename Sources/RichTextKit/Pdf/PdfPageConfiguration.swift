@@ -35,9 +35,7 @@ public struct PdfPageConfiguration: Equatable {
 public extension PdfPageConfiguration {
 
     /// The standard PDF page configuration.
-    ///
-    /// You can override this to change the global default.
-    static var standard = Self()
+    static var standard: Self { .init() }
 }
 
 public extension PdfPageConfiguration {

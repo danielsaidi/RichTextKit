@@ -54,6 +54,7 @@ import UniformTypeIdentifiers
  You'll see the name of the missing class in the unarchiving
  error, so just use that name as the class name.
  */
+@preconcurrency @MainActor
 open class RichTextImageAttachment: NSTextAttachment {
 
     /**
@@ -176,9 +177,13 @@ open class RichTextImageAttachment: NSTextAttachment {
      */
     public override var attachmentCell: NSTextAttachmentCellProtocol? {
         get {
-            guard let data = contents else { return nil }
-            guard let image = ImageRepresentable(data: data) else { return nil }
-            return NSTextAttachmentCell(imageCell: image)
+            guard
+                let data = contents,
+                let image = ImageRepresentable(data: data)
+            else { return nil }
+            return MainActor.assumeIsolated {
+                NSTextAttachmentCell(imageCell: image)
+            }
         }
         set {
             super.attachmentCell = newValue

@@ -14,6 +14,7 @@ import Foundation
 
  Share files are by default written to the app caches folder.
  */
+@preconcurrency @MainActor
 public class StandardRichTextShareService: RichTextShareService {
 
     /**

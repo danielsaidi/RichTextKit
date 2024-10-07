@@ -29,6 +29,7 @@ import AppKit
  The protocol implements and extends many other protocols to
  provide more features for components with more capabilities.
  */
+@preconcurrency @MainActor
 public protocol RichTextViewComponent: AnyObject,
     RichTextPresenter,
     RichTextAttributeReader,

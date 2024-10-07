@@ -36,12 +36,16 @@ public extension StandardFontSizeProvider {
 
     /// The standard font size to use for rich text.
     static var standardRichTextFontSize: CGFloat {
-        get { StandardFontSizeProviderStorage.standardRichTextFontSize }
-        set { StandardFontSizeProviderStorage.standardRichTextFontSize = newValue }
+        get { StandardFontSizeProviderStorage.shared.richTextFontSize }
+        set { StandardFontSizeProviderStorage.shared.richTextFontSize = newValue }
     }
 }
 
-private class StandardFontSizeProviderStorage {
+private class StandardFontSizeProviderStorage: @unchecked Sendable {
 
-    static var standardRichTextFontSize: CGFloat = 16
+    private init() {}
+
+    static let shared = StandardFontSizeProviderStorage()
+
+    var richTextFontSize: CGFloat = 16
 }

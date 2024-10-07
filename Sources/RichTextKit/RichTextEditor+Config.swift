@@ -26,7 +26,9 @@ private extension RichTextEditorConfig {
 
     struct Key: EnvironmentKey {
 
-        public static var defaultValue: RichTextEditorConfig = .standard
+        public static var defaultValue: RichTextEditorConfig {
+            .standard
+        }
     }
 }
 

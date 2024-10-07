@@ -6,6 +6,22 @@ Until then, minor updates may remove deprecated features and introduce breaking 
 
 
 
+## 1.1
+
+This release makes RichTextKit use Swift 6.
+
+This will involve a few breaking changes, but they are so minor that they (hopefully) didn't warrant a major version bump.
+
+Reach out if you think that this version changes too much for a minor bump, or if you see any Swift 6 changes you don't agree with.
+
+### 💡 Adjustments
+
+* Many protocols now use `@preconcurrency @MainActor`.
+* All mutable `Image` and `Color` extensions are now computed.
+* All standard style and configuration values are now computed. 
+
+
+
 ## 1.0
 
 This release removes all deprecated code and cleans up the library.

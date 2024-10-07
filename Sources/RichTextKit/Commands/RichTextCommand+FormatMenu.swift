@@ -41,7 +41,9 @@ public extension RichTextCommand {
         public var body: some Commands {
             CommandMenu(RTKL10n.menuFormat.text) {
                 Group {
-                    ForEach(submenus) { $0 }
+                    ForEach(Array(submenus.enumerated()), id: \.offset) {
+                        $0.element
+                    }
                 }
                 .disabled(context == nil)
 
@@ -59,10 +61,8 @@ public extension RichTextCommand {
 public extension RichTextCommand.FormatMenu {
 
     /// This enum defines various format sub-menus
-    enum SubMenu: String, CaseIterable, Identifiable, View {
+    enum SubMenu: String, CaseIterable, View {
         case font, text, indent, lineSpacing, superscript
-
-        public var id: String { rawValue }
 
         typealias Group = RichTextCommand.ActionButtonGroup
 

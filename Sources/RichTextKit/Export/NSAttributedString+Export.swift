@@ -8,6 +8,7 @@
 
 import Foundation
 
+@MainActor
 extension NSAttributedString {
 
     /// Make all text black to account for dark mode.

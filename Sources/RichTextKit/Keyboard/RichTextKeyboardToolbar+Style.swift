@@ -47,9 +47,7 @@ public struct RichTextKeyboardToolbarStyle {
 public extension RichTextKeyboardToolbarStyle {
 
     /// The standard rich text keyboard toolbar style.
-    ///
-    /// You can set a new value to change the global default.
-    static var standard = Self()
+    static var standard: Self { .init() }
 }
 
 public extension View {
@@ -66,7 +64,9 @@ private extension RichTextKeyboardToolbarStyle {
 
     struct Key: EnvironmentKey {
 
-        static var defaultValue: RichTextKeyboardToolbarStyle = .standard
+        static var defaultValue: RichTextKeyboardToolbarStyle {
+            .standard
+        }
     }
 }
 

@@ -55,9 +55,7 @@ public extension RichTextFormat {
 public extension RichTextFormat.ToolbarConfig {
 
     /// The standard rich text format toolbar configuration.
-    ///
-    /// You can set a new value to change the global default.
-    static var standard = Self()
+    static var standard: Self { .init() }
 }
 
 public extension View {
@@ -74,7 +72,9 @@ private extension RichTextFormat.ToolbarConfig {
 
     struct Key: EnvironmentKey {
 
-        public static let defaultValue = RichTextFormat.ToolbarConfig()
+        public static var defaultValue: RichTextFormat.ToolbarConfig {
+            .init()
+        }
     }
 }
 

@@ -80,9 +80,7 @@ public extension RichTextViewComponent {
         images.reversed().forEach { performPasteImage($0, at: index) }
         if move { moveInputCursor(to: safeInsertRange.location + items) }
         if move || isSelectedRange {
-            DispatchQueue.main.async {
-                self.moveInputCursor(to: self.selectedRange.location)
-            }
+            self.moveInputCursor(to: self.selectedRange.location)
         }
         #endif
     }
