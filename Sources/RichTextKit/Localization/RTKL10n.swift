@@ -30,6 +30,7 @@ public enum RTKL10n: String, CaseIterable, Identifiable {
     strokeColor,
 
     actionCopy,
+    actionDelete,
     actionDismissKeyboard,
     actionPrint,
     actionRedoLatestChange,

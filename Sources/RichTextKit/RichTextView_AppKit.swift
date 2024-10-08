@@ -147,6 +147,11 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         pasteboard.setString(text.string, forType: .string)
     }
 
+    /// Delete the text at a certain range.
+    open func deleteText(in range: NSRange) {
+        deleteCharacters(in: range)
+    }
+
     /// Try to redo the latest undone change.
     open func redoLatestChange() {
         undoManager?.redo()

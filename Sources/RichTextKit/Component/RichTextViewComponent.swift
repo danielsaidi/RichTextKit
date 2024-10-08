@@ -15,20 +15,14 @@ import UIKit
 import AppKit
 #endif
 
-/**
- This protocol provides a common interface for the UIKit and
- AppKit ``RichTextView`` components.
-
- By implementing this protocol, the library does not have to
- do a bunch of `#if` platform checks within the code.
-
- This component can read and write many different attributes
- from and to its rich text, using the underlying features of
- ``RichTextAttributeReader`` and ``RichTextAttributeWriter``.
-
- The protocol implements and extends many other protocols to
- provide more features for components with more capabilities.
- */
+/// This is a shared protocol for all ``RichTextView`` types.
+///
+/// By implementing this protocol, the library does not have
+/// to do a bunch of `#if` platform checks within the code.
+///
+/// This component can read and write many attributes to and
+/// from its rich text, using the underlying features of the
+/// ``RichTextAttributeReader`` & ``RichTextAttributeWriter``.
 @preconcurrency @MainActor
 public protocol RichTextViewComponent: AnyObject,
     RichTextPresenter,
@@ -83,6 +77,9 @@ public protocol RichTextViewComponent: AnyObject,
 
     /// Copy the current selection.
     func copySelection()
+
+    /// Delete the text at a certain range.
+    func deleteText(in range: NSRange)
 
     /// Try to redo the latest undone change.
     func redoLatestChange()

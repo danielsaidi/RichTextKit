@@ -15,6 +15,10 @@ extension RichTextCoordinator {
         guard let action else { return }
         switch action {
         case .copy: textView.copySelection()
+        case .deleteSelectedText:
+            textView.deleteText(in: textView.selectedRange)
+        case .deleteText(let range):
+            textView.deleteText(in: range)
         case .dismissKeyboard:
             textView.resignFirstResponder()
         case .pasteImage(let image):

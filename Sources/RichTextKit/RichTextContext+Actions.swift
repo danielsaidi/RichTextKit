@@ -21,6 +21,8 @@ public extension RichTextContext {
     func canHandle(_ action: RichTextAction) -> Bool {
         switch action {
         case .copy: canCopy
+        case .deleteSelectedText: hasSelectedRange
+        case .deleteText: true
         case .dismissKeyboard: true
         case .pasteImage: true
         case .pasteImages: true

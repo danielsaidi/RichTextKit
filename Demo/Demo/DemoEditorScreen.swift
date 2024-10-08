@@ -54,6 +54,11 @@ struct DemoEditorScreen: View {
                 }
             }
         }
+        .overlay(content: {
+            Button("DELETE") {
+                context.trigger(.deleteText(in: .init(location: 2, length: 4)))
+            }
+        })
         .frame(minWidth: 500)
         .focusedValue(\.richTextContext, context)
         .toolbarRole(.automatic)

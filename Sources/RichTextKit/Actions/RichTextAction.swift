@@ -22,6 +22,12 @@ public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
     /// Dismiss any presented software keyboard.
     case dismissKeyboard
 
+    /// Delete the selected text.
+    case deleteSelectedText
+
+    /// Delete text at a certain range.
+    case deleteText(in: NSRange)
+
     /// Paste a single image.
     case pasteImage(RichTextInsertion<ImageRepresentable>)
 
@@ -88,6 +94,8 @@ public extension RichTextAction {
     var icon: Image {
         switch self {
         case .copy: .richTextCopy
+        case .deleteSelectedText: .richTextDelete
+        case .deleteText: .richTextDelete
         case .dismissKeyboard: .richTextDismissKeyboard
         case .pasteImage: .richTextDocuments
         case .pasteImages: .richTextDocuments
@@ -137,6 +145,8 @@ public extension RichTextAction {
     var titleKey: RTKL10n {
         switch self {
         case .copy: .actionCopy
+        case .deleteSelectedText: .actionDelete
+        case .deleteText: .actionDelete
         case .dismissKeyboard: .actionDismissKeyboard
         case .pasteImage: .pasteImage
         case .pasteImages: .pasteImages

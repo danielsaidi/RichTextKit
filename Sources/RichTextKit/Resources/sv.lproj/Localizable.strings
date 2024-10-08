@@ -18,7 +18,6 @@
 "fontSizeDecrease" = "Mindre";
 "fontSizeDecreaseDescription" = "Minska teckenstorlek";
 
-
 "color" = "Färg";
 "foregroundColor" = "Text";
 "backgroundColor" = "Bakgrund";
@@ -27,6 +26,7 @@
 "strokeColor" = "Stroke Color";
 
 "actionCopy" = "Kopiera";
+"actionDelete" = "Radera";
 "actionDismissKeyboard" = "Stäng tangentbordet";
 "actionPrint" = "Skriv ut";
 "actionRedoLatestChange" = "Gör om";

@@ -44,6 +44,29 @@ open class RichTextView: UITextView, RichTextViewComponent {
         self.setup(with: string, format: format)
     }
 
+    // MARK: - Essentials
+
+    /// Get the frame of a certain range.
+    open func frame(of range: NSRange) -> CGRect {
+        let beginning = beginningOfDocument
+        guard
+            let start = position(from: beginning, offset: range.location),
+            let end = position(from: start, offset: range.length),
+            let textRange = textRange(from: start, to: end)
+        else { return .zero }
+        let rect = firstRect(for: textRange)
+        return convert(rect, from: textInputView)
+    }
+
+    /// Get the text range at a certain point.
+    open func range(at index: CGPoint) -> NSRange? {
+        let range = characterRange(at: index) ?? UITextRange()
+        let location = offset(from: beginningOfDocument, to: range.start)
+        let length = offset(from: range.start, to: range.end)
+        return NSRange(location: location, length: length)
+    }
+
+
     // MARK: - Properties
 
     /// The configuration to use by the rich text view.
@@ -189,24 +212,9 @@ open class RichTextView: UITextView, RichTextViewComponent {
         #endif
     }
 
-    /// Get the frame of a certain range.
-    open func frame(of range: NSRange) -> CGRect {
-        let beginning = beginningOfDocument
-        guard
-            let start = position(from: beginning, offset: range.location),
-            let end = position(from: start, offset: range.length),
-            let textRange = textRange(from: start, to: end)
-        else { return .zero }
-        let rect = firstRect(for: textRange)
-        return convert(rect, from: textInputView)
-    }
-
-    /// Get the text range at a certain point.
-    open func range(at index: CGPoint) -> NSRange? {
-        let range = characterRange(at: index) ?? UITextRange()
-        let location = offset(from: beginningOfDocument, to: range.start)
-        let length = offset(from: range.start, to: range.end)
-        return NSRange(location: location, length: length)
+    /// Delete the text at a certain range.
+    open func deleteText(in range: NSRange) {
+        deleteCharacters(in: range)
     }
 
     /// Try to redo the latest undone change.

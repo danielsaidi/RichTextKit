@@ -16,6 +16,9 @@ Reach out if you think that this version changes too much for a minor bump, or i
 
 ### ✨ Features
 
+* `RichTextAction` has a new `deleteSelectedText` action.
+* `RichTextAction` has a new `deleteText(at:)` action.
+* `RichTextView` has a new `deleteAction(at:)` function.
 * `RichTextView.Configuration` has a new `isScrollBarsVisible` property for macOS.
 
 ### 💡 Adjustments
