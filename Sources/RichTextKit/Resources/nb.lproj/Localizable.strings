@@ -26,8 +26,11 @@
 "strokeColor" = "Stroke Color";
 
 "actionCopy" = "Kopiere";
+"actionDelete" = "Slette";
 "actionDismissKeyboard" = "Lukk tastaturet";
 "actionPrint" = "Skrive ut";
+"actionReplace" = "Erstatte";
+
 "actionRedoLatestChange" = "Angre";
 "actionUndoLatestChange" = "Gjøre om";
 

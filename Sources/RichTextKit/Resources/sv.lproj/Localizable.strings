@@ -29,6 +29,7 @@
 "actionDelete" = "Radera";
 "actionDismissKeyboard" = "Stäng tangentbordet";
 "actionPrint" = "Skriv ut";
+
 "actionRedoLatestChange" = "Gör om";
 "actionUndoLatestChange" = "Ångra";
 

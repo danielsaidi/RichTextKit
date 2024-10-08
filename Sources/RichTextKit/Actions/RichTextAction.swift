@@ -25,7 +25,7 @@ public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
     /// Delete the selected text.
     case deleteSelectedText
 
-    /// Delete text at a certain range.
+    /// Delete text in a certain range.
     case deleteText(in: NSRange)
 
     /// Paste a single image.
@@ -42,6 +42,12 @@ public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
 
     /// Redo the latest undone change.
     case redoLatestChange
+
+    /// Replace the selected text.
+    case replaceSelectedText(with: NSAttributedString)
+
+    /// Replace text in a certain range.
+    case replaceText(in: NSRange, with: NSAttributedString)
 
     /// Select a range.
     case selectRange(NSRange)
@@ -102,6 +108,8 @@ public extension RichTextAction {
         case .pasteText: .richTextDocuments
         case .print: .richTextPrint
         case .redoLatestChange: .richTextRedo
+        case .replaceSelectedText: .richTextReplace
+        case .replaceText: .richTextReplace
         case .selectRange: .richTextSelection
         case .setAlignment(let val): val.icon
         case .setAttributedString: .richTextDocument
@@ -153,6 +161,8 @@ public extension RichTextAction {
         case .pasteText: .pasteText
         case .print: .actionPrint
         case .redoLatestChange: .actionRedoLatestChange
+        case .replaceSelectedText: .actionDelete
+        case .replaceText: .actionDelete
         case .selectRange: .selectRange
         case .setAlignment(let alignment): alignment.titleKey
         case .setAttributedString: .setAttributedString

@@ -29,6 +29,8 @@ public extension RichTextContext {
         case .pasteText: true
         case .print: false
         case .redoLatestChange: canRedoLatestChange
+        case .replaceSelectedText: hasSelectedRange
+        case .replaceText: true
         case .selectRange: true
         case .setAlignment: true
         case .setAttributedString: true

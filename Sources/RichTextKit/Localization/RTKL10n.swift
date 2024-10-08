@@ -33,6 +33,8 @@ public enum RTKL10n: String, CaseIterable, Identifiable {
     actionDelete,
     actionDismissKeyboard,
     actionPrint,
+    actionReplace,
+
     actionRedoLatestChange,
     actionUndoLatestChange,
 

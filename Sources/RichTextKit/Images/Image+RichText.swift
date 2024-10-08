@@ -17,6 +17,7 @@ public extension Image {
     static let richTextExport = symbol("square.and.arrow.up.on.square")
     static let richTextPrint = symbol("printer")
     static let richTextRedo = symbol("arrow.uturn.forward")
+    static let richTextReplace = symbol("arrow.turn.left.down")
     static let richTextShare = symbol("square.and.arrow.up")
     static let richTextUndo = symbol("arrow.uturn.backward")
 

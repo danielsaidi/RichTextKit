@@ -32,6 +32,10 @@ extension RichTextCoordinator {
         case .redoLatestChange:
             textView.redoLatestChange()
             syncContextWithTextView()
+        case .replaceSelectedText(let text):
+            textView.replaceText(in: textView.selectedRange, with: text)
+        case .replaceText(let range, let text):
+            textView.replaceText(in: range, with: text)
         case .selectRange(let range):
             setSelectedRange(to: range)
         case .setAlignment(let alignment):
