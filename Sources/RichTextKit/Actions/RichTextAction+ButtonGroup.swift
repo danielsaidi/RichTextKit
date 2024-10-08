@@ -11,22 +11,18 @@ import SwiftUI
 
 public extension RichTextAction {
 
-    /**
-     This view lists ``RichTextAction`` buttons in a group.
-
-     Since this view uses multiple values, it binds directly
-     to a ``RichTextContext`` instead of individual values.
-     */
+    /// This view adds ``RichTextAction`` buttons to a group.
+    ///
+    /// Since the view will bind to multiple values, it uses
+    /// a ``RichTextContext`` instead of individual values.
     struct ButtonGroup: View {
 
-        /**
-         Create a rich text action button stack.
-
-         - Parameters:
-           - context: The context to affect.
-           - actions: The actions to list, by default all non-size actions.
-           - greedy: Whether or not the group is horizontally greedy, by default `true`.
-         */
+        /// Create a rich text action button stack.
+        ///
+        /// - Parameters:
+        ///   - context: The context to affect.
+        ///   - actions: The actions to list, by default all non-size actions.
+        ///   - greedy: Whether or not the group is horizontally greedy, by default `true`.
         public init(
             context: RichTextContext,
             actions: [RichTextAction],

@@ -10,13 +10,10 @@ import SwiftUI
 
 public extension RichTextAlignment {
 
-    /**
-     This view modifier can apply keyboard shortcuts for any
-     ``RichTextAlignment`` to any view.
-
-     You can also apply it with the `.keyboardShortcut(for:)`
-     view modifier.
-     */
+    /// Apply keyboard shortcuts for a ``RichTextAlignment``
+    /// to the view.
+    ///
+    /// You can also use ``SwiftUICore/View/keyboardShortcut(for:)-22ksm``.
     struct KeyboardShortcutModifier: ViewModifier {
 
         public init(_ alignment: RichTextAlignment) {
@@ -33,19 +30,15 @@ public extension RichTextAlignment {
 
 public extension View {
 
-    /**
-     Add a keyboard shortcut that toggles a certain style.
-
-     This modifier only has effect on platforms that support
-     keyboard shortcuts.
-     */
+    /// Apply keyboard shortcuts for a ``RichTextAlignment``
+    /// to the view.
     @ViewBuilder
     func keyboardShortcut(for alignment: RichTextAlignment) -> some View {
         #if iOS || macOS || os(visionOS)
         switch alignment {
-        case .left: keyboardShortcut("Ö", modifiers: [.command, .shift])
-        case .center: keyboardShortcut("*", modifiers: [.command])
-        case .right: keyboardShortcut("Ä", modifiers: [.command, .shift])
+        case .left: self.keyboardShortcut("Ö", modifiers: [.command, .shift])
+        case .center: self.keyboardShortcut("*", modifiers: [.command])
+        case .right: self.keyboardShortcut("Ä", modifiers: [.command, .shift])
         case .justified: self
         }
         #else

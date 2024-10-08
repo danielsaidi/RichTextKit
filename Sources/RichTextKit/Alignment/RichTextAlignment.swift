@@ -14,12 +14,10 @@ import SwiftUI
  */
 public enum RichTextAlignment: String, CaseIterable, Codable, Equatable, Identifiable, RichTextLabelValue {
 
-    /**
-     Initialize a rich text alignment with a native alignment.
-
-     - Parameters:
-       - alignment: The native alignment to use.
-     */
+    /// Create a rich text alignment with a native alignment.
+    ///
+    /// - Parameters:
+    ///   - alignment: The native alignment to use.
     public init(_ alignment: NSTextAlignment) {
         switch alignment {
         case .left: self = .left

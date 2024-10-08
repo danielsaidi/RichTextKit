@@ -10,30 +10,24 @@
 import Combine
 import SwiftUI
 
-/**
- This coordinator is used to keep a ``RichTextView`` in sync
- with a ``RichTextContext``.
-
- This is used by ``RichTextEditor`` to coordinate changes in
- its context and the underlying text view.
-
- The coordinator sets itself as the text view's delegate. It
- updates the context when things change in the text view and
- syncs to context changes to the text view.
- */
+/// This class is used to keep ``RichTextView`` in sync with
+/// a ``RichTextContext``.
+///
+/// This is used by ``RichTextEditor`` to coordinate changes
+/// in its context and the underlying text view. It will set
+/// itself as the text view delegate, and update the context
+/// when things change in the text view, and vice versa.
 @preconcurrency @MainActor
 open class RichTextCoordinator: NSObject {
 
     // MARK: - Initialization
 
-    /**
-     Create a rich text coordinator.
-
-     - Parameters:
-       - text: The rich text to edit.
-       - textView: The rich text view to keep in sync.
-       - richTextContext: The context to keep in sync.
-     */
+    /// Create a rich text coordinator.
+    ///
+    /// - Parameters:
+    ///   - text: The rich text to edit.
+    ///   - textView: The rich text view to keep in sync.
+    ///   - richTextContext: The context to keep in sync.
     public init(
         text: Binding<NSAttributedString>,
         textView: RichTextView,
@@ -67,16 +61,13 @@ open class RichTextCoordinator: NSObject {
 
     // MARK: - Internal Properties
 
-    /**
-     The background color that was used before the currently
-     highlighted range was set.
-     */
+    /// The background color that was set before any current
+    /// highlighted range was set.
     var highlightedRangeOriginalBackgroundColor: ColorRepresentable?
 
-    /**
-     The foreground color that was used before the currently
-     highlighted range was set.
-     */
+
+    /// The foreground color that was set before any current
+    /// highlighted range was set.
      var highlightedRangeOriginalForegroundColor: ColorRepresentable?
 
     #if canImport(UIKit)
@@ -213,20 +204,17 @@ extension RichTextCoordinator {
         }
     }
 
-    /**
-     On macOS, we have to update the font and colors when we
-     move the text input cursor and there's no selected text.
-
-     The code looks very strange, but setting current values
-     to the current values will reset the text view in a way
-     that is otherwise not done correctly.
-
-     To try out the incorrect behavior, comment out the code
-     below, then change font size, colors etc. for a part of
-     the text then move the input cursor around. When you do,
-     the presented information will be correct, but when you
-     type, the last selected font, colors etc. will be used.
-     */
+    /// On macOS, we have to update the font and colors when
+    /// we move the text input cursor with no selected text.
+    ///
+    /// The code may look strange, but setting values resets
+    /// the text view in a way that is otherwise not correct.
+    ///
+    /// To try out the incorrect behavior, disable this code,
+    /// then change font size, colors etc. for a part of the
+    /// text, then move the input cursor around. When you do,
+    /// the information will show correctly, but as you type,
+    /// the last selected font, colors etc. will be used.
     func updateTextViewAttributesIfNeeded() {
         #if macOS
         if textView.hasSelectedRange { return }

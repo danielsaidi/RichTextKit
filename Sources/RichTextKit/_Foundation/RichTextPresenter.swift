@@ -8,14 +8,8 @@
 
 import Foundation
 
-/**
- This protocol can be implemented any types that can present
- a rich text and provide a ``selectedRange``.
-
- This protocol is implemented by ``RichTextEditor`` since it
- can both present and select text. It is also implemented by
- the platform-specific ``RichTextView`` components.
- */
+/// This protocol can be implemented by any type that can be
+/// used to present rich text and provide a ``selectedRange``.
 public protocol RichTextPresenter: RichTextReader {
 
     /// Get the currently selected range.

@@ -10,21 +10,18 @@ import SwiftUI
 
 public extension RichTextAction {
 
-    /**
-     This button can be used to trigger a ``RichTextAction``.
-
-     This renders a plain `Button`, which means that you can
-     use and configure it as a normal button.
-     */
+    /// This view can be used to trigger a ``RichTextAction``.
+    ///
+    /// It renders a plain `Button`, which means you can use
+    /// and configure it as a normal button.
     struct Button: View {
-        /**
-         Create a rich text action button.
 
-         - Parameters:
-           - action: The action to trigger.
-           - context: The context to affect.
-           - fillVertically: WhetherP or not fill up vertical space, by default `false`.
-         */
+        /// Create a rich text action button.
+        ///
+        /// - Parameters:
+        ///   - action: The action to trigger.
+        ///   - context: The context to affect.
+        ///   - fillVertically: Whether to fill up vertical space, by default `false`.
         public init(
             action: RichTextAction,
             context: RichTextContext,

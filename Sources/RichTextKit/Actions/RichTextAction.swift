@@ -9,13 +9,11 @@
 import SwiftUI
 import Combine
 
-/**
- This enum defines rich text actions that can be executed on
- a rich text editor.
-
- This type also serves as a type namespace for other related
- types and views, like ``RichTextAction/Button``.
- */
+/// This enum defines rich text actions that can be executed
+/// on a rich text editor.
+///
+/// It's also a namespace for action-related types and views,
+/// like ``RichTextAction/Button``.
 public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
 
     /// Copy the currently selected text, if any.
