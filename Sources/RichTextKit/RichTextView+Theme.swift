@@ -10,19 +10,15 @@ import SwiftUI
 
 public extension RichTextView {
 
-    /**
-     This type can be used to configure a ``RichTextEditor``'s current color properties.
-     */
+    /// This type can configure a ``RichTextEditor`` theme.
     struct Theme {
 
-        /**
-         Create a custom configuration.
-
-         - Parameters:
-           - font: default `.systemFont` of point size `16` (this differs on iOS and macOS).
-           - fontColor: default `.textColor`.
-           - backgroundColor: Color of whole textView default `.clear`.
-         */
+        /// Create a custom configuration.
+        ///
+        /// - Parameters:
+        ///   - font: default `.systemFont` of point size `16` (this differs on iOS and macOS).
+        ///   - fontColor: default `.textColor`.
+        ///   - backgroundColor: Color of whole textView default `.clear`.
         public init(
             font: FontRepresentable = .systemFont(ofSize: 16),
             fontColor: ColorRepresentable = .textColor,

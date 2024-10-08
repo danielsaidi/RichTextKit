@@ -11,25 +11,30 @@ import Foundation
 
 public extension RichTextView {
 
-    /**
-     This type can be used to configure a ``RichTextEditor``.
-     */
+    /// This type can configure a ``RichTextEditor``.
     struct Configuration {
 
         /// Create a custom configuration
+        /// 
         /// - Parameters:
-        ///   - isScrollingEnabled: Whether or not the editor should scroll, by default `true`.
+        ///   - isScrollingEnabled: Whether the editor should scroll, by default `true`.
+        ///   - isScrollBarsVisible: Whether the editor should show scrollbars, by default `isScrollingEnabled`.
         ///   - isContinuousSpellCheckingEnabled: Whether the editor spell-checks in realtime. Defaults to `true`.
         public init(
             isScrollingEnabled: Bool = true,
+            isScrollBarsVisible: Bool? = nil,
             isContinuousSpellCheckingEnabled: Bool = true
         ) {
             self.isScrollingEnabled = isScrollingEnabled
+            self.isScrollBarsVisible = isScrollBarsVisible ?? isScrollingEnabled
             self.isContinuousSpellCheckingEnabled = isContinuousSpellCheckingEnabled
         }
 
-        /// Whether or not the editor should scroll.
+        /// Whether the editor should scroll.
         public var isScrollingEnabled: Bool
+
+        /// Whether the editor should show scrollbars.
+        public var isScrollBarsVisible: Bool
 
         /// Whether the editor spell-checks in realtime.
         public var isContinuousSpellCheckingEnabled: Bool

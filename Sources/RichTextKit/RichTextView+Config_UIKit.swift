@@ -11,20 +11,16 @@ import SwiftUI
 
 public extension RichTextView {
 
-    /**
-     This type can be used to configure a ``RichTextEditor``.
-     */
+    /// This type can configure a ``RichTextEditor``.
     struct Configuration {
 
-        /**
-         Create a custom configuration.
-
-         - Parameters:
-           - isScrollingEnabled: Whether or not the editor should scroll, by default `true`.
-           - allowsEditingTextAttributes: If editor allows editing text attributes, by default `true`.
-           - autocapitalizationType: Type of Auto capitalization, default is to `.sentences`.
-           - spellCheckingType: Whether textView spell-Checks, default is `.no`.
-         */
+        /// Create a custom configuration.
+        ///
+        /// - Parameters:
+        ///   - isScrollingEnabled: Whether or not the editor should scroll, by default `true`.
+        ///   - allowsEditingTextAttributes: If editor allows editing text attributes, by default `true`.
+        ///   - autocapitalizationType: Type of Auto capitalization, default is to `.sentences`.
+        ///   - spellCheckingType: Whether textView spell-Checks, default is `.no`.
         public init(
             isScrollingEnabled: Bool = true,
             allowsEditingTextAttributes: Bool = true,

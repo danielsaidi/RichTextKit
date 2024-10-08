@@ -14,6 +14,10 @@ This will involve a few breaking changes, but they are so minor that they (hopef
 
 Reach out if you think that this version changes too much for a minor bump, or if you see any Swift 6 changes you don't agree with.
 
+### ✨ Features
+
+* `RichTextView.Configuration` has a new `isScrollBarsVisible` property for macOS.
+
 ### 💡 Adjustments
 
 * Many protocols now use `@preconcurrency @MainActor`.

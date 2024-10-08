@@ -97,7 +97,7 @@ public struct RichTextEditor: ViewRepresentable {
     public let scrollView = RichTextView.scrollableTextView()
 
     public var textView: RichTextView {
-        scrollView.hasVerticalScroller = config.isScrollingEnabled
+        scrollView.hasVerticalScroller = config.isScrollBarsVisible
         return scrollView.documentView as? RichTextView ?? RichTextView()
     }
     #endif
