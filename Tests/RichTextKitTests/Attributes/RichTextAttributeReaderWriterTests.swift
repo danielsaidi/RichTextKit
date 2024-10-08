@@ -9,6 +9,7 @@
 import RichTextKit
 import XCTest
 
+@MainActor
 final class RichTextAttributeReaderWriterTests: XCTestCase {
 
     private let string = NSMutableAttributedString(string: "foo bar baz")

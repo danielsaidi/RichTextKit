@@ -11,6 +11,7 @@ import XCTest
 
 @testable import RichTextKit
 
+@MainActor
 final class RichTextAlignment_PickerTests: XCTestCase {
 
     func testCanBeCreatedWithAllParameters() {

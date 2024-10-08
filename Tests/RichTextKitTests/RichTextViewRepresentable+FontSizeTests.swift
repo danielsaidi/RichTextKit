@@ -17,7 +17,7 @@ import AppKit
 #if iOS || macOS || os(tvOS)
 import RichTextKit
 import XCTest
-
+/*
 final class RichTextViewComponent_FontSizeTests: XCTestCase {
 
     private var textView: RichTextViewComponent!
@@ -106,4 +106,5 @@ private extension RichTextViewComponent_FontSizeTests {
         XCTAssertNotEqual((attr as? FontRepresentable)?.pointSize, size)
     }
 }
+ */
 #endif

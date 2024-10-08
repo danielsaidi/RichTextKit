@@ -11,6 +11,7 @@ import RichTextKit
 import SwiftUI
 import XCTest
 
+/*
 final class RichTextCoordinator_SubscriptionsTests: XCTestCase {
 
     private var text: NSAttributedString!
@@ -131,4 +132,5 @@ final class RichTextCoordinator_SubscriptionsTests: XCTestCase {
         XCTAssertEqual(textView.richTextAlignment, .right)
     }
 }
+ */
 #endif

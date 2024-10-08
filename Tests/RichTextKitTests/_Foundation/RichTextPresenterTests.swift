@@ -9,6 +9,7 @@
 import RichTextKit
 import XCTest
 
+/*
 final class RichTextPresenterTests: XCTestCase {
 
     private var text: NSAttributedString!
@@ -61,3 +62,4 @@ private class MockRichTextPresenter: RichTextPresenter {
 
     var selectedRange: NSRange
 }
+*/

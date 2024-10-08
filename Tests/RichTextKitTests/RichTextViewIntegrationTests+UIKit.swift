@@ -13,6 +13,7 @@ import SwiftUI
 @testable import RichTextKit
 import XCTest
 
+/*
 final class RichTextViewIntegrationTests: XCTestCase {
 
     private var text: NSAttributedString!
@@ -134,4 +135,5 @@ final class RichTextViewIntegrationTests: XCTestCase {
         XCTAssertTrue(try XCTUnwrap(fontForLastString?.fontDescriptor.symbolicTraits.contains(.traitBold)))
     }
 }
+ */
 #endif

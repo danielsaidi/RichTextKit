@@ -10,6 +10,7 @@ import RichTextKit
 import UniformTypeIdentifiers
 import XCTest
 
+@MainActor
 final class RichTextDataReaderWriterTests: XCTestCase {
 
     func testCanGenerateDataForArchivedFormat() {
