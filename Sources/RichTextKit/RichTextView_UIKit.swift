@@ -98,9 +98,13 @@ open class RichTextView: UITextView, RichTextViewComponent {
         didSet {
             #if iOS || os(visionOS)
             refreshDropInteraction()
+            imageConfigurationWasSet = true
             #endif
         }
     }
+
+    /// The image configuration to use by the rich text view.
+    var imageConfigurationWasSet = false
 
     #if iOS || os(visionOS)
 

@@ -27,7 +27,11 @@ Reach out if you think that this version changes too much for a minor bump, or i
 
 * Many protocols now use `@preconcurrency @MainActor`.
 * All mutable `Image` and `Color` extensions are now computed.
-* All standard style and configuration values are now computed. 
+* All standard style and configuration values are now computed.
+
+### 🐛 Bug Fixes
+
+* `RichTextView` only sets image configuration if it's not manually set before.  
 
 
 
