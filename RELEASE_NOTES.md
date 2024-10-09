@@ -6,6 +6,16 @@ Until then, minor updates may remove deprecated features and introduce breaking 
 
 
 
+## 1.1.1
+
+This release reverts the Swift 6 restriction.
+
+The library is still ready for Swift 6, but will not require it due to compatibility issues.
+
+This version lets you keep using RichTextKit with Xcode 15.
+
+
+
 ## 1.1
 
 This release makes RichTextKit use Swift 6.
