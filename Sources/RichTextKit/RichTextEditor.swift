@@ -120,22 +120,8 @@ public struct RichTextEditor: ViewRepresentable {
         viewConfiguration(textView)
         return textView
     }
-
+    
     public func updateUIView(_ view: UIViewType, context: Context) {}
-
-    #else
-
-    public func makeNSView(context: Context) -> some NSView {
-        textView.setup(with: text.wrappedValue, format: format)
-        textView.configuration = config
-        textView.theme = style
-        viewConfiguration(textView)
-        return scrollView
-    }
-
-    public func updateNSView(_ view: NSViewType, context: Context) {}
-
- 
 
     @available(iOS 16.0, *)
     public func sizeThatFits(_ proposal: ProposedViewSize, uiView: UIViewType, context: Context) -> CGSize? {
@@ -151,6 +137,21 @@ public struct RichTextEditor: ViewRepresentable {
             height: textView.sizeThatFits(dimensions).height
         )
     }
+    #else
+
+    public func makeNSView(context: Context) -> some NSView {
+        textView.setup(with: text.wrappedValue, format: format)
+        textView.configuration = config
+        textView.theme = style
+        viewConfiguration(textView)
+        return scrollView
+    }
+
+    public func updateNSView(_ view: NSViewType, context: Context) {}
+
+ 
+
+    
     #endif
 }
 
