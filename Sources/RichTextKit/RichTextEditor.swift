@@ -122,7 +122,7 @@ public struct RichTextEditor: ViewRepresentable {
     }
     
     public func updateUIView(_ view: UIViewType, context: Context) {}
-
+    // new
     @available(iOS 16.0, *)
     public func sizeThatFits(_ proposal: ProposedViewSize, uiView: UIViewType, context: Context) -> CGSize? {
         let dimensions = proposal.replacingUnspecifiedDimensions(
