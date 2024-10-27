@@ -111,10 +111,12 @@ public struct RichTextEditor: ViewRepresentable {
     }
 
     #if iOS || os(tvOS) || os(visionOS)
-    public func makeUIView(context: Context) -> some UIView {
+    public func makeUIView(context: Context) -> RichTextView {
         textView.setup(with: text.wrappedValue, format: format)
         textView.configuration = config
         textView.theme = style
+        textView.textContainer.lineFragmentPadding = 0
+        textView.textContainerInset = .zero
         viewConfiguration(textView)
         return textView
     }
@@ -132,6 +134,23 @@ public struct RichTextEditor: ViewRepresentable {
     }
 
     public func updateNSView(_ view: NSViewType, context: Context) {}
+
+ 
+
+    @available(iOS 16.0, *)
+    public func sizeThatFits(_ proposal: ProposedViewSize, uiView: UIViewType, context: Context) -> CGSize? {
+        let dimensions = proposal.replacingUnspecifiedDimensions(
+            by: .init(
+                width: 0,
+                height: CGFloat.greatestFiniteMagnitude
+            )
+        )
+
+        return .init(
+            width: dimensions.width,
+            height: textView.sizeThatFits(dimensions).height
+        )
+    }
     #endif
 }
 
