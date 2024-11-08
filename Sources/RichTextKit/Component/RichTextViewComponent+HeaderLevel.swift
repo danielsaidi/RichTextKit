@@ -5,7 +5,13 @@
 //
 
 import Foundation
+#if canImport(UIKit)
+import UIKit
+#endif
+
+#if canImport(AppKit) && !targetEnvironment(macCatalyst)
 import AppKit
+#endif
 
 extension RichTextViewComponent {
 
