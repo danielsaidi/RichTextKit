@@ -164,4 +164,26 @@ public extension RichTextEditor {
         textView.mutableAttributedString
     }
 }
+
+public extension RichTextEditor {
+
+    public func onAIChatAction(_ completion: @escaping () -> ()) -> RichTextEditor {
+        let editor = self
+#if os(macOS)
+        editor.textView.onAIChatBtnAction = completion
+#endif
+        // TODO: Other OS call back
+        return editor
+    }
+
+    public func onRecordAction(_ completion: @escaping () -> ()) -> RichTextEditor {
+        let editor = self
+#if os(macOS)
+        editor.textView.onRecordBtnAction = completion
+#endif
+        // TODO: Other OS call back
+        return editor
+    }
+
+}
 #endif

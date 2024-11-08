@@ -45,6 +45,9 @@ open class RichTextView: NSTextView, RichTextViewComponent {
 
     /// The image configuration to use by the rich text view.
     var imageConfigurationWasSet = false
+    private var customToolContainerView: NSView?
+    var onAIChatBtnAction: () -> () = {}
+    var onRecordBtnAction: () -> () = {}
 
     // MARK: - Overrides
 
@@ -109,8 +112,8 @@ open class RichTextView: NSTextView, RichTextViewComponent {
      ``RichTextDataFormat``.
 
      - Parameters:
-       - text: The text to edit with the text view.
-       - format: The rich text format to edit.
+     - text: The text to edit with the text view.
+     - format: The rich text format to edit.
      */
     open func setup(
         with text: NSAttributedString,
@@ -122,6 +125,9 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         layoutManager?.defaultAttachmentScaling = NSImageScaling.scaleProportionallyDown
         isContinuousSpellCheckingEnabled = configuration.isContinuousSpellCheckingEnabled
         setup(theme)
+        setupCustomToolButton()
+        NotificationCenter.default.addObserver(self, selector: #selector(selectionDidChange), name: NSTextView.didChangeSelectionNotification, object: self)
+
     }
 
     // MARK: - Open Functionality
@@ -130,9 +136,9 @@ open class RichTextView: NSTextView, RichTextViewComponent {
      Alert a certain title and message.
 
      - Parameters:
-       - title: The alert title.
-       - message: The alert message.
-       - buttonTitle: The alert button title.
+     - title: The alert title.
+     - message: The alert message.
+     - buttonTitle: The alert button title.
      */
     open func alert(title: String, message: String, buttonTitle: String) {
         let alert = NSAlert()
@@ -234,5 +240,81 @@ public extension RichTextView {
         return pasteboardTypes
     }
 }
+// custom tool buttons for ai chat and Record option
+// TODO:  Can Make this tool buttons more dynamic, also should have flag to show hide this buttons according to prefrence of projects, in case using same framework in other library
+public extension RichTextView {
+
+    // Setup the custom tool button
+    private func setupCustomToolButton() {
+        customToolContainerView = NSView()
+        customToolContainerView?.isHidden = true // Hide initially
+        customToolContainerView?.wantsLayer = true
+        customToolContainerView?.layer?.backgroundColor = NSColor.white.cgColor
+        customToolContainerView?.layer?.borderColor = NSColor.gray.cgColor
+        customToolContainerView?.layer?.borderWidth = 1
+        customToolContainerView?.layer?.cornerRadius = 5
+
+        // Set container dimensions (adjust as needed)
+        customToolContainerView?.frame.size = NSSize(width: 60, height: 30)
+
+        if let containerView = customToolContainerView {
+            self.addSubview(containerView)
+        }
+
+        // Record Button setup
+        let micImage = NSImage(systemSymbolName: "mic.fill", accessibilityDescription: "Microphone")!
+
+        let recordBtn = NSButton(image: micImage, target: self, action: #selector(recordButtonAction))
+        recordBtn.isBordered = false
+        recordBtn.contentTintColor = .gray
+        recordBtn.frame = NSRect(x: 0, y: 0, width: 30, height: 30) // Position inside container
+        customToolContainerView?.addSubview(recordBtn)
+
+        // AI Button setup
+        let aiImage = NSImage(systemSymbolName: "sparkles", accessibilityDescription: "AI Action")!
+        let AIBtn = NSButton(image: aiImage, target: self, action: #selector(aiButtonAction))
+        AIBtn.contentTintColor = .gray
+        AIBtn.isBordered = false
+        AIBtn.frame = NSRect(x: 31, y: 0, width: 30, height: 30) // Position next to recordBtn inside container
+        customToolContainerView?.addSubview(AIBtn)
+
+    }
+
+    // Update container visibility and position based on selection
+    @objc private func selectionDidChange() {
+        guard let containerView = customToolContainerView else { return }
+
+        if selectedRange.length > 0 {
+            // Show container and position it below the selected text
+            containerView.isHidden = false
+
+            // Calculate the position of the container below the selection
+            let layoutManager = self.layoutManager!
+            let glyphRange = layoutManager.glyphRange(forCharacterRange: selectedRange, actualCharacterRange: nil)
+            let boundingRect = layoutManager.boundingRect(forGlyphRange: glyphRange, in: self.textContainer!)
+
+            // Convert the bounding rectangle to view coordinates
+            let containerPosition = NSPoint(x: boundingRect.minX, y: boundingRect.minY + containerView.frame.height + 20 ) // Adjust y-offset as needed
+            containerView.setFrameOrigin(containerPosition)
+        } else {
+            // Hide container if no text is selected
+            containerView.isHidden = true
+        }
+    }
+
+    @objc private func recordButtonAction() {
+        print("Record button action on selected text:")
+        // Add custom behavior for Record Button here
+        onRecordBtnAction()
+    }
+
+    // Action for AI button
+    @objc private func aiButtonAction() {
+        print("AI button action on selected text:")
+        // Add custom behavior for AI Button here
+        onAIChatBtnAction()
+    }
+}
+
 
 #endif
