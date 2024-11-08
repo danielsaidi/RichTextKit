@@ -21,10 +21,10 @@ extension RichTextViewComponent {
     }
 
     // TODO: Ideally i was expecting to manage header level based on paragraph style header level, but when we re-open file in that case not getting correct header level, therefore as of now managing header level based on font size. will look into it later.
-    var richTextHeaderLevelOld: RichTextHeaderLevel? {
-        guard let style = richTextParagraphStyle else { return nil }
-        return RichTextHeaderLevel(style.headerLevel)
-    }
+//    var richTextHeaderLevelOld: RichTextHeaderLevel? {
+//        guard let style = richTextParagraphStyle else { return nil }
+//        return RichTextHeaderLevel(style.headerLevel)
+//    }
 
     func setHeaderLevel2(_ level: RichTextHeaderLevel) {
         let range = lineRange(for: selectedRange)
