@@ -19,11 +19,13 @@ extension NSMutableParagraphStyle {
     convenience init(
         from style: NSMutableParagraphStyle? = nil,
         alignment: RichTextAlignment? = nil,
+        headerLevel: RichTextHeaderLevel? = nil,
         indent: CGFloat? = nil,
         lineSpacing: CGFloat? = nil
     ) {
         let style = style ?? .init()
         self.init()
+        self.headerLevel = headerLevel?.value ?? style.headerLevel
         self.alignment = alignment?.nativeAlignment ?? style.alignment
         self.lineSpacing = lineSpacing ?? style.lineSpacing
         self.headIndent = indent ?? style.headIndent

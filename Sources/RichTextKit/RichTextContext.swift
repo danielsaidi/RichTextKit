@@ -46,6 +46,10 @@ public class RichTextContext: ObservableObject {
 
     // MARK: - Bindable & Settable Properies
 
+    /// The current header level..
+    @Published
+    public var headerLevel: RichTextHeaderLevel = .paragraph
+
     /// Whether or not the rich text editor is editable.
     @Published
     public var isEditable = true

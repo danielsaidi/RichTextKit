@@ -44,6 +44,7 @@ public extension RichTextContext {
         case .stepSuperscript: true
         case .toggleStyle: true
         case .undoLatestChange: canUndoLatestChange
+        case .setHeaderLevel: true
         }
     }
 

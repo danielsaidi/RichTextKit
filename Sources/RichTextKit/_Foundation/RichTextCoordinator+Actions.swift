@@ -64,6 +64,9 @@ extension RichTextCoordinator {
         case .undoLatestChange:
             textView.undoLatestChange()
             syncContextWithTextView()
+        case .setHeaderLevel(let level):
+            textView.setHeaderLevel(level)
+            syncContextWithTextView()
         }
     }
 }
