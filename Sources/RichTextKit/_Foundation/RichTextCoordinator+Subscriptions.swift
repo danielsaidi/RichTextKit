@@ -22,6 +22,7 @@ extension RichTextCoordinator {
         }
         .store(in: &cancellables)
 
+//        subscribeToHeaderLevel()
         subscribeToAlignment()
         subscribeToFontName()
         subscribeToFontSize()
@@ -40,6 +41,12 @@ private extension RichTextCoordinator {
         publisher
             .sink(receiveValue: action)
             .store(in: &cancellables)
+    }
+
+    func subscribeToHeaderLevel() {
+        subscribe(to: context.$headerLevel) { [weak self] in
+            self?.textView.setHeaderLevel($0)
+        }
     }
 
     func subscribeToAlignment() {
