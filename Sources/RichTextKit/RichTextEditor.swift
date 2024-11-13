@@ -185,5 +185,14 @@ public extension RichTextEditor {
         return editor
     }
 
+    public func onFocus(_ completion: @escaping () -> ()) -> RichTextEditor {
+        let editor = self
+#if os(macOS)
+        editor.textView.onFocus = completion
+#endif
+        // TODO: Other OS call back
+        return editor
+    }
+
 }
 #endif

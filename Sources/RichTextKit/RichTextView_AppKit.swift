@@ -48,6 +48,7 @@ open class RichTextView: NSTextView, RichTextViewComponent {
     private var customToolContainerView: NSView?
     var onAIChatBtnAction: () -> () = {}
     var onRecordBtnAction: () -> () = {}
+    var onFocus: () -> () = {}
 
     // MARK: - Overrides
 
@@ -250,7 +251,7 @@ public extension RichTextView {
         customToolContainerView?.isHidden = true // Hide initially
         customToolContainerView?.wantsLayer = true
         customToolContainerView?.layer?.backgroundColor = NSColor.white.cgColor
-        customToolContainerView?.layer?.borderColor = NSColor.gray.cgColor
+        customToolContainerView?.layer?.borderColor = NSColor.gray.withAlphaComponent(0.3).cgColor
         customToolContainerView?.layer?.borderWidth = 1
         customToolContainerView?.layer?.cornerRadius = 5
 
@@ -316,5 +317,18 @@ public extension RichTextView {
     }
 }
 
+extension RichTextView {
+
+    open override func becomeFirstResponder() -> Bool {
+        onFocus()
+        return super.becomeFirstResponder()
+    }
+
+    open override func resignFirstResponder() -> Bool {
+        print("NSTextView lost focus")
+        return super.resignFirstResponder()
+    }
+
+}
 
 #endif
