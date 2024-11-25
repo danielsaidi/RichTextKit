@@ -24,7 +24,16 @@ public extension FontRepresentable {
 
     /// The standard font to use for rich text.
     static var standardRichTextFont: FontRepresentable {
-        Self(name: "", size: .standardRichTextFontSize) ?? .systemFont(ofSize: .standardRichTextFontSize)
+        // Try to create a font with empty name to inherit current font
+        if let font = Self(name: "", size: .standardRichTextFontSize) {
+            return font
+        }
+        // If that fails, try to get the current font from the shared text view
+        if let currentFont = NSFontManager.shared.selectedFont {
+            return currentFont.withSize(.standardRichTextFontSize)
+        }
+        // As absolute last resort, use system font
+        return .systemFont(ofSize: .standardRichTextFontSize)
     }
 
     /// Create a new font by toggling a certain style.
