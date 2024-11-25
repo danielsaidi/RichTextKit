@@ -28,7 +28,7 @@ public extension FontRepresentable {
         if let font = Self(name: "", size: .standardRichTextFontSize) {
             return font
         }
-        return font
+        return
     }
 
     /// Create a new font by toggling a certain style.
