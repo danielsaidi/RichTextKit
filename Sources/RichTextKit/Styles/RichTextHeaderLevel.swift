@@ -39,11 +39,11 @@ public enum RichTextHeaderLevel: CaseIterable {
         case .paragraph:
             "Paragraph"
         case .heading1:
-            "h1"
+            "Heading 1"
         case .heading2:
-            "h2"
+            "Heading 2"
         case .heading3:
-            "h3"
+            "Heading 3"
         }
     }
 
@@ -62,28 +62,29 @@ public enum RichTextHeaderLevel: CaseIterable {
     }
 
     public var font: FontRepresentable {
+        let currentFont = FontRepresentable.standardRichTextFont
         switch self {
         case .heading1:
-            return .systemFont(ofSize: self.fontSize, weight: .bold)
+            return currentFont.withWeight(.bold)
         case .heading2:
-            return .systemFont(ofSize: self.fontSize, weight: .semibold)
+            return currentFont.withWeight(.semibold)
         case .heading3:
-            return .systemFont(ofSize: self.fontSize, weight: .medium)
+            return currentFont.withWeight(.medium)
         default:
-            return .standardRichTextFont //16
+            return currentFont
         }
     }
 
     public var fontSize: CGFloat {
         switch self {
         case .heading1:
-            return 24
+            return 32
         case .heading2:
-            return 20
+            return 24
         case .heading3:
-            return 18
+            return 20
         case .paragraph:
-            return .standardRichTextFontSize
+            return 16
         }
     }
 
