@@ -28,12 +28,6 @@ public extension FontRepresentable {
         if let font = Self(name: "", size: .standardRichTextFontSize) {
             return font
         }
-        // If that fails, try to get the current font from the shared text view
-        if let currentFont = NSFontManager.shared.selectedFont {
-            return currentFont.withSize(.standardRichTextFontSize)
-        }
-        // As absolute last resort, use system font
-        return .systemFont(ofSize: .standardRichTextFontSize)
     }
 
     /// Create a new font by toggling a certain style.
