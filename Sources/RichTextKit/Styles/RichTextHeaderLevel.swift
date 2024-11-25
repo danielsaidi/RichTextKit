@@ -62,17 +62,7 @@ public enum RichTextHeaderLevel: CaseIterable {
     }
 
     public var font: FontRepresentable {
-        let currentFont = FontRepresentable.standardRichTextFont
-        switch self {
-        case .heading1:
-            return currentFont.withWeight(.bold)
-        case .heading2:
-            return currentFont.withWeight(.semibold)
-        case .heading3:
-            return currentFont.withWeight(.medium)
-        default:
-            return currentFont
-        }
+        return FontRepresentable.standardRichTextFont
     }
 
     public var fontSize: CGFloat {
