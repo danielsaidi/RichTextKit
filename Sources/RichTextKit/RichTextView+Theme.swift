@@ -20,7 +20,7 @@ public extension RichTextView {
         ///   - fontColor: default `.textColor`.
         ///   - backgroundColor: Color of whole textView default `.clear`.
         public init(
-            font: FontRepresentable = .systemFont(ofSize: 16),
+            font: FontRepresentable? = nil,
             fontColor: ColorRepresentable = .textColor,
             backgroundColor: ColorRepresentable = .clear
         ) {
@@ -29,7 +29,7 @@ public extension RichTextView {
             self.backgroundColor = backgroundColor
         }
 
-        public let font: FontRepresentable
+        public let font: FontRepresentable?
         public let fontColor: ColorRepresentable
         public let backgroundColor: ColorRepresentable
     }
