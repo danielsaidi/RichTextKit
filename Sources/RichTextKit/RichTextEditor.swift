@@ -167,7 +167,7 @@ public extension RichTextEditor {
 
 public extension RichTextEditor {
 
-    public func onAIChatAction(_ completion: @escaping () -> ()) -> RichTextEditor {
+    public func onAIChatAction(_ completion: @escaping (String) -> ()) -> RichTextEditor {
         let editor = self
 #if os(macOS)
         editor.textView.onAIChatBtnAction = completion

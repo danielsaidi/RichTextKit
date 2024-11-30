@@ -28,9 +28,9 @@ struct DemoEditorScreen: View {
             ) {
                 $0.textContentInset = CGSize(width: 30, height: 30)
             }
-            .onAIChatAction({
-                print("Here in onAIChatAction")
-            })
+            .onAIChatAction { selectedText in
+                print("Selected Text \(selectedText)")
+            }
             // Use this to just view the text:
             // RichTextViewer(document.text)
             #if os(iOS)

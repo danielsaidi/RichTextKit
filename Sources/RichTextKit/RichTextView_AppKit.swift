@@ -46,7 +46,7 @@ open class RichTextView: NSTextView, RichTextViewComponent {
     /// The image configuration to use by the rich text view.
     var imageConfigurationWasSet = false
     private var customToolContainerView: NSView?
-    var onAIChatBtnAction: () -> () = {}
+    var onAIChatBtnAction: (String) -> () = { _ in }
     var onRecordBtnAction: () -> () = {}
     var onFocus: () -> () = {}
 
@@ -313,7 +313,9 @@ public extension RichTextView {
     @objc private func aiButtonAction() {
         print("AI button action on selected text:")
         // Add custom behavior for AI Button here
-        onAIChatBtnAction()
+        let range = safeRange(for: selectedRange)
+        let text = richText(at: range)
+        onAIChatBtnAction(text.string)
     }
 }
 
