@@ -22,10 +22,9 @@ public typealias FontRepresentable = NSFont
 
 public extension FontRepresentable {
 
-    /// The standard rich text font with the current size.
+    /// The standard font to use for rich text.
     static var standardRichTextFont: FontRepresentable {
-        // Use the existing font face but apply the standard font size
-        return .init(name: fontName, size: StandardFontSizeProvider.standardRichTextFontSize) ?? .defaultFont
+        .init(name: "New York", size: .standardRichTextFontSize) ?? .systemFont(ofSize: .standardRichTextFontSize)
     }
 
     /// Create a new font by toggling a certain style.
