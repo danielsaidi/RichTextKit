@@ -47,6 +47,7 @@ open class RichTextView: NSTextView, RichTextViewComponent {
     var imageConfigurationWasSet = false
     private var customToolContainerView: NSView?
     var onAIChatBtnAction: (String) -> () = { _ in }
+    var onEditBtnAction: (String) -> () = { _ in }
     var onRecordBtnAction: () -> () = {}
     var onFocus: () -> () = {}
     private var timer: Timer?
@@ -274,26 +275,19 @@ public extension RichTextView {
     }
 
     @objc func showContextMenu(_ sender: NSButton) {
-        // Create the context menu
         let menu = NSMenu()
-
-        // Add menu items with image and title
-        menu.addItem(createMenuItem(title: "Ask a Question", imageName: "sparkles", action: #selector(actionAskQuestion)))
-        menu.addItem(createMenuItem(title: "Write with Voice", imageName: "mic.fill", action: #selector(actionAskQuestion)))
-        menu.addItem(createMenuItem(title: "Edit and Author", imageName: "character.cursor.ibeam", action: #selector(actionAskQuestion)))
-
+        menu.addItem(createMenuItem(title: "Edit and Author", imageName: "character.cursor.ibeam", action: #selector(editButtonAction)))
+        menu.addItem(createMenuItem(title: "Ask a Question", imageName: "sparkles", action: #selector(chatButtonAction)))
+        menu.addItem(createMenuItem(title: "Write with Voice", imageName: "mic.fill", action: #selector(recordButtonAction)))
         // Show the menu at the button's location
         menu.popUp(positioning: nil, at: sender.bounds.origin, in: sender)
     }
+
     private func createMenuItem(title: String, imageName: String, action: Selector) -> NSMenuItem {
-            let menuItem = NSMenuItem(title: title, action: action, keyEquivalent: "")
-            menuItem.image = NSImage(named: imageName) // Set the image
-            menuItem.target = self // Ensure the action is triggered
-            return menuItem
-        }
-
-    @objc func actionAskQuestion() {
-
+        let menuItem = NSMenuItem(title: title, action: action, keyEquivalent: "")
+        menuItem.image = NSImage(named: imageName) // Set the image
+        menuItem.target = self // Ensure the action is triggered
+        return menuItem
     }
 
     // Update container visibility and position based on selection
@@ -341,13 +335,16 @@ public extension RichTextView {
         onRecordBtnAction()
     }
 
-    // Action for AI button
-    @objc private func aiButtonAction() {
-        print("AI button action on selected text:")
-        // Add custom behavior for AI Button here
+    @objc private func chatButtonAction() {
         let range = safeRange(for: selectedRange)
         let text = richText(at: range)
         onAIChatBtnAction(text.string)
+    }
+
+    @objc private func editButtonAction() {
+        let range = safeRange(for: selectedRange)
+        let text = richText(at: range)
+        onEditBtnAction(text.string)
     }
 }
 
