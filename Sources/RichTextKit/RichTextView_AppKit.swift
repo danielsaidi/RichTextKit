@@ -256,28 +256,42 @@ public extension RichTextView {
         customToolContainerView?.layer?.cornerRadius = 5
 
         // Set container dimensions (adjust as needed)
-        customToolContainerView?.frame.size = NSSize(width: 60, height: 30)
+        customToolContainerView?.frame.size = NSSize(width: 30, height: 30)
 
         if let containerView = customToolContainerView {
             self.addSubview(containerView)
         }
+        // Paragraph button
+        let paragraphSign = NSImage(systemSymbolName: "paragraphsign", accessibilityDescription: "paragraphsign")!
 
-        // Record Button setup
-        let micImage = NSImage(systemSymbolName: "mic.fill", accessibilityDescription: "Microphone")!
+        let btn = NSButton(image: paragraphSign, target: self, action: #selector(showContextMenu(_:)))
+        btn.isBordered = false
+        btn.contentTintColor = .gray
+        btn.frame = NSRect(x: 0, y: 0, width: 30, height: 30) // Position inside container
+        customToolContainerView?.addSubview(btn)
 
-        let recordBtn = NSButton(image: micImage, target: self, action: #selector(recordButtonAction))
-        recordBtn.isBordered = false
-        recordBtn.contentTintColor = .gray
-        recordBtn.frame = NSRect(x: 0, y: 0, width: 30, height: 30) // Position inside container
-        customToolContainerView?.addSubview(recordBtn)
+    }
 
-        // AI Button setup
-        let aiImage = NSImage(systemSymbolName: "sparkles", accessibilityDescription: "AI Action")!
-        let AIBtn = NSButton(image: aiImage, target: self, action: #selector(aiButtonAction))
-        AIBtn.contentTintColor = .gray
-        AIBtn.isBordered = false
-        AIBtn.frame = NSRect(x: 31, y: 0, width: 30, height: 30) // Position next to recordBtn inside container
-        customToolContainerView?.addSubview(AIBtn)
+    @objc func showContextMenu(_ sender: NSButton) {
+        // Create the context menu
+        let menu = NSMenu()
+
+        // Add menu items with image and title
+        menu.addItem(createMenuItem(title: "Ask a Question", imageName: "sparkles", action: #selector(actionAskQuestion)))
+        menu.addItem(createMenuItem(title: "Write with Voice", imageName: "mic.fill", action: #selector(actionAskQuestion)))
+        menu.addItem(createMenuItem(title: "Edit and Author", imageName: "character.cursor.ibeam", action: #selector(actionAskQuestion)))
+
+        // Show the menu at the button's location
+        menu.popUp(positioning: nil, at: sender.bounds.origin, in: sender)
+    }
+    private func createMenuItem(title: String, imageName: String, action: Selector) -> NSMenuItem {
+            let menuItem = NSMenuItem(title: title, action: action, keyEquivalent: "")
+            menuItem.image = NSImage(named: imageName) // Set the image
+            menuItem.target = self // Ensure the action is triggered
+            return menuItem
+        }
+
+    @objc func actionAskQuestion() {
 
     }
 
@@ -293,10 +307,14 @@ public extension RichTextView {
             let layoutManager = self.layoutManager!
             let glyphRange = layoutManager.glyphRange(forCharacterRange: selectedRange, actualCharacterRange: nil)
             let boundingRect = layoutManager.boundingRect(forGlyphRange: glyphRange, in: self.textContainer!)
+            let containerOrigin = self.textContainerOrigin
 
             // Convert the bounding rectangle to view coordinates
-            let containerPosition = NSPoint(x: boundingRect.minX, y: boundingRect.minY + containerView.frame.height + 20 ) // Adjust y-offset as needed
-            containerView.setFrameOrigin(containerPosition)
+            let buttonPosition = NSPoint(x: boundingRect.maxX + containerOrigin.x + 5, // Offset slightly to the right
+                                         y: boundingRect.minY + containerOrigin.y + self.frame.origin.y)
+
+//            let containerPosition = NSPoint(x: boundingRect.minX, y: boundingRect.minY + containerView.frame.height + 20 ) // Adjust y-offset as needed
+            containerView.setFrameOrigin(buttonPosition)
         } else {
             // Hide container if no text is selected
             containerView.isHidden = true
