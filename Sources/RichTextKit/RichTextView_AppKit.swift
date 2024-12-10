@@ -49,6 +49,7 @@ open class RichTextView: NSTextView, RichTextViewComponent {
     var onAIChatBtnAction: (String) -> () = { _ in }
     var onRecordBtnAction: () -> () = {}
     var onFocus: () -> () = {}
+    private var timer: Timer?
 
     // MARK: - Overrides
 
@@ -297,27 +298,40 @@ public extension RichTextView {
 
     // Update container visibility and position based on selection
     @objc private func selectionDidChange() {
-        guard let containerView = customToolContainerView else { return }
-
+        resetTimer()
         if selectedRange.length > 0 {
-            // Show container and position it below the selected text
-            containerView.isHidden = false
-
-            // Calculate the position of the container below the selection
-            let layoutManager = self.layoutManager!
-            let glyphRange = layoutManager.glyphRange(forCharacterRange: selectedRange, actualCharacterRange: nil)
-            let boundingRect = layoutManager.boundingRect(forGlyphRange: glyphRange, in: self.textContainer!)
-            let containerOrigin = self.textContainerOrigin
-
-            // Convert the bounding rectangle to view coordinates
-            let buttonPosition = NSPoint(x: boundingRect.maxX + containerOrigin.x + 5, // Offset slightly to the right
-                                         y: boundingRect.minY + containerOrigin.y + self.frame.origin.y)
-
-//            let containerPosition = NSPoint(x: boundingRect.minX, y: boundingRect.minY + containerView.frame.height + 20 ) // Adjust y-offset as needed
-            containerView.setFrameOrigin(buttonPosition)
+            showParagraphButton()
         } else {
+            guard let containerView = customToolContainerView else { return }
             // Hide container if no text is selected
             containerView.isHidden = true
+        }
+    }
+
+    func showParagraphButton() {
+        guard let containerView = customToolContainerView else { return }
+        // Show container and position it below the selected text
+        containerView.isHidden = false
+
+        // Calculate the position of the container below the selection
+        let layoutManager = self.layoutManager!
+        let glyphRange = layoutManager.glyphRange(forCharacterRange: selectedRange, actualCharacterRange: nil)
+        let boundingRect = layoutManager.boundingRect(forGlyphRange: glyphRange, in: self.textContainer!)
+        let containerOrigin = self.textContainerOrigin
+
+        // Convert the bounding rectangle to view coordinates
+        let buttonPosition = NSPoint(x: boundingRect.maxX + containerOrigin.x + 5, // Offset slightly to the right
+                                     y: boundingRect.minY + containerOrigin.y + self.frame.origin.y)
+
+       containerView.setFrameOrigin(buttonPosition)
+    }
+
+    private func resetTimer() {
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { _ in
+            if let view = self.customToolContainerView, view.isHidden {
+                self.showParagraphButton()
+            }
         }
     }
 
