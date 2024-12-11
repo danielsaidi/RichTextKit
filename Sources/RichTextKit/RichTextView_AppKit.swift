@@ -252,24 +252,37 @@ public extension RichTextView {
         customToolContainerView = NSView()
         customToolContainerView?.isHidden = true // Hide initially
         customToolContainerView?.wantsLayer = true
-        customToolContainerView?.layer?.backgroundColor = NSColor.white.cgColor
+        
+        let cursorButtonColor = NSColor(name: "cursorButtonColor") { appearance in
+            switch appearance.bestMatch(from: [.aqua, .darkAqua]) {
+            case .darkAqua:
+                return NSColor(red: 48/255, green: 45/255, blue: 38/255, alpha: 1)
+            case .aqua:
+                return NSColor(red: 228/255, green: 224/255, blue: 211/255, alpha: 1)
+            default:
+                return NSColor(red: 228/255, green: 224/255, blue: 211/255, alpha: 1)
+            }
+        }
+        customToolContainerView?.layer?.backgroundColor = cursorButtonColor.cgColor
         customToolContainerView?.layer?.borderColor = NSColor.gray.withAlphaComponent(0.3).cgColor
-        customToolContainerView?.layer?.borderWidth = 1
+                customToolContainerView?.layer?.borderWidth = 1
         customToolContainerView?.layer?.cornerRadius = 5
 
         // Set container dimensions (adjust as needed)
-        customToolContainerView?.frame.size = NSSize(width: 30, height: 30)
+        customToolContainerView?.frame.size = NSSize(width: 36, height: 30)
 
         if let containerView = customToolContainerView {
             self.addSubview(containerView)
         }
         // Paragraph button
-        let paragraphSign = NSImage(systemSymbolName: "paragraphsign", accessibilityDescription: "paragraphsign")!
+        let commandSign = NSImage(systemSymbolName: "command", accessibilityDescription: "command")!
+        let symbolConfiguration = NSImage.SymbolConfiguration(textStyle: .title3, scale: .small)
 
-        let btn = NSButton(image: paragraphSign, target: self, action: #selector(showContextMenu(_:)))
+        let btn = NSButton(title: "K", image: commandSign.withSymbolConfiguration(symbolConfiguration)!, target: self, action: #selector(showContextMenu(_:)))
+        btn.imageHugsTitle = true
+        btn.imagePosition = .imageLeading
         btn.isBordered = false
-        btn.contentTintColor = .gray
-        btn.frame = NSRect(x: 0, y: 0, width: 30, height: 30) // Position inside container
+        btn.frame = NSRect(x: 0, y: 0, width: 33, height: 30) // Position inside container
         customToolContainerView?.addSubview(btn)
 
     }
@@ -315,14 +328,14 @@ public extension RichTextView {
 
         // Convert the bounding rectangle to view coordinates
         let buttonPosition = NSPoint(x: boundingRect.maxX + containerOrigin.x + 5, // Offset slightly to the right
-                                     y: boundingRect.minY + containerOrigin.y + self.frame.origin.y)
+                                     y: boundingRect.minY + containerOrigin.y + self.frame.origin.y - 5)
 
        containerView.setFrameOrigin(buttonPosition)
     }
 
     private func resetTimer() {
         timer?.invalidate()
-        timer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { _ in
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { _ in
             if let view = self.customToolContainerView, view.isHidden {
                 self.showParagraphButton()
             }
