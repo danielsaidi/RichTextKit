@@ -278,7 +278,7 @@ public extension RichTextView {
         let commandSign = NSImage(systemSymbolName: "command", accessibilityDescription: "command")!
         let symbolConfiguration = NSImage.SymbolConfiguration(textStyle: .title3, scale: .small)
 
-        let btn = NSButton(title: "K", image: commandSign.withSymbolConfiguration(symbolConfiguration)!, target: self, action: #selector(showContextMenu(_:)))
+        let btn = NSButton(title: "K", image: commandSign.withSymbolConfiguration(symbolConfiguration)!, target: self, action: #selector(chatButtonAction))
         btn.imageHugsTitle = true
         btn.imagePosition = .imageLeading
         btn.isBordered = false
