@@ -176,6 +176,15 @@ public extension RichTextEditor {
         return editor
     }
 
+    public func onEditAction(_ completion: @escaping (String) -> ()) -> RichTextEditor {
+        let editor = self
+#if os(macOS)
+        editor.textView.onEditBtnAction = completion
+#endif
+        // TODO: Other OS call back
+        return editor
+    }
+
     public func onRecordAction(_ completion: @escaping () -> ()) -> RichTextEditor {
         let editor = self
 #if os(macOS)

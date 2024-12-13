@@ -97,14 +97,17 @@ open class RichTextCoordinator: NSObject {
     // MARK: - NSTextViewDelegate
 
     open func textDidBeginEditing(_ notification: Notification) {
+        print("---text begin editing---")
         context.isEditingText = true
     }
 
     open func textDidChange(_ notification: Notification) {
+        print("---text did change---")
         syncWithTextView()
     }
 
     open func textViewDidChangeSelection(_ notification: Notification) {
+        print("text change selections")
         syncWithTextView()
     }
 
