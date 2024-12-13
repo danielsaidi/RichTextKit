@@ -127,6 +127,7 @@ public struct RichTextEditor: ViewRepresentable {
         textView.setup(with: text.wrappedValue, format: format)
         textView.configuration = config
         textView.theme = style
+        textView.usesFindBar = true
         viewConfiguration(textView)
         return scrollView
     }
