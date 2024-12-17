@@ -50,7 +50,6 @@ open class RichTextView: NSTextView, RichTextViewComponent {
     var onEditBtnAction: (String) -> () = { _ in }
     var onRecordBtnAction: () -> () = {}
     var onFocus: () -> () = {}
-    private var timer: Timer?
 
     // MARK: - Overrides
 
@@ -305,7 +304,6 @@ public extension RichTextView {
 
     // Update container visibility and position based on selection
     @objc private func selectionDidChange() {
-        resetTimer()
         if selectedRange.length > 0 {
             showParagraphButton()
         } else {
@@ -331,15 +329,6 @@ public extension RichTextView {
                                      y: boundingRect.minY + containerOrigin.y + self.frame.origin.y - 5)
 
        containerView.setFrameOrigin(buttonPosition)
-    }
-
-    private func resetTimer() {
-        timer?.invalidate()
-        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { _ in
-            if let view = self.customToolContainerView, view.isHidden {
-                self.showParagraphButton()
-            }
-        }
     }
 
     @objc private func recordButtonAction() {
