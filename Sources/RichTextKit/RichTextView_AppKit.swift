@@ -278,6 +278,8 @@ public extension RichTextView {
         let symbolConfiguration = NSImage.SymbolConfiguration(textStyle: .title3, scale: .small)
 
         let btn = NSButton(title: "K", image: commandSign.withSymbolConfiguration(symbolConfiguration)!, target: self, action: #selector(chatButtonAction))
+        btn.keyEquivalent = "k"
+        btn.keyEquivalentModifierMask = [.command]
         btn.imageHugsTitle = true
         btn.imagePosition = .imageLeading
         btn.isBordered = false
@@ -305,15 +307,18 @@ public extension RichTextView {
     // Update container visibility and position based on selection
     @objc private func selectionDidChange() {
         if selectedRange.length > 0 {
-            showParagraphButton()
+            showCustomToolButton()
         } else {
-            guard let containerView = customToolContainerView else { return }
-            // Hide container if no text is selected
-            containerView.isHidden = true
+            hideCustomToolButton()
         }
     }
 
-    func showParagraphButton() {
+    private func hideCustomToolButton() {
+        guard let containerView = customToolContainerView else { return }
+        containerView.isHidden = true
+    }
+
+    private func showCustomToolButton() {
         guard let containerView = customToolContainerView else { return }
         // Show container and position it below the selected text
         containerView.isHidden = false
@@ -341,6 +346,7 @@ public extension RichTextView {
         let range = safeRange(for: selectedRange)
         let text = richText(at: range)
         onAIChatBtnAction(text.string)
+        hideCustomToolButton()
     }
 
     @objc private func editButtonAction() {
