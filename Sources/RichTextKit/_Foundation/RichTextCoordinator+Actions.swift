@@ -49,6 +49,11 @@ extension RichTextCoordinator {
         case .setHighlightingStyle(let style):
             textView.highlightingStyle = style
         case .setStyle(let style, let newValue):
+            let undoManager = textView.undoManager
+            undoManager?.registerUndo(withTarget: textView, handler: {
+                $0.toggleRichTextStyle(style)
+            })
+            undoManager?.setActionName(style.title)
             setStyle(style, to: newValue)
         case .stepFontSize(let points):
             textView.stepRichTextFontSize(points: points)
@@ -60,6 +65,11 @@ extension RichTextCoordinator {
         case .stepSuperscript(let points):
             textView.stepRichTextSuperscriptLevel(points: points)
         case .toggleStyle(let style):
+            let undoManager = textView.undoManager
+            undoManager?.registerUndo(withTarget: textView, handler: {
+                $0.toggleRichTextStyle(style)
+            })
+            undoManager?.setActionName(style.title)
             textView.toggleRichTextStyle(style)
         case .undoLatestChange:
             textView.undoLatestChange()
