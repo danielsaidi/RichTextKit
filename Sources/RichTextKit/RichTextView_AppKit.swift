@@ -268,7 +268,7 @@ public extension RichTextView {
         customToolContainerView?.layer?.cornerRadius = 5
 
         // Set container dimensions (adjust as needed)
-        customToolContainerView?.frame.size = NSSize(width: 36, height: 30)
+        customToolContainerView?.frame.size = NSSize(width: 24, height: 24)
 
         if let containerView = customToolContainerView {
             self.addSubview(containerView)
