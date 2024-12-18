@@ -265,25 +265,54 @@ public extension RichTextView {
         customToolContainerView?.layer?.backgroundColor = cursorButtonColor.cgColor
         customToolContainerView?.layer?.borderColor = NSColor.gray.withAlphaComponent(0.3).cgColor
                 customToolContainerView?.layer?.borderWidth = 1
-        customToolContainerView?.layer?.cornerRadius = 5
+        customToolContainerView?.layer?.cornerRadius = 3
 
         // Set container dimensions (adjust as needed)
-        customToolContainerView?.frame.size = NSSize(width: 24, height: 24)
+        customToolContainerView?.frame.size = NSSize(width: 26, height: 24)
 
         if let containerView = customToolContainerView {
             self.addSubview(containerView)
         }
         // Paragraph button
+        let symbolConfiguration = NSImage.SymbolConfiguration(textStyle: .caption1, scale: .small)
         let commandSign = NSImage(systemSymbolName: "command", accessibilityDescription: "command")!
-        let symbolConfiguration = NSImage.SymbolConfiguration(textStyle: .title3, scale: .small)
+            .withSymbolConfiguration(symbolConfiguration)
 
-        let btn = NSButton(title: "K", image: commandSign.withSymbolConfiguration(symbolConfiguration)!, target: self, action: #selector(chatButtonAction))
+        let btn = NSButton()
+        btn.bezelStyle = .rounded
+        btn.isBordered = false
+
+        // Create a combined attributed title with both icon and text
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+
+        let attributedTitle = NSMutableAttributedString()
+
+        // Add command icon
+        let commandAttachment = NSTextAttachment()
+        commandAttachment.image = commandSign
+        commandAttachment.bounds = CGRect(x: 0, y: -1, width: 12, height: 12)
+        let commandString = NSAttributedString(attachment: commandAttachment)
+        attributedTitle.append(commandString)
+
+        // Add "K" with semi-bold styling
+        let semi = NSFont.systemFont(ofSize: 12, weight: .semibold)
+        let kString = NSAttributedString(string: "K", attributes: [
+            .font: semi,
+            .paragraphStyle: paragraphStyle,
+            .baselineOffset: 0
+        ])
+        attributedTitle.append(kString)
+
+        btn.attributedTitle = attributedTitle
+        btn.target = self
+        btn.action = #selector(chatButtonAction)
         btn.keyEquivalent = "k"
         btn.keyEquivalentModifierMask = [.command]
+
         btn.imageHugsTitle = true
         btn.imagePosition = .imageLeading
-        btn.isBordered = false
-        btn.frame = NSRect(x: 0, y: 0, width: 33, height: 30) // Position inside container
+        btn.frame = NSRect(x: 0, y: 0, width: 26, height: 24) // Match container size
         customToolContainerView?.addSubview(btn)
 
     }
@@ -331,7 +360,7 @@ public extension RichTextView {
 
         // Convert the bounding rectangle to view coordinates
         let buttonPosition = NSPoint(x: boundingRect.maxX + containerOrigin.x + 5, // Offset slightly to the right
-                                     y: boundingRect.minY + containerOrigin.y + self.frame.origin.y - 5)
+                                     y: boundingRect.minY + containerOrigin.y + self.frame.origin.y - 4)
 
        containerView.setFrameOrigin(buttonPosition)
     }
