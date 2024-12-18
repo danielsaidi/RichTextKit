@@ -243,26 +243,20 @@ public extension RichTextView {
     }
 }
 // custom tool buttons for ai chat and Record option
-// TODO:  Can Make this tool buttons more dynamic, also should have flag to show hide this buttons according to prefrence of projects, in case using same framework in other library
+// TODO:  Can Make this tool buttons more dynamic, also should have flag to show hide this buttons according to prefrence of projects, in case using same framework in other project
 public extension RichTextView {
+
+    override open func viewDidChangeEffectiveAppearance() {
+        super.viewDidChangeEffectiveAppearance()
+        updateColorsForAppearance()
+    }
 
     // Setup the custom tool button
     private func setupCustomToolButton() {
         customToolContainerView = NSView()
         customToolContainerView?.isHidden = true // Hide initially
         customToolContainerView?.wantsLayer = true
-        
-        let cursorButtonColor = NSColor(name: "cursorButtonColor") { appearance in
-            switch appearance.bestMatch(from: [.aqua, .darkAqua]) {
-            case .darkAqua:
-                return NSColor(red: 48/255, green: 45/255, blue: 38/255, alpha: 1)
-            case .aqua:
-                return NSColor(red: 228/255, green: 224/255, blue: 211/255, alpha: 1)
-            default:
-                return NSColor(red: 228/255, green: 224/255, blue: 211/255, alpha: 1)
-            }
-        }
-        customToolContainerView?.layer?.backgroundColor = cursorButtonColor.cgColor
+        updateColorsForAppearance()
         customToolContainerView?.layer?.borderColor = NSColor.gray.withAlphaComponent(0.3).cgColor
                 customToolContainerView?.layer?.borderWidth = 1
         customToolContainerView?.layer?.cornerRadius = 3
@@ -315,6 +309,22 @@ public extension RichTextView {
         btn.frame = NSRect(x: 0, y: 0, width: 26, height: 24) // Match container size
         customToolContainerView?.addSubview(btn)
 
+    }
+
+    private func updateColorsForAppearance() {
+        guard let customToolContainerView = customToolContainerView else { return }
+
+        let cursorButtonColor = NSColor(name: "cursorButtonColor") { appearance in
+            switch appearance.bestMatch(from: [.aqua, .darkAqua]) {
+            case .darkAqua:
+                return NSColor(red: 48/255, green: 45/255, blue: 38/255, alpha: 1)
+            case .aqua:
+                return NSColor(red: 228/255, green: 224/255, blue: 211/255, alpha: 1)
+            default:
+                return NSColor(red: 228/255, green: 224/255, blue: 211/255, alpha: 1)
+            }
+        }
+        customToolContainerView.layer?.backgroundColor = cursorButtonColor.cgColor
     }
 
     @objc func showContextMenu(_ sender: NSButton) {
