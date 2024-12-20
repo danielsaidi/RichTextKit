@@ -97,17 +97,15 @@ open class RichTextCoordinator: NSObject {
     // MARK: - NSTextViewDelegate
 
     open func textDidBeginEditing(_ notification: Notification) {
-        print("---text begin editing---")
         context.isEditingText = true
     }
 
     open func textDidChange(_ notification: Notification) {
-        print("---text did change---")
         syncWithTextView()
     }
 
     open func textViewDidChangeSelection(_ notification: Notification) {
-        print("text change selections")
+        replaceCurrentAttributesIfNeeded()
         syncWithTextView()
     }
 
@@ -224,6 +222,19 @@ extension RichTextCoordinator {
         if textView.hasSelectedRange { return }
         let attributes = textView.richTextAttributes
         textView.setRichTextAttributes(attributes)
+        #endif
+    }
+
+    /**
+     On macOS, we have to update the typingAttributes when we
+     move the text input cursor and there's no selected text.
+     So that the current attributes will set again for updated location.
+     */
+    func replaceCurrentAttributesIfNeeded() {
+        #if macOS
+        if textView.hasSelectedRange { return }
+        let attributes = textView.richTextAttributes
+        textView.setNewRichTextAttributes(attributes)
         #endif
     }
 }
