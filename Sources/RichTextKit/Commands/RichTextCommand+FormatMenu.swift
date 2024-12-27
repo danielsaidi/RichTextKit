@@ -62,7 +62,7 @@ public extension RichTextCommand.FormatMenu {
 
     /// This enum defines various format sub-menus
     enum SubMenu: String, CaseIterable, View {
-        case font, text, indent, lineSpacing, superscript
+        case font, text, indent
 
         typealias Group = RichTextCommand.ActionButtonGroup
 
@@ -70,9 +70,8 @@ public extension RichTextCommand.FormatMenu {
             switch self {
             case .font:
                 Menu(RTKL10n.font.text) {
-                    Group(styles: .all)
-                    Divider()
-                    Group(fontSize: true)
+                    let styles = [ RichTextStyle.bold, RichTextStyle.italic, RichTextStyle.underlined]
+                    Group(styles: styles)
                 }
             case .text:
                 Menu(RTKL10n.menuText.text) {
@@ -81,14 +80,6 @@ public extension RichTextCommand.FormatMenu {
             case .indent:
                 Menu(RTKL10n.indent.text) {
                     Group(indent: true)
-                }
-            case .lineSpacing:
-                Menu(RTKL10n.lineSpacing.text) {
-                    Group(lineSpacing: true)
-                }
-            case .superscript:
-                Menu(RTKL10n.superscript.text) {
-                    Group(superscript: true)
                 }
             }
         }

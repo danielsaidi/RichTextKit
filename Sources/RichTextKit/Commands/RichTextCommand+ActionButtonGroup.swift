@@ -90,10 +90,10 @@ public extension RichTextCommand.ActionButtonGroup {
 
     /// Create a button group with style toggles.
     init(
-        styles: [RichTextAlignment],
+        styles: [RichTextStyle],
         additionalActions: [RichTextAction] = []
     ) {
-        self.actions = RichTextStyle.allCases.map {
+        self.actions = styles.map {
             .toggleStyle($0)
         } + additionalActions
     }
