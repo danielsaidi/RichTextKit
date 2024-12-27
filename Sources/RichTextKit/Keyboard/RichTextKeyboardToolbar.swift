@@ -181,7 +181,7 @@ private extension RichTextKeyboardToolbar {
 
         divider
 
-     if formatSheetButton {
+     if config.displayFormatSheetButton {
         Button(action: presentFormatSheet) {
             Image.richTextFormat
                 .contentShape(Rectangle())
