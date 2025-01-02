@@ -181,11 +181,13 @@ private extension RichTextKeyboardToolbar {
 
         divider
 
+     if config.displayFormatSheetButton {
         Button(action: presentFormatSheet) {
             Image.richTextFormat
                 .contentShape(Rectangle())
         }
-
+     }
+     
         RichTextStyle.ToggleStack(context: context)
             .keyboardShortcutsOnly(if: isCompact)
 
