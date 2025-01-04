@@ -36,10 +36,10 @@ public extension View {
     func keyboardShortcut(for alignment: RichTextAlignment) -> some View {
         #if iOS || macOS || os(visionOS)
         switch alignment {
-        case .left: self.keyboardShortcut("Ö", modifiers: [.command, .shift])
-        case .center: self.keyboardShortcut("*", modifiers: [.command])
-        case .right: self.keyboardShortcut("Ä", modifiers: [.command, .shift])
-        case .justified: self
+        case .left: self.keyboardShortcut("l", modifiers: [.command, .shift])
+        case .center: self.keyboardShortcut("e", modifiers: [.command, .shift])
+        case .right: self.keyboardShortcut("r", modifiers: [.command, .shift])
+        case .justified: self.keyboardShortcut("j", modifiers: [.command, .shift])
         }
         #else
         self
