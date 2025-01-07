@@ -8,6 +8,6 @@
 NAME="RichTextKit"
 DEFAULT_BRANCH="main"
 BRANCH=${1:-$DEFAULT_BRANCH}
-SCRIPT="scripts/version_create.sh"
+SCRIPT="scripts/version.sh"
 chmod +x $SCRIPT
 bash $SCRIPT $NAME $BRANCH

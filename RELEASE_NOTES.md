@@ -6,6 +6,21 @@ Until then, minor updates may remove deprecated features and introduce breaking 
 
 
 
+## 1.1.2
+
+Thanks to @cp-divyesh-v, and @bryan1anderson for your contributions to this version!
+
+### 💡 Adjustments
+
+* `RichKeyboardToolbar.Configuration` has a new format sheet button toggle. (@bryan1anderson)
+
+### 🐛 Bug Fixes
+
+* `RichTextCoordinator` now updates the current attributes if needed on macOS. (@cp-divyesh-v)
+
+
+
+
 ## 1.1.1
 
 This release reverts the Swift 6 restriction.
