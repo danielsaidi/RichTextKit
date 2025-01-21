@@ -291,7 +291,7 @@ public extension RichTextView {
 
         // Add "K" with semi-bold styling
         let semi = NSFont.systemFont(ofSize: 12, weight: .semibold)
-        let kString = NSAttributedString(string: "K", attributes: [
+        let kString = NSAttributedString(string: "L", attributes: [
             .font: semi,
             .paragraphStyle: paragraphStyle,
             .baselineOffset: 0
@@ -301,7 +301,7 @@ public extension RichTextView {
         btn.attributedTitle = attributedTitle
         btn.target = self
         btn.action = #selector(chatButtonAction)
-        btn.keyEquivalent = "k"
+        btn.keyEquivalent = "L"
         btn.keyEquivalentModifierMask = [.command]
 
         btn.imageHugsTitle = true
