@@ -301,7 +301,7 @@ public extension RichTextView {
         btn.attributedTitle = attributedTitle
         btn.target = self
         btn.action = #selector(chatButtonAction)
-        btn.keyEquivalent = "L"
+        btn.keyEquivalent = "l"
         btn.keyEquivalentModifierMask = [.command]
 
         btn.imageHugsTitle = true
