@@ -57,95 +57,17 @@ open class RichTextView: NSTextView, RichTextViewComponent {
     open override func paste(_ sender: Any?) {
         let pasteboard = NSPasteboard.general
         
-        // Try to get rich text data first
+        // Try to get any text data (RTF or plain)
         if let rtfData = pasteboard.data(forType: .rtf),
            let rtfString = try? NSAttributedString(data: rtfData, documentAttributes: nil) {
-            let attributedString = NSMutableAttributedString(attributedString: rtfString)
-            
-            // Get our default attributes for font and color
-            let defaultAttrs = richTextAttributes
-            let defaultFont = defaultAttrs[.font] as? NSFont
-            let defaultColor = defaultAttrs[.foregroundColor] as? NSColor
-            
-            // Strip colors and fonts while preserving other attributes
-            let range = NSRange(location: 0, length: attributedString.length)
-            attributedString.enumerateAttributes(in: range, options: []) { (attrs, subrange, _) in
-                var newAttrs = attrs
-                
-                // Preserve font traits (bold, italic) while using our font
-                if let defaultFont = defaultFont {
-                    if let oldFont = attrs[.font] as? NSFont {
-                        // Get the traits from the old font
-                        let oldTraits = oldFont.fontDescriptor.symbolicTraits
-                        
-                        // Create a new font descriptor with the same traits
-                        let newDesc = defaultFont.fontDescriptor.withSymbolicTraits(oldTraits)
-                        if let newFont = NSFont(descriptor: newDesc, size: defaultFont.pointSize) {
-                            newAttrs[.font] = newFont
-                        } else {
-                            newAttrs[.font] = defaultFont
-                        }
-                    } else {
-                        newAttrs[.font] = defaultFont
-                    }
-                }
-                
-                // Remove color attributes and apply default color
-                newAttrs.removeValue(forKey: .foregroundColor)
-                newAttrs.removeValue(forKey: .backgroundColor)
-                if let defaultColor = defaultColor {
-                    newAttrs[.foregroundColor] = defaultColor
-                }
-                
-                // Update attributes
-                attributedString.setAttributes(newAttrs, range: subrange)
-            }
-            
-            insertText(attributedString, replacementRange: selectedRange())
+            handlePastedText(rtfString)
             return
         }
         
-        // Then try getting regular attributed string
         if let data = pasteboard.data(forType: .string),
            let string = String(data: data, encoding: .utf8) {
-            // Create attributed string from pasteboard
-            let attributedString = NSMutableAttributedString(string: string)
-            
-            // Apply our default attributes
-            let defaultAttrs = richTextAttributes
-            attributedString.addAttributes(defaultAttrs, range: NSRange(location: 0, length: attributedString.length))
-            
-            // Scan for list patterns
-            let lines = string.components(separatedBy: .newlines)
-            var location = 0
-            
-            for line in lines {
-                // Check for ordered list pattern (e.g., "1.", "2.", etc.)
-                if let range = line.range(of: "^\\d+\\.\\s+", options: .regularExpression) {
-                    let paragraphStyle = NSMutableParagraphStyle()
-                    paragraphStyle.configureForList(.ordered)
-                    
-                    let attributes: [NSAttributedString.Key: Any] = [
-                        .listStyle: RichTextListStyle.ordered,
-                        .listItemNumber: 1, // Will be updated later
-                        .paragraphStyle: paragraphStyle
-                    ]
-                    
-                    let lineRange = NSRange(location: location, length: line.count)
-                    attributedString.addAttributes(attributes, range: lineRange)
-                }
-                
-                location += line.count + 1 // +1 for newline
-            }
-            
-            // Insert the attributed string
-            insertText(attributedString, replacementRange: selectedRange())
-            
-            // Update list item numbers
-            if let textStorage = textStorage {
-                let fullRange = NSRange(location: 0, length: textStorage.length)
-                updateListItemNumbers(in: fullRange)
-            }
+            let attrString = NSAttributedString(string: string)
+            handlePastedText(attrString)
             return
         }
         
@@ -274,6 +196,94 @@ open class RichTextView: NSTextView, RichTextViewComponent {
     /// Undo the latest change.
     open func undoLatestChange() {
         undoManager?.undo()
+    }
+
+    private func handlePastedText(_ text: NSAttributedString) {
+        let attributedString = NSMutableAttributedString(attributedString: text)
+        
+        // Get our default attributes for font and color
+        var defaultAttrs = richTextAttributes
+        if defaultAttrs[.font] == nil {
+            defaultAttrs = typingAttributes
+        }
+        let defaultFont = defaultAttrs[.font] as? NSFont
+        let defaultColor = defaultAttrs[.foregroundColor] as? NSColor
+        
+        print("Default font: \(String(describing: defaultFont))")
+        print("Default color: \(String(describing: defaultColor))")
+        
+        // Strip colors and fonts while preserving other attributes
+        let range = NSRange(location: 0, length: attributedString.length)
+        attributedString.enumerateAttributes(in: range, options: []) { (attrs, subrange, _) in
+            var newAttrs = attrs
+            print("Original attributes at range \(subrange): \(attrs)")
+            
+            // Preserve font traits (bold, italic) while using our font
+            if let defaultFont = defaultFont {
+                if let oldFont = attrs[.font] as? NSFont {
+                    // Get the traits from the old font
+                    let oldTraits = oldFont.fontDescriptor.symbolicTraits
+                    print("Old font traits: \(oldTraits)")
+                    
+                    // Create a new font descriptor with the same traits
+                    let newDesc = defaultFont.fontDescriptor.withSymbolicTraits(oldTraits)
+                    if let newFont = NSFont(descriptor: newDesc, size: defaultFont.pointSize) {
+                        newAttrs[.font] = newFont
+                        print("Applied new font: \(newFont)")
+                    } else {
+                        newAttrs[.font] = defaultFont
+                        print("Fallback to default font: \(defaultFont)")
+                    }
+                } else {
+                    newAttrs[.font] = defaultFont
+                    print("No old font, using default: \(defaultFont)")
+                }
+            }
+            
+            // Remove color attributes and apply default color
+            newAttrs.removeValue(forKey: .foregroundColor)
+            newAttrs.removeValue(forKey: .backgroundColor)
+            if let defaultColor = defaultColor {
+                newAttrs[.foregroundColor] = defaultColor
+            }
+            
+            // Update attributes
+            attributedString.setAttributes(newAttrs, range: subrange)
+            print("Final attributes at range \(subrange): \(newAttrs)")
+        }
+        
+        // Scan for list patterns
+        let string = attributedString.string
+        let lines = string.components(separatedBy: .newlines)
+        var location = 0
+        
+        for line in lines {
+            // Check for ordered list pattern (e.g., "1.", "2.", etc.)
+            if let range = line.range(of: "^\\d+\\.\\s+", options: .regularExpression) {
+                let paragraphStyle = NSMutableParagraphStyle()
+                paragraphStyle.configureForList(.ordered)
+                
+                let attributes: [NSAttributedString.Key: Any] = [
+                    .listStyle: RichTextListStyle.ordered,
+                    .listItemNumber: 1, // Will be updated later
+                    .paragraphStyle: paragraphStyle
+                ]
+                
+                let lineRange = NSRange(location: location, length: line.count)
+                attributedString.addAttributes(attributes, range: lineRange)
+            }
+            
+            location += line.count + 1 // +1 for newline
+        }
+        
+        // Insert the attributed string
+        insertText(attributedString, replacementRange: selectedRange())
+        
+        // Update list item numbers
+        if let textStorage = textStorage {
+            let fullRange = NSRange(location: 0, length: textStorage.length)
+            updateListItemNumbers(in: fullRange)
+        }
     }
 }
 
