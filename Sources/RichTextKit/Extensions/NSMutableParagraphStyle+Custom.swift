@@ -20,13 +20,39 @@ extension NSMutableParagraphStyle {
         from style: NSMutableParagraphStyle? = nil,
         alignment: RichTextAlignment? = nil,
         indent: CGFloat? = nil,
-        lineSpacing: CGFloat? = nil
+        lineSpacing: CGFloat? = nil,
+        listStyle: RichTextListStyle = .none
     ) {
         let style = style ?? .init()
         self.init()
         self.alignment = alignment?.nativeAlignment ?? style.alignment
         self.lineSpacing = lineSpacing ?? style.lineSpacing
         self.headIndent = indent ?? style.headIndent
-        self.firstLineHeadIndent = indent ?? style.headIndent
+        self.firstLineHeadIndent = (indent ?? style.headIndent) - (listStyle == .none ? 0 : 20)  // Add space for list marker
+        
+        // Configure list-specific formatting
+        if listStyle != .none {
+            self.tabStops = [NSTextTab(textAlignment: .left, location: indent ?? style.headIndent)]
+            self.headIndent = (indent ?? style.headIndent) + 20  // Add indentation for list items
+        }
+    }
+}
+
+// MARK: - List Support
+
+public extension NSMutableParagraphStyle {
+    
+    /// Configure the paragraph style for a list item
+    func configureForList(_ style: RichTextListStyle, itemNumber: Int = 1) {
+        switch style {
+        case .none:
+            // Reset list-specific formatting
+            firstLineHeadIndent = headIndent
+            tabStops = []
+        case .ordered, .unordered:
+            // Add space for list marker and configure indentation
+            firstLineHeadIndent = headIndent - 20
+            tabStops = [NSTextTab(textAlignment: .left, location: headIndent)]
+        }
     }
 }

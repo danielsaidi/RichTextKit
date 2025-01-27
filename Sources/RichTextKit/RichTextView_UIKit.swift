@@ -166,9 +166,92 @@ open class RichTextView: UITextView, RichTextViewComponent {
      */
     open override func paste(_ sender: Any?) {
         let pasteboard = UIPasteboard.general
+        
+        // Handle images first
         if let image = pasteboard.image {
-            return pasteImage(image, at: selectedRange.location)
+            pasteImage(image, at: selectedRange.location)
+            return
         }
+        
+        // Try to get rich text data
+        if let rtfData = pasteboard.data(forType: .rtf),
+           let rtfString = try? NSAttributedString(data: rtfData, documentAttributes: nil) {
+            let attributedString = NSMutableAttributedString(attributedString: rtfString)
+            
+            // Get our default attributes for font and color
+            let defaultAttrs = richTextAttributes
+            let defaultFont = defaultAttrs[.font] as? UIFont
+            let defaultColor = defaultAttrs[.foregroundColor] as? UIColor
+            
+            // Strip colors and fonts while preserving other attributes
+            let range = NSRange(location: 0, length: attributedString.length)
+            attributedString.enumerateAttributes(in: range, options: []) { (attrs, subrange, _) in
+                var newAttrs = attrs
+                // Remove font and color attributes
+                newAttrs.removeValue(forKey: .font)
+                newAttrs.removeValue(forKey: .foregroundColor)
+                newAttrs.removeValue(forKey: .backgroundColor)
+                
+                // Apply our default font and color
+                if let defaultFont = defaultFont {
+                    newAttrs[.font] = defaultFont
+                }
+                if let defaultColor = defaultColor {
+                    newAttrs[.foregroundColor] = defaultColor
+                }
+                
+                // Update attributes
+                attributedString.setAttributes(newAttrs, range: subrange)
+            }
+            
+            insertText(attributedString, replacementRange: selectedRange)
+            return
+        }
+        
+        // Then try getting regular string
+        if let string = pasteboard.string {
+            // Create attributed string from pasteboard
+            let attributedString = NSMutableAttributedString(string: string)
+            
+            // Apply our default attributes
+            let defaultAttrs = richTextAttributes
+            attributedString.addAttributes(defaultAttrs, range: NSRange(location: 0, length: attributedString.length))
+            
+            // Scan for list patterns
+            let lines = string.components(separatedBy: .newlines)
+            var location = 0
+            
+            for line in lines {
+                // Check for ordered list pattern (e.g., "1.", "2.", etc.)
+                if let range = line.range(of: "^\\d+\\.\\s+", options: .regularExpression) {
+                    let paragraphStyle = NSMutableParagraphStyle()
+                    paragraphStyle.configureForList(.ordered)
+                    
+                    let attributes: [NSAttributedString.Key: Any] = [
+                        .listStyle: RichTextListStyle.ordered,
+                        .listItemNumber: 1, // Will be updated later
+                        .paragraphStyle: paragraphStyle
+                    ]
+                    
+                    let lineRange = NSRange(location: location, length: line.count)
+                    attributedString.addAttributes(attributes, range: lineRange)
+                }
+                
+                location += line.count + 1 // +1 for newline
+            }
+            
+            // Insert the attributed string
+            insertText(attributedString, replacementRange: selectedRange)
+            
+            // Update list item numbers
+            if let textStorage = textStorage {
+                let fullRange = NSRange(location: 0, length: textStorage.length)
+                updateListItemNumbers(in: fullRange)
+            }
+            return
+        }
+        
+        // Fall back to super implementation
         super.paste(sender)
     }
     #endif
@@ -337,6 +420,72 @@ open class RichTextView: UITextView, RichTextViewComponent {
         }
     }
     #endif
+
+    // MARK: - List Support
+
+    open override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        drawListMarkers(in: rect)
+    }
+    
+    private func drawListMarkers(in rect: CGRect) {
+        guard let layoutManager = layoutManager,
+              let textContainer = textContainer else { return }
+        
+        layoutManager.enumerateLineFragments(forGlyphRange: layoutManager.glyphRange(forBoundingRect: rect, in: textContainer)) { (lineRect, usedRect, textContainer, glyphRange, stop) in
+            
+            let characterRange = layoutManager.characterRange(forGlyphRange: glyphRange, actualGlyphRange: nil)
+            let attributes = self.textStorage?.attributes(at: characterRange.location, effectiveRange: nil) ?? [:]
+            
+            guard let listStyle = attributes[.listStyle] as? RichTextListStyle,
+                  listStyle != .none else { return }
+            
+            let paragraphStyle = attributes[.paragraphStyle] as? NSParagraphStyle
+            let indent = paragraphStyle?.headIndent ?? 0
+            
+            // Calculate marker position
+            let markerX = lineRect.minX + (paragraphStyle?.firstLineHeadIndent ?? 0)
+            let markerY = lineRect.minY + (lineRect.height - (font?.pointSize ?? 12)) / 2
+            
+            // Create marker string
+            let marker: String
+            if listStyle == .ordered {
+                let number = attributes[.listItemNumber] as? Int ?? 1
+                marker = "\(number)."
+            } else {
+                marker = listStyle.marker
+            }
+            
+            // Draw marker
+            let markerAttributes: [NSAttributedString.Key: Any] = [
+                .font: font ?? .systemFont(ofSize: UIFont.systemFontSize),
+                .foregroundColor: textColor ?? .label
+            ]
+            
+            (marker as NSString).draw(at: CGPoint(x: markerX, y: markerY), withAttributes: markerAttributes)
+        }
+    }
+    
+    private func updateListItemNumbers(in range: NSRange) {
+        guard let textStorage = textStorage else { return }
+        
+        var currentNumber = 1
+        var location = range.location
+        
+        while location < range.location + range.length {
+            let attributes = textStorage.attributes(at: location, effectiveRange: nil)
+            
+            if let style = attributes[.listStyle] as? RichTextListStyle,
+               style == .ordered {
+                let lineRange = lineRange(for: NSRange(location: location, length: 0))
+                textStorage.addAttribute(.listItemNumber, value: currentNumber, range: lineRange)
+                currentNumber += 1
+                location = lineRange.location + lineRange.length
+            } else {
+                location += 1
+            }
+        }
+    }
 }
 
 #if iOS || os(visionOS)
