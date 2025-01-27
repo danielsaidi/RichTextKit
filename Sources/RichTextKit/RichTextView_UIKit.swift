@@ -187,15 +187,28 @@ open class RichTextView: UITextView, RichTextViewComponent {
             let range = NSRange(location: 0, length: attributedString.length)
             attributedString.enumerateAttributes(in: range, options: []) { (attrs, subrange, _) in
                 var newAttrs = attrs
-                // Remove font and color attributes
-                newAttrs.removeValue(forKey: .font)
+                
+                // Preserve font traits (bold, italic) while using our font
+                if let defaultFont = defaultFont {
+                    if let oldFont = attrs[.font] as? UIFont {
+                        // Get the traits from the old font
+                        let oldTraits = oldFont.fontDescriptor.symbolicTraits
+                        
+                        // Create a new font descriptor with the same traits
+                        let newDesc = defaultFont.fontDescriptor.withSymbolicTraits(oldTraits)
+                        if let newFont = UIFont(descriptor: newDesc, size: defaultFont.pointSize) {
+                            newAttrs[.font] = newFont
+                        } else {
+                            newAttrs[.font] = defaultFont
+                        }
+                    } else {
+                        newAttrs[.font] = defaultFont
+                    }
+                }
+                
+                // Remove color attributes and apply default color
                 newAttrs.removeValue(forKey: .foregroundColor)
                 newAttrs.removeValue(forKey: .backgroundColor)
-                
-                // Apply our default font and color
-                if let defaultFont = defaultFont {
-                    newAttrs[.font] = defaultFont
-                }
                 if let defaultColor = defaultColor {
                     newAttrs[.foregroundColor] = defaultColor
                 }

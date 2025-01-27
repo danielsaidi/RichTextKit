@@ -71,15 +71,28 @@ open class RichTextView: NSTextView, RichTextViewComponent {
             let range = NSRange(location: 0, length: attributedString.length)
             attributedString.enumerateAttributes(in: range, options: []) { (attrs, subrange, _) in
                 var newAttrs = attrs
-                // Remove font and color attributes
-                newAttrs.removeValue(forKey: .font)
+                
+                // Preserve font traits (bold, italic) while using our font
+                if let defaultFont = defaultFont {
+                    if let oldFont = attrs[.font] as? NSFont {
+                        // Get the traits from the old font
+                        let oldTraits = oldFont.fontDescriptor.symbolicTraits
+                        
+                        // Create a new font descriptor with the same traits
+                        let newDesc = defaultFont.fontDescriptor.withSymbolicTraits(oldTraits)
+                        if let newFont = NSFont(descriptor: newDesc, size: defaultFont.pointSize) {
+                            newAttrs[.font] = newFont
+                        } else {
+                            newAttrs[.font] = defaultFont
+                        }
+                    } else {
+                        newAttrs[.font] = defaultFont
+                    }
+                }
+                
+                // Remove color attributes and apply default color
                 newAttrs.removeValue(forKey: .foregroundColor)
                 newAttrs.removeValue(forKey: .backgroundColor)
-                
-                // Apply our default font and color
-                if let defaultFont = defaultFont {
-                    newAttrs[.font] = defaultFont
-                }
                 if let defaultColor = defaultColor {
                     newAttrs[.foregroundColor] = defaultColor
                 }
@@ -490,6 +503,65 @@ extension RichTextView {
 // MARK: - List Support
 
 extension RichTextView {
+    
+    open override func insertNewline(_ sender: Any?) {
+        let currentRange = selectedRange
+        let attributes = richTextAttributes(at: currentRange)
+        
+        // Check if we're in a list
+        if let listStyle = attributes[.listStyle] as? RichTextListStyle,
+           listStyle != .none {
+            
+            // Get the current line's text
+            let lineRange = lineRange(for: currentRange)
+            let lineText = richText(at: lineRange).string.trimmingCharacters(in: .whitespaces)
+            
+            // If the line is empty, end the list
+            if lineText.isEmpty {
+                // Remove list formatting from the current line
+                let paragraphStyle = NSMutableParagraphStyle()
+                setRichTextParagraphStyle(paragraphStyle)
+                
+                if let string = mutableRichText {
+                    string.removeAttribute(.listStyle, range: lineRange)
+                    string.removeAttribute(.listItemNumber, range: lineRange)
+                }
+                
+                super.insertNewline(sender)
+                return
+            }
+            
+            // Insert newline with list formatting
+            super.insertNewline(sender)
+            
+            // Get the new line range
+            let newLineRange = selectedRange
+            
+            // Create paragraph style for the new line
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.configureForList(listStyle)
+            
+            // Get the next number for ordered lists
+            let nextNumber = (attributes[.listItemNumber] as? Int ?? 1) + 1
+            
+            // Apply list attributes to the new line
+            let listAttributes: [NSAttributedString.Key: Any] = [
+                .listStyle: listStyle,
+                .listItemNumber: nextNumber,
+                .paragraphStyle: paragraphStyle
+            ]
+            
+            if let string = mutableRichText {
+                string.addAttributes(listAttributes, range: newLineRange)
+            }
+            
+            // Update all following list item numbers
+            updateListItemNumbers(in: NSRange(location: newLineRange.location, length: (textStorage?.length ?? 0) - newLineRange.location))
+            
+        } else {
+            super.insertNewline(sender)
+        }
+    }
     
     open override func drawBackground(in rect: NSRect) {
         super.drawBackground(in: rect)
