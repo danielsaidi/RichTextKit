@@ -436,6 +436,69 @@ open class RichTextView: UITextView, RichTextViewComponent {
 
     // MARK: - List Support
 
+    open override func insertText(_ text: String) {
+        // Handle return key for lists
+        if text == "\n" {
+            let currentRange = selectedRange
+            let attributes = richTextAttributes(at: currentRange)
+            
+            // Check if we're in a list
+            if let listStyle = attributes[.listStyle] as? RichTextListStyle,
+               listStyle != .none {
+                
+                // Get the current line's text
+                let lineRange = lineRange(for: currentRange)
+                let lineText = richText(at: lineRange).string.trimmingCharacters(in: .whitespaces)
+                
+                // If the line is empty, end the list
+                if lineText.isEmpty {
+                    // Remove list formatting from the current line
+                    let paragraphStyle = NSMutableParagraphStyle()
+                    setRichTextParagraphStyle(paragraphStyle)
+                    
+                    if let string = mutableRichText {
+                        string.removeAttribute(.listStyle, range: lineRange)
+                        string.removeAttribute(.listItemNumber, range: lineRange)
+                    }
+                    
+                    super.insertText(text)
+                    return
+                }
+                
+                // Insert newline with list formatting
+                super.insertText(text)
+                
+                // Get the new line range
+                let newLineRange = selectedRange
+                
+                // Create paragraph style for the new line
+                let paragraphStyle = NSMutableParagraphStyle()
+                paragraphStyle.configureForList(listStyle)
+                
+                // Get the next number for ordered lists
+                let nextNumber = (attributes[.listItemNumber] as? Int ?? 1) + 1
+                
+                // Apply list attributes to the new line
+                let listAttributes: [NSAttributedString.Key: Any] = [
+                    .listStyle: listStyle,
+                    .listItemNumber: nextNumber,
+                    .paragraphStyle: paragraphStyle
+                ]
+                
+                if let string = mutableRichText {
+                    string.addAttributes(listAttributes, range: newLineRange)
+                }
+                
+                // Update all following list item numbers
+                updateListItemNumbers(in: NSRange(location: newLineRange.location, length: (textStorage?.length ?? 0) - newLineRange.location))
+                
+                return
+            }
+        }
+        
+        super.insertText(text)
+    }
+    
     open override func draw(_ rect: CGRect) {
         super.draw(rect)
         drawListMarkers(in: rect)
