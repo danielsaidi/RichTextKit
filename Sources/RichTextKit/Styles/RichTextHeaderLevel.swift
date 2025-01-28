@@ -77,11 +77,11 @@ public enum RichTextHeaderLevel: CaseIterable {
     public var fontSize: CGFloat {
         switch self {
         case .heading1:
-            return 32
+            return 28
         case .heading2:
             return 24
         case .heading3:
-            return 22
+            return 20
         case .paragraph:
             return 16
         }
