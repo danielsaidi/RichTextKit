@@ -67,7 +67,10 @@ public extension RichTextViewComponent {
             let remainingLength = max(0, selectedRange.location + selectedRange.length - searchLocation)
             remainingRange = NSRange(location: searchLocation, length: remainingLength)
         }
-        
+        if selectedRange.length == 0 {
+            typingAttributes[.paragraphStyle] = paragraphStyle
+        }
+
         // End batch editing
         text.endEditing()
         
