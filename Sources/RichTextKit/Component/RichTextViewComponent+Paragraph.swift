@@ -30,7 +30,10 @@ public extension RichTextViewComponent {
     /// it will only affect the first one.
     func setRichTextParagraphStyle(_ style: NSParagraphStyle) {
         let range = lineRange(for: selectedRange)
-        guard range.length > 0 else { return }
+        guard range.length > 0 else {
+            typingAttributes[.paragraphStyle] = style
+            return
+        }
         #if os(watchOS)
         setRichTextAttribute(.paragraphStyle, to: style, at: range)
         #else
