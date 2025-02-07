@@ -21,7 +21,6 @@ extension RichTextViewComponent {
     }
 
     func setHeaderLevel(_ level: RichTextHeaderLevel) {
-        let attributes: RichTextAttributes = [.font: level.font]
-        setRichTextAttributes(attributes)
+        setRichTextFontSize(level.fontSize)
     }
 }

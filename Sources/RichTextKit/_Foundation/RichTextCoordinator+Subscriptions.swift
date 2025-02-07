@@ -22,7 +22,7 @@ extension RichTextCoordinator {
         }
         .store(in: &cancellables)
 
-//        subscribeToHeaderLevel()
+        subscribeToHeaderLevel()
         subscribeToAlignment()
         subscribeToFontName()
         subscribeToFontSize()
