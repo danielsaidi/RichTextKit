@@ -462,18 +462,22 @@ public extension RichTextView {
         guard let containerView = customToolContainerView else { return }
         // Show container and position it below the selected text
         containerView.isHidden = false
+        setCustomToolButtonFrameOrigin()
+    }
 
+    func setCustomToolButtonFrameOrigin() {
+        guard let containerView = customToolContainerView, !containerView.isHidden else { return }
         // Calculate the position of the container below the selection
-        let layoutManager = self.layoutManager!
-        let glyphRange = layoutManager.glyphRange(forCharacterRange: selectedRange, actualCharacterRange: nil)
-        let boundingRect = layoutManager.boundingRect(forGlyphRange: glyphRange, in: self.textContainer!)
-        let containerOrigin = self.textContainerOrigin
+        if let layoutManager = self.layoutManager {
+            let glyphRange = layoutManager.glyphRange(forCharacterRange: selectedRange, actualCharacterRange: nil)
+            let boundingRect = layoutManager.boundingRect(forGlyphRange: glyphRange, in: self.textContainer!)
+            let containerOrigin = self.textContainerOrigin
 
-        // Convert the bounding rectangle to view coordinates
-        let buttonPosition = NSPoint(x: boundingRect.maxX + containerOrigin.x + 5, // Offset slightly to the right
-                                     y: boundingRect.minY + containerOrigin.y + self.frame.origin.y - 4)
-
-       containerView.setFrameOrigin(buttonPosition)
+            // Convert the bounding rectangle to view coordinates
+            let buttonPosition = NSPoint(x: boundingRect.maxX + containerOrigin.x + 5, // Offset slightly to the right
+                                         y: boundingRect.minY + containerOrigin.y + self.frame.origin.y - 4)
+            containerView.setFrameOrigin(buttonPosition)
+        }
     }
 
     @objc private func recordButtonAction() {
