@@ -37,6 +37,7 @@ extension RichTextViewComponent {
         }
         // Create paragraph style with the specified line spacing
         let paragraphStyle = NSMutableParagraphStyle(
+            from: richTextParagraphStyle,
             lineSpacing: lineSpacing
         )
         setRichTextParagraphStyle(paragraphStyle)
