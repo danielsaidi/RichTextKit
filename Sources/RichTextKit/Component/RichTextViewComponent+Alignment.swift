@@ -24,6 +24,7 @@ public extension RichTextViewComponent {
 
     /// Set the text alignment.
     func setRichTextAlignment(_ alignment: RichTextAlignment) {
+        registerUndo()
         if richTextAlignment == alignment { return }
         let style = NSMutableParagraphStyle(
             from: richTextParagraphStyle,

@@ -37,12 +37,12 @@ public extension RichTextViewComponent {
         #if os(watchOS)
         setRichTextAttribute(.paragraphStyle, to: style, at: range)
         #else
-        registerUndo(for: range, style: style)
         textStorageWrapper?.addAttribute(.paragraphStyle, value: style, range: range)
         #endif
     }
 
-    func registerUndo(for range: NSRange, style: NSParagraphStyle) {
+    func registerUndo() {
+        let range = selectedRange
         guard range.length > 0 else { return }
         let textView = self as? RichTextView
         #if canImport(UIKit)
@@ -54,7 +54,7 @@ public extension RichTextViewComponent {
             return
         }
         // Store the previous paragraph style
-        let currentAttributes = NSAttributedString(attributedString: text.attributedSubstring(from: selectedRange))
+        let currentAttributes = NSAttributedString(attributedString: text.attributedSubstring(from: range))
 
         undoManager.registerUndo(withTarget: textView) { target in
             target.mutableRichText?.replaceCharacters(in: range, with: currentAttributes)

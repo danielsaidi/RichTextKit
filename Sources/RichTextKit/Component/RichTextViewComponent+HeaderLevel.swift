@@ -21,6 +21,7 @@ extension RichTextViewComponent {
     }
 
     func setHeaderLevel(_ level: RichTextHeaderLevel) {
+        registerUndo()
         setRichTextFontSize(level.fontSize)
         // Set line spacing based on header level
         let lineSpacing: CGFloat
