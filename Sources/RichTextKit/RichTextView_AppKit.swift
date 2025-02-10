@@ -55,84 +55,85 @@ open class RichTextView: NSTextView, RichTextViewComponent {
 
     /// Paste the current pasteboard content into the view.
     open override func paste(_ sender: Any?) {
-        // Set default typing attributes to ensure proper font size
-        let defaultFont = NSFont(name: "New York", size: 16) ?? NSFont.systemFont(ofSize: 16)
-        typingAttributes[.font] = defaultFont
-        typingAttributes[NSAttributedString.Key("NSFontSizeAttribute")] = 16.0
-        
         let pasteboard = NSPasteboard.general
         
         // Try to get any text data (RTF or plain)
         if let rtfData = pasteboard.data(forType: .rtf),
            let rtfString = try? NSAttributedString(data: rtfData, documentAttributes: nil) {
-            // Create mutable copy and strip only color and unnecessary style attributes
+            // Create mutable copy to clean up attributes
             let mutableString = NSMutableAttributedString(attributedString: rtfString)
             let range = NSRange(location: 0, length: mutableString.length)
             
-            // List of attributes we want to strip (only colors and unnecessary styles)
-            let attributesToStrip: [NSAttributedString.Key] = [
-                // Color attributes
-                .foregroundColor,
-                .backgroundColor,
-                .underlineColor,
-                .strokeColor,
-                NSAttributedString.Key("NSColor"),
-                NSAttributedString.Key("NSBackgroundColor"),
-                NSAttributedString.Key("NSStrokeColor"),
-                NSAttributedString.Key("NSUnderlineColor"),
-                NSAttributedString.Key("NSStrikethroughColor"),
-                
-                // Stroke attributes
-                .strokeWidth,
-                NSAttributedString.Key("NSStrokeWidth"),
-                
-                // Other unnecessary style attributes
-                .kern,
-                .baselineOffset,
-                .obliqueness,
-                .expansion
+            // Define the attributes we want to keep
+            let whitelistedKeys: Set<NSAttributedString.Key> = [
+                .font,  // For font size mapping
+                .underlineStyle,  // For underline
+                .paragraphStyle,  // For alignment and line spacing
+                .listStyle,  // For list handling
+                .listItemNumber  // For list handling
             ]
             
-            // Remove specified attributes while preserving others (bold, italic, underline, alignment, lists)
-            for attribute in attributesToStrip {
-                mutableString.removeAttribute(attribute, range: range)
+            // Remove all attributes except our whitelist
+            mutableString.enumerateAttributes(in: range, options: []) { attrs, subrange, _ in
+                // Remove all attributes in this range
+                for (key, _) in attrs {
+                    if !whitelistedKeys.contains(key) {
+                        mutableString.removeAttribute(key, range: subrange)
+                    }
+                }
+                
+                // Clean up paragraph style - preserve only alignment and line spacing
+                if let oldStyle = attrs[.paragraphStyle] as? NSParagraphStyle {
+                    let newStyle = NSMutableParagraphStyle()
+                    newStyle.alignment = oldStyle.alignment
+                    
+                    // Get the font size to determine line spacing
+                    if let font = attrs[.font] as? NSFont {
+                        let mappedSize = mapFontSize(font.pointSize)
+                        newStyle.lineSpacing = mapLineSpacing(mappedSize)
+                    } else {
+                        newStyle.lineSpacing = mapLineSpacing(16.0) // Default line spacing
+                    }
+                    
+                    // Handle list indentation if needed
+                    if let listStyle = attrs[.listStyle] as? RichTextListStyle,
+                       listStyle != .none {
+                        if let level = attrs[.listItemNumber] as? Int {
+                            newStyle.headIndent = CGFloat((level + 1) * 36) // 36 points per level
+                        }
+                    }
+                    
+                    mutableString.addAttribute(.paragraphStyle, value: newStyle, range: subrange)
+                }
             }
             
-            // Map font sizes and ensure minimum size
+            // Map font sizes and apply our font family
             mutableString.enumerateAttribute(.font, in: range, options: []) { value, subrange, _ in
+                let mappedSize: CGFloat
                 if let font = value as? NSFont {
-                    let mappedSize = mapFontSize(font.pointSize)
-                    
-                    // Create new font with mapped size but preserve other attributes (weight, traits)
-                    let traits = font.fontDescriptor.symbolicTraits
-                    let newFont = NSFont(name: "New York", size: mappedSize) ?? NSFont.systemFont(ofSize: mappedSize)
-                    
-                    // Create a font descriptor with the original traits
-                    let descriptor = newFont.fontDescriptor
-                    if let fontWithTraits = NSFont(descriptor: descriptor.withSymbolicTraits(traits), size: mappedSize) {
-                        mutableString.addAttribute(.font, value: fontWithTraits, range: subrange)
-                        mutableString.addAttribute(NSAttributedString.Key("NSFontSizeAttribute"), value: mappedSize, range: subrange)
-                    } else {
-                        mutableString.addAttribute(.font, value: newFont, range: subrange)
-                        mutableString.addAttribute(NSAttributedString.Key("NSFontSizeAttribute"), value: mappedSize, range: subrange)
-                    }
+                    mappedSize = mapFontSize(font.pointSize)
                 } else {
-                    // If no font is set, use default paragraph font
-                    let defaultSize = 16.0
-                    let defaultFont = NSFont(name: "New York", size: defaultSize) ?? NSFont.systemFont(ofSize: defaultSize)
-                    mutableString.addAttribute(.font, value: defaultFont, range: subrange)
-                    mutableString.addAttribute(NSAttributedString.Key("NSFontSizeAttribute"), value: defaultSize, range: subrange)
+                    mappedSize = 16.0 // Default to paragraph size
                 }
+                
+                let defaultFont = NSFont(name: "New York", size: mappedSize) ?? NSFont.systemFont(ofSize: mappedSize)
+                mutableString.addAttribute(.font, value: defaultFont, range: subrange)
+                mutableString.addAttribute(NSAttributedString.Key("NSFontSizeAttribute"), value: mappedSize, range: subrange)
             }
             
             handlePastedText(mutableString)
             return
         } else if let data = pasteboard.data(forType: .string),
            let string = String(data: data, encoding: .utf8) {
-            // For plain text, always use paragraph font size
+            // For plain text, always use paragraph defaults
+            let defaultFont = NSFont(name: "New York", size: 16.0) ?? NSFont.systemFont(ofSize: 16.0)
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineSpacing = mapLineSpacing(16.0) // Default line spacing
+            
             let attrString = NSAttributedString(string: string, attributes: [
                 .font: defaultFont,
-                NSAttributedString.Key("NSFontSizeAttribute"): 16.0
+                NSAttributedString.Key("NSFontSizeAttribute"): 16.0,
+                .paragraphStyle: paragraphStyle
             ])
             handlePastedText(attrString)
             return
@@ -266,22 +267,19 @@ open class RichTextView: NSTextView, RichTextViewComponent {
     }
 
     private func handlePastedText(_ text: NSAttributedString) {
-        print("=== Starting handlePastedText ===")
         let attributedString = NSMutableAttributedString(attributedString: text)
         let range = NSRange(location: 0, length: attributedString.length)
-        
-        print("Processing text of length: \(range.length)")
         
         // Get the current typing attributes to preserve the correct color
         let currentAttributes = typingAttributes
         
         // Define the attributes we want to keep
         let whitelistedKeys: Set<NSAttributedString.Key> = [
-            .font,  // For font family and traits (bold/italic)
-            NSAttributedString.Key("NSFontSizeAttribute"),  // Explicit font size
+            .font,  // For font size mapping
             .underlineStyle,  // For underline
-            .strikethroughStyle,  // For strikethrough
-            .paragraphStyle  // For alignment only - we'll clean this up
+            .paragraphStyle,  // For alignment and line spacing
+            .listStyle,  // For list handling
+            .listItemNumber  // For list handling
         ]
         
         // Remove all attributes except our whitelist
@@ -293,44 +291,43 @@ open class RichTextView: NSTextView, RichTextViewComponent {
                 }
             }
             
-            // Clean up paragraph style - preserve only alignment
+            // Clean up paragraph style - preserve only alignment and line spacing
             if let oldStyle = attrs[.paragraphStyle] as? NSParagraphStyle {
                 let newStyle = NSMutableParagraphStyle()
                 newStyle.alignment = oldStyle.alignment
-                newStyle.lineSpacing = 0  // Reset to default
-                newStyle.paragraphSpacing = 12  // Consistent paragraph spacing
-                newStyle.paragraphSpacingBefore = 0
-                newStyle.headIndent = 0
-                newStyle.firstLineHeadIndent = 0
-                newStyle.tailIndent = 0
+                
+                // Get the font size to determine line spacing
+                if let font = attrs[.font] as? NSFont {
+                    let mappedSize = mapFontSize(font.pointSize)
+                    newStyle.lineSpacing = mapLineSpacing(mappedSize)
+                } else {
+                    newStyle.lineSpacing = mapLineSpacing(16.0) // Default line spacing
+                }
+                
+                // Handle list indentation if needed
+                if let listStyle = attrs[.listStyle] as? RichTextListStyle,
+                   listStyle != .none {
+                    if let level = attrs[.listItemNumber] as? Int {
+                        newStyle.headIndent = CGFloat((level + 1) * 36) // 36 points per level
+                    }
+                }
+                
                 attributedString.addAttribute(.paragraphStyle, value: newStyle, range: subrange)
             }
         }
         
-        // Map font sizes to standard heading sizes
+        // Map font sizes and apply our font family
         attributedString.enumerateAttribute(.font, in: range, options: []) { value, subrange, _ in
+            let mappedSize: CGFloat
             if let font = value as? NSFont {
-                let mappedSize = mapFontSize(font.pointSize)
-                
-                // Create new font with mapped size but preserve bold/italic traits
-                let traits = font.fontDescriptor.symbolicTraits
-                let newFont = NSFont(name: "New York", size: mappedSize) ?? NSFont.systemFont(ofSize: mappedSize)
-                
-                // Create a font descriptor with the original traits
-                let descriptor = newFont.fontDescriptor
-                if let fontWithTraits = NSFont(descriptor: descriptor.withSymbolicTraits(traits), size: mappedSize) {
-                    attributedString.addAttribute(.font, value: fontWithTraits, range: subrange)
-                    attributedString.addAttribute(NSAttributedString.Key("NSFontSizeAttribute"), value: mappedSize, range: subrange)
-                } else {
-                    attributedString.addAttribute(.font, value: newFont, range: subrange)
-                    attributedString.addAttribute(NSAttributedString.Key("NSFontSizeAttribute"), value: mappedSize, range: subrange)
-                }
+                mappedSize = mapFontSize(font.pointSize)
             } else {
-                let defaultSize = 16.0
-                let defaultFont = NSFont(name: "New York", size: defaultSize) ?? NSFont.systemFont(ofSize: defaultSize)
-                attributedString.addAttribute(.font, value: defaultFont, range: subrange)
-                attributedString.addAttribute(NSAttributedString.Key("NSFontSizeAttribute"), value: defaultSize, range: subrange)
+                mappedSize = 16.0 // Default to paragraph size
             }
+            
+            let defaultFont = NSFont(name: "New York", size: mappedSize) ?? NSFont.systemFont(ofSize: mappedSize)
+            attributedString.addAttribute(.font, value: defaultFont, range: subrange)
+            attributedString.addAttribute(NSAttributedString.Key("NSFontSizeAttribute"), value: mappedSize, range: subrange)
         }
         
         // Apply the current foreground color
@@ -358,35 +355,6 @@ open class RichTextView: NSTextView, RichTextViewComponent {
                 textStorage.addAttribute(.foregroundColor, value: foregroundColor, range: NSRange(location: insertRange.location, length: attributedString.length))
             }
         }
-        
-        // Scan for list patterns and apply list attributes
-        let string = attributedString.string
-        let lines = string.components(separatedBy: .newlines)
-        var location = insertRange.location
-        
-        for line in lines {
-            if let range = line.range(of: "^\\d+\\.\\s+", options: .regularExpression) {
-                let paragraphStyle = NSMutableParagraphStyle()
-                paragraphStyle.configureForList(.ordered)
-                
-                let attributes: [NSAttributedString.Key: Any] = [
-                    .listStyle: RichTextListStyle.ordered,
-                    .listItemNumber: 1,
-                    .paragraphStyle: paragraphStyle
-                ]
-                
-                let lineRange = NSRange(location: location, length: line.count)
-                textStorage?.addAttributes(attributes, range: lineRange)
-            }
-            
-            location += line.count + 1
-        }
-        
-        // Update list item numbers if needed
-        if let textStorage = textStorage {
-            let fullRange = NSRange(location: 0, length: textStorage.length)
-            updateListItemNumbers(in: fullRange)
-        }
     }
     
     private func mapFontSize(_ originalSize: CGFloat) -> CGFloat {
@@ -403,6 +371,19 @@ open class RichTextView: NSTextView, RichTextViewComponent {
             16.0 // default to paragraph size
         }
         return mappedSize
+    }
+
+    private func mapLineSpacing(_ fontSize: CGFloat) -> CGFloat {
+        switch fontSize {
+        case 28.0: // heading1
+            return 24.0  // Matches RichTextHeaderLevel.heading1
+        case 24.0: // heading2
+            return 20.0  // Matches RichTextHeaderLevel.heading2
+        case 20.0: // heading3
+            return 16.0  // Matches RichTextHeaderLevel.heading3
+        default: // paragraph
+            return 10.0  // Matches RichTextHeaderLevel.paragraph
+        }
     }
 }
 
