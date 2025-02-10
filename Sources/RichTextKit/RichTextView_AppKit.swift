@@ -98,12 +98,42 @@ open class RichTextView: NSTextView, RichTextViewComponent {
                 mutableString.removeAttribute(attribute, range: range)
             }
             
-            // Handle lists and insert the text
+            // Map font sizes and ensure minimum size
+            mutableString.enumerateAttribute(.font, in: range, options: []) { value, subrange, _ in
+                if let font = value as? NSFont {
+                    let mappedSize = mapFontSize(font.pointSize)
+                    
+                    // Create new font with mapped size but preserve other attributes (weight, traits)
+                    let traits = font.fontDescriptor.symbolicTraits
+                    let newFont = NSFont(name: "New York", size: mappedSize) ?? NSFont.systemFont(ofSize: mappedSize)
+                    
+                    // Create a font descriptor with the original traits
+                    let descriptor = newFont.fontDescriptor
+                    if let fontWithTraits = NSFont(descriptor: descriptor.withSymbolicTraits(traits), size: mappedSize) {
+                        mutableString.addAttribute(.font, value: fontWithTraits, range: subrange)
+                        mutableString.addAttribute(NSAttributedString.Key("NSFontSizeAttribute"), value: mappedSize, range: subrange)
+                    } else {
+                        mutableString.addAttribute(.font, value: newFont, range: subrange)
+                        mutableString.addAttribute(NSAttributedString.Key("NSFontSizeAttribute"), value: mappedSize, range: subrange)
+                    }
+                } else {
+                    // If no font is set, use default paragraph font
+                    let defaultSize = 16.0
+                    let defaultFont = NSFont(name: "New York", size: defaultSize) ?? NSFont.systemFont(ofSize: defaultSize)
+                    mutableString.addAttribute(.font, value: defaultFont, range: subrange)
+                    mutableString.addAttribute(NSAttributedString.Key("NSFontSizeAttribute"), value: defaultSize, range: subrange)
+                }
+            }
+            
             handlePastedText(mutableString)
             return
         } else if let data = pasteboard.data(forType: .string),
            let string = String(data: data, encoding: .utf8) {
-            let attrString = NSAttributedString(string: string)
+            // For plain text, always use paragraph font size
+            let attrString = NSAttributedString(string: string, attributes: [
+                .font: defaultFont,
+                NSAttributedString.Key("NSFontSizeAttribute"): 16.0
+            ])
             handlePastedText(attrString)
             return
         }
@@ -256,19 +286,20 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         attributedString.removeAttribute(NSAttributedString.Key("NSUnderlineColor"), range: range)
         attributedString.removeAttribute(NSAttributedString.Key("NSStrikethroughColor"), range: range)
         
-        // Remove tailIndent from paragraph styles
+        // Remove all indents from paragraph styles
         attributedString.enumerateAttribute(.paragraphStyle, in: range, options: []) { value, subrange, _ in
             if let oldStyle = value as? NSParagraphStyle {
                 let newStyle = NSMutableParagraphStyle()
-                // Copy all attributes except tailIndent
+                // Copy only essential non-indent attributes
                 newStyle.alignment = oldStyle.alignment
-                newStyle.firstLineHeadIndent = oldStyle.firstLineHeadIndent
-                newStyle.headIndent = oldStyle.headIndent
                 newStyle.lineSpacing = oldStyle.lineSpacing
-                newStyle.paragraphSpacing = oldStyle.paragraphSpacing
-                newStyle.paragraphSpacingBefore = oldStyle.paragraphSpacingBefore
-                // Set tailIndent to 0 (default)
-                newStyle.tailIndent = 0
+                newStyle.paragraphSpacing = 12  // Consistent paragraph spacing
+                newStyle.paragraphSpacingBefore = 0  // No extra space before paragraphs
+                
+                // Reset all indent-related attributes to 0
+                newStyle.firstLineHeadIndent = 0  // Remove leading indent for first line
+                newStyle.headIndent = 0  // Remove leading indent for rest of paragraph
+                newStyle.tailIndent = 0  // Remove trailing indent
                 
                 attributedString.addAttribute(.paragraphStyle, value: newStyle, range: subrange)
             }
