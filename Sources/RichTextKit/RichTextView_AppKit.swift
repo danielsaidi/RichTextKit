@@ -55,18 +55,85 @@ open class RichTextView: NSTextView, RichTextViewComponent {
 
     /// Paste the current pasteboard content into the view.
     open override func paste(_ sender: Any?) {
+        // Set default typing attributes to ensure proper font size
+        let defaultFont = NSFont(name: "New York", size: 16) ?? NSFont.systemFont(ofSize: 16)
+        typingAttributes[.font] = defaultFont
+        typingAttributes[NSAttributedString.Key("NSFontSizeAttribute")] = 16.0
+        
         let pasteboard = NSPasteboard.general
         
         // Try to get any text data (RTF or plain)
         if let rtfData = pasteboard.data(forType: .rtf),
            let rtfString = try? NSAttributedString(data: rtfData, documentAttributes: nil) {
-            handlePastedText(rtfString)
+            // Create mutable copy and strip only color and unnecessary style attributes
+            let mutableString = NSMutableAttributedString(attributedString: rtfString)
+            let range = NSRange(location: 0, length: mutableString.length)
+            
+            // List of attributes we want to strip (only colors and unnecessary styles)
+            let attributesToStrip: [NSAttributedString.Key] = [
+                // Color attributes
+                .foregroundColor,
+                .backgroundColor,
+                .underlineColor,
+                .strokeColor,
+                NSAttributedString.Key("NSColor"),
+                NSAttributedString.Key("NSBackgroundColor"),
+                NSAttributedString.Key("NSStrokeColor"),
+                NSAttributedString.Key("NSUnderlineColor"),
+                NSAttributedString.Key("NSStrikethroughColor"),
+                
+                // Stroke attributes
+                .strokeWidth,
+                NSAttributedString.Key("NSStrokeWidth"),
+                
+                // Other unnecessary style attributes
+                .kern,
+                .baselineOffset,
+                .obliqueness,
+                .expansion
+            ]
+            
+            // Remove specified attributes while preserving others (bold, italic, underline, alignment, lists)
+            for attribute in attributesToStrip {
+                mutableString.removeAttribute(attribute, range: range)
+            }
+            
+            // Map font sizes and ensure minimum size
+            mutableString.enumerateAttribute(.font, in: range, options: []) { value, subrange, _ in
+                if let font = value as? NSFont {
+                    let mappedSize = mapFontSize(font.pointSize)
+                    
+                    // Create new font with mapped size but preserve other attributes (weight, traits)
+                    let traits = font.fontDescriptor.symbolicTraits
+                    let newFont = NSFont(name: "New York", size: mappedSize) ?? NSFont.systemFont(ofSize: mappedSize)
+                    
+                    // Create a font descriptor with the original traits
+                    let descriptor = newFont.fontDescriptor
+                    if let fontWithTraits = NSFont(descriptor: descriptor.withSymbolicTraits(traits), size: mappedSize) {
+                        mutableString.addAttribute(.font, value: fontWithTraits, range: subrange)
+                        mutableString.addAttribute(NSAttributedString.Key("NSFontSizeAttribute"), value: mappedSize, range: subrange)
+                    } else {
+                        mutableString.addAttribute(.font, value: newFont, range: subrange)
+                        mutableString.addAttribute(NSAttributedString.Key("NSFontSizeAttribute"), value: mappedSize, range: subrange)
+                    }
+                } else {
+                    // If no font is set, use default paragraph font
+                    let defaultSize = 16.0
+                    let defaultFont = NSFont(name: "New York", size: defaultSize) ?? NSFont.systemFont(ofSize: defaultSize)
+                    mutableString.addAttribute(.font, value: defaultFont, range: subrange)
+                    mutableString.addAttribute(NSAttributedString.Key("NSFontSizeAttribute"), value: defaultSize, range: subrange)
+                }
+            }
+            
+            handlePastedText(mutableString)
             return
-        }
-        
-        if let data = pasteboard.data(forType: .string),
+        } else if let data = pasteboard.data(forType: .string),
            let string = String(data: data, encoding: .utf8) {
-            let attrString = NSAttributedString(string: string)
+            // For plain text, always use paragraph font size
+            let attrString = NSAttributedString(string: string, attributes: [
+                .font: defaultFont,
+                NSAttributedString.Key("NSFontSizeAttribute"): 16.0
+            ])
             handlePastedText(attrString)
             return
         }
@@ -199,91 +266,143 @@ open class RichTextView: NSTextView, RichTextViewComponent {
     }
 
     private func handlePastedText(_ text: NSAttributedString) {
+        print("=== Starting handlePastedText ===")
         let attributedString = NSMutableAttributedString(attributedString: text)
-        
-        // Get our default attributes for font and color
-        var defaultAttrs = richTextAttributes
-        if defaultAttrs[.font] == nil {
-            defaultAttrs = typingAttributes
-        }
-        let defaultFont = defaultAttrs[.font] as? NSFont
-        let defaultColor = defaultAttrs[.foregroundColor] as? NSColor
-        
-        print("Default font: \(String(describing: defaultFont))")
-        print("Default color: \(String(describing: defaultColor))")
-        
-        // Strip colors and fonts while preserving other attributes
         let range = NSRange(location: 0, length: attributedString.length)
-        attributedString.enumerateAttributes(in: range, options: []) { (attrs, subrange, _) in
-            var newAttrs = attrs
-            print("Original attributes at range \(subrange): \(attrs)")
-            
-            // Preserve font traits (bold, italic) while using our font
-            if let defaultFont = defaultFont {
-                if let oldFont = attrs[.font] as? NSFont {
-                    // Get the traits from the old font
-                    let oldTraits = oldFont.fontDescriptor.symbolicTraits
-                    print("Old font traits: \(oldTraits)")
-                    
-                    // Create a new font descriptor with the same traits
-                    let newDesc = defaultFont.fontDescriptor.withSymbolicTraits(oldTraits)
-                    if let newFont = NSFont(descriptor: newDesc, size: defaultFont.pointSize) {
-                        newAttrs[.font] = newFont
-                        print("Applied new font: \(newFont)")
-                    } else {
-                        newAttrs[.font] = defaultFont
-                        print("Fallback to default font: \(defaultFont)")
-                    }
-                } else {
-                    newAttrs[.font] = defaultFont
-                    print("No old font, using default: \(defaultFont)")
+        
+        print("Processing text of length: \(range.length)")
+        
+        // Get the current typing attributes to preserve the correct color
+        let currentAttributes = typingAttributes
+        
+        // Define the attributes we want to keep
+        let whitelistedKeys: Set<NSAttributedString.Key> = [
+            .font,  // For font family and traits (bold/italic)
+            NSAttributedString.Key("NSFontSizeAttribute"),  // Explicit font size
+            .underlineStyle,  // For underline
+            .strikethroughStyle,  // For strikethrough
+            .paragraphStyle  // For alignment only - we'll clean this up
+        ]
+        
+        // Remove all attributes except our whitelist
+        attributedString.enumerateAttributes(in: range, options: []) { attrs, subrange, _ in
+            // Remove all attributes in this range
+            for (key, _) in attrs {
+                if !whitelistedKeys.contains(key) {
+                    attributedString.removeAttribute(key, range: subrange)
                 }
             }
             
-            // Remove color attributes and apply default color
-            newAttrs.removeValue(forKey: .foregroundColor)
-            newAttrs.removeValue(forKey: .backgroundColor)
-            if let defaultColor = defaultColor {
-                newAttrs[.foregroundColor] = defaultColor
+            // Clean up paragraph style - preserve only alignment
+            if let oldStyle = attrs[.paragraphStyle] as? NSParagraphStyle {
+                let newStyle = NSMutableParagraphStyle()
+                newStyle.alignment = oldStyle.alignment
+                newStyle.lineSpacing = 0  // Reset to default
+                newStyle.paragraphSpacing = 12  // Consistent paragraph spacing
+                newStyle.paragraphSpacingBefore = 0
+                newStyle.headIndent = 0
+                newStyle.firstLineHeadIndent = 0
+                newStyle.tailIndent = 0
+                attributedString.addAttribute(.paragraphStyle, value: newStyle, range: subrange)
             }
-            
-            // Update attributes
-            attributedString.setAttributes(newAttrs, range: subrange)
-            print("Final attributes at range \(subrange): \(newAttrs)")
         }
         
-        // Scan for list patterns
+        // Map font sizes to standard heading sizes
+        attributedString.enumerateAttribute(.font, in: range, options: []) { value, subrange, _ in
+            if let font = value as? NSFont {
+                let mappedSize = mapFontSize(font.pointSize)
+                
+                // Create new font with mapped size but preserve bold/italic traits
+                let traits = font.fontDescriptor.symbolicTraits
+                let newFont = NSFont(name: "New York", size: mappedSize) ?? NSFont.systemFont(ofSize: mappedSize)
+                
+                // Create a font descriptor with the original traits
+                let descriptor = newFont.fontDescriptor
+                if let fontWithTraits = NSFont(descriptor: descriptor.withSymbolicTraits(traits), size: mappedSize) {
+                    attributedString.addAttribute(.font, value: fontWithTraits, range: subrange)
+                    attributedString.addAttribute(NSAttributedString.Key("NSFontSizeAttribute"), value: mappedSize, range: subrange)
+                } else {
+                    attributedString.addAttribute(.font, value: newFont, range: subrange)
+                    attributedString.addAttribute(NSAttributedString.Key("NSFontSizeAttribute"), value: mappedSize, range: subrange)
+                }
+            } else {
+                let defaultSize = 16.0
+                let defaultFont = NSFont(name: "New York", size: defaultSize) ?? NSFont.systemFont(ofSize: defaultSize)
+                attributedString.addAttribute(.font, value: defaultFont, range: subrange)
+                attributedString.addAttribute(NSAttributedString.Key("NSFontSizeAttribute"), value: defaultSize, range: subrange)
+            }
+        }
+        
+        // Apply the current foreground color
+        if let foregroundColor = currentAttributes[.foregroundColor] as? NSColor {
+            attributedString.addAttribute(.foregroundColor, value: foregroundColor, range: range)
+        }
+        
+        // Use textStorage to replace the text while preserving attributes
+        let insertRange = selectedRange()
+        if let textStorage = self.textStorage {
+            textStorage.replaceCharacters(in: insertRange, with: attributedString)
+            
+            // Re-apply attributes
+            attributedString.enumerateAttributes(in: range, options: []) { attrs, subrange, _ in
+                let adjustedRange = NSRange(location: insertRange.location + subrange.location, length: subrange.length)
+                for (key, value) in attrs {
+                    if whitelistedKeys.contains(key) {
+                        textStorage.addAttribute(key, value: value, range: adjustedRange)
+                    }
+                }
+            }
+            
+            // Ensure the color is set correctly from typing attributes
+            if let foregroundColor = currentAttributes[.foregroundColor] as? NSColor {
+                textStorage.addAttribute(.foregroundColor, value: foregroundColor, range: NSRange(location: insertRange.location, length: attributedString.length))
+            }
+        }
+        
+        // Scan for list patterns and apply list attributes
         let string = attributedString.string
         let lines = string.components(separatedBy: .newlines)
-        var location = 0
+        var location = insertRange.location
         
         for line in lines {
-            // Check for ordered list pattern (e.g., "1.", "2.", etc.)
             if let range = line.range(of: "^\\d+\\.\\s+", options: .regularExpression) {
                 let paragraphStyle = NSMutableParagraphStyle()
                 paragraphStyle.configureForList(.ordered)
                 
                 let attributes: [NSAttributedString.Key: Any] = [
                     .listStyle: RichTextListStyle.ordered,
-                    .listItemNumber: 1, // Will be updated later
+                    .listItemNumber: 1,
                     .paragraphStyle: paragraphStyle
                 ]
                 
                 let lineRange = NSRange(location: location, length: line.count)
-                attributedString.addAttributes(attributes, range: lineRange)
+                textStorage?.addAttributes(attributes, range: lineRange)
             }
             
-            location += line.count + 1 // +1 for newline
+            location += line.count + 1
         }
         
-        // Insert the attributed string
-        insertText(attributedString, replacementRange: selectedRange())
-        
-        // Update list item numbers
+        // Update list item numbers if needed
         if let textStorage = textStorage {
             let fullRange = NSRange(location: 0, length: textStorage.length)
             updateListItemNumbers(in: fullRange)
         }
+    }
+    
+    private func mapFontSize(_ originalSize: CGFloat) -> CGFloat {
+        let mappedSize = switch originalSize {
+        case 0..<17:
+            16.0 // paragraph (anything under 17)
+        case 17..<21:
+            20.0 // heading3 (17-20)
+        case 21..<24:
+            24.0 // heading2 (21-23)
+        case 24...:
+            28.0 // heading1 (24 or larger)
+        default:
+            16.0 // default to paragraph size
+        }
+        return mappedSize
     }
 }
 
@@ -481,8 +600,6 @@ public extension RichTextView {
     }
 
     @objc private func recordButtonAction() {
-        print("Record button action on selected text:")
-        // Add custom behavior for Record Button here
         onRecordBtnAction()
     }
 
@@ -508,7 +625,6 @@ extension RichTextView {
     }
 
     open override func resignFirstResponder() -> Bool {
-        print("NSTextView lost focus")
         return super.resignFirstResponder()
     }
 
