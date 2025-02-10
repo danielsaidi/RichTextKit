@@ -52,7 +52,9 @@ extension RichTextViewComponent {
         }
 
         // Convert glyph range to character range
-        return manager.characterRange(forGlyphRange: lineRange, actualGlyphRange: nil)
+        let characterRange = manager.characterRange(forGlyphRange: lineRange, actualGlyphRange: nil)
+        let finalRange = characterRange.length >= range.length ? lineRange : range
+        return finalRange
         #endif
     }
 }
