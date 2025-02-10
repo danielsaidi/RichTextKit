@@ -22,5 +22,22 @@ extension RichTextViewComponent {
 
     func setHeaderLevel(_ level: RichTextHeaderLevel) {
         setRichTextFontSize(level.fontSize)
+        // Set line spacing based on header level
+        let lineSpacing: CGFloat
+        switch level {
+        case .heading1:
+            lineSpacing = 24  // Larger spacing for H1
+        case .heading2:
+            lineSpacing = 20  // Medium spacing for H2
+        case .heading3:
+            lineSpacing = 16  // Smaller spacing for H3
+        case .paragraph:
+            lineSpacing = 10  // Default paragraph spacing
+        }
+        // Create paragraph style with the specified line spacing
+        let paragraphStyle = NSMutableParagraphStyle(
+            lineSpacing: lineSpacing
+        )
+        setRichTextParagraphStyle(paragraphStyle)
     }
 }
