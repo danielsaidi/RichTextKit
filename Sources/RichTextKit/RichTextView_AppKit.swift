@@ -275,48 +275,44 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         // Get the current typing attributes to preserve the correct color
         let currentAttributes = typingAttributes
         
-        // Strip all color attributes but don't set new ones - let SectionEditorView handle colors
-        attributedString.removeAttribute(.foregroundColor, range: range)
-        attributedString.removeAttribute(.backgroundColor, range: range)
-        attributedString.removeAttribute(.underlineColor, range: range)
-        attributedString.removeAttribute(.strokeColor, range: range)
-        attributedString.removeAttribute(NSAttributedString.Key("NSColor"), range: range)
-        attributedString.removeAttribute(NSAttributedString.Key("NSBackgroundColor"), range: range)
-        attributedString.removeAttribute(NSAttributedString.Key("NSStrokeColor"), range: range)
-        attributedString.removeAttribute(NSAttributedString.Key("NSUnderlineColor"), range: range)
-        attributedString.removeAttribute(NSAttributedString.Key("NSStrikethroughColor"), range: range)
+        // Define the attributes we want to keep
+        let whitelistedKeys: Set<NSAttributedString.Key> = [
+            .font,  // For font family and traits (bold/italic)
+            NSAttributedString.Key("NSFontSizeAttribute"),  // Explicit font size
+            .underlineStyle,  // For underline
+            .strikethroughStyle,  // For strikethrough
+            .paragraphStyle  // For alignment only - we'll clean this up
+        ]
         
-        // Remove all indents from paragraph styles
-        attributedString.enumerateAttribute(.paragraphStyle, in: range, options: []) { value, subrange, _ in
-            if let oldStyle = value as? NSParagraphStyle {
+        // Remove all attributes except our whitelist
+        attributedString.enumerateAttributes(in: range, options: []) { attrs, subrange, _ in
+            // Remove all attributes in this range
+            for (key, _) in attrs {
+                if !whitelistedKeys.contains(key) {
+                    attributedString.removeAttribute(key, range: subrange)
+                }
+            }
+            
+            // Clean up paragraph style - preserve only alignment
+            if let oldStyle = attrs[.paragraphStyle] as? NSParagraphStyle {
                 let newStyle = NSMutableParagraphStyle()
-                // Copy only essential non-indent attributes
                 newStyle.alignment = oldStyle.alignment
-                newStyle.lineSpacing = oldStyle.lineSpacing
+                newStyle.lineSpacing = 0  // Reset to default
                 newStyle.paragraphSpacing = 12  // Consistent paragraph spacing
-                newStyle.paragraphSpacingBefore = 0  // No extra space before paragraphs
-                
-                // Reset all indent-related attributes to 0
-                newStyle.firstLineHeadIndent = 0  // Remove leading indent for first line
-                newStyle.headIndent = 0  // Remove leading indent for rest of paragraph
-                newStyle.tailIndent = 0  // Remove trailing indent
-                
+                newStyle.paragraphSpacingBefore = 0
+                newStyle.headIndent = 0
+                newStyle.firstLineHeadIndent = 0
+                newStyle.tailIndent = 0
                 attributedString.addAttribute(.paragraphStyle, value: newStyle, range: subrange)
             }
         }
         
-        // Apply the current foreground color from typing attributes
-        if let foregroundColor = currentAttributes[.foregroundColor] as? NSColor {
-            attributedString.addAttribute(.foregroundColor, value: foregroundColor, range: range)
-        }
-        
         // Map font sizes to standard heading sizes
         attributedString.enumerateAttribute(.font, in: range, options: []) { value, subrange, _ in
-            let mappedSize: CGFloat
             if let font = value as? NSFont {
-                mappedSize = max(16.0, mapFontSize(font.pointSize))
+                let mappedSize = mapFontSize(font.pointSize)
                 
-                // Create new font with mapped size but preserve other attributes (weight, traits)
+                // Create new font with mapped size but preserve bold/italic traits
                 let traits = font.fontDescriptor.symbolicTraits
                 let newFont = NSFont(name: "New York", size: mappedSize) ?? NSFont.systemFont(ofSize: mappedSize)
                 
@@ -330,11 +326,16 @@ open class RichTextView: NSTextView, RichTextViewComponent {
                     attributedString.addAttribute(NSAttributedString.Key("NSFontSizeAttribute"), value: mappedSize, range: subrange)
                 }
             } else {
-                mappedSize = 16.0
-                let defaultFont = NSFont(name: "New York", size: mappedSize) ?? NSFont.systemFont(ofSize: mappedSize)
+                let defaultSize = 16.0
+                let defaultFont = NSFont(name: "New York", size: defaultSize) ?? NSFont.systemFont(ofSize: defaultSize)
                 attributedString.addAttribute(.font, value: defaultFont, range: subrange)
-                attributedString.addAttribute(NSAttributedString.Key("NSFontSizeAttribute"), value: mappedSize, range: subrange)
+                attributedString.addAttribute(NSAttributedString.Key("NSFontSizeAttribute"), value: defaultSize, range: subrange)
             }
+        }
+        
+        // Apply the current foreground color
+        if let foregroundColor = currentAttributes[.foregroundColor] as? NSColor {
+            attributedString.addAttribute(.foregroundColor, value: foregroundColor, range: range)
         }
         
         // Use textStorage to replace the text while preserving attributes
@@ -342,11 +343,13 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         if let textStorage = self.textStorage {
             textStorage.replaceCharacters(in: insertRange, with: attributedString)
             
-            // Re-apply non-color attributes as a safeguard
+            // Re-apply attributes
             attributedString.enumerateAttributes(in: range, options: []) { attrs, subrange, _ in
                 let adjustedRange = NSRange(location: insertRange.location + subrange.location, length: subrange.length)
                 for (key, value) in attrs {
-                    textStorage.addAttribute(key, value: value, range: adjustedRange)
+                    if whitelistedKeys.contains(key) {
+                        textStorage.addAttribute(key, value: value, range: adjustedRange)
+                    }
                 }
             }
             
