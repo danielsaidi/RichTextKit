@@ -16,8 +16,7 @@ public extension RichTextContext {
     /// - Parameters:
     ///   - urlString: The URL string to link to
     ///   - text: Optional text to replace the selection with. If nil, uses existing selection
-    ///   - color: The color to use for the link. If nil, uses system default
-    public func addLink(url urlString: String, text: String? = nil, color: Any? = nil) {
+    public func addLink(url urlString: String, text: String? = nil) {
         let range = selectedRange
         guard range.length > 0 else { return }
         
@@ -30,25 +29,16 @@ public extension RichTextContext {
         guard let linkURL = URL(string: finalURLString) else { return }
         
         let linkText = text ?? attributedString.string.substring(with: range)
+        let linkRange = NSRange(location: range.location, length: linkText.count)
         
         // Create a mutable copy of the current attributed string
         let mutableString = NSMutableAttributedString(attributedString: attributedString)
         
-        // Get existing attributes at the selection
-        let existingAttributes = mutableString.attributes(at: range.location, effectiveRange: nil)
-        
-        // Merge existing attributes with link attributes
-        var newAttributes = existingAttributes
-        newAttributes[.link] = linkURL
-        
-        // Set the foreground color if provided
-        if let nsColor = color as? NSColor {
-            newAttributes[.foregroundColor] = nsColor
-        }
-        
-        // Replace the text while preserving other attributes
+        // Replace the text first if needed
         mutableString.replaceCharacters(in: range, with: linkText)
-        mutableString.setAttributes(newAttributes, range: NSRange(location: range.location, length: linkText.count))
+        
+        // Add the link attribute
+        mutableString.addAttribute(.link, value: linkURL, range: linkRange)
         
         // Update the context with the new string
         setAttributedString(to: mutableString)
@@ -70,14 +60,8 @@ public extension RichTextContext {
         // Create a mutable copy of the current attributed string
         let mutableString = NSMutableAttributedString(attributedString: attributedString)
         
-        // Get existing attributes and remove link
-        var attributes = mutableString.attributes(at: range.location, effectiveRange: nil)
-        attributes.removeValue(forKey: .link)
-        attributes.removeValue(forKey: .foregroundColor)  // Remove the link color
-        attributes.removeValue(forKey: .underlineStyle)   // Remove the underline
-        
-        // Apply the updated attributes
-        mutableString.setAttributes(attributes, range: range)
+        // Remove only the link attribute
+        mutableString.removeAttribute(.link, range: range)
         
         // Update the context with the new string
         setAttributedString(to: mutableString)

@@ -32,7 +32,18 @@ open class RichTextView: NSTextView, RichTextViewComponent {
 
     /// The theme for coloring and setting style to text view.
     public var theme: Theme = .standard {
-        didSet { setup(theme) }
+        didSet { 
+            setup(theme)
+            // Set up link text attributes
+            if let linkColor = theme.linkColor {
+                linkTextAttributes = [
+                    .foregroundColor: linkColor,
+                    .underlineStyle: NSUnderlineStyle.single.rawValue,
+                    .underlineColor: linkColor,
+                    NSAttributedString.Key.cursor: NSCursor.pointingHand
+                ]
+            }
+        }
     }
 
     /// The style to use when highlighting text in the view.
@@ -58,7 +69,8 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         .underlineStyle,  // For underline
         .paragraphStyle,  // For alignment and line spacing
         .listStyle,  // For list handling
-        .listItemNumber  // For list handling
+        .listItemNumber,  // For list handling
+        .link  // For preserving link functionality
     ]
     
     private func cleanAttributes(_ attributedString: NSMutableAttributedString, range: NSRange, preserveColor: Bool = false) {
@@ -96,6 +108,13 @@ open class RichTextView: NSTextView, RichTextViewComponent {
                 }
                 
                 attributedString.addAttribute(.paragraphStyle, value: newStyle, range: subrange)
+            }
+            
+            // Apply theme's link color if this is a link
+            if attrs[.link] != nil, let linkColor = theme.linkColor {
+                attributedString.addAttribute(.foregroundColor, value: linkColor, range: subrange)
+                attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: subrange)
+                attributedString.addAttribute(.underlineColor, value: linkColor, range: subrange)
             }
         }
         
@@ -222,12 +241,14 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         setupSharedBehavior(with: text, format)
         allowsImageEditing = true
         allowsUndo = true
+        isAutomaticLinkDetectionEnabled = true
+        isEditable = true
+        isSelectable = true
         layoutManager?.defaultAttachmentScaling = NSImageScaling.scaleProportionallyDown
         isContinuousSpellCheckingEnabled = configuration.isContinuousSpellCheckingEnabled
         setup(theme)
         setupCustomToolButton()
         NotificationCenter.default.addObserver(self, selector: #selector(selectionDidChange), name: NSTextView.didChangeSelectionNotification, object: self)
-
     }
 
     // MARK: - Open Functionality
