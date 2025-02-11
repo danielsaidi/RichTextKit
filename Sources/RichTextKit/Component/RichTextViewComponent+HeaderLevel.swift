@@ -47,8 +47,8 @@ extension RichTextViewComponent {
             lineSpacing: lineSpacing
         )
         // Ensure paragraph spacing is maintained
-        paragraphStyle.paragraphSpacing = 20
-        paragraphStyle.paragraphSpacingBefore = 20
+        paragraphStyle.paragraphSpacing = 10
+        paragraphStyle.paragraphSpacingBefore = 10
         setRichTextParagraphStyle(paragraphStyle)
     }
 }
