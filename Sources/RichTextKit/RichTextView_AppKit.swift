@@ -142,8 +142,8 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         let defaultFont = NSFont(name: "New York", size: 16.0) ?? NSFont.systemFont(ofSize: 16.0)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = mapLineSpacing(16.0) // Default line spacing
-        paragraphStyle.paragraphSpacing = 10
-        paragraphStyle.paragraphSpacingBefore = 10
+        // paragraphStyle.paragraphSpacing = 10
+        // paragraphStyle.paragraphSpacingBefore = 10
         
         return NSAttributedString(string: string, attributes: [
             .font: defaultFont,
