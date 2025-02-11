@@ -389,16 +389,7 @@ open class RichTextView: NSTextView, RichTextViewComponent {
     }
 
     private func mapLineSpacing(_ fontSize: CGFloat) -> CGFloat {
-        switch fontSize {
-        case 28.0: // heading1
-            return 24.0  // Matches RichTextHeaderLevel.heading1
-        case 24.0: // heading2
-            return 20.0  // Matches RichTextHeaderLevel.heading2
-        case 20.0: // heading3
-            return 16.0  // Matches RichTextHeaderLevel.heading3
-        default: // paragraph
-            return 10.0  // Matches RichTextHeaderLevel.paragraph
-        }
+        return 10.0  // Use consistent line spacing for all text
     }
 }
 

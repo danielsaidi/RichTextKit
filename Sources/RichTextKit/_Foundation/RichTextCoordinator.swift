@@ -221,6 +221,10 @@ extension RichTextCoordinator {
         #if macOS
         if textView.hasSelectedRange { return }
         let attributes = textView.richTextAttributes
+        // Preserve header level if it exists
+        if let headerLevel = attributes[.headerLevel] as? RichTextHeaderLevel {
+            textView.setHeaderLevel(headerLevel)
+        }
         textView.setRichTextAttributes(attributes)
         #endif
     }
@@ -234,6 +238,10 @@ extension RichTextCoordinator {
         #if macOS
         if textView.hasSelectedRange { return }
         let attributes = textView.richTextAttributes
+        // Preserve header level if it exists
+        if let headerLevel = attributes[.headerLevel] as? RichTextHeaderLevel {
+            textView.setHeaderLevel(headerLevel)
+        }
         textView.setNewRichTextAttributes(attributes)
         #endif
     }

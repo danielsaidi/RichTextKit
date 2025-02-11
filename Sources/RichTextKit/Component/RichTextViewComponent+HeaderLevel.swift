@@ -21,34 +21,23 @@ extension RichTextViewComponent {
     }
 
     func setHeaderLevel(_ level: RichTextHeaderLevel) {
-        // Don't apply changes if no text is selected
-        guard selectedRange.length > 0 else { return }
+        // For text insertion point (cursor), apply to typing attributes
+        if selectedRange.length == 0 {
+            #if canImport(UIKit)
+            typingAttributes[.font] = level.font
+            #elseif canImport(AppKit)
+            typingAttributes[.font] = level.font
+            #endif
+            return
+        }
         
-        // Only apply changes if explicitly requested and different from current
-        if let currentLevel = richTextHeaderLevel, currentLevel == level { return }
-        
+        // For selected text, apply formatting to the selection
         registerUndo()
         setRichTextFontSize(level.fontSize)
-        // Set line spacing based on header level
-        let lineSpacing: CGFloat
-        switch level {
-        case .heading1:
-            lineSpacing = 24  // Larger spacing for H1
-        case .heading2:
-            lineSpacing = 20  // Medium spacing for H2
-        case .heading3:
-            lineSpacing = 16  // Smaller spacing for H3
-        case .paragraph:
-            lineSpacing = 10  // Default paragraph spacing
-        }
-        // Create paragraph style with the specified line spacing
-        let paragraphStyle = NSMutableParagraphStyle(
-            from: richTextParagraphStyle,
-            lineSpacing: lineSpacing
-        )
-        // Ensure paragraph spacing is maintained
-        paragraphStyle.paragraphSpacing = 10
-        paragraphStyle.paragraphSpacingBefore = 10
-        setRichTextParagraphStyle(paragraphStyle)
     }
+}
+
+// Define header level attribute key
+extension NSAttributedString.Key {
+    static let headerLevel = NSAttributedString.Key("headerLevel")
 }
