@@ -30,14 +30,36 @@ public extension RichTextViewComponent {
     /// it will only affect the first one.
     func setRichTextParagraphStyle(_ style: NSParagraphStyle) {
         let range = lineRange(for: selectedRange)
-        guard range.length > 0 else {
+        if selectedRange.length > 0 {
             typingAttributes[.paragraphStyle] = style
-            return
         }
         #if os(watchOS)
         setRichTextAttribute(.paragraphStyle, to: style, at: range)
         #else
         textStorageWrapper?.addAttribute(.paragraphStyle, value: style, range: range)
         #endif
+    }
+
+    func registerUndo() {
+        let range = selectedRange
+        guard range.length > 0 else { return }
+        let textView = self as? RichTextView
+        #if canImport(UIKit)
+        let undoManager = textView?.undoManager
+        #elseif canImport(AppKit)
+        let undoManager = textView?.undoManager
+        #endif
+        guard let undoManager = undoManager, let text = mutableRichText, let textView else {
+            return
+        }
+        // Store the previous paragraph style
+        let currentAttributes = NSAttributedString(attributedString: text.attributedSubstring(from: range))
+
+        undoManager.registerUndo(withTarget: textView) { target in
+            target.mutableRichText?.replaceCharacters(in: range, with: currentAttributes)
+        }
+        undoManager.setActionName("Change Paragraph Style")
+
+
     }
 }

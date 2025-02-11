@@ -24,11 +24,17 @@ public extension RichTextViewComponent {
 
     /// Set the text alignment.
     func setRichTextAlignment(_ alignment: RichTextAlignment) {
+        // Only apply changes if explicitly requested and different from current
         if richTextAlignment == alignment { return }
+        
+        registerUndo()
         let style = NSMutableParagraphStyle(
             from: richTextParagraphStyle,
             alignment: alignment
         )
+        // Ensure paragraph spacing is maintained
+        style.paragraphSpacing = 20
+        style.paragraphSpacingBefore = 20
         setRichTextParagraphStyle(style)
     }
 }

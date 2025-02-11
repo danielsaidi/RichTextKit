@@ -19,19 +19,27 @@ public extension RichTextView {
         ///   - font: default `.systemFont` of point size `16` (this differs on iOS and macOS).
         ///   - fontColor: default `.textColor`.
         ///   - backgroundColor: Color of whole textView default `.clear`.
+        ///   - linkColor: The color to use for links, default is system link color.
+        ///   - paragraphStyle: The paragraph style to use, default is standard paragraph style.
         public init(
             font: FontRepresentable = .systemFont(ofSize: 16),
             fontColor: ColorRepresentable = .textColor,
-            backgroundColor: ColorRepresentable = .clear
+            backgroundColor: ColorRepresentable = .clear,
+            linkColor: ColorRepresentable? = nil,
+            paragraphStyle: NSParagraphStyle = NSParagraphStyle.default
         ) {
             self.font = font
             self.fontColor = fontColor
             self.backgroundColor = backgroundColor
+            self.linkColor = linkColor
+            self.paragraphStyle = paragraphStyle
         }
 
         public let font: FontRepresentable
         public let fontColor: ColorRepresentable
         public let backgroundColor: ColorRepresentable
+        public let linkColor: ColorRepresentable?
+        public let paragraphStyle: NSParagraphStyle
     }
 }
 
