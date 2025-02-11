@@ -96,8 +96,8 @@ open class RichTextView: NSTextView, RichTextViewComponent {
                 }
                 
                 // Add paragraph spacing
-                newStyle.paragraphSpacing = 20
-                newStyle.paragraphSpacingBefore = 20
+                // newStyle.paragraphSpacing = 20
+                // newStyle.paragraphSpacingBefore = 20
                 
                 // Handle list indentation if needed
                 if let listStyle = attrs[.listStyle] as? RichTextListStyle,
