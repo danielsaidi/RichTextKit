@@ -27,9 +27,6 @@ public extension RichTextViewComponent {
         // Only apply changes if explicitly requested and different from current
         if richTextAlignment == alignment { return }
         
-        // Don't apply changes if no text is selected
-        guard selectedRange.length > 0 else { return }
-        
         registerUndo()
         let style = NSMutableParagraphStyle(
             from: richTextParagraphStyle,
