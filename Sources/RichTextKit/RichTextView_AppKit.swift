@@ -96,8 +96,8 @@ open class RichTextView: NSTextView, RichTextViewComponent {
                 }
                 
                 // Add paragraph spacing
-                // newStyle.paragraphSpacing = 20
-                // newStyle.paragraphSpacingBefore = 20
+                newStyle.paragraphSpacing = 10
+                newStyle.paragraphSpacingBefore = 10
                 
                 // Handle list indentation if needed
                 if let listStyle = attrs[.listStyle] as? RichTextListStyle,
@@ -142,8 +142,8 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         let defaultFont = NSFont(name: "New York", size: 16.0) ?? NSFont.systemFont(ofSize: 16.0)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = mapLineSpacing(16.0) // Default line spacing
-        // paragraphStyle.paragraphSpacing = 10
-        // paragraphStyle.paragraphSpacingBefore = 10
+        paragraphStyle.paragraphSpacing = 10
+        paragraphStyle.paragraphSpacingBefore = 10
         
         return NSAttributedString(string: string, attributes: [
             .font: defaultFont,
