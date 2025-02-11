@@ -21,6 +21,12 @@ extension RichTextViewComponent {
     }
 
     func setHeaderLevel(_ level: RichTextHeaderLevel) {
+        // Don't apply changes if no text is selected
+        guard selectedRange.length > 0 else { return }
+        
+        // Only apply changes if explicitly requested and different from current
+        if let currentLevel = richTextHeaderLevel, currentLevel == level { return }
+        
         registerUndo()
         setRichTextFontSize(level.fontSize)
         // Set line spacing based on header level
@@ -40,6 +46,9 @@ extension RichTextViewComponent {
             from: richTextParagraphStyle,
             lineSpacing: lineSpacing
         )
+        // Ensure paragraph spacing is maintained
+        paragraphStyle.paragraphSpacing = 20
+        paragraphStyle.paragraphSpacingBefore = 20
         setRichTextParagraphStyle(paragraphStyle)
     }
 }
