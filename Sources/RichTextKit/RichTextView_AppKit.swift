@@ -224,6 +224,61 @@ open class RichTextView: NSTextView, RichTextViewComponent {
             .scrollWheel(with: event)
     }
 
+    // Add text input handling
+    open override func insertText(_ string: Any, replacementRange: NSRange) {
+        // Store current selection for undo
+        let currentRange = selectedRange
+        let currentAttributes = typingAttributes
+        
+        // Begin undo grouping
+        undoManager?.beginUndoGrouping()
+        
+        // If we're typing after a link or inserting whitespace, remove link attributes
+        if let text = string as? String {
+            let attributes = richTextAttributes(at: NSRange(location: max(0, currentRange.location - 1), length: 1))
+            
+            if attributes[.link] != nil || text.rangeOfCharacter(from: .whitespacesAndNewlines) != nil {
+                // Remove link-related attributes from typing attributes
+                var attrs = typingAttributes
+                attrs.removeValue(forKey: .link)
+                attrs.removeValue(forKey: .underlineStyle)
+                attrs.removeValue(forKey: .underlineColor)
+                if let linkColor = theme.linkColor {
+                    // Reset color if it matches the link color
+                    if attrs[.foregroundColor] as? NSColor == linkColor {
+                        attrs[.foregroundColor] = textColor
+                    }
+                }
+                typingAttributes = attrs
+                
+                // Also remove link attributes from the current position
+                if let textStorage = self.textStorage {
+                    textStorage.removeAttribute(.link, range: NSRange(location: currentRange.location, length: 0))
+                    textStorage.removeAttribute(.underlineStyle, range: NSRange(location: currentRange.location, length: 0))
+                    textStorage.removeAttribute(.underlineColor, range: NSRange(location: currentRange.location, length: 0))
+                }
+            }
+        }
+        
+        // Perform the text insertion
+        super.insertText(string, replacementRange: replacementRange)
+        
+        // Register undo operation
+        undoManager?.registerUndo(withTarget: self) { target in
+            target.undoTextInsertion(at: currentRange, attributes: currentAttributes)
+        }
+        
+        undoManager?.endUndoGrouping()
+    }
+    
+    private func undoTextInsertion(at range: NSRange, attributes: [NSAttributedString.Key: Any]) {
+        if let textStorage = self.textStorage {
+            textStorage.deleteCharacters(in: range)
+            typingAttributes = attributes
+            selectedRange = range
+        }
+    }
+
     // MARK: - Setup
 
     /**
@@ -375,7 +430,11 @@ public extension RichTextView {
     /// Get the rich text that is managed by the view.
     var attributedString: NSAttributedString {
         get { attributedString() }
-        set { textStorage?.setAttributedString(newValue) }
+        set { 
+            let currentRange = selectedRange
+            textStorage?.setAttributedString(newValue)
+            selectedRange = currentRange
+        }
     }
 
     /// Whether or not the text view is the first responder.

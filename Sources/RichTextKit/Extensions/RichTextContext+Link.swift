@@ -12,13 +12,24 @@ public extension RichTextContext {
         return attributedString.string.substring(with: range)
     }
     
+    /// Check if the current selection has a link
+    public var hasLink: Bool {
+        let range = selectedRange
+        guard range.length > 0 else { return false }
+        let attributes = attributedString.attributes(at: range.location, effectiveRange: nil)
+        return attributes[.link] != nil
+    }
+    
     /// Add a link to the currently selected text
     /// - Parameters:
     ///   - urlString: The URL string to link to
     ///   - text: Optional text to replace the selection with. If nil, uses existing selection
-    public func addLink(url urlString: String, text: String? = nil) {
+    public func setLink(url urlString: String, text: String? = nil) {
         let range = selectedRange
         guard range.length > 0 else { return }
+        
+        // Only apply changes if explicitly requested and different from current
+        if hasLink { return }
         
         // Process URL string
         var finalURLString = urlString
@@ -41,21 +52,16 @@ public extension RichTextContext {
         mutableString.addAttribute(.link, value: linkURL, range: linkRange)
         
         // Update the context with the new string
-        setAttributedString(to: mutableString)
-    }
-    
-    /// Check if the current selection has a link
-    public var hasLink: Bool {
-        let range = selectedRange
-        guard range.length > 0 else { return false }
-        let attributes = attributedString.attributes(at: range.location, effectiveRange: nil)
-        return attributes[.link] != nil
+        actionPublisher.send(.setAttributedString(mutableString))
     }
     
     /// Remove link from the current selection
     public func removeLink() {
         let range = selectedRange
         guard range.length > 0 else { return }
+        
+        // Only apply changes if explicitly requested and different from current
+        if !hasLink { return }
         
         // Create a mutable copy of the current attributed string
         let mutableString = NSMutableAttributedString(attributedString: attributedString)
@@ -64,7 +70,7 @@ public extension RichTextContext {
         mutableString.removeAttribute(.link, range: range)
         
         // Update the context with the new string
-        setAttributedString(to: mutableString)
+        actionPublisher.send(.setAttributedString(mutableString))
     }
 }
 
