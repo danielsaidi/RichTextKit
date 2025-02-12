@@ -26,7 +26,6 @@ public extension RichTextContext {
     ///   - text: Optional text to replace the selection with. If nil, uses existing selection
     public func setLink(url urlString: String, text: String? = nil) {
         let range = selectedRange
-        guard range.length > 0 else { return }
         
         // Only apply changes if explicitly requested and different from current
         if hasLink { return }
