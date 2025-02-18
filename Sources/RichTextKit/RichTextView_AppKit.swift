@@ -306,6 +306,182 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         NotificationCenter.default.addObserver(self, selector: #selector(selectionDidChange), name: NSTextView.didChangeSelectionNotification, object: self)
     }
 
+    // MARK: - Custom Tool Button Setup
+
+    private func setupCustomToolButton() {
+        customToolContainerView = NSView()
+        customToolContainerView?.isHidden = true // Hide initially
+        customToolContainerView?.wantsLayer = true
+        customToolContainerView?.layer?.cornerRadius = 4
+        customToolContainerView?.layer?.borderWidth = 1
+        customToolContainerView?.layer?.borderColor = NSColor(named: "secondaryBackground")?.cgColor ?? NSColor.gray.cgColor
+        customToolContainerView?.layer?.backgroundColor = NSColor(named: "quaternaryBackground")?.cgColor ?? NSColor.windowBackgroundColor.cgColor
+        
+        // Set container dimensions for three squares
+        customToolContainerView?.frame.size = NSSize(width: 70, height: 24)
+
+        if let containerView = customToolContainerView {
+            self.addSubview(containerView)
+            setupColorSquares(in: containerView)
+        }
+    }
+
+    private func setupColorSquares(in container: NSView) {
+        let squareSize: CGFloat = 16
+        let spacing: CGFloat = 4  // Reduced spacing between squares
+        let yOffset: CGFloat = 4
+        
+        // Create three square buttons
+        let clearButton = createColorSquare(color: .clear, size: squareSize, withSlash: true)
+        let redButton = createColorSquare(color: NSColor(named: "highlightRed") ?? .red, size: squareSize)
+        let greenButton = createColorSquare(color: NSColor(named: "highlightGreen") ?? .green, size: squareSize)
+        
+        // Position squares horizontally with even spacing
+        let totalWidth = squareSize * 3 + spacing * 2
+        let startX = (container.frame.width - totalWidth) / 2
+        
+        clearButton.frame.origin = NSPoint(x: startX, y: yOffset)
+        redButton.frame.origin = NSPoint(x: startX + squareSize + spacing, y: yOffset)
+        greenButton.frame.origin = NSPoint(x: startX + (squareSize + spacing) * 2, y: yOffset)
+        
+        container.addSubview(clearButton)
+        container.addSubview(redButton)
+        container.addSubview(greenButton)
+        
+        // Add actions
+        clearButton.target = self
+        clearButton.action = #selector(clearHighlightAction)
+        redButton.target = self
+        redButton.action = #selector(redHighlightAction)
+        greenButton.target = self
+        greenButton.action = #selector(greenHighlightAction)
+    }
+    
+    private func createColorSquare(color: NSColor, size: CGFloat, withSlash: Bool = false) -> NSButton {
+        let button = NSButton(frame: NSRect(x: 0, y: 0, width: size, height: size))
+        button.wantsLayer = true
+        button.layer?.cornerRadius = 2
+        button.layer?.borderWidth = 1
+        button.layer?.borderColor = NSColor.gray.withAlphaComponent(0.3).cgColor
+        button.title = ""
+        button.bezelStyle = .regularSquare
+        button.isBordered = false
+        
+        // Create a container view for the button content
+        let containerView = NSView(frame: NSRect(x: 0, y: 0, width: size, height: size))
+        containerView.wantsLayer = true
+        
+        // Background layer
+        let backgroundLayer = CALayer()
+        backgroundLayer.frame = containerView.bounds
+        backgroundLayer.cornerRadius = 2
+        backgroundLayer.borderWidth = 1
+        backgroundLayer.borderColor = NSColor.gray.withAlphaComponent(0.3).cgColor
+        backgroundLayer.backgroundColor = color == .clear ? NSColor.white.cgColor : color.cgColor
+        containerView.layer = backgroundLayer
+        
+        if withSlash {
+            // Add diagonal red line for clear button
+            let slashLayer = CAShapeLayer()
+            slashLayer.frame = containerView.bounds
+            
+            let path = NSBezierPath()
+            path.move(to: NSPoint(x: 2, y: 2))
+            path.line(to: NSPoint(x: size - 2, y: size - 2))
+            
+            slashLayer.path = path.cgPath
+            slashLayer.strokeColor = NSColor.red.cgColor
+            slashLayer.lineWidth = 1.5
+            slashLayer.lineCap = .round
+            
+            containerView.layer?.addSublayer(slashLayer)
+        }
+        
+        button.addSubview(containerView)
+        
+        return button
+    }
+
+    private func updateColorsForAppearance() {
+        guard let customToolContainerView = customToolContainerView else { return }
+        customToolContainerView.layer?.backgroundColor = NSColor(named: "quaternary")?.cgColor ?? NSColor.windowBackgroundColor.cgColor
+        customToolContainerView.layer?.borderColor = NSColor(named: "secondary")?.cgColor ?? NSColor.gray.cgColor
+    }
+
+    // MARK: - Tool Button Visibility
+
+    @objc private func selectionDidChange() {
+        if selectedRange.length > 0 {
+            showCustomToolButton()
+        } else {
+            hideCustomToolButton()
+        }
+    }
+
+    private func hideCustomToolButton() {
+        guard let containerView = customToolContainerView else { return }
+        containerView.isHidden = true
+    }
+
+    private func showCustomToolButton() {
+        guard let containerView = customToolContainerView else { return }
+        containerView.isHidden = false
+        setCustomToolButtonFrameOrigin()
+    }
+
+    public func setCustomToolButtonFrameOrigin() {
+        guard let containerView = customToolContainerView, !containerView.isHidden else { return }
+        
+        if let layoutManager = self.layoutManager {
+            let glyphRange = layoutManager.glyphRange(forCharacterRange: selectedRange, actualCharacterRange: nil)
+            let boundingRect = layoutManager.boundingRect(forGlyphRange: glyphRange, in: self.textContainer!)
+            let containerOrigin = self.textContainerOrigin
+            
+            // Get the cursor position (start of selection)
+            let cursorRect = layoutManager.boundingRect(forGlyphRange: NSRange(location: selectedRange.location, length: 0), in: self.textContainer!)
+            
+            // Position above the cursor with offset
+            let buttonPosition = NSPoint(
+                x: cursorRect.minX + containerOrigin.x,
+                y: cursorRect.minY + containerOrigin.y - containerView.frame.height - 5
+            )
+            containerView.setFrameOrigin(buttonPosition)
+        }
+    }
+
+    // MARK: - Highlight Actions
+
+    @objc private func clearHighlightAction() {
+        // Remove highlight from selected text
+        if let textStorage = textStorage {
+            textStorage.removeAttribute(.backgroundColor, range: selectedRange)
+        }
+        hideCustomToolButton()
+        selectedRange = NSRange(location: selectedRange.location + selectedRange.length, length: 0)  // Deselect text
+    }
+
+    @objc private func redHighlightAction() {
+        if let color = NSColor(named: "highlightRed") {
+            applyHighlight(color)
+        }
+        hideCustomToolButton()
+        selectedRange = NSRange(location: selectedRange.location + selectedRange.length, length: 0)  // Deselect text
+    }
+
+    @objc private func greenHighlightAction() {
+        if let color = NSColor(named: "highlightGreen") {
+            applyHighlight(color)
+        }
+        hideCustomToolButton()
+        selectedRange = NSRange(location: selectedRange.location + selectedRange.length, length: 0)  // Deselect text
+    }
+    
+    private func applyHighlight(_ color: NSColor) {
+        if let textStorage = textStorage {
+            textStorage.addAttribute(.backgroundColor, value: color, range: selectedRange)
+        }
+    }
+
     // MARK: - Open Functionality
 
     /**
@@ -451,301 +627,6 @@ public extension RichTextView {
         var pasteboardTypes = super.readablePasteboardTypes
         pasteboardTypes.append(.png)
         return pasteboardTypes
-    }
-}
-// custom tool buttons for ai chat and Record option
-// TODO:  Can Make this tool buttons more dynamic, also should have flag to show hide this buttons according to prefrence of projects, in case using same framework in other project
-public extension RichTextView {
-
-    override open func viewDidChangeEffectiveAppearance() {
-        super.viewDidChangeEffectiveAppearance()
-        updateColorsForAppearance()
-    }
-
-    // Setup the custom tool button
-    private func setupCustomToolButton() {
-        customToolContainerView = NSView()
-        customToolContainerView?.isHidden = true // Hide initially
-        customToolContainerView?.wantsLayer = true
-        updateColorsForAppearance()
-        customToolContainerView?.layer?.borderColor = NSColor.gray.withAlphaComponent(0.3).cgColor
-                customToolContainerView?.layer?.borderWidth = 1
-        customToolContainerView?.layer?.cornerRadius = 3
-
-        // Set container dimensions (adjust as needed)
-        customToolContainerView?.frame.size = NSSize(width: 26, height: 24)
-
-        if let containerView = customToolContainerView {
-            self.addSubview(containerView)
-        }
-        // Paragraph button
-        let symbolConfiguration = NSImage.SymbolConfiguration(textStyle: .caption1, scale: .small)
-        let commandSign = NSImage(systemSymbolName: "command", accessibilityDescription: "command")!
-            .withSymbolConfiguration(symbolConfiguration)
-
-        let btn = NSButton()
-        btn.bezelStyle = .rounded
-        btn.isBordered = false
-
-        // Create a combined attributed title with both icon and text
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .center
-
-        let attributedTitle = NSMutableAttributedString()
-
-        // Add command icon
-        let commandAttachment = NSTextAttachment()
-        commandAttachment.image = commandSign
-        commandAttachment.bounds = CGRect(x: 0, y: -1, width: 12, height: 12)
-        let commandString = NSAttributedString(attachment: commandAttachment)
-        attributedTitle.append(commandString)
-
-        // Add "K" with semi-bold styling
-        let semi = NSFont.systemFont(ofSize: 12, weight: .semibold)
-        let kString = NSAttributedString(string: "L", attributes: [
-            .font: semi,
-            .paragraphStyle: paragraphStyle,
-            .baselineOffset: 0
-        ])
-        attributedTitle.append(kString)
-
-        btn.attributedTitle = attributedTitle
-        btn.target = self
-        btn.action = #selector(chatButtonAction)
-        btn.keyEquivalent = "l"
-        btn.keyEquivalentModifierMask = [.command]
-
-        btn.imageHugsTitle = true
-        btn.imagePosition = .imageLeading
-        btn.frame = NSRect(x: 0, y: 0, width: 26, height: 24) // Match container size
-        customToolContainerView?.addSubview(btn)
-
-    }
-
-    private func updateColorsForAppearance() {
-        guard let customToolContainerView = customToolContainerView else { return }
-
-        let cursorButtonColor = NSColor(name: "cursorButtonColor") { appearance in
-            switch appearance.bestMatch(from: [.aqua, .darkAqua]) {
-            case .darkAqua:
-                return NSColor(red: 48/255, green: 45/255, blue: 38/255, alpha: 1)
-            case .aqua:
-                return NSColor(red: 228/255, green: 224/255, blue: 211/255, alpha: 1)
-            default:
-                return NSColor(red: 228/255, green: 224/255, blue: 211/255, alpha: 1)
-            }
-        }
-        customToolContainerView.layer?.backgroundColor = cursorButtonColor.cgColor
-    }
-
-    @objc func showContextMenu(_ sender: NSButton) {
-        let menu = NSMenu()
-        menu.addItem(createMenuItem(title: "Edit and Author", imageName: "character.cursor.ibeam", action: #selector(editButtonAction)))
-        menu.addItem(createMenuItem(title: "Ask a Question", imageName: "sparkles", action: #selector(chatButtonAction)))
-        menu.addItem(createMenuItem(title: "Write with Voice", imageName: "mic.fill", action: #selector(recordButtonAction)))
-        // Show the menu at the button's location
-        menu.popUp(positioning: nil, at: sender.bounds.origin, in: sender)
-    }
-
-    private func createMenuItem(title: String, imageName: String, action: Selector) -> NSMenuItem {
-        let menuItem = NSMenuItem(title: title, action: action, keyEquivalent: "")
-        menuItem.image = NSImage(named: imageName) // Set the image
-        menuItem.target = self // Ensure the action is triggered
-        return menuItem
-    }
-
-    // Update container visibility and position based on selection
-    @objc private func selectionDidChange() {
-        if selectedRange.length > 0 {
-            showCustomToolButton()
-        } else {
-            hideCustomToolButton()
-        }
-    }
-
-    private func hideCustomToolButton() {
-        guard let containerView = customToolContainerView else { return }
-        containerView.isHidden = true
-    }
-
-    private func showCustomToolButton() {
-        guard let containerView = customToolContainerView else { return }
-        // Show container and position it below the selected text
-        containerView.isHidden = false
-        setCustomToolButtonFrameOrigin()
-    }
-
-    func setCustomToolButtonFrameOrigin() {
-        guard let containerView = customToolContainerView, !containerView.isHidden else { return }
-        // Calculate the position of the container below the selection
-        if let layoutManager = self.layoutManager {
-            let glyphRange = layoutManager.glyphRange(forCharacterRange: selectedRange, actualCharacterRange: nil)
-            let boundingRect = layoutManager.boundingRect(forGlyphRange: glyphRange, in: self.textContainer!)
-            let containerOrigin = self.textContainerOrigin
-
-            // Convert the bounding rectangle to view coordinates
-            let buttonPosition = NSPoint(x: boundingRect.maxX + containerOrigin.x + 5, // Offset slightly to the right
-                                         y: boundingRect.minY + containerOrigin.y + self.frame.origin.y - 4)
-            containerView.setFrameOrigin(buttonPosition)
-        }
-    }
-
-    @objc private func recordButtonAction() {
-        onRecordBtnAction()
-    }
-
-    @objc private func chatButtonAction() {
-        let range = safeRange(for: selectedRange)
-        let text = richText(at: range)
-        onAIChatBtnAction(text.string)
-        hideCustomToolButton()
-    }
-
-    @objc private func editButtonAction() {
-        let range = safeRange(for: selectedRange)
-        let text = richText(at: range)
-        onEditBtnAction(text.string)
-    }
-}
-
-extension RichTextView {
-
-    open override func becomeFirstResponder() -> Bool {
-        onFocus()
-        return super.becomeFirstResponder()
-    }
-
-    open override func resignFirstResponder() -> Bool {
-        return super.resignFirstResponder()
-    }
-
-}
-
-// MARK: - List Support
-
-extension RichTextView {
-    
-    open override func insertNewline(_ sender: Any?) {
-        let currentRange = selectedRange
-        let attributes = richTextAttributes(at: currentRange)
-        
-        // Check if we're in a list
-        if let listStyle = attributes[.listStyle] as? RichTextListStyle,
-           listStyle != .none {
-            
-            // Get the current line's text
-            let lineRange = lineRange(for: currentRange)
-            let lineText = richText(at: lineRange).string.trimmingCharacters(in: .whitespaces)
-            
-            // If the line is empty, end the list
-            if lineText.isEmpty {
-                // Remove list formatting from the current line
-                let paragraphStyle = NSMutableParagraphStyle()
-                setRichTextParagraphStyle(paragraphStyle)
-                
-                if let string = mutableRichText {
-                    string.removeAttribute(.listStyle, range: lineRange)
-                    string.removeAttribute(.listItemNumber, range: lineRange)
-                }
-                
-                super.insertNewline(sender)
-                return
-            }
-            
-            // Insert newline with list formatting
-            super.insertNewline(sender)
-            
-            // Get the new line range
-            let newLineRange = selectedRange
-            
-            // Create paragraph style for the new line
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.configureForList(listStyle)
-            
-            // Get the next number for ordered lists
-            let nextNumber = (attributes[.listItemNumber] as? Int ?? 1) + 1
-            
-            // Apply list attributes to the new line
-            let listAttributes: [NSAttributedString.Key: Any] = [
-                .listStyle: listStyle,
-                .listItemNumber: nextNumber,
-                .paragraphStyle: paragraphStyle
-            ]
-            
-            if let string = mutableRichText {
-                string.addAttributes(listAttributes, range: newLineRange)
-            }
-            
-            // Update all following list item numbers
-            updateListItemNumbers(in: NSRange(location: newLineRange.location, length: (textStorage?.length ?? 0) - newLineRange.location))
-            
-        } else {
-            super.insertNewline(sender)
-        }
-    }
-    
-    open override func drawBackground(in rect: NSRect) {
-        super.drawBackground(in: rect)
-        drawListMarkers(in: rect)
-    }
-    
-    private func drawListMarkers(in rect: NSRect) {
-        guard let layoutManager = self.layoutManager,
-              let textContainer = self.textContainer else { return }
-        
-        layoutManager.enumerateLineFragments(forGlyphRange: layoutManager.glyphRange(forBoundingRect: rect, in: textContainer)) { (lineRect, usedRect, textContainer, glyphRange, stop) in
-            
-            let characterRange = layoutManager.characterRange(forGlyphRange: glyphRange, actualGlyphRange: nil)
-            let attributes = self.textStorage?.attributes(at: characterRange.location, effectiveRange: nil) ?? [:]
-            
-            guard let listStyle = attributes[.listStyle] as? RichTextListStyle,
-                  listStyle != .none else { return }
-            
-            let paragraphStyle = attributes[.paragraphStyle] as? NSParagraphStyle
-            let indent = paragraphStyle?.headIndent ?? 0
-            
-            // Calculate marker position
-            let markerX = lineRect.minX + (paragraphStyle?.firstLineHeadIndent ?? 0)
-            let markerY = lineRect.minY + (lineRect.height - (self.font?.pointSize ?? 12)) / 2
-            
-            // Create marker string
-            let marker: String
-            if listStyle == .ordered {
-                let number = attributes[.listItemNumber] as? Int ?? 1
-                marker = "\(number)."
-            } else {
-                marker = listStyle.marker
-            }
-            
-            // Draw marker
-            let markerAttributes: [NSAttributedString.Key: Any] = [
-                .font: self.font ?? .systemFont(ofSize: NSFont.systemFontSize),
-                .foregroundColor: self.textColor ?? .textColor
-            ]
-            
-            marker.draw(at: NSPoint(x: markerX, y: markerY), withAttributes: markerAttributes)
-        }
-    }
-    
-    private func updateListItemNumbers(in range: NSRange) {
-        guard let textStorage = textStorage else { return }
-        
-        var currentNumber = 1
-        var location = range.location
-        
-        while location < range.location + range.length {
-            let attributes = textStorage.attributes(at: location, effectiveRange: nil)
-            
-            if let style = attributes[.listStyle] as? RichTextListStyle,
-               style == .ordered {
-                let lineRange = lineRange(for: NSRange(location: location, length: 0))
-                textStorage.addAttribute(.listItemNumber, value: currentNumber, range: lineRange)
-                currentNumber += 1
-                location = lineRange.location + lineRange.length
-            } else {
-                location += 1
-            }
-        }
     }
 }
 
