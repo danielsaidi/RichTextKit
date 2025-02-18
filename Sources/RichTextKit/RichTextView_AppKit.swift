@@ -303,7 +303,92 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         isContinuousSpellCheckingEnabled = configuration.isContinuousSpellCheckingEnabled
         setup(theme)
         setupCustomToolButton()
+        setupCmdLButton()
+        setupHighlightShortcut()
         NotificationCenter.default.addObserver(self, selector: #selector(selectionDidChange), name: NSTextView.didChangeSelectionNotification, object: self)
+    }
+
+    // Add highlight shortcut setup
+    private func setupHighlightShortcut() {
+        // Create a menu item for CMD+SHIFT+H
+        let menuItem = NSMenuItem()
+        menuItem.title = "Toggle Highlight"
+        menuItem.keyEquivalent = "h"
+        menuItem.keyEquivalentModifierMask = [.command, .shift]
+        menuItem.action = #selector(cycleHighlight)
+        menuItem.target = self
+        
+        // Add to main menu
+        if let mainMenu = NSApplication.shared.mainMenu {
+            // Try to find existing Edit menu
+            if let editMenu = mainMenu.items.first(where: { $0.submenu?.title == "Edit" })?.submenu {
+                editMenu.addItem(NSMenuItem.separator())
+                editMenu.addItem(menuItem)
+            } else {
+                // Create Edit menu if it doesn't exist
+                let editMenu = NSMenu(title: "Edit")
+                let editMenuItem = NSMenuItem()
+                editMenuItem.submenu = editMenu
+                editMenuItem.title = "Edit"
+                mainMenu.addItem(editMenuItem)
+                editMenu.addItem(menuItem)
+            }
+        }
+    }
+    
+    @objc private func cycleHighlight() {
+        guard selectedRange.length > 0,
+              let textStorage = textStorage else { return }
+        
+        // Get current highlight color if any
+        let attributes = richTextAttributes(at: selectedRange)
+        let currentHighlight = attributes[.backgroundColor] as? NSColor
+        
+        print("Cycling highlight. Current color: \(String(describing: currentHighlight?.description))")
+        
+        // Define highlight colors directly
+        let greenHighlight = NSColor(red: 0.8, green: 1.0, blue: 0.8, alpha: 0.5)
+        let redHighlight = NSColor(red: 1.0, green: 0.8, blue: 0.8, alpha: 0.5)
+        
+        // Helper function to compare colors approximately
+        func colorsAreEqual(_ color1: NSColor?, _ color2: NSColor) -> Bool {
+            guard let color1 = color1?.usingColorSpace(.genericRGB) else { return false }
+            let color2 = color2.usingColorSpace(.genericRGB)!
+            
+            // Compare RGB components with some tolerance for floating point comparison
+            let tolerance: CGFloat = 0.1
+            return abs(color1.redComponent - color2.redComponent) < tolerance &&
+                   abs(color1.greenComponent - color2.greenComponent) < tolerance &&
+                   abs(color1.blueComponent - color2.blueComponent) < tolerance
+        }
+        
+        // Determine next color in cycle
+        if currentHighlight == nil {
+            // No highlight -> Green
+            print("Applying green highlight")
+            applyHighlight(greenHighlight)
+        } else if colorsAreEqual(currentHighlight, greenHighlight) {
+            // Green -> Red
+            print("Applying red highlight")
+            applyHighlight(redHighlight)
+        } else if colorsAreEqual(currentHighlight, redHighlight) {
+            // Red -> None
+            print("Removing highlight")
+            textStorage.removeAttribute(.backgroundColor, range: selectedRange)
+        } else {
+            // Unknown color -> Start over with green
+            print("Unknown color, applying green highlight")
+            applyHighlight(greenHighlight)
+        }
+        
+        // Move cursor to end of selection and deselect
+        selectedRange = NSRange(location: selectedRange.location + selectedRange.length, length: 0)
+    }
+
+    private func applyHighlight(_ color: NSColor) {
+        if let textStorage = textStorage {
+            textStorage.addAttribute(.backgroundColor, value: color, range: selectedRange)
+        }
     }
 
     // MARK: - Custom Tool Button Setup
@@ -475,11 +560,53 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         hideCustomToolButton()
         selectedRange = NSRange(location: selectedRange.location + selectedRange.length, length: 0)  // Deselect text
     }
+
+    // MARK: - CMD+L Button Setup
     
-    private func applyHighlight(_ color: NSColor) {
-        if let textStorage = textStorage {
-            textStorage.addAttribute(.backgroundColor, value: color, range: selectedRange)
+    private func setupCmdLButton() {
+        // Create a menu item for CMD+L
+        let menuItem = NSMenuItem()
+        menuItem.title = "Chat"
+        menuItem.keyEquivalent = "l"
+        menuItem.keyEquivalentModifierMask = .command
+        menuItem.action = #selector(chatButtonAction)
+        menuItem.target = self
+        
+        // Add to main menu
+        if let mainMenu = NSApplication.shared.mainMenu {
+            // Try to find existing Edit menu
+            if let editMenu = mainMenu.items.first(where: { $0.submenu?.title == "Edit" })?.submenu {
+                editMenu.addItem(NSMenuItem.separator())
+                editMenu.addItem(menuItem)
+            } else {
+                // Create Edit menu if it doesn't exist
+                let editMenu = NSMenu(title: "Edit")
+                let editMenuItem = NSMenuItem()
+                editMenuItem.submenu = editMenu
+                editMenuItem.title = "Edit"
+                mainMenu.addItem(editMenuItem)
+                editMenu.addItem(menuItem)
+            }
         }
+    }
+    
+    @objc private func chatButtonAction() {
+        // Only proceed if there is selected text
+        guard selectedRange.length > 0 else { return }
+        
+        let range = safeRange(for: selectedRange)
+        let text = richText(at: range)
+        onAIChatBtnAction(text.string)
+    }
+
+    @objc private func editButtonAction() {
+        let range = safeRange(for: selectedRange)
+        let text = richText(at: range)
+        onEditBtnAction(text.string)
+    }
+
+    @objc private func recordButtonAction() {
+        onRecordBtnAction()
     }
 
     // MARK: - Open Functionality
@@ -566,6 +693,49 @@ open class RichTextView: NSTextView, RichTextViewComponent {
 
     private func mapLineSpacing(_ fontSize: CGFloat) -> CGFloat {
         return 10.0  // Use consistent line spacing for all text
+    }
+
+    // Override to handle keyboard shortcuts
+    open override func performKeyEquivalent(with event: NSEvent) -> Bool {
+        print("Received key event: \(event.charactersIgnoringModifiers ?? ""), modifiers: \(event.modifierFlags)")
+        
+        let flags = event.modifierFlags.intersection(.deviceIndependentFlagsMask)
+        let chars = event.charactersIgnoringModifiers ?? ""
+        
+        // Handle CMD+L
+        if flags == .command && chars == "l" {
+            chatButtonAction()
+            return true
+        }
+        
+        // Handle CMD+SHIFT+H
+        if chars.lowercased() == "h" && flags.contains(.command) && flags.contains(.shift) {
+            print("Detected CMD+SHIFT+H")
+            if selectedRange.length > 0 {
+                cycleHighlight()
+                return true
+            }
+        }
+        
+        // If we didn't handle it, let super try
+        let handled = super.performKeyEquivalent(with: event)
+        print("Super handled: \(handled)")
+        return handled
+    }
+
+    open override var acceptsFirstResponder: Bool {
+        return true
+    }
+
+    open override func becomeFirstResponder() -> Bool {
+        let result = super.becomeFirstResponder()
+        if result {
+            // Register for the keyboard shortcut
+            if let window = window {
+                window.makeFirstResponder(self)
+            }
+        }
+        return result
     }
 }
 
