@@ -126,8 +126,8 @@ import AppKit
 extension RichTextCoordinator: NSTextViewDelegate {
 
     public func textView(_ textView: NSTextView, clickedOnLink link: Any, at charIndex: Int) -> Bool {
-        guard let linkValue = link as? String else { return false }
-        
+        guard let linkValue = (link as? URL)?.absoluteString else { return false }
+
         if linkValue.hasPrefix("note:") {
             let noteID = linkValue.replacingOccurrences(of: "note:", with: "")
             print("open note with id \(noteID)")
