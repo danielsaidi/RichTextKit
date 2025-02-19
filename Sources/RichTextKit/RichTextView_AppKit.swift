@@ -61,6 +61,8 @@ open class RichTextView: NSTextView, RichTextViewComponent {
     var onEditBtnAction: (String) -> () = { _ in }
     var onRecordBtnAction: () -> () = {}
     var onFocus: () -> () = {}
+    var openNote: (String) -> () = { _ in }
+    var openSection: (String) -> () = { _ in }
 
     // MARK: - Private Helper Methods
     
