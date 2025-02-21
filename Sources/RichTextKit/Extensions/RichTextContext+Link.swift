@@ -24,7 +24,7 @@ public extension RichTextContext {
     /// - Parameters:
     ///   - urlString: The URL string to link to
     ///   - text: Optional text to replace the selection with. If nil, uses existing selection
-    public func setLink(url urlString: String, text: String? = nil) {
+    public func setLink(url urlString: String, text: String? = nil, isURL: Bool) {
         let range = selectedRange
         
         // Only apply changes if explicitly requested and different from current
@@ -32,10 +32,11 @@ public extension RichTextContext {
         
         // Process URL string
         var finalURLString = urlString
-        if !urlString.lowercased().hasPrefix("http://") && !urlString.lowercased().hasPrefix("https://") {
-            finalURLString = "https://" + urlString
+        if isURL {
+            if !urlString.lowercased().hasPrefix("http://") && !urlString.lowercased().hasPrefix("https://") {
+                finalURLString = "https://" + urlString
+            }
         }
-        
         guard let linkURL = URL(string: finalURLString) else { return }
         
         let linkText = text ?? attributedString.string.substring(with: range)

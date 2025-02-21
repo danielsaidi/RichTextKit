@@ -123,7 +123,28 @@ extension RichTextCoordinator: UITextViewDelegate {}
 #elseif macOS
 import AppKit
 
-extension RichTextCoordinator: NSTextViewDelegate {}
+extension RichTextCoordinator: NSTextViewDelegate {
+
+    public func textView(_ textView: NSTextView, clickedOnLink link: Any, at charIndex: Int) -> Bool {
+        guard let linkValue = (link as? URL)?.absoluteString else { return false }
+
+        if linkValue.hasPrefix("note:") {
+            let noteID = linkValue.replacingOccurrences(of: "note:", with: "")
+            print("open note with id \(noteID)")
+            self.textView.openNote(noteID)
+            return true
+        } else if linkValue.hasPrefix("section:") {
+            let sectionID = linkValue.replacingOccurrences(of: "section:", with: "")
+            print("navigate to section with id: \(sectionID)")
+            self.textView.openSection(sectionID)
+            return true
+        }
+        
+        return false // Allow default handling for normal URLs
+    }
+
+}
+
 #endif
 
 // MARK: - Public Extensions
