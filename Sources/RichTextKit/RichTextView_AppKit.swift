@@ -3,7 +3,7 @@
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2022-05-12.
-//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
+//  Copyright 2022-2024 Daniel Saidi. All rights reserved.
 //
 
 #if macOS
@@ -339,8 +339,7 @@ open class RichTextView: NSTextView, RichTextViewComponent {
     }
     
     @objc private func cycleHighlight() {
-        guard selectedRange.length > 0,
-              let textStorage = textStorage else { return }
+        guard let textStorage = textStorage else { return }
         
         // Get current highlight color if any
         let attributes = richTextAttributes(at: selectedRange)
@@ -593,9 +592,6 @@ open class RichTextView: NSTextView, RichTextViewComponent {
     }
     
     @objc private func chatButtonAction() {
-        // Only proceed if there is selected text
-        guard selectedRange.length > 0 else { return }
-        
         let range = safeRange(for: selectedRange)
         let text = richText(at: range)
         onAIChatBtnAction(text.string)
