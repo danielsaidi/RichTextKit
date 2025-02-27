@@ -65,16 +65,19 @@ open class RichTextView: NSTextView, RichTextViewComponent {
     var openSection: (String) -> () = { _ in }
     public var formattingStateDidChange: ((RichTextStyle) -> Void)?
 
-
     // MARK: - Private Helper Methods
     
     private let whitelistedKeys: Set<NSAttributedString.Key> = [
-        .font,  // For font size mapping
+        .font,  // For font size and traits
+        .foregroundColor, // For text color
+        .backgroundColor, // For background color
         .underlineStyle,  // For underline
+        .strikethroughStyle, // For strikethrough
         .paragraphStyle,  // For alignment and line spacing
         .listStyle,  // For list handling
         .listItemNumber,  // For list handling
-        .link  // For preserving link functionality
+        .link,  // For preserving link functionality
+        .headerLevel // For header levels
     ]
     
     private func cleanAttributes(_ attributedString: NSMutableAttributedString, range: NSRange, preserveColor: Bool = false) {
@@ -86,22 +89,47 @@ open class RichTextView: NSTextView, RichTextViewComponent {
                 }
             }
             
+            // Preserve font traits (bold, italic) but standardize font family
+            if let oldFont = attrs[.font] as? NSFont {
+                let fontManager = NSFontManager.shared
+                let isBold = fontManager.traits(of: oldFont).contains(.boldFontMask)
+                let isItalic = fontManager.traits(of: oldFont).contains(.italicFontMask)
+                
+                // Start with standard font at the original size
+                var newFont = NSFont.standardRichTextFont.withSize(oldFont.pointSize)
+                
+                // Apply bold if needed
+                if isBold {
+                    newFont = fontManager.convert(newFont, toHaveTrait: .boldFontMask)
+                }
+                
+                // Apply italic if needed
+                if isItalic {
+                    newFont = fontManager.convert(newFont, toHaveTrait: .italicFontMask)
+                }
+                
+                // Apply the new font
+                attributedString.addAttribute(.font, value: newFont, range: subrange)
+            }
+            
             // Clean up paragraph style - preserve alignment, line spacing, and paragraph spacing
             if let oldStyle = attrs[.paragraphStyle] as? NSParagraphStyle {
                 let newStyle = NSMutableParagraphStyle()
                 newStyle.alignment = oldStyle.alignment
                 
-                // Get the font size to determine line spacing
-                if let font = attrs[.font] as? NSFont {
+                // Preserve original line spacing if reasonable, otherwise map based on font size
+                if oldStyle.lineSpacing > 0 && oldStyle.lineSpacing < 30 {
+                    newStyle.lineSpacing = oldStyle.lineSpacing
+                } else if let font = attrs[.font] as? NSFont {
                     let mappedSize = mapFontSize(font.pointSize)
                     newStyle.lineSpacing = mapLineSpacing(mappedSize)
                 } else {
                     newStyle.lineSpacing = mapLineSpacing(16.0) // Default line spacing
                 }
                 
-                // Add paragraph spacing
-                newStyle.paragraphSpacing = 10
-                newStyle.paragraphSpacingBefore = 10
+                // Preserve original paragraph spacing
+                newStyle.paragraphSpacing = oldStyle.paragraphSpacing
+                newStyle.paragraphSpacingBefore = oldStyle.paragraphSpacingBefore
                 
                 // Handle list indentation if needed
                 if let listStyle = attrs[.listStyle] as? RichTextListStyle,
@@ -235,7 +263,7 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         let currentAttributes = typingAttributes
         
         // Begin undo grouping
-        undoManager?.beginUndoGrouping()
+        safelyBeginUndoGrouping()
         
         // If we're typing after a link or inserting whitespace, remove link attributes
         if let text = string as? String {
@@ -267,23 +295,91 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         // Perform the text insertion
         super.insertText(string, replacementRange: replacementRange)
         
+        // Handle markdown formatting within the same undo group
+        handleMarkdownInput()
+        
         // Register undo operation
         undoManager?.registerUndo(withTarget: self) { target in
             target.undoTextInsertion(at: currentRange, attributes: currentAttributes)
         }
         
-        undoManager?.endUndoGrouping()
-        handleMarkdownInput()
+        // End undo grouping
+        safelyEndUndoGrouping()
     }
     
     private func undoTextInsertion(at range: NSRange, attributes: [NSAttributedString.Key: Any]) {
-        textStorage?.deleteCharacters(in: range)
-        typingAttributes = attributes
-        selectedRange = range
         if let textStorage = self.textStorage {
             textStorage.deleteCharacters(in: range)
             typingAttributes = attributes
             selectedRange = range
+        }
+    }
+
+    // Override deleteBackward to properly handle undo operations
+    open override func deleteBackward(_ sender: Any?) {
+        // If there's no selection, we're just deleting a single character
+        // Otherwise, we're deleting the selected text
+        let currentRange = selectedRange
+        
+        if currentRange.length == 0 && currentRange.location > 0 {
+            // Store the character that will be deleted for undo
+            let deleteRange = NSRange(location: currentRange.location - 1, length: 1)
+            if let textStorage = self.textStorage, deleteRange.location >= 0 && deleteRange.location + deleteRange.length <= textStorage.length {
+                let deletedText = textStorage.attributedSubstring(from: deleteRange)
+                let currentAttributes = typingAttributes
+                
+                // Begin undo grouping
+                safelyBeginUndoGrouping()
+                
+                // Perform the delete
+                super.deleteBackward(sender)
+                
+                // Register undo operation
+                undoManager?.registerUndo(withTarget: self) { target in
+                    // Restore the deleted character
+                    if let ts = target.textStorage {
+                        let insertPoint = NSRange(location: deleteRange.location, length: 0)
+                        ts.replaceCharacters(in: insertPoint, with: deletedText)
+                        target.selectedRange = NSRange(location: deleteRange.location + 1, length: 0)
+                        target.typingAttributes = currentAttributes
+                    }
+                }
+                
+                // End undo grouping
+                safelyEndUndoGrouping()
+            } else {
+                super.deleteBackward(sender)
+            }
+        } else if currentRange.length > 0 {
+            // Deleting selected text
+            if let textStorage = self.textStorage {
+                let deletedText = textStorage.attributedSubstring(from: currentRange)
+                let currentAttributes = typingAttributes
+                
+                // Begin undo grouping
+                safelyBeginUndoGrouping()
+                
+                // Perform the delete
+                super.deleteBackward(sender)
+                
+                // Register undo operation
+                undoManager?.registerUndo(withTarget: self) { target in
+                    // Restore the deleted text
+                    if let ts = target.textStorage {
+                        let insertPoint = NSRange(location: currentRange.location, length: 0)
+                        ts.replaceCharacters(in: insertPoint, with: deletedText)
+                        target.selectedRange = currentRange
+                        target.typingAttributes = currentAttributes
+                    }
+                }
+                
+                // End undo grouping
+                safelyEndUndoGrouping()
+            } else {
+                super.deleteBackward(sender)
+            }
+        } else {
+            super.deleteBackward(sender)
         }
     }
 
@@ -667,6 +763,10 @@ open class RichTextView: NSTextView, RichTextViewComponent {
     }
 
     private func handlePastedText(_ text: NSAttributedString) {
+        // Store current selection and content for undo
+        let currentRange = selectedRange()
+        let currentText = NSAttributedString(attributedString: textStorage?.attributedSubstring(from: currentRange) ?? NSAttributedString())
+        
         let attributedString = NSMutableAttributedString(attributedString: text)
         let range = NSRange(location: 0, length: attributedString.length)
         
@@ -675,7 +775,23 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         // Use textStorage to replace the text while preserving attributes
         let insertRange = selectedRange()
         if let textStorage = self.textStorage {
+            // Begin undo grouping
+            safelyBeginUndoGrouping()
+            
             textStorage.replaceCharacters(in: insertRange, with: attributedString)
+            
+            // Register undo operation
+            undoManager?.registerUndo(withTarget: self) { target in
+                // Restore previous state on undo
+                if let ts = target.textStorage {
+                    target.selectedRange = currentRange
+                    ts.replaceCharacters(in: NSRange(location: currentRange.location, length: attributedString.length), with: currentText)
+                    target.selectedRange = currentRange
+                }
+            }
+            
+            // End undo grouping
+            safelyEndUndoGrouping()
         }
     }
     
@@ -740,6 +856,25 @@ open class RichTextView: NSTextView, RichTextViewComponent {
             }
         }
         return result
+    }
+    
+    // MARK: - Private Helper Methods
+    
+    // Track if we're already in an undo operation to prevent nesting
+    private var isPerformingUndoOperation = false
+    
+    // Safely begin an undo group only if we're not already in one
+    private func safelyBeginUndoGrouping() {
+        guard !isPerformingUndoOperation else { return }
+        isPerformingUndoOperation = true
+        undoManager?.beginUndoGrouping()
+    }
+    
+    // Safely end an undo group only if we started one
+    private func safelyEndUndoGrouping() {
+        guard isPerformingUndoOperation else { return }
+        undoManager?.endUndoGrouping()
+        isPerformingUndoOperation = false
     }
 }
 
