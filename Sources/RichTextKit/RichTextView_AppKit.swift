@@ -68,19 +68,35 @@ open class RichTextView: NSTextView, RichTextViewComponent {
     // MARK: - Private Helper Methods
     
     private let whitelistedKeys: Set<NSAttributedString.Key> = [
-        .font,  // For font size and traits
-        .foregroundColor, // For text color
-        .backgroundColor, // For background color
+        .font,  // For font size mapping
         .underlineStyle,  // For underline
-        .strikethroughStyle, // For strikethrough
         .paragraphStyle,  // For alignment and line spacing
         .listStyle,  // For list handling
         .listItemNumber,  // For list handling
-        .link,  // For preserving link functionality
-        .headerLevel // For header levels
+        .link  // For preserving link functionality
     ]
     
     private func cleanAttributes(_ attributedString: NSMutableAttributedString, range: NSRange, preserveColor: Bool = false) {
+        // Track font traits to preserve
+        var preservedFontTraits = [NSRange: (isBold: Bool, isItalic: Bool)]()
+        var preservedUnderline = [NSRange: Int]()
+        
+        // First pass: collect all formatting we want to preserve
+        attributedString.enumerateAttributes(in: range, options: []) { attrs, subrange, _ in
+            // Preserve font traits (bold, italic)
+            if let font = attrs[.font] as? NSFont {
+                let fontManager = NSFontManager.shared
+                let isBold = fontManager.traits(of: font).contains(.boldFontMask)
+                let isItalic = fontManager.traits(of: font).contains(.italicFontMask)
+                preservedFontTraits[subrange] = (isBold, isItalic)
+            }
+            
+            // Preserve underline
+            if let underlineStyle = attrs[.underlineStyle] as? Int {
+                preservedUnderline[subrange] = underlineStyle
+            }
+        }
+        
         // Remove all attributes except our whitelist
         attributedString.enumerateAttributes(in: range, options: []) { attrs, subrange, _ in
             for (key, _) in attrs {
@@ -92,8 +108,9 @@ open class RichTextView: NSTextView, RichTextViewComponent {
             // Preserve font traits (bold, italic) but standardize font family
             if let oldFont = attrs[.font] as? NSFont {
                 let fontManager = NSFontManager.shared
-                let isBold = fontManager.traits(of: oldFont).contains(.boldFontMask)
-                let isItalic = fontManager.traits(of: oldFont).contains(.italicFontMask)
+                let traits = preservedFontTraits[subrange]
+                let isBold = traits?.isBold ?? fontManager.traits(of: oldFont).contains(.boldFontMask)
+                let isItalic = traits?.isItalic ?? fontManager.traits(of: oldFont).contains(.italicFontMask)
                 
                 // Start with standard font at the original size
                 var newFont = NSFont.standardRichTextFont.withSize(oldFont.pointSize)
@@ -112,15 +129,18 @@ open class RichTextView: NSTextView, RichTextViewComponent {
                 attributedString.addAttribute(.font, value: newFont, range: subrange)
             }
             
+            // Restore underline if it was present
+            if let underlineStyle = preservedUnderline[subrange] {
+                attributedString.addAttribute(.underlineStyle, value: underlineStyle, range: subrange)
+            }
+            
             // Clean up paragraph style - preserve alignment, line spacing, and paragraph spacing
             if let oldStyle = attrs[.paragraphStyle] as? NSParagraphStyle {
                 let newStyle = NSMutableParagraphStyle()
                 newStyle.alignment = oldStyle.alignment
                 
-                // Preserve original line spacing if reasonable, otherwise map based on font size
-                if oldStyle.lineSpacing > 0 && oldStyle.lineSpacing < 30 {
-                    newStyle.lineSpacing = oldStyle.lineSpacing
-                } else if let font = attrs[.font] as? NSFont {
+                // Get the font size to determine line spacing
+                if let font = attrs[.font] as? NSFont {
                     let mappedSize = mapFontSize(font.pointSize)
                     newStyle.lineSpacing = mapLineSpacing(mappedSize)
                 } else {
@@ -155,12 +175,33 @@ open class RichTextView: NSTextView, RichTextViewComponent {
             let mappedSize: CGFloat
             if let font = value as? NSFont {
                 mappedSize = mapFontSize(font.pointSize)
+                
+                // Get the traits from the current font
+                let fontManager = NSFontManager.shared
+                let traits = fontManager.traits(of: font)
+                let isBold = traits.contains(.boldFontMask)
+                let isItalic = traits.contains(.italicFontMask)
+                
+                // Create a new font with the mapped size but preserve bold/italic
+                var newFont = NSFont(name: "New York", size: mappedSize) ?? NSFont.systemFont(ofSize: mappedSize)
+                
+                // Apply bold if needed
+                if isBold {
+                    newFont = fontManager.convert(newFont, toHaveTrait: .boldFontMask)
+                }
+                
+                // Apply italic if needed
+                if isItalic {
+                    newFont = fontManager.convert(newFont, toHaveTrait: .italicFontMask)
+                }
+                
+                attributedString.addAttribute(.font, value: newFont, range: subrange)
             } else {
                 mappedSize = 16.0 // Default to paragraph size
+                let defaultFont = NSFont(name: "New York", size: mappedSize) ?? NSFont.systemFont(ofSize: mappedSize)
+                attributedString.addAttribute(.font, value: defaultFont, range: subrange)
             }
             
-            let defaultFont = NSFont(name: "New York", size: mappedSize) ?? NSFont.systemFont(ofSize: mappedSize)
-            attributedString.addAttribute(.font, value: defaultFont, range: subrange)
             attributedString.addAttribute(NSAttributedString.Key("NSFontSizeAttribute"), value: mappedSize, range: subrange)
         }
         
@@ -315,7 +356,6 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         }
     }
 
-    // Override deleteBackward to properly handle undo operations
     open override func deleteBackward(_ sender: Any?) {
         // If there's no selection, we're just deleting a single character
         // Otherwise, we're deleting the selected text
