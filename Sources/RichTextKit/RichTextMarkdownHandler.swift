@@ -37,11 +37,6 @@ public extension RichTextView {
     private func handleInlineMarkdown(fullText: String, selectedRange: NSRange) {
         print("Checking inline markdown in text: \(fullText)")
         let patterns = ["\\*\\*(.+?)\\*\\*", "(?<!\\*)\\*(?!\\*)(.+?)(?<!\\*)\\*(?!\\*)", "_(.+?)_"]
-        let attributes: [[NSAttributedString.Key: Any]] = [
-            [.font: NSFont.boldSystemFont(ofSize: NSFont.systemFontSize)],
-            [.font: NSFontManager.shared.convert(NSFont.systemFont(ofSize: NSFont.systemFontSize), toHaveTrait: .italicFontMask)],
-            [.underlineStyle: NSUnderlineStyle.single.rawValue]
-        ]
 
         for (index, pattern) in patterns.enumerated() {
             print("Inline markdown pattern checked: \(pattern)")
@@ -52,16 +47,35 @@ public extension RichTextView {
                 let markdownRange = match.range(at: 0)
                 let contentRange = match.range(at: 1)
                 let content = (fullText as NSString).substring(with: contentRange)
-                
-                textStorage?.replaceCharacters(in: markdownRange, with: content)
-                textStorage?.addAttributes(attributes[index], range: NSRange(location: markdownRange.location, length: content.count))
+
+                let currentFont = textStorage?.attribute(.font, at: markdownRange.location, effectiveRange: nil) as? NSFont ?? NSFont.systemFont(ofSize: NSFont.systemFontSize)
+
+                var newFont: NSFont = currentFont
+                var attributes: [NSAttributedString.Key: Any] = [:]
 
                 switch index {
-                case 0: formattingStateDidChange?(.bold)
-                case 1: formattingStateDidChange?(.italic)
-                case 2: formattingStateDidChange?(.underlined)
+                case 0:
+                    newFont = NSFontManager.shared.convert(currentFont, toHaveTrait: .boldFontMask)
+                    attributes[.font] = newFont
+                case 1:
+                    newFont = NSFontManager.shared.convert(currentFont, toHaveTrait: .italicFontMask)
+                    attributes[.font] = newFont
+                case 2:
+                    attributes[.underlineStyle] = NSUnderlineStyle.single.rawValue
                 default: break
                 }
+
+                textStorage?.replaceCharacters(in: markdownRange, with: content)
+                textStorage?.addAttributes(attributes, range: NSRange(location: markdownRange.location, length: content.count))
+
+                // Don't update the UI state when applying markdown formatting
+                // This prevents the FormattingStyleToggleGroup from being updated
+                // switch index {
+                // case 0: formattingStateDidChange?(.bold)
+                // case 1: formattingStateDidChange?(.italic)
+                // case 2: formattingStateDidChange?(.underlined)
+                // default: break
+                // }
             }
         }
     }
