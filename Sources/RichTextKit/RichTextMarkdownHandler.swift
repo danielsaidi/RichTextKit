@@ -22,12 +22,20 @@ public extension RichTextView {
     }
 
     private func handleHeadingMarkdown(fullText: String, selectedRange: NSRange) {
-        let patterns = ["^(###)\\s", "^(##)\\s", "^(#)\\s"]
+        // Modified patterns to work in the middle of sentences
+        // (?<=^|\s) is a positive lookbehind that matches if preceded by start of line or whitespace
+        let patterns = ["(?<=^|\\s)(###)\\s", "(?<=^|\\s)(##)\\s", "(?<=^|\\s)(#)\\s"]
+        
         for (index, pattern) in patterns.enumerated() {
             if let regex = try? NSRegularExpression(pattern: pattern, options: .anchorsMatchLines),
                let match = regex.firstMatch(in: fullText, options: [], range: NSRange(location: 0, length: fullText.utf16.count)) {
                 let nsRange = match.range(at: 0)
-                textStorage?.replaceCharacters(in: nsRange, with: "")
+                let hashRange = match.range(at: 1)
+                
+                // Only replace the # characters and the space after them, not any preceding whitespace
+                textStorage?.replaceCharacters(in: NSRange(location: hashRange.location, length: nsRange.length - (hashRange.location - nsRange.location)), with: "")
+                
+                // Apply heading formatting
                 setTypingAttributes(forHeadingLevel: 3 - index)
                 break
             }
@@ -83,5 +91,8 @@ public extension RichTextView {
     private func setTypingAttributes(forHeadingLevel level: Int) {
         let headerLevel = RichTextHeaderLevel(level)
         typingAttributes[.font] = NSFont(name: headerLevel.font.fontName, size: headerLevel.fontSize)
+        
+        // Store the header level in the typing attributes to ensure it's preserved
+        typingAttributes[.headerLevel] = level
     }
 }
