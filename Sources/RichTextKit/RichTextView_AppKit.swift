@@ -178,9 +178,9 @@ open class RichTextView: NSTextView, RichTextViewComponent {
                 
                 // Get the traits from the current font
                 let fontManager = NSFontManager.shared
-                let traits = fontManager.traits(of: font)
-                let isBold = traits.contains(.boldFontMask)
-                let isItalic = traits.contains(.italicFontMask)
+                let traits = preservedFontTraits[subrange]
+                let isBold = traits?.isBold ?? fontManager.traits(of: font).contains(.boldFontMask)
+                let isItalic = traits?.isItalic ?? fontManager.traits(of: font).contains(.italicFontMask)
                 
                 // Create a new font with the mapped size but preserve bold/italic
                 var newFont = NSFont(name: "New York", size: mappedSize) ?? NSFont.systemFont(ofSize: mappedSize)
@@ -195,6 +195,7 @@ open class RichTextView: NSTextView, RichTextViewComponent {
                     newFont = fontManager.convert(newFont, toHaveTrait: .italicFontMask)
                 }
                 
+                // Apply the new font
                 attributedString.addAttribute(.font, value: newFont, range: subrange)
             } else {
                 mappedSize = 16.0 // Default to paragraph size
@@ -232,6 +233,12 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         let pasteboard = NSPasteboard.general
         
         // Try to get any text data (RTF or plain)
+        if let rtfData = pasteboard.data(forType: .rtf) {
+            print("RTF data retrieved from pasteboard: \(rtfData.count) bytes")
+        } else {
+            print("No RTF data available on pasteboard")
+        }
+        
         if let rtfData = pasteboard.data(forType: .rtf),
            let rtfString = try? NSAttributedString(data: rtfData, documentAttributes: nil) {
             // Create mutable copy to clean up attributes
@@ -421,6 +428,11 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         } else {
             super.deleteBackward(sender)
         }
+    }
+
+    open override func copy(_ sender: Any?) {
+        print("Standard copy method triggered")
+        copySelection()
     }
 
     // MARK: - Setup
@@ -775,6 +787,14 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         let text = richText(at: range)
         pasteboard.clearContents()
         pasteboard.setString(text.string, forType: .string)
+
+        do {
+            let rtfData = try text.data(from: NSRange(location: 0, length: text.length), documentAttributes: [.documentType: NSAttributedString.DocumentType.rtf])
+            pasteboard.setData(rtfData, forType: .rtf)
+            print("RTF data successfully copied: \(rtfData.count) bytes")
+        } catch {
+            print("Error generating RTF data: \(error.localizedDescription)")
+        }
     }
 
     /// Delete the text at a certain range.
