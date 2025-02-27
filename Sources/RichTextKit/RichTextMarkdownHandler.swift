@@ -9,7 +9,6 @@ import AppKit
 public extension RichTextView {
 
     func handleMarkdownInput() {
-        print("handleMarkdownInput invoked. Current text storage: \(textStorage?.string ?? "nil")")
         guard let textStorage = self.textStorage else { return }
         let fullText = textStorage.string
         let selectedRange = self.selectedRange()
@@ -43,15 +42,12 @@ public extension RichTextView {
     }
 
     private func handleInlineMarkdown(fullText: String, selectedRange: NSRange) {
-        print("Checking inline markdown in text: \(fullText)")
         let patterns = ["\\*\\*(.+?)\\*\\*", "(?<!\\*)\\*(?!\\*)(.+?)(?<!\\*)\\*(?!\\*)", "_(.+?)_"]
 
         for (index, pattern) in patterns.enumerated() {
-            print("Inline markdown pattern checked: \(pattern)")
             let regex = try? NSRegularExpression(pattern: pattern, options: [])
             regex?.enumerateMatches(in: fullText, options: [], range: NSRange(location: 0, length: fullText.utf16.count)) { match, _, _ in
                 guard let match = match, match.numberOfRanges > 1 else { return }
-                print("Inline markdown pattern matched: \(pattern)")
                 let markdownRange = match.range(at: 0)
                 let contentRange = match.range(at: 1)
                 let content = (fullText as NSString).substring(with: contentRange)

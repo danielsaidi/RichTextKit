@@ -232,13 +232,47 @@ open class RichTextView: NSTextView, RichTextViewComponent {
     open override func paste(_ sender: Any?) {
         let pasteboard = NSPasteboard.general
         
-        // Try to get any text data (RTF or plain)
-        if let rtfData = pasteboard.data(forType: .rtf) {
-            print("RTF data retrieved from pasteboard: \(rtfData.count) bytes")
-        } else {
-            print("No RTF data available on pasteboard")
+        // Check for image data first
+        if let image = pasteboard.image {
+            // Insert the image at the current selection point
+            let attachment = NSTextAttachment()
+            attachment.image = image
+            
+            // Scale down large images to a reasonable size
+            let imageSize = image.size
+            if imageSize.width > 600 {
+                let ratio = imageSize.height / imageSize.width
+                let newWidth: CGFloat = 600
+                let newHeight = newWidth * ratio
+                attachment.bounds = CGRect(x: 0, y: 0, width: newWidth, height: newHeight)
+            }
+            
+            let attachmentString = NSAttributedString(attachment: attachment)
+            let mutableString = NSMutableAttributedString(attributedString: attachmentString)
+            
+            // Add a newline after the image
+            mutableString.append(NSAttributedString(string: "\n"))
+            
+            // Insert at current selection
+            if let storage = textStorage {
+                let insertionPoint = selectedRange.location
+                storage.replaceCharacters(in: selectedRange, with: mutableString)
+                
+                // Move cursor right after the inserted image (before the newline)
+                let newPosition = insertionPoint + 1  // Position after the attachment character
+                selectedRange = NSRange(location: newPosition, length: 0)
+                
+                // Ensure the cursor is visible
+                scrollRangeToVisible(selectedRange)
+            } else {
+                // Fall back to handlePastedText if textStorage is nil
+                handlePastedText(mutableString)
+            }
+            
+            return
         }
         
+        // Try to get any text data (RTF or plain)
         if let rtfData = pasteboard.data(forType: .rtf),
            let rtfString = try? NSAttributedString(data: rtfData, documentAttributes: nil) {
             // Create mutable copy to clean up attributes
@@ -255,7 +289,7 @@ open class RichTextView: NSTextView, RichTextViewComponent {
             return
         }
         
-        // Fall back to super implementation for other types (like images)
+        // Fall back to super implementation for other types
         super.paste(sender)
     }
 
@@ -431,7 +465,6 @@ open class RichTextView: NSTextView, RichTextViewComponent {
     }
 
     open override func copy(_ sender: Any?) {
-        print("Standard copy method triggered")
         copySelection()
     }
 
@@ -499,8 +532,6 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         let attributes = richTextAttributes(at: selectedRange)
         let currentHighlight = attributes[.backgroundColor] as? NSColor
         
-        print("Cycling highlight. Current color: \(String(describing: currentHighlight?.description))")
-        
         // Define highlight colors directly
         let greenHighlight = NSColor(red: 0.8, green: 1.0, blue: 0.8, alpha: 0.5)
         let redHighlight = NSColor(red: 1.0, green: 0.8, blue: 0.8, alpha: 0.5)
@@ -520,19 +551,15 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         // Determine next color in cycle
         if currentHighlight == nil {
             // No highlight -> Green
-            print("Applying green highlight")
             applyHighlight(greenHighlight)
         } else if colorsAreEqual(currentHighlight, greenHighlight) {
             // Green -> Red
-            print("Applying red highlight")
             applyHighlight(redHighlight)
         } else if colorsAreEqual(currentHighlight, redHighlight) {
             // Red -> None
-            print("Removing highlight")
             textStorage.removeAttribute(.backgroundColor, range: selectedRange)
         } else {
             // Unknown color -> Start over with green
-            print("Unknown color, applying green highlight")
             applyHighlight(greenHighlight)
         }
         
@@ -791,9 +818,8 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         do {
             let rtfData = try text.data(from: NSRange(location: 0, length: text.length), documentAttributes: [.documentType: NSAttributedString.DocumentType.rtf])
             pasteboard.setData(rtfData, forType: .rtf)
-            print("RTF data successfully copied: \(rtfData.count) bytes")
         } catch {
-            print("Error generating RTF data: \(error.localizedDescription)")
+            // Error handling silently
         }
     }
 
@@ -834,11 +860,11 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         
         // Use textStorage to replace the text while preserving attributes
         let insertRange = selectedRange()
-        if let textStorage = self.textStorage {
+        if let storage = textStorage {
             // Begin undo grouping
             safelyBeginUndoGrouping()
             
-            textStorage.replaceCharacters(in: insertRange, with: attributedString)
+            storage.replaceCharacters(in: insertRange, with: attributedString)
             
             // Register undo operation
             undoManager?.registerUndo(withTarget: self) { target in
@@ -877,8 +903,6 @@ open class RichTextView: NSTextView, RichTextViewComponent {
 
     // Override to handle keyboard shortcuts
     open override func performKeyEquivalent(with event: NSEvent) -> Bool {
-        print("Received key event: \(event.charactersIgnoringModifiers ?? ""), modifiers: \(event.modifierFlags)")
-        
         let flags = event.modifierFlags.intersection(.deviceIndependentFlagsMask)
         let chars = event.charactersIgnoringModifiers ?? ""
         
@@ -890,7 +914,6 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         
         // Handle CMD+SHIFT+H
         if chars.lowercased() == "h" && flags.contains(.command) && flags.contains(.shift) {
-            print("Detected CMD+SHIFT+H")
             if selectedRange.length > 0 {
                 cycleHighlight()
                 return true
@@ -898,9 +921,7 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         }
         
         // If we didn't handle it, let super try
-        let handled = super.performKeyEquivalent(with: event)
-        print("Super handled: \(handled)")
-        return handled
+        return super.performKeyEquivalent(with: event)
     }
 
     open override var acceptsFirstResponder: Bool {
