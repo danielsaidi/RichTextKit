@@ -101,10 +101,14 @@ open class RichTextCoordinator: NSObject {
     }
 
     open func textDidChange(_ notification: Notification) {
+        guard !context.isApplyingMarkdown else { return }
+        print("textDidChange triggered - current header level: \(context.headerLevel)")
         syncWithTextView()
     }
 
     open func textViewDidChangeSelection(_ notification: Notification) {
+        guard !context.isApplyingMarkdown else { return }
+        print("textViewDidChangeSelection triggered - current header level: \(context.headerLevel)")
         replaceCurrentAttributesIfNeeded()
         syncWithTextView()
     }
@@ -191,6 +195,13 @@ extension RichTextCoordinator {
 
     /// Sync the rich text context with the text view.
     func syncContextWithTextViewAfterDelay() {
+        print("syncContextWithTextViewAfterDelay called - isApplyingMarkdown: \(context.isApplyingMarkdown)")
+
+        guard !context.isApplyingMarkdown else {
+            print("syncContextWithTextViewAfterDelay skipped due to markdown processing")
+            return
+        }
+
         let font = textView.richTextFont ?? .standardRichTextFont
         sync(&context.attributedString, with: textView.attributedString)
         sync(&context.selectedRange, with: textView.selectedRange)

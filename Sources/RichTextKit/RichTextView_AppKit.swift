@@ -347,6 +347,20 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         // Begin undo grouping
         safelyBeginUndoGrouping()
         
+        // Explicitly reset header level on newline independently of markdown processing
+        if let text = string as? String, text == "\n",
+           let coordinator = delegate as? RichTextCoordinator,
+           let textStorage = self.textStorage {
+            let paragraphRange = (textStorage.string as NSString).paragraphRange(for: selectedRange())
+            coordinator.context.headerLevel = .paragraph
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineSpacing = coordinator.context.lineSpacing
+            textStorage.addAttribute(.paragraphStyle, value: paragraphStyle, range: paragraphRange)
+            var attributes = typingAttributes
+            attributes[.paragraphStyle] = paragraphStyle
+            typingAttributes = attributes
+        }
+        
         // If we're typing after a link or inserting whitespace, remove link attributes
         if let text = string as? String {
             let attributes = richTextAttributes(at: NSRange(location: max(0, currentRange.location - 1), length: 1))
