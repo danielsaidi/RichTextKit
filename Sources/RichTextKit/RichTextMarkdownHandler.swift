@@ -14,8 +14,6 @@ public extension RichTextView {
         let selectedRange = self.selectedRange()
 
         if let coordinator = self.delegate as? RichTextCoordinator {
-            print("Delegate correctly cast to RichTextCoordinator")
-            print("Markdown processing started - setting isApplyingMarkdown to true")
             coordinator.context.isApplyingMarkdown = true
             
             // Begin editing session
@@ -64,14 +62,11 @@ public extension RichTextView {
             let nsRange = match.range(at: 0)
             let hashRange = match.range(at: 1)
 
-            print("Detected hashtags at range: \(nsRange), hashRange: \(hashRange)")
-
             textStorage?.replaceCharacters(in: NSRange(location: hashRange.location, length: nsRange.length - (hashRange.location - nsRange.location)), with: "")
 
             if let coordinator = self.delegate as? RichTextCoordinator {
                 coordinator.context.headerLevel = RichTextHeaderLevel(3 - index)
                 coordinator.syncContextWithTextView()
-                print("Header level explicitly set to: \(coordinator.context.headerLevel)")
             }
 
             break

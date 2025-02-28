@@ -102,13 +102,11 @@ open class RichTextCoordinator: NSObject {
 
     open func textDidChange(_ notification: Notification) {
         guard !context.isApplyingMarkdown else { return }
-        print("textDidChange triggered - current header level: \(context.headerLevel)")
         syncWithTextView()
     }
 
     open func textViewDidChangeSelection(_ notification: Notification) {
         guard !context.isApplyingMarkdown else { return }
-        print("textViewDidChangeSelection triggered - current header level: \(context.headerLevel)")
         replaceCurrentAttributesIfNeeded()
         syncWithTextView()
     }
@@ -134,12 +132,10 @@ extension RichTextCoordinator: NSTextViewDelegate {
 
         if linkValue.hasPrefix("note:") {
             let noteID = linkValue.replacingOccurrences(of: "note:", with: "")
-            print("open note with id \(noteID)")
             self.textView.openNote(noteID)
             return true
         } else if linkValue.hasPrefix("section:") {
             let sectionID = linkValue.replacingOccurrences(of: "section:", with: "")
-            print("navigate to section with id: \(sectionID)")
             self.textView.openSection(sectionID)
             return true
         }
@@ -195,10 +191,7 @@ extension RichTextCoordinator {
 
     /// Sync the rich text context with the text view.
     func syncContextWithTextViewAfterDelay() {
-        print("syncContextWithTextViewAfterDelay called - isApplyingMarkdown: \(context.isApplyingMarkdown)")
-
         guard !context.isApplyingMarkdown else {
-            print("syncContextWithTextViewAfterDelay skipped due to markdown processing")
             return
         }
 
