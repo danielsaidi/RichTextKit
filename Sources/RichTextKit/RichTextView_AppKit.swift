@@ -343,10 +343,7 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         // Store current selection for undo
         let currentRange = selectedRange
         let currentAttributes = typingAttributes
-        
-        // Begin undo grouping
-        safelyBeginUndoGrouping()
-        
+
         // Explicitly reset header level on newline independently of markdown processing
         if let text = string as? String, text == "\n",
            let coordinator = delegate as? RichTextCoordinator,
@@ -360,6 +357,9 @@ open class RichTextView: NSTextView, RichTextViewComponent {
             attributes[.paragraphStyle] = paragraphStyle
             typingAttributes = attributes
         }
+        
+        // Begin undo grouping
+        undoManager?.beginUndoGrouping()
         
         // If we're typing after a link or inserting whitespace, remove link attributes
         if let text = string as? String {
@@ -391,23 +391,30 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         // Perform the text insertion
         super.insertText(string, replacementRange: replacementRange)
         
-        // Handle markdown formatting within the same undo group
-        handleMarkdownInput()
-        
         // Register undo operation
         undoManager?.registerUndo(withTarget: self) { target in
             target.undoTextInsertion(at: currentRange, attributes: currentAttributes)
         }
         
-        // End undo grouping
-        safelyEndUndoGrouping()
+        // End undo grouping before handling markdown
+        undoManager?.endUndoGrouping()
+        
+        // Handle markdown after undo grouping is complete
+        handleMarkdownInput()
     }
     
     private func undoTextInsertion(at range: NSRange, attributes: [NSAttributedString.Key: Any]) {
         if let textStorage = self.textStorage {
-            textStorage.deleteCharacters(in: range)
-            typingAttributes = attributes
-            selectedRange = range
+            // Ensure the range is valid
+            let safeRange = NSRange(location: min(range.location, textStorage.length),
+                                  length: min(range.length, max(0, textStorage.length - range.location)))
+            
+            // Only proceed if we have a valid range
+            if safeRange.location < textStorage.length {
+                textStorage.deleteCharacters(in: safeRange)
+                typingAttributes = attributes
+                selectedRange = NSRange(location: safeRange.location, length: 0)
+            }
         }
     }
 
@@ -424,7 +431,7 @@ open class RichTextView: NSTextView, RichTextViewComponent {
                 let currentAttributes = typingAttributes
                 
                 // Begin undo grouping
-                safelyBeginUndoGrouping()
+                undoManager?.beginUndoGrouping()
                 
                 // Perform the delete
                 super.deleteBackward(sender)
@@ -441,7 +448,7 @@ open class RichTextView: NSTextView, RichTextViewComponent {
                 }
                 
                 // End undo grouping
-                safelyEndUndoGrouping()
+                undoManager?.endUndoGrouping()
             } else {
                 super.deleteBackward(sender)
             }
@@ -452,7 +459,7 @@ open class RichTextView: NSTextView, RichTextViewComponent {
                 let currentAttributes = typingAttributes
                 
                 // Begin undo grouping
-                safelyBeginUndoGrouping()
+                undoManager?.beginUndoGrouping()
                 
                 // Perform the delete
                 super.deleteBackward(sender)
@@ -469,7 +476,7 @@ open class RichTextView: NSTextView, RichTextViewComponent {
                 }
                 
                 // End undo grouping
-                safelyEndUndoGrouping()
+                undoManager?.endUndoGrouping()
             } else {
                 super.deleteBackward(sender)
             }
@@ -876,7 +883,7 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         let insertRange = selectedRange()
         if let storage = textStorage {
             // Begin undo grouping
-            safelyBeginUndoGrouping()
+            undoManager?.beginUndoGrouping()
             
             storage.replaceCharacters(in: insertRange, with: attributedString)
             
@@ -891,7 +898,7 @@ open class RichTextView: NSTextView, RichTextViewComponent {
             }
             
             // End undo grouping
-            safelyEndUndoGrouping()
+            undoManager?.endUndoGrouping()
         }
     }
     

@@ -17,8 +17,30 @@ public extension RichTextView {
             print("Delegate correctly cast to RichTextCoordinator")
             print("Markdown processing started - setting isApplyingMarkdown to true")
             coordinator.context.isApplyingMarkdown = true
+            
+            // Begin editing session
+            textStorage.beginEditing()
+            
+            // Store the original state
+            let originalText = NSAttributedString(attributedString: textStorage)
+            let originalRange = selectedRange
+            
             handleHeadingMarkdown(fullText: fullText, selectedRange: selectedRange)
             handleInlineMarkdown(fullText: fullText, selectedRange: selectedRange)
+            
+            // End editing session
+            textStorage.endEditing()
+            
+            // Register undo for the markdown changes
+            undoManager?.registerUndo(withTarget: self) { target in
+                if let ts = target.textStorage {
+                    ts.beginEditing()
+                    ts.setAttributedString(originalText)
+                    ts.endEditing()
+                    target.selectedRange = originalRange
+                }
+            }
+            
             coordinator.syncContextWithTextView()
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -58,6 +80,7 @@ public extension RichTextView {
 
     private func handleInlineMarkdown(fullText: String, selectedRange: NSRange) {
         let patterns = ["\\*\\*(.+?)\\*\\*", "(?<!\\*)\\*(?!\\*)(.+?)(?<!\\*)\\*(?!\\*)", "_(.+?)_"]
+        var replacements: [(range: NSRange, content: String, attributes: [NSAttributedString.Key: Any])] = []
 
         for (index, pattern) in patterns.enumerated() {
             let regex = try? NSRegularExpression(pattern: pattern, options: [])
@@ -84,18 +107,14 @@ public extension RichTextView {
                 default: break
                 }
 
-                textStorage?.replaceCharacters(in: markdownRange, with: content)
-                textStorage?.addAttributes(attributes, range: NSRange(location: markdownRange.location, length: content.count))
-
-                // Don't update the UI state when applying markdown formatting
-                // This prevents the FormattingStyleToggleGroup from being updated
-                // switch index {
-                // case 0: formattingStateDidChange?(.bold)
-                // case 1: formattingStateDidChange?(.italic)
-                // case 2: formattingStateDidChange?(.underlined)
-                // default: break
-                // }
+                replacements.append((markdownRange, content, attributes))
             }
+        }
+
+        // Apply all replacements in reverse order to maintain correct ranges
+        for replacement in replacements.reversed() {
+            textStorage?.replaceCharacters(in: replacement.range, with: replacement.content)
+            textStorage?.addAttributes(replacement.attributes, range: NSRange(location: replacement.range.location, length: replacement.content.count))
         }
     }
 
