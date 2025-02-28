@@ -53,8 +53,8 @@ public extension RichTextView {
     private func handleHeadingMarkdown(fullText: String, selectedRange: NSRange) {
         // Modified patterns to work in the middle of sentences
         // (?<=^|\s) is a positive lookbehind that matches if preceded by start of line or whitespace
-        let patterns = ["(?<=^|\\s)(###)\\s", "(?<=^|\\s)(##)\\s", "(?<=^|\\s)(#)\\s"]
-        
+        let patterns = ["(?<=^|\\s)(### )", "(?<=^|\\s)(## )", "(?<=^|\\s)(# )"]
+
         for (index, pattern) in patterns.enumerated() {
             guard let regex = try? NSRegularExpression(pattern: pattern, options: .anchorsMatchLines),
                   let match = regex.firstMatch(in: fullText, options: [], range: NSRange(location: 0, length: fullText.utf16.count)) else { continue }
