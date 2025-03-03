@@ -157,9 +157,13 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         let factor = abs(oldScaleFactor - scale.factor)
         if oldScaleFactor > scale.factor {
             zoomOut(by: factor)
+            print("Zoom out oldScaleFactor \(oldScaleFactor)")
         } else {
             zoomTo(factor: scale.factor)
+            print("Zoom in oldScaleFactor \(oldScaleFactor)")
         }
+        print("selected factor \(scale.factor)")
+        print("current factor \(factor)")
     }
 
     // MARK: - Private Helper Methods
