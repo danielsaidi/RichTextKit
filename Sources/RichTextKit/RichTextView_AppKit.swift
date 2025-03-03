@@ -116,8 +116,9 @@ open class RichTextView: NSTextView, RichTextViewComponent {
          scaleUnitSquare(to: NSSize(width: scaleFactor, height: scaleFactor))
 
          // Handle the details:
-         let tc = textContainer!
-         let lm = layoutManager!
+         guard let tc = textContainer, let lm = layoutManager else {
+             return
+         }
 
          // To make word-wrapping update:
          let scrollContentSize = enclosingScrollView!.contentSize
@@ -150,6 +151,15 @@ open class RichTextView: NSTextView, RichTextViewComponent {
     func zoomOut(by factor: Double) {
         let newZoomFactor = max(zoomFactor / factor, minZoomFactor)
         zoomTo(factor: newZoomFactor)
+    }
+
+    func handleScale(for scale: ScalingOption) {
+        let factor = abs(oldScaleFactor - scale.factor)
+        if oldScaleFactor > scale.factor {
+            zoomOut(by: factor)
+        } else {
+            zoomTo(factor: scale.factor)
+        }
     }
 
     // MARK: - Private Helper Methods

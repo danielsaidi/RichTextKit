@@ -95,3 +95,26 @@ public enum RichTextHeaderLevel: CaseIterable {
     ]
 
 }
+
+public enum ScalingOption: CaseIterable {
+    case defaultFont
+    case extraSmall
+    case small
+    case large
+    case extraLarge
+
+    var factor: CGFloat {
+        switch self {
+        case .defaultFont:
+            1
+        case .extraSmall:
+            0.6
+        case .small:
+            0.8
+        case .large:
+            1.2
+        case .extraLarge:
+            1.4
+        }
+    }
+}
