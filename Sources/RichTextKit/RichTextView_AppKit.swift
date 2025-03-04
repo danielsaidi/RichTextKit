@@ -349,9 +349,17 @@ open class RichTextView: NSTextView, RichTextViewComponent {
            let coordinator = delegate as? RichTextCoordinator,
            let textStorage = self.textStorage {
             let paragraphRange = (textStorage.string as NSString).paragraphRange(for: selectedRange())
+            
+            // Capture the current paragraph's alignment before resetting
+            let currentParagraphStyle = textStorage.attribute(.paragraphStyle, at: paragraphRange.location, effectiveRange: nil) as? NSParagraphStyle
+            let currentAlignment = currentParagraphStyle?.alignment ?? .left
+            
             coordinator.context.headerLevel = .paragraph
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.lineSpacing = coordinator.context.lineSpacing
+            // Preserve the alignment from the previous paragraph
+            paragraphStyle.alignment = currentAlignment
+            
             textStorage.addAttribute(.paragraphStyle, value: paragraphStyle, range: paragraphRange)
             var attributes = typingAttributes
             attributes[.paragraphStyle] = paragraphStyle
