@@ -104,6 +104,21 @@ public enum ScalingOption: String, CaseIterable, Identifiable {
     case extraLarge
     public var id: ScalingOption { self }
 
+    var value: String {
+        switch self {
+        case .defaultFont:
+            "Default"
+        case .extraSmall:
+            "Extra Small"
+        case .small:
+            "Small"
+        case .large:
+            "Large"
+        case .extraLarge:
+            "Extra large"
+        }
+    }
+
     var factor: CGFloat {
         switch self {
         case .defaultFont:

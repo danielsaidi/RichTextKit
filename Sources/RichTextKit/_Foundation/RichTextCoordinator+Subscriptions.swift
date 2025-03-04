@@ -29,6 +29,7 @@ extension RichTextCoordinator {
         subscribeToIsEditable()
         subscribeToIsEditingText()
         subscribeToLineSpacing()
+        subscribeToScalingOption()
     }
 }
 
@@ -46,6 +47,12 @@ private extension RichTextCoordinator {
     func subscribeToHeaderLevel() {
         subscribe(to: context.$headerLevel) { [weak self] in
             self?.textView.setHeaderLevel($0)
+        }
+    }
+
+    func subscribeToScalingOption() {
+        subscribe(to: context.$selectedFontScale) { [weak self] in
+            self?.textView.handleScale(for: $0)
         }
     }
 

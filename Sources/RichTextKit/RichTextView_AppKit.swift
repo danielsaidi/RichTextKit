@@ -90,19 +90,6 @@ open class RichTextView: NSTextView, RichTextViewComponent {
              scaleFactor = 1.0
          }
 
-         // Don't repeatedly zoom in on 100%
-         // Prevents glitches
-         if (scaleFactor < 1.01 && scaleFactor > 0.99) {
-             // we'll only reach here if scale factor is about 1.0
-             if (oldScaleFactor < 1.01 && oldScaleFactor > 0.99) {
-                 // print("old and new scale factor are 1.0")
-                 // For some reason, if we try to set the zoom to 100% when the zoom is
-                 // already 100%, everything disappears. This prevents that from
-                 // happening.
-                 return
-             }
-         }
-
          // Don't do redundant scaling:
          if scaleFactor == oldScaleFactor {
              // We've already scaled.
@@ -110,7 +97,7 @@ open class RichTextView: NSTextView, RichTextViewComponent {
          }
 
          // Reset the zoom before re-zooming
-         scaleUnitSquare(to: convert(unitSize, to: nil))
+         scaleUnitSquare(to: NSSize(width: 1.0 / oldScaleFactor, height: 1.0 / oldScaleFactor))
 
          // Perform the zoom on the text view:
          scaleUnitSquare(to: NSSize(width: scaleFactor, height: scaleFactor))
@@ -148,22 +135,8 @@ open class RichTextView: NSTextView, RichTextViewComponent {
          }
      }
 
-    func zoomOut(by factor: Double) {
-        let newZoomFactor = max(zoomFactor / factor, minZoomFactor)
-        zoomTo(factor: newZoomFactor)
-    }
-
     func handleScale(for scale: ScalingOption) {
-        let factor = abs(oldScaleFactor - scale.factor)
-        if oldScaleFactor > scale.factor {
-            zoomOut(by: factor)
-            print("Zoom out oldScaleFactor \(oldScaleFactor)")
-        } else {
-            zoomTo(factor: scale.factor)
-            print("Zoom in oldScaleFactor \(oldScaleFactor)")
-        }
-        print("selected factor \(scale.factor)")
-        print("current factor \(factor)")
+        zoomTo(factor: scale.factor)
     }
 
     // MARK: - Private Helper Methods
