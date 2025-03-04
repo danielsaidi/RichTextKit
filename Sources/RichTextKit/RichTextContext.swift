@@ -63,8 +63,10 @@ public class RichTextContext: ObservableObject {
     public var textAlignment: RichTextAlignment = .left
 
     @Published
-    public var selectedFontScale: ScalingOption = .defaultFont
+    public var selectedFontScale: FontScalingOption = .defaultFont
 
+    @Published
+    public var customZoomFactor: Double?
     /// The current font name.
     @Published
     public var fontName = RichTextFont.PickerFont.all.first?.fontName ?? ""

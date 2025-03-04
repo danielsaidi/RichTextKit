@@ -40,6 +40,7 @@ open class RichTextCoordinator: NSObject {
         super.init()
         self.textView.delegate = self
         subscribeToUserActions()
+        self.textView.zoomDelegate = self
     }
 
     // MARK: - Properties
@@ -143,6 +144,12 @@ extension RichTextCoordinator: NSTextViewDelegate {
         return false // Allow default handling for normal URLs
     }
 
+}
+
+extension RichTextCoordinator: ZoomFactorDelegate {
+    func customZoomFactorDidChanged(_ factor: Double?) {
+        context.customZoomFactor = factor
+    }
 }
 
 #endif

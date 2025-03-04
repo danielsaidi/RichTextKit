@@ -141,11 +141,11 @@ private extension RichTextFormat.Toolbar {
 
 struct FonScalingPicker: View {
 
-    @Binding var selection: ScalingOption
+    @Binding var selection: FontScalingOption
 
     var body: some View {
         Picker(selection: $selection) {
-            ForEach(ScalingOption.allCases) { font in
+            ForEach(FontScalingOption.allCases) { font in
                 HStack {
                     Text(font.value)
                 }.contentShape(Rectangle())

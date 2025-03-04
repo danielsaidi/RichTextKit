@@ -15,7 +15,13 @@ struct DemoEditorScreen: View {
 
     @State private var isInspectorPresented = false
 
-    @StateObject var context = RichTextContext()
+    @StateObject var context = DemoEditorScreen.context
+
+    static var context: RichTextContext {
+        let richTextContext = RichTextContext()
+        richTextContext.customZoomFactor = 4
+        return richTextContext
+    }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -69,6 +75,7 @@ struct DemoEditorScreen: View {
         )
         .richTextFormatToolbarConfig(.init(colorPickers: []))
         .viewDebug()
+
     }
 }
 

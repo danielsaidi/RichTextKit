@@ -91,7 +91,7 @@ public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
     /// Set Header Level - Paragraph, heading1, heading2, heading3
     case setHeaderLevel(RichTextHeaderLevel)
 
-    case setScaleLevel(ScalingOption)
+    case updateFontScale(FontScalingOption)
 
 }
 
@@ -188,7 +188,7 @@ public extension RichTextAction {
         case .setHeaderLevel(let level):
             //TODO: change key
                 .highlightingStyle
-        case .setScaleLevel(let level):
+        case .updateFontScale(let level):
                 .highlightingStyle
         }
     }

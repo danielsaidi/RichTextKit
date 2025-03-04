@@ -41,7 +41,7 @@ public extension View {
         case .print: self.keyboardShortcut("p", modifiers: .command)
         case .redoLatestChange: self.keyboardShortcut("z", modifiers: [.command, .shift])
         case .setAlignment(let align): self.keyboardShortcut(for: align)
-        case .stepFontSize(let points): self.keyboardShortcut(points < 0 ? "-" : "+", modifiers: .command)
+//        case .stepFontSize(let points): self.keyboardShortcut(points < 0 ? "-" : "+", modifiers: .command)
         case .stepIndent(let steps): self.keyboardShortcut(steps < 0 ? "[" : "]", modifiers: .command)
         case .stepSuperscript: self
         case .toggleStyle(let style): self.keyboardShortcut(for: style)

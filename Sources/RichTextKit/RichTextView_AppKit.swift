@@ -45,7 +45,7 @@ open class RichTextView: NSTextView, RichTextViewComponent {
             }
         }
     }
-
+    var zoomDelegate: ZoomFactorDelegate?
     /// The style to use when highlighting text in the view.
     public var highlightingStyle: RichTextHighlightingStyle = .standard
 
@@ -103,12 +103,11 @@ open class RichTextView: NSTextView, RichTextViewComponent {
          scaleUnitSquare(to: NSSize(width: scaleFactor, height: scaleFactor))
 
          // Handle the details:
-         guard let tc = textContainer, let lm = layoutManager else {
+         guard let tc = textContainer, let lm = layoutManager, let scrollContentSize = enclosingScrollView?.contentSize else {
              return
          }
 
-         // To make word-wrapping update:
-         let scrollContentSize = enclosingScrollView!.contentSize
+         // scrollContentSize- To make word-wrapping update:
 
          // Necessary for word wrap
          frame = CGRect(x:0, y:0, width: scrollContentSize.width, height: 0.0)
@@ -126,6 +125,11 @@ open class RichTextView: NSTextView, RichTextViewComponent {
 
          // Keep track of the old scale factor:
          oldScaleFactor = scaleFactor
+         if FontScalingOption.allCases.contains { $0.factor == scaleFactor } {
+             self.zoomDelegate?.customZoomFactorDidChanged(nil)
+         } else {
+             self.zoomDelegate?.customZoomFactorDidChanged(scaleFactor)
+         }
      }
 
      /// Forces the textview to scroll to the current cursor/caret position.
@@ -135,8 +139,31 @@ open class RichTextView: NSTextView, RichTextViewComponent {
          }
      }
 
-    func handleScale(for scale: ScalingOption) {
+    func updateFontScale(to scale: FontScalingOption) {
         zoomTo(factor: scale.factor)
+    }
+
+    func zoomIn() {
+        guard oldScaleFactor < 3 else { return }
+        let factor = oldScaleFactor + 0.2
+        print("zoom in:: \(factor)")
+        performZoom(factor: factor)
+    }
+
+    func zoomOut() {
+        guard oldScaleFactor > 0.5 else { return }
+        let factor = oldScaleFactor - 0.2
+        print("zoom out:: \(factor)")
+        performZoom(factor: factor)
+    }
+
+    func performZoom(factor: Double) {
+        DispatchQueue.main.async {
+            guard self.oldScaleFactor != factor else { return }
+            let factorString = String(format: "%.2f", factor)
+            let roundedFactor = Double(factorString) ?? 0.0
+            self.zoomTo(factor: roundedFactor)
+        }
     }
 
     // MARK: - Private Helper Methods
@@ -789,7 +816,17 @@ open class RichTextView: NSTextView, RichTextViewComponent {
                 return true
             }
         }
-        
+
+        if flags == .command && event.characters == "+" {
+            zoomIn()
+            return true
+        }
+
+        if flags == .command && event.characters == "-" {
+            zoomOut()
+            return true
+        }
+
         // If we didn't handle it, let super try
         let handled = super.performKeyEquivalent(with: event)
         print("Super handled: \(handled)")
