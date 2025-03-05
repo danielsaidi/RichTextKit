@@ -58,6 +58,9 @@ public class RichTextContext: ObservableObject {
     @Published
     public var isEditingText = false
 
+    /// Flag to indicate markdown application state
+    @Published public var isApplyingMarkdown: Bool = false
+
     /// The current text alignment, if any.
     @Published
     public var textAlignment: RichTextAlignment = .left
