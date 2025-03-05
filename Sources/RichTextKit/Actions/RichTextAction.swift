@@ -91,6 +91,8 @@ public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
     /// Set Header Level - Paragraph, heading1, heading2, heading3
     case setHeaderLevel(RichTextHeaderLevel)
 
+    case updateFontScale(FontScalingOption)
+
 }
 
 public extension RichTextAction {
@@ -127,8 +129,8 @@ public extension RichTextAction {
         case .stepSuperscript(let val): .richTextStepSuperscript(val)
         case .toggleStyle(let val): val.icon
         case .undoLatestChange: .richTextUndo
-        case .setHeaderLevel(_):
-            // Don't need icon for header level
+        default:
+            // Don't need icon for default
                 .richTextDocument
         }
     }
@@ -185,6 +187,8 @@ public extension RichTextAction {
         case .undoLatestChange: .actionUndoLatestChange
         case .setHeaderLevel(let level):
             //TODO: change key
+                .highlightingStyle
+        case .updateFontScale(let level):
                 .highlightingStyle
         }
     }

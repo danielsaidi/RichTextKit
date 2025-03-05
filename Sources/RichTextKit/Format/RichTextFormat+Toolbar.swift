@@ -115,6 +115,7 @@ private extension RichTextFormat.Toolbar {
     var controlsContent: some View {
         HStack {
             #if macOS
+            fontSizePicker
             fontPicker(value: $context.fontName)
             #endif
             styleToggleGroup(for: context)
@@ -132,6 +133,29 @@ private extension RichTextFormat.Toolbar {
             indentButtons(for: context, greedy: false)
         }
     }
+
+    private var fontSizePicker: some View {
+        FonScalingPicker(selection: $context.selectedFontScale)
+    }
+}
+
+struct FonScalingPicker: View {
+
+    @Binding var selection: FontScalingOption
+
+    var body: some View {
+        Picker(selection: $selection) {
+            ForEach(FontScalingOption.allCases) { font in
+                HStack {
+                    Text(font.value)
+                }.contentShape(Rectangle())
+                    .tag(font)
+            }
+        } label: {
+            Text(selection.value)
+        }
+    }
+
 }
 
 #Preview {

@@ -45,7 +45,7 @@ open class RichTextView: NSTextView, RichTextViewComponent {
             }
         }
     }
-
+    var zoomDelegate: ZoomFactorDelegate?
     /// The style to use when highlighting text in the view.
     public var highlightingStyle: RichTextHighlightingStyle = .standard
 
@@ -64,6 +64,108 @@ open class RichTextView: NSTextView, RichTextViewComponent {
     var openNote: (String) -> () = { _ in }
     var openSection: (String) -> () = { _ in }
     public var formattingStateDidChange: ((RichTextStyle) -> Void)?
+
+    /// 100% 1x1 unit scaling:
+     let unitSize: NSSize = NSSize(width: 1.0, height: 1.0)
+
+     /// The last scaling factor that this textview experienced
+     private(set) var oldScaleFactor: Double = 1.0
+
+     /// The current zoom factor
+     private(set) var zoomFactor: Double = 1.0
+
+    let minZoomFactor: Double = 0.8
+
+     /// Zooms to the specified scaling factor.
+     /// - Parameter factor: The scaling factor. 1.0 = 100%
+     func zoomTo(factor: Double) {
+         var scaleFactor = factor
+
+         // No negative values:
+         if scaleFactor < 0 {
+             scaleFactor = abs(scaleFactor)
+         }
+
+         // No 0 value allowed!
+         if scaleFactor == 0.0 {
+             scaleFactor = 1.0
+         }
+
+         // Don't do redundant scaling:
+         if scaleFactor == oldScaleFactor {
+             // We've already scaled.
+             return
+         }
+
+         // Reset the zoom before re-zooming
+         scaleUnitSquare(to: NSSize(width: 1.0 / oldScaleFactor, height: 1.0 / oldScaleFactor))
+
+         // Perform the zoom on the text view:
+         scaleUnitSquare(to: NSSize(width: scaleFactor, height: scaleFactor))
+
+         // Handle the details:
+         guard let tc = textContainer, let lm = layoutManager, let scrollContentSize = enclosingScrollView?.contentSize else {
+             return
+         }
+
+         // scrollContentSize- To make word-wrapping update:
+
+         // Necessary for word wrap
+         frame = CGRect(x:0, y:0, width: scrollContentSize.width, height: 0.0)
+
+         tc.containerSize = NSMakeSize(scrollContentSize.width, CGFloat(FLT_MAX))
+         tc.widthTracksTextView = true
+         lm.ensureLayout(for: tc)
+
+         // Scroll to the cursor! Makes zooming super nice :)
+         alternativeScrollToCursor()
+
+         needsDisplay = true
+
+         zoomFactor = scaleFactor
+
+         // Keep track of the old scale factor:
+         oldScaleFactor = scaleFactor
+         if FontScalingOption.allCases.contains { $0.factor == scaleFactor } {
+             self.zoomDelegate?.customZoomFactorDidChanged(nil)
+         } else {
+             self.zoomDelegate?.customZoomFactorDidChanged(scaleFactor)
+         }
+     }
+
+     /// Forces the textview to scroll to the current cursor/caret position.
+     func alternativeScrollToCursor() {
+         if let cursorPosition: NSInteger = selectedRanges.first?.rangeValue.location {
+             scrollRangeToVisible(NSRange(location: cursorPosition, length: 0))
+         }
+     }
+
+    func updateFontScale(to scale: FontScalingOption) {
+        zoomTo(factor: scale.factor)
+    }
+
+    func zoomIn() {
+        guard oldScaleFactor < 3 else { return }
+        let factor = oldScaleFactor + 0.2
+        print("zoom in:: \(factor)")
+        performZoom(factor: factor)
+    }
+
+    func zoomOut() {
+        guard oldScaleFactor > 0.5 else { return }
+        let factor = oldScaleFactor - 0.2
+        print("zoom out:: \(factor)")
+        performZoom(factor: factor)
+    }
+
+    func performZoom(factor: Double) {
+        DispatchQueue.main.async {
+            guard self.oldScaleFactor != factor else { return }
+            let factorString = String(format: "%.2f", factor)
+            let roundedFactor = Double(factorString) ?? 0.0
+            self.zoomTo(factor: roundedFactor)
+        }
+    }
 
     // MARK: - Private Helper Methods
     
@@ -989,7 +1091,17 @@ open class RichTextView: NSTextView, RichTextViewComponent {
                 return true
             }
         }
-        
+
+        if flags == .command && event.characters == "+" {
+            zoomIn()
+            return true
+        }
+
+        if flags == .command && event.characters == "-" {
+            zoomOut()
+            return true
+        }
+
         // If we didn't handle it, let super try
         return super.performKeyEquivalent(with: event)
     }

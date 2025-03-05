@@ -45,6 +45,7 @@ public extension RichTextContext {
         case .toggleStyle: true
         case .undoLatestChange: canUndoLatestChange
         case .setHeaderLevel: true
+        case .updateFontScale(_): true
         }
     }
 

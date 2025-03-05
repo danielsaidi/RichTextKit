@@ -76,6 +76,8 @@ extension RichTextCoordinator {
             syncContextWithTextView()
         case .setHeaderLevel(let level):
             textView.setHeaderLevel(level)
+        case .updateFontScale(let scale):
+            textView.updateFontScale(to: scale)
         }
         textView.setCustomToolButtonFrameOrigin()
     }
