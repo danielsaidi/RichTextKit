@@ -40,11 +40,7 @@ public extension RichTextViewComponent {
     /// Set the rich text font name at current range.
     func setRichTextFontName(_ name: String) {
         if richTextFont?.fontName == name { return }
-        if hasSelectedRange {
-            setFontName(name, at: selectedRange)
-        } else {
-            setFontNameAtCurrentPosition(to: name)
-        }
+        updateFontName(to: name)
     }
 
     /// Set the rich text font size at current range.
@@ -91,6 +87,8 @@ private extension RichTextViewComponent {
         typingAttributes = attributes
     }
 
+    
+
     /// Set the font name at a certain range.
     func setFontName(_ name: String, at range: NSRange) {
         guard let text = mutableRichText else { return }
@@ -104,6 +102,20 @@ private extension RichTextViewComponent {
             text.removeAttribute(.font, range: range)
             text.addAttribute(.font, value: newFont, range: range)
             text.fixAttributes(in: range)
+        }
+        text.endEditing()
+    }
+
+    func updateFontName(to fontName: String)  {
+        guard let text = mutableRichText else { return }
+        text.enumerateAttribute(.font, in: NSRange(location: 0, length: text.length), options: []) { value, range, _ in
+            let oldFont = value as? FontRepresentable ?? .standardRichTextFont
+
+            if let newFont = FontRepresentable(name: fontName, size: oldFont.pointSize) {
+                text.removeAttribute(.font, range: range)
+                text.addAttribute(.font, value: newFont, range: range)
+                text.fixAttributes(in: range)
+            }
         }
         text.endEditing()
     }
