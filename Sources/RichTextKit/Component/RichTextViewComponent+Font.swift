@@ -45,7 +45,6 @@ public extension RichTextViewComponent {
         } else {
             setFontNameAtCurrentPosition(to: name)
         }
-        updateFontName(to: name)
     }
 
     /// Set the rich text font size at current range.
