@@ -1055,16 +1055,14 @@ open class RichTextView: NSTextView, RichTextViewComponent {
     
     private func mapFontSize(_ originalSize: CGFloat) -> CGFloat {
         let mappedSize = switch originalSize {
-        case 0..<17:
-            16.0 // paragraph (anything under 17)
-        case 17..<21:
-            20.0 // heading3 (17-20)
-        case 21..<24:
-            24.0 // heading2 (21-23)
-        case 24...:
-            28.0 // heading1 (24 or larger)
+   case 26...:
+            RichTextHeaderLevel.heading1.fontSize
+        case 20..<25:
+            RichTextHeaderLevel.heading2.fontSize
+        case 17..<20:
+            RichTextHeaderLevel.heading3.fontSize
         default:
-            16.0 // default to paragraph size
+            RichTextHeaderLevel.paragraph.fontSize
         }
         return mappedSize
     }
