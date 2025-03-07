@@ -11,8 +11,20 @@ import SwiftUI
 
 extension RichTextCoordinator {
 
+    // Track if we're currently handling an action to prevent recursive updates
+    private static var isHandlingAction = false
+    
     func handle(_ action: RichTextAction?) {
         guard let action else { return }
+        
+        // Prevent recursive action handling
+        guard !Self.isHandlingAction else {
+            return
+        }
+        
+        Self.isHandlingAction = true
+        defer { Self.isHandlingAction = false }
+        
         switch action {
         case .copy: textView.copySelection()
         case .deleteSelectedText:
@@ -39,6 +51,18 @@ extension RichTextCoordinator {
         case .selectRange(let range):
             setSelectedRange(to: range)
         case .setAlignment(let alignment):
+            // Debounce rapid alignment updates
+            let currentTime = ProcessInfo.processInfo.systemUptime
+            if currentTime - Self.lastAlignmentTime < Self.updateThreshold {
+                return
+            }
+            Self.lastAlignmentTime = currentTime
+            
+            // Only update if alignment actually changed
+            if textView.richTextAlignment == alignment {
+                return
+            }
+            
             textView.setRichTextAlignment(alignment)
         case .setAttributedString(let string):
             setAttributedString(to: string)
@@ -93,7 +117,6 @@ extension RichTextCoordinator {
         } else if let data = data as? RichTextInsertion<String> {
             pasteText(data)
         } else {
-            print("Unsupported media type")
         }
     }
 
@@ -121,9 +144,59 @@ extension RichTextCoordinator {
         )
     }
 
+    // Track the last update time to prevent rapid repeated updates
+    private static var lastUpdateTime: TimeInterval = 0
+    private static var lastAlignmentTime: TimeInterval = 0
+    private static let updateThreshold: TimeInterval = 0.1 // 100ms
+    
     func setAttributedString(to newValue: NSAttributedString?) {
-        guard let newValue else { return }
+        guard let newValue else {
+            return
+        }
+        
+        // Debounce rapid updates
+        let currentTime = ProcessInfo.processInfo.systemUptime
+        if currentTime - Self.lastUpdateTime < Self.updateThreshold {
+            return
+        }
+        Self.lastUpdateTime = currentTime
+        
+        // Compare strings to avoid unnecessary updates
+        if textView.attributedString.string == newValue.string {
+            // Only update if there are link changes
+            var hasLinkChanges = false
+            let fullRange = NSRange(location: 0, length: newValue.length)
+            
+            newValue.enumerateAttribute(.link, in: fullRange, options: []) { newLink, range, _ in
+                let oldLink = textView.attributedString.attribute(.link, at: range.location, effectiveRange: nil)
+                // Compare links safely by checking if either is nil or if they're different
+                if let newLinkObj = newLink as? NSObject,
+                   let oldLinkObj = oldLink as? NSObject {
+                    if !newLinkObj.isEqual(oldLinkObj) {
+                        hasLinkChanges = true
+                    }
+                } else if (newLink == nil) != (oldLink == nil) {
+                    // One is nil and the other isn't
+                    hasLinkChanges = true
+                }
+            }
+            
+            if !hasLinkChanges {
+                return
+            }
+        }
+        
+        // Store current selection
+        let currentRange = textView.selectedRange
+        
+        // Apply the update
         textView.setRichText(newValue)
+        
+        // Restore selection if possible
+        if currentRange.location + currentRange.length <= newValue.length {
+            textView.selectedRange = currentRange
+        }
+        
     }
 
     // TODO: This code should be handled by the component
