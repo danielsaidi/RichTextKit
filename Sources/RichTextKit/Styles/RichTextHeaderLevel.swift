@@ -30,8 +30,21 @@ public enum RichTextHeaderLevel: CaseIterable {
         }
     }
 
+    /// Initialize a header level from a font.
+    /// The header level is determined by the font's point size:
+    /// - Sizes >= 28 (heading1.fontSize - 2) -> heading1
+    /// - Sizes >= 23 (heading2.fontSize - 2) -> heading2
+    /// - Sizes >= 18 (heading3.fontSize - 2) -> heading3
+    /// - All other sizes -> paragraph
     public init(_ font: FontRepresentable) {
-        self = RichTextHeaderLevel.fontMap[font.pointSize] ?? .paragraph
+        let size = font.pointSize
+        
+        // Find the first header level where the font size meets the minimum threshold
+        if let headerLevel = Self.headerSizeThresholds.first(where: { size >= $0.size }) {
+            self = headerLevel.level
+        } else {
+            self = .paragraph
+        }
     }
 
     public var title: String {
@@ -74,25 +87,31 @@ public enum RichTextHeaderLevel: CaseIterable {
         }
     }
 
+    /// The font size for each header level.
+    /// These sizes are used when applying header styles.
+    /// For detecting header levels from fonts, we use a threshold of (size - 2)
+    /// to allow for some flexibility in font sizes.
     public var fontSize: CGFloat {
         switch self {
         case .heading1:
-            return 30
+            return 28  // Threshold: 26
         case .heading2:
-            return 25
+            return 24  // Threshold: 22
         case .heading3:
-            return 20
+            return 20  // Threshold: 18
         case .paragraph:
             return 16
         }
     }
 
-    private static let fontMap: [CGFloat: RichTextHeaderLevel] = [
-        RichTextHeaderLevel.heading1.fontSize: .heading1,
-        RichTextHeaderLevel.heading2.fontSize: .heading2,
-        RichTextHeaderLevel.heading3.fontSize: .heading3,
-        RichTextHeaderLevel.paragraph.fontSize: .paragraph
+    /// The minimum font sizes for each header level.
+    /// Any font size >= these values will be considered that header level.
+    private static let headerSizeThresholds: [(level: RichTextHeaderLevel, size: CGFloat)] = [
+        (.heading1, RichTextHeaderLevel.heading1.fontSize - 2),
+        (.heading2, RichTextHeaderLevel.heading2.fontSize - 2),
+        (.heading3, RichTextHeaderLevel.heading3.fontSize - 2)
     ]
 
 }
+
 
