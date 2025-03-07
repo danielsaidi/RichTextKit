@@ -22,11 +22,19 @@ public typealias FontRepresentable = NSFont
 
 public extension FontRepresentable {
 
-    /// The standard font to use for rich text.
-    static var standardRichTextFont: FontRepresentable {
-        .init(name: "New York", size: .standardRichTextFontSize) ?? .systemFont(ofSize: .standardRichTextFontSize)
+    static var selectedFontName: String {
+        get {
+            UserDefaults.standard.string(forKey: "selectedFont") ?? "New York"
+        } set {
+            UserDefaults.standard.set(newValue, forKey: "selectedFont")
+        }
     }
 
+    /// The standard font to use for rich text.
+    static var standardRichTextFont: FontRepresentable {
+        .init(name: selectedFontName, size: .standardRichTextFontSize) ?? .systemFont(ofSize: .standardRichTextFontSize)
+    }
+    
     /// Create a new font by toggling a certain style.
     func toggling(
         _ style: RichTextStyle
