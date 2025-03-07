@@ -40,6 +40,7 @@ public extension RichTextViewComponent {
     /// Set the rich text font name at current range.
     func setRichTextFontName(_ name: String) {
         if richTextFont?.fontName == name { return }
+        FontRepresentable.selectedFontName = name
         if hasSelectedRange {
             setFontName(name, at: selectedRange)
         } else {
