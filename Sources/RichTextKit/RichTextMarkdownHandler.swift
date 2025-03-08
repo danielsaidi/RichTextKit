@@ -4,6 +4,7 @@
 //
 
 import Foundation
+#if canImport(AppKit) && !targetEnvironment(macCatalyst)
 import AppKit
 
 public extension RichTextView {
@@ -121,3 +122,4 @@ public extension RichTextView {
         typingAttributes[.headerLevel] = level
     }
 }
+#endif
