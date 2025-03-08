@@ -9,6 +9,10 @@
 #if macOS
 import AppKit
 
+public extension Notification.Name {
+    static let richTextKitScaleChanged = Notification.Name("richTextKitScaleChanged")
+}
+
 /**
  This is a platform-agnostic rich text view that can be used
  in both UIKit and AppKit.
@@ -145,17 +149,23 @@ open class RichTextView: NSTextView, RichTextViewComponent {
     }
 
     func zoomIn() {
-        guard oldScaleFactor < 3 else { return }
-        let factor = oldScaleFactor + 0.2
-        print("zoom in:: \(factor)")
-        performZoom(factor: factor)
+        let currentScale = FontScalingOption.allCases.first { $0.factor == oldScaleFactor } ?? .defaultFont
+        let orderedScales: [FontScalingOption] = [.extraSmall, .small, .defaultFont, .large, .extraLarge]
+        if let currentIndex = orderedScales.firstIndex(of: currentScale),
+           currentIndex < orderedScales.count - 1 {
+            let nextScale = orderedScales[currentIndex + 1]
+            performZoom(factor: nextScale.factor)
+        }
     }
 
     func zoomOut() {
-        guard oldScaleFactor > 0.5 else { return }
-        let factor = oldScaleFactor - 0.2
-        print("zoom out:: \(factor)")
-        performZoom(factor: factor)
+        let currentScale = FontScalingOption.allCases.first { $0.factor == oldScaleFactor } ?? .defaultFont
+        let orderedScales: [FontScalingOption] = [.extraSmall, .small, .defaultFont, .large, .extraLarge]
+        if let currentIndex = orderedScales.firstIndex(of: currentScale),
+           currentIndex > 0 {
+            let previousScale = orderedScales[currentIndex - 1]
+            performZoom(factor: previousScale.factor)
+        }
     }
 
     func performZoom(factor: Double) {
@@ -164,6 +174,11 @@ open class RichTextView: NSTextView, RichTextViewComponent {
             let factorString = String(format: "%.2f", factor)
             let roundedFactor = Double(factorString) ?? 0.0
             self.zoomTo(factor: roundedFactor)
+            
+            // Notify observers with the new scale factor
+            if let scale = FontScalingOption.allCases.first(where: { $0.factor == roundedFactor }) {
+                NotificationCenter.default.post(name: .richTextKitScaleChanged, object: scale)
+            }
         }
     }
 
