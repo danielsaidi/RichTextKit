@@ -51,18 +51,6 @@ extension RichTextCoordinator {
         case .selectRange(let range):
             setSelectedRange(to: range)
         case .setAlignment(let alignment):
-            // Debounce rapid alignment updates
-            let currentTime = ProcessInfo.processInfo.systemUptime
-            if currentTime - Self.lastAlignmentTime < Self.updateThreshold {
-                return
-            }
-            Self.lastAlignmentTime = currentTime
-            
-            // Only update if alignment actually changed
-            if textView.richTextAlignment == alignment {
-                return
-            }
-            
             textView.setRichTextAlignment(alignment)
         case .setAttributedString(let string):
             setAttributedString(to: string)
@@ -143,23 +131,11 @@ extension RichTextCoordinator {
             moveCursorToPastedContent: data.moveCursor
         )
     }
-
-    // Track the last update time to prevent rapid repeated updates
-    private static var lastUpdateTime: TimeInterval = 0
-    private static var lastAlignmentTime: TimeInterval = 0
-    private static let updateThreshold: TimeInterval = 0.1 // 100ms
     
     func setAttributedString(to newValue: NSAttributedString?) {
         guard let newValue else {
             return
         }
-        
-        // Debounce rapid updates
-        let currentTime = ProcessInfo.processInfo.systemUptime
-        if currentTime - Self.lastUpdateTime < Self.updateThreshold {
-            return
-        }
-        Self.lastUpdateTime = currentTime
         
         // Compare strings to avoid unnecessary updates
         if textView.attributedString.string == newValue.string {
