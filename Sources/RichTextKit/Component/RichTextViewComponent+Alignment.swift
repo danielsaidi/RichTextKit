@@ -32,9 +32,5 @@ public extension RichTextViewComponent {
             from: richTextParagraphStyle,
             alignment: alignment
         )
-        // Ensure paragraph spacing is maintained
-        style.paragraphSpacing = 10
-        style.paragraphSpacingBefore = 10
-        setRichTextParagraphStyle(style)
     }
 }
