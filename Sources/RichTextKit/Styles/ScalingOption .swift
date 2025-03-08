@@ -8,9 +8,9 @@
 import Foundation
 
 public enum FontScalingOption: String, CaseIterable, Identifiable {
-    case defaultFont
     case extraSmall
     case small
+    case defaultFont
     case large
     case extraLarge
     public var id: FontScalingOption { self }
@@ -35,13 +35,13 @@ public enum FontScalingOption: String, CaseIterable, Identifiable {
         case .defaultFont:
             1
         case .extraSmall:
-            0.6
+            0.5
         case .small:
             0.8
         case .large:
-            1.2
+            1.5
         case .extraLarge:
-            1.4
+            2.0
         }
     }
 }
