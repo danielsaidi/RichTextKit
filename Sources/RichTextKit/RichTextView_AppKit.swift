@@ -762,9 +762,7 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         customToolContainerView?.wantsLayer = true
         customToolContainerView?.layer?.cornerRadius = 4
         customToolContainerView?.layer?.borderWidth = 1
-        customToolContainerView?.layer?.borderColor = NSColor(named: "secondaryBackground")?.cgColor ?? NSColor.gray.cgColor
-        customToolContainerView?.layer?.backgroundColor = NSColor(named: "quaternaryBackground")?.cgColor ?? NSColor.windowBackgroundColor.cgColor
-        
+        setUpCustomToolColor()
         // Set container dimensions for three squares
         customToolContainerView?.frame.size = NSSize(width: 70, height: 24)
 
@@ -795,7 +793,6 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         container.addSubview(clearButton)
         container.addSubview(redButton)
         container.addSubview(greenButton)
-        
         // Add actions
         clearButton.target = self
         clearButton.action = #selector(clearHighlightAction)
@@ -850,10 +847,10 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         return button
     }
 
-    private func updateColorsForAppearance() {
+    private func setUpCustomToolColor() {
         guard let customToolContainerView = customToolContainerView else { return }
-        customToolContainerView.layer?.backgroundColor = NSColor(named: "quaternary")?.cgColor ?? NSColor.windowBackgroundColor.cgColor
-        customToolContainerView.layer?.borderColor = NSColor(named: "secondary")?.cgColor ?? NSColor.gray.cgColor
+        customToolContainerView.layer?.borderColor = NSColor(named: "secondaryBackground")?.cgColor ?? NSColor.gray.cgColor
+        customToolContainerView.layer?.backgroundColor = NSColor(named: "quaternaryBackground")?.cgColor ?? NSColor.windowBackgroundColor.cgColor
     }
 
     // MARK: - Tool Button Visibility
@@ -1207,6 +1204,17 @@ public extension RichTextView {
         pasteboardTypes.append(.png)
         return pasteboardTypes
     }
+}
+
+// Observe appearance changes
+
+public extension RichTextView {
+
+    override open func viewDidChangeEffectiveAppearance() {
+        super.viewDidChangeEffectiveAppearance()
+        setUpCustomToolColor()
+    }
+
 }
 
 #endif
