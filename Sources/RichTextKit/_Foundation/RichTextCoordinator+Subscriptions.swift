@@ -30,7 +30,6 @@ extension RichTextCoordinator {
         subscribeToIsEditingText()
         subscribeToLineSpacing()
         subscribeToScalingOption()
-        subscribeToCustomZoomFactor()
     }
 }
 
@@ -54,14 +53,6 @@ private extension RichTextCoordinator {
     func subscribeToScalingOption() {
         subscribe(to: context.$selectedFontScale) { [weak self] in
             self?.textView.updateFontScale(to: $0)
-        }
-    }
-
-    func subscribeToCustomZoomFactor() {
-        subscribe(to: context.$customZoomFactor) { [weak self] in
-            if let factorValue = $0 {
-                self?.textView.performZoom(factor: factorValue)
-            }
         }
     }
 

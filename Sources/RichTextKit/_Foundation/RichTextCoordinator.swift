@@ -148,7 +148,7 @@ extension RichTextCoordinator: NSTextViewDelegate {
 
 extension RichTextCoordinator: ZoomFactorDelegate {
     func customZoomFactorDidChanged(_ factor: Double?) {
-        context.customZoomFactor = factor
+//        context.customZoomFactor = factor
     }
 }
 

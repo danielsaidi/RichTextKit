@@ -19,7 +19,6 @@ struct DemoEditorScreen: View {
 
     static var context: RichTextContext {
         let richTextContext = RichTextContext()
-        richTextContext.customZoomFactor = 4
         return richTextContext
     }
 

@@ -128,11 +128,7 @@ public struct RichTextEditor: ViewRepresentable {
         textView.configuration = config
         textView.theme = style
         textView.usesFindBar = true
-        if let customZoomFactor = self.context.customZoomFactor {
-            textView.zoomTo(factor: customZoomFactor)
-        } else {
-            textView.zoomTo(factor: self.context.selectedFontScale.factor)
-        }
+        textView.zoomTo(factor: self.context.selectedFontScale.factor)
         viewConfiguration(textView)
         return scrollView
     }
