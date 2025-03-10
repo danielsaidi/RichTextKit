@@ -40,7 +40,6 @@ open class RichTextCoordinator: NSObject {
         super.init()
         self.textView.delegate = self
         subscribeToUserActions()
-        self.textView.zoomDelegate = self
     }
 
     // MARK: - Properties

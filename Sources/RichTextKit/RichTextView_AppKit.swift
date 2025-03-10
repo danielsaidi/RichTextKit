@@ -49,7 +49,6 @@ open class RichTextView: NSTextView, RichTextViewComponent {
             }
         }
     }
-    var zoomDelegate: ZoomFactorDelegate?
     /// The style to use when highlighting text in the view.
     public var highlightingStyle: RichTextHighlightingStyle = .standard
 
@@ -130,11 +129,6 @@ open class RichTextView: NSTextView, RichTextViewComponent {
 
          // Keep track of the old scale factor:
          oldScaleFactor = scaleFactor
-         if FontScalingOption.allCases.contains { $0.factor == scaleFactor } {
-             self.zoomDelegate?.customZoomFactorDidChanged(nil)
-         } else {
-             self.zoomDelegate?.customZoomFactorDidChanged(scaleFactor)
-         }
      }
 
      /// Forces the textview to scroll to the current cursor/caret position.
