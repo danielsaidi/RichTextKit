@@ -54,4 +54,22 @@ public extension RichTextViewComponent {
         style[keyPath: keyPath] = value
         setRichTextParagraphStyle(style)
     }
+    
+    /// Step a certain value for the current paragraph style.
+    func stepRichTextParagraphStyleValue(
+        _ keyPath: WritableKeyPath<NSMutableParagraphStyle, Int>,
+        _ change: Int
+    ) {
+        let current = richTextParagraphStyleValue(keyPath) ?? 0
+        setRichTextParagraphStyleValue(keyPath, current + change)
+    }
+    
+    /// Step a certain value for the current paragraph style.
+    func stepRichTextParagraphStyleValue(
+        _ keyPath: WritableKeyPath<NSMutableParagraphStyle, CGFloat>,
+        _ change: CGFloat
+    ) {
+        let current = richTextParagraphStyleValue(keyPath) ?? 0
+        setRichTextParagraphStyleValue(keyPath, current + change)
+    }
 }

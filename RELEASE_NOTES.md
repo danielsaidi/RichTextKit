@@ -16,6 +16,7 @@ This means that you will now be able to get and set a bunch of properties with a
 
 * `RichTextViewComponent` has a new, keypath-based `richTextParagraphStyleValue(_:)`.
 * `RichTextViewComponent` has a new, keypath-based `setRichTextParagraphStyleValue(_:_:)`.
+* `RichTextViewComponent` has a new, keypath-based `stepRichTextParagraphStyleValue(_:_:)`.
 
 ### ✨ Paragraph Features
 

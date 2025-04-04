@@ -18,7 +18,7 @@ public extension RichTextViewComponent {
 
     /// Get the current line spacing.
     var richTextLineSpacing: CGFloat? {
-        richTextParagraphStyle?.lineSpacing
+        richTextParagraphStyleValue(\.lineSpacing)
     }
 
     /// Set the current line spacing.
@@ -28,8 +28,6 @@ public extension RichTextViewComponent {
 
     /// Step the current line spacing.
     func stepRichTextLineSpacing(points: CGFloat) {
-        let currentSize = richTextLineSpacing ?? 0
-        let newSize = currentSize + points
-        setRichTextLineSpacing(newSize)
+        stepRichTextParagraphStyleValue(\.lineSpacing, points)
     }
 }
