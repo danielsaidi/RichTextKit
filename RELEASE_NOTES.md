@@ -16,6 +16,7 @@ As a result, all parts of the library that handled individual value types have b
 
 ### ✨ Features
 
+* `Image` has a new, keypath-based `richTextParagraphStyleValue(_)` image builder.
 * `RichTextViewComponent` has a new, keypath-based `richTextParagraphStyleValue(_:)`.
 * `RichTextViewComponent` has a new, keypath-based `setRichTextParagraphStyleValue(_:_:)`.
 * `RichTextViewComponent` has a new, keypath-based `stepRichTextParagraphStyleValue(_:_:)`.
