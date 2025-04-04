@@ -1,5 +1,5 @@
 //
-//  Image+RichTextParagraphStyle.swift
+//  NSParagraphStyle+Image.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2025-04-04.
@@ -10,10 +10,18 @@ import SwiftUI
 
 public extension Image {
     
-    static func richTextParagraphStyleValue<ValueType>(
-        _ keyPath: KeyPath<NSParagraphStyle, ValueType>
-    ) -> Image? {
-        switch keyPath {
+    /// Create a default icon for the provided key path.
+    init?<ValueType>(for value: KeyPath<NSParagraphStyle, ValueType>) {
+        guard let icon = value.defaultIcon else { return nil }
+        self = icon
+    }
+}
+
+public extension KeyPath where Root == NSParagraphStyle {
+    
+    /// The default icon for the key path.
+    var defaultIcon: Image? {
+        switch self {
         case \.alignment: .richTextAlignmentLeft
         case \.baseWritingDirection: .symbol("pencil.line")
         case \.firstLineHeadIndent: .symbol("increase.indent")
@@ -27,12 +35,27 @@ public extension Image {
     }
 }
 
+public extension NSTextAlignment {
+    
+    /// The default icon for the text alignment.
+    var defaultIcon: Image? {
+        switch self {
+        case .center: .richTextAlignmentCenter
+        case .justified: .richTextAlignmentJustified
+        case .left: .richTextAlignmentLeft
+        case .natural: .richTextAlignmentLeft
+        case .right: .richTextAlignmentRight
+        @unknown default: .richTextUnknownValueType
+        }
+    }
+}
+
 @ViewBuilder
 private func previewIcon<ValueType>(
     for keyPath: KeyPath<NSParagraphStyle, ValueType>,
     _ title: String
 ) -> some View {
-    if let image = Image.richTextParagraphStyleValue(keyPath) {
+    if let image = Image(for: keyPath) {
         Label {
             Text(title)
         } icon: {

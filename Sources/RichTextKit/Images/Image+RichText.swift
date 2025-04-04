@@ -26,17 +26,6 @@ public extension Image {
     static let richTextAlignmentLeft = symbol("text.alignleft")
     static let richTextAlignmentRight = symbol("text.alignright")
     
-    static func richTextAlignment(_ alignment: NSTextAlignment) -> Image {
-        switch alignment {
-        case .center: richTextAlignmentCenter
-        case .justified: richTextAlignmentJustified
-        case .left: richTextAlignmentLeft
-        case .natural: richTextAlignmentLeft
-        case .right: richTextAlignmentRight
-        @unknown default: richTextUnknownValueType
-        }
-    }
-
     static let richTextColorBackground = symbol("highlighter")
     static let richTextColorForeground = symbol("character")
     static let richTextColorReset = symbol("circle.slash")
