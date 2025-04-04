@@ -16,26 +16,17 @@ import AppKit
 
 public extension RichTextViewComponent {
 
-    /// Get the line spacing.
+    /// Get the current line spacing.
     var richTextLineSpacing: CGFloat? {
         richTextParagraphStyle?.lineSpacing
     }
 
-    /// Set the line spacing.
-    ///
-    /// > Todo: The function currently can't handle multiple
-    /// selected paragraphs. If many paragraphs are selected,
-    /// it will only affect the first one.
+    /// Set the current line spacing.
     func setRichTextLineSpacing(_ spacing: CGFloat) {
-        if richTextLineSpacing == spacing { return }
-        let style = NSMutableParagraphStyle(
-            from: richTextParagraphStyle,
-            lineSpacing: spacing
-        )
-        setRichTextParagraphStyle(style)
+        setRichTextParagraphStyleValue(\.lineSpacing, spacing)
     }
 
-    /// Step the line spacing.
+    /// Step the current line spacing.
     func stepRichTextLineSpacing(points: CGFloat) {
         let currentSize = richTextLineSpacing ?? 0
         let newSize = currentSize + points

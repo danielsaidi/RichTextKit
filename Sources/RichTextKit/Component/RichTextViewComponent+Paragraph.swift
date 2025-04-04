@@ -18,12 +18,19 @@ import AppKit
 
 public extension RichTextViewComponent {
 
-    /// Get the paragraph style.
+    /// Get the current paragraph style.
     var richTextParagraphStyle: NSMutableParagraphStyle? {
         richTextAttribute(.paragraphStyle)
     }
+    
+    /// Get a certain value from the current paragraph style.
+    func richTextParagraphStyleValue<ValueType>(
+        _ keyPath: WritableKeyPath<NSMutableParagraphStyle, ValueType>
+    ) -> ValueType? {
+        richTextParagraphStyle?[keyPath: keyPath]
+    }
 
-    /// Set the paragraph style.
+    /// Set the current paragraph style.
     ///
     /// > Todo: The function currently can't handle multiple
     /// selected paragraphs. If many paragraphs are selected,
@@ -36,5 +43,15 @@ public extension RichTextViewComponent {
         #else
         textStorageWrapper?.addAttribute(.paragraphStyle, value: style, range: range)
         #endif
+    }
+    
+    /// Set a certain value for the current paragraph style.
+    func setRichTextParagraphStyleValue<ValueType>(
+        _ keyPath: WritableKeyPath<NSMutableParagraphStyle, ValueType>,
+        _ value: ValueType
+    ) {
+        var style = richTextParagraphStyle ?? .init()
+        style[keyPath: keyPath] = value
+        setRichTextParagraphStyle(style)
     }
 }

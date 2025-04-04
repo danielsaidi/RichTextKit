@@ -17,7 +17,7 @@ import AppKit
 extension NSMutableParagraphStyle {
 
     convenience init(
-        from style: NSMutableParagraphStyle? = nil,
+        from style: NSParagraphStyle? = nil,
         alignment: RichTextAlignment? = nil,
         indent: CGFloat? = nil,
         lineSpacing: CGFloat? = nil

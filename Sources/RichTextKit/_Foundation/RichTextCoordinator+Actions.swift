@@ -15,52 +15,32 @@ extension RichTextCoordinator {
         guard let action else { return }
         switch action {
         case .copy: textView.copySelection()
-        case .deleteSelectedText:
-            textView.deleteText(in: textView.selectedRange)
-        case .deleteText(let range):
-            textView.deleteText(in: range)
-        case .dismissKeyboard:
-            textView.resignFirstResponder()
-        case .pasteImage(let image):
-            pasteImage(image)
-        case .pasteImages(let images):
-            pasteImages(images)
-        case .pasteText(let text):
-            pasteText(text)
-        case .print:
-            break
+        case .deleteSelectedText: textView.deleteText(in: textView.selectedRange)
+        case .deleteText(let range): textView.deleteText(in: range)
+        case .dismissKeyboard: textView.resignFirstResponder()
+        case .pasteImage(let image): pasteImage(image)
+        case .pasteImages(let images): pasteImages(images)
+        case .pasteText(let text): pasteText(text)
+        case .print: break
         case .redoLatestChange:
             textView.redoLatestChange()
             syncContextWithTextView()
-        case .replaceSelectedText(let text):
-            textView.replaceText(in: textView.selectedRange, with: text)
-        case .replaceText(let range, let text):
-            textView.replaceText(in: range, with: text)
-        case .selectRange(let range):
-            setSelectedRange(to: range)
-        case .setAlignment(let alignment):
-            textView.setRichTextAlignment(alignment)
-        case .setAttributedString(let string):
-            setAttributedString(to: string)
-        case .setColor(let color, let newValue):
-            setColor(color, to: newValue)
-        case .setHighlightedRange(let range):
-            setHighlightedRange(to: range)
-        case .setHighlightingStyle(let style):
-            textView.highlightingStyle = style
-        case .setStyle(let style, let newValue):
-            setStyle(style, to: newValue)
+        case .replaceSelectedText(let text): textView.replaceText(in: textView.selectedRange, with: text)
+        case .replaceText(let range, let text): textView.replaceText(in: range, with: text)
+        case .selectRange(let range): setSelectedRange(to: range)
+        case .setAlignment(let alignment): textView.setRichTextAlignment(alignment)
+        case .setAttributedString(let string): setAttributedString(to: string)
+        case .setColor(let color, let newValue): setColor(color, to: newValue)
+        case .setHighlightedRange(let range): setHighlightedRange(to: range)
+        case .setHighlightingStyle(let style): textView.highlightingStyle = style
+        case .setStyle(let style, let newValue): setStyle(style, to: newValue)
         case .stepFontSize(let points):
             textView.stepRichTextFontSize(points: points)
             syncContextWithTextView()
-        case .stepIndent(let points):
-            textView.stepRichTextIndent(points: points)
-        case .stepLineSpacing(let points):
-            textView.stepRichTextLineSpacing(points: points)
-        case .stepSuperscript(let points):
-            textView.stepRichTextSuperscriptLevel(points: points)
-        case .toggleStyle(let style):
-            textView.toggleRichTextStyle(style)
+        case .stepIndent(let points): textView.stepRichTextIndent(points: points)
+        case .stepLineSpacing(let points): textView.stepRichTextLineSpacing(points: points)
+        case .stepSuperscript(let points): textView.stepRichTextSuperscriptLevel(points: points)
+        case .toggleStyle(let style): textView.toggleRichTextStyle(style)
         case .undoLatestChange:
             textView.undoLatestChange()
             syncContextWithTextView()

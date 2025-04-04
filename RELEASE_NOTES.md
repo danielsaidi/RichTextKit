@@ -6,6 +6,26 @@ Until then, minor updates may remove deprecated features and introduce breaking 
 
 
 
+## 1.2
+
+This version adds keypath-based paragraph functions to the `RichTextViewComponent`.
+
+This means that you will now be able to get and set a bunch of properties with a single set of functions.
+
+### ✨ Features
+
+* `RichTextViewComponent` has a new, keypath-based `richTextParagraphStyleValue(_:)`.
+* `RichTextViewComponent` has a new, keypath-based `setRichTextParagraphStyleValue(_:_:)`.
+
+### ✨ Paragraph Features
+
+`RichTextViewComponent` can use the new keypath functions to get and set:
+
+`alignment`, `allowsDefaultTighteningForTruncation`, `baseWritingDirection`, `defaultTabInterval`, `firstLineHeadIndent`, `headIndent`, `hyphenationFactor`, `lineBreakMode`, `lineBreakStrategy`, `lineHeightMultiple`, `lineSpacing`, `maximumLineHeight`, `minimumLineHeight`, `paragraphSpacing`, `paragraphSpacingBefore`, `tabStops`, `tailIndent`, `usesDefaultHyphenation`.
+
+ 
+
+
 ## 1.1.2
 
 Thanks to @cp-divyesh-v, and @bryan1anderson for your contributions to this version!
