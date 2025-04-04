@@ -18,7 +18,6 @@ import AppKit
 import RichTextKit
 import XCTest
 
-/*
 final class RichTextViewComponent_AttributesTests: XCTestCase {
 
     private var textView: RichTextViewComponent!
@@ -101,5 +100,4 @@ private extension RichTextViewComponent_AttributesTests {
         assertNonEqualAttribute(attr[.font])
     }
 }
-*/
 #endif

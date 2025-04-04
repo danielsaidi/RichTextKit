@@ -18,7 +18,6 @@ import AppKit
 import RichTextKit
 import XCTest
 
-/*
 final class RichTextViewComponent_ColorTests: XCTestCase {
 
     private var textView: RichTextViewComponent!
@@ -96,5 +95,4 @@ final class RichTextViewComponent_ColorTests: XCTestCase {
         assertEqualColor(textView.typingAttributes[.foregroundColor])
     }
 }
- */
 #endif

@@ -1,19 +1,18 @@
 <p align="center">
-    <img src ="Resources/Logo_GitHub.png" alt="RichTextKit Logo" title="RichTextKit" />
+    <img src="Resources/Icon.png" alt="Project Icon" width="250" />
 </p>
 
 <p align="center">
     <img src="https://img.shields.io/github/v/release/danielsaidi/RichTextKit?color=%2300550&sort=semver" alt="Version" />
     <img src="https://img.shields.io/badge/Swift-5.9-orange.svg" alt="Swift 5.9" />
     <img src="https://img.shields.io/badge/platform-SwiftUI-blue.svg" alt="Swift UI" title="Swift UI" />
+    <a href="https://danielsaidi.github.io/RichTextKit"><img src="https://img.shields.io/badge/documentation-web-blue.svg" alt="Documentation" /></a>
     <img src="https://img.shields.io/github/license/danielsaidi/RichTextKit" alt="MIT License" />
-    <a href="https://twitter.com/danielsaidi"><img src="https://img.shields.io/twitter/url?label=Twitter&style=social&url=https%3A%2F%2Ftwitter.com%2Fdanielsaidi" alt="Twitter: @danielsaidi" title="Twitter: @danielsaidi" /></a>
-    <a href="https://mastodon.social/@danielsaidi"><img src="https://img.shields.io/mastodon/follow/000253346?label=mastodon&style=social" alt="Mastodon: @danielsaidi@mastodon.social" title="Mastodon: @danielsaidi@mastodon.social" /></a>
 </p>
 
 
 
-## About RichTextKit
+# RichTextKit
 
 RichTextKit is a Swift SDK that lets you edit rich text in `Swift` & `SwiftUI` with a multi-platform `RichTextEditor`:
 
@@ -112,9 +111,9 @@ You can [sponsor me][Sponsors] on GitHub Sponsors, [reach out][Email] for paid s
 Feel free to reach out if you have questions or want to contribute in any way:
 
 * Website: [danielsaidi.com][Website]
-* Mastodon: [@danielsaidi@mastodon.social][Mastodon]
-* Twitter: [@danielsaidi][Twitter]
 * E-mail: [daniel.saidi@gmail.com][Email]
+* Bluesky: [@danielsaidi@bsky.social][Bluesky]
+* Mastodon: [@danielsaidi@mastodon.social][Mastodon]
 
 
 
@@ -125,14 +124,15 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 
 
 [Email]: mailto:daniel.saidi@gmail.com
-
-[Website]: https://www.danielsaidi.com
-[GitHub]: https://www.github.com/danielsaidi
-[Twitter]: https://www.twitter.com/danielsaidi
-[Mastodon]: https://mastodon.social/@danielsaidi
+[Website]: https://danielsaidi.com
+[GitHub]: https://github.com/danielsaidi
+[OpenSource]: https://danielsaidi.com/opensource
 [Sponsors]: https://github.com/sponsors/danielsaidi
-[OpenSource]: https://www.danielsaidi.com/opensource
 
-[Documentation]: https://danielsaidi.github.io/RichTextKit/documentation/richtextkit/
+[Bluesky]: https://bsky.app/profile/danielsaidi.bsky.social
+[Mastodon]: https://mastodon.social/@danielsaidi
+[Twitter]: https://twitter.com/danielsaidi
+
+[Documentation]: https://danielsaidi.github.io/RichTextKit/
 [Getting-Started]: https://danielsaidi.github.io/RichTextKit/documentation/richtextkit/getting-started
 [License]: https://github.com/danielsaidi/RichTextKit/blob/master/LICENSE

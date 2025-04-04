@@ -18,7 +18,6 @@ import AppKit
 import RichTextKit
 import XCTest
 
-/*
 final class RichTextViewComponent_StylesTests: XCTestCase {
 
     private var textView: RichTextViewComponent!
@@ -80,5 +79,4 @@ final class RichTextViewComponent_StylesTests: XCTestCase {
         XCTAssertFalse(textView.richTextStyles.hasStyle(.underlined))
     }
 }
- */
 #endif

@@ -12,7 +12,6 @@ import SwiftUI
 @testable import RichTextKit
 import XCTest
 
-/*
 final class RichTextCoordinatorIntegrationTests: XCTestCase {
     private var text: NSAttributedString!
     private var textBinding: Binding<NSAttributedString>!
@@ -79,5 +78,4 @@ final class RichTextCoordinatorIntegrationTests: XCTestCase {
         XCTAssertEqual(textView.richTextAttributes[.strikethroughStyle] as? Int, 1)
     }
 }
- */
 #endif

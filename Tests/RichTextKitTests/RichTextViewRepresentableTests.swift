@@ -10,7 +10,6 @@
 import RichTextKit
 import XCTest
 
-/*
 final class RichTextViewComponentTests: XCTestCase {
 
     private var view: RichTextView!
@@ -85,5 +84,4 @@ final class RichTextViewComponentTests: XCTestCase {
         #endif
     }
 }
- */
 #endif

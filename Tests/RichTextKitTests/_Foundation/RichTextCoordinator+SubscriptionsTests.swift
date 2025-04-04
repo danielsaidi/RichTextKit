@@ -11,7 +11,7 @@ import RichTextKit
 import SwiftUI
 import XCTest
 
-/*
+@MainActor
 final class RichTextCoordinator_SubscriptionsTests: XCTestCase {
 
     private var text: NSAttributedString!
@@ -49,11 +49,10 @@ final class RichTextCoordinator_SubscriptionsTests: XCTestCase {
         XCTAssertNotNil(coordinator)
     }
 
-    func testFontNameChangesUpdatesTextView() {
+    func testFontNameChangesUpdatesTextView() async {
         XCTAssertNotEqual(textView.richTextFont?.fontName, "Arial")
         textContext.fontName = ""
-
-        eventually {
+        await MainActor.run {
             #if iOS || os(tvOS)
             XCTAssertEqual(self.textView.richTextFont?.fontName, ".SFUI-Regular")
             #elseif macOS
@@ -132,5 +131,4 @@ final class RichTextCoordinator_SubscriptionsTests: XCTestCase {
         XCTAssertEqual(textView.richTextAlignment, .right)
     }
 }
- */
 #endif

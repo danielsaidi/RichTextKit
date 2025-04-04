@@ -12,7 +12,6 @@ import XCTest
 
 @testable import RichTextKit
 
-/*
 final class RichTextCoordinatorTests: XCTestCase {
     private var text: NSAttributedString!
     private var textBinding: Binding<NSAttributedString>!
@@ -166,5 +165,4 @@ final class RichTextCoordinatorTests: XCTestCase {
         XCTAssertEqual(view.richTextColor(.foreground), .yellow)
     }
 }
- */
 #endif
