@@ -1,5 +1,5 @@
 //
-//  NSParagraphStyle+Image.swift
+//  NSParagraphStyle+Presentation.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2025-04-04.
@@ -46,6 +46,15 @@ public extension NSTextAlignment {
         case .natural: .richTextAlignmentLeft
         case .right: .richTextAlignmentRight
         @unknown default: .richTextUnknownValueType
+        }
+    }
+    
+    /// The default label for the text alignment.
+    var defaultLabel: some View {
+        Label {
+            Text(title)
+        } icon: {
+            defaultIcon
         }
     }
 }

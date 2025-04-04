@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-public extension KeyPath where Root == NSParagraphStyle {
+public extension KeyPath where Root == NSMutableParagraphStyle, Value: Hashable & Strideable {
     
     /// Get the default stepper interval for the key path.
     var defaultStepperInterval: Value? {

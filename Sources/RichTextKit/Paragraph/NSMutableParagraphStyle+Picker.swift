@@ -1,5 +1,5 @@
 //
-//  NSParagraphStyle+Picker.swift
+//  NSMutableParagraphStyle+Picker.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2025-04-04.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-public extension KeyPath where Root == NSParagraphStyle {
+public extension KeyPath where Root == NSMutableParagraphStyle {
     
     /// Get default picker values for the key path.
     var defaultPickerValues: [Value]? {
@@ -16,20 +16,20 @@ public extension KeyPath where Root == NSParagraphStyle {
         case \.alignment: NSTextAlignment.defaultPickerValues as? [Value]
         case \.allowsDefaultTighteningForTruncation: [true, false] as? [Value]
         case \.baseWritingDirection: NSWritingDirection.defaultPickerValues as? [Value]
-        case \.defaultTabInterval: [28.0, 36.0, 72.0, 144.0] as? [Value]
-        case \.firstLineHeadIndent: [0.0, 10.0, 20.0, 30.0, 40.0, 50.0] as? [Value]
-        case \.headIndent: [0.0, 10.0, 20.0, 30.0, 40.0, 50.0] as? [Value]
+        case \.defaultTabInterval: [28.0, 36, 72, 144] as? [Value]
+        case \.firstLineHeadIndent: [0.0, 10, 20, 30, 40, 50] as? [Value]
+        case \.headIndent: [0.0, 10, 20, 30, 40, 50] as? [Value]
         case \.hyphenationFactor: [0.0, 0.5, 1.0] as? [Value]
         case \.lineBreakMode: NSLineBreakMode.defaultPickerValues as? [Value]
         case \.lineBreakStrategy: NSParagraphStyle.LineBreakStrategy.defaultPickerValues as? [Value]
         case \.lineHeightMultiple: [1.0, 1.1, 1.2, 1.5, 2.0] as? [Value]
-        case \.lineSpacing: [0.0, 2.0, 4.0, 6.0, 8.0, 10.0] as? [Value]
-        case \.maximumLineHeight: [0.0, 20.0, 24.0, 28.0, 32.0, 36.0] as? [Value]
-        case \.minimumLineHeight: [0.0, 16.0, 18.0, 20.0, 22.0, 24.0] as? [Value]
-        case \.paragraphSpacing: [0.0, 4.0, 8.0, 12.0, 16.0, 20.0] as? [Value]
-        case \.paragraphSpacingBefore: [0.0, 4.0, 8.0, 12.0, 16.0, 20.0] as? [Value]
+        case \.lineSpacing: [0.0, 2, 4, 6, 8, 10] as? [Value]
+        case \.maximumLineHeight: [0.0, 20, 24, 28, 32, 36] as? [Value]
+        case \.minimumLineHeight: [0.0, 16, 18, 20, 22, 24] as? [Value]
+        case \.paragraphSpacing: [0.0, 4, 8, 12, 16, 20] as? [Value]
+        case \.paragraphSpacingBefore: [0.0, 4, 8, 12, 16, 20] as? [Value]
         case \.tabStops: [[]] as? [Value] // Usually customized based on document needs
-        case \.tailIndent: [0.0, 10.0, 20.0, 30.0, 40.0, 50.0] as? [Value]
+        case \.tailIndent: [0.0, 10, 20, 30, 40, 50] as? [Value]
         case \.usesDefaultHyphenation: [true, false] as? [Value]
         default: [] as? [Value]
         }

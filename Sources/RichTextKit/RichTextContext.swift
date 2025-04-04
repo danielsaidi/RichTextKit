@@ -94,7 +94,7 @@ public class RichTextContext: ObservableObject {
     ) -> ValueType {
         paragraphStyle[keyPath: keyPath]
     }
-
+    
     /// A binding that binds to paragraph style values.
     public func paragraphStyleValueBinding<ValueType>(
         for keyPath: WritableKeyPath<NSMutableParagraphStyle, ValueType>

@@ -22,11 +22,11 @@ extension RichTextCoordinator {
         }
         .store(in: &cancellables)
 
-        subscribeToAlignment()
-        subscribeToFontName()
-        subscribeToFontSize()
-        subscribeToIsEditable()
-        subscribeToIsEditingText()
+        subscribeToContextAlignment()
+        subscribeToContextFontName()
+        subscribeToContextFontSize()
+        subscribeToContextIsEditable()
+        subscribeToContextIsEditingText()
     }
 }
 
@@ -41,31 +41,31 @@ private extension RichTextCoordinator {
             .store(in: &cancellables)
     }
 
-    func subscribeToAlignment() {
+    func subscribeToContextAlignment() {
         subscribe(to: context.$textAlignment) { [weak self] in
             self?.handle(.setAlignment($0))
         }
     }
 
-    func subscribeToFontName() {
+    func subscribeToContextFontName() {
         subscribe(to: context.$fontName) { [weak self] in
             self?.textView.setRichTextFontName($0)
         }
     }
 
-    func subscribeToFontSize() {
+    func subscribeToContextFontSize() {
         subscribe(to: context.$fontSize) { [weak self] in
             self?.textView.setRichTextFontSize($0)
         }
     }
 
-    func subscribeToIsEditable() {
+    func subscribeToContextIsEditable() {
         subscribe(to: context.$isEditable) { [weak self] in
             self?.setIsEditable(to: $0)
         }
     }
 
-    func subscribeToIsEditingText() {
+    func subscribeToContextIsEditingText() {
         subscribe(to: context.$isEditingText) { [weak self] in
             self?.setIsEditing(to: $0)
         }
