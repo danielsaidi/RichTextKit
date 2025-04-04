@@ -16,12 +16,14 @@ As a result, all parts of the library that handled individual value types have b
 
 ### ✨ Features
 
-* `Array` has a new, keypath-based `defaultPickerValues(for:)` value builder.
-* `Array` has a new, keypath-based `defaultStepperInterval(for:)` value builder.
-* `Image` has a new, keypath-based `richTextParagraphStyleValue(_)` image builder.
 * `NSMutableParagraphStyle` has a new `defaultMutable` builder.
 * `NSParagraphStyle` has a new `defaultPickerValues(for:)` function.
 * `NSParagraphStyle` has a new `defaultStepperSteps(for:)` function.
+* `NSParagraphStyle.KeyPath` has a new `defaultIcon` image property.
+* `NSParagraphStyle.KeyPath` has a new `defaultPickerValues` property.
+* `NSParagraphStyle.KeyPath` has a new `defaultStepperInterval` property.
+* `NSTextAlignment` has a new `defaultIcon` image-building property.
+* `RichTextContext` has a new `paragraphStyleValueBinding` property.
 * `RichTextViewComponent` has a new, keypath-based `richTextParagraphStyleValue(_:)`.
 * `RichTextViewComponent` has a new, keypath-based `setRichTextParagraphStyleValue(_:_:)`.
 * `RichTextViewComponent` has a new, keypath-based `stepRichTextParagraphStyleValue(_:_:)`.

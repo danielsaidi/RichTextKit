@@ -8,23 +8,21 @@
 
 import SwiftUI
 
-public extension Array {
+public extension KeyPath where Root == NSParagraphStyle {
     
-    /// Get the default stepper interval for a certain pakey path.
-    static func defaultStepperInterval<Value>(
-        for keyPath: KeyPath<NSParagraphStyle, Value>
-    ) -> Value? {
-        switch keyPath {
+    /// Get the default stepper interval for the key path.
+    var defaultStepperInterval: Value? {
+        switch self {
         case \.defaultTabInterval: 0.1 as? Value
-        case \.firstLineHeadIndent: 0.1 as? Value
-        case \.headIndent: 0.1 as? Value
+        case \.firstLineHeadIndent: 1 as? Value
+        case \.headIndent: 1 as? Value
         case \.hyphenationFactor: 0.1 as? Value
         case \.lineHeightMultiple: 0.1 as? Value
         case \.lineSpacing: 0.1 as? Value
         case \.maximumLineHeight: 0.1 as? Value
         case \.minimumLineHeight: 0.1 as? Value
-        case \.paragraphSpacing: 0.1 as? Value
-        case \.paragraphSpacingBefore: 0.1 as? Value
+        case \.paragraphSpacing: 1 as? Value
+        case \.paragraphSpacingBefore: 1 as? Value
         case \.tailIndent: 0.1 as? Value
         default: nil
         }

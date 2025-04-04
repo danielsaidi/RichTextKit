@@ -8,13 +8,11 @@
 
 import SwiftUI
 
-public extension Array {
+public extension KeyPath where Root == NSParagraphStyle {
     
-    /// Get default picker values for a certain key path.
-    static func defaultPickerValues<Value>(
-        for keyPath: KeyPath<NSParagraphStyle, Value>
-    ) -> [Value]? {
-        switch keyPath {
+    /// Get default picker values for the key path.
+    var defaultPickerValues: [Value]? {
+        switch self {
         case \.alignment: NSTextAlignment.defaultPickerValues as? [Value]
         case \.allowsDefaultTighteningForTruncation: [true, false] as? [Value]
         case \.baseWritingDirection: NSWritingDirection.defaultPickerValues as? [Value]
@@ -42,7 +40,7 @@ public extension NSLineBreakMode {
     
     /// Get the default picker values.
     static var defaultPickerValues: [Self] {
-        [Self.byWordWrapping, .byCharWrapping, .byClipping, .byTruncatingHead, .byTruncatingTail, .byTruncatingMiddle]
+        [.byWordWrapping, .byCharWrapping, .byClipping, .byTruncatingHead, .byTruncatingTail, .byTruncatingMiddle]
     }
 }
 
@@ -50,7 +48,7 @@ public extension NSParagraphStyle.LineBreakStrategy {
     
     /// Get the default picker values.
     static var defaultPickerValues: [Self] {
-        [Self.standard, .pushOut, .hangulWordPriority]
+        [.standard, .pushOut, .hangulWordPriority]
     }
 }
 
@@ -58,7 +56,7 @@ public extension NSTextAlignment {
     
     /// Get the default picker values.
     static var defaultPickerValues: [Self] {
-        [Self.left, .center, .right, .justified]
+        [.left, .center, .right, .justified]
     }
 }
 
@@ -66,6 +64,6 @@ public extension NSWritingDirection {
     
     /// Get the default picker values.
     static var defaultPickerValues: [Self] {
-        [Self.leftToRight, .rightToLeft]
+        [.leftToRight, .rightToLeft]
     }
 }
