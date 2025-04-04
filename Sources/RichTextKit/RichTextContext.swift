@@ -86,9 +86,16 @@ public class RichTextContext: ObservableObject {
     @Published public internal(set) var styles = [RichTextStyle: Bool]()
     
     
-    // MARK: - Bindings
+    // MARK: - Paragraph
+    
+    /// A paragraph style value for a certain value type.
+    public func paragraphStyleValue<ValueType>(
+        for keyPath: KeyPath<NSParagraphStyle, ValueType>
+    ) -> ValueType {
+        paragraphStyle[keyPath: keyPath]
+    }
 
-    /// This binding lets you bind to paragraph style values.
+    /// A binding that binds to paragraph style values.
     public func paragraphStyleValueBinding<ValueType>(
         for keyPath: WritableKeyPath<NSMutableParagraphStyle, ValueType>
     ) -> Binding<ValueType> {

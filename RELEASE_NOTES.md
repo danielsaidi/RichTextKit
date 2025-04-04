@@ -23,7 +23,8 @@ As a result, all parts of the library that handled individual value types have b
 * `NSParagraphStyle.KeyPath` has a new `defaultPickerValues` property.
 * `NSParagraphStyle.KeyPath` has a new `defaultStepperInterval` property.
 * `NSTextAlignment` has a new `defaultIcon` image-building property.
-* `RichTextContext` has a new `paragraphStyleValueBinding` property.
+* `RichTextContext` has a new `paragraphStyleValue(for:)` function.
+* `RichTextContext` has a new `paragraphStyleValueBinding(for:)` function.
 * `RichTextViewComponent` has a new, keypath-based `richTextParagraphStyleValue(_:)`.
 * `RichTextViewComponent` has a new, keypath-based `setRichTextParagraphStyleValue(_:_:)`.
 * `RichTextViewComponent` has a new, keypath-based `stepRichTextParagraphStyleValue(_:_:)`.
