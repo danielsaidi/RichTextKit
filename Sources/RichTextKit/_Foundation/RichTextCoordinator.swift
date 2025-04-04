@@ -181,7 +181,7 @@ extension RichTextCoordinator {
         sync(&context.isEditingText, with: textView.isFirstResponder)
         // sync(&context.lineSpacing, with: textView.richTextLineSpacing ?? 10.0)   TODO: Not done yet
         sync(&context.paragraphStyle, with: textView.richTextParagraphStyle ?? .default)
-        sync(&context.textAlignment, with: textView.richTextAlignment ?? .left)
+        sync(&context.textAlignment, with: RichTextAlignment(textView.richTextParagraphStyleValue(\.alignment) ?? .left))
 
         RichTextColor.allCases.forEach {
             if let color = textView.richTextColor($0) {

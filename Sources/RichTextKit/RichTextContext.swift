@@ -47,58 +47,45 @@ public class RichTextContext: ObservableObject {
     // MARK: - Bindable & Settable Properies
 
     /// Whether or not the rich text editor is editable.
-    @Published
-    public var isEditable = true
+    @Published public var isEditable = true
 
     /// Whether or not the text is currently being edited.
-    @Published
-    public var isEditingText = false
+    @Published public var isEditingText = false
 
     /// The current text alignment, if any.
-    @Published
-    public var textAlignment: RichTextAlignment = .left
+    @Published public var textAlignment: RichTextAlignment = .left
 
     /// The current font name.
-    @Published
-    public var fontName = RichTextFont.PickerFont.all.first?.fontName ?? ""
+    @Published public var fontName = RichTextFont.PickerFont.all.first?.fontName ?? ""
 
     /// The current font size.
-    @Published
-    public var fontSize = CGFloat.standardRichTextFontSize
+    @Published public var fontSize = CGFloat.standardRichTextFontSize
 
     /// The current line spacing.
-    @Published
-    public var lineSpacing: CGFloat = 10.0
+    @Published public var lineSpacing: CGFloat = 10.0
 
     // MARK: - Observable Properties
 
     /// Whether or not the current rich text can be copied.
-    @Published
-    public internal(set) var canCopy = false
+    @Published public internal(set) var canCopy = false
 
     /// Whether or not the latest undo can be redone.
-    @Published
-    public internal(set) var canRedoLatestChange = false
+    @Published public internal(set) var canRedoLatestChange = false
 
     /// Whether or not the latest change can be undone.
-    @Published
-    public internal(set) var canUndoLatestChange = false
+    @Published public internal(set) var canUndoLatestChange = false
 
     /// The current color values.
-    @Published
-    public internal(set) var colors = [RichTextColor: ColorRepresentable]()
+    @Published public internal(set) var colors = [RichTextColor: ColorRepresentable]()
 
     /// The style to apply when highlighting a range.
-    @Published
-    public internal(set) var highlightingStyle = RichTextHighlightingStyle.standard
+    @Published public internal(set) var highlightingStyle = RichTextHighlightingStyle.standard
 
     /// The current paragraph style.
-    @Published
-    public internal(set) var paragraphStyle = NSParagraphStyle.default
+    @Published public internal(set) var paragraphStyle = NSParagraphStyle.default
 
     /// The current rich text styles.
-    @Published
-    public internal(set) var styles = [RichTextStyle: Bool]()
+    @Published public internal(set) var styles = [RichTextStyle: Bool]()
 
     // MARK: - Properties
 

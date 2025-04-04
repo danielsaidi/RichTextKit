@@ -16,17 +16,17 @@ import AppKit
 
 public extension RichTextViewComponent {
 
-    /// Get the rich text indent.
+    @available(*, deprecated, message: "Use richTextParagraphStyleValue(\\.headIndent) instead.")
     var richTextIndent: CGFloat? {
         richTextParagraphStyleValue(\.headIndent)
     }
 
-    /// Set the rich text indent.
+    @available(*, deprecated, message: "Use setRichTextParagraphStyleValue(\\.headIndent, ...) instead.")
     func setRichTextIndent(to val: CGFloat) {
         setRichTextParagraphStyleValue(\.headIndent, val)
     }
 
-    /// Step the rich text indent.
+    @available(*, deprecated, message: "Use stepRichTextParagraphStyleValue(\\.headIndent, ...) instead.")
     func stepRichTextIndent(points: CGFloat) {
         stepRichTextParagraphStyleValue(\.headIndent, points)
     }

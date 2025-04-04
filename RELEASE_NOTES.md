@@ -8,9 +8,11 @@ Until then, minor updates may remove deprecated features and introduce breaking 
 
 ## 1.2
 
-This version adds keypath-based paragraph functions to the `RichTextViewComponent`.
+This version adds key path-based paragraph functions to the `RichTextViewComponent`. This means that you can now get and set the following values with a single set of functions:
 
-This means that you will now be able to get and set a bunch of properties with a single set of functions.
+`alignment`, `allowsDefaultTighteningForTruncation`, `baseWritingDirection`, `defaultTabInterval`, `firstLineHeadIndent`, `headIndent`, `hyphenationFactor`, `lineBreakMode`, `lineBreakStrategy`, `lineHeightMultiple`, `lineSpacing`, `maximumLineHeight`, `minimumLineHeight`, `paragraphSpacing`, `paragraphSpacingBefore`, `tabStops`, `tailIndent`, `usesDefaultHyphenation`.
+
+As a result, all parts of the library that handled individual value types have been deprecated. This makes the library tighter, and also a lot more capable, with less code. 
 
 ### ✨ Features
 
@@ -18,13 +20,10 @@ This means that you will now be able to get and set a bunch of properties with a
 * `RichTextViewComponent` has a new, keypath-based `setRichTextParagraphStyleValue(_:_:)`.
 * `RichTextViewComponent` has a new, keypath-based `stepRichTextParagraphStyleValue(_:_:)`.
 
-### ✨ Paragraph Features
+### 🗑️ Deprecations 
 
-`RichTextViewComponent` can use the new keypath functions to get and set:
+* `RichTextAttributeReader` has deprecated a lot of functions.
 
-`alignment`, `allowsDefaultTighteningForTruncation`, `baseWritingDirection`, `defaultTabInterval`, `firstLineHeadIndent`, `headIndent`, `hyphenationFactor`, `lineBreakMode`, `lineBreakStrategy`, `lineHeightMultiple`, `lineSpacing`, `maximumLineHeight`, `minimumLineHeight`, `paragraphSpacing`, `paragraphSpacingBefore`, `tabStops`, `tailIndent`, `usesDefaultHyphenation`.
-
- 
 
 
 ## 1.1.2

@@ -28,7 +28,7 @@ extension RichTextCoordinator {
         case .replaceSelectedText(let text): textView.replaceText(in: textView.selectedRange, with: text)
         case .replaceText(let range, let text): textView.replaceText(in: range, with: text)
         case .selectRange(let range): setSelectedRange(to: range)
-        case .setAlignment(let alignment): textView.setRichTextAlignment(alignment)
+        case .setAlignment(let alignment): textView.setRichTextParagraphStyleValue(\.alignment, alignment.nativeAlignment)
         case .setAttributedString(let string): setAttributedString(to: string)
         case .setColor(let color, let newValue): setColor(color, to: newValue)
         case .setHighlightedRange(let range): setHighlightedRange(to: range)
@@ -37,8 +37,8 @@ extension RichTextCoordinator {
         case .stepFontSize(let points):
             textView.stepRichTextFontSize(points: points)
             syncContextWithTextView()
-        case .stepIndent(let points): textView.stepRichTextIndent(points: points)
-        case .stepLineSpacing(let points): textView.stepRichTextLineSpacing(points: points)
+        case .stepIndent(let points): textView.stepRichTextParagraphStyleValue(\.headIndent, points)
+        case .stepLineSpacing(let points): textView.stepRichTextParagraphStyleValue(\.lineSpacing, points)
         case .stepSuperscript(let points): textView.stepRichTextSuperscriptLevel(points: points)
         case .toggleStyle(let style): textView.toggleRichTextStyle(style)
         case .undoLatestChange:

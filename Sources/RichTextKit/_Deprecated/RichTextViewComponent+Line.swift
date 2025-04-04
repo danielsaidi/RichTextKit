@@ -16,17 +16,17 @@ import AppKit
 
 public extension RichTextViewComponent {
 
-    /// Get the current line spacing.
+    @available(*, deprecated, message: "Use richTextParagraphStyleValue(\\.lineSpacing) instead.")
     var richTextLineSpacing: CGFloat? {
         richTextParagraphStyleValue(\.lineSpacing)
     }
 
-    /// Set the current line spacing.
+    @available(*, deprecated, message: "Use setRichTextParagraphStyleValue(\\.lineSpacing, ...) instead.")
     func setRichTextLineSpacing(_ spacing: CGFloat) {
         setRichTextParagraphStyleValue(\.lineSpacing, spacing)
     }
 
-    /// Step the current line spacing.
+    @available(*, deprecated, message: "Use stepRichTextParagraphStyleValue(\\.lineSpacing, ...) instead.")
     func stepRichTextLineSpacing(points: CGFloat) {
         stepRichTextParagraphStyleValue(\.lineSpacing, points)
     }

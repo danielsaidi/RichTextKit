@@ -1,11 +1,3 @@
-//
-//  RichTextViewComponent+Alignment.swift
-//  RichTextKit
-//
-//  Created by Daniel Saidi on 2022-05-29.
-//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
-//
-
 import Foundation
 
 #if canImport(UIKit)
@@ -16,12 +8,13 @@ import AppKit
 
 public extension RichTextViewComponent {
 
-    /// Get the text alignment.
+    @available(*, deprecated, message: "Use richTextParagraphStyleValue(\\.alignment) instead.")
     var richTextAlignment: RichTextAlignment? {
-        guard let style = richTextParagraphStyle else { return nil }
-        return RichTextAlignment(style.alignment)
+        guard let val = richTextParagraphStyleValue(\.alignment) else { return nil }
+        return RichTextAlignment(val)
     }
 
+    @available(*, deprecated, message: "Use setRichTextParagraphStyleValue(\\.alignment, ...) instead.")
     /// Set the text alignment.
     func setRichTextAlignment(_ alignment: RichTextAlignment) {
         if richTextAlignment == alignment { return }
