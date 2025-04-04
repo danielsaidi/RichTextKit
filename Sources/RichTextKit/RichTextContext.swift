@@ -61,8 +61,6 @@ public class RichTextContext: ObservableObject {
     /// The current font size.
     @Published public var fontSize = CGFloat.standardRichTextFontSize
 
-    /// The current line spacing.
-    @Published public var lineSpacing: CGFloat = 10.0
 
     // MARK: - Observable Properties
 
@@ -82,11 +80,26 @@ public class RichTextContext: ObservableObject {
     @Published public internal(set) var highlightingStyle = RichTextHighlightingStyle.standard
 
     /// The current paragraph style.
-    @Published public internal(set) var paragraphStyle = NSParagraphStyle.default
+    @Published public internal(set) var paragraphStyle = NSMutableParagraphStyle.defaultMutable
 
     /// The current rich text styles.
     @Published public internal(set) var styles = [RichTextStyle: Bool]()
+    
+    
+    // MARK: - Bindings
 
+    /// This binding lets you bind to paragraph style values.
+    public func paragraphStyleValueBinding<ValueType>(
+        for keyPath: WritableKeyPath<NSMutableParagraphStyle, ValueType>
+    ) -> Binding<ValueType> {
+        .init {
+            self.paragraphStyle[keyPath: keyPath]
+        } set: { value in
+            self.paragraphStyle[keyPath: keyPath] = value
+        }
+    }
+    
+    
     // MARK: - Properties
 
     /// This publisher can emit actions to the coordinator.
@@ -94,6 +107,12 @@ public class RichTextContext: ObservableObject {
 
     /// The currently highlighted range, if any.
     public var highlightedRange: NSRange?
+    
+    
+    // MARK: - Deprecated
+    
+    @available(*, deprecated, message: "Use paragraphStyle instead.")
+    @Published public var lineSpacing: CGFloat = 10.0
 }
 
 public extension RichTextContext {

@@ -47,63 +47,20 @@ public extension RichTextLine {
 
         @ObservedObject
         private var context: RichTextContext
+        
+        var value: Binding<CGFloat> {
+            context.paragraphStyleValueBinding(for: \.lineSpacing)
+        }
 
         public var body: some View {
-            #if iOS || os(visionOS)
-            stack
-                .fixedSize(horizontal: false, vertical: true)
-            #else
-            HStack(spacing: 3) {
-                picker
-                stepper
+            HStack(spacing: 5) {
+                RichTextLine.SpacingPicker(
+                    selection: value
+                )
+                Stepper("", value: value, step: 0.1)
+                    .labelsHidden()
             }
-            .overlay(macShortcutOverlay)
-            #endif
         }
-    }
-}
-
-private extension RichTextLine.SpacingPickerStack {
-
-    var macShortcutOverlay: some View {
-        stack
-            .opacity(0)
-            .allowsHitTesting(false)
-    }
-
-    var stack: some View {
-        HStack(spacing: 2) {
-            stepButton(-step)
-            picker
-            stepButton(step)
-        }
-    }
-
-    func stepButton(_ points: CGFloat) -> some View {
-        RichTextAction.Button(
-            action: .stepLineSpacing(points: points),
-            context: context,
-            fillVertically: true
-        )
-    }
-
-    var picker: some View {
-        RichTextLine.SpacingPicker(
-            selection: $context.lineSpacing
-        )
-    }
-
-    var stepper: some View {
-        Stepper("", onIncrement: increment, onDecrement: decrement)
-            .labelsHidden()
-    }
-
-    func decrement() {
-        context.lineSpacing -= step
-    }
-
-    func increment() {
-        context.lineSpacing += step
     }
 }
 
@@ -116,7 +73,7 @@ private extension RichTextLine.SpacingPickerStack {
 
         var body: some View {
             VStack {
-                Text("Spacing: \(context.lineSpacing)")
+                Text("Spacing: \(context.paragraphStyle[keyPath: \.lineSpacing])")
                 RichTextLine.SpacingPickerStack(context: context)
             }
             .buttonStyle(.bordered)

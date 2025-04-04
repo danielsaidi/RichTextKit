@@ -48,7 +48,7 @@ public extension RichTextLine {
         private var config
 
         public var body: some View {
-            SwiftUI.Picker(RTKL10n.lineSpacing.text, selection: $selection) {
+            Picker(RTKL10n.lineSpacing.text, selection: $selection) {
                 ForEach(values(
                     for: config.values,
                     selection: selection
