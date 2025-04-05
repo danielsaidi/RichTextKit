@@ -132,6 +132,146 @@ public struct RichTextEditor: ViewRepresentable {
     }
 
     public func updateNSView(_ view: NSViewType, context: Context) {}
+    
+    #endif
+}
+
+#if canImport(AppKit)
+
+extension NSTextView {
+    
+    var contentSize: CGSize {
+        get {
+            guard let layoutManager = layoutManager, let textContainer = textContainer else {
+                print("textView no layoutManager or textContainer")
+                return .zero
+            }
+
+            layoutManager.ensureLayout(for: textContainer)
+            return layoutManager.usedRect(for: textContainer).size
+        }
+    }
+}
+#endif
+
+public struct StaticRichTextEditor: ViewRepresentable {
+
+    /// Create a rich text editor with a rich text value and
+    /// a certain rich text data format.
+    ///
+    /// - Parameters:
+    ///   - text: The rich text to edit.
+    ///   - context: The rich text context to use.
+    ///   - format: The rich text data format, by default `.archivedData`.
+    ///   - viewConfiguration: A platform-specific view configuration, if any.
+    public init(
+        text: Binding<NSAttributedString>,
+        context: RichTextContext,
+        format: RichTextDataFormat = .archivedData,
+        viewConfiguration: @escaping ViewConfiguration = { _ in }
+    ) {
+        self.text = text
+        self._context = ObservedObject(wrappedValue: context)
+        self.format = format
+        self.viewConfiguration = viewConfiguration
+    }
+
+    public typealias ViewConfiguration = (RichTextViewComponent) -> Void
+
+    @ObservedObject
+    private var context: RichTextContext
+
+    private var text: Binding<NSAttributedString>
+    private var format: RichTextDataFormat
+    private var viewConfiguration: ViewConfiguration
+
+    @Environment(\.richTextEditorConfig)
+    private var config
+
+    @Environment(\.richTextEditorStyle)
+    private var style
+
+    #if iOS || os(tvOS) || os(visionOS)
+    public let textView = RichTextView()
+    #endif
+
+    #if macOS
+    public let textView = RichTextView()
+
+    
+    #endif
+
+    public func makeCoordinator() -> RichTextCoordinator {
+        RichTextCoordinator(
+            text: text,
+            textView: textView,
+            richTextContext: context
+        )
+    }
+
+    #if iOS || os(tvOS) || os(visionOS)
+    public func makeUIView(context: Context) -> some UIView {
+        textView.setup(with: text.wrappedValue, format: format)
+        textView.configuration = config
+        textView.theme = style
+        viewConfiguration(textView)
+        return textView
+    }
+
+    public func updateUIView(_ view: UIViewType, context: Context) {}
+    
+    @available(iOS 16.0, *)
+    public func sizeThatFits(_ proposal: ProposedViewSize, uiView: UIViewType, context: Context) -> CGSize? {
+        guard let proposedWidth = proposal.width, proposedWidth > 0, proposedWidth < .infinity else {
+          return nil
+        }
+        if let textView = uiView as? RichTextView {
+            let inset = textView.textContainerInset
+            
+            // calculate size of UITextView that fits current text:
+            var sizeThatFits = uiView.sizeThatFits(CGSize(
+                width: proposedWidth,
+                height: UIView.layoutFittingCompressedSize.height
+            ))
+            
+            print(proposal, inset, sizeThatFits, textView.contentInset)
+            
+            
+            sizeThatFits.width = proposedWidth
+            
+            return sizeThatFits
+        }
+        return nil
+    }
+
+    #else
+
+    public func makeNSView(context: Context) -> some NSView {
+        textView.setup(with: text.wrappedValue, format: format)
+        textView.configuration = config
+        textView.theme = style
+        viewConfiguration(textView)
+        return textView
+    }
+
+    public func updateNSView(_ view: NSViewType, context: Context) {}
+    
+    @available(macOS 13.0, *)
+    public func sizeThatFits(_ proposal: ProposedViewSize, nsView: NSViewType, context: Context) -> CGSize? {
+        guard let proposedWidth = proposal.width, proposedWidth > 0, proposedWidth < .infinity else {
+          return nil
+        }
+        
+        if let textView = nsView as? NSTextView {
+            let inset = textView.textContainerInset
+
+            let height = max(proposal.height ?? 100, textView.contentSize.height) + inset.height + inset.height
+            
+            return CGSize(width: proposedWidth, height: height)
+        }
+        return nil
+
+    }
     #endif
 }
 
