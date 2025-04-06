@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+#if iOS || os(macOS) || os(visionOS)
 public extension Stepper {
     
     /// Creates a stepper for a paragraph style value in the
@@ -73,3 +74,4 @@ public extension Stepper {
 
     return Preview()
 }
+#endif

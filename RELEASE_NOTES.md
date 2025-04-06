@@ -8,6 +8,10 @@ Until then, minor updates may remove deprecated features and introduce breaking 
 
 ## 1.2
 
+This version makes a first step towards removing library-specific types in favor of native types, to avoid having to add custom types and logic to the library, where native alternatives exist.
+
+This version deprecates the `RichTextAlignment` type and instead   
+
 This version adds key path-based paragraph functions to the `RichTextViewComponent`. This means that you can now get and set the following values with a single set of functions, pickers, steppers and toggles:
 
 `alignment`, `allowsDefaultTighteningForTruncation`, `baseWritingDirection`, `defaultTabInterval`, `firstLineHeadIndent`, `headIndent`, `hyphenationFactor`, `lineBreakMode`, `lineBreakStrategy`, `lineHeightMultiple`, `lineSpacing`, `maximumLineHeight`, `minimumLineHeight`, `paragraphSpacing`, `paragraphSpacingBefore`, `tabStops`, `tailIndent`, `usesDefaultHyphenation`.
@@ -37,8 +41,8 @@ As a result, all parts of the library that handled individual value types have b
 
 ### 🗑️ Deprecations 
 
-* `RichTextAlignment` has been deprecated due to the new paragraph-based features.
-* `RichTextAlignment.Picker` has been deprecated due to the new `Picker` capabilities.
+* `RichTextAlignment` and all nested types have been deprecated due to the new paragraph-based features.
+* `RichTextLine` and all nested types have been deprecated due to the new paragraph-based features.
 
 
 

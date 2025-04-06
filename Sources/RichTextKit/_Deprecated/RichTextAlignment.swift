@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-@available(*, deprecated, message: "Use native NSTextAlignment directly")
+@available(*, deprecated, message: "Use native NSTextAlignment directly instead.")
 public enum RichTextAlignment: String, CaseIterable, Codable, Equatable, Identifiable, RichTextLabelValue {
 
     /// Create a rich text alignment with a native alignment.
@@ -38,13 +38,13 @@ public enum RichTextAlignment: String, CaseIterable, Codable, Equatable, Identif
     case right
 }
 
-@available(*, deprecated, message: "Use native NSTextAlignment instead")
+@available(*, deprecated, message: "Use native NSTextAlignment directly instead.")
 public extension Collection where Element == RichTextAlignment {
 
     static var all: [Element] { RichTextAlignment.allCases }
 }
 
-@available(*, deprecated, message: "Use native NSTextAlignment instead")
+@available(*, deprecated, message: "Use native NSTextAlignment directly instead.")
 public extension RichTextAlignment {
 
     /// The unique alignment ID.

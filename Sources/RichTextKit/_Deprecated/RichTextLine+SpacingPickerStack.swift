@@ -9,6 +9,7 @@
 #if iOS || macOS || os(visionOS)
 import SwiftUI
 
+@available(*, deprecated, message: "Use SwiftUI Picker with native NSParagraphStyle directly instead.")
 public extension RichTextLine {
 
     /**
@@ -62,25 +63,5 @@ public extension RichTextLine {
             }
         }
     }
-}
-
-#Preview {
-
-    struct Preview: View {
-
-        @StateObject
-        private var context = RichTextContext()
-
-        var body: some View {
-            VStack {
-                Text("Spacing: \(context.paragraphStyle[keyPath: \.lineSpacing])")
-                RichTextLine.SpacingPickerStack(context: context)
-            }
-            .buttonStyle(.bordered)
-            .padding()
-        }
-    }
-
-    return Preview()
 }
 #endif

@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+@available(*, deprecated, message: "Use SwiftUI Picker with native NSParagraphStyle directly instead.")
 public extension RichTextLine {
 
     /// This can be used with a ``RichTextLine/SpacingPicker``.
@@ -28,12 +29,14 @@ public extension RichTextLine {
     }
 }
 
+@available(*, deprecated, message: "Use SwiftUI Picker with native NSParagraphStyle directly instead.")
 public extension RichTextLine.SpacingPickerConfig {
 
     /// The standard line spacing picker configuration.
     static var standard: Self { .init() }
 }
 
+@available(*, deprecated, message: "Use SwiftUI Picker with native NSParagraphStyle directly instead.")
 public extension View {
 
     /// Apply a ``RichTextLine`` spacing picker configuration.
@@ -44,6 +47,7 @@ public extension View {
     }
 }
 
+@available(*, deprecated, message: "Use SwiftUI Picker with native NSParagraphStyle directly instead.")
 private extension RichTextLine.SpacingPickerConfig {
 
     struct Key: EnvironmentKey {
@@ -54,6 +58,7 @@ private extension RichTextLine.SpacingPickerConfig {
     }
 }
 
+@available(*, deprecated, message: "Use SwiftUI Picker with native NSParagraphStyle directly instead.")
 public extension EnvironmentValues {
 
     /// This value can bind to a line spacing picker config.

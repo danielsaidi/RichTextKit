@@ -8,5 +8,5 @@
 
 import Foundation
 
-/// This is a namespace for line-related types and views.
+@available(*, deprecated, message: "Use native NSParagraphStyle directly instead.")
 public struct RichTextLine {}

@@ -149,10 +149,6 @@ RichTextKit is available under the MIT license.
 - ``RichTextKeyboardToolbarMenu``
 - ``RichTextKeyboardToolbarStyle``
 
-### Line
-
-- ``RichTextLine``
-
 ### Localization
 
 - ``RTKL10n``
