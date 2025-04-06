@@ -29,6 +29,12 @@ As a result, all parts of the library that handled individual value types have b
 * `RichTextViewComponent` has a new, keypath-based `setRichTextParagraphStyleValue(_:_:)`.
 * `RichTextViewComponent` has a new, keypath-based `stepRichTextParagraphStyleValue(_:_:)`.
 
+### 🏞️ Views
+
+* `Picker` has new paragraph style value-based initializers.
+* `Stepper` has new paragraph style value-based initializers.
+* `Toggle` has new paragraph style value-based initializers.
+
 ### 🗑️ Deprecations 
 
 * `RichTextAttributeReader` has deprecated a lot of functions.
