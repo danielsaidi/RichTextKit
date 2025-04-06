@@ -95,7 +95,9 @@ private extension Picker {
                     value.defaultLabel
                 }
                 .labelStyle(.iconOnly)
+                #if !os(watchOS)
                 .pickerStyle(.segmented)
+                #endif
             }
         }
     }

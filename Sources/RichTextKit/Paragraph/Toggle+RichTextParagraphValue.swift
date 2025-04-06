@@ -70,7 +70,9 @@ public extension Toggle {
                     Text("Paragraph")
                 }
                 .labelStyle(.iconOnly)
+                #if !os(watchOS)
                 .pickerStyle(.segmented)
+                #endif
             }
         }
     }
