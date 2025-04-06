@@ -70,7 +70,8 @@ public extension RichTextFormat {
                 Divider()
 
                 SidebarSection {
-                    alignmentPicker(value: $context.textAlignment)
+                    alignmentPicker(for: context)
+                    
                     HStack {
                         lineSpacingPicker(for: context)
                     }

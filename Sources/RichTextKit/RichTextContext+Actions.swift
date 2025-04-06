@@ -37,6 +37,7 @@ public extension RichTextContext {
         case .setColor: true
         case .setHighlightedRange: true
         case .setHighlightingStyle: true
+        case .setParagraphStyle: true
         case .setStyle: true
         case .stepFontSize: true
         case .stepIndent: true

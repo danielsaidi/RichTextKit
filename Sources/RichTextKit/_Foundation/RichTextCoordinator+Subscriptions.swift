@@ -25,6 +25,7 @@ extension RichTextCoordinator {
         subscribeToContextAlignment()
         subscribeToContextFontName()
         subscribeToContextFontSize()
+        subscribeToContextParagraphStyle()
         subscribeToContextIsEditable()
         subscribeToContextIsEditingText()
     }
@@ -56,6 +57,12 @@ private extension RichTextCoordinator {
     func subscribeToContextFontSize() {
         subscribe(to: context.$fontSize) { [weak self] in
             self?.textView.setRichTextFontSize($0)
+        }
+    }
+    
+    func subscribeToContextParagraphStyle() {
+        subscribe(to: context.$paragraphStyle) { [weak self] in
+            self?.handle(.setParagraphStyle($0))
         }
     }
 

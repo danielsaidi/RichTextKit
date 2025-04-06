@@ -127,7 +127,7 @@ private extension RichTextFormat.Toolbar {
             }
         }
         HStack {
-            alignmentPicker(value: $context.textAlignment)
+            alignmentPicker(for: context)
             superscriptButtons(for: context, greedy: false)
             indentButtons(for: context, greedy: false)
         }

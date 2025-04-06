@@ -33,6 +33,7 @@ extension RichTextCoordinator {
         case .setColor(let color, let newValue): setColor(color, to: newValue)
         case .setHighlightedRange(let range): setHighlightedRange(to: range)
         case .setHighlightingStyle(let style): textView.highlightingStyle = style
+        case .setParagraphStyle(let style): textView.setRichTextParagraphStyle(style)
         case .setStyle(let style, let newValue): setStyle(style, to: newValue)
         case .stepFontSize(let points):
             textView.stepRichTextFontSize(points: points)

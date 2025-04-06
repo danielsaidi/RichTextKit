@@ -78,6 +78,9 @@ public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
 
     /// Step the line spacing.
     case stepLineSpacing(points: CGFloat)
+    
+    /// Set the current paragraph style.
+    case setParagraphStyle(_ style: NSMutableParagraphStyle)
 
     /// Step the superscript level.
     case stepSuperscript(steps: Int)
@@ -116,6 +119,7 @@ public extension RichTextAction {
         case .setColor(let color, _): color.icon
         case .setHighlightedRange: .richTextAlignmentCenter
         case .setHighlightingStyle: .richTextAlignmentCenter
+        case .setParagraphStyle: .richTextAlignmentLeft
         case .setStyle(let style, _): style.icon
         case .stepFontSize(let val): .richTextStepFontSize(val)
         case .stepIndent(let val): .richTextStepIndent(val)
@@ -169,6 +173,7 @@ public extension RichTextAction {
         case .setColor(let color, _): color.titleKey
         case .setHighlightedRange: .highlightedRange
         case .setHighlightingStyle: .highlightingStyle
+        case .setParagraphStyle: .textAlignmentLeft
         case .setStyle(let style, _): style.titleKey
         case .stepFontSize(let points): .actionStepFontSize(points)
         case .stepIndent(let points): .actionStepIndent(points)
