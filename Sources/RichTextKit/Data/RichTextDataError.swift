@@ -8,9 +8,7 @@
 
 import Foundation
 
-/**
- This enum represents rich text data-related errors.
- */
+/// This enum represents rich text data-related errors.
 public enum RichTextDataError: Error {
 
     case invalidArchivedData(in: Data)

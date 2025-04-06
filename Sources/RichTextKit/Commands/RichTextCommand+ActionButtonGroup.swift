@@ -10,13 +10,11 @@ import SwiftUI
 
 public extension RichTextCommand {
 
-    /**
-     This view can add list of ``RichTextAction`` buttons to
-     the main menu.
-
-     This view requires that a ``RichTextContext`` is set as
-     a focused value, otherwise it will be disabled.
-     */
+    /// This view can add list of ``RichTextAction`` buttons
+    /// to the main menu.
+    ///
+    /// This view requires that a ``RichTextContext`` is set
+    /// as a focused value, otherwise it will be disabled. 
     struct ActionButtonGroup: View {
 
         /**

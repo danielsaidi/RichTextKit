@@ -10,13 +10,11 @@ Until then, minor updates may remove deprecated features and introduce breaking 
 
 This version makes a first step towards removing library-specific types in favor of native types, to avoid having to add custom types and logic to the library, where native alternatives exist.
 
-This version deprecates the `RichTextAlignment` type and instead   
-
-This version adds key path-based paragraph functions to the `RichTextViewComponent`. This means that you can now get and set the following values with a single set of functions, pickers, steppers and toggles:
+This version starts with `NSParagraphStyle` and its nested types, and makes it possible to get, set, pick, step and toggle the following values with a single set of functions, pickers, steppers and toggles:
 
 `alignment`, `allowsDefaultTighteningForTruncation`, `baseWritingDirection`, `defaultTabInterval`, `firstLineHeadIndent`, `headIndent`, `hyphenationFactor`, `lineBreakMode`, `lineBreakStrategy`, `lineHeightMultiple`, `lineSpacing`, `maximumLineHeight`, `minimumLineHeight`, `paragraphSpacing`, `paragraphSpacingBefore`, `tabStops`, `tailIndent`, `usesDefaultHyphenation`.
 
-As a result, all parts of the library that handled individual value types have been deprecated. This makes the library tighter, and a lot more capable with less code. 
+As a result, this version deprecates the `RichTextAlignment` and `RichTextLine` type. This makes the library tighter, and a lot more capable with less code that does more.
 
 ### ✨ Features
 

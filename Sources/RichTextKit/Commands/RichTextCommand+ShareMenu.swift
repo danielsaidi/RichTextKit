@@ -11,32 +11,26 @@ import SwiftUI
 
 public extension RichTextCommand {
 
-    /**
-     This menu view can add a list of sharing options to the
-     main menu.
-
-     The menu will try to add options for share, export, and
-     print, if applicable to the current platform. Selecting
-     an option will trigger a corresponding, provided action.
-
-     The macOS exclusive `nsSharing` commands require you to
-     return a share url, after which a command takes care of
-     the sharing. Also note that the `formatNSSharingAction`
-     and `pdfNSSharingAction` will only have effect on macOS,
-     where they add ``RichTextNSSharingMenu`` options.
-
-     Note that a pdf action menu will only be included if it
-     has a corresponding action. Also note that you must use
-     `isEnabled: false` to disable the menu, since you can't
-     add `.disabled` to the command menu.
-
-     Setting actions to `nil` removes the related menu items.
-     */
+    /// This menu adds share options to the main menu.
+    ///
+    /// This menu will attempt to add menu options for share,
+    /// export, and print, if applicable to the platform.
+    ///
+    /// The macOS exclusive `nsSharing` commands require you
+    /// to return a share url, after which the command takes
+    /// care of the sharing. The `formatNSSharingAction` and
+    /// `pdfNSSharingAction` only works on macOS, where they
+    /// add ``RichTextNSSharingMenu`` options.
+    ///
+    /// Note that a pdf action menu will only be included if
+    /// it has an action. You must use `isEnabled: false` to
+    /// disable the menu, since you can't add `.disabled` to
+    /// the command menu.
+    ///
+    /// Setting an action to `nil` removes the related menu.
     struct ShareMenu: Commands {
 
-        /**
-         Create a rich text share command menu.
-         */
+        /// Create a rich text share command menu.
         public init(
             isEnabled: Bool = true,
             shareFormats: [RichTextDataFormat],

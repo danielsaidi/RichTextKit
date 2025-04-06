@@ -11,16 +11,13 @@ import SwiftUI
 
 public extension RichTextCommand {
 
-    /**
-     This menu adds standard rich text format options to the
-     main menu, using `CommandGroup`.
-
-     You can apply this to a `WindowGroup` or `DocumentGroup`
-     to make it appear in the app's main menu.
-
-     This menu requires that a ``RichTextContext`` is set as
-     a focused value, otherwise it will be disabled.
-     */
+    /// This menu adds format options to the main menu.
+    ///
+    /// You can add it to a `WindowGroup` or `DocumentGroup`,
+    /// to make it appear in the app's main menu.
+    ///
+    /// This view requires that a ``RichTextContext`` is set
+    /// as a focused value, otherwise it will be disabled.
     struct FormatMenu: Commands {
 
         /// Create a rich text format command menu.

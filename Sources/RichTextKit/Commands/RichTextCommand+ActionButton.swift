@@ -10,21 +10,17 @@ import SwiftUI
 
 public extension RichTextCommand {
 
-    /**
-     This button can trigger any ``RichTextAction`` from the
-     main menu.
-
-     This view requires that a ``RichTextContext`` is set as
-     a focused value, otherwise it will be disabled.
-     */
+    /// This button can trigger ``RichTextAction``s from the
+    /// main menu.
+    ///
+    /// This view requires that a ``RichTextContext`` is set
+    /// as a focused value, otherwise it will be disabled.
     struct ActionButton: View {
 
-        /**
-         Create a command button.
-
-         - Parameters:
-         - action: The action to trigger.
-         */
+        /// Create a command button.
+        ///
+        /// - Parameters:
+        ///   - action: The action to trigger.
         public init(
             action: RichTextAction
         ) {

@@ -11,15 +11,13 @@ import SwiftUI
 
 public extension RichTextDataFormat {
 
-    /**
-     This menu can be used to trigger custom actions for any
-     list of ``RichTextDataFormat`` values.
-
-     The menu uses customizable actions, which means that it
-     can be used in toolbars, menu bar commands etc. It also
-     has an optional `pdf` action, which for instance can be
-     used when exporting or sharing rich text.
-     */
+    /// This menu can be used to trigger a custom action for
+    /// any list of ``RichTextDataFormat`` values.
+    ///
+    /// The menu uses customizable actions, which means that
+    /// it can be used in toolbars, menubar commands etc. It
+    /// also has an optional `pdf` action, which can be used
+    /// when exporting or sharing rich text.
     struct Menu: View {
 
         public init(

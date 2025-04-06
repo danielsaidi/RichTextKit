@@ -9,19 +9,13 @@
 #if macOS
 import AppKit
 
-/**
- This typealias bridges platform-specific colors to simplify
- multi-platform support.
- */
+/// This typealias bridges platform-specific colors.
 public typealias ColorRepresentable = NSColor
 #endif
 
 #if iOS || os(tvOS) || os(watchOS) || os(visionOS)
 import UIKit
 
-/**
- This typealias bridges platform-specific colors to simplify
- multi-platform support.
- */
+/// This typealias bridges platform-specific colors.
 public typealias ColorRepresentable = UIColor
 #endif

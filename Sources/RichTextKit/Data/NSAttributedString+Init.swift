@@ -10,13 +10,11 @@ import Foundation
 
 public extension NSAttributedString {
 
-    /**
-     Try to parse ``RichTextDataFormat`` formatted data.
-
-     - Parameters:
-       - data: The data to initialize the string with.
-       - format: The data format to use.
-     */
+    /// Try to parse ``RichTextDataFormat`` formatted data.
+    ///
+    /// - Parameters:
+    ///   - data: The data to initialize the string with.
+    ///   - format: The data format to use.
     convenience init(
         data: Data,
         format: RichTextDataFormat

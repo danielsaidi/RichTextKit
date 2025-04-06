@@ -9,13 +9,8 @@
 #if iOS || macOS || os(visionOS)
 import SwiftUI
 
-/**
- This menu can be used to trigger various export actions for
- a list of ``RichTextDataFormat`` values.
-
- This menu uses a ``RichTextDataFormat/Menu`` configured for
- exporting, with customizable actions and data formats.
- */
+/// This menu can be used to call various export actions for
+/// a list of ``RichTextDataFormat`` values.
 public struct RichTextExportMenu: View {
 
     public init(

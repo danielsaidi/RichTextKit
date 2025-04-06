@@ -38,7 +38,8 @@ extension RichTextCoordinator {
         case .stepFontSize(let points):
             textView.stepRichTextFontSize(points: points)
             syncContextWithTextView()
-        case .stepIndent(let points): textView.stepRichTextParagraphStyleValue(\.headIndent, points)
+        case .stepIndent(let points): textView.stepRichTextParagraphStyleValue(\.firstLineHeadIndent, points)
+            textView.stepRichTextParagraphStyleValue(\.headIndent, points)
         case .stepLineSpacing(let points): textView.stepRichTextParagraphStyleValue(\.lineSpacing, points)
         case .stepSuperscript(let points): textView.stepRichTextSuperscriptLevel(points: points)
         case .toggleStyle(let style): textView.toggleRichTextStyle(style)

@@ -8,36 +8,29 @@
 
 import Foundation
 
-/**
- This protocol can be implemented by any classes that can be
- used to export rich text to files.
- */
+/// This protocol can be implemented by any type that can be
+/// used to export rich text to files.
 @preconcurrency @MainActor
 public protocol RichTextExportService: AnyObject {
 
-    /**
-     Generate an export file with a certain name and content,
-     that uses a certain rich text data format.
-
-     - Parameters:
-       - fileName: The preferred file name.
-       - content: The rich text content to export.
-       - format: The rich text format to use when exporting.
-     */
+    /// Generate an export file with a name and content that
+    /// uses a certain rich text data format.
+    ///
+    /// - Parameters:
+    ///   - fileName: The preferred file name.
+    ///   - content: The rich text content to export.
+    ///   - format: The rich text format to use when exporting.
     func generateExportFile(
         withName fileName: String,
         content: NSAttributedString,
         format: RichTextDataFormat
     ) throws -> URL
 
-    /**
-     Generate a PDF export file with a certain name and rich
-     text content.
-
-     - Parameters:
-       - fileName: The preferred file name.
-       - content: The rich text content to export.
-     */
+    /// Generate a PDF export file with a name and content.
+    ///
+    /// - Parameters:
+    ///   - fileName: The preferred file name.
+    ///   - content: The rich text content to export.
     func generatePdfExportFile(
         withName fileName: String,
         content: NSAttributedString

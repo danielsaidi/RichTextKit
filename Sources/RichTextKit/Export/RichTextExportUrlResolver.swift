@@ -8,49 +8,41 @@
 
 import Foundation
 
-/**
- This protocol can be implemented by types that can generate
- file urls, for instance when exporting rich text files.
-
- The protocol is implemented by `FileManager`, which is used
- by default by the library.
- */
+/// This protocol can be implemented by any type that can be
+/// used to generate file urls, e.g. when exporting files.
+///
+/// This protocol is implemented by the `FileManager`, which
+/// is used by default by the library.
 public protocol RichTextExportUrlResolver {
 
-    /**
-     Try to generate a file url in a certain directory.
-
-     - Parameters:
-       - fileName: The preferred file name.
-       - extension: The file extension.
-       - directory: The directory in which to generate an url.
-     */
+    /// Try to generate a file url in a certain directory.
+    ///
+    /// - Parameters:
+    ///   - fileName: The preferred file name.
+    ///   - extension: The file extension.
+    ///   - directory: The directory in which to generate an url.
     func fileUrl(
         withName fileName: String,
         extension: String,
         in directory: FileManager.SearchPathDirectory
     ) throws -> URL
 
-    /**
-     Try to generate a unique file url in a certain directory.
-
-     - Parameters:
-       - fileName: The preferred file name.
-       - extension: The file extension.
-       - directory: The directory in which to generate an url.
-     */
+    /// Try to generate a file url in a certain directory.
+    ///
+    /// - Parameters:
+    ///   - fileName: The preferred file name.
+    ///   - extension: The file extension.
+    ///   - directory: The directory in which to generate an url.
     func uniqueFileUrl(
         withName fileName: String,
         extension: String,
         in directory: FileManager.SearchPathDirectory
     ) throws -> URL
 
-    /**
-     Get a unique url for the provided url, to ensure that a
-     file with the same name doesn't exist.
-
-     - Parameters:
-       - url: The url to generate a unique url for.
-     */
+    /// Get a unique url for the provided url to ensure that
+    /// a file with the same name doesn't exist.
+    ///
+    /// - Parameters:
+    ///   - url: The url to generate a unique url for.
     func uniqueUrl(for url: URL) -> URL
 }

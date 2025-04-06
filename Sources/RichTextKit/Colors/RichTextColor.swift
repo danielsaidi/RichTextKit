@@ -8,11 +8,7 @@
 
 import SwiftUI
 
-/**
- This enum defines supported rich text color types.
-
- The enum makes the colors identifiable and diffable.
- */
+/// This enum defines supported rich text color types.
 public enum RichTextColor: String, CaseIterable, Codable, Equatable, Identifiable {
 
     /// Foreground color.
