@@ -32,7 +32,7 @@ final class RichTextCoordinatorTests: XCTestCase {
             richTextContext: context)
         coordinator.shouldDelaySyncContextWithTextView = false
         view.selectedRange = NSRange(location: 0, length: 1)
-        view.setRichTextAlignment(.justified)
+        view.setRichTextParagraphStyleValue(\.alignment, .justified)
     }
 
     override func tearDown() {
@@ -83,14 +83,14 @@ final class RichTextCoordinatorTests: XCTestCase {
         XCTAssertEqual(context.fontSize, view.richTextFont?.pointSize)
         XCTAssertEqual(context.isEditingText, view.isFirstResponder)
         // XCTAssertEqual(context.lineSpacing, view.richTextLineSpacing) TODO: Not done yet
-        XCTAssertEqual(context.textAlignment, view.richTextAlignment)
+        XCTAssertEqual(context.paragraphStyleValue(for: \.alignment), view.richTextParagraphStyleValue(\.alignment))
     }
 
     func testChangingOtherViewPropertiesUpdatesContextAfterExplicitUpdate() {
 
     }
 
-    func assertIsSyncedWithContext(macOSAlignment: RichTextAlignment = .left) {
+    func assertIsSyncedWithContext(macOSAlignment: NSTextAlignment = .left) {
         let styles = view.richTextStyles
         XCTAssertEqual(context.fontName, view.richTextFont?.fontName)
         XCTAssertEqual(context.fontSize, view.richTextFont?.pointSize)
@@ -99,7 +99,7 @@ final class RichTextCoordinatorTests: XCTestCase {
         XCTAssertEqual(context.styles[.underlined], styles.hasStyle(.underlined))
         XCTAssertEqual(context.selectedRange, view.selectedRange)
         #if iOS || os(tvOS)
-        XCTAssertEqual(context.textAlignment, view.richTextAlignment)
+        XCTAssertEqual(context.paragraphStyleValue(for: \.alignment), view.richTextParagraphStyleValue(\.alignment))
         #elseif macOS
         XCTAssertEqual(context.textAlignment, macOSAlignment)
         #endif

@@ -120,11 +120,9 @@ public class RichTextContext: ObservableObject {
     
     @available(*, deprecated, message: "Use paragraphStyle instead.")
     public var textAlignment: RichTextAlignment {
-        get { .init(textAlignmentInternal) }
-        set { textAlignmentInternal = newValue.nativeAlignment }
+        get { .init(paragraphStyleValue(for: \.alignment)) }
+        set { paragraphStyle[keyPath: \.alignment] = newValue.nativeAlignment }
     }
-    
-    @Published public var textAlignmentInternal: NSTextAlignment = .left
 }
 
 public extension RichTextContext {

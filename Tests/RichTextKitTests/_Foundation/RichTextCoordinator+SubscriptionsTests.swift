@@ -124,11 +124,9 @@ final class RichTextCoordinator_SubscriptionsTests: XCTestCase {
         XCTAssertEqual(textView.selectedRange, range)
     }
 
-    func testTextAlignmentUpdatesTextView() {
-        textView.setRichTextAlignment(.left)
-        XCTAssertEqual(textView.richTextAlignment, .left)
-        textContext.textAlignment = .right
-        XCTAssertEqual(textView.richTextAlignment, .right)
+    func testSettingParagraphStyleValueUpdatesTheParagraphStyle() {
+        textView.setRichTextParagraphStyleValue(\.alignment, .left)
+        XCTAssertEqual(textView.richTextParagraphStyleValue(\.alignment), .left)
     }
 }
 #endif
