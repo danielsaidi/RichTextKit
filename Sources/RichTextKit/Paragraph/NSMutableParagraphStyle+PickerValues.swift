@@ -40,6 +40,14 @@ public extension NSLineBreakMode {
     
     /// Get the default picker values.
     static var defaultPickerValues: [Self] {
+        .defaultPickerValues
+    }
+}
+
+public extension Collection where Element == NSLineBreakMode {
+    
+    /// Get the default picker values.
+    static var defaultPickerValues: [Element] {
         [.byWordWrapping, .byCharWrapping, .byClipping, .byTruncatingHead, .byTruncatingTail, .byTruncatingMiddle]
     }
 }
@@ -48,6 +56,14 @@ public extension NSParagraphStyle.LineBreakStrategy {
     
     /// Get the default picker values.
     static var defaultPickerValues: [Self] {
+        .defaultPickerValues
+    }
+}
+
+public extension Collection where Element == NSParagraphStyle.LineBreakStrategy {
+    
+    /// Get the default picker values.
+    static var defaultPickerValues: [Element] {
         [.standard, .pushOut, .hangulWordPriority]
     }
 }
@@ -56,6 +72,14 @@ public extension NSTextAlignment {
     
     /// Get the default picker values.
     static var defaultPickerValues: [Self] {
+        .defaultPickerValues
+    }
+}
+
+public extension Collection where Element == NSTextAlignment {
+    
+    /// Get the default picker values.
+    static var defaultPickerValues: [Element] {
         [.left, .center, .right, .justified]
     }
 }
@@ -64,6 +88,14 @@ public extension NSWritingDirection {
     
     /// Get the default picker values.
     static var defaultPickerValues: [Self] {
+        .defaultPickerValues
+    }
+}
+
+public extension Collection where Element == NSWritingDirection {
+    
+    /// Get the default picker values.
+    static var defaultPickerValues: [Element] {
         [.leftToRight, .rightToLeft]
     }
 }

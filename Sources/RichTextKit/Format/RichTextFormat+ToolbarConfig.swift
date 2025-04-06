@@ -15,7 +15,7 @@ public extension RichTextFormat {
     struct ToolbarConfig {
 
         public init(
-            alignments: [RichTextAlignment] = .all,
+            alignments: [NSTextAlignment] = .defaultPickerValues,
             colorPickers: [RichTextColor] = [.foreground],
             colorPickersDisclosed: [RichTextColor] = [],
             fontPicker: Bool = true,
@@ -40,7 +40,7 @@ public extension RichTextFormat {
             #endif
         }
 
-        public var alignments: [RichTextAlignment]
+        public var alignments: [NSTextAlignment]
         public var colorPickers: [RichTextColor]
         public var colorPickersDisclosed: [RichTextColor]
         public var fontPicker: Bool

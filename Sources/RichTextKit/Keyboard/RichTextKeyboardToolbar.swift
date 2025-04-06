@@ -197,10 +197,17 @@ private extension RichTextKeyboardToolbar {
 
     @ViewBuilder
     var trailingViews: some View {
-        RichTextAlignment.Picker(selection: $context.textAlignment)
-            .pickerStyle(.segmented)
-            .frame(maxWidth: 200)
-            .keyboardShortcutsOnly(if: isCompact)
+        Picker(
+            forValue: \.alignment,
+            in: context
+        ) {
+            Text(RTKL10n.textAlignment.text)
+        } valueLabel: {
+            $0.defaultLabel
+        }
+        .pickerStyle(.segmented)
+        .frame(maxWidth: 200)
+        .keyboardShortcutsOnly(if: isCompact)
 
         trailingButtons(StandardTrailingButtons())
 

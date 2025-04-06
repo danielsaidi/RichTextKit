@@ -58,7 +58,7 @@ public extension RichTextViewComponent {
      - Parameters:
        - images: The images to paste.
        - index: The index to paste at.
-       - moveCursorToPastedContent: Whether or not the input
+       - move: Whether or not the input
      cursor should be moved to the end of the pasted content,
      by default `false`.
      */

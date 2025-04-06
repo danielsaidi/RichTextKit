@@ -30,24 +30,3 @@ public extension RichTextLabelValue {
         .tag(self)
     }
 }
-
-#Preview {
-
-    struct Preview: View {
-
-        @State
-        private var alignment = RichTextAlignment.left
-
-        var body: some View {
-            List {
-                Section("Rich Text Alignment") {
-                    ForEach(RichTextAlignment.allCases) {
-                        $0.label
-                    }
-                }
-            }
-        }
-    }
-
-    return Preview()
-}

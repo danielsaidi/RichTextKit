@@ -82,10 +82,6 @@ These are the top-level types you should start looking at.
 - ``RichTextInsertable``
 - ``RichTextInsertion``
 
-### Alignment
-
-- ``RichTextAlignment``
-
 ### Attributes
 
 - ``RichTextAttribute``

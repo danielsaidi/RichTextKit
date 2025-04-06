@@ -22,7 +22,7 @@ public protocol RichTextExportUrlResolver {
 
      - Parameters:
        - fileName: The preferred file name.
-       - extensions: The file extension.
+       - extension: The file extension.
        - directory: The directory in which to generate an url.
      */
     func fileUrl(
@@ -36,7 +36,7 @@ public protocol RichTextExportUrlResolver {
 
      - Parameters:
        - fileName: The preferred file name.
-       - extensions: The file extension.
+       - extension: The file extension.
        - directory: The directory in which to generate an url.
      */
     func uniqueFileUrl(
@@ -51,7 +51,6 @@ public protocol RichTextExportUrlResolver {
 
      - Parameters:
        - url: The url to generate a unique url for.
-       - separator: The separator to use for separating the counter.
      */
     func uniqueUrl(for url: URL) -> URL
 }

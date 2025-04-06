@@ -179,7 +179,7 @@ extension RichTextCoordinator {
         sync(&context.fontName, with: font.fontName)
         sync(&context.fontSize, with: font.pointSize)
         sync(&context.isEditingText, with: textView.isFirstResponder)
-        sync(&context.textAlignment, with: RichTextAlignment(textView.richTextParagraphStyleValue(\.alignment) ?? .left))
+        sync(&context.textAlignmentInternal, with: (textView.richTextParagraphStyleValue(\.alignment) ?? .left))
 
         RichTextColor.allCases.forEach {
             if let color = textView.richTextColor($0) {

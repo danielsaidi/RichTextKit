@@ -163,7 +163,7 @@ public extension EnvironmentValues {
                     context: context
                 )
                 .richTextFormatSheetConfig(.init(
-                    alignments: .all,
+                    alignments: .defaultPickerValues,
                     colorPickers: [.foreground, .background],
                     colorPickersDisclosed: [.stroke],
                     fontPicker: true,

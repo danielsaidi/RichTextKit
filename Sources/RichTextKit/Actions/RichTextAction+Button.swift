@@ -86,7 +86,7 @@ private extension RichTextAction.Button {
                         button(for: .undoLatestChange)
                     }
                     HStack {
-                        ForEach(RichTextAlignment.allCases) {
+                        ForEach(NSTextAlignment.defaultPickerValues) {
                             button(for: .setAlignment($0))
                         }
                     }

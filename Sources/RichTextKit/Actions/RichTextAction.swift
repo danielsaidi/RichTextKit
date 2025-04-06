@@ -53,7 +53,7 @@ public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
     case selectRange(NSRange)
 
     /// Set the text alignment.
-    case setAlignment(_ alignment: RichTextAlignment)
+    case setAlignment(_ alignment: NSTextAlignment)
 
     /// Set the entire attributed string.
     case setAttributedString(NSAttributedString)
@@ -114,7 +114,7 @@ public extension RichTextAction {
         case .replaceSelectedText: .richTextReplace
         case .replaceText: .richTextReplace
         case .selectRange: .richTextSelection
-        case .setAlignment(let val): val.icon
+        case .setAlignment(let val): val.defaultIcon
         case .setAttributedString: .richTextDocument
         case .setColor(let color, _): color.icon
         case .setHighlightedRange: .richTextAlignmentCenter
@@ -168,7 +168,7 @@ public extension RichTextAction {
         case .replaceSelectedText: .actionDelete
         case .replaceText: .actionDelete
         case .selectRange: .selectRange
-        case .setAlignment(let alignment): alignment.titleKey
+        case .setAlignment(let alignment): alignment.defaultTitleKey
         case .setAttributedString: .setAttributedString
         case .setColor(let color, _): color.titleKey
         case .setHighlightedRange: .highlightedRange

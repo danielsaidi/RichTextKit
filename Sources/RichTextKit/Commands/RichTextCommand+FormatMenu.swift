@@ -76,7 +76,7 @@ public extension RichTextCommand.FormatMenu {
                 }
             case .text:
                 Menu(RTKL10n.menuText.text) {
-                    Group(alignments: .all)
+                    Group(alignments: NSTextAlignment.defaultPickerValues)
                 }
             case .indent:
                 Menu(RTKL10n.indent.text) {

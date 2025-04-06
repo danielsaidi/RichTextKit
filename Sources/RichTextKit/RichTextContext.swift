@@ -52,9 +52,6 @@ public class RichTextContext: ObservableObject {
     /// Whether or not the text is currently being edited.
     @Published public var isEditingText = false
 
-    /// The current text alignment, if any.
-    @Published public var textAlignment: RichTextAlignment = .left
-
     /// The current font name.
     @Published public var fontName = RichTextFont.PickerFont.all.first?.fontName ?? ""
 
@@ -120,6 +117,14 @@ public class RichTextContext: ObservableObject {
     
     @available(*, deprecated, message: "Use paragraphStyle instead.")
     @Published public var lineSpacing: CGFloat = 10.0
+    
+    @available(*, deprecated, message: "Use paragraphStyle instead.")
+    public var textAlignment: RichTextAlignment {
+        get { .init(textAlignmentInternal) }
+        set { textAlignmentInternal = newValue.nativeAlignment }
+    }
+    
+    @Published public var textAlignmentInternal: NSTextAlignment = .left
 }
 
 public extension RichTextContext {

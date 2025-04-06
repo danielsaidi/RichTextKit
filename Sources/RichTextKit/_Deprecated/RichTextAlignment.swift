@@ -8,10 +8,7 @@
 
 import SwiftUI
 
-/**
- This enum defines supported rich text alignments, like left,
- right, center, and justified.
- */
+@available(*, deprecated, message: "Use native NSTextAlignment directly")
 public enum RichTextAlignment: String, CaseIterable, Codable, Equatable, Identifiable, RichTextLabelValue {
 
     /// Create a rich text alignment with a native alignment.
@@ -41,24 +38,26 @@ public enum RichTextAlignment: String, CaseIterable, Codable, Equatable, Identif
     case right
 }
 
+@available(*, deprecated, message: "Use native NSTextAlignment instead")
 public extension Collection where Element == RichTextAlignment {
 
     static var all: [Element] { RichTextAlignment.allCases }
 }
 
+@available(*, deprecated, message: "Use native NSTextAlignment instead")
 public extension RichTextAlignment {
 
     /// The unique alignment ID.
     var id: String { rawValue }
 
     /// The standard icon to use for the alignment.
-    var icon: Image { nativeAlignment.icon }
+    var icon: Image { nativeAlignment.defaultIcon }
 
     /// The standard title to use for the alignment.
-    var title: String { nativeAlignment.title }
+    var title: String { nativeAlignment.defaultTitle }
 
     /// The standard title key to use for the alignment.
-    var titleKey: RTKL10n { nativeAlignment.titleKey }
+    var titleKey: RTKL10n { nativeAlignment.defaultTitleKey }
 
     /// The native alignment of the alignment.
     var nativeAlignment: NSTextAlignment {
@@ -67,38 +66,6 @@ public extension RichTextAlignment {
         case .right: .right
         case .center: .center
         case .justified: .justified
-        }
-    }
-}
-
-extension NSTextAlignment: RichTextLabelValue {}
-
-public extension NSTextAlignment {
-
-    /// The standard icon to use for the alignment.
-    var icon: Image {
-        switch self {
-        case .left: .richTextAlignmentLeft
-        case .right: .richTextAlignmentRight
-        case .center: .richTextAlignmentCenter
-        case .justified: .richTextAlignmentJustified
-        default: .richTextAlignmentLeft
-        }
-    }
-
-    /// The standard title to use for the alignment.
-    var title: String {
-        titleKey.text
-    }
-
-    /// The standard title key to use for the alignment.
-    var titleKey: RTKL10n {
-        switch self {
-        case .left: .textAlignmentLeft
-        case .right: .textAlignmentRight
-        case .center: .textAlignmentCentered
-        case .justified: .textAlignmentJustified
-        default: .textAlignmentLeft
         }
     }
 }

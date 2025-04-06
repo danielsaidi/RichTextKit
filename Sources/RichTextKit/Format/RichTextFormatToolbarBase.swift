@@ -34,7 +34,7 @@ extension RichTextFormatToolbarBase {
         Picker(
             forValue: \.alignment,
             in: context,
-            values: config.alignments.map { $0.nativeAlignment }
+            values: config.alignments
         ) {
             Text(RTKL10n.textAlignment.text)
         } valueLabel: { val in

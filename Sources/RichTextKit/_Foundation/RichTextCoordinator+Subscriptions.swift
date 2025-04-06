@@ -22,7 +22,6 @@ extension RichTextCoordinator {
         }
         .store(in: &cancellables)
 
-        subscribeToContextAlignment()
         subscribeToContextFontName()
         subscribeToContextFontSize()
         subscribeToContextParagraphStyle()
@@ -40,12 +39,6 @@ private extension RichTextCoordinator {
         publisher
             .sink(receiveValue: action)
             .store(in: &cancellables)
-    }
-
-    func subscribeToContextAlignment() {
-        subscribe(to: context.$textAlignment) { [weak self] in
-            self?.handle(.setAlignment($0))
-        }
     }
 
     func subscribeToContextFontName() {

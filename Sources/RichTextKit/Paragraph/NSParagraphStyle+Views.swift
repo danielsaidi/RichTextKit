@@ -35,30 +35,6 @@ public extension KeyPath where Root == NSParagraphStyle {
     }
 }
 
-public extension NSTextAlignment {
-    
-    /// The default icon for the text alignment.
-    var defaultIcon: Image? {
-        switch self {
-        case .center: .richTextAlignmentCenter
-        case .justified: .richTextAlignmentJustified
-        case .left: .richTextAlignmentLeft
-        case .natural: .richTextAlignmentLeft
-        case .right: .richTextAlignmentRight
-        @unknown default: .richTextUnknownValueType
-        }
-    }
-    
-    /// The default label for the text alignment.
-    var defaultLabel: some View {
-        Label {
-            Text(title)
-        } icon: {
-            defaultIcon
-        }
-    }
-}
-
 @ViewBuilder
 private func previewIcon<ValueType>(
     for keyPath: KeyPath<NSParagraphStyle, ValueType>,
