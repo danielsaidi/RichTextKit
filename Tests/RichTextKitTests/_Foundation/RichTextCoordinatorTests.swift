@@ -98,10 +98,8 @@ final class RichTextCoordinatorTests: XCTestCase {
         XCTAssertEqual(context.styles[.italic], styles.hasStyle(.italic))
         XCTAssertEqual(context.styles[.underlined], styles.hasStyle(.underlined))
         XCTAssertEqual(context.selectedRange, view.selectedRange)
-        #if iOS || os(tvOS)
+        #if iOS || os(tvOS) || os(macOS)
         XCTAssertEqual(context.paragraphStyleValue(for: \.alignment), view.richTextParagraphStyleValue(\.alignment))
-        #elseif macOS
-        XCTAssertEqual(context.textAlignment, macOSAlignment)
         #endif
     }
 
