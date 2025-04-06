@@ -29,7 +29,7 @@ https://github.com/danielsaidi/RichTextKit.git
 
 @Links(visualStyle: detailedGrid) {
     
-    - <doc:Getting-Started>
+    - <doc:Getting-Started-Article>
     - <doc:Demo-Article>
 }
 
@@ -51,7 +51,7 @@ RichTextKit is available under the MIT license.
 
 ### Getting Started
 
-- <doc:Getting-Started>
+- <doc:Getting-Started-Article>
 
 ### Articles
 
@@ -62,11 +62,8 @@ RichTextKit is available under the MIT license.
 
 ### Essentials
 
-These are the top-level types you should start looking at.
-
-- ``RichTextEditor``
 - ``RichTextContext``
-- ``RichTextView``
+- ``RichTextEditor``
 - ``RichTextViewer``
 
 ### Foundation
@@ -89,10 +86,11 @@ These are the top-level types you should start looking at.
 - ``RichTextAttributeReader``
 - ``RichTextAttributeWriter``
 
-### Colors
+### Bridging
 
-- ``ColorRepresentable``
-- ``RichTextColor``
+- ``RichTextView``
+- ``RichTextViewComponent``
+- ``RichTextViewRepresentable``
 
 ### Colors
 
@@ -159,6 +157,10 @@ These are the top-level types you should start looking at.
 
 - ``RTKL10n``
 
+### Paragraph
+
+- ``NSMutableParagraphStyleValueLabel``
+
 ### Pasteboard
 
 - ``PasteboardImageReader``
@@ -185,7 +187,6 @@ These are the top-level types you should start looking at.
 ### Views
 
 - ``RichTextLabelValue``
-- ``TextViewRepresentable``
 
 
 
