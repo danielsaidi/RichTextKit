@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+@available(*, deprecated, message: "Use Picker(forValue:in:values:label:valueLabel:)")
 public extension RichTextAlignment {
 
     /// This picker can be used to pick a text alignment.
@@ -43,23 +44,4 @@ public extension RichTextAlignment {
             }
         }
     }
-}
-
-#Preview {
-
-    struct Preview: View {
-
-        @State
-        private var alignment = RichTextAlignment.left
-
-        var body: some View {
-            RichTextAlignment.Picker(
-                selection: $alignment,
-                values: .all
-            )
-            .withPreviewPickerStyles()
-        }
-    }
-
-    return Preview()
 }

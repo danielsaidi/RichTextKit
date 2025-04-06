@@ -37,6 +37,7 @@ As a result, all parts of the library that handled individual value types have b
 
 ### 🗑️ Deprecations 
 
+* `RichTextAlignment.Picker` has been deprecated due to the new `Picker` capabilities.
 * `RichTextAttributeReader` has deprecated a lot of functions.
 
 

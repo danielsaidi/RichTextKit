@@ -1,5 +1,5 @@
 //
-//  NSParagraphStyle+Stepper.swift
+//  NSParagraphStyle+StepperInterval.swift
 //  RichTextKit
 //
 //  Created by Daniel Saidi on 2025-04-04.
