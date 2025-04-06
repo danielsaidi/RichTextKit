@@ -8,13 +8,9 @@
 
 import Foundation
 
-/**
- This typealias represents a rich text dictionary key.
- */
+/// This typealias represents a rich text dictionary key.
 public typealias RichTextAttribute = NSAttributedString.Key
 
-/**
- This typealias represents a ``RichTextAttribute`` keyed and
- `Any` valued dictionary.
- */
+/// This typealias represents a dictionary with an attribute
+/// as key and `Any` as value.
 public typealias RichTextAttributes = [RichTextAttribute: Any]

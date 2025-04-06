@@ -15,15 +15,16 @@ import UniformTypeIdentifiers
 extension RichTextView: UIDropInteractionDelegate {}
 #endif
 
-/**
- This is a platform-agnostic rich text view that can be used
- in both UIKit and AppKit.
-
- The view inherits `NSTextView` in AppKit and `UITextView`
- in UIKit. It aims to make these views behave more alike and
- make them implement ``RichTextViewComponent``, which is the
- protocol that is used within this library.
- */
+/// This is a platform-agnostic text view for both UIKit and
+/// AppKit that makes the underlying views behave more alike.
+///
+/// The view inherits `NSTextView` in AppKit and `UITextView`
+/// in UIKit and implements ``RichTextViewComponent``, which
+/// is the protocol that is used within this library.
+///
+/// The view will apply a disabled ``imageConfiguration`` by
+/// default. You can change this by setting the property, or
+/// by applying a ``RichTextDataFormat`` that handles images.
 open class RichTextView: UITextView, RichTextViewComponent {
 
     // MARK: - Initializers
