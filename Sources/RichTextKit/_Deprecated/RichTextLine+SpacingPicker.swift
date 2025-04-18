@@ -10,16 +10,16 @@ import SwiftUI
 
 @available(*, deprecated, message: "Use SwiftUI Picker with native NSParagraphStyle directly instead.")
 public extension RichTextLine {
-    
+
     /**
      This picker can be used to pick a font size.
-     
+
      The view returns a plain SwiftUI `Picker` view that can
      be styled and configured with plain SwiftUI.
-     
+
      You can configure this picker by applying a config view
      modifier to your view hierarchy:
-     
+
      ```swift
      VStack {
      RichTextLine.SpacingPicker(...)
@@ -29,10 +29,10 @@ public extension RichTextLine {
      ```
      */
     struct SpacingPicker: View {
-        
+
         /**
          Create a line spacing picker.
-         
+
          - Parameters:
          - selection: The selected font size.
          */
@@ -41,13 +41,13 @@ public extension RichTextLine {
         ) {
             self._selection = selection
         }
-        
+
         @Binding
         private var selection: CGFloat
-        
+
         @Environment(\.richTextLineSpacingPickerConfig)
         private var config
-        
+
         public var body: some View {
             Picker(RTKL10n.lineSpacing.text, selection: $selection) {
                 ForEach(values(
@@ -59,7 +59,7 @@ public extension RichTextLine {
                 }
             }
         }
-        
+
         /// Get a list of values for a certain selection.
         func values(
             for values: [CGFloat],
@@ -68,7 +68,7 @@ public extension RichTextLine {
             let values = values + [selection]
             return Array(Set(values)).sorted()
         }
-        
+
         func text(
             for fontSize: CGFloat
         ) -> some View {

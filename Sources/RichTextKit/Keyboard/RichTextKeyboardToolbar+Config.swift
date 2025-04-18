@@ -32,7 +32,7 @@ public struct RichTextKeyboardToolbarConfig {
 
     /// Whether or not to always show the toolbar.
     public var alwaysDisplayToolbar: Bool
-    
+
     /// Whether to display the format sheet button.
     public var displayFormatSheetButton: Bool
 

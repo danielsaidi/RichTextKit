@@ -48,7 +48,7 @@ public extension RichTextLine {
 
         @ObservedObject
         private var context: RichTextContext
-        
+
         var value: Binding<CGFloat> {
             context.paragraphStyleValueBinding(for: \.lineSpacing)
         }

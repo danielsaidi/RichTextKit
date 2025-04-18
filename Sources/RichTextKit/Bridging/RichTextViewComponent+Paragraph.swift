@@ -22,7 +22,7 @@ public extension RichTextViewComponent {
     var richTextParagraphStyle: NSMutableParagraphStyle? {
         richTextAttribute(.paragraphStyle)
     }
-    
+
     /// Get a certain value from the current paragraph style.
     func richTextParagraphStyleValue<ValueType>(
         _ keyPath: WritableKeyPath<NSMutableParagraphStyle, ValueType>
@@ -44,7 +44,7 @@ public extension RichTextViewComponent {
         textStorageWrapper?.addAttribute(.paragraphStyle, value: style, range: range)
         #endif
     }
-    
+
     /// Set a certain value for the current paragraph style.
     func setRichTextParagraphStyleValue<ValueType>(
         _ keyPath: WritableKeyPath<NSMutableParagraphStyle, ValueType>,
@@ -54,7 +54,7 @@ public extension RichTextViewComponent {
         style[keyPath: keyPath] = value
         setRichTextParagraphStyle(style)
     }
-    
+
     /// Step a certain value for the current paragraph style.
     func stepRichTextParagraphStyleValue(
         _ keyPath: WritableKeyPath<NSMutableParagraphStyle, Int>,
@@ -63,7 +63,7 @@ public extension RichTextViewComponent {
         let current = richTextParagraphStyleValue(keyPath) ?? 0
         setRichTextParagraphStyleValue(keyPath, current + change)
     }
-    
+
     /// Step a certain value for the current paragraph style.
     func stepRichTextParagraphStyleValue(
         _ keyPath: WritableKeyPath<NSMutableParagraphStyle, CGFloat>,

@@ -78,7 +78,7 @@ public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
 
     /// Step the line spacing.
     case stepLineSpacing(points: CGFloat)
-    
+
     /// Set the current paragraph style.
     case setParagraphStyle(_ style: NSMutableParagraphStyle)
 

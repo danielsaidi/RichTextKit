@@ -9,7 +9,7 @@
 import SwiftUI
 
 public extension Toggle {
-    
+
     /// Creates a toggle for a certain paragraph style value
     /// in the provided rich text context.
     init(
@@ -22,7 +22,7 @@ public extension Toggle {
             label: label
         )
     }
-    
+
     /// Creates a toggle for a certain paragraph style value
     /// in the provided paragraph style.
     init(
@@ -44,12 +44,12 @@ public extension Toggle {
 #Preview {
 
     struct Preview: View {
-        
+
         let keypath: KeyPath<NSParagraphStyle, Bool> = \.allowsDefaultTighteningForTruncation
         let writableKeypath: WritableKeyPath<NSMutableParagraphStyle, Bool> = \.allowsDefaultTighteningForTruncation
 
         @StateObject var context = RichTextContext()
-        
+
         var value: Bool {
             context.paragraphStyleValue(for: keypath)
         }

@@ -68,7 +68,7 @@ public extension RichTextFormat {
 
                 SidebarSection {
                     alignmentPicker(for: context)
-                    
+
                     HStack {
                         lineSpacingPicker(for: context)
                     }

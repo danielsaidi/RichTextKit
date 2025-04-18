@@ -14,7 +14,7 @@ import UIKit
 import AppKit
 #endif
 
-@available(*, deprecated, message: "This is no longer used within the library and will be removed in the next major version bump.")
+@available(*, deprecated, message: "This is no longer used and will be removed in the next major version.")
 extension NSMutableParagraphStyle {
 
     convenience init(

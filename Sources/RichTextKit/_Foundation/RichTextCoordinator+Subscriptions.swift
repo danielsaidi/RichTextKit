@@ -52,7 +52,7 @@ private extension RichTextCoordinator {
             self?.textView.setRichTextFontSize($0)
         }
     }
-    
+
     func subscribeToContextParagraphStyle() {
         subscribe(to: context.$paragraphStyle) { [weak self] in
             self?.handle(.setParagraphStyle($0))

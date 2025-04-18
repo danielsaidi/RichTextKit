@@ -9,12 +9,12 @@
 import SwiftUI
 
 extension NSTextAlignment: @retroactive Identifiable {
-    
+
     public var id: Int { rawValue }
 }
 
 public extension NSTextAlignment {
-    
+
     /// The default icon for the text alignment.
     var defaultIcon: Image {
         switch self {
@@ -26,7 +26,7 @@ public extension NSTextAlignment {
         @unknown default: .richTextUnknownValueType
         }
     }
-    
+
     #if iOS || macOS || os(visionOS)
     /// The default keyboard shortcut, if any.
     var defaultKeyboardShortcut: KeyboardShortcut? {
@@ -38,7 +38,7 @@ public extension NSTextAlignment {
         }
     }
     #endif
-    
+
     /// The default label for the text alignment.
     var defaultLabel: some View {
         Label {
@@ -47,12 +47,12 @@ public extension NSTextAlignment {
             defaultIcon
         }
     }
-    
+
     /// The standard title to use for the alignment.
     var defaultTitle: String {
         defaultTitleKey.text
     }
-    
+
     /// The standard title key to use for the alignment.
     var defaultTitleKey: RTKL10n {
         switch self {

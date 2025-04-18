@@ -9,7 +9,7 @@
 import SwiftUI
 
 public extension KeyPath where Root == NSMutableParagraphStyle {
-    
+
     /// Get default picker values for the key path.
     var defaultPickerValues: [Value]? {
         switch self {
@@ -37,7 +37,7 @@ public extension KeyPath where Root == NSMutableParagraphStyle {
 }
 
 public extension NSLineBreakMode {
-    
+
     /// Get the default picker values.
     static var defaultPickerValues: [Self] {
         .defaultPickerValues
@@ -45,7 +45,7 @@ public extension NSLineBreakMode {
 }
 
 public extension Collection where Element == NSLineBreakMode {
-    
+
     /// Get the default picker values.
     static var defaultPickerValues: [Element] {
         [.byWordWrapping, .byCharWrapping, .byClipping, .byTruncatingHead, .byTruncatingTail, .byTruncatingMiddle]
@@ -53,7 +53,7 @@ public extension Collection where Element == NSLineBreakMode {
 }
 
 public extension NSParagraphStyle.LineBreakStrategy {
-    
+
     /// Get the default picker values.
     static var defaultPickerValues: [Self] {
         .defaultPickerValues
@@ -61,7 +61,7 @@ public extension NSParagraphStyle.LineBreakStrategy {
 }
 
 public extension Collection where Element == NSParagraphStyle.LineBreakStrategy {
-    
+
     /// Get the default picker values.
     static var defaultPickerValues: [Element] {
         [.standard, .pushOut, .hangulWordPriority]
@@ -69,7 +69,7 @@ public extension Collection where Element == NSParagraphStyle.LineBreakStrategy 
 }
 
 public extension NSTextAlignment {
-    
+
     /// Get the default picker values.
     static var defaultPickerValues: [Self] {
         .defaultPickerValues
@@ -77,7 +77,7 @@ public extension NSTextAlignment {
 }
 
 public extension Collection where Element == NSTextAlignment {
-    
+
     /// Get the default picker values.
     static var defaultPickerValues: [Element] {
         [.left, .center, .right, .justified]
@@ -85,7 +85,7 @@ public extension Collection where Element == NSTextAlignment {
 }
 
 public extension NSWritingDirection {
-    
+
     /// Get the default picker values.
     static var defaultPickerValues: [Self] {
         .defaultPickerValues
@@ -93,7 +93,7 @@ public extension NSWritingDirection {
 }
 
 public extension Collection where Element == NSWritingDirection {
-    
+
     /// Get the default picker values.
     static var defaultPickerValues: [Element] {
         [.leftToRight, .rightToLeft]

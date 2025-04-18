@@ -9,7 +9,7 @@
 import SwiftUI
 
 public extension Image {
-    
+
     /// Create a default icon for the provided key path.
     init?<ValueType>(for value: KeyPath<NSParagraphStyle, ValueType>) {
         guard let icon = value.defaultIcon else { return nil }
@@ -18,7 +18,7 @@ public extension Image {
 }
 
 public extension KeyPath where Root == NSParagraphStyle {
-    
+
     /// The default icon for the key path.
     var defaultIcon: Image? {
         switch self {
@@ -52,7 +52,7 @@ private func previewIcon<ValueType>(
 }
 
 #Preview {
-    
+
     List {
         previewIcon(for: \.alignment, ".alignment")
         previewIcon(for: \.baseWritingDirection, ".baseWritingDirection")

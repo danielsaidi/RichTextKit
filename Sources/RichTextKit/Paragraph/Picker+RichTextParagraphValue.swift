@@ -9,7 +9,7 @@
 import SwiftUI
 
 public extension Picker {
-    
+
     /// Creates a picker for a certain paragraph style value
     /// in the provided rich text context.
     init<ValueType: Hashable, ValueLabel: View>(
@@ -28,7 +28,7 @@ public extension Picker {
             label()
         }
     }
-    
+
     /// Creates a picker for a certain paragraph style value
     /// in the provided paragraph style.
     init<ValueType: Hashable, ValueLabel: View>(
@@ -54,7 +54,7 @@ public extension Picker {
 }
 
 private extension Picker {
-    
+
     static func indexBinding<ValueType: Hashable>(
         for values: [ValueType],
         binding: Binding<ValueType>
@@ -69,14 +69,14 @@ private extension Picker {
 #Preview {
 
     struct Preview: View {
-        
+
         typealias ValueType = NSTextAlignment
         let keypath: KeyPath<NSParagraphStyle, NSTextAlignment> = \.alignment
         let writableKeypath: WritableKeyPath<NSMutableParagraphStyle, NSTextAlignment> = \.alignment
 
         @State var alignment = ValueType.left
         @StateObject var context = RichTextContext()
-        
+
         var value: ValueType {
             context.paragraphStyleValue(for: keypath)
         }

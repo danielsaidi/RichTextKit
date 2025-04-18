@@ -27,7 +27,7 @@ extension RichTextFormatToolbarBase {
 }
 
 extension RichTextFormatToolbarBase {
-    
+
     func alignmentPicker(
         for context: RichTextContext
     ) -> some View {

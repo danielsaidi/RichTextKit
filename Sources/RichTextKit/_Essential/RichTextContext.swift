@@ -81,17 +81,17 @@ public class RichTextContext: ObservableObject {
 
     /// The current rich text styles.
     @Published public internal(set) var styles = [RichTextStyle: Bool]()
-    
-    
+
+
     // MARK: - Paragraph
-    
+
     /// A paragraph style value for a certain value type.
     public func paragraphStyleValue<ValueType>(
         for keyPath: KeyPath<NSParagraphStyle, ValueType>
     ) -> ValueType {
         paragraphStyle[keyPath: keyPath]
     }
-    
+
     /// A binding that binds to paragraph style values.
     public func paragraphStyleValueBinding<ValueType>(
         for keyPath: WritableKeyPath<NSMutableParagraphStyle, ValueType>
@@ -102,8 +102,8 @@ public class RichTextContext: ObservableObject {
             self.paragraphStyle[keyPath: keyPath] = value
         }
     }
-    
-    
+
+
     // MARK: - Properties
 
     /// This publisher can emit actions to the coordinator.
@@ -111,13 +111,13 @@ public class RichTextContext: ObservableObject {
 
     /// The currently highlighted range, if any.
     public var highlightedRange: NSRange?
-    
-    
+
+
     // MARK: - Deprecated
-    
+
     @available(*, deprecated, message: "Use paragraphStyle instead.")
     @Published public var lineSpacing: CGFloat = 10.0
-    
+
     @available(*, deprecated, message: "Use paragraphStyle instead.")
     public var textAlignment: RichTextAlignment {
         get { .init(paragraphStyleValue(for: \.alignment)) }

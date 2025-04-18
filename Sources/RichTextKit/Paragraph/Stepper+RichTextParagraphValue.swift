@@ -10,7 +10,7 @@ import SwiftUI
 
 #if iOS || os(macOS) || os(visionOS)
 public extension Stepper {
-    
+
     /// Creates a stepper for a paragraph style value in the
     /// provided rich text context.
     init<ValueType: Hashable & Strideable & Comparable & SignedNumeric>(
@@ -25,7 +25,7 @@ public extension Stepper {
             label: label
         )
     }
-    
+
     /// Creates a stepper for a paragraph style value in the
     /// provided paragraph style.
     init<ValueType: Hashable & Strideable & Comparable & SignedNumeric>(
@@ -49,12 +49,12 @@ public extension Stepper {
 #Preview {
 
     struct Preview: View {
-        
+
         let keypath: KeyPath<NSParagraphStyle, CGFloat> = \.lineSpacing
         let writableKeypath: WritableKeyPath<NSMutableParagraphStyle, CGFloat> = \.lineSpacing
 
         @StateObject var context = RichTextContext()
-        
+
         var value: Double {
             context.paragraphStyleValue(for: keypath)
         }

@@ -187,7 +187,7 @@ private extension RichTextKeyboardToolbar {
                 .contentShape(Rectangle())
         }
      }
-     
+
         RichTextStyle.ToggleStack(context: context)
             .keyboardShortcutsOnly(if: isCompact)
 

@@ -9,7 +9,7 @@
 import SwiftUI
 
 public extension NSMutableParagraphStyle {
-    
+
     /// Create a mutable copy or a brand new instance.
     static var defaultMutable: NSMutableParagraphStyle {
         NSParagraphStyle.default.mutableCopy() as? NSMutableParagraphStyle ?? .init()
