@@ -8,7 +8,7 @@ Until then, minor updates may remove deprecated features and introduce breaking 
 
 ## 1.2
 
-This version makes a first step towards removing library-specific types in favor of native types, to avoid having to add custom types and logic to the library, where native alternatives exist.
+This version makes a first step towards removing library-specific types in favor of native types, to avoid having to add custom types and logic where native alternatives exist.
 
 This version starts with `NSParagraphStyle` and its nested types, and makes it possible to get, set, pick, step and toggle the following values with a single set of functions, pickers, steppers and toggles:
 
