@@ -16,8 +16,21 @@ public extension RichTextContext {
     public var hasLink: Bool {
         let range = selectedRange
         guard range.length > 0 else { return false }
-        let attributes = attributedString.attributes(at: range.location, effectiveRange: nil)
-        return attributes[.link] != nil
+        
+        // Check if any part of the selection has a link
+        var hasAnyLink = false
+        var hasNoLink = false
+        
+        attributedString.enumerateAttributes(in: range, options: []) { attributes, _, _ in
+            if attributes[.link] != nil {
+                hasAnyLink = true
+            } else {
+                hasNoLink = true
+            }
+        }
+        
+        // Only return true if the entire selection has a link
+        return hasAnyLink && !hasNoLink
     }
     
     /// Add a link to the currently selected text
@@ -26,7 +39,6 @@ public extension RichTextContext {
     ///   - text: Optional text to replace the selection with. If nil, uses existing selection
     public func setLink(url urlString: String, text: String? = nil) {
         let range = selectedRange
-//        guard range.length > 0 else { return }
         
         // Only apply changes if explicitly requested and different from current
         if hasLink { return }
@@ -58,11 +70,12 @@ public extension RichTextContext {
         let range = selectedRange
         guard range.length > 0 else { return }
         
-        // Only apply changes if explicitly requested and different from current
-        if !hasLink { return }
-        
-        // Remove the link attribute
-        actionPublisher.send(.setLinkAttribute(nil, range))
+        // Remove link from any part of the selection that has one
+        attributedString.enumerateAttributes(in: range, options: []) { attributes, subrange, _ in
+            if attributes[.link] != nil {
+                actionPublisher.send(.setLinkAttribute(nil, subrange))
+            }
+        }
     }
 }
 

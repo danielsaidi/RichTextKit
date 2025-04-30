@@ -51,7 +51,10 @@ public class RichTextContext: ObservableObject {
 
     /// Whether or not the text is currently being edited.
     @Published public var isEditingText = false
-
+    
+    /// Whether or not the link input sheet is presented.
+    @Published public var isLinkSheetPresented = false
+    
     /// The current font name.
     @Published public var fontName = RichTextFont.PickerFont.all.first?.fontName ?? ""
 

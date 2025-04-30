@@ -111,7 +111,8 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         if let text = string as? String {
             let attributes = richTextAttributes(at: NSRange(location: max(0, currentRange.location - 1), length: 1))
             
-            if attributes[.link] != nil || text.rangeOfCharacter(from: .whitespacesAndNewlines) != nil {
+            // Only remove link attributes when typing whitespace
+            if text.rangeOfCharacter(from: .whitespacesAndNewlines) != nil {
                 // Remove link-related attributes from typing attributes
                 var attrs = typingAttributes
                 attrs.removeValue(forKey: .link)
@@ -119,13 +120,13 @@ open class RichTextView: NSTextView, RichTextViewComponent {
                 attrs.removeValue(forKey: .underlineColor)
                 typingAttributes = attrs
                 
-                // Also remove link attributes from the current position
-                if let textStorage = self.textStorage {
+                // Also remove link attributes from the current position if we're after a link
+                if attributes[.link] != nil, let textStorage = self.textStorage {
                     textStorage.removeAttribute(.link, range: NSRange(location: currentRange.location, length: 0))
                     textStorage.removeAttribute(.underlineStyle, range: NSRange(location: currentRange.location, length: 0))
                     textStorage.removeAttribute(.underlineColor, range: NSRange(location: currentRange.location, length: 0))
                 }
-            }
+            }      
         }
         
         // Perform the text insertion
