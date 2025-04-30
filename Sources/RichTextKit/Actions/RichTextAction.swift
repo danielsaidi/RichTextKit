@@ -69,6 +69,9 @@ public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
 
     /// Set a certain ``RichTextStyle``.
     case setStyle(RichTextStyle, Bool)
+    
+    /// Set a link attribute for a range of text.
+    case setLinkAttribute(URL?, NSRange)
 
     /// Step the font size.
     case stepFontSize(points: Int)
@@ -121,6 +124,7 @@ public extension RichTextAction {
         case .setHighlightingStyle: .richTextAlignmentCenter
         case .setParagraphStyle: .richTextAlignmentLeft
         case .setStyle(let style, _): style.icon
+        case .setLinkAttribute: .richTextStyleLink
         case .stepFontSize(let val): .richTextStepFontSize(val)
         case .stepIndent(let val): .richTextStepIndent(val)
         case .stepLineSpacing(let val): .richTextStepLineSpacing(val)
@@ -175,6 +179,7 @@ public extension RichTextAction {
         case .setHighlightingStyle: .highlightingStyle
         case .setParagraphStyle: .textAlignmentLeft
         case .setStyle(let style, _): style.titleKey
+        case .setLinkAttribute: .styleLink
         case .stepFontSize(let points): .actionStepFontSize(points)
         case .stepIndent(let points): .actionStepIndent(points)
         case .stepLineSpacing(let points): .actionStepLineSpacing(points)

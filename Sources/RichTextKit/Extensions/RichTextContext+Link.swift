@@ -42,17 +42,15 @@ public extension RichTextContext {
         let linkText = text ?? attributedString.string.substring(with: range)
         let linkRange = NSRange(location: range.location, length: linkText.count)
         
-        // Create a mutable copy of the current attributed string
-        let mutableString = NSMutableAttributedString(attributedString: attributedString)
+        // If there's replacement text, replace it first
+        if text != nil {
+            let mutableString = NSMutableAttributedString(attributedString: attributedString)
+            mutableString.replaceCharacters(in: range, with: linkText)
+            actionPublisher.send(.setAttributedString(mutableString))
+        }
         
-        // Replace the text first if needed
-        mutableString.replaceCharacters(in: range, with: linkText)
-        
-        // Add the link attribute
-        mutableString.addAttribute(.link, value: linkURL, range: linkRange)
-        
-        // Update the context with the new string
-        actionPublisher.send(.setAttributedString(mutableString))
+        // Set the link attribute
+        actionPublisher.send(.setLinkAttribute(linkURL, linkRange))
     }
     
     /// Remove link from the current selection
@@ -63,14 +61,8 @@ public extension RichTextContext {
         // Only apply changes if explicitly requested and different from current
         if !hasLink { return }
         
-        // Create a mutable copy of the current attributed string
-        let mutableString = NSMutableAttributedString(attributedString: attributedString)
-        
-        // Remove only the link attribute
-        mutableString.removeAttribute(.link, range: range)
-        
-        // Update the context with the new string
-        actionPublisher.send(.setAttributedString(mutableString))
+        // Remove the link attribute
+        actionPublisher.send(.setLinkAttribute(nil, range))
     }
 }
 
