@@ -70,12 +70,17 @@ public extension RichTextContext {
         let range = selectedRange
         guard range.length > 0 else { return }
         
-        // Remove link from any part of the selection that has one
-        attributedString.enumerateAttributes(in: range, options: []) { attributes, subrange, _ in
-            if attributes[.link] != nil {
-                actionPublisher.send(.setLinkAttribute(nil, subrange))
-            }
-        }
+        // Only apply changes if explicitly requested and different from current
+        if !hasLink { return }
+        
+        // Create a mutable copy of the current attributed string
+        let mutableString = NSMutableAttributedString(attributedString: attributedString)
+        
+        // Remove only the link attribute
+        mutableString.removeAttribute(.link, range: range)
+        
+        // Update the context with the new string
+        actionPublisher.send(.setAttributedString(mutableString))
     }
 }
 
