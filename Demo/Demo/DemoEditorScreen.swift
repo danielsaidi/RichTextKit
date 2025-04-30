@@ -14,6 +14,8 @@ struct DemoEditorScreen: View {
     @Binding var document: DemoDocument
 
     @State private var isInspectorPresented = false
+    @State private var isLinkSheetPresented = false
+    @State private var linkURL = ""
 
     @StateObject var context = RichTextContext()
 
@@ -53,6 +55,29 @@ struct DemoEditorScreen: View {
                         .aspectRatio(1, contentMode: .fit)
                 }
             }
+            
+            ToolbarItem(placement: .automatic) {
+                Button {
+                    if context.hasLink {
+                        context.removeLink()
+                    } else {
+                        isLinkSheetPresented = true
+                    }
+                } label: {
+                    Image(systemName: "link")
+                        .foregroundColor(context.hasLink ? .accentColor : .primary)
+                }
+                .help("Add or remove link")
+            }
+        }
+        .sheet(isPresented: $isLinkSheetPresented) {
+            LinkSheet(url: $linkURL) {
+                if !linkURL.isEmpty {
+                    context.setLink(url: linkURL)
+                    linkURL = ""
+                }
+                isLinkSheetPresented = false
+            }
         }
         .frame(minWidth: 500)
         .focusedValue(\.richTextContext, context)
@@ -66,6 +91,38 @@ struct DemoEditorScreen: View {
         )
         .richTextFormatToolbarConfig(.init(colorPickers: []))
         .viewDebug()
+    }
+}
+
+private struct LinkSheet: View {
+    @Binding var url: String
+    let onDismiss: () -> Void
+    
+    var body: some View {
+        VStack(spacing: 20) {
+            Text("Add Link")
+                .font(.headline)
+            
+            TextField("URL", text: $url)
+                .textFieldStyle(.roundedBorder)
+                .frame(width: 300)
+            
+            HStack {
+                Button("Cancel") {
+                    url = ""
+                    onDismiss()
+                }
+                .keyboardShortcut(.cancelAction)
+                
+                Button("Add") {
+                    onDismiss()
+                }
+                .keyboardShortcut(.defaultAction)
+                .disabled(url.isEmpty)
+            }
+        }
+        .padding()
+        .frame(width: 400, height: 150)
     }
 }
 
