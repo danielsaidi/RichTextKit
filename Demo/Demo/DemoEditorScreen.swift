@@ -42,7 +42,7 @@ struct DemoEditorScreen: View {
         .inspector(isPresented: $isInspectorPresented) {
             RichTextFormat.Sidebar(context: context)
                 #if os(macOS)
-                .inspectorColumnWidth(min: 200, ideal: 200, max: 315)
+                .inspectorColumnWidth(min: 280, ideal: 350, max: 400)
                 #endif
         }
         .toolbar {
