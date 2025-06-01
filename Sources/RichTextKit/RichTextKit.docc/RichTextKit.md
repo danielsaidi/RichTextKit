@@ -1,13 +1,13 @@
 # ``RichTextKit``
 
-RichTextKit is a Swift SDK that helps you use rich text in Swift and SwiftUI.
+RichTextKit lets you view and edit rich text in `Swift` and `SwiftUI` on all major Apple platforms.
 
 
 ## Overview
 
 ![RichTextKit logo](Logo.png)
 
-RichTextKit is a Swift SDK that helps you use rich text in Swift and SwiftUI.
+RichTextKit is a library that lets you view and edit rich text in `Swift` and `SwiftUI` on all major Apple platforms.
 
 RichTextKit has a multi-platform SwiftUI ``RichTextEditor`` that can be added to any app. The editor supports text styles (bold, italic, underline, etc.), fonts, font sizes, colors, text alignments, image attachments, and much more.
 
@@ -22,6 +22,11 @@ RichTextKit can be installed with the Swift Package Manager:
 ```
 https://github.com/danielsaidi/RichTextKit.git
 ```
+
+
+## Support My Work
+
+You can [become a sponsor][Sponsors] to help me dedicate more time on my various [open-source tools][OpenSource]. Every contribution, no matter the size, makes a real difference in keeping these tools free and actively developed.
 
 
 
@@ -185,6 +190,12 @@ RichTextKit is available under the MIT license.
 - ``RichTextLabelValue``
 
 
+
+[Email]: mailto:daniel.saidi@gmail.com
+[Website]: https://danielsaidi.com
+[GitHub]: https://github.com/danielsaidi
+[OpenSource]: https://danielsaidi.com/opensource
+[Sponsors]: https://github.com/sponsors/danielsaidi
 
 [License]: https://github.com/danielsaidi/RichTextKit/blob/master/LICENSE
 [Repository]: https://github.com/danielsaidi/RichTextKit

@@ -7,14 +7,15 @@
     <img src="https://img.shields.io/badge/Swift-5.9-orange.svg" alt="Swift 5.9" />
     <img src="https://img.shields.io/badge/platform-SwiftUI-blue.svg" alt="Swift UI" title="Swift UI" />
     <a href="https://danielsaidi.github.io/RichTextKit"><img src="https://img.shields.io/badge/documentation-web-blue.svg" alt="Documentation" /></a>
-    <img src="https://img.shields.io/github/license/danielsaidi/RichTextKit" alt="MIT License" />
+        <a href="https://github.com/danielsaidi/RichTextKit/blob/master/LICENSE"><img src="https://img.shields.io/github/license/danielsaidi/RichTextKit" alt="MIT License" /></a>
+    <a href="https://github.com/sponsors/danielsaidi"><img src="https://img.shields.io/badge/sponsor-GitHub-red.svg" alt="Sponsor my work" /></a>
 </p>
 
 
 
 # RichTextKit
 
-RichTextKit is a Swift SDK that lets you edit rich text in `Swift` & `SwiftUI` with a multi-platform `RichTextEditor`:
+RichTextKit lets you view and edit rich text in `Swift` and `SwiftUI` on all major Apple platforms.
 
 <p align="center">
     <img src ="Resources/Demo.jpg" />
@@ -33,6 +34,11 @@ RichTextKit can be installed with the Swift Package Manager:
 ```
 https://github.com/danielsaidi/RichTextKit.git
 ```
+
+
+## Support My Work
+
+You can [become a sponsor][Sponsors] to help me dedicate more time on my various [open-source tools][OpenSource]. Every contribution, no matter the size, makes a real difference in keeping these tools free and actively developed.
 
 
 
@@ -95,14 +101,6 @@ RichTextKit is also used in the following apps, so make sure to check them out f
 <a title="Oribi Writer" href="https://oribi.se/en"><img src="Resources/apps/oribiwriter.png" width=100 /></a>
 
 Don't hesitate to reach out if you are using RichTextKit, and want to add your app to this list. I'd love to feature it.
-
-
-
-## Sponsor my work
-
-Please consider supporting my work if you find this and my other [open-source projects][OpenSource] helpful. I manage them on my spare time, and any help to keep them going is greatly appreciated.
-
-You can [sponsor me][Sponsors] on GitHub Sponsors, [reach out][Email] for paid support, or hire me for [freelance work][Website].
 
 
 
