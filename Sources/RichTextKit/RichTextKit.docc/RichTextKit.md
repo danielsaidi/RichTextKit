@@ -7,7 +7,7 @@ RichTextKit lets you view and edit rich text in `Swift` and `SwiftUI` on all maj
 
 ![RichTextKit logo](Logo.png)
 
-RichTextKit is a library that lets you view and edit rich text in `Swift` and `SwiftUI` on all major Apple platforms.
+RichTextKit is a library that lets you view and edit rich text in Swift and SwiftUI, on all major Apple platforms.
 
 RichTextKit has a multi-platform SwiftUI ``RichTextEditor`` that can be added to any app. The editor supports text styles (bold, italic, underline, etc.), fonts, font sizes, colors, text alignments, image attachments, and much more.
 
