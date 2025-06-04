@@ -24,6 +24,7 @@ public extension View {
         case .italic: keyboardShortcut("i", modifiers: .command)
         case .strikethrough: self
         case .underlined: keyboardShortcut("u", modifiers: .command)
+        case .link: keyboardShortcut("k", modifiers: .command)
         }
         #else
         self

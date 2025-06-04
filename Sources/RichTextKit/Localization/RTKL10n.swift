@@ -79,6 +79,7 @@ public enum RTKL10n: String, CaseIterable, Identifiable {
     styleItalic,
     styleStrikethrough,
     styleUnderlined,
+    styleLink,
 
     superscript,
     superscriptIncrease,

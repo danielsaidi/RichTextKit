@@ -39,6 +39,7 @@ public extension RichTextContext {
         case .setHighlightingStyle: true
         case .setParagraphStyle: true
         case .setStyle: true
+        case .setLinkAttribute: true
         case .stepFontSize: true
         case .stepIndent: true
         case .stepLineSpacing: true

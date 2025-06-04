@@ -22,6 +22,7 @@ public enum RichTextStyle: String, CaseIterable, Identifiable, RichTextLabelValu
     case italic
     case underlined
     case strikethrough
+    case link
 }
 
 public extension RichTextStyle {
@@ -44,9 +45,10 @@ public extension RichTextStyle {
     var icon: Image {
         switch self {
         case .bold: .richTextStyleBold
-        case .italic: .richTextStyleItalic
+        case .italic: .richTextItalic
         case .strikethrough: .richTextStyleStrikethrough
         case .underlined: .richTextStyleUnderline
+        case .link: .richTextStyleLink
         }
     }
 
@@ -62,6 +64,7 @@ public extension RichTextStyle {
         case .italic: .styleItalic
         case .underlined: .styleUnderlined
         case .strikethrough: .styleStrikethrough
+        case .link: .styleLink
         }
     }
 
@@ -80,6 +83,7 @@ public extension RichTextStyle {
         var styles = traits?.enabledRichTextStyles ?? []
         if attributes?.isStrikethrough == true { styles.append(.strikethrough) }
         if attributes?.isUnderlined == true { styles.append(.underlined) }
+        if attributes?[.link] != nil { styles.append(.link) }
         return styles
     }
 }
@@ -112,6 +116,7 @@ public extension RichTextStyle {
         case .italic: .traitItalic
         case .strikethrough: nil
         case .underlined: nil
+        case .link: nil
         }
     }
 }
@@ -127,6 +132,7 @@ public extension RichTextStyle {
         case .italic: .italic
         case .strikethrough: nil
         case .underlined: nil
+        case .link: nil
         }
     }
 }
