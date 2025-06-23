@@ -26,6 +26,17 @@ The `RichTextEditor` supports text styles (bold, italic, underline, etc.), fonts
 If you just want to view rich text content, you can use the `RichTextViewer` SwiftUI view, which wraps the editor and applies a read-only configuration to it.
 
 
+## ‼️ Important ‼️ 
+
+This repository was created a few years ago, when SwiftUI had limited support for rich text. Since then, SwiftUI has received more support for attributed strings. And with the new iOS/macOS 26 releases, we can now edit attributed strings with a `TextEditor`.
+
+This brings into questions how much value this repository will bring over time. It will most likely not be updated in its current direction, since most of its complexities to integrate between SwiftUI & UIKit/AppKit will not be needed.
+
+It will most probably still be relevant to perform operations on the attributed string, and perhaps provide control panels, etc. Regardless, things will be different, so I am not yet sure if I will keep this library alive after the WWDC 25 announcements. Feel free to reach out to discuss this with me.
+
+Best regards, Daniel Saidi
+
+
 
 ## Installation
 
