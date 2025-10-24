@@ -8,13 +8,8 @@
 
 import Foundation
 
-/**
- This protocol can be implemented by types that can fetch an
- image or multiple images from the pasteboard.
-
- The protocol is implemented by the UIKit `UIPasteboard`, as
- well as the AppKit `NSPasteboard`.
- */
+/// This protocol can be implemented by types that can fetch an image or multiple
+/// images from the pasteboard.
 public protocol PasteboardImageReader {
 
     /// Get the first image in the pasteboard, if any.

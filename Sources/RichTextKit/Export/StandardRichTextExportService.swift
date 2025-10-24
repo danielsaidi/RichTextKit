@@ -8,11 +8,15 @@
 
 import Foundation
 
-/// This service can be used to export rich text contents to
-/// files with a certain format.
+/// This service can be used to export rich text content to files with a certain format.
 ///
-/// Files are by default written to an app's document folder.
-/// It can be changed by providing another directory.
+/// Files are by default written to an app's document folder. It can be changed by
+/// providing another directory.
+///
+/// Exported files are default be exported to an app's document folder. This means
+/// that we must give them a unique name to avoid overwriting any existing file. To
+/// achieve this, we use the `uniqueFileUrl` function of the url resolver, which
+/// will add a suffix until a file name is unique.
 public class StandardRichTextExportService: RichTextExportService {
 
     /// Create a standard rich text export service.
@@ -31,15 +35,7 @@ public class StandardRichTextExportService: RichTextExportService {
     private let urlResolver: RichTextExportUrlResolver
     private let directory: FileManager.SearchPathDirectory
 
-    /// Generate an export file with a certain name, content,
-    /// and format.
-    ///
-    /// Exported files will by default be exported to an app
-    /// document folder. This means that we should give them
-    /// a unique name to avoid overwriting any existing file.
-    /// To achieve this, we use the `uniqueFileUrl` function
-    /// of the url resolver, which will add a suffix until a
-    /// file name is unique.
+    /// Generate an export file with a certain name, content, and format.
     ///
     /// - Parameters:
     ///   - fileName: The preferred name of the exported name.
@@ -60,13 +56,6 @@ public class StandardRichTextExportService: RichTextExportService {
     }
 
     /// Generate a PDF file with a certain name and content.
-    ///
-    /// Exported files will by default be exported to an app
-    /// document folder. This means that we should give them
-    /// a unique name to avoid overwriting any existing file.
-    /// To achieve this, we use the `uniqueFileUrl` function
-    /// of the url resolver, which will add a suffix until a
-    /// file name is unique.
     ///
     /// - Parameters:
     ///   - fileName: The preferred file name.

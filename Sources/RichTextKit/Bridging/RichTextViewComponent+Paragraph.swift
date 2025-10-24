@@ -32,9 +32,8 @@ public extension RichTextViewComponent {
 
     /// Set the current paragraph style.
     ///
-    /// > Todo: The function currently can't handle multiple
-    /// selected paragraphs. If many paragraphs are selected,
-    /// it will only affect the first one.
+    /// > Todo: The function currently can't handle multiple selected paragraphs.
+    /// If many paragraphs are selected, it will only affect the first one.
     func setRichTextParagraphStyle(_ style: NSParagraphStyle) {
         let range = lineRange(for: selectedRange)
         guard range.length > 0 else { return }

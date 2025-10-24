@@ -9,71 +9,54 @@
 #if iOS || macOS || os(visionOS)
 import SwiftUI
 
-/**
- This toolbar can be added above an iOS keyboard, to provide
- rich text formatting in a compact form.
-
- This toolbar is needed since the ``RichTextEditor`` can not
- use a `toolbar` modifier with `.keyboard` placement:
-
- ```swift
- RichTextEditor(text: $text, context: context)
-     .toolbar {
-         ToolbarItemGroup(placement: .keyboard) {
-             ....
-         }
-     }
- ```
-
- Instead, add this toolbar below a ``RichTextEditor`` to let
- it automatically show when the text editor is edited in iOS.
-
- You can inject additional leading and trailing buttons, and
- customize the format sheet that is presented when users tap
- format button:
-
- ```swift
- VStack {
-    RichTextEditor(...)
-    RichTextKeyboardToolbar(
-        context: context,
-        leadingButtons: {},
-        trailingButtons: {},
-        formatSheet: { $0 }
-    )
- }
- ```
-
- These view builders provide you with standard views. Return
- `$0` to use these standard views, or return any custom view
- that you want to use instead.
-
- You can configure and style the view by applying its config
- and style view modifiers to your view hierarchy:
-
- ```swift
- VStack {
-    RichTextEditor(...)
-    RichTextKeyboardToolbar(...)
- }
- .richTextKeyboardToolbarStyle(...)
- .richTextKeyboardToolbarConfig(...)
- ```
-
- For more information, see ``RichTextKeyboardToolbarConfig``
- and ``RichTextKeyboardToolbarStyle``.
- */
+/// This toolbar can be added above an iOS keyboard, to provide rich text format
+/// options in a compact form.
+///
+/// This toolbar is needed since the ``RichTextEditor`` can not use a native
+/// `toolbar` modifier with `.keyboard` placement:
+///
+/// ```swift
+/// RichTextEditor(text: $text, context: context)
+///     .toolbar {
+///         ToolbarItemGroup(placement: .keyboard) {
+///         ...
+///     }
+/// }
+/// ```
+///
+/// Instead, add this toolbar below a ``RichTextEditor`` to let it automatically
+/// show when the text editor is edited in iOS.
+///
+/// You can inject additional leading and trailing buttons, and customize the format
+/// sheet that is presented when users tap format button:
+///
+/// ```swift
+/// VStack {
+///     RichTextEditor(...)
+///     RichTextKeyboardToolbar(
+///         context: context,
+///         leadingButtons: {},
+///         trailingButtons: {},
+///         formatSheet: { $0 }
+///     )
+/// }
+/// ```
+///
+/// These view builders provide you with standard views. Return `$0` to use the
+/// standard views, or return any custom view that you want to use instead.
+///
+/// You can style and configure this view by applying the view modifiers
+/// ``SwiftUICore/View/richTextKeyboardToolbarStyle(_:)``.
+/// ``SwiftUICore/View/richTextKeyboardToolbarConfig(_:)``.
 public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: View, FormatSheet: View>: View {
 
-    /**
-     Create a rich text keyboard toolbar.
-
-     - Parameters:
-       - context: The context to affect.
-       - leadingButtons: The leading buttons to place after the leading actions.
-       - trailingButtons: The trailing buttons to place before the trailing actions.
-       - formatSheet: The rich text format sheet to use, by default ``RichTextFormat/Sheet``.
-     */
+    /// Create a rich text keyboard toolbar.
+    ///
+    /// - Parameters:
+    ///   - context: The context to affect.
+    ///   - leadingButtons: The leading buttons to place after the leading actions.
+    ///   - trailingButtons: The trailing buttons to place before the trailing actions.
+    ///   - formatSheet: The rich text format sheet to use, by default ``RichTextFormat/Sheet``.
     public init(
         context: RichTextContext,
         @ViewBuilder leadingButtons: @escaping (StandardLeadingButtons) -> LeadingButtons,

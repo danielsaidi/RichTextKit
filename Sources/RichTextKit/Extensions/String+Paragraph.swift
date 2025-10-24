@@ -10,10 +10,7 @@ import Foundation
 
 public extension String {
 
-    /**
-     Look backward to find the index of the paragraph before
-     the provided location, if any.
-     */
+    /// Look backward to find the index of the paragraph before the provided location, if any.
     func findIndexOfCurrentParagraph(from location: UInt) -> UInt {
         if isEmpty { return 0 }
         let count = UInt(count)
@@ -27,10 +24,7 @@ public extension String {
         return max(index, 0)
     }
 
-    /**
-     Look forward to find the index of a paragraph after the
-     provided location, if any.
-     */
+    /// Look forward to find the index of a paragraph after the provided location, if any.
     func findIndexOfNextParagraph(from location: UInt) -> UInt {
         var index = location
         repeat {
@@ -43,10 +37,7 @@ public extension String {
         return found ? index : findIndexOfCurrentParagraph(from: location)
     }
 
-    /**
-     Look forward to find the index of a paragraph after the
-     provided location, if any.
-     */
+    /// Look forward to find the index of a paragraph after the provided location, if any.
     func findIndexOfNextParagraphOrEndOfCurrent(from location: UInt) -> UInt {
         var index = location
         repeat {
@@ -59,9 +50,7 @@ public extension String {
         return UInt(found ? index : UInt(count))
     }
 
-    /**
-     Get the length of the paragraph at a provided location.
-     */
+    /// Get the length of the paragraph at a provided location.
     func findLengthOfCurrentParagraph(from location: UInt) -> Int {
         if isEmpty { return 0 }
         let startIndex = findIndexOfCurrentParagraph(from: location)
@@ -69,12 +58,7 @@ public extension String {
         return Int(endIndex)-Int(startIndex)
     }
 
-    /**
-     Get the index of the word at the provided text location.
-
-     A word is considered to be a length of text between two
-     breaking characters or space characters.
-     */
+    /// Get the index of the word at the provided text location.
     func findIndexOfCurrentWord(from location: UInt) -> UInt {
         if isEmpty { return 0 }
         let count = UInt(count)

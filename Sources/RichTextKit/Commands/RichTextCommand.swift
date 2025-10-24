@@ -8,9 +8,8 @@
 
 import Foundation
 
-/// This is a namespace for command-specific types like menu
-/// and buttons commands.
+/// This is a namespace for command-specific menu and buttons commands.
 ///
-/// > Important: The rich text-related commands require that
-/// there's a ``RichTextContext`` set as a focused value.
+/// > Important: Rich text commands require a focused ``RichTextContext``,
+/// otherwise the commands will be disabled.
 public struct RichTextCommand {}

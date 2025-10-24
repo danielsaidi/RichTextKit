@@ -11,32 +11,21 @@ import SwiftUI
 
 public extension RichTextFormat {
 
-    /**
-     This horizontal toolbar provides text format controls.
-
-     This toolbar adapts the layout based on horizontal size
-     class. The control row is split in two for compact size,
-     while macOS and regular sizes get a single row.
-
-     You can configure and style the view by applying config
-     and style view modifiers to your view hierarchy:
-
-     ```swift
-     VStack {
-     ...
-     }
-     .richTextFormatToolbarStyle(...)
-     .richTextFormatToolbarConfig(...)
-     ```
-     */
+    /// This horizontal toolbar provides text format controls.
+    ///
+    /// This toolbar adapts the layout based on horizontal size class. The control
+    /// row is split in two for compact size, while macOS and regular sizes get a
+    /// single row.
+    ///
+    /// You can style and configure this view by applying the view modifiers
+    /// ``SwiftUICore/View/richTextFormatToolbarStyle(_:)`` and.
+    /// ``SwiftUICore/View/richTextFormatToolbarConfig(_:)``.
     struct Toolbar: RichTextFormatToolbarBase {
 
-        /**
-         Create a rich text format sheet.
-
-         - Parameters:
-         - context: The context to apply changes to.
-         */
+        /// Create a rich text format sheet.
+        ///
+        /// - Parameters:
+        ///   - context: The context to apply changes to.
         public init(
             context: RichTextContext
         ) {

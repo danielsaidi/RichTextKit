@@ -9,8 +9,7 @@
 #if iOS || macOS || os(visionOS)
 import SwiftUI
 
-/// This internal protocol is used to share code between the
-/// two toolbars, which should eventually become one.
+/// This internal protocol is used to share code between the two toolbars.
 protocol RichTextFormatToolbarBase: View {
 
     var config: RichTextFormat.ToolbarConfig { get }

@@ -12,9 +12,8 @@ public extension RichTextFont {
 
     /// This type can configure a ``RichTextFont/Picker``.
     ///
-    /// This configuration contains configuration properties
-    /// for many different font pickers types. Some of these
-    /// properties are not used in some pickers.
+    /// This configuration contains configuration properties for many font pickers.
+    /// Some of these properties are not used in some pickers.
     struct PickerConfig {
 
         /// Create a custom font picker config.

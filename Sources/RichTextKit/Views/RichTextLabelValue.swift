@@ -8,8 +8,7 @@
 
 import SwiftUI
 
-/// This protocol can be implemented by any rich text values
-/// that can be represented as a label.
+/// This protocol can be implemented by any rich text label values.
 public protocol RichTextLabelValue: Hashable {
 
     /// The value icon.

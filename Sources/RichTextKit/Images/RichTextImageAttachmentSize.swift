@@ -8,9 +8,7 @@
 
 import CoreGraphics
 
-/**
- This enum defines various ways to size images in rich text.
- */
+/// This enum defines various ways to size images in rich text.
 public enum RichTextImageAttachmentSize {
 
     /// This size aims to make image fit the frame.

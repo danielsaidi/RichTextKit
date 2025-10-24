@@ -9,8 +9,7 @@
 #if iOS || macOS || os(tvOS) || os(visionOS)
 import SwiftUI
 
-/// This view can be used to display rich text without being
-/// able to edit it.
+/// This view can be used to display rich text without being able to edit it.
 public struct RichTextViewer: View {
 
     public init(_ text: String) {

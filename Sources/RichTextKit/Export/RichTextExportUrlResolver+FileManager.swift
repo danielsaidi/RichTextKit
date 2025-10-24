@@ -8,8 +8,7 @@
 
 import Foundation
 
-/// This is a typealias for the `FileManager` since it's the
-/// standard way to resolve export file urls.
+/// This is a typealias for the `FileManager`, which is the standard export service.
 public typealias StandardRichTextExportUrlResolver = FileManager
 
 extension FileManager: RichTextExportUrlResolver {}
@@ -37,10 +36,9 @@ public extension FileManager {
 
     /// Try to generate a file url in a certain directory.
     ///
-    /// If needed, this function will append a counter until
-    /// the url is unique. This means that the resulting url
-    /// for a file with the name `myFile.txt` may instead be
-    /// a url with the file name `myFile-1.txt`.
+    /// If needed, this function will append a counter until the url is unique. This
+    /// means that the resulting url for a file with the name `myFile.txt` may
+    /// instead be a url with the file name `myFile-1.txt`.
     ///
     /// - Parameters:
     ///   - fileName: The preferred file name.
@@ -56,13 +54,11 @@ public extension FileManager {
         return uniqueUrl
     }
 
-    /// Get a unique url for the provided `url` to make sure
-    /// that no existing folder or file exists there.
+    /// Get a unique url for the provided `url`.
     ///
-    /// If needed, this function will append a counter until
-    /// the url is unique. This means that the resulting url
-    /// for a file with the name `myFile.txt` may instead be
-    /// a url with the file name `myFile-1.txt`.
+    /// If needed, this function will append a counter until the url is unique. This
+    /// means that the resulting url for a file with the name `myFile.txt` may
+    /// instead be a url with the file name `myFile-1.txt`.
     ///
     /// - Parameters:
     ///   - url: The url to generate a unique url for.

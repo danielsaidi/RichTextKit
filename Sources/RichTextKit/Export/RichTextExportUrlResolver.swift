@@ -8,11 +8,10 @@
 
 import Foundation
 
-/// This protocol can be implemented by any type that can be
-/// used to generate file urls, e.g. when exporting files.
+/// This protocol can be implemented by types that can be used to generate urls,
+/// e.g. when exporting files.
 ///
-/// This protocol is implemented by the `FileManager`, which
-/// is used by default by the library.
+/// This protocol is implemented by the `FileManager` which is used by default.
 public protocol RichTextExportUrlResolver {
 
     /// Try to generate a file url in a certain directory.

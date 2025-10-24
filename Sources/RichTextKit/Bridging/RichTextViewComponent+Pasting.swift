@@ -18,22 +18,18 @@ import AppKit
 
 public extension RichTextViewComponent {
 
-    /**
-     Paste an image into the rich text, at a certain index.
-
-     Pasting images only works on iOS, tvOS and macOS. Other
-     platform will trigger an assertion failure.
-
-     > Todo: This automatically inserts images as compressed
-     jpeg. We should make it more configurable.
-
-     - Parameters:
-       - image: The image to paste.
-       - index: The index to paste at.
-       - moveCursorToPastedContent: Whether or not the input
-     cursor should be moved to the end of the pasted content,
-     by default `false`.
-     */
+    /// Paste an image into the rich text, at a certain index.
+    ///
+    /// Pasting images only works on iOS, tvOS and macOS. Other platform will
+    /// trigger an assertion failure.
+    ///
+    /// > Todo: This automatically inserts images as compressed jpeg. We must
+    /// make it more configurable.
+    ///
+    /// - Parameters:
+    ///   - image: The image to paste.
+    ///   - index: The index to paste at.
+    ///   - moveCursorToPastedContent: Whether the cursor should be moved to the end of the pasted content, by default `true`.
     func pasteImage(
         _ image: ImageRepresentable,
         at index: Int,
@@ -46,22 +42,18 @@ public extension RichTextViewComponent {
         )
     }
 
-    /**
-     Paste images into the text view, at a certain index.
-
-     This will automatically insert an image as a compressed
-     jpeg. We should make it more configurable.
-
-     > Todo: This automatically inserts images as compressed
-     jpeg. We should make it more configurable.
-
-     - Parameters:
-       - images: The images to paste.
-       - index: The index to paste at.
-       - move: Whether or not the input
-     cursor should be moved to the end of the pasted content,
-     by default `false`.
-     */
+    /// Paste images into the text view, at a certain index.
+    ///
+    /// This will automatically insert an image as a compressed jpeg. We should
+    /// make it more configurable.
+    ///
+    /// > Todo: This automatically inserts images as compressed jpeg. We must
+    /// make it more configurable.
+    ///
+    /// - Parameters:
+    ///   - image: The images to paste.
+    ///   - index: The index to paste at.
+    ///   - moveCursorToPastedContent: Whether the cursor should be moved to the end of the pasted content, by default `false`.
     func pasteImages(
         _ images: [ImageRepresentable],
         at index: Int,
@@ -85,16 +77,12 @@ public extension RichTextViewComponent {
         #endif
     }
 
-    /**
-     Paste text into the text view, at a certain index.
-
-     - Parameters:
-       - text: The text to paste.
-       - index: The text index to paste at.
-       - moveCursorToPastedContent: Whether or not the input
-     cursor should be moved to the end of the pasted content,
-     by default `false`.
-     */
+    /// Paste text into the text view, at a certain index.
+    ///
+    /// - Parameters:
+    ///   - image: The text to paste.
+    ///   - index: The index to paste at.
+    ///   - moveCursorToPastedContent: Whether the cursor should be moved to the end of the pasted content, by default `false`.
     func pasteText(
         _ text: String,
         at index: Int,

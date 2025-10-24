@@ -11,20 +11,18 @@ import UniformTypeIdentifiers
 
 /// This enum specifies rich text data formats.
 ///
-/// For instance, ``rtf`` supports styles, colors etc. while
-/// ``plainText`` only handles text. ``archivedData`` can be
-/// used to archive texts, images and various attachments in
-/// binary archives. This is convenient when targeting Apple
-/// platforms, but restricts how data can be used elsewhere.
+/// For instance, ``rtf`` supports styles, colors, etc. while the ``plainText``
+/// format only supports text. ``archivedData`` can be used to archive texts,
+/// images and attachments in binary archives. This is convenient when targeting
+/// Apple platforms, but restricts how data can be used elsewhere.
 ///
-/// ``archivedData`` uses an `rtk` file extension as well as
-/// a `UTType.archivedData` uniform type. You can define any
-/// custom ``vendorArchivedData(id:fileExtension:fileFormatText:uniformType:)``
+/// ``archivedData`` uses an `rtk` file extension and will automatically use
+/// a `UTType.archivedData` uniform type. You can use the vendor-specific
+/// ``vendorArchivedData(id:fileExtension:fileFormatText:uniformType:)``
 /// value to specify a custom data format.
 ///
-/// Remember to configure your app to handle the UTTypes you
-/// want to support, as well as the file extensions you want
-/// to open with it. Check out the demo app for examples.
+/// Remember to configure your app to handle the UTTypes you want to support,
+/// as well as the file extensions you want to open with it. Check out the demo app.
 public enum RichTextDataFormat: Equatable, Identifiable {
 
     /// Archived data that's persisted with a keyed archiver.

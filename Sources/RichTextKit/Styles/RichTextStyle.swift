@@ -8,14 +8,11 @@
 
 import SwiftUI
 
-/**
- This enum represents various rich text styles, such as bold,
- italic and underlined.
-
- This enum aims to simplify working with styles, by creating
- a single way to toggle certain traits and attributes on and
- off, although they may be handled differently by the system.
- */
+/// This enum represents various rich text styles, such as bold, italic and underlined.
+///
+/// This aims to simplify working with styles, by creating one way to toggle certain
+/// traits and attributes on and off, although they may be handled differently by each
+/// specific platform.
 public enum RichTextStyle: String, CaseIterable, Identifiable, RichTextLabelValue {
 
     case bold
@@ -65,14 +62,11 @@ public extension RichTextStyle {
         }
     }
 
-    /**
-     Get the rich text styles that are enabled in a provided
-     set of traits and attributes.
-
-     - Parameters:
-       - traits: The symbolic traits to inspect.
-       - attributes: The rich text attributes to inspect.
-     */
+    /// Get the rich text styles that are enabled in a provided traits and attributes.
+    ///
+    /// - Parameters:
+    ///   - traits: The symbolic traits to inspect.
+    ///   - attributes: The rich text attributes to inspect.
     static func styles(
         in traits: FontTraitsRepresentable?,
         attributes: RichTextAttributes?

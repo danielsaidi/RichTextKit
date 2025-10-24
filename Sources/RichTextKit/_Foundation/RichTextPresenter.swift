@@ -8,8 +8,8 @@
 
 import Foundation
 
-/// This protocol can be implemented by any type that can be
-/// used to present rich text and provide a ``selectedRange``.
+/// This protocol can be implemented by any type that can be used to present rich
+/// text and provide a ``selectedRange``.
 public protocol RichTextPresenter: RichTextReader {
 
     /// Get the currently selected range.

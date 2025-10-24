@@ -10,8 +10,7 @@ import SwiftUI
 
 public extension RichTextContext {
 
-    /// This key can be used to keep track of a context in a
-    /// multi-windowed app.
+    /// This key can be used to keep track of a context in a multi-windowed app.
     struct FocusedValueKey: SwiftUI.FocusedValueKey {
 
         public typealias Value = RichTextContext
@@ -20,8 +19,7 @@ public extension RichTextContext {
 
 public extension FocusedValues {
 
-    /// This value can be used to keep track of a context in
-    /// a multi-windowed app.
+    /// This value can be used to keep track of a context in a multi-windowed app.
     ///
     /// You can bind a context to a view with `focusedValue`:
     ///

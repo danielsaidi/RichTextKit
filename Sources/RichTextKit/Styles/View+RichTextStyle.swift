@@ -10,12 +10,9 @@ import SwiftUI
 
 public extension View {
 
-    /**
-     Add a keyboard shortcut that toggles a certain style.
-
-     This modifier only has effect on platforms that support
-     keyboard shortcuts.
-     */
+    /// Add a keyboard shortcut that toggles a certain style.
+    ///
+    /// This modifier only has effect on platforms that support keyboard shortcuts.
     @ViewBuilder
     func keyboardShortcut(for style: RichTextStyle) -> some View {
         #if iOS || macOS || os(visionOS)

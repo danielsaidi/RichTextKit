@@ -11,28 +11,16 @@ import SwiftUI
 
 public extension RichTextFormat {
 
-    /**
-     This sheet contains a font picker and a bottom toolbar.
-
-     You can configure and style the view by applying config
-     and style view modifiers to your view hierarchy:
-
-     ```swift
-     VStack {
-     ...
-     }
-     .richTextFormatSheetStyle(...)
-     .richTextFormatSheetConfig(...)
-     ```
-     */
+    /// This sheet contains a font picker and a bottom toolbar.
+    ///
+    /// You can style this view by applying the view modifier
+    /// ``SwiftUICore/View/richTextFormatSheetStyle(_:)``.
     struct Sheet: RichTextFormatToolbarBase {
 
-        /**
-         Create a rich text format sheet.
-
-         - Parameters:
-         - context: The context to apply changes to.
-         */
+        /// Create a rich text format sheet.
+        ///
+        /// - Parameters:
+        ///   - context: The context to apply changes to.
         public init(
             context: RichTextContext
         ) {

@@ -11,6 +11,5 @@ import Foundation
 /// This typealias represents a rich text dictionary key.
 public typealias RichTextAttribute = NSAttributedString.Key
 
-/// This typealias represents a dictionary with an attribute
-/// as key and `Any` as value.
+/// This typealias represents a dictionary with an attribute key and `Any` value.
 public typealias RichTextAttributes = [RichTextAttribute: Any]

@@ -8,11 +8,10 @@
 
 import Foundation
 
-/// This protocol extends the ``RichTextReader`` protocol to
-/// support reading rich text data for the current rich text.
+/// This protocol extends the ``RichTextReader`` protocol to support reading
+/// rich text data for the current rich text.
 ///
-/// This protocol is implemented by `NSAttributedString` and
-/// other types in the library.
+/// This protocol is implemented by `NSAttributedString` and other types.
 public protocol RichTextDataReader: RichTextReader {}
 
 extension NSAttributedString: RichTextDataReader {}

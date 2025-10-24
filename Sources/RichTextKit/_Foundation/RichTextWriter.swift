@@ -8,10 +8,7 @@
 
 import Foundation
 
-/// This protocol can be implemented by any type that can be
-/// used to access an ``mutableAttributedString``.
-///
-/// 
+/// This protocol can be implemented by any type with a mutable attributed string.
 public protocol RichTextWriter: RichTextReader {
 
     /// The mutable attributed string.

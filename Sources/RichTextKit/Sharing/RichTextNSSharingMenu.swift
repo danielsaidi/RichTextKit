@@ -8,18 +8,15 @@
 
 import SwiftUI
 
-/**
- This macOS-specific share menu can be used to trigger share
- actions for a list of ``RichTextDataFormat`` values.
-
- The menu iterate over an `NSSharingService` for each format.
- When the user selects a service for a format, `formatAction`
- is called, in which you should generate a file, then return
- the url to the file so the service can share it.
-
- If the url action returns `nil` instead of a valid url, the
- menu will abort the share operation.
- */
+/// This macOS-specific share menu can be used to trigger share actions for a list
+/// of ``RichTextDataFormat`` values.
+///
+/// The menu iterate over an `NSSharingService` for each format. When the
+/// user selects a service for a format, `formatAction` is called, in which you
+/// should generate a file, then return the url to the file so the service can share it.
+///
+/// If the action returns `nil` instead of a valid url, the menu will abort the share
+/// operation.
 public struct RichTextNSSharingMenu: View {
 
     #if macOS

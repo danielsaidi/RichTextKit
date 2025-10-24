@@ -8,13 +8,11 @@
 
 import Foundation
 
-/**
- This protocol extends ``RichTextReader`` with functionality
- for generating PDF data for the current rich text.
-
- The protocol is implemented by `NSAttributedString` as well
- as other types in the library.
- */
+/// This protocol extends ``RichTextReader`` with functionality for generating
+/// PDF data for the current rich text.
+///
+/// The protocol is implemented by `NSAttributedString` as well as other
+/// types in the library.
 @preconcurrency @MainActor
 public protocol RichTextPdfDataReader: RichTextReader {}
 
@@ -22,13 +20,10 @@ extension NSAttributedString: RichTextPdfDataReader {}
 
 public extension RichTextPdfDataReader {
 
-    /**
-     Generate PDF data from the current rich text.
-
-     This is currently only supported on iOS and macOS. When
-     calling this function on other platforms, it will throw
-     a ``PdfDataError/unsupportedPlatform`` error.
-     */
+    /// Generate PDF data from the current rich text.
+    ///
+    /// This is currently only supported on iOS & macOS. Unsupported platforms
+    /// will throw a ``PdfDataError/unsupportedPlatform`` error.
     func richTextPdfData(configuration: PdfPageConfiguration = .standard) throws -> Data {
         #if iOS || os(visionOS)
         try richText.iosPdfData(for: configuration)

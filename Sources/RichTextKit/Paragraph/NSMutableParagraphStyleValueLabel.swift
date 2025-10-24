@@ -8,8 +8,7 @@
 
 import SwiftUI
 
-/// This internal view is used by the Picker when building a
-/// picker for a certain rich text paragraph value.
+/// This internal view is used by the Picker when building a paragraph value picker.
 public struct NSMutableParagraphStyleValueLabel<ValueType: Hashable, ValueLabel: View>: View {
 
     let values: [ValueType]

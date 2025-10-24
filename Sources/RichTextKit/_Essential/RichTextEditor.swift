@@ -9,53 +9,47 @@
 #if iOS || macOS || os(tvOS) || os(visionOS)
 import SwiftUI
 
-/**
- This view can be used to view and edit rich text in SwiftUI.
-
- The view uses a platform-specific ``RichTextView`` together
- with a ``RichTextContext`` and a ``RichTextCoordinator`` to
- keep the view and context in sync.
-
- You can use the provided context to trigger and observe any
- changes to the text editor. Note that changing the value of
- the `text` binding will not yet update the editor. Until it
- is fixed, use `setAttributedString(to:)`.
-
- Since the view wraps a native `UIKit` or `AppKit` text view,
- you can't apply `.toolbar` modifiers to it, like you can do
- with other SwiftUI views. This means that this doesn't work:
-
- ```swift
- RichTextEditor(text: $text, context: context)
-     .toolbar {
-         ToolbarItemGroup(placement: .keyboard) {
-             ....
-         }
-     }
- ```
-
- This will not show anything. To work around this limitation,
- use a ``RichTextKeyboardToolbar`` instead.
-
- You can configure and style the view by applying its config
- and style view modifiers to your view hierarchy:
-
- ```swift
- VStack {
-    RichTextEditor(...)
-    ...
- }
- .richTextEditorStyle(...)
- .richTextEditorConfig(...)
- ```
-
- For more information, see ``RichTextKeyboardToolbarConfig``
- and ``RichTextKeyboardToolbarStyle``.
- */
+/// This view can be used to view and edit rich text in SwiftUI.
+///
+/// Thos view wraps a platform-specific ``RichTextView`` with an observable
+/// ``RichTextContext`` and a ``RichTextCoordinator`` that is used
+/// to keep the view and context in sync.
+///
+/// You can use the provided context to trigger and observe changes to the editor.
+/// Note that changing the value of the `text` binding will not update the editor.
+/// Until it is fixed, use `setAttributedString(to:)`.
+///
+/// Since the view wraps a native `UIKit` or `AppKit` view, you can't use the
+/// `.toolbar` modifier on it, like you can with other SwiftUI views. This means
+/// that this doesn't work:
+///
+/// ```swift
+/// RichTextEditor(text: $text, context: context)
+///     .toolbar {
+///         ToolbarItemGroup(placement: .keyboard) { .... }
+///     }
+/// ```
+///
+/// This will not show a keyboard toolbar, since the modifier has no effect. To work
+/// around this limitation, use a ``RichTextKeyboardToolbar`` instead.
+///
+/// You can configure and style the view by applying config and style modifiers to
+/// your view hierarchy:
+///
+/// ```swift
+/// VStack {
+///     RichTextEditor(...)
+///     ...
+/// }
+/// .richTextEditorStyle(...)
+/// .richTextEditorConfig(...)
+/// ```
+///
+/// For more information, see ``RichTextKeyboardToolbarConfig`` and
+/// ``RichTextKeyboardToolbarStyle``.
 public struct RichTextEditor: ViewRepresentable {
 
-    /// Create a rich text editor with a rich text value and
-    /// a certain rich text data format.
+    /// Create a rich text editor with a rich text value and a rich text data format.
     ///
     /// - Parameters:
     ///   - text: The rich text to edit.

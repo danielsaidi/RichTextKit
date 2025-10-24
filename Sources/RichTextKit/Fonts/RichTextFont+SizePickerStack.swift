@@ -11,29 +11,25 @@ import SwiftUI
 
 public extension RichTextFont {
 
-    /**
-     This view uses a ``RichTextFont/SizePicker`` and button
-     steppers to increment and a decrement the font size.
-
-     You can configure this picker by applying a config view
-     modifier to your view hierarchy:
-
-     ```swift
-     VStack {
-        RichTextFont.SizePickerStack(...)
-        ...
-     }
-     .richTextFontSizePickerConfig(...)
-     ```
-     */
+    /// This view uses a ``RichTextFont/SizePicker`` and steppers to
+    /// increment and a decrement the font size.
+    ///
+    /// You can configure this picker by applying a config view modifier to your
+    /// view hierarchy:
+    ///
+    /// ```swift
+    /// VStack {
+    ///     RichTextFont.SizePickerStack(...)
+    ///     ...
+    /// }
+    /// .richTextFontSizePickerConfig(...)
+    /// ```
     struct SizePickerStack: View {
 
-        /**
-         Create a rich text font size picker stack.
-
-         - Parameters:
-           - context: The context to affect.
-         */
+        /// Create a rich text font size picker stack.
+        ///
+        /// - Parameters:
+        ///   - context: The context to affect.
         public init(
             context: RichTextContext
         ) {

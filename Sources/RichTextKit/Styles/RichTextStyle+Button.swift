@@ -10,22 +10,17 @@ import SwiftUI
 
 public extension RichTextStyle {
 
-    /**
-     This button can be used to toggle a ``RichTextStyle``.
-
-     This view renders a plain `Button`, which means you can
-     use and configure with plain SwiftUI.
-     */
+    /// This button can be used to toggle a ``RichTextStyle``.
+    ///
+    /// This view is rendered as a plain `Button`.
     struct Button: View {
 
-        /**
-         Create a rich text style button.
-
-         - Parameters:
-           - style: The style to toggle.
-           - value: The value to bind to.
-           - fillVertically: Whether or not fill up vertical space in a non-greedy way, by default `false`.
-         */
+        /// Create a rich text style button.
+        ///
+        /// - Parameters:
+        ///   - style: The style to toggle.
+        ///   - value: The value to bind to.
+        ///   - fillVertically: Whether or not fill up vertical space in a non-greedy way, by default `false`.
         public init(
             style: RichTextStyle,
             value: Binding<Bool>,
@@ -36,14 +31,12 @@ public extension RichTextStyle {
             self.fillVertically = fillVertically
         }
 
-        /**
-         Create a rich text style button.
-
-         - Parameters:
-           - style: The style to toggle.
-           - context: The context to affect.
-           - fillVertically: Whether or not fill up vertical space in a non-greedy way, by default `false`.
-         */
+        /// Create a rich text style button.
+        ///
+        /// - Parameters:
+        ///   - style: The style to toggle.
+        ///   - context: The context to affect.
+        ///   - fillVertically: Whether or not fill up vertical space in a non-greedy way, by default `false`.
         public init(
             style: RichTextStyle,
             context: RichTextContext,

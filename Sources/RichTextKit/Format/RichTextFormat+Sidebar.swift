@@ -11,24 +11,15 @@ import SwiftUI
 
 public extension RichTextFormat {
 
-    /// This view has various format options and is meant to
-    /// be used on macOS, in a trailing sidebar.
+    /// This view has various format options and is meant to be used on macOS,
+    /// in a trailing sidebar.
     ///
-    /// You can configure and style the view by applying its
-    /// config & style view modifiers to your view hierarchy:
+    /// You can style and configure this view by applying the view modifiers
+    /// ``SwiftUICore/View/richTextFormatSidebarStyle(_:)`` and
+    /// ``SwiftUICore/View/richTextFormatSidebarConfig(_:)``.
     ///
-    /// ```swift
-    /// VStack {
-    ///     ...
-    /// }
-    /// .richTextFormatSidebarStyle(...)
-    /// .richTextFormatSidebarConfig(...)
-    /// ```
-    ///
-    /// > Note: This sidebar is currently designed for macOS,
-    /// but it should also be made to look good on iPadOS in
-    /// landscape, to let us use this sidebar instead of the
-    /// ``RichTextFormat/Sheet``.
+    /// > Note: This sidebar is currently designed for macOS, but should also be
+    /// made to look good on iPadOS in landscape.
     struct Sidebar: RichTextFormatToolbarBase {
 
         /// Create a rich text format sheet.

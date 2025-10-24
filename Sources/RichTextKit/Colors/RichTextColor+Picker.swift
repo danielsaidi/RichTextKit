@@ -12,8 +12,8 @@ public extension RichTextColor {
 
     /// This picker can be used to select a rich text color.
     ///
-    /// This picker renders an icon next to the color picker
-    /// as well as an optional list of custom quick colors.
+    /// This picker renders an icon next to the color picker as well as an optional
+    /// list of custom quick colors.
     struct Picker: View {
 
         /// Create a rich text color picker.

@@ -10,8 +10,7 @@ import SwiftUI
 
 public extension Picker {
 
-    /// Creates a picker for a certain paragraph style value
-    /// in the provided rich text context.
+    /// Creates a picker for a certain paragraph style value in the provided context.
     init<ValueType: Hashable, ValueLabel: View>(
         forValue value: WritableKeyPath<NSMutableParagraphStyle, ValueType>,
         in context: RichTextContext,
@@ -29,8 +28,7 @@ public extension Picker {
         }
     }
 
-    /// Creates a picker for a certain paragraph style value
-    /// in the provided paragraph style.
+    /// Creates a picker for a certain paragraph style in the provided paragraph.
     init<ValueType: Hashable, ValueLabel: View>(
         forValue value: WritableKeyPath<NSMutableParagraphStyle, ValueType>,
         in paragraph: Binding<NSMutableParagraphStyle>,

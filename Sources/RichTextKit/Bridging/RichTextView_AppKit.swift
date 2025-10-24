@@ -9,16 +9,15 @@
 #if macOS
 import AppKit
 
-/// This is a platform-agnostic text view for both UIKit and
-/// AppKit that makes the underlying views behave more alike.
+/// This is a platform-agnostic text view for both UIKit and AppKit, which is used to
+/// make the underlying views behave more alike.
 ///
-/// The view inherits `NSTextView` in AppKit and `UITextView`
-/// in UIKit and implements ``RichTextViewComponent``, which
-/// is the protocol that is used within this library.
+/// The view inherits `NSTextView` in AppKit and `UITextView` in UIKit and
+/// implements ``RichTextViewComponent``, which is used within the library.
 ///
-/// The view will apply a disabled ``imageConfiguration`` by
-/// default. You can change this by setting the property, or
-/// by applying a ``RichTextDataFormat`` that handles images.
+/// The view applies a disabled ``imageConfiguration`` by default. You can
+/// change this by setting the property or applying a ``RichTextDataFormat``
+/// that handles images.
 open class RichTextView: NSTextView, RichTextViewComponent {
 
     // MARK: - Properties
@@ -53,10 +52,8 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         super.paste(sender)
     }
 
-    /**
-     Try to perform a certain drag operation, which will get
-     and paste images from the drag info into the text.
-     */
+    /// Try to perform a certain drag operation, which will get and paste images
+    /// from the drag info into the text.
     open override func performDragOperation(_ draggingInfo: NSDraggingInfo) -> Bool {
         let pasteboard = draggingInfo.draggingPasteboard
         if let images = pasteboard.images, images.count > 0 {
@@ -100,14 +97,11 @@ open class RichTextView: NSTextView, RichTextViewComponent {
 
     // MARK: - Setup
 
-    /**
-     Setup the rich text view with a rich text and a certain
-     ``RichTextDataFormat``.
-
-     - Parameters:
-       - text: The text to edit with the text view.
-       - format: The rich text format to edit.
-     */
+    /// Setup the rich text view with a rich text and a certain data format.
+    ///
+    /// - Parameters:
+    ///   - text: The text to edit with the text view.
+    ///   - format: The rich text format to edit.
     open func setup(
         with text: NSAttributedString,
         format: RichTextDataFormat
@@ -122,14 +116,12 @@ open class RichTextView: NSTextView, RichTextViewComponent {
 
     // MARK: - Open Functionality
 
-    /**
-     Alert a certain title and message.
-
-     - Parameters:
-       - title: The alert title.
-       - message: The alert message.
-       - buttonTitle: The alert button title.
-     */
+    /// Alert a certain title and message.
+    ///
+    /// - Parameters:
+    ///   - title: The alert title.
+    ///   - message: The alert message.
+    ///   - buttonTitle: The alert button title.
     open func alert(title: String, message: String, buttonTitle: String) {
         let alert = NSAlert()
         alert.messageText = title

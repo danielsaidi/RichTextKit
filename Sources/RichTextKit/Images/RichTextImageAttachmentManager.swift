@@ -17,22 +17,15 @@ import UIKit
 import AppKit
 #endif
 
-/**
- This protocol extends ``RichTextReader`` with functionality
- for handling image attachments.
-
- The protocol is implemented by `NSAttributedString` and can
- be implemented by any `RichTextReader` as well.
- */
+/// This protocol extends ``RichTextReader`` with functionality for handling
+/// image attachments.
 public protocol RichTextImageAttachmentManager: RichTextReader {}
 
 extension NSAttributedString: RichTextImageAttachmentManager {}
 
 public extension RichTextImageAttachmentManager {
 
-    /**
-     Get the attachment bounds of an image, given a max size.
-     */
+    /// Get the attachment bounds of an image, given a max size.
     func attachmentBounds(
         for image: ImageRepresentable,
         maxSize: CGSize
@@ -41,9 +34,7 @@ public extension RichTextImageAttachmentManager {
         return CGRect(origin: .zero, size: size)
     }
 
-    /**
-     Get the attachment size of an image, given a max size.
-     */
+    /// Get the attachment size of an image, given a max size.
     func attachmentSize(
         for image: ImageRepresentable,
         maxSize: CGSize
@@ -66,10 +57,7 @@ public extension RichTextImageAttachmentManager {
 #if iOS || macOS || os(tvOS) || os(visionOS)
 public extension RichTextImageAttachmentManager {
 
-    /**
-     Auto-size all images attachments within a rich text, by
-     applying a max image size.
-     */
+    /// Auto-size all images attachments within a rich text, by applying a max size.
     func autosizeImageAttachments(maxSize: CGSize) {
         let range = NSRange(location: 0, length: richText.length)
         let safeRange = safeRange(for: range)

@@ -8,18 +8,14 @@
 
 import SwiftUI
 
-/**
- This struct can be used to style rich text highlighting.
- */
+/// This struct can be used to style rich text highlighting.
 public struct RichTextHighlightingStyle: Equatable, Hashable {
 
-    /**
-     Create a style instance.
-
-     - Parameters:
-       - backgroundColor: The background color to use for highlighted text.
-       - foregroundColor: The foreground color to use for highlighted text.
-     */
+    /// Create a style instance.
+    ///
+    /// - Parameters:
+    ///   - backgroundColor: The background color to use for highlighted text.
+    ///   - foregroundColor: The foreground color to use for highlighted text.
     public init(
         backgroundColor: Color = .clear,
         foregroundColor: Color = .accentColor

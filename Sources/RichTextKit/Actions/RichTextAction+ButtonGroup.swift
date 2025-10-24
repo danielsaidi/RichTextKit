@@ -13,8 +13,8 @@ public extension RichTextAction {
 
     /// This view adds ``RichTextAction`` buttons to a group.
     ///
-    /// Since the view will bind to multiple values, it uses
-    /// a ``RichTextContext`` instead of individual values.
+    /// Since this view binds to multiple values, it uses a ``RichTextContext``
+    /// instead of individual values.
     struct ButtonGroup: View {
 
         /// Create a rich text action button stack.

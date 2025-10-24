@@ -7,8 +7,7 @@
 
 import Foundation
 
-/// This protocol can be implemented by anything that can be
-/// inserted into a rich text.
+/// This protocol can be implemented by types that can be inserted into a rich text.
 public protocol RichTextInsertable: Hashable, Equatable {}
 
 extension String: RichTextInsertable {}
@@ -16,8 +15,7 @@ extension ImageRepresentable: RichTextInsertable {}
 extension [ImageRepresentable]: RichTextInsertable {}
 extension NSAttributedString: RichTextInsertable {}
 
-/// This struct represents something that should be inserted
-/// into a rich text attributed string.
+/// This struct represents something that should be inserted into a rich text.
 public struct RichTextInsertion<T: RichTextInsertable>: Hashable, Equatable {
 
     /// Create a rich text insertion.

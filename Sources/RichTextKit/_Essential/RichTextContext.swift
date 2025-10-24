@@ -9,16 +9,13 @@
 import SwiftUI
 import Combine
 
-/**
- This observable context can be used to affect and observe a
- ``RichTextEditor`` and its native text view.
-
- Use ``handle(_:)`` to trigger actions, e.g. to change fonts,
- text styles, text alignments, select a text range, etc.
-
- You can use ``RichTextContext/FocusedValueKey`` to handle a
- context with focus in a multi-windowed app.
- */
+/// This class can be used to observe a ``RichTextEditor`` and its text view.
+///
+/// Use ``handle(_:)`` to trigger actions, e.g. to change fonts, text styles, text
+/// alignments, select a text range, etc.
+///
+/// You can use ``RichTextContext/FocusedValueKey`` to handle focus
+/// for a context in a multi-windowed app.
 public class RichTextContext: ObservableObject {
 
     /// Create a new rich text context instance.
@@ -26,19 +23,16 @@ public class RichTextContext: ObservableObject {
 
     // MARK: - Not yet observable properties
 
-    /**
-     The currently attributed string, if any.
-
-     Note that the property is read-only and not `@Published`
-     to avoid redrawing the editor when it changes, which is
-     done as the user types. We should find a way to observe
-     it without this happening. The best way to observe this
-     property is to use the raw `text` binding that you pass
-     into the text editor. The editor will not redraw if you
-     change this value from the outside.
-
-     Until then, use `setAttributedString(to:)` to change it.
-     */
+    /// The currently attributed string, if any.
+    ///
+    /// Note that the property is read-only and not `@Published` to avoid any
+    /// redrawing of the editor when it changes, which is done as the user types.
+    /// We should find a way to observe it without this happening. The best way
+    /// to observe this property is to use the raw `text` binding that you pass
+    /// into the text editor. The editor will not redraw if you change this value from
+    /// the outside.
+    ///
+    /// Until this is fixed, use `setAttributedString(to:)` to change it.
     public internal(set) var attributedString = NSAttributedString()
 
     /// The currently selected range, if any.

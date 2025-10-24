@@ -13,11 +13,11 @@ public extension RichTextCommand {
 
     /// This menu adds format options to the main menu.
     ///
-    /// You can add it to a `WindowGroup` or `DocumentGroup`,
-    /// to make it appear in the app's main menu.
+    /// You can add it to a `WindowGroup` or `DocumentGroup`  to make it
+    /// appear in the main menu.
     ///
-    /// This view requires that a ``RichTextContext`` is set
-    /// as a focused value, otherwise it will be disabled.
+    /// > Important: Rich text commands require a ``RichTextContext`` to
+    /// have focus, otherwise they will be disabled. 
     struct FormatMenu: Commands {
 
         /// Create a rich text format command menu.

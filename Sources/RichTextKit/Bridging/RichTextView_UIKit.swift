@@ -15,16 +15,15 @@ import UniformTypeIdentifiers
 extension RichTextView: UIDropInteractionDelegate {}
 #endif
 
-/// This is a platform-agnostic text view for both UIKit and
-/// AppKit that makes the underlying views behave more alike.
+/// This is a platform-agnostic text view for both UIKit and AppKit, which is used to
+/// make the underlying views behave more alike.
 ///
-/// The view inherits `NSTextView` in AppKit and `UITextView`
-/// in UIKit and implements ``RichTextViewComponent``, which
-/// is the protocol that is used within this library.
+/// The view inherits `NSTextView` in AppKit and `UITextView` in UIKit and
+/// implements ``RichTextViewComponent``, which is used within the library.
 ///
-/// The view will apply a disabled ``imageConfiguration`` by
-/// default. You can change this by setting the property, or
-/// by applying a ``RichTextDataFormat`` that handles images.
+/// The view applies a disabled ``imageConfiguration`` by default. You can
+/// change this by setting the property or applying a ``RichTextDataFormat``
+/// that handles images.
 open class RichTextView: UITextView, RichTextViewComponent {
 
     // MARK: - Initializers
@@ -87,14 +86,7 @@ open class RichTextView: UITextView, RichTextViewComponent {
     /// The style to use when highlighting text in the view.
     public var highlightingStyle: RichTextHighlightingStyle = .standard
 
-    /**
-     The image configuration to use by the rich text view.
-
-     The view uses the ``RichTextImageConfiguration/disabled``
-     configuration by default. You can change this by either
-     setting the property manually or by setting up the view
-     with a ``RichTextDataFormat`` that supports images.
-     */
+    /// The image configuration to use by the rich text view.
     public var imageConfiguration: RichTextImageConfiguration = .disabled {
         didSet {
             #if iOS || os(visionOS)
@@ -129,14 +121,11 @@ open class RichTextView: UITextView, RichTextViewComponent {
 
     // MARK: - Overrides
 
-    /**
-     Layout subviews and auto-resize images in the rich text.
-
-     I tried to only autosize image attachments here, but it
-     didn't work - they weren't resized. I then tried adding
-     font size adjustment, but that also didn't work. So now
-     we initialize this once, when the frame is first set.
-     */
+    /// Layout subviews and auto-resize images in the rich text.
+    ///
+    /// I tried to only autosize image attachments here, but this didn't work - they
+    /// weren't resized. I then tried adding font size adjustment, but that also did
+    /// not work. So now we initialize this once, when the frame is first set.
     open override var frame: CGRect {
         didSet {
             if frame.size == .zero { return }
@@ -147,9 +136,7 @@ open class RichTextView: UITextView, RichTextViewComponent {
     }
 
     #if iOS || os(visionOS)
-    /**
-     Check whether or not a certain action can be performed.
-     */
+    /// Check whether or not a certain action can be performed.
     open override func canPerformAction(
         _ action: Selector,
         withSender sender: Any?
@@ -162,9 +149,7 @@ open class RichTextView: UITextView, RichTextViewComponent {
         return super.canPerformAction(action, withSender: sender)
     }
 
-    /**
-     Paste the current content of the general pasteboard.
-     */
+    /// Paste the current content of the general pasteboard.
     open override func paste(_ sender: Any?) {
         let pasteboard = UIPasteboard.general
         if let image = pasteboard.image {
@@ -176,14 +161,11 @@ open class RichTextView: UITextView, RichTextViewComponent {
 
     // MARK: - Setup
 
-    /**
-     Setup the rich text view with a rich text and a certain
-     ``RichTextDataFormat``.
-
-     - Parameters:
-       - text: The text to edit with the text view.
-       - format: The rich text format to edit.
-     */
+    /// Setup the rich text view with a rich text and a certain data format.
+    ///
+    /// - Parameters:
+    ///   - text: The text to edit with the text view.
+    ///   - format: The rich text format to edit.
     open func setup(
         with text: NSAttributedString,
         format: RichTextDataFormat
@@ -280,13 +262,10 @@ open class RichTextView: UITextView, RichTextViewComponent {
         return frame.contains(location) ? .copy : .cancel
     }
 
-    /**
-     Handle a performed drop session.
-
-     In this function, we reverse the item collection, since
-     each item will be pasted at the drop point, which would
-     result in a reverse result.
-     */
+    /// Handle a performed drop session.
+    ///
+    /// In this function, we reverse the item collection, since each item is pasted
+    /// at the drop point, which would result in a reverse result.
     open func dropInteraction(
         _ interaction: UIDropInteraction,
         performDrop session: UIDropSession
@@ -300,12 +279,10 @@ open class RichTextView: UITextView, RichTextViewComponent {
 
     // MARK: - Drop Interaction Support
 
-    /**
-     Performs an image drop session.
-
-     We reverse the item collection, since each item will be
-     pasted at the original drop point.
-     */
+    /// Performs an image drop session.
+    ///
+    /// In this function, we reverse the item collection, since each item is pasted
+    /// at the drop point, which would result in a reverse result.
     open func performImageDrop(with session: UIDropSession, at range: NSRange) {
         guard validateImageInsertion(for: imageDropConfiguration) else { return }
         session.loadObjects(ofClass: UIImage.self) { items in
@@ -314,12 +291,10 @@ open class RichTextView: UITextView, RichTextViewComponent {
         }
     }
 
-    /**
-     Perform a text drop session.
-
-     We reverse the item collection, since each item will be
-     pasted at the original drop point.
-     */
+    /// Perform a text drop session.
+    ///
+    /// In this function, we reverse the item collection, since each item is pasted
+    /// at the drop point, which would result in a reverse result. 
     open func performTextDrop(with session: UIDropSession, at range: NSRange) {
         if session.hasImage { return }
         _ = session.loadObjects(ofClass: String.self) { items in

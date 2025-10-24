@@ -10,31 +10,27 @@ import SwiftUI
 
 public extension RichTextFont {
 
-    /**
-     This picker can be used to pick a font size.
-
-     The view returns a plain SwiftUI `Picker` view that can
-     be styled and configured with plain SwiftUI.
-
-     You can configure this picker by applying a config view
-     modifier to your view hierarchy:
-
-     ```swift
-     VStack {
-        RichTextFont.SizePicker(...)
-        ...
-     }
-     .richTextFontSizePickerConfig(...)
-     ```
-     */
+    /// This picker can be used to pick a font size.
+    ///
+    /// The view returns a plain SwiftUI `Picker` view that can be styled and
+    /// configured with plain SwiftUI.
+    ///
+    /// You can configure this picker by applying a config view modifier to your
+    /// view hierarchy:
+    ///
+    /// ```swift
+    /// VStack {
+    ///     RichTextFont.SizePicker(...)
+    ///     ...
+    /// }
+    /// .richTextFontSizePickerConfig(...)
+    /// ```
     struct SizePicker: View {
 
-        /**
-         Create a font size picker.
-
-         - Parameters:
-           - selection: The selected font size.
-         */
+        /// Create a font size picker.
+        ///
+        /// - Parameters:
+        ///   - selection: The selected font size.
         public init(
             selection: Binding<CGFloat>
         ) {

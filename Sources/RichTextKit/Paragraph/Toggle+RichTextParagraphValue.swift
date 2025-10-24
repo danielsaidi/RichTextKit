@@ -10,8 +10,7 @@ import SwiftUI
 
 public extension Toggle {
 
-    /// Creates a toggle for a certain paragraph style value
-    /// in the provided rich text context.
+    /// Creates a toggle for a certain paragraph style value in the provided context.
     init(
         forValue value: WritableKeyPath<NSMutableParagraphStyle, Bool>,
         in context: RichTextContext,
@@ -23,8 +22,7 @@ public extension Toggle {
         )
     }
 
-    /// Creates a toggle for a certain paragraph style value
-    /// in the provided paragraph style.
+    /// Creates a toggle for a certain paragraph style in the provided paragraph.
     init(
         forValue value: WritableKeyPath<NSMutableParagraphStyle, Bool>,
         in paragraph: Binding<NSMutableParagraphStyle>,

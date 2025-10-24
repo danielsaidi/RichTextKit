@@ -8,8 +8,8 @@
 
 import Foundation
 
-/// This protocol can be implemented by any type that can be
-/// used to access an ``attributedString``.
+/// This protocol can be implemented by any type that can be used to access an
+/// ``attributedString``.
 @preconcurrency @MainActor
 public protocol RichTextReader {
 
@@ -34,8 +34,8 @@ public extension RichTextReader {
 
     /// The full range of the entire ``richText``.
     ///
-    /// This will use ``safeRange(for:isAttributeOperation:)``
-    /// to return a range that is always valid for this text.
+    /// This uses ``safeRange(for:isAttributeOperation:)`` to get
+    /// a range that is always valid for this text.
     var richTextRange: NSRange {
         let range = NSRange(location: 0, length: richText.length)
         let safeRange = safeRange(for: range)
@@ -44,9 +44,9 @@ public extension RichTextReader {
 
     /// The rich text at a certain range.
     ///
-    /// This will use ``safeRange(for:isAttributeOperation:)``
-    /// to return a range that is always valid for the range,
-    /// so use it instead of the unsafe `attributedSubstring`.
+    /// This uses ``safeRange(for:isAttributeOperation:)`` to get
+    /// a range that is always valid for the range, so use it instead of the unsafe
+    /// `attributedSubstring`.
     ///
     /// - Parameters:
     ///   - range: The range for which to get the rich text.
@@ -57,8 +57,8 @@ public extension RichTextReader {
 
     /// Get a safe range for the provided range.
     ///
-    /// This range is capped to the bounds of the attributed
-    /// string and helps protecting against range overflow.
+    /// This range is capped to the bounds of the string and helps protecting you
+    /// against range overflow.
     ///
     /// - Parameters:
     ///   - range: The range for which to get a safe range.

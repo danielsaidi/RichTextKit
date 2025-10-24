@@ -8,13 +8,12 @@
 
 import Foundation
 
-/// This protocol can be implemented by any type that can be
-/// used to export rich text to files.
+/// This protocol can be implemented by types that can export rich text to files.
 @preconcurrency @MainActor
 public protocol RichTextExportService: AnyObject {
 
-    /// Generate an export file with a name and content that
-    /// uses a certain rich text data format.
+    /// Generate an export file with a name and content that uses a certain rich
+    /// text data format.
     ///
     /// - Parameters:
     ///   - fileName: The preferred file name.

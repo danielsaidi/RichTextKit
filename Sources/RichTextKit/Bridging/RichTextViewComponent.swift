@@ -17,12 +17,11 @@ import AppKit
 
 /// This is a shared protocol for all ``RichTextView`` types.
 ///
-/// By implementing this protocol, the library does not have
-/// to do a bunch of `#if` platform checks within the code.
+/// By implementing this protocol, the library doesn't have to do a bunch of `#if`
+/// platform checks within the code.
 ///
-/// This component can read and write many attributes to and
-/// from its rich text, using the underlying features of the
-/// ``RichTextAttributeReader`` & ``RichTextAttributeWriter``.
+/// This component can read and write attributes to and from its rich text, using the
+/// underlying ``RichTextAttributeReader`` & ``RichTextAttributeWriter``.
 @preconcurrency @MainActor
 public protocol RichTextViewComponent: AnyObject,
     RichTextPresenter,

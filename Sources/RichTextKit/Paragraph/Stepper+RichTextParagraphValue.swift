@@ -11,8 +11,7 @@ import SwiftUI
 #if iOS || os(macOS) || os(visionOS)
 public extension Stepper {
 
-    /// Creates a stepper for a paragraph style value in the
-    /// provided rich text context.
+    /// Creates a stepper for a paragraph style value in the provided context.
     init<ValueType: Hashable & Strideable & Comparable & SignedNumeric>(
         forValue value: WritableKeyPath<NSMutableParagraphStyle, ValueType>,
         in context: RichTextContext,
@@ -26,8 +25,7 @@ public extension Stepper {
         )
     }
 
-    /// Creates a stepper for a paragraph style value in the
-    /// provided paragraph style.
+    /// Creates a stepper for a paragraph style in the provided paragraph.
     init<ValueType: Hashable & Strideable & Comparable & SignedNumeric>(
         forValue value: WritableKeyPath<NSMutableParagraphStyle, ValueType>,
         in paragraph: Binding<NSMutableParagraphStyle>,

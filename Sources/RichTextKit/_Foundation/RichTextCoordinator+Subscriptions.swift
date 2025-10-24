@@ -13,9 +13,9 @@ extension RichTextCoordinator {
 
     /// Subscribe to observable context state changes.
     ///
-    /// The coordinator subscribes to both actions triggered
-    /// by various buttons via the context, but also to some
-    /// context value that are changed through view bindings.
+    /// The coordinator subscribes to both actions triggered by various buttons
+    /// via the context, but also to some context value that are changed through
+    /// view bindings.
     func subscribeToUserActions() {
         context.actionPublisher.sink { [weak self] action in
             self?.handle(action)

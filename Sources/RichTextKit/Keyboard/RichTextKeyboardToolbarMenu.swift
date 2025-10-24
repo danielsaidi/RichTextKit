@@ -9,13 +9,11 @@
 #if iOS || os(visionOS)
 import SwiftUI
 
-/**
- This menu can be used to fix a UI glitch that can appear in
- a `Menu` when presented in a keyboard toolbar.
-
- The menu label can be incorrectly offset vertically, beyond
- the menu bounds. This view fixes that problem.
- */
+/// This menu can be used to fix a UI glitch that can appear in a `Menu` when it
+/// is presented in a keyboard toolbar.
+///
+/// The menu label can be incorrectly offset vertically, beyond the menu bounds.
+/// This view fixes that problem.
 public struct RichTextKeyboardToolbarMenu<Label: View, Content: View>: View {
 
     /// Create a keyboard toolbar menu.

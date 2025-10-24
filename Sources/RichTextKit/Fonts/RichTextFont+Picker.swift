@@ -10,36 +10,29 @@ import SwiftUI
 
 public extension RichTextFont {
 
-    /**
-     This font picker can be used to pick a font from a list,
-     using ``RichTextFont/PickerFont/all`` as default fonts.
-
-     This view uses a plain `Picker`, which renders fonts on
-     macOS, but not on iOS. To render fonts correctly on all
-     platforms, you can use a ``RichTextFont/ListPicker`` or
-     a ``RichTextFont/ForEachPicker``.
-
-     You can configure this picker by applying a config view
-     modifier to your view hierarchy:
-
-     ```swift
-     VStack {
-        RichTextFont.Picker(...)
-        ...
-     }
-     .richTextFontPickerConfig(...)
-     ```
-
-     Note that this picker will not apply all configurations.
-     */
+    /// This font picker can be used to pick a font from a list.
+    ///
+    /// This view uses a plain `Picker`, which will render fonts on macOS, but
+    /// not on iOS. To render fonts correctly on all platforms, you can use any of
+    /// the other pickers in this library.
+    ///
+    /// You can configure this picker by applying a config view modifier like this:
+    ///
+    /// ```swift
+    /// VStack {
+    ///     RichTextFont.Picker(...)
+    ///     ...
+    /// }
+    /// .richTextFontPickerConfig(...)
+    /// ```
+    ///
+    /// Note that this picker will not apply all configurations.
     struct Picker: View {
 
-        /**
-         Create a font picker.
-
-         - Parameters:
-           - selection: The selected font name.
-         */
+        /// Create a font picker.
+        ///
+        /// - Parameters:
+        ///   - selection: The selected font name.
         public init(
             selection: Binding<FontName>
         ) {
@@ -79,11 +72,9 @@ public extension RichTextFont {
 
 private extension RichTextFont.PickerFont {
 
-    /**
-     A system font has a font name that may be resolved to a
-     different name when picked. We must thus try to pattern
-     match, using the currently selected font name.
-     */
+    /// A system font has a font name that may be resolved to a different name
+    /// when picked. We must therefore try to pattern match, using the selected
+    /// font name.
     func matches(_ fontName: String) -> Bool {
         let compare = fontName.lowercased()
         let fontName = self.fontName.lowercased()
@@ -93,9 +84,7 @@ private extension RichTextFont.PickerFont {
         return false
     }
 
-    /**
-     Use the selected font name as tag for the selected font.
-     */
+    /// Use the selected font name as tag for the selected font.
     func tag(for selectedFont: Self?, selectedName: String) -> String {
         let isSelected = fontName == selectedFont?.fontName
         return isSelected ? selectedName : fontName

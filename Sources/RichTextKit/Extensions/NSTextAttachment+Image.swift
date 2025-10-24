@@ -17,13 +17,9 @@ import AppKit
 #if iOS || macOS || os(tvOS) || os(visionOS)
 public extension NSTextAttachment {
 
-    /**
-     Get an `image` value, if any, or use `contents` data to
-     create a platform-specific image.
-
-     This additional handling is needed since the `image` is
-     not always available on certain platforms.
-     */
+    /// Get an `image` value, or use `contents` to create a platform image.
+    ///
+    /// This is needed since the `image` is not always available on some platforms.
     var attachedImage: ImageRepresentable? {
         if let image { return image }
         guard let contents else { return nil }

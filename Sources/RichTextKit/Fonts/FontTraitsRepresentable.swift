@@ -22,12 +22,9 @@ public typealias FontTraitsRepresentable = UIFontDescriptor.SymbolicTraits
 
 public extension FontTraitsRepresentable {
 
-    /**
-     Get the rich text styles that are enabled in the traits.
-
-     Note that the traits only contain some of the available
-     rich text styles.
-     */
+    /// Get the rich text styles that are enabled in the traits.
+    ///
+    /// Note that the traits only contain some of the available rich text styles.
     var enabledRichTextStyles: [RichTextStyle] {
         RichTextStyle.allCases.filter {
             guard let trait = $0.symbolicTraits else { return false }

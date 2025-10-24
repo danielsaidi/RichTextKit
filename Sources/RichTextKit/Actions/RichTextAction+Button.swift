@@ -12,8 +12,8 @@ public extension RichTextAction {
 
     /// This view can be used to trigger a ``RichTextAction``.
     ///
-    /// It renders a plain `Button`, which means you can use
-    /// and configure it as a normal button.
+    /// This view is rendered as a plain SwiftUI `Button`, so you can use and
+    /// configure it just like a regular button.
     struct Button: View {
 
         /// Create a rich text action button.

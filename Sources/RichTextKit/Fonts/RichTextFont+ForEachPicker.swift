@@ -10,33 +10,27 @@ import SwiftUI
 
 public extension RichTextFont {
 
-    /**
-     This view uses a plain `ForEach` to list a set of fonts,
-     of which one can be selected.
-
-     Unlike ``RichTextFont/Picker`` this picker presents all
-     pickers with proper previews on all platforms. You must
-     therefore add it ina  way that gives it space.
-
-     You can configure this picker by applying a config view
-     modifier to your view hierarchy:
-
-     ```swift
-     VStack {
-        RichTextFont.ForEachPicker(...)
-        ...
-     }
-     .richTextFontPickerConfig(...)
-     ```
-     */
+    /// This view uses a plain `ForEach` to list a set of fonts to pick from.
+    ///
+    /// Unlike ``RichTextFont/Picker`` this view presents all pickers with
+    /// proper previews on all platforms. You must therefore add it ina  way that
+    /// gives it space.
+    ///
+    /// You can configure this picker by applying a config view modifier like this:
+    ///
+    /// ```swift
+    /// VStack {
+    ///     RichTextFont.ForEachPicker(...)
+    ///     ...
+    /// }
+    /// .richTextFontPickerConfig(...)
+    /// ```
     struct ForEachPicker: View {
 
-        /**
-         Create a font picker.
-
-         - Parameters:
-           - selection: The selected font name.
-         */
+        /// Create a font picker.
+        ///
+        /// - Parameters:
+        ///   - selection: The selected font name.
         public init(
             selection: Binding<FontName>
         ) {

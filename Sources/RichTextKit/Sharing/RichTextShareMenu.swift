@@ -9,16 +9,13 @@
 #if iOS || macOS || os(visionOS)
 import SwiftUI
 
-/**
- This menu trigger share actions for ``RichTextDataFormat``s.
-
- The menu wraps a ``RichTextDataFormat/Menu`` that is set up
- for exporting, with customizable share actions.
-
- If you have a ``RichTextDataFormat`` value, you can use its
- ``RichTextDataFormat/convertibleFormats`` as init parameter
- to get an export menu for all other formats.
- */
+/// This menu trigger share actions for ``RichTextDataFormat``s.
+///
+/// The menu wraps a ``RichTextDataFormat/Menu`` that is set up for the
+/// exporting, with customizable share actions.
+///
+/// If you have a ``RichTextDataFormat``, you can use convertible formats
+/// as init parameter to get an export menu for all other formats.
 public struct RichTextShareMenu: View {
 
     public init(

@@ -8,14 +8,12 @@
 
 import Foundation
 
-/**
- This enum can be used to configure the image drop and paste
- behavior of a ``RichTextView``.
-
- The configuration is needed, since ``RichTextDataFormat/rtf``
- and ``RichTextDataFormat/plainText`` doesn't support images
- and a text view doesn't know about the data format.
- */
+/// This enum can be used to configure the image drop and paste behavior of any
+/// ``RichTextView``.
+///
+/// The configuration is needed, since ``RichTextDataFormat/rtf`` and
+/// ``RichTextDataFormat/plainText`` doesn't support images and a text
+/// view doesn't know about the data format.
 public enum RichTextImageInsertConfiguration: Equatable {
 
     /// Image inserting is disabled

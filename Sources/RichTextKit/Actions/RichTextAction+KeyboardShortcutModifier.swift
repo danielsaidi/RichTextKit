@@ -10,8 +10,7 @@ import SwiftUI
 
 public extension RichTextAction {
 
-    /// Apply keyboard shortcuts for a ``RichTextAction`` to
-    /// the view.
+    /// Apply keyboard shortcuts for a ``RichTextAction`` to the view.
     ///
     /// You can also use ``SwiftUICore/View/keyboardShortcut(for:)-9i7js``.
     struct KeyboardShortcutModifier: ViewModifier {
@@ -30,8 +29,7 @@ public extension RichTextAction {
 
 public extension View {
 
-    /// Apply keyboard shortcuts for a ``RichTextAction`` to
-    /// the view.
+    /// Apply keyboard shortcuts for a ``RichTextAction`` to the view.
     @ViewBuilder
     func keyboardShortcut(for action: RichTextAction) -> some View {
         #if iOS || macOS || os(visionOS)
