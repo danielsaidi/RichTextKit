@@ -1,11 +1,3 @@
-//
-//  RichTextCoordinator.swift
-//  RichTextKit
-//
-//  Created by Daniel Saidi on 2022-05-22.
-//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
-//
-
 #if iOS || macOS || os(tvOS) || os(visionOS)
 import Combine
 import SwiftUI
@@ -32,24 +24,11 @@ open class RichTextCoordinator: NSObject {
         richTextContext: RichTextContext
     ) {
         textView.attributedString = text.wrappedValue
-        self.text = text
-        self.textView = textView
-        self.context = richTextContext
         super.init()
-        self.textView.delegate = self
         subscribeToUserActions()
     }
 
     // MARK: - Properties
-
-    /// The rich text context to coordinate with.
-    public let context: RichTextContext
-
-    /// The rich text to edit.
-    public var text: Binding<NSAttributedString>
-
-    /// The text view for which the coordinator is used.
-    public private(set) var textView: RichTextView
 
     /// This set is used to store context observations.
     public var cancellables = Set<AnyCancellable>()
@@ -65,62 +44,7 @@ open class RichTextCoordinator: NSObject {
 
     /// The foreground color used before any current highlighted range was set.
      var highlightedRangeOriginalForegroundColor: ColorRepresentable?
-
-    #if canImport(UIKit)
-
-    // MARK: - UITextViewDelegate
-
-    open func textViewDidBeginEditing(_ textView: UITextView) {
-        context.isEditingText = true
-    }
-
-    open func textViewDidChange(_ textView: UITextView) {
-        syncWithTextView()
-    }
-
-    open func textViewDidChangeSelection(_ textView: UITextView) {
-        syncWithTextView()
-    }
-
-    open func textViewDidEndEditing(_ textView: UITextView) {
-        syncWithTextView()
-        context.isEditingText = false
-    }
-    #endif
-
-    #if canImport(AppKit) && !targetEnvironment(macCatalyst)
-
-    // MARK: - NSTextViewDelegate
-
-    open func textDidBeginEditing(_ notification: Notification) {
-        context.isEditingText = true
-    }
-
-    open func textDidChange(_ notification: Notification) {
-        syncWithTextView()
-    }
-
-    open func textViewDidChangeSelection(_ notification: Notification) {
-        replaceCurrentAttributesIfNeeded()
-        syncWithTextView()
-    }
-
-    open func textDidEndEditing(_ notification: Notification) {
-        context.isEditingText = false
-    }
-    #endif
 }
-
-#if iOS || os(tvOS) || os(visionOS)
-import UIKit
-
-extension RichTextCoordinator: UITextViewDelegate {}
-
-#elseif macOS
-import AppKit
-
-extension RichTextCoordinator: NSTextViewDelegate {}
-#endif
 
 // MARK: - Public Extensions
 

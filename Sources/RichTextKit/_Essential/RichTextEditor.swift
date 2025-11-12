@@ -1,11 +1,3 @@
-//
-//  RichTextEditor.swift
-//  RichTextKit
-//
-//  Created by Daniel Saidi on 2022-05-21.
-//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
-//
-
 #if iOS || macOS || os(tvOS) || os(visionOS)
 import SwiftUI
 
@@ -49,33 +41,7 @@ import SwiftUI
 /// ``RichTextKeyboardToolbarStyle``.
 public struct RichTextEditor: ViewRepresentable {
 
-    /// Create a rich text editor with a rich text value and a rich text data format.
-    ///
-    /// - Parameters:
-    ///   - text: The rich text to edit.
-    ///   - context: The rich text context to use.
-    ///   - format: The rich text data format, by default `.archivedData`.
-    ///   - viewConfiguration: A platform-specific view configuration, if any.
-    public init(
-        text: Binding<NSAttributedString>,
-        context: RichTextContext,
-        format: RichTextDataFormat = .archivedData,
-        viewConfiguration: @escaping ViewConfiguration = { _ in }
-    ) {
-        self.text = text
-        self._context = ObservedObject(wrappedValue: context)
-        self.format = format
-        self.viewConfiguration = viewConfiguration
-    }
 
-    public typealias ViewConfiguration = (RichTextViewComponent) -> Void
-
-    @ObservedObject
-    private var context: RichTextContext
-
-    private var text: Binding<NSAttributedString>
-    private var format: RichTextDataFormat
-    private var viewConfiguration: ViewConfiguration
 
     @Environment(\.richTextEditorConfig)
     private var config
@@ -96,24 +62,9 @@ public struct RichTextEditor: ViewRepresentable {
     }
     #endif
 
-    public func makeCoordinator() -> RichTextCoordinator {
-        RichTextCoordinator(
-            text: text,
-            textView: textView,
-            richTextContext: context
-        )
-    }
 
     #if iOS || os(tvOS) || os(visionOS)
-    public func makeUIView(context: Context) -> some UIView {
-        textView.setup(with: text.wrappedValue, format: format)
-        textView.configuration = config
-        textView.theme = style
-        viewConfiguration(textView)
-        return textView
-    }
-
-    public func updateUIView(_ view: UIViewType, context: Context) {}
+    
 
     #else
 

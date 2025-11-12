@@ -2,9 +2,6 @@
 //  RichTextContext.swift
 //  RichTextKit
 //
-//  Created by Daniel Saidi on 2022-05-22.
-//  Copyright © 2022-2023 Daniel Saidi. All rights reserved.
-//
 
 import SwiftUI
 import Combine
@@ -17,9 +14,6 @@ import Combine
 /// You can use ``RichTextContext/FocusedValueKey`` to handle focus
 /// for a context in a multi-windowed app.
 public class RichTextContext: ObservableObject {
-
-    /// Create a new rich text context instance.
-    public init() {}
 
     // MARK: - Not yet observable properties
 

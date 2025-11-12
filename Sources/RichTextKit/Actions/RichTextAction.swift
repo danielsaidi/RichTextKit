@@ -1,11 +1,3 @@
-//
-//  RichTextAction.swift
-//  RichTextKit
-//
-//  Created by Daniel Saidi on 2022-12-08.
-//  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
-//
-
 import SwiftUI
 import Combine
 
@@ -14,14 +6,7 @@ import Combine
 /// It's also a namespace for action-related types, like ``RichTextAction/Button``.
 public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
 
-    /// Copy the currently selected text, if any.
-    case copy
 
-    /// Dismiss any presented software keyboard.
-    case dismissKeyboard
-
-    /// Delete the selected text.
-    case deleteSelectedText
 
     /// Delete text in a certain range.
     case deleteText(in: NSRange)
@@ -35,32 +20,14 @@ public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
     /// Paste plain text.
     case pasteText(RichTextInsertion<String>)
 
-    /// A print command.
-    case print
 
-    /// Redo the latest undone change.
-    case redoLatestChange
 
-    /// Replace the selected text.
-    case replaceSelectedText(with: NSAttributedString)
 
-    /// Replace text in a certain range.
-    case replaceText(in: NSRange, with: NSAttributedString)
-
-    /// Select a range.
-    case selectRange(NSRange)
-
-    /// Set the text alignment.
-    case setAlignment(_ alignment: NSTextAlignment)
-
-    /// Set the entire attributed string.
-    case setAttributedString(NSAttributedString)
 
     // Change background color
     case setColor(RichTextColor, ColorRepresentable)
 
-    // Highlighted renge
-    case setHighlightedRange(NSRange?)
+
 
     // Change highlighting style
     case setHighlightingStyle(RichTextHighlightingStyle)
@@ -68,20 +35,7 @@ public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
     /// Set a certain ``RichTextStyle``.
     case setStyle(RichTextStyle, Bool)
 
-    /// Step the font size.
-    case stepFontSize(points: Int)
 
-    /// Step the indent level.
-    case stepIndent(points: CGFloat)
-
-    /// Step the line spacing.
-    case stepLineSpacing(points: CGFloat)
-
-    /// Set the current paragraph style.
-    case setParagraphStyle(_ style: NSMutableParagraphStyle)
-
-    /// Step the superscript level.
-    case stepSuperscript(steps: Int)
 
     /// Toggle a certain style.
     case toggleStyle(_ style: RichTextStyle)
@@ -91,8 +45,6 @@ public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
 }
 
 public extension RichTextAction {
-
-    typealias Publisher = PassthroughSubject<Self, Never>
 
     /// The action's unique identifier.
     var id: String { title }
