@@ -7,10 +7,8 @@
     <img src="https://img.shields.io/badge/Swift-5.9-orange.svg" alt="Swift 5.9" />
     <img src="https://img.shields.io/badge/platform-SwiftUI-blue.svg" alt="Swift UI" title="Swift UI" />
     <a href="https://danielsaidi.github.io/RichTextKit"><img src="https://img.shields.io/badge/documentation-web-blue.svg" alt="Documentation" /></a>
-        <a href="https://github.com/danielsaidi/RichTextKit/blob/master/LICENSE"><img src="https://img.shields.io/github/license/danielsaidi/RichTextKit" alt="MIT License" /></a>
-    <a href="https://github.com/sponsors/danielsaidi"><img src="https://img.shields.io/badge/sponsor-GitHub-red.svg" alt="Sponsor my work" /></a>
+    <a href="https://github.com/danielsaidi/RichTextKit/blob/master/LICENSE"><img src="https://img.shields.io/github/license/danielsaidi/RichTextKit" alt="MIT License" /></a>
 </p>
-
 
 
 # RichTextKit
@@ -37,7 +35,6 @@ It will most probably still be relevant to perform operations on the attributed 
 Best regards, Daniel Saidi
 
 
-
 ## Installation
 
 RichTextKit can be installed with the Swift Package Manager:
@@ -45,12 +42,6 @@ RichTextKit can be installed with the Swift Package Manager:
 ```
 https://github.com/danielsaidi/RichTextKit.git
 ```
-
-
-## Support My Work
-
-You can [become a sponsor][Sponsors] to help me dedicate more time on my various [open-source tools][OpenSource]. Every contribution, no matter the size, makes a real difference in keeping these tools free and actively developed.
-
 
 
 ## Getting started
@@ -95,17 +86,19 @@ RichTextKit provides UI components, keyboard shortcuts & menu commands that can 
 For more information, please see the [getting started guide][Getting-Started].
 
 
-
 ## Documentation
 
 The [online documentation][Documentation] has more information, articles, code examples, etc.
-
 
 
 ## Demo App & Inspiration
 
 The RichTextKit demo lets you explore the library on iOS & macOS. To try it out, just open and run the `Demo` app.
 
+
+## Support My Work
+
+You can [become a sponsor][Sponsors] to help me dedicate more time on my various [open-source tools][OpenSource]. Every contribution, no matter the size, makes a real difference in keeping these tools free and actively developed.
 
 
 ## Contact
@@ -118,11 +111,9 @@ Feel free to reach out if you have questions or want to contribute in any way:
 * Mastodon: [@danielsaidi@mastodon.social][Mastodon]
 
 
-
 ## License
 
 RichTextKit is available under the MIT license. See the [LICENSE][License] file for more info.
-
 
 
 [Email]: mailto:daniel.saidi@gmail.com

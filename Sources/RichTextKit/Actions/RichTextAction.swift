@@ -6,28 +6,8 @@ import Combine
 /// It's also a namespace for action-related types, like ``RichTextAction/Button``.
 public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
 
-
-
-    /// Delete text in a certain range.
-    case deleteText(in: NSRange)
-
-    /// Paste a single image.
-    case pasteImage(RichTextInsertion<ImageRepresentable>)
-
-    /// Paste multiple images.
-    case pasteImages(RichTextInsertion<[ImageRepresentable]>)
-
-    /// Paste plain text.
-    case pasteText(RichTextInsertion<String>)
-
-
-
-
-
     // Change background color
     case setColor(RichTextColor, ColorRepresentable)
-
-
 
     // Change highlighting style
     case setHighlightingStyle(RichTextHighlightingStyle)
@@ -35,13 +15,9 @@ public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
     /// Set a certain ``RichTextStyle``.
     case setStyle(RichTextStyle, Bool)
 
-
-
     /// Toggle a certain style.
     case toggleStyle(_ style: RichTextStyle)
 
-    /// Undo the latest change.
-    case undoLatestChange
 }
 
 public extension RichTextAction {
