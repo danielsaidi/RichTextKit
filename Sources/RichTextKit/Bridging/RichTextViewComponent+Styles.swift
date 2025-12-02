@@ -17,6 +17,7 @@ public extension RichTextViewComponent {
         var styles = traits?.enabledRichTextStyles ?? []
         if attributes.isStrikethrough { styles.append(.strikethrough) }
         if attributes.isUnderlined { styles.append(.underlined) }
+        if attributes[.link] != nil { styles.append(.link) }
         return styles
     }
 
@@ -42,6 +43,12 @@ public extension RichTextViewComponent {
             setRichTextAttribute(.underlineStyle, to: value)
         case .strikethrough:
             setRichTextAttribute(.strikethroughStyle, to: value)
+        case .link:
+            if !newValue {
+                // When disabling link, remove the link attribute
+                setRichTextAttribute(.link, to: NSNull())
+            }
+            // When enabling link, do nothing - this will be handled by the context
         }
     }
 

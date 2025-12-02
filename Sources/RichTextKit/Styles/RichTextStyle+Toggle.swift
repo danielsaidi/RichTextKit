@@ -35,6 +35,7 @@ public extension RichTextStyle {
             self.style = style
             self.value = value
             self.fillVertically = fillVertically
+            self.context = nil
         }
 
         /**
@@ -50,16 +51,31 @@ public extension RichTextStyle {
             context: RichTextContext,
             fillVertically: Bool = false
         ) {
-            self.init(
-                style: style,
-                value: context.binding(for: style),
-                fillVertically: fillVertically
-            )
+            self.style = style
+            self.fillVertically = fillVertically
+            self.context = context
+            
+            if style == .link {
+                self.value = Binding(
+                    get: { context.hasLink },
+                    set: { _ in
+                        guard context.hasSelectedRange else { return }
+                        if context.hasLink {
+                            context.removeLink()
+                        } else {
+                            context.isLinkSheetPresented = true
+                        }
+                    }
+                )
+            } else {
+                self.value = context.binding(for: style)
+            }
         }
 
         private let style: RichTextStyle
         private let value: Binding<Bool>
         private let fillVertically: Bool
+        private let context: RichTextContext?
 
         public var body: some View {
             #if os(tvOS) || os(watchOS)
@@ -74,9 +90,12 @@ public extension RichTextStyle {
                 style.icon
                     .frame(maxHeight: fillVertically ? .infinity : nil)
             }
+            .toggleStyle(.button)
             .keyboardShortcut(for: style)
             .accessibilityLabel(style.title)
         }
+        
+
     }
 }
 

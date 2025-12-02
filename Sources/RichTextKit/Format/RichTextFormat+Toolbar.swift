@@ -57,7 +57,7 @@ public extension RichTextFormat {
             .environment(\.sizeCategory, .medium)
             .background(background)
             #if macOS
-            .frame(minWidth: 650)
+            .frame(minWidth: 750)
             #endif
         }
     }
