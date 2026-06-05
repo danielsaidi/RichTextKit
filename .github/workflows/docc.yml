@@ -1,0 +1,63 @@
+# This workflow builds and publishes DocC docs for one platform to GitHub Pages.
+
+# Source: https://maxxfrazer.medium.com/deploying-docc-with-github-actions-218c5ca6cad5
+# Sample: https://github.com/AgoraIO-Community/VideoUIKit-iOS/blob/main/.github/workflows/deploy_docs.yml
+
+name: DocC Runner
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+    inputs:
+      platform:
+        description: 'Platform to build'
+        required: true
+        default: 'iOS'
+        type: choice
+        options:
+          - iOS
+          - macOS
+          - tvOS
+          - watchOS
+          - xrOS
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: macos-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v5
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v4
+
+      - name: Setup Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+
+      - name: Build DocC
+        run: bash scripts/docc --platforms ${{ github.event.inputs.platform || 'iOS' }}
+
+      - name: Upload DocC Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ format('.build/docs-{0}', github.event.inputs.platform || 'iOS') }}
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
