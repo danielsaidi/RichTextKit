@@ -7,7 +7,7 @@
     <img src="https://img.shields.io/badge/Swift-5.9-orange.svg" alt="Swift 5.9" />
     <img src="https://img.shields.io/badge/platform-SwiftUI-blue.svg" alt="Swift UI" title="Swift UI" />
     <a href="https://danielsaidi.github.io/RichTextKit"><img src="https://img.shields.io/badge/documentation-web-blue.svg" alt="Documentation" /></a>
-        <a href="https://github.com/danielsaidi/RichTextKit/blob/master/LICENSE"><img src="https://img.shields.io/github/license/danielsaidi/RichTextKit" alt="MIT License" /></a>
+        <a href="https://github.com/danielsaidi/RichTextKit/blob/main/LICENSE"><img src="https://img.shields.io/github/license/danielsaidi/RichTextKit" alt="MIT License" /></a>
     <a href="https://github.com/sponsors/danielsaidi"><img src="https://img.shields.io/badge/sponsor-GitHub-red.svg" alt="Sponsor my work" /></a>
 </p>
 
