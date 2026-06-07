@@ -35,6 +35,7 @@ extension RichTextCoordinator {
         case .setHighlightingStyle(let style): textView.highlightingStyle = style
         case .setParagraphStyle(let style): textView.setRichTextParagraphStyle(style)
         case .setStyle(let style, let newValue): setStyle(style, to: newValue)
+        case .setLinkAttribute(let url, let range): setLinkAttribute(url, range: range)
         case .stepFontSize(let points):
             textView.stepRichTextFontSize(points: points)
             syncContextWithTextView()
@@ -158,6 +159,14 @@ extension RichTextCoordinator {
         let hasStyle = textView.richTextStyles.hasStyle(style)
         if newValue == hasStyle { return }
         textView.setRichTextStyle(style, to: newValue)
+    }
+    
+    func setLinkAttribute(_ url: URL?, range: NSRange) {
+        if let url = url {
+            textView.setRichTextAttribute(.link, to: url, at: range)
+        } else {
+            textView.setRichTextAttribute(.link, to: NSNull(), at: range)
+        }
     }
 }
 

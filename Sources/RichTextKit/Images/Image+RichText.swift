@@ -54,9 +54,14 @@ public extension Image {
     static let richTextSelection = symbol("123.rectangle.fill")
 
     static let richTextStyleBold = symbol("bold")
-    static let richTextStyleItalic = symbol("italic")
+    static var richTextItalic = symbol("italic")
+    
+    /// The rich text link image.
+    static var richTextLink = ("link")
+
     static let richTextStyleStrikethrough = symbol("strikethrough")
     static let richTextStyleUnderline = symbol("underline")
+    static let richTextStyleLink = symbol("link")
 
     static let richTextSuperscriptDecrease = symbol("textformat.subscript")
     static let richTextSuperscriptIncrease = symbol("textformat.superscript")

@@ -42,7 +42,7 @@ struct DemoEditorScreen: View {
         .inspector(isPresented: $isInspectorPresented) {
             RichTextFormat.Sidebar(context: context)
                 #if os(macOS)
-                .inspectorColumnWidth(min: 200, ideal: 200, max: 315)
+                .inspectorColumnWidth(min: 280, ideal: 350, max: 400)
                 #endif
         }
         .toolbar {
@@ -53,6 +53,7 @@ struct DemoEditorScreen: View {
                         .aspectRatio(1, contentMode: .fit)
                 }
             }
+            
         }
         .frame(minWidth: 500)
         .focusedValue(\.richTextContext, context)
@@ -65,7 +66,15 @@ struct DemoEditorScreen: View {
             )
         )
         .richTextFormatToolbarConfig(.init(colorPickers: []))
-        .viewDebug()
+        .sheet(isPresented: $context.isLinkSheetPresented) {
+            RichTextFormat.LinkInput(
+                context: context,
+                isPresented: $context.isLinkSheetPresented
+            )
+            #if macOS
+            .frame(width: 400)
+            #endif
+        }
     }
 }
 
